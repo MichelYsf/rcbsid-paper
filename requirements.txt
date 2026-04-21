@@ -1,0 +1,17 @@
+numpy==1.26.4
+pandas==2.2.3
+scipy>=1.16,<1.18
+scikit-learn>=1.5,<1.9
+river==0.22.0
+pyod==2.0.5
+pysad==0.3.4
+rrcf==0.4.4
+PyYAML==6.0.2
+matplotlib==3.9.2
+pyarrow==17.0.0
+tqdm==4.67.1
+joblib==1.4.2
+
+mmh3>=4.1.0
+setuptools>=68,<81
+pytest>=8,<9

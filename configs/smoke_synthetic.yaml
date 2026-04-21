@@ -1,0 +1,30 @@
+project: rcbsid_smoke
+allow_fallback_baselines: true  # smoke tests may use dependency-light fallbacks
+random_seeds: [11]
+splits:
+  train: 0.70
+  validation: 0.15
+  test: 0.15
+  mode: chronological
+datasets:
+  - name: synthetic_mean_shift
+    path: data/raw/synthetic_mean_shift
+    label_column: label
+    time_column: null
+proposed_method:
+  name: bocpd_slo
+  run_length_truncation: 200
+  hazard_grid: [0.01, 0.002, 0.001, 0.0002, 0.0001]
+  incident_prior_grid: [0.005, 0.01, 0.02, 0.05]
+  cost_ratio_grid: [5, 10, 25, 50]
+  slo_grid: [0.995, 0.999, 0.9995, 0.9999]
+  default_false_positive_cost: 1.0
+  default_false_negative_cost: 10.0
+  default_incident_prior: 0.01
+streaming_baselines: [hst, kitnet, loda, xstream, rrcf, iforest_asd]
+batch_reference_baselines: [lof, ecod, copod]
+burn_rate_alerting:
+  slo: 0.999
+  page_fast: {long_window_minutes: 60, short_window_minutes: 5, burn_rate: 14.4}
+  page_slow: {long_window_minutes: 360, short_window_minutes: 30, burn_rate: 6.0}
+  ticket: {long_window_minutes: 4320, short_window_minutes: 360, burn_rate: 1.0}

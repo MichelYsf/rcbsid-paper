@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "SLO-Aware Streaming Intrusion Detection: Reproducibility Package"
+message: "If you use this software, please cite it using this metadata."
+type: software
+authors:
+  - family-names: "Youssef"
+    given-names: "Michel"
+    email: "michelyoussef@hotmail.com"
+version: "1.1.0-audit-fixed"
+date-released: "2026-09-14"
+license: "Apache-2.0"
+repository-code: "https://github.com/myoussef/rcbsid-paper"
+doi: "10.5281/zenodo.XXXXXXX"
+keywords:
+  - intrusion detection
+  - streaming anomaly detection
+  - Bayesian online changepoint detection
+  - site reliability engineering
+  - error budget
+  - burn-rate alerting
