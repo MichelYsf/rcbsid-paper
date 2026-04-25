@@ -159,6 +159,13 @@ def run(config_path, output):
         except Exception as exc:
             rows.append({'dataset': dataset['name'], 'method': 'SKIPPED', 'reason': str(exc)})
             continue
+        # Honor time_column: sort by timestamp before chronological split so the
+        # stream truly represents temporal ordering rather than file-read order.
+        tcol = dataset.get('time_column')
+        if tcol and tcol in df.columns:
+            df = df.sort_values(tcol, kind='mergesort').reset_index(drop=True)
+            print(f'[runner] sorted {dataset["name"]} by time_column={tcol}; '
+                  f'range {df[tcol].iloc[0]} to {df[tcol].iloc[-1]}', flush=True)
         X, y, features = prepare_xy(df, dataset['label_column'])
         if len(y) < 100:
             rows.append({'dataset': dataset['name'], 'method': 'SKIPPED', 'reason': 'dataset has fewer than 100 rows after preprocessing'})
