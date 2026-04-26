@@ -1,6 +1,6 @@
 project: rcbsid_litnet_trial
 allow_fallback_baselines: false
-random_seeds: [11]
+random_seeds: [11, 23, 47]
 
 splits:
   train: 0.70

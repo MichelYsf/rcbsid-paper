@@ -1,1 +1,9 @@
-
+dataset,method,metric,wilcoxon_stat,p_value,holm_p_value
+litnet2020,copod_batch_ref,auc_pr,0.0,0.25,1.0
+litnet2020,ecod_batch_ref,auc_pr,0.0,0.25,1.0
+litnet2020,hst,auc_pr,0.0,0.25,1.0
+litnet2020,iforest_asd,auc_pr,0.0,0.25,1.0
+litnet2020,kitnet,auc_pr,0.0,0.25,1.0
+litnet2020,loda,auc_pr,0.0,0.25,0.75
+litnet2020,lof_batch_ref,auc_pr,0.0,0.25,0.5
+litnet2020,rrcf,auc_pr,0.0,0.25,0.25
