@@ -1,1 +1,9 @@
-
+dataset,method,metric,wilcoxon_stat,p_value,holm_p_value
+cicids2017,copod_batch_ref,auc_pr,0.0,0.25,1.0
+cicids2017,ecod_batch_ref,auc_pr,0.0,0.25,1.0
+cicids2017,hst,auc_pr,0.0,0.25,1.0
+cicids2017,iforest_asd,auc_pr,0.0,0.25,1.0
+cicids2017,kitnet,auc_pr,0.0,0.25,1.0
+cicids2017,loda,auc_pr,0.0,0.25,0.75
+cicids2017,lof_batch_ref,auc_pr,0.0,0.25,0.5
+cicids2017,rrcf,auc_pr,0.0,0.25,0.25
