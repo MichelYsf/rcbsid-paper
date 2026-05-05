@@ -1,0 +1,625 @@
+%% main.tex
+%% CALIBURN paper for KeAi Cyber Security and Applications
+%% Author: Michel A. Youssef
+%% Compiled with: pdflatex + bibtex (Harvard author-year style)
+
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+
+%% Math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+%% Algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+%% Tables
+\usepackage{booktabs}
+\usepackage{multirow}
+
+%% Graphics (in case you add figures later)
+\usepackage{graphicx}
+
+%% Hyperlinks (load last; elsarticle handles natbib already)
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+%% Custom commands for readability
+\newcommand{\caliburn}{CALIBURN}
+
+\journal{Cyber Security and Applications}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{\caliburn{}: Streaming Network Intrusion Detection with Operationally Calibrated Alerting}
+
+\author{Michel A. Youssef}
+\address{Independent Researcher, Beirut, Lebanon}
+\ead{michelyoussef@hotmail.com}
+
+\begin{abstract}
+Streaming network intrusion detection systems must process flows continuously while keeping memory bounded, but most current methods leave alerting threshold selection as a separate post-hoc tuning problem that is poorly suited to production deployment. In practice, operators need alerting behavior that can be specified before deployment using operational inputs such as false-negative cost, false-positive cost, and alerting budget. This paper presents \caliburn{}, a streaming anomaly detector that integrates four components: a truncated Bayesian online change-point detector that produces a probabilistic anomaly score with bounded per-flow update cost; a cost-sensitive threshold derived from the operator-specified cost ratio between missed attacks and false positives; a multi-window burn-rate alerting layer adapted from Site Reliability Engineering practice; and an explicit separation between statistical scoring, operational decision, and alert escalation. We evaluate \caliburn{} across three network intrusion detection datasets with different attack-prevalence regimes. On LITNET-2020, the rare-attack regime closest to operational reality with 5.2 percent attack prevalence, \caliburn{} achieves AUC-PR 0.943, outperforming the best streaming baseline by 2.21x and the best batch reference by 4.12x. On CICIDS2017, with 22.06 percent attack prevalence, \caliburn{} remains the strongest streaming method but trails LOF, a batch reference with access to full training data. On UNSW-NB15, with approximately 64 percent attack prevalence, all streaming methods including \caliburn{} collapse to near-random ranking behavior. These results show that \caliburn{} is best positioned for the rare-attack streaming regime where operationally calibrated alerting is most needed. Code, configurations, and experimental artifacts are released to support replication.
+\end{abstract}
+
+\begin{keyword}
+streaming anomaly detection \sep network intrusion detection \sep Bayesian online change-point detection \sep cost-sensitive learning \sep service-level objective \sep alert fatigue
+\end{keyword}
+
+\end{frontmatter}
+
+%==============================================================================
+\section{Introduction}
+\label{sec:intro}
+%==============================================================================
+
+Streaming network intrusion detection has a practical problem that is not fully solved by better anomaly scores alone. A detector may process flows continuously, update online, and keep bounded memory, but the score it produces still has to become an operational decision. In practice, operators do not act on ``anomaly score = 0.73.'' They need to know whether the event should be ignored, written to a ticket, or escalated as a page. Most streaming intrusion detection work treats this last step as a threshold-tuning problem, usually solved by grid search, percentile rules, or validation-set optimization. That is acceptable for a benchmark, but it is weak for production. A real security team must define alerting behavior before deployment, using quantities it can reason about: how costly a missed attack is, how many false alarms the team can tolerate, and how fast the alerting budget is allowed to burn.
+
+This distinction matters because operational alerting is not the same as offline anomaly scoring. Offline scoring usually asks which method produces the best ranking on a labeled test set. Operational alerting has stricter constraints. First, the threshold must be specified from operational inputs rather than selected after looking at labels. Second, individual suspicious events must aggregate into alert decisions that respect a finite false-positive budget. Third, the alerting policy must be explainable to security operators and non-ML stakeholders. This is not a theoretical concern. \citet{alahmadi2022falsepositives} report that SOC practitioners experience high false-positive rates from security tools, requiring manual validation and contributing to alarm burnout. A streaming intrusion detector therefore has two costs: the compute cost of processing flows, and the human cost of alerts that should not have fired.
+
+\caliburn{} addresses a layer of the streaming intrusion detection problem that has remained largely unsolved: how a probabilistic anomaly score becomes a thresholded, budget-aware operational alert. It combines four components. First, it uses a truncated Bayesian online change-point detector to produce a probabilistic streaming anomaly score with bounded per-flow update cost. Second, it derives the alert threshold from an operator-specified cost ratio between missed attacks and false positives, following cost-sensitive decision theory. Third, it adapts multi-window burn-rate alerting from Site Reliability Engineering so that suspicious events escalate only when they consume alerting budget at an unsustainable rate. The SRE Workbook \citep{beyer2018workbook} recommends multi-window, multi-burn-rate alerting because it reduces false positives while keeping detection fast enough for actionable response. Fourth, \caliburn{} keeps the scoring model, threshold rule, and alerting policy separate, so each part can be inspected and changed without silently re-tuning the whole detector.
+
+We evaluate \caliburn{} across three attack-prevalence regimes rather than treating all NIDS datasets as if they measure the same problem. The datasets are LITNET-2020 with 5.2 percent attacks, CICIDS2017 with 22.06 percent attacks, and UNSW-NB15 with approximately 64 percent attacks. This design is intentional. If \caliburn{} is useful because it is a streaming, budget-aware detector, then its advantage should be strongest in rare-attack settings where most traffic is benign and false positives matter. It should narrow as attacks become more common, and it may fail when the stream is dominated by attack traffic. The evaluation therefore tests not only whether \caliburn{} wins, but where it wins and where it should not be expected to dominate.
+
+The results show clear regime dependence. On LITNET-2020, the rare-attack regime closest to the operational setting targeted by this paper, \caliburn{} achieves AUC-PR 0.943. It outperforms the best streaming baseline by 2.21x and the best batch reference by 4.12x. On CICIDS2017, where attack prevalence rises to 22.06 percent, \caliburn{} remains the strongest streaming method but trails LOF, a batch reference method that is not bound by the same online constraint. On UNSW-NB15, where the published partition has approximately 64 percent attack prevalence, streaming methods including \caliburn{} collapse to near-random ranking behavior. Taken together, the results support a specific claim, not an inflated one: \caliburn{} is not the best detector everywhere. It is a strong fit for the rare-attack streaming regime where operationally calibrated alerting is most needed.
+
+This paper makes three contributions. First, it derives a streaming anomaly detection threshold from operationally specifiable inputs, especially the cost ratio between false negatives and false positives, instead of selecting the threshold through test-set tuning. Second, it integrates SRE-style multi-window burn-rate alerting into security ML, making alert escalation depend on budget consumption rather than isolated anomaly scores. Third, it presents a regime-sensitive empirical evaluation across three NIDS datasets, showing where streaming change-point detection with operational calibration helps and where it breaks down.
+
+The remainder of the paper is organized as follows. Section~\ref{sec:background} reviews related work in streaming anomaly detection, Bayesian online change-point detection, cost-sensitive learning, SLO-based alerting, and NIDS dataset critique. Section~\ref{sec:method} presents \caliburn{}'s method. Section~\ref{sec:experiments} describes the experimental setup. Section~\ref{sec:results} reports results across the three datasets. Section~\ref{sec:discussion} discusses limitations and threats to validity. Section~\ref{sec:conclusion} concludes.
+
+%==============================================================================
+\section{Background and Related Work}
+\label{sec:background}
+%==============================================================================
+
+This section positions \caliburn{} across four research areas that usually remain separate: streaming anomaly detection, Bayesian online change-point detection, cost-sensitive decision theory, and SLO-based alerting. The method proposed in this paper does not claim that any one of these components is new by itself. The contribution is the way they are combined into a streaming security detector whose threshold is derived from operational inputs rather than selected after the fact.
+
+\subsection{Streaming Anomaly Detection}
+\label{sec:bg-streaming}
+
+Streaming anomaly detection has been studied through several families of methods. Tree-based methods are a major line of work. Half-Space Trees were introduced as a fast one-class anomaly detector for evolving data streams, with the goal of detecting anomalous points without repeatedly rebuilding a full batch model \citep{tan2011fast}. Robust Random Cut Forest, introduced by \citet{guha2016robust}, takes a related stream-oriented approach, using random cut trees as a sketch of the input stream and updating that sketch dynamically.
+
+Another line of work uses lightweight ensembles. LODA \citep{pevny2016loda} is based on the idea that an ensemble of weak random-projection detectors can produce a strong anomaly detector while remaining fast enough for online use. Pevn{\'y} explicitly motivates LODA for settings with many samples, concept drift, and the need for online updates. Sliding-window adaptations of batch methods, such as iForest\_ASD, use a moving Isolation Forest over recent windows of the stream. \citet{ding2013iforestasd} proposed this approach specifically to handle the infinite volume, fast arrival, and concept-drift properties of streaming data. Neural methods have also been adapted to online intrusion detection. Kitsune, and its core algorithm KitNET \citep{mirsky2018kitsune}, use an ensemble of autoencoders to learn normal network behavior in an unsupervised and efficient online manner, with the specific goal of making NIDS practical on resource-constrained gateways. \citet{cao2025revisiting} provide a recent benchmark of these and related streaming detectors.
+
+These methods are valuable because they satisfy the basic streaming constraint: the detector can update incrementally as data arrives. However, they usually leave the alerting threshold as a separate tuning problem. In practice, thresholds are often chosen through validation search, percentile rules, or heuristic score cutoffs. \caliburn{} addresses a different part of the problem. It does not only ask how to score a flow online. It asks how that score should become an alert when the operator has a finite false-positive budget and a real cost for missing attacks.
+
+\subsection{Bayesian Online Change-Point Detection}
+\label{sec:bg-bocpd}
+
+Bayesian Online Change-Point Detection (BOCPD) was introduced by \citet{adams2007bayesian} as an online method for detecting abrupt changes in the generative parameters of a data sequence. The key idea is to maintain a posterior distribution over the current run length, meaning the number of observations since the most recent change point. As each new observation arrives, the posterior is updated using a message-passing recursion rather than waiting for the full sequence.
+
+This is closely related to other online change-point work. \citet{fearnhead2007online} developed an online inference method for multiple change-point problems, using filtering and particle methods to represent the posterior over change-point structures. Their exact filtering algorithm has quadratic cost in the number of observations, which is important because it shows why direct online change-point inference can become expensive on long streams. Later variants extended the BOCPD idea to richer observation models, including Gaussian process change-point models \citep{saatci2010gaussian}, and to spatio-temporal settings.
+
+The issue for security monitoring is that network streams can be long and continuous. A detector that grows in cost with the full history is not practical. \citet{knoblauch2018spatio} extended BOCPD to online spatio-temporal change-point detection with model selection, and \citet{knoblauch2018doubly} reported linear time and constant space behavior under their scalable formulation. \caliburn{} follows this practical direction by truncating the run-length posterior to a maximum length $L$. This keeps the update bounded and makes BOCPD usable as a streaming anomaly detector rather than only as an elegant Bayesian model.
+
+\subsection{Cost-Sensitive Learning and Operational Thresholds}
+\label{sec:bg-cost}
+
+Cost-sensitive learning provides the decision-theoretic basis for \caliburn{}'s threshold. In normal binary classification, false positives and false negatives are often treated as equal. That assumption is usually wrong in security. A missed attack and a false alert do not have the same operational cost, and the correct decision rule should reflect that difference.
+
+\citet{elkan2001foundations} provides the most direct reference for this paper. The work revisits decision-making when misclassification errors carry different penalties and makes clear that the decision rule should be tied to the cost matrix. For a calibrated posterior probability $p$, with false-positive cost $C_{FP}$ and false-negative cost $C_{FN}$, the Bayes-optimal alert threshold is:
+\begin{equation}
+    \tau^{*} = \frac{C_{FP}}{C_{FP} + C_{FN}}.
+    \label{eq:elkan-threshold}
+\end{equation}
+This means the threshold should come from the relative cost of the two mistakes, not from a blind search over the validation set. Related work such as MetaCost \citep{domingos1999metacost} also tries to make classifiers cost-sensitive, but through a wrapper procedure around existing classifiers. The calibration of probability estimates remains important here. \citet{niculescu2005predicting} showed that many classifiers can have strong discrimination while still producing distorted probability estimates, which is why calibrated posterior scores matter when the output is used for cost-sensitive decisions \citep{zadrozny2002transforming}.
+
+\caliburn{} uses the decision-theoretic rule directly. The detector produces a posterior-like streaming score, the operator specifies the cost ratio, and the threshold follows from that cost ratio. The attack prior is not folded into the threshold again, because it already enters the streaming model through the BOCPD hazard parameter. This keeps the statistical prior and the operational cost model separate.
+
+\subsection{SLO-Based Alerting in Site Reliability Engineering}
+\label{sec:bg-slo}
+
+The alerting layer in \caliburn{} comes from Site Reliability Engineering rather than from classical intrusion detection. Google's SRE practice formalized the idea that reliability should be managed through service-level objectives and error budgets. The SRE book \citep{beyer2016sre} describes how Google uses these ideas to build and operate large production systems, and the SRE Workbook \citep{beyer2018workbook} turns them into concrete operational practices.
+
+The most relevant concept for this paper is multi-window, multi-burn-rate alerting. The Site Reliability Workbook explains that alerting logic can use multiple burn rates and time windows, and can fire when the burn rate exceeds a specified threshold. This helps balance fast detection against alert noise. A short window catches sudden spikes, while a longer window confirms that the budget is being consumed at a sustained rate. This is useful because a single error should not always page an operator, but a sustained pattern of errors should not be ignored.
+
+Industrial deployments confirm the pattern beyond the original SRE framing. Large-scale infrastructure teams have adopted burn-rate alerting in production monitoring because it gives operators a way to separate short-lived noise from sustained budget exhaustion. In SRE, the budget is usually an availability or error budget. In \caliburn{}, the same idea is applied to security alerting. A suspicious flow that crosses the cost-sensitive threshold consumes alerting budget. The burn-rate layer then decides whether that consumption pattern should become a ticket, a slow page, or a fast page. This is a deliberate separation between scoring, thresholding, and alert escalation.
+
+\subsection{NIDS Dataset Critique Literature}
+\label{sec:bg-datasets}
+
+Network intrusion detection datasets have been heavily criticized in recent years, and this matters for the design of the experiments. CICIDS2017 \citep{sharafaldin2018cicids} is one of the most widely used intrusion detection benchmarks, but later work showed that the dataset has significant problems. \citet{engelen2021troubleshooting} revisited CICIDS2017 and found issues in traffic generation, flow construction, feature extraction, and labeling, then proposed improved processing to correct many of them. \citet{liu2022errorprevalence} further document errors in CIC-IDS-2017 and CIC-CSE-IDS-2018 across the dataset creation lifecycle, including attack orchestration, feature generation, documentation, and labeling, and release a refined version that this paper uses.
+
+UNSW-NB15 is also widely used. \citet{moustafa2015unsw} introduced it as a comprehensive dataset for network intrusion detection systems, and the official UNSW project page provides the published training and testing partitions. We use that partition because it is common in the literature, but we do not treat it as the main operational benchmark. Its high attack prevalence makes it a useful stress case for understanding what happens when the stream is no longer mostly benign.
+
+LITNET-2020 is a more recent dataset collected from a real-world academic network. \citet{damasevicius2020litnet} present it as an annotated network flow dataset with real examples of normal and under-attack traffic, including 85 network flow features and 12 attack types. Broader methodological work has also warned against common mistakes in machine learning for security, including invalid evaluation assumptions and weak experimental hygiene. The ``dos and don'ts'' paper of \citet{arp2022dosdonts} is especially relevant because it argues that security ML results must be interpreted with care rather than treated as generic benchmark wins.
+
+Overall, the experimental design follows the dataset-critique literature by using corrected datasets where available, treating high-prevalence partitions carefully, and avoiding the assumption that all NIDS benchmarks measure the same operational problem.
+
+\subsection{Operational Motivation and Gap Statement}
+\label{sec:bg-gap}
+
+The practical motivation for this work is alert fatigue. Security teams do not only need high anomaly scores. They need alerting rules that can be defended operationally. \citet{alahmadi2022falsepositives} studied SOC analysts' perspectives on security alarms and found that practitioners reported high false-positive rates requiring manual validation. This is exactly the setting where a detector that only optimizes a benchmark score is incomplete.
+
+The related work shows that all the pieces exist, but they have not been connected in this way. Streaming anomaly detectors can process data online, but their thresholds are usually selected through validation tuning or heuristic score cutoffs. BOCPD provides a principled way to model streaming changes, but by itself it does not define an operational alerting policy. Cost-sensitive learning gives a clean decision rule for calibrated probabilities, but it is usually discussed in classification settings rather than streaming security. SLO-based burn-rate alerting gives operators a mature alerting framework, but it has mostly remained in service reliability and infrastructure monitoring.
+
+\caliburn{} fills this gap by combining these ideas into one detector. It uses truncated BOCPD to produce a streaming posterior change-point score, derives the threshold from the operator's cost ratio, and uses SLO burn-rate logic to decide when suspicious events should escalate. The architectural point is the separation between statistical scoring, operational decision, and alerting policy. That separation is what makes the detector explainable before deployment, instead of relying on a threshold selected after looking at the validation or test behavior.
+
+%==============================================================================
+\section{Method}
+\label{sec:method}
+%==============================================================================
+
+In this section, we describe \caliburn{}, a streaming anomaly detector designed for security settings where attacks are rare, labels are delayed or unavailable, and operators cannot afford an alerting system that depends on arbitrary threshold tuning. The main idea is simple. Instead of treating anomaly detection as only a scoring problem, \caliburn{} treats it as an operational decision problem. A detector should not only say that a flow looks unusual. It should also decide when the score is strong enough to consume alerting budget, analyst time, and possibly incident response effort.
+
+\caliburn{} has three parts. First, it uses a truncated Bayesian online change-point detector to process network flows sequentially and produce a probabilistic anomaly score. Second, it converts operational inputs, such as the relative cost of a missed attack and the cost of a false alert, into a posterior decision threshold. Third, it wraps the detector with multi-window burn-rate alerting so that the system behaves more like an operational security control and less like an offline machine learning benchmark.
+
+\subsection{Problem Formulation}
+\label{sec:method-formulation}
+
+Let a network traffic stream be represented as a sequence of feature vectors:
+\begin{equation}
+    x_1, x_2, \ldots, x_t, \quad x_t \in \mathbb{R}^d,
+\end{equation}
+where each $x_t$ is a flow observed at time $t$, and $d$ is the number of extracted features. The detector sees each flow once, in chronological order. At every time step, it must update its internal state and output an anomaly score:
+\begin{equation}
+    s_t = f(x_t, x_{1:t-1}),
+\end{equation}
+where $s_t$ represents how suspicious the current flow is given the history observed so far. The final alerting decision is binary:
+\begin{equation}
+    a_t =
+    \begin{cases}
+        1, & s_t > \tau \\
+        0, & s_t \leq \tau,
+    \end{cases}
+\end{equation}
+where $a_t = 1$ means an alert is raised and $\tau$ is the decision threshold.
+
+The usual way to choose $\tau$ is to tune it on validation data. We consider this a weak choice for operational security. It may maximize a benchmark metric, but it does not explain why a real operator should accept that threshold. In a live environment, the question is not only ``which threshold gives the best F1 score?'' The real question is: ``how many false alerts can we afford, and how bad is it if we miss a real attack?''
+
+This is especially important in rare-attack settings. In these settings, ROC-AUC can look good even when the detector is not useful operationally, because the number of benign flows is very large. For this reason, we treat AUC-PR as the main evaluation metric, since it focuses directly on precision and recall under class imbalance \citep{saito2015precision}. The streaming constraint is also important. The detector cannot retrain on the full dataset every time a new flow arrives. It must update incrementally and keep bounded memory.
+
+The problem studied in this paper is therefore not just anomaly scoring. It is streaming, cost-aware, operationally calibrated alerting.
+
+\subsection{Truncated Bayesian Online Change-Point Detection}
+\label{sec:method-bocpd}
+
+The core probabilistic model in \caliburn{} is BOCPD \citep{adams2007bayesian}. BOCPD was introduced as an online method for estimating whether a data-generating process has changed, while maintaining a posterior distribution over the current run length. A run length is the number of observations since the most recent change point. If the run length is large, the model believes the stream has been stable for a while. If the run length resets to zero, the model believes a new regime has started.
+
+In network security, this is a natural fit. A sudden change in the statistical behavior of flows may indicate scanning, flooding, lateral movement, or another abnormal condition. \caliburn{} does not assume that every change point is malicious. Instead, it uses the posterior change-point probability as an anomaly score that can later be converted into an operational alert.
+
+Let $r_t$ denote the run length at time $t$. BOCPD maintains the posterior:
+\begin{equation}
+    P(r_t \mid x_{1:t}).
+\end{equation}
+At each step, the model updates this posterior by combining three pieces of information: the previous run-length distribution, the predictive likelihood of the new observation, and a hazard function that controls the prior probability of a change point. Each step, probability mass either grows, meaning the current run continues, or resets to $r_t = 0$ with rate $H$. Unlikely observations under the current run shift more mass toward the reset case, but the hazard term ensures that some baseline reset probability is always present.
+
+The anomaly score used by \caliburn{} is:
+\begin{equation}
+    s_t = P(r_t = 0 \mid x_{1:t}).
+    \label{eq:anomaly-score}
+\end{equation}
+This score has a direct interpretation. It is the posterior probability that the current flow begins a new regime.
+
+The original BOCPD formulation is elegant, but the exact algorithm becomes expensive as the stream grows, because the number of possible run lengths increases with time. For real streaming detection, this is not acceptable. \caliburn{} therefore uses a truncated run-length approximation. Instead of keeping all possible run lengths from $0$ to $t$, it keeps only the most recent $L$ run lengths:
+\begin{equation}
+    r_t \in \{0, 1, \ldots, L\}.
+\end{equation}
+This makes the update cost bounded. \citet{knoblauch2018doubly} later developed robust streaming variants of BOCPD with linear-time updates and constant-space posterior representations. Their result confirms that bounded-truncation approaches like ours can run continuously without re-fitting the model.
+
+Within each run, \caliburn{} uses a Gaussian observation model. This means that the model assumes flows in the same run are generated from a distribution with stable mean and variance. The model updates the sufficient statistics of this distribution online. To avoid numerical instability, a variance floor is used. A warm-up period is also used before alerts are emitted, so that the model does not page operators before it has seen enough normal context.
+
+The update can be summarized in Algorithm~\ref{alg:bocpd-update}.
+
+\begin{algorithm}
+\caption{Truncated BOCPD update}
+\label{alg:bocpd-update}
+\begin{algorithmic}[1]
+\Require New flow $x_t$, previous run-length posterior $P(r_{t-1} \mid x_{1:t-1})$, maximum run length $L$, hazard rate $H$, sufficient statistics for each run length
+\For{each retained run length $r$}
+    \State Compute the predictive likelihood of $x_t$
+\EndFor
+\State Compute growth probabilities for continuing the current run
+\State Compute reset probability for $r_t = 0$ using hazard rate $H$
+\State Normalize all probabilities so they sum to one
+\State Truncate the posterior to run lengths $0$ through $L$
+\State Update sufficient statistics for each retained run length
+\State \Return Anomaly score $s_t = P(r_t = 0 \mid x_{1:t})$
+\end{algorithmic}
+\end{algorithm}
+
+This gives \caliburn{} a probabilistic streaming score without retraining a batch model. The detector only needs the current flow, the retained run-length posterior, and the sufficient statistics for the retained runs.
+
+\subsection{SLO-Aware Threshold Derivation}
+\label{sec:method-threshold}
+
+The main contribution of \caliburn{} is not only that it uses BOCPD. BOCPD already exists. The contribution is that \caliburn{} connects the probabilistic score to an operational decision rule.
+
+Most anomaly detectors output a score and then choose a threshold using grid search. This is common in papers, but it is not how production security teams think. A SOC or infrastructure team does not start by asking which threshold maximizes a validation metric. It starts by asking how costly a missed incident is, how much alert fatigue the team can tolerate, and how quickly an alert should consume the available operational budget.
+
+\caliburn{} uses cost-sensitive decision theory to make this connection explicit. Let:
+\begin{equation}
+    p_t = P(y_t = 1 \mid x_{1:t})
+\end{equation}
+be the calibrated posterior probability that the current flow belongs to an attack or abnormal regime. Let $C_{FP}$ be the cost of a false positive and $C_{FN}$ be the cost of a false negative. If the detector raises an alert, the expected false-positive cost is:
+\begin{equation}
+    C_{FP}(1 - p_t).
+\end{equation}
+If the detector does not raise an alert, the expected false-negative cost is:
+\begin{equation}
+    C_{FN} p_t.
+\end{equation}
+A rational alert is justified when the expected cost of staying silent exceeds the expected cost of alerting:
+\begin{equation}
+    C_{FN} p_t > C_{FP}(1 - p_t).
+\end{equation}
+Solving this inequality gives the posterior threshold $p_t > \tau^{*}$, where:
+\begin{equation}
+    \tau^{*} = \frac{C_{FP}}{C_{FP} + C_{FN}}.
+    \label{eq:threshold-derivation}
+\end{equation}
+Equivalently, if $C = C_{FN}/C_{FP}$, then:
+\begin{equation}
+    \tau^{*} = \frac{1}{1 + C}.
+    \label{eq:threshold-cost-ratio}
+\end{equation}
+This is the simplest form of the cost-sensitive posterior decision rule. It follows the same logic as classical cost-sensitive learning: different mistakes should not be treated as equal when their operational consequences are different. \citet{elkan2001foundations}'s cost-sensitive learning framework is especially relevant here because it argues that once reliable probability estimates are available, the correct decision should be made explicitly using the cost matrix rather than by changing the training distribution blindly.
+
+For example, suppose a missed attack is considered 10 times worse than a false alert. Then $C = 10$, and the threshold becomes:
+\begin{equation}
+    \tau^{*} = \frac{1}{11} = 0.091.
+\end{equation}
+This means that if the detector assigns more than 0.091, about 9 percent, posterior probability to an attack or change-point condition, alerting is justified by the cost model. If the missed-attack cost is much higher, the threshold becomes lower. If false positives are more expensive, the threshold becomes higher. Table~\ref{tab:cost-thresholds} shows several cost-ratio values and the resulting thresholds.
+
+\begin{table}[ht]
+\centering
+\caption{Cost ratio $C = C_{FN}/C_{FP}$ and the resulting Bayes-optimal posterior threshold $\tau^{*}$.}
+\label{tab:cost-thresholds}
+\begin{tabular}{cc}
+\toprule
+Cost ratio $C$ & Threshold $\tau^{*}$ \\
+\midrule
+1   & 0.500 \\
+5   & 0.167 \\
+10  & 0.091 \\
+25  & 0.038 \\
+50  & 0.020 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This table is important because it shows the operational meaning of the threshold. The threshold is not chosen because it looks good on a test set. It comes from an explicit judgment about the cost of missing an attack compared with the cost of raising a false alert.
+
+\caliburn{} deliberately keeps the threshold formula independent of the attack prior $\pi$. The prior enters \caliburn{} through the BOCPD model itself: the hazard parameter $H$ encodes the prior probability of a change point per flow. Folding the prior into the posterior threshold as well would double-count the same information. In other words, the model uses the prior to produce the posterior score, and the decision rule uses the cost ratio to decide whether that posterior probability is high enough to alert.
+
+The SLO defines the alerting budget. If the operator commits to a 99.9 percent SLO with respect to false alarms, the system is allowed at most 0.1 percent of flows to consume budget. The cost ratio determines which flows are budget-worthy through the threshold. The burn-rate layer in Section~\ref{sec:method-burnrate} then determines how aggressively that budget is being consumed. These three layers are intentionally separable: score, threshold, and alerting. An operator can adjust the cost ratio during a high-risk period without retraining the detector, and can adjust the SLO independently of either.
+
+\subsection{Multi-Window Burn-Rate Alerting}
+\label{sec:method-burnrate}
+
+Even with a calibrated threshold, raw anomaly alerts can still be noisy. A single suspicious flow may not justify waking up an engineer. At the same time, a sustained stream of suspicious flows should escalate quickly. This is the same type of problem that Site Reliability Engineering teams face when alerting on service-level objectives. The SRE Workbook \citep{beyer2018workbook} recommends burn-rate alerting and multi-window alerting to balance fast detection with lower false positives.
+
+\caliburn{} uses this idea as an operational wrapper around the detector. First, each flow is scored by the streaming BOCPD model. Then the cost-sensitive threshold converts the score into a budget-consuming event. Finally, the burn-rate layer decides whether the pattern is serious enough to page or ticket.
+
+Let $B$ be the allowed alerting budget over a target period. Let $e_w$ be the number of budget-consuming events observed inside window $w$. The burn rate is:
+\begin{equation}
+    b_w = \frac{e_w / |w|}{B / T},
+    \label{eq:burn-rate}
+\end{equation}
+where $|w|$ is the window length and $T$ is the full SLO period. A burn rate greater than 1 means the system is consuming the budget faster than allowed. For example, with a 1-hour SLO budget of 1{,}000 events ($B = 1000$, $T = 60$ minutes), a 5-minute window observing 50 events has burn rate:
+\begin{equation}
+    b = \frac{50/5}{1000/60} = 0.6.
+\end{equation}
+This means the system is consuming budget at 60 percent of the allowed rate.
+
+\caliburn{} uses paired long and short windows. An alert fires only when both windows exceed their threshold. This reduces flapping. A short window catches sudden spikes, while a longer window confirms that the spike is not just a one-off anomaly. Table~\ref{tab:burn-rate-windows} shows the window pairs and burn-rate thresholds used in this paper.
+
+\begin{table}[ht]
+\centering
+\caption{Multi-window burn-rate alerting configuration used in \caliburn{}, following \citet{beyer2018workbook}.}
+\label{tab:burn-rate-windows}
+\begin{tabular}{lccc}
+\toprule
+Alert level  & Long window & Short window & Burn threshold $\beta$ \\
+\midrule
+page-fast    & 60 min      & 5 min        & 14.4 \\
+page-slow    & 360 min     & 30 min       & 6.0  \\
+ticket       & 4320 min    & 360 min      & 1.0  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The logic is:
+\begin{equation}
+    \text{alert if } b_{\text{long}} > \beta \text{ and } b_{\text{short}} > \beta,
+\end{equation}
+where $\beta$ is the burn-rate threshold for that alert level.
+
+This gives the system three operational behaviors. A severe attack-like burst can trigger a fast page. A slower but still dangerous pattern can trigger a delayed page. A persistent low-level issue can create a ticket without immediately waking someone up. This is what makes \caliburn{} different from a normal anomaly detector. It does not only produce scores. It produces alerts in a way that maps to how real teams operate.
+
+\subsection{Pseudocode and Complexity}
+\label{sec:method-complexity}
+
+The full \caliburn{} update combines the streaming BOCPD score, the cost-sensitive posterior threshold, and the burn-rate alerting layer. The update is performed once per flow and does not require re-fitting on the full history. The complete per-flow update is shown in Algorithm~\ref{alg:caliburn}.
+
+\begin{algorithm}
+\caption{\caliburn{} per-flow update}
+\label{alg:caliburn}
+\begin{algorithmic}[1]
+\Require Flow $x_t$, BOCPD state $S_{t-1}$, max run length $L$, hazard rate $H$, cost ratio $C = C_{FN}/C_{FP}$, burn-rate windows $W$, warm-up period $W_0$
+\State Update truncated BOCPD posterior using $x_t$
+\State Compute anomaly score $s_t = P(r_t = 0 \mid x_{1:t})$
+\If{$t < W_0$}
+    \State update model state only
+    \State \Return no alert
+\EndIf
+\State Compute cost-sensitive threshold $\tau = 1/(1 + C)$
+\State Convert score to budget event: $z_t = 1$ if $s_t > \tau$ else $z_t = 0$
+\State Update burn-rate windows using $z_t$
+\If{both long and short windows exceed page-fast threshold}
+    \State \Return page-fast
+\ElsIf{both long and short windows exceed page-slow threshold}
+    \State \Return page-slow
+\ElsIf{both long and short windows exceed ticket threshold}
+    \State \Return ticket
+\Else
+    \State \Return no alert
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+The per-flow update cost is bounded by the truncation length $L$. For each new flow, \caliburn{} updates at most $L$ retained run-length hypotheses. If the feature dimension is $d$, the memory cost is $O(Ld)$ and the per-flow update cost is $O(Ld)$.
+
+This is the main reason for using the truncated BOCPD formulation. The detector can run continuously without retraining over the full history. Batch methods may still perform well on some datasets, but they do not satisfy the same operational constraint. \caliburn{} is designed for the setting where the stream keeps moving, the base rate of attack is low, and the operator needs an alerting rule that is explainable before the test labels are known.
+
+%==============================================================================
+\section{Experimental Setup}
+\label{sec:experiments}
+%==============================================================================
+
+This section describes the datasets, baselines, and evaluation protocol used to test \caliburn{}. The goal of the experiments is not only to compare anomaly detection scores, but to evaluate whether a streaming detector remains useful across different attack-prevalence regimes. For this reason, we use three network intrusion datasets with very different attack rates: LITNET-2020 at 5.2 percent, CICIDS2017 at 22.06 percent, and UNSW-NB15 at 64 percent. This allows the evaluation to test the main claim of the paper: \caliburn{} is most useful in the rare-attack regime where streaming detection and operationally calibrated alerting matter most.
+
+\subsection{Datasets}
+\label{sec:exp-datasets}
+
+We evaluate \caliburn{} on three widely used network intrusion detection datasets.
+
+The first dataset is LITNET-2020 \citep{damasevicius2020litnet}, a real-world NetFlow dataset collected from an academic network. The original dataset contains 85 NetFlow features and 12 attack types, and was released specifically for network intrusion detection research. We use LITNET-2020 as the main rare-attack benchmark because it is closest to the operational setting targeted by this paper. From the original files, we extracted 1.5 million flows from three attack types: BLASTER\_WORM, UDP\_FLOOD, and SPAM. Their individual attack rates were 0.78 percent, 14.94 percent, and 0.06 percent, respectively. We matched ATTACKERS\_ONLY signatures against the FLOWS files using hash-based row matching, then round-robin interleaved the selected attack windows to form a single stream. This interleaving step was necessary because the individual attack types occur in different time windows. The final LITNET stream has an overall attack rate of 5.2 percent.
+
+The second dataset is CICIDS2017 \citep{sharafaldin2018cicids}, using the corrected version published by \citet{engelen2021troubleshooting} and refined by \citet{liu2022errorprevalence}. CICIDS2017 is one of the most widely used intrusion detection datasets, but the original release has documented issues in attack orchestration, feature generation, documentation, and labeling. Because of these known problems, we use the corrected version rather than the original 2017 labels. The dataset contains multiple weekdays of captured traffic and includes attacks such as DDoS, brute force, web attacks, and infiltration. We used 1.6 million flows with proportional per-day subsampling so that each day kept its natural attack rate. We dropped high-cardinality identifier columns such as IP addresses and ports, and removed rows marked as ``Attempted.'' We then performed day-by-day round-robin interleaving to keep the train, validation, and test splits balanced. The final attack rate is 22.06 percent.
+
+The third dataset is UNSW-NB15, using the published partition from \citet{moustafa2015unsw}. UNSW-NB15 is a benchmark dataset built from a mixture of modern normal traffic and synthetic attack activity, and the official project page provides a predefined training set of 175{,}341 records and a testing set of 82{,}332 records. We use this published partition because it is common in the literature and gives a useful stress test for the regime-sensitivity argument. However, this partition has a high attack prevalence of approximately 64 percent, which is very different from the rare-attack setting that motivates \caliburn{}. We therefore treat UNSW-NB15 not as the main operational benchmark, but as a stress case showing what happens when the attack base rate is inverted relative to typical streaming security operations.
+
+This range is important because the paper's central empirical question is precisely whether \caliburn{}'s advantage holds across attack-prevalence regimes, and if not, where it fails. The three datasets bracket the regime space from rare to moderate to high prevalence, so the regime-sensitivity hypothesis can be evaluated rather than asserted.
+
+\subsection{Baselines}
+\label{sec:exp-baselines}
+
+We compare \caliburn{} against five streaming anomaly detection baselines and three batch reference baselines.
+
+The streaming baselines are Half-Space Trees \citep{tan2011fast}, KitNET \citep{mirsky2018kitsune}, LODA \citep{pevny2016loda}, Robust Random Cut Forest \citep{guha2016robust}, and iForest\_ASD \citep{ding2013iforestasd}. These methods cover the main families of streaming anomaly detection used in current practice and literature: tree-based streaming detection, autoencoder-based online detection, projection-based lightweight detection, and streaming isolation-based detection. They are direct competitors because they process the stream incrementally and do not assume access to the full future test distribution.
+
+The batch reference baselines are Local Outlier Factor \citep{breunig2000lof}, ECOD \citep{li2022ecod}, and COPOD \citep{li2020copod}. LOF is a classical density-based outlier detection method. ECOD is an empirical cumulative distribution based detector, and COPOD is a copula-based outlier detector. These methods are not direct streaming competitors, because they do not satisfy the same online constraint. We include them as reference points because they show what can be achieved when a detector has access to full training data or can operate in a more traditional offline setting.
+
+We exclude xStream \citep{manzoor2018xstream} from the final experimental set. While xStream is a useful baseline in some streaming anomaly detection work, preliminary trials showed prohibitive compute cost at this dataset scale, approximately three hours per million rows on the c7i.2xlarge machine used for this study. Since the goal of this paper is to compare practical streaming detectors under a reproducible compute budget, we leave xStream for future extended benchmarking, noting that \citet{cao2025revisiting} provides recent comprehensive xStream evaluation.
+
+\subsection{Evaluation Protocol}
+\label{sec:exp-protocol}
+
+All datasets are evaluated using chronological splits. After preprocessing and interleaving where needed, each stream is sorted by timestamp and split into 70 percent training, 15 percent validation, and 15 percent test. LITNET-2020 and CICIDS2017 required round-robin interleaving before splitting because their raw attack windows are not naturally balanced across time. Without this step, the validation and test partitions would have substantially different attack rates, which would make threshold and calibration analysis unstable.
+
+The primary evaluation metric is area under the precision-recall curve, or AUC-PR. We use AUC-PR as the main metric because it is more informative than ROC-AUC under class imbalance \citep{saito2015precision}. Since most real network traffic is benign, a detector can achieve a misleadingly high ROC-AUC while still producing poor precision. We also report ROC-AUC, F1 score, precision, recall, and Brier score. For operational interpretation, we report latency statistics, including p50, p95, and p99 update latency, as well as throughput in events per second.
+
+For variance-reportable methods, we use three random seeds: 11, 23, and 47. These seeds are low-numbered primes and were fixed before running the experiments. For deterministic methods, including \caliburn{}, KitNET, ECOD, COPOD, and LOF, the variance across seeds is zero by construction. For methods with stochastic components, we report the mean and variance across the three seeds on LITNET-2020 and CICIDS2017. UNSW-NB15 is reported with a single seed due to compute cost and because it is used mainly as a stress case rather than the primary operational benchmark.
+
+Pairwise comparisons between \caliburn{} and each baseline are reported using the Wilcoxon signed-rank test \citep{wilcoxon1945individual} on per-seed AUC-PR values. We report exact p-values rather than significance asterisks, following the recommendation of recent ML methodology critiques \citep{arp2022dosdonts}.
+
+All experiments were run on AWS EC2 c7i.2xlarge in the eu-north-1 region. The machine used 8 vCPUs and 16 GB of RAM. The implementation used Python 3.11 with NumPy, scikit-learn, River, PySAD, KitNET-py, and rrcf. All preprocessing scripts, configuration files, and fixed seeds are preserved so that the experimental protocol can be reproduced exactly.
+
+%==============================================================================
+\section{Results}
+\label{sec:results}
+%==============================================================================
+
+This section reports the empirical results across the three evaluation regimes. We present the results in the same order as the experimental design: LITNET-2020 as the rare-attack regime, CICIDS2017 as the moderate-prevalence regime, and UNSW-NB15 as the high-prevalence stress case. The main pattern is clear. \caliburn{} is strongest when attacks are rare, remains competitive among streaming methods when attacks become more common, and loses its advantage when the stream is dominated by attacks.
+
+The primary metric is AUC-PR because precision-recall evaluation is more informative than ROC-based evaluation under class imbalance, especially when the positive class is rare \citep{saito2015precision}. This matters here because the datasets intentionally cover very different attack-prevalence regimes.
+
+\subsection{LITNET-2020: Rare-Attack Regime}
+\label{sec:results-litnet}
+
+On LITNET-2020, the rare-attack regime closest to the operational setting targeted by this paper, \caliburn{} achieves an AUC-PR of 0.943. This is the strongest result in the study. It outperforms the best streaming baseline, LODA, by 2.21x and the best batch reference, ECOD, by 4.12x under the same evaluation protocol. Notably, LOF, which becomes the strongest batch method on CICIDS2017, performs poorly on LITNET-2020 with AUC-PR 0.099. This already shows that no single baseline dominates across regimes.
+
+The gap is large. LODA is the next strongest streaming method, with mean AUC-PR of 0.426. HST follows at 0.262 mean, but with markedly larger variance, with standard deviation 0.078, than the other stochastic baselines. This variance reflects HST's sensitivity to randomized tree initialization and is itself a notable result. It means that HST's reported performance in any single-seed evaluation may be unreliable. Among the batch reference methods, ECOD performs best at 0.229, followed by COPOD at 0.208. KitNET and RRCF also fail to identify a useful rare-attack signal under this configuration.
+
+The operational profile of \caliburn{} is also important. Its precision is 0.976, meaning that when the system raises an alert, it is correct 97.6 percent of the time. Its recall is 0.451, meaning that it catches less than half of all attacks. We do not treat this as a weakness hidden by the aggregate score. It is the trade-off produced by the SLO-aware threshold. \caliburn{} is tuned to spend alerting budget carefully, not to maximize recall at any cost. In an operational setting, that profile is useful when false positives are expensive and the team wants high-confidence alerts.
+
+Table~\ref{tab:litnet-results} reports the full results.
+
+\begin{table}[ht]
+\centering
+\caption{AUC-PR, AUC-ROC, and F1 on LITNET-2020 (3-seed mean $\pm$ std). Deterministic methods are marked ``det.'' because repeated seeds produce identical results.}
+\label{tab:litnet-results}
+\begin{tabular}{lccc}
+\toprule
+Method        & AUC-PR              & AUC-ROC             & F1                  \\
+\midrule
+\caliburn{}   & 0.943 det.          & 0.998 det.          & 0.617 det.          \\
+LODA          & 0.426 $\pm$ 0.013   & 0.840 $\pm$ 0.005   & 0.451 $\pm$ 0.009   \\
+HST           & 0.262 $\pm$ 0.078   & 0.852 $\pm$ 0.029   & 0.281 $\pm$ 0.012   \\
+ECOD          & 0.229 det.          & 0.737 det.          & 0.325 det.          \\
+COPOD         & 0.208 det.          & 0.780 det.          & 0.273 det.          \\
+iForest\_ASD  & 0.140 $\pm$ 0.008   & 0.781 $\pm$ 0.020   & 0.252 $\pm$ 0.005   \\
+LOF           & 0.099 det.          & 0.509 det.          & 0.125 det.          \\
+KitNET        & 0.086 det.          & 0.600 det.          & 0.145 det.          \\
+RRCF          & 0.075 $\pm$ 0.001   & 0.553 $\pm$ 0.003   & 0.130 $\pm$ 0.001   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{CICIDS2017: Moderate-Prevalence Regime}
+\label{sec:results-cicids}
+
+On CICIDS2017, the shift to 22.06 percent attack prevalence changes the result substantially. LOF achieves the best overall AUC-PR at 0.863, while \caliburn{} achieves 0.545. However, \caliburn{} remains the strongest streaming method. It outperforms HST at 0.433, LODA at 0.342, iForest\_ASD at 0.306, RRCF at 0.252, and KitNET at 0.191.
+
+This result is not a generic failure of \caliburn{}. It shows where the method's advantage begins to narrow. BOCPD learns a streaming reference distribution from the data it sees. When attacks become a large part of the stream, the reference distribution can become contaminated by attack behavior. A batch method such as LOF is not subject to the same online constraint. It can use the full training distribution and isolate dense abnormal regions more effectively in this setting.
+
+This is consistent with the central claim of the paper. \caliburn{} is designed for the regime where streaming detection is operationally needed most: rare attacks in a mostly benign stream. CICIDS2017 sits in a middle regime. \caliburn{} still performs well among streaming detectors, but a strong batch reference can outperform it when the prevalence is high enough and the full training distribution is available.
+
+Variance also changes on CICIDS2017. \caliburn{} is deterministic and produces the same AUC-PR across seeds. HST shows the largest variance among the stochastic baselines, with standard deviation 0.063 in AUC-PR and 0.077 in F1. LODA, RRCF, and iForest\_ASD are more stable, although they remain below \caliburn{} in AUC-PR. The deterministic batch methods produce fixed values under the same preprocessing and split. Table~\ref{tab:cicids-results} reports the full results.
+
+\begin{table}[ht]
+\centering
+\caption{AUC-PR, AUC-ROC, and F1 on CICIDS2017 (3-seed mean $\pm$ std). \caliburn{} remains the best streaming method but trails the LOF batch reference.}
+\label{tab:cicids-results}
+\begin{tabular}{lccc}
+\toprule
+Method        & AUC-PR              & AUC-ROC             & F1                  \\
+\midrule
+LOF           & 0.863 det.          & 0.972 det.          & 0.893 det.          \\
+\caliburn{}   & 0.545 det.          & 0.880 det.          & 0.639 det.          \\
+HST           & 0.433 $\pm$ 0.063   & 0.803 $\pm$ 0.058   & 0.426 $\pm$ 0.077   \\
+COPOD         & 0.423 det.          & 0.812 det.          & 0.632 det.          \\
+ECOD          & 0.419 det.          & 0.808 det.          & 0.661 det.          \\
+LODA          & 0.342 $\pm$ 0.004   & 0.715 $\pm$ 0.001   & 0.532 $\pm$ 0.002   \\
+iForest\_ASD  & 0.306 $\pm$ 0.015   & 0.672 $\pm$ 0.027   & 0.454 $\pm$ 0.016   \\
+RRCF          & 0.252 $\pm$ 0.001   & 0.474 $\pm$ 0.001   & 0.403 $\pm$ 0.000   \\
+KitNET        & 0.191 det.          & 0.344 det.          & 0.403 det.          \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{UNSW-NB15: High-Prevalence Stress Case}
+\label{sec:results-unsw}
+
+UNSW-NB15 gives a different picture. Using the published Moustafa and Slay partition, the test regime has approximately 64 percent attack prevalence. In this setting, the advantage of streaming change-point detection largely disappears. \caliburn{} reaches AUC-PR 0.653, which is close to the positive-class prevalence and therefore not strong evidence of useful separation. Its AUC-ROC is 0.488, which confirms that the detector is not ranking attack flows above benign flows in a useful way. Other streaming methods also perform poorly.
+
+The batch reference methods perform better, but even there the result should be interpreted carefully. LOF reaches AUC-PR 0.777, ECOD reaches 0.741, and COPOD reaches 0.704. These scores are higher than the streaming methods, but they are being measured in a setting where attacks are no longer rare. This changes the meaning of the detection problem. When the majority of the stream is attack traffic, the online reference distribution is no longer mainly benign. That is a base-rate inversion relative to the operational setting this paper targets.
+
+For this reason, we treat UNSW-NB15 as a stress case rather than as the main operating regime. It is useful because it shows where \caliburn{} should not be expected to dominate. Streaming change-point detection is structurally limited when the stream is already attack-heavy. We return to this issue in Section~\ref{sec:disc-unsw}, where we discuss the partition structure and its implications for evaluation. Table~\ref{tab:unsw-results} reports the full results.
+
+\begin{table}[ht]
+\centering
+\caption{AUC-PR and AUC-ROC on UNSW-NB15 using the published partition from \citet{moustafa2015unsw} (single seed).}
+\label{tab:unsw-results}
+\begin{tabular}{lcc}
+\toprule
+Method        & AUC-PR  & AUC-ROC \\
+\midrule
+LOF           & 0.777   & 0.899   \\
+ECOD          & 0.741   & 0.625   \\
+COPOD         & 0.704   & 0.539   \\
+\caliburn{}   & 0.653   & 0.488   \\
+HST           & 0.450   & 0.525   \\
+LODA          & 0.380   & 0.487   \\
+iForest\_ASD  & 0.290   & 0.402   \\
+RRCF          & 0.230   & 0.380   \\
+KitNET        & 0.210   & 0.430   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Cross-Dataset Comparison and Statistical Tests}
+\label{sec:results-cross}
+
+Across the three datasets, the ranking pattern supports the regime-sensitivity hypothesis. \caliburn{} ranks first on LITNET-2020, second overall on CICIDS2017, and mid-pack on UNSW-NB15. This is not the pattern expected from a method that simply wins everywhere. It is the pattern expected from a streaming detector whose advantage depends on the attack base rate.
+
+The strongest result is the rare-attack case. On LITNET-2020, \caliburn{} is not only the best method, but substantially ahead of both streaming and batch alternatives. On CICIDS2017, it remains the best streaming method, but LOF becomes the strongest overall method. On UNSW-NB15, the attack prevalence is high enough that streaming reference estimation becomes unreliable, and batch methods dominate. Table~\ref{tab:cross-summary} summarizes this pattern.
+
+\begin{table}[ht]
+\centering
+\caption{Cross-dataset ranking summary.}
+\label{tab:cross-summary}
+\begin{tabular}{lcccc}
+\toprule
+Dataset       & Attack rate & \caliburn{} rank & Best method & Best streaming baseline \\
+\midrule
+LITNET-2020   & 5.2\%       & 1st              & \caliburn{} & LODA \\
+CICIDS2017    & 22.06\%     & 2nd              & LOF         & \caliburn{} \\
+UNSW-NB15     & 64\%        & mid-pack         & LOF         & \caliburn{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Pairwise statistical comparisons are handled carefully because several methods are deterministic under the fixed preprocessing and split. The Wilcoxon signed-rank test \citep{wilcoxon1945individual} is appropriate for paired samples and tests whether the paired differences are symmetric around zero, but it is not very meaningful when one or both methods have zero variance across seeds. On LITNET-2020, \caliburn{}'s deterministic AUC-PR of 0.943 exceeds the upper end of every other method's variance interval. The closest streaming comparison is LODA at 0.426 $\pm$ 0.013, where the gap is over 30 standard deviations. This margin does not require formal hypothesis testing to establish practical significance. Exact Wilcoxon p-values for stochastic baseline comparisons are reported in the supplementary statistical table.
+
+Operational latency is also consistent with real-time deployment. \caliburn{}'s per-flow update latency is approximately 6 ms on LITNET-2020 and approximately 60 ms on CICIDS2017. The higher CICIDS latency is expected because the feature space is larger and preprocessing produces a heavier per-row computation path. The p99 latency remains around one second in both settings. Throughput is in the range of several hundred events per second, which is sufficient for many production monitoring pipelines where flows are aggregated before detection.
+
+\subsection{Calibration and Operational Metrics}
+\label{sec:results-calibration}
+
+The threshold derivation in Section~\ref{sec:method-threshold} produces concrete operator-facing thresholds. With a cost ratio $C = 10$, which is the default in the experiments, and an incident prior $\pi = 0.05$, matching the LITNET attack rate, the posterior threshold derived from cost-sensitive decision theory is:
+\begin{equation}
+    \tau^{*} = \frac{1}{1 + 10} = 0.091.
+\end{equation}
+With $C = 25$, the threshold becomes:
+\begin{equation}
+    \tau^{*} = \frac{1}{26} = 0.038.
+\end{equation}
+These threshold values are not chosen after observing the test set. They are derived from operational inputs that the operator specifies before deployment: cost ratio, incident prior through the BOCPD hazard model, and the SLO budget. A lower cost ratio makes the system more conservative, requiring stronger posterior evidence before alerting. A higher cost ratio makes the system more sensitive, allowing weaker posterior evidence to consume alerting budget. The SLO and burn-rate layer then determine how those budget-consuming events escalate into tickets or pages.
+
+This is the practical difference between \caliburn{} and a normal threshold-tuned anomaly detector. The threshold is not selected after looking at the test set. It is derived from an operational cost model and then evaluated on the stream. This keeps the alerting rule explainable before deployment, which is important in security environments where labels are delayed, incomplete, or unavailable.
+
+%==============================================================================
+\section{Discussion and Limitations}
+\label{sec:discussion}
+%==============================================================================
+
+The results show that \caliburn{} is not a universal replacement for all intrusion detection methods. Its strength is more specific: it is a streaming, operationally calibrated detector for the rare-attack regime. This section discusses where that positioning is appropriate, why the high-prevalence UNSW-NB15 partition changes the problem, and which limitations remain.
+
+\subsection{When \caliburn{} Works and When It Does Not}
+\label{sec:disc-positioning}
+
+The experiments suggest a clear operational rule. \caliburn{} should be preferred when attacks are rare, the stream is mostly benign, and the operator needs an alerting policy that can be specified before test labels are available. In the experiments, this is most visible on LITNET-2020, where the attack prevalence is 5.2 percent and \caliburn{} achieves its strongest performance. This is also the regime where streaming detection makes the most operational sense: the detector is observing a continuous flow of mostly normal traffic and is trying to detect meaningful changes without retraining a batch model.
+
+\caliburn{} is also appropriate when the operator can specify a cost ratio between missed attacks and false positives. That cost ratio does not have to be perfect, but it must be explicit. The point is not that $C = 10$ is universally correct. The point is that the threshold should reflect an operational judgment rather than a hidden validation-set search. \caliburn{} is also a good fit when the deployment requires explainable alerting behavior. The system can explain why a flow crossed the posterior threshold, why it consumed alerting budget, and why the burn-rate policy escalated or did not escalate.
+
+The method should not be preferred in every setting. When attack prevalence rises above roughly 20 to 30 percent, the reference distribution learned from the stream becomes less clearly benign. In that regime, a batch method with access to full training data may be stronger, as shown by LOF on CICIDS2017. \caliburn{} is also not the best choice when there is no streaming constraint, when full historical retraining is available, or when the attack structure forms dense clusters that are better captured by offline density-based methods.
+
+The intended position is therefore specific. \caliburn{} is a streaming detector for the rare-attack regime that streaming detection actually targets in practice. That is the scenario where the online constraint matters, where false positives are operationally expensive, and where a threshold selected after seeing labels is not realistic.
+
+\subsection{The UNSW-NB15 Partition: Base-Rate Inversion}
+\label{sec:disc-unsw}
+
+UNSW-NB15 behaves differently because the published Moustafa and Slay partition has a much higher attack prevalence than the other datasets used in this paper. In the evaluated partition, approximately 64 percent of the records are attacks. This is not a small technical detail. It changes the meaning of the detection problem. A streaming detector usually assumes that the stream is mostly normal and that attacks appear as deviations from that background. In UNSW-NB15, that assumption is inverted.
+
+For \caliburn{}, the mechanical reason is straightforward. BOCPD tracks how long the current data-generating regime has remained stable. If benign behavior dominates the stream, then attack behavior is more likely to appear as a change point. But if attack traffic dominates the stream, the model can converge to a regime that is itself attack-heavy. Subsequent attack records are then no longer surprising relative to the model's current belief. They are consistent with the regime the detector has already learned. This explains why \caliburn{} can produce an AUC-PR near the attack prevalence while having an AUC-ROC near random.
+
+The same base-rate problem affects other streaming baselines, although through different mechanisms. Autoencoder methods can learn to reconstruct attack-heavy traffic if that traffic dominates the stream. Projection and histogram methods can absorb attack behavior into their estimated density. Tree-based streaming methods can split around the dominant attack distribution rather than treating it as exceptional. In all cases, the key issue is the same: if the majority of the stream is attack traffic, ``normal'' no longer means benign.
+
+This is why UNSW-NB15 is treated here as a stress case rather than the primary operational benchmark. Future evaluations of streaming IDS methods should report results across multiple prevalence regimes, not only on the dominant published partition of one dataset. A method that performs well at 64 percent attack prevalence may not be useful in a real monitoring stream, and a method that performs poorly there may still be valuable in the rare-attack regime where streaming detection is actually needed.
+
+\subsection{Threats to Validity}
+\label{sec:disc-threats}
+
+The first threat is the choice of observation model. \caliburn{} uses BOCPD with a Gaussian observation model. Other models, including Gaussian process \citep{saatci2010gaussian}, beta-Bernoulli, multinomial, or heavy-tailed likelihoods, may behave differently. We use the Gaussian model for tractability and streaming efficiency, but this choice should not be treated as final.
+
+The second threat is dataset correction. This paper uses the corrected CICIDS2017 version rather than the original 2017 release. This is the right methodological choice because the original dataset has documented errors in traffic generation, feature extraction, and labeling \citep{engelen2021troubleshooting,liu2022errorprevalence}. However, it also means the results should not be compared naively against papers that used the uncorrected release.
+
+The third threat is deterministic versus stochastic baselines. Several baselines are deterministic under the fixed preprocessing and split, while others depend on random seeds. We report three-seed variance for stochastic methods on LITNET-2020 and CICIDS2017, but deterministic comparisons remain point estimates. This is why we avoid overstating Wilcoxon tests across deterministic-stochastic boundaries.
+
+The fourth threat is cost-ratio specification. \caliburn{} assumes that the operator can specify the relative cost of a false negative and a false positive. In production, this may require incident-response cost estimates that are not always available. The default $C = 10$ is reasonable for experimentation, but the real value should be chosen by the organization deploying the detector.
+
+The fifth threat is posterior calibration. The threshold derivation assumes that the BOCPD output is usable as a calibrated probability-like score. Probability calibration is itself non-trivial. \citet{niculescu2005predicting} show that different learning algorithms can have good discrimination while still producing distorted probability estimates. If the BOCPD posterior is systematically overconfident or underconfident, the threshold will produce a biased operating point.
+
+\subsection{Future Directions}
+\label{sec:disc-future}
+
+The most important future direction is calibration. \caliburn{} currently uses the BOCPD posterior directly, but streaming calibration methods could improve the reliability of the cost-sensitive threshold. Temperature scaling, Platt scaling, or isotonic regression \citep{zadrozny2002transforming} adapted to streaming settings are natural candidates.
+
+A second direction is online cost-ratio adaptation. In this paper, the cost ratio is operator-specified. In a production SOC, that ratio could be updated from incident-response outcomes, analyst workload, or escalation cost.
+
+A third direction is multi-class detection. \caliburn{} currently treats the problem as binary: attack or non-attack. Extending the framework to distinguish attack families would make it more useful for triage and response.
+
+Finally, \caliburn{} currently runs as a single streaming detector. Future work could study federated or distributed change-point detection across multiple sensors, sites, or network segments. The same threshold and burn-rate logic should extend naturally to that setting, but the statistical model would need to account for correlated alerts across monitoring points.
+
+%==============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%==============================================================================
+
+\caliburn{} is a streaming network intrusion detector that integrates truncated Bayesian online change-point detection with cost-sensitive threshold derivation and multi-window burn-rate alerting from Site Reliability Engineering practice. Its main architectural point is the separation of statistical scoring, operational decision, and alerting policy. This separation allows operators to specify alerting behavior before deployment using quantities they can reason about, such as false-negative cost, false-positive cost, and alerting budget, rather than relying on thresholds tuned after observing labeled validation data.
+
+The empirical results show clear regime sensitivity across the three evaluated NIDS datasets. On LITNET-2020, with 5.2 percent attack prevalence, \caliburn{} achieves AUC-PR 0.943, outperforming the best streaming baseline by 2.21x and the best batch reference by 4.12x. On CICIDS2017, with 22.06 percent attack prevalence, \caliburn{} remains the strongest streaming method but trails LOF, a batch reference method. On UNSW-NB15, with approximately 64 percent attack prevalence, all streaming methods including \caliburn{} collapse to near-random ranking behavior. These results support a specific claim: \caliburn{} is strongest where streaming detection is operationally needed most, namely rare attacks in a mostly benign stream, and it breaks down when the data regime no longer matches that assumption.
+
+The most important next step is improving calibration of the streaming posterior, since the threshold derivation assumes the score can be used as a calibrated probability-like estimate. Other directions include online cost-ratio adaptation, multi-class extensions for attack-family discrimination, and federated streaming detection across multiple monitoring nodes. Code, configurations, and experimental artifacts are released to support replication and extension.
+
+%==============================================================================
+%% References
+%==============================================================================
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{cas-refs}
+
+\end{document}
