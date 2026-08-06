@@ -44,7 +44,8 @@ def _minmax(scores):
     return (scores - lo) / (hi - lo)
 
 
-def run_batch_reference(name: str, X_train, X_eval, seed: int = 42):
+def run_batch_reference(name: str, X_train, X_eval, seed: int = 42, n_neighbors: int = 35):
+    # n_neighbors applies to LOF only (default 35 = the published configuration).
     name = name.lower()
     X_train = np.asarray(X_train, dtype=float)
     X_eval = np.asarray(X_eval, dtype=float)
@@ -63,7 +64,7 @@ def run_batch_reference(name: str, X_train, X_eval, seed: int = 42):
             return _minmax(model.decision_function(X_eval))
     if name == 'lof':
         try:
-            model = LocalOutlierFactor(n_neighbors=35, novelty=True, contamination='auto')
+            model = LocalOutlierFactor(n_neighbors=int(n_neighbors), novelty=True, contamination='auto')
             model.fit(X_train)
             return _minmax(-model.score_samples(X_eval))
         except Exception:

@@ -15,26 +15,28 @@ def available_baselines():
     }
 
 
-def make_streaming_baseline(name: str, n_features: int, seed: int = 42, allow_fallback: bool = True):
+def make_streaming_baseline(name: str, n_features: int, seed: int = 42, allow_fallback: bool = True, **params):
+    # `params` forwards hyperparameters to the wrapper constructors (used by the
+    # baseline-tuning experiment); omitted params keep the published defaults.
     name = name.lower()
     if name == 'hst':
         from .hst import HalfSpaceTreesWrapper
-        return HalfSpaceTreesWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback)
+        return HalfSpaceTreesWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback, **params)
     if name == 'kitnet':
         from .kitnet import KitNETWrapper
-        return KitNETWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback)
+        return KitNETWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback, **params)
     if name == 'loda':
         from .loda import LODAWrapper
-        return LODAWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback)
+        return LODAWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback, **params)
     if name == 'xstream':
         from .xstream import XStreamWrapper
-        return XStreamWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback)
+        return XStreamWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback, **params)
     if name == 'rrcf':
         from .rrcf import RRCFWrapper
-        return RRCFWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback)
+        return RRCFWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback, **params)
     if name == 'iforest_asd':
         from .iforest_asd import IForestASDWrapper
-        return IForestASDWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback)
+        return IForestASDWrapper(n_features=n_features, seed=seed, allow_fallback=allow_fallback, **params)
     raise KeyError(f'Unknown streaming baseline: {name}')
 
 
