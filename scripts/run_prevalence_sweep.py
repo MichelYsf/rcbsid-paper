@@ -60,12 +60,24 @@ COST_RATIO = 10.0
 
 
 def load_stream(cfg: dict, dataset_index: int = 0):
+    """Load the stream, with an .npy cache so parallel cell processes can
+    memory-map the feature matrix instead of re-parsing the CSV."""
     ds = cfg["datasets"][dataset_index]
+    folder = Path(ds["path"])
+    cache_x, cache_y = folder / "cache_X.npy", folder / "cache_y.npy"
+    sources = [f for f in folder.glob("*.csv")]
+    if cache_x.exists() and cache_y.exists() and sources and \
+            cache_x.stat().st_mtime > max(f.stat().st_mtime for f in sources):
+        X = np.load(cache_x, mmap_mode="r")
+        y = np.load(cache_y)
+        return ds["name"], X, y
     df = load_dataset_folder(ds["path"], ds["label_column"])
     tcol = ds.get("time_column")
     if tcol and tcol in df.columns:
         df = df.sort_values(tcol, kind="mergesort").reset_index(drop=True)
     X, y, features = prepare_xy(df, ds["label_column"])
+    np.save(cache_x, X)
+    np.save(cache_y, y)
     return ds["name"], X, y
 
 
@@ -81,7 +93,6 @@ def run_cell(cfg: dict, dataset_name: str, X: np.ndarray, y: np.ndarray,
             "n_flows": int(len(y)), "achieved_overall": nat,
             **{f"achieved_{k}": v for k, v in split_prevalences(y).items()},
         }
-        info = {k if k.startswith("achieved_") or k in ("target_rate", "seed", "n_redraws", "effective_seed", "n_flows") else k: v for k, v in info.items()}
         target_label = nat
     else:
         target = float(level) / 100.0
