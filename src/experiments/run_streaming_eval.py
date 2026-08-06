@@ -167,6 +167,7 @@ def run(config_path, output):
             print(f'[runner] sorted {dataset["name"]} by time_column={tcol}; '
                   f'range {df[tcol].iloc[0]} to {df[tcol].iloc[-1]}', flush=True)
         X, y, features = prepare_xy(df, dataset['label_column'])
+        del df  # free the string-heavy frame; only X/y are used from here on
         if len(y) < 100:
             rows.append({'dataset': dataset['name'], 'method': 'SKIPPED', 'reason': 'dataset has fewer than 100 rows after preprocessing'})
             continue
