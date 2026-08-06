@@ -5,8 +5,19 @@ import pandas as pd
 
 
 def list_data_files(path):
+    # Dedupe by resolved path: on case-insensitive filesystems (Windows/macOS)
+    # the '*.csv' and '*.CSV' patterns both match the same file, which would
+    # silently load every dataset twice.
     p = Path(path)
-    return sorted(list(p.glob('*.csv')) + list(p.glob('*.CSV')) + list(p.glob('*.parquet')))
+    matches = list(p.glob('*.csv')) + list(p.glob('*.CSV')) + list(p.glob('*.parquet'))
+    seen: set[str] = set()
+    unique = []
+    for f in matches:
+        key = str(f.resolve()).lower()
+        if key not in seen:
+            seen.add(key)
+            unique.append(f)
+    return sorted(unique)
 
 
 def list_csv_files(path):
