@@ -58,7 +58,10 @@ def main(run_dirs: list[str]) -> int:
                 failures.append(f"{method}/{metric}: maxdiff {diff:.2e} > {tol}")
 
     compare("bocpd_slo", EXACT_TOL, "exact")
-    compare("lof_batch_ref", EXACT_TOL, "exact")
+    # LOF: requirements pin a scikit-learn RANGE (>=1.5,<1.9); LOF's AUC-PR
+    # drifts ~5e-4 across versions while ECOD (pyod hard-pinned) reproduces
+    # bit-for-bit. Gate LOF at the published 3-decimal precision.
+    compare("lof_batch_ref", 5e-4, "published 3-decimal precision")
     compare("ecod_batch_ref", EXACT_TOL, "exact (cross-check, not in gate)")
     compare("loda", SEED_TIGHT_TOL, "seed-tight")
     compare("hst", SEED_TIGHT_TOL, "seed-tight")
