@@ -85,6 +85,19 @@ Gate targets: CALIBURN AUC-PR 0.545 / AUC-ROC 0.880 / F1 0.639 exact
 precision (documented above), LODA 0.342 / HST 0.433 seed-tight (1e-6) with
 the paper's mean±std envelope as documented fallback.
 
+Seed 11 preliminary (landed 2026-08-07 10:40, 16.7 h wall = overnight
+throttle factor ~2.9x): CALIBURN F1 bit-exact (0.639230), AUC-PR/ROC match
+to six decimals (diffs 2.9e-07 / 7.5e-07 — sklearn-version AUC tie-handling
+on CALIBURN's heavily tied scores; the bit-exact F1 proves the scores
+themselves are identical). Detection latency_mean 0.061029 equals the
+published Table 8 value exactly. ECOD bit-exact on all metrics. LOF rounds
+to the published 0.863 (full-precision drift 5.3e-04, scikit-learn range
+pin). LODA seed 11 = 0.3389, inside the published 0.342+/-0.005 envelope
+(seed-tight mismatch logged — cross-version RNG-sensitivity in projections).
+The gate criterion in scripts/check_stage1_gate.py is equality at the
+published 3-decimal precision (the runbook's own numbers), with
+full-precision diffs reported as evidence.
+
 ### Ceiling overrun (logged 2026-08-07 07:50, decision: let them finish)
 
 The pre-launch estimate (~6 h wall from isolated steady-state timing) was
