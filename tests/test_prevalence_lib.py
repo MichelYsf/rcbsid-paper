@@ -43,11 +43,16 @@ def test_below_natural_keeps_every_benign_and_no_duplicates():
     assert set(benign_original).issubset(set(idx.tolist()))
 
 
-def test_above_natural_keeps_every_attack():
+def test_above_natural_drops_only_structurally_excess_attacks():
+    # On a uniformly mixed stream the attack mass is split-proportional, so
+    # the joint-quota construction keeps essentially every attack (rounding
+    # and the binding-segment cap may shave a small fraction).
     y = make_stream()
     idx, _ = resample_to_prevalence(y, 0.40, seed=23)
-    attack_original = np.flatnonzero(y == 1)
-    assert set(attack_original).issubset(set(idx.tolist()))
+    attack_original = set(np.flatnonzero(y == 1).tolist())
+    attacks_kept = attack_original & set(idx.tolist())
+    assert len(attacks_kept) >= 0.97 * len(attack_original)
+    assert len(np.unique(idx)) == len(idx)
 
 
 def test_chronological_order_preserved():
@@ -84,3 +89,17 @@ def test_split_prevalences_match_runner_cuts():
 
 def test_natural_rate():
     assert natural_rate(np.array([0, 1, 1, 0])) == 0.5
+
+
+def test_structural_gradient_still_hits_per_split_targets():
+    # Mimic CICIDS: the tail of the stream is attack-richer than the front.
+    # An unstratified uniform draw preserves this gradient and can never meet
+    # the per-split tolerance at 40%; the stratified draw must.
+    rng = np.random.default_rng(9)
+    front = (rng.random(17000) < 0.20).astype(int)
+    tail = (rng.random(3000) < 0.28).astype(int)
+    y = np.concatenate([front, tail])
+    for target in (0.05, 0.40, 0.64):
+        _, info = resample_to_prevalence(y, target, seed=11)
+        for split in ("achieved_train", "achieved_val", "achieved_test"):
+            assert abs(info[split] - target) <= 0.01 + 1e-12, (target, split, info)

@@ -29,35 +29,79 @@ def split_prevalences(y: np.ndarray, train_ratio: float = 0.70, val_ratio: float
     }
 
 
-def draw_resample_indices(y: np.ndarray, target_rate: float, rng: np.random.Generator) -> np.ndarray:
+def draw_resample_indices(y: np.ndarray, target_rate: float, rng: np.random.Generator,
+                          train_ratio: float = 0.70, val_ratio: float = 0.15) -> np.ndarray:
     """One random draw of retained flow indices, in original chronological order.
 
     Below natural rate: keep all benign flows, subsample attacks.
     Above natural rate: keep all attack flows, subsample benigns.
+
+    The draw is STRATIFIED over the three chronological split segments: the
+    thinned class gets a per-segment quota that hits the target rate inside
+    each segment. This is required, not cosmetic: the interleaved stream's
+    attack share varies structurally across splits (CICIDS2017: train 21.46%,
+    val 21.70%, test 25.24%), so an unstratified uniform draw preserves that
+    gradient and the runbook's per-split 1 pp tolerance can never be met at
+    targets far from natural (e.g. 40% target -> ~44.3% test split, a
+    structural bias no redraw can fix). Stratification keeps selection random
+    by flow within each segment, preserves chronological order, and never
+    duplicates a flow.
     """
     y = np.asarray(y, dtype=int)
-    attack_idx = np.flatnonzero(y == 1)
-    benign_idx = np.flatnonzero(y == 0)
-    n_attack, n_benign = len(attack_idx), len(benign_idx)
-    if n_attack == 0 or n_benign == 0:
-        raise ValueError("stream must contain both classes")
-    natural = n_attack / (n_attack + n_benign)
+    n = len(y)
     if not (0.0 < target_rate < 1.0):
         raise ValueError("target_rate must be in (0, 1)")
+    n_attack_total = int(np.sum(y == 1))
+    n_benign_total = n - n_attack_total
+    if n_attack_total == 0 or n_benign_total == 0:
+        raise ValueError("stream must contain both classes")
+    natural = n_attack_total / n
 
+    i_train = int(n * train_ratio)
+    i_val = i_train + int(n * val_ratio)
+    segments = [(0, i_train), (i_train, i_val), (i_val, n)]
+
+    kept: list[np.ndarray] = []
     if target_rate <= natural:
-        # keep benigns, thin attacks: a / (a + n_benign) = target
-        keep_attacks = int(round(target_rate * n_benign / (1.0 - target_rate)))
-        keep_attacks = max(1, min(keep_attacks, n_attack))
-        chosen = rng.choice(attack_idx, size=keep_attacks, replace=False)
-        retained = np.concatenate([benign_idx, chosen])
+        for lo, hi in segments:
+            seg_y = y[lo:hi]
+            attack_idx = np.flatnonzero(seg_y == 1) + lo
+            benign_idx = np.flatnonzero(seg_y == 0) + lo
+            # keep all benigns in the segment, thin its attacks to the target
+            quota = int(round(target_rate * len(benign_idx) / (1.0 - target_rate)))
+            quota = max(1, min(quota, len(attack_idx))) if len(attack_idx) else 0
+            chosen = rng.choice(attack_idx, size=quota, replace=False) if quota else attack_idx[:0]
+            kept.append(benign_idx)
+            kept.append(chosen)
     else:
-        # keep attacks, thin benigns: n_attack / (n_attack + b) = target
-        keep_benign = int(round(n_attack * (1.0 - target_rate) / target_rate))
-        keep_benign = max(1, min(keep_benign, n_benign))
-        chosen = rng.choice(benign_idx, size=keep_benign, replace=False)
-        retained = np.concatenate([attack_idx, chosen])
-    return np.sort(retained)  # chronological order, no duplicates by construction
+        # Above natural, keeping ALL attacks is mathematically incompatible
+        # with per-split targets whenever the attack mass is not distributed
+        # in the split proportions (CICIDS: 68.1/14.8/17.2 vs 70/15/15 — the
+        # test split is attack-over-endowed). Choose the largest resampled
+        # stream n' whose 70/15/15 re-split hits the target rate in EVERY
+        # split, then draw per-segment quotas for BOTH classes; only the
+        # structurally excess attacks of over-endowed segments are thinned.
+        kept = []
+        seg_frac = [(hi - lo) / n for lo, hi in segments]
+        n_prime = None
+        for (lo, hi), r in zip(segments, seg_frac):
+            seg_y = y[lo:hi]
+            a, b = int(np.sum(seg_y == 1)), int(np.sum(seg_y == 0))
+            cap = min(a / (target_rate * r), b / ((1.0 - target_rate) * r)) if a and b else 0.0
+            n_prime = cap if n_prime is None else min(n_prime, cap)
+        n_prime = int(n_prime or 0)
+        if n_prime < 100:
+            raise ValueError("target rate structurally unachievable on this stream")
+        for (lo, hi), r in zip(segments, seg_frac):
+            seg_y = y[lo:hi]
+            attack_idx = np.flatnonzero(seg_y == 1) + lo
+            benign_idx = np.flatnonzero(seg_y == 0) + lo
+            length = r * n_prime
+            qa = min(int(round(target_rate * length)), len(attack_idx))
+            qb = min(int(round((1.0 - target_rate) * length)), len(benign_idx))
+            kept.append(rng.choice(attack_idx, size=qa, replace=False))
+            kept.append(rng.choice(benign_idx, size=qb, replace=False))
+    return np.sort(np.concatenate(kept))  # chronological order, no duplicates
 
 
 def resample_to_prevalence(
