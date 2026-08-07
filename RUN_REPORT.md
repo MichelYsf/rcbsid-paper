@@ -85,6 +85,25 @@ Gate targets: CALIBURN AUC-PR 0.545 / AUC-ROC 0.880 / F1 0.639 exact
 precision (documented above), LODA 0.342 / HST 0.433 seed-tight (1e-6) with
 the paper's mean±std envelope as documented fallback.
 
+### Ceiling overrun (logged 2026-08-07 07:50, decision: let them finish)
+
+The pre-launch estimate (~6 h wall from isolated steady-state timing) was
+inside the ceiling, but by 07:49 next morning all three runs were still in
+flight at ~13.8 h wall / ~13.5 CPU-h each (98% of one core, never suspended).
+A live probe measured BOCPD-class work at 10.04 ms/flow — 4.9x the isolated
+benchmark — so effective in-run throughput was throttled (laptop clocks /
+3-way contention), putting true position between ~48% (if the overnight
+factor was ~4.9x) and ~99% (if ~2.4x). Ruling: the 12 h ceiling was
+respected at launch; the runbook's authorized reduction rules contain
+nothing scoped to Stage 1, and no reduction can replace the reproduction
+gate itself — killing the runs would discard ~40 CPU-h and re-incur the
+identical cost. The runs are being allowed to finish, loudly logged here.
+Consequences applied downstream: Stage 2/3 estimates will be recalibrated
+from the measured in-situ Stage 1 wall times (not isolated benchmarks), and
+Stage 2/3 use their authorized reductions aggressively. Recommendation for
+the operator: keep the machine on AC power with sleep disabled during
+stages; sustained clocks dominate wall-clock here.
+
 ## Stage 2 — prevalence sweep (PENDING gate)
 
 Harness: scripts/run_prevalence_sweep.py (cells = level × seed, resampling
