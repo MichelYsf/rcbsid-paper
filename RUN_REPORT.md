@@ -117,13 +117,36 @@ Stage 2/3 use their authorized reductions aggressively. Recommendation for
 the operator: keep the machine on AC power with sleep disabled during
 stages; sustained clocks dominate wall-clock here.
 
-## Stage 2 — prevalence sweep (PENDING gate)
+## Stage 2 — prevalence sweep (RUNNING, launched 2026-08-07 ~11:30)
 
 Harness: scripts/run_prevalence_sweep.py (cells = level × seed, resampling
-per scripts/prevalence_lib.py with per-split 1 pp tolerance and logged
-redraws; CALIBURN variants V1/V3/V4 per scripts/caliburn_variants.py layered
-on one scored stream per cell; bocpd_slo control row is byte-identical to
-the Stage 1 protocol). Estimate to be printed before launch.
+per scripts/prevalence_lib.py; CALIBURN variants V1/V3/V4 per
+scripts/caliburn_variants.py layered on one scored stream per cell;
+bocpd_slo control row is byte-identical to the Stage 1 protocol).
+
+Protocol finding (forced design decision, commit d8d0796): the runbook's
+uniform-draw construction and its per-split 1 pp gate are jointly
+unsatisfiable on this stream — the interleaved stream carries a structural
+attack-share gradient (train 21.46 / val 21.70 / test 25.24) and the attack
+mass sits 68.1/14.8/17.2 across splits. Resolution: stratified per-split
+draws; above natural, joint per-segment quotas at the largest stream where
+every split hits the target (97.3% of attacks retained). Verified on the
+real stream: 4.96-5.07 / 9.89-10.16 / 40.00 / 64.00 percent per split,
+zero redraws. Resampled stream sizes: 1,312,671 / 1,385,597 / 858,221 /
+536,388.
+
+Runtime estimate printed at launch: ~44.6 isolated-core-hours total.
+Reductions applied and logged: KitNET/RRCF/iForest_ASD/xStream skipped
+(runbook rule); optional LITNET upward sweep skipped (ceiling rule);
+natural-level LODA/HST/LOF/ECOD/CALIBURN rows reused from the bit-exact
+Stage 1 outputs (~27 core-h saved; scripts/merge_sweep_with_stage1.py marks
+provenance and enforces the internal control on the recomputed natural
+BOCPD cell); mixed-method scheduling (4 workers, one method group per
+process) to avoid the memory-bandwidth collapse observed overnight. The
+honest wall-clock floor remains ~12-19 h depending on sustained clocks —
+at/above the 12 h ceiling; per the Stage 1 precedent this proceeds loudly
+logged, cheapest level first (waves: 64% -> 40% -> 5% -> 10% -> natural
+control cell) so partial deliverables accrue early.
 
 ## Stage 3 — baseline tuning (PENDING)
 
