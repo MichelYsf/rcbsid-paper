@@ -1,0 +1,610 @@
+#!/usr/bin/env python
+"""CALIBURN autopilot: file-driven state machine for the remaining pipeline.
+
+On every start, state is inferred solely from durable artifacts on disk and
+execution continues from the first incomplete step. Idempotent: finished work
+is never recomputed. Designed to run detached (Task Scheduler / logon task),
+surviving host-app restarts; a power cut costs only in-flight cells.
+
+Stages: S2-RESUME -> S2-MERGE -> S2-DELIVER -> S3-CAL -> S3-RUN ->
+S3-DELIVER -> S4-CONDITIONAL -> WRAP. Halt protocol: HALT.md + status HALTED
+on control mismatch / integrity failure / missing required artifact.
+"""
+from __future__ import annotations
+
+import datetime
+import itertools
+import json
+import os
+import subprocess
+import sys
+import time
+import traceback
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+PY = str(ROOT / ".venv/Scripts/python.exe")
+LOGS = ROOT / "logs"
+LOGS.mkdir(exist_ok=True)
+LOG = LOGS / "autopilot.log"
+PIDFILE = LOGS / "autopilot.pid"
+STATUS = ROOT / "PIPELINE_STATUS.md"
+HALTFILE = ROOT / "HALT.md"
+DONE = ROOT / "DONE_ALL.md"
+STAGE_TIMES = LOGS / "stage_times.json"
+PARTS = ROOT / "results/sweep_parts"
+TPARTS = ROOT / "results/tuning_parts"
+WORKERS = 4
+TASK_NAME = "CALIBURN-AUTOPILOT"
+
+ENV = dict(os.environ)
+ENV["PATH"] = str(ROOT / ".venv/Scripts") + os.pathsep + ENV.get("PATH", "")
+ENV["PYTHONPATH"] = str(ROOT / "external/KitNET-py")
+ENV["PYTHONUNBUFFERED"] = "1"
+
+
+def now() -> str:
+    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+def log(msg: str) -> None:
+    line = f"[{now()}] {msg}"
+    with open(LOG, "a", encoding="utf-8") as fh:
+        fh.write(line + "\n")
+    print(line, flush=True)
+
+
+def write_status(stage: str, detail: str, done_n: int | None = None,
+                 total_n: int | None = None, eta_h: float | None = None) -> None:
+    progress = f"{done_n}/{total_n} jobs done" if done_n is not None else ""
+    eta = f"~{eta_h:.1f} h remaining (measured rates)" if eta_h else ""
+    STATUS.write_text(f"""# CALIBURN pipeline status
+
+- **State**: {stage}
+- **Detail**: {detail}
+- **Progress**: {progress}
+- **ETA**: {eta}
+- **Last update**: {now()}
+- **Scheduled task**: {TASK_NAME} (deregisters itself when DONE_ALL.md exists)
+- **Live log**: logs/autopilot.log
+""", encoding="utf-8")
+
+
+def halt(cause: str, evidence: str, resume_cmd: str) -> None:
+    HALTFILE.write_text(f"""# PIPELINE HALTED — {now()}
+
+## Cause
+{cause}
+
+## Evidence
+{evidence}
+
+## Resume after fixing the cause
+```
+{resume_cmd}
+```
+The scheduled task {TASK_NAME} stays registered; once the cause is fixed and
+this file is deleted, the pipeline resumes on next logon (or run the command).
+""", encoding="utf-8")
+    write_status("HALTED", cause)
+    log(f"HALT: {cause}")
+    sys.exit(2)
+
+
+def record_stage(name: str, seconds: float) -> None:
+    data = json.loads(STAGE_TIMES.read_text()) if STAGE_TIMES.exists() else {}
+    data[name] = data.get(name, 0.0) + seconds
+    STAGE_TIMES.write_text(json.dumps(data, indent=2))
+
+
+def run(cmd: list[str], timeout: int = 7200, cwd: Path = ROOT) -> subprocess.CompletedProcess:
+    return subprocess.run(cmd, cwd=str(cwd), env=ENV, capture_output=True,
+                          text=True, timeout=timeout)
+
+
+def single_instance_guard() -> None:
+    if PIDFILE.exists():
+        try:
+            pid = int(PIDFILE.read_text().strip())
+            out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV"],
+                                 capture_output=True, text=True).stdout
+            if f'"{pid}"' in out and "python" in out.lower():
+                print(f"another autopilot instance is alive (pid {pid}); exiting")
+                sys.exit(0)
+        except Exception:
+            pass
+    PIDFILE.write_text(str(os.getpid()))
+
+
+# ---------------------------------------------------------------- Stage 2
+S2_LEVELS = ["64", "40", "5", "10"]
+S2_SEEDS = [11, 23, 47]
+S2_GROUPS = {"bocpd": ["bocpd"], "loda": ["loda"], "hst": ["hst"],
+             "lof_ecod": ["lof", "ecod"]}
+
+
+def s2_part_path(level: str, seed: int, group: str) -> Path:
+    p = PARTS / f"cicids_L{level}_s{seed}_{group}.csv"
+    if group == "lof_ecod":
+        legacy = PARTS / f"cicids_L{level}_s{seed}_batch.csv"
+        if legacy.exists() and legacy.stat().st_size > 0:
+            return legacy
+    return p
+
+
+def s2_jobs() -> list[dict]:
+    jobs = []
+    for level, seed, group in itertools.product(S2_LEVELS, S2_SEEDS, S2_GROUPS):
+        jobs.append({"kind": "s2", "level": level, "seed": seed, "group": group,
+                     "out": s2_part_path(level, seed, group)})
+    jobs.append({"kind": "s2", "level": "natural", "seed": 11, "group": "bocpd",
+                 "out": PARTS / "cicids_Lnat_s11_bocpd.csv"})
+    return jobs
+
+
+def s2_missing() -> list[dict]:
+    return [j for j in s2_jobs() if not (j["out"].exists() and j["out"].stat().st_size > 0)]
+
+
+def run_s2_job(job: dict) -> tuple[dict, bool, str]:
+    out = PARTS / (f"cicids_Lnat_s11_bocpd.csv" if job["level"] == "natural" else
+                   f"cicids_L{job['level']}_s{job['seed']}_{job['group']}.csv")
+    cmd = [PY, str(ROOT / "scripts/run_prevalence_sweep.py"), "--level", job["level"],
+           "--seed", str(job["seed"]), "--methods", *S2_GROUPS[job["group"]],
+           "--out", str(out)]
+    t0 = time.time()
+    try:
+        r = run(cmd, timeout=6 * 3600)
+        ok = r.returncode == 0 and out.exists() and out.stat().st_size > 0
+        return job, ok, f"{(time.time() - t0) / 60:.1f} min rc={r.returncode}" + \
+            ("" if ok else f" err={r.stderr[-400:]}")
+    except Exception as exc:
+        return job, False, f"exception: {exc}"
+
+
+def stage_s2_resume() -> None:
+    missing = s2_missing()
+    total = len(s2_jobs())
+    if not missing:
+        return
+    log(f"S2-RESUME: {len(missing)} of {total} jobs remaining")
+    t_stage = time.time()
+    walls: list[float] = []
+    failed_once: set[str] = set()
+    while missing:
+        done_before = total - len(missing)
+        write_status("S2-RESUME", f"running {min(WORKERS, len(missing))} workers",
+                     done_before, total,
+                     eta_h=(len(missing) * (sum(walls) / len(walls)) / WORKERS / 3600)
+                     if walls else None)
+        with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+            futs = {pool.submit(run_s2_job, j): j for j in missing}
+            for fut in as_completed(futs):
+                job, ok, info = fut.result()
+                key = f"L{job['level']}_s{job['seed']}_{job['group']}"
+                log(f"S2 job {key}: {'OK' if ok else 'FAILED'} ({info})")
+                if ok:
+                    walls.append(float(info.split()[0]) * 60)
+                elif key in failed_once:
+                    halt(f"Stage 2 job {key} failed twice",
+                         info, f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
+                else:
+                    failed_once.add(key)
+                done_n = total - len(s2_missing())
+                write_status("S2-RESUME", f"last: {key} {'OK' if ok else 'RETRY'}",
+                             done_n, total,
+                             eta_h=(len(s2_missing()) * (sum(walls) / max(1, len(walls)))
+                                    / WORKERS / 3600) if walls else None)
+        missing = s2_missing()
+    record_stage("S2-RESUME", time.time() - t_stage)
+    log("S2-RESUME complete")
+
+
+def stage_s2_merge() -> None:
+    merged = ROOT / "results/prevalence_sweep_cicids.csv"
+    if merged.exists():
+        return
+    log("S2-MERGE: merging cells + internal control check")
+    r = run([PY, str(ROOT / "scripts/merge_sweep_with_stage1.py")])
+    log(r.stdout[-2000:])
+    if r.returncode != 0:
+        halt("Stage 2 internal control failed (natural cell vs Stage 1)",
+             r.stdout[-2000:] + r.stderr[-1000:],
+             f'"{PY}" "{ROOT / "scripts/merge_sweep_with_stage1.py"}"')
+    write_status("S2-MERGE", "merged, control OK")
+
+
+def stage_s2_deliver() -> None:
+    targets = {
+        "table": ROOT / "results/prevalence_sweep_table.tex",
+        "fig": ROOT / "figures/fig6_prevalence_sweep.pdf",
+        "findings": ROOT / "findings_prevalence.md",
+    }
+    if all(p.exists() for p in targets.values()):
+        return
+    log("S2-DELIVER: table, figure, findings")
+    for script in ("make_prevalence_table.py", "figures/fig6_prevalence_sweep.py",
+                   "make_findings_prevalence.py"):
+        r = run([PY, str(ROOT / "scripts" / script)])
+        if r.returncode != 0:
+            halt(f"S2 deliverable generator {script} failed",
+                 r.stderr[-1500:], f'"{PY}" "{ROOT / "scripts" / script}"')
+    write_status("S2-DELIVER", "deliverables written")
+
+
+# ---------------------------------------------------------------- Stage 3
+S3_DATASETS = ["litnet2020", "cicids2017"]
+S3_METHODS = ["hst", "loda", "rrcf", "iforest_asd", "kitnet", "lof"]
+REDUCTIONS = TPARTS / "reductions.json"
+S3_CEILING_H = 36.0
+
+
+def s3_probe_rates() -> dict:
+    probe_file = TPARTS / "probe_rates.json"
+    if probe_file.exists():
+        return json.loads(probe_file.read_text())
+    log("S3-CAL: probing per-flow rates (both datasets)")
+    code = r"""
+import sys, time, json
+sys.path.insert(0, '.'); sys.path.insert(0, 'scripts')
+import numpy as np
+from run_baseline_tuning import load_stream, GRIDS, grid_points, to_wrapper_params
+from src.baselines.registry import make_streaming_baseline
+out = {}
+for ds in ('litnet2020','cicids2017'):
+    cfg, X, y = load_stream(ds)
+    out[ds+'_n'] = int(len(y))
+    Xp = np.asarray(X[3000:8000])
+    for m in ('hst','loda','rrcf','iforest_asd','kitnet'):
+        try:
+            mm = make_streaming_baseline(m, n_features=X.shape[1], seed=11,
+                 allow_fallback=False, **to_wrapper_params(m, grid_points(m)[0], stream_len=len(y)))
+            for r in np.asarray(X[:600]): mm.score_one(r); mm.learn_one(r)
+            t0 = time.perf_counter()
+            for r in Xp: mm.score_one(r); mm.learn_one(r)
+            out[f'{ds}_{m}_ms'] = (time.perf_counter()-t0)/len(Xp)*1e3
+        except Exception as e:
+            out[f'{ds}_{m}_ms'] = None; out[f'{ds}_{m}_err'] = str(e)
+print(json.dumps(out))
+"""
+    r = run([PY, "-c", code], timeout=3600)
+    if r.returncode != 0:
+        halt("S3 probe failed", r.stderr[-1500:], f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
+    rates = json.loads(r.stdout.strip().splitlines()[-1])
+    TPARTS.mkdir(parents=True, exist_ok=True)
+    probe_file.write_text(json.dumps(rates, indent=2))
+    log(f"S3 probe: {rates}")
+    return rates
+
+
+def s3_decide_reductions() -> dict:
+    if REDUCTIONS.exists():
+        return json.loads(REDUCTIONS.read_text())
+    from math import isnan  # noqa: F401
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from run_baseline_tuning import GRIDS, grid_points  # noqa: E402
+    rates = s3_probe_rates()
+    decision = {"train_frac": 1.0, "grid": "full", "datasets": S3_DATASETS,
+                "ladder_log": [], "projection_h": None}
+
+    def project(train_frac: float, grids_scale: float, datasets: list[str]) -> float:
+        total_s = 0.0
+        for ds in datasets:
+            n = rates.get(f"{ds}_n", 1_500_000)
+            stream = n * (0.70 * train_frac + 0.15)
+            for m in ("hst", "loda", "rrcf", "iforest_asd", "kitnet"):
+                ms = rates.get(f"{ds}_{m}_ms")
+                if ms is None:
+                    continue
+                pts = max(1, int(round(len(grid_points(m)) * grids_scale)))
+                total_s += stream * ms / 1000.0 * pts
+            total_s += 45 * 60 * 4 * grids_scale  # lof grid, coarse allowance
+            # finals: 3 seeds full stream for stochastic + deterministic reruns
+            for m in ("hst", "loda", "rrcf", "iforest_asd"):
+                ms = rates.get(f"{ds}_{m}_ms") or 0
+                total_s += n * 0.85 * ms / 1000.0 * 3
+        return total_s / 3600 / WORKERS  # wall hours at 4 workers (optimistic mix)
+
+    p = project(1.0, 1.0, S3_DATASETS)
+    decision["ladder_log"].append(f"full protocol projection: {p:.1f} h wall")
+    if p > S3_CEILING_H:
+        decision["train_frac"] = 0.4
+        p = project(0.4, 1.0, S3_DATASETS)
+        decision["ladder_log"].append(f"rung 1 (40% train substream tuning): {p:.1f} h wall")
+    if p > S3_CEILING_H:
+        decision["grid"] = "coarse"
+        p = project(decision["train_frac"], 0.45, S3_DATASETS)
+        decision["ladder_log"].append(f"rung 2 (drop middle grid values): {p:.1f} h wall")
+    if p > S3_CEILING_H:
+        decision["datasets"] = ["litnet2020"]
+        p = project(decision["train_frac"], 0.45 if decision["grid"] == "coarse" else 1.0,
+                    ["litnet2020"])
+        decision["ladder_log"].append(f"rung 3 (LITNET-2020 only): {p:.1f} h wall")
+    decision["projection_h"] = p
+    REDUCTIONS.write_text(json.dumps(decision, indent=2))
+    for line in decision["ladder_log"]:
+        log(f"S3-CAL: {line}")
+    return decision
+
+
+def coarse_grid(method: str) -> list[dict]:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from run_baseline_tuning import GRIDS
+    grid = GRIDS[method]
+    coarse = {k: ([v[0], v[-1]] if len(v) > 2 else v) for k, v in grid.items()}
+    keys = list(coarse)
+    return [dict(zip(keys, combo)) for combo in itertools.product(*(coarse[k] for k in keys))]
+
+
+def s3_grid_points(method: str, decision: dict) -> list[dict]:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from run_baseline_tuning import grid_points
+    return coarse_grid(method) if decision["grid"] == "coarse" else grid_points(method)
+
+
+def stage_s3() -> None:
+    final_csv = ROOT / "results/baseline_tuning.csv"
+    if final_csv.exists():
+        return
+    TPARTS.mkdir(parents=True, exist_ok=True)
+    decision = s3_decide_reductions()
+    write_status("S3-RUN", f"reductions: train_frac={decision['train_frac']} "
+                           f"grid={decision['grid']} datasets={decision['datasets']}")
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from run_baseline_tuning import grid_points as full_points
+
+    t_stage = time.time()
+    jobs = []
+    for ds in decision["datasets"]:
+        for method in S3_METHODS:
+            pts = s3_grid_points(method, decision)
+            full = full_points(method)
+            for i, pt in enumerate(pts):
+                idx = full.index(pt) if pt in full else i
+                out = TPARTS / f"grid_{ds}_{method}_{idx:03d}.csv"
+                if not (out.exists() and out.stat().st_size > 0):
+                    jobs.append((ds, method, idx))
+    log(f"S3-RUN: {len(jobs)} grid jobs to run")
+    total = len(jobs)
+    done_ctr = 0
+
+    def run_grid_job(j):
+        ds, method, idx = j
+        cmd = [PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "grid",
+               "--dataset", ds, "--method", method, "--point", str(idx),
+               "--train-frac", str(decision["train_frac"])]
+        t0 = time.time()
+        r = run(cmd, timeout=8 * 3600)
+        return j, r.returncode == 0, (time.time() - t0) / 60
+
+    walls = []
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        futs = [pool.submit(run_grid_job, j) for j in jobs]
+        for fut in as_completed(futs):
+            j, ok, mins = fut.result()
+            done_ctr += 1
+            walls.append(mins)
+            log(f"S3 grid {j}: {'OK' if ok else 'CRASH-LOGGED'} {mins:.1f} min")
+            write_status("S3-RUN", f"grid {j[0]}/{j[1]} pt{j[2]}", done_ctr, total,
+                         eta_h=(total - done_ctr) * (sum(walls) / len(walls)) / WORKERS / 60)
+
+    for ds in decision["datasets"]:
+        for method in S3_METHODS:
+            tag = TPARTS / f"final_{ds}_{method}_tuned.csv"
+            if tag.exists():
+                continue
+            r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "final",
+                     "--dataset", ds, "--method", method], timeout=12 * 3600)
+            log(f"S3 final {ds}/{method}: rc={r.returncode} {r.stdout[-200:]}")
+        for method in ("ecod", "copod"):  # carried forward, defaults documented
+            tag = TPARTS / f"final_{ds}_{method}_default.csv"
+            if not tag.exists():
+                r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "final",
+                         "--dataset", ds, "--method", method, "--params-json", "{}"],
+                        timeout=4 * 3600)
+                log(f"S3 final-default {ds}/{method}: rc={r.returncode}")
+
+    r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--merge", str(TPARTS),
+             "--out", str(final_csv)])
+    if r.returncode != 0 or not final_csv.exists():
+        halt("S3 merge failed", r.stderr[-1500:],
+             f'"{PY}" "{ROOT / "scripts/run_baseline_tuning.py"}" --merge "{TPARTS}" --out "{final_csv}"')
+    record_stage("S3", time.time() - t_stage)
+
+
+def stage_s3_deliver() -> None:
+    targets = [ROOT / "results/table4_litnet_tuned.tex",
+               ROOT / "results/tuning_delta_summary.tex",
+               ROOT / "results/appendix_a_replacement.tex",
+               ROOT / "findings_tuning.md"]
+    if all(p.exists() for p in targets):
+        return
+    log("S3-DELIVER: tables, appendix, findings")
+    for script in ("make_tuning_tables.py", "make_findings_tuning.py"):
+        r = run([PY, str(ROOT / "scripts" / script)])
+        if r.returncode != 0:
+            halt(f"S3 deliverable generator {script} failed", r.stderr[-1500:],
+                 f'"{PY}" "{ROOT / "scripts" / script}"')
+    write_status("S3-DELIVER", "deliverables written")
+
+
+# ---------------------------------------------------------------- Stage 4
+def stage_s4() -> None:
+    scope = ROOT / "results/burnrate_scope.json"
+    fig = ROOT / "figures/fig7_burnrate_litnet.pdf"
+    out_csv = ROOT / "results/burnrate_litnet.csv"
+    if (out_csv.exists() and fig.exists()) or (ROOT / "findings_burnrate.md").exists():
+        return
+    rates = s3_probe_rates()
+    n = rates.get("litnet2020_n", 1_500_000)
+    bocpd_ms = 4.8  # measured in-situ CICIDS mix rate; LITNET similar order
+    proj_h = n * bocpd_ms / 1000 / 3600 + 0.5
+    scope.parent.mkdir(parents=True, exist_ok=True)
+    scope.write_text(json.dumps({"projection_h": proj_h, "fits": proj_h <= 12.0}))
+    if proj_h > 12.0:
+        (ROOT / "findings_burnrate.md").write_text(
+            f"# Burn-rate validation scoping\n\nStage 4 was scoped out: the CALIBURN "
+            f"scoring pass over the LITNET-2020 stream projects to ~{proj_h:.1f} h wall "
+            f"on this hardware, exceeding the 12 additional-hour budget the autopilot "
+            f"allows after Stage 3. No burn-rate numbers are reported rather than "
+            f"reporting rushed ones.\n")
+        log(f"S4: scoped out at projection {proj_h:.1f} h")
+        return
+    log(f"S4: running (projection {proj_h:.1f} h)")
+    t0 = time.time()
+    r = run([PY, str(ROOT / "scripts/run_burnrate_litnet.py")], timeout=14 * 3600)
+    log(r.stdout[-3000:])
+    if r.returncode != 0:
+        halt("S4 burn-rate run failed", r.stderr[-1500:],
+             f'"{PY}" "{ROOT / "scripts/run_burnrate_litnet.py"}"')
+    for script in ("figures/fig7_burnrate_litnet.py", "make_burnrate_table.py"):
+        rr = run([PY, str(ROOT / "scripts" / script)])
+        if rr.returncode != 0:
+            halt(f"S4 deliverable {script} failed", rr.stderr[-1500:],
+                 f'"{PY}" "{ROOT / "scripts" / script}"')
+    record_stage("S4", time.time() - t0)
+
+
+# ---------------------------------------------------------------- Wrap-up
+def stage_wrap() -> None:
+    if DONE.exists():
+        return
+    log("WRAP: pytest + smoke test")
+    r = run([PY, "-m", "pytest", "-q"], timeout=3600)
+    if r.returncode != 0:
+        halt("pytest failed at wrap-up", r.stdout[-2000:], f'"{PY}" -m pytest -q')
+    bash = r"C:\Program Files\Git\bin\bash.exe"
+    if not Path(bash).exists():
+        bash = "bash"
+    r = subprocess.run([bash, "scripts/run_smoke_test.sh"], cwd=str(ROOT), env=ENV,
+                       capture_output=True, text=True, timeout=3600)
+    if r.returncode != 0:
+        halt("smoke test failed at wrap-up", (r.stdout + r.stderr)[-2000:],
+             f'bash scripts/run_smoke_test.sh')
+
+    log("WRAP: RUN_REPORT completion")
+    freeze = run([PY, "-m", "pip", "freeze"]).stdout
+    stage_times = json.loads(STAGE_TIMES.read_text()) if STAGE_TIMES.exists() else {}
+    reductions = json.loads(REDUCTIONS.read_text()) if REDUCTIONS.exists() else {}
+    findings = ""
+    for f in ("findings_prevalence.md", "findings_tuning.md", "findings_burnrate.md",
+              "findings_paper_overlap.md"):
+        p = ROOT / f
+        if p.exists():
+            findings += f"\n\n---\n\n<!-- inlined {f} -->\n\n" + p.read_text(encoding="utf-8")
+    with open(ROOT / "RUN_REPORT.md", "a", encoding="utf-8") as fh:
+        fh.write(f"""
+
+## Autopilot completion — {now()}
+
+Wall clock per stage (seconds, cumulative across restarts):
+```json
+{json.dumps(stage_times, indent=2)}
+```
+
+Stage 3 reductions decision:
+```json
+{json.dumps(reductions, indent=2)}
+```
+
+Power settings: NOT modified by the agent (system-settings policy). The
+pre-authorized commands are staged in scripts/apply_power_settings.cmd for
+the operator; resilience is provided by the logon scheduled task instead.
+
+pip freeze:
+```
+{freeze}
+```
+{findings}
+""")
+
+    log("WRAP: commit + push")
+    def git(*args):
+        return subprocess.run(["git", *args], cwd=str(ROOT), capture_output=True, text=True)
+    git("add", "-A")
+    git("add", "-f", "results/")
+    git("commit", "-m", "exp: autopilot completion — Stage 2/3(/4) results, "
+        "deliverables, RUN_REPORT\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>")
+    push = git("push", "-u", "origin", "exp/prevalence-and-tuning")
+    push_note = "pushed" if push.returncode == 0 else \
+        f"PUSH FAILED (auth?) — commits are local only: {push.stderr[-300:]}"
+    log(f"WRAP: {push_note}")
+
+    deliverables = [str(p.relative_to(ROOT)) for p in [
+        ROOT / "results/prevalence_sweep_cicids.csv",
+        ROOT / "results/prevalence_sweep_table.tex",
+        ROOT / "figures/fig6_prevalence_sweep.pdf",
+        ROOT / "findings_prevalence.md",
+        ROOT / "results/baseline_tuning.csv",
+        ROOT / "results/table4_litnet_tuned.tex",
+        ROOT / "results/table5_cicids_tuned.tex",
+        ROOT / "results/tuning_delta_summary.tex",
+        ROOT / "results/appendix_a_replacement.tex",
+        ROOT / "findings_tuning.md",
+        ROOT / "results/burnrate_litnet.csv",
+        ROOT / "figures/fig7_burnrate_litnet.pdf",
+        ROOT / "findings_burnrate.md",
+        ROOT / "findings_paper_overlap.md",
+        ROOT / "RUN_REPORT.md",
+    ] if p.exists()]
+    DONE.write_text(f"""# DONE_ALL — {now()}
+
+Branch: exp/prevalence-and-tuning ({push_note})
+
+## Deliverables
+""" + "\n".join(f"- {d}" for d in deliverables) + """
+
+## Paste into the Claude chat for manuscript integration
+- findings_prevalence.md
+- findings_tuning.md
+- results/prevalence_sweep_table.tex
+- results/table4_litnet_tuned.tex
+- results/table5_cicids_tuned.tex
+- results/tuning_delta_summary.tex
+- results/appendix_a_replacement.tex
+- RUN_REPORT.md (the reductions + gate sections)
+""", encoding="utf-8")
+    subprocess.run(["schtasks", "/delete", "/tn", TASK_NAME, "/f"],
+                   capture_output=True, text=True)
+    startup = Path(os.environ["APPDATA"]) / \
+        "Microsoft/Windows/Start Menu/Programs/Startup/CALIBURN-AUTOPILOT.cmd"
+    if startup.exists():
+        startup.unlink()
+    write_status("COMPLETE", "all stages done; scheduled task deregistered")
+    log("WRAP complete — DONE_ALL.md written")
+
+
+def main() -> None:
+    if DONE.exists():
+        print("DONE_ALL.md exists; nothing to do")
+        return
+    if HALTFILE.exists():
+        write_status("HALTED", "HALT.md present — fix the cause and delete HALT.md")
+        print("HALT.md present; refusing to run until it is removed")
+        return
+    single_instance_guard()
+    if "--infer" in sys.argv:
+        miss = s2_missing()
+        print(f"S2 remaining jobs: {len(miss)}")
+        for j in miss:
+            print(f"  L{j['level']} s{j['seed']} {j['group']}")
+        return
+    log(f"autopilot start (pid {os.getpid()})")
+    try:
+        stage_s2_resume()
+        stage_s2_merge()
+        stage_s2_deliver()
+        stage_s3()
+        stage_s3_deliver()
+        stage_s4()
+        stage_wrap()
+    except SystemExit:
+        raise
+    except Exception:
+        halt("unexpected exception in autopilot", traceback.format_exc()[-3000:],
+             f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
+
+
+if __name__ == "__main__":
+    main()

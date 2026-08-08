@@ -8,3 +8,4 @@ __pycache__/
 /mlruns/
 /wandb/
 .DS_Store
+/logs/
