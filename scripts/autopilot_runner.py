@@ -658,6 +658,8 @@ def main() -> None:
         return
     log(f"autopilot start (pid {os.getpid()}, windowless={sys.executable.endswith('pythonw.exe')})")
     pick_workers("startup")
+    write_status("STARTING", f"runner up (pid {os.getpid()}); "
+                             f"{len(s2_missing())} of {len(s2_jobs())} S2 jobs remaining")
     try:
         stage_s2_resume()
         stage_s2_merge()
