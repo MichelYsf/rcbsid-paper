@@ -3,8 +3,10 @@
 
 On every start, state is inferred solely from durable artifacts on disk and
 execution continues from the first incomplete step. Idempotent: finished work
-is never recomputed. Designed to run detached (Task Scheduler / logon task),
-surviving host-app restarts; a power cut costs only in-flight cells.
+is never recomputed. Designed to run detached and WINDOWLESS (pythonw +
+CREATE_NO_WINDOW workers): no console exists anywhere for a human to close
+and no Ctrl event can propagate (2026-08-08 incident: a visible console was
+closed, STATUS_CONTROL_C_EXIT killed all workers).
 
 Stages: S2-RESUME -> S2-MERGE -> S2-DELIVER -> S3-CAL -> S3-RUN ->
 S3-DELIVER -> S4-CONDITIONAL -> WRAP. Halt protocol: HALT.md + status HALTED
@@ -12,6 +14,7 @@ on control mismatch / integrity failure / missing required artifact.
 """
 from __future__ import annotations
 
+import ctypes
 import datetime
 import itertools
 import json
@@ -20,13 +23,14 @@ import subprocess
 import sys
 import time
 import traceback
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PY = str(ROOT / ".venv/Scripts/python.exe")
 LOGS = ROOT / "logs"
 LOGS.mkdir(exist_ok=True)
+JOBLOGS = LOGS / "jobs"
+JOBLOGS.mkdir(exist_ok=True)
 LOG = LOGS / "autopilot.log"
 PIDFILE = LOGS / "autopilot.pid"
 STATUS = ROOT / "PIPELINE_STATUS.md"
@@ -35,13 +39,27 @@ DONE = ROOT / "DONE_ALL.md"
 STAGE_TIMES = LOGS / "stage_times.json"
 PARTS = ROOT / "results/sweep_parts"
 TPARTS = ROOT / "results/tuning_parts"
-WORKERS = 4
+MAX_WORKERS = 4
+LOW_RAM_WORKERS = 3
+LOW_RAM_GB = 5.0
 TASK_NAME = "CALIBURN-AUTOPILOT"
+
+# No window, and a separate process group so no Ctrl event can reach workers.
+CREATE_FLAGS = subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP
+
+# Under pythonw there is no console: stdout/stderr are invalid. Redirect them
+# to a file so stray prints and tracebacks are never lost.
+if sys.stdout is None or sys.stderr is None:
+    _side = open(LOGS / "autopilot_stdio.log", "a", buffering=1, encoding="utf-8")
+    sys.stdout = sys.stdout or _side
+    sys.stderr = sys.stderr or _side
 
 ENV = dict(os.environ)
 ENV["PATH"] = str(ROOT / ".venv/Scripts") + os.pathsep + ENV.get("PATH", "")
 ENV["PYTHONPATH"] = str(ROOT / "external/KitNET-py")
 ENV["PYTHONUNBUFFERED"] = "1"
+
+_last_workers: int | None = None
 
 
 def now() -> str:
@@ -52,22 +70,54 @@ def log(msg: str) -> None:
     line = f"[{now()}] {msg}"
     with open(LOG, "a", encoding="utf-8") as fh:
         fh.write(line + "\n")
-    print(line, flush=True)
+    try:
+        print(line, flush=True)
+    except Exception:
+        pass
+
+
+def free_ram_gb() -> float:
+    class MEMORYSTATUSEX(ctypes.Structure):
+        _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                    ("ullTotalPhys", ctypes.c_ulonglong),
+                    ("ullAvailPhys", ctypes.c_ulonglong),
+                    ("ullTotalPageFile", ctypes.c_ulonglong),
+                    ("ullAvailPageFile", ctypes.c_ulonglong),
+                    ("ullTotalVirtual", ctypes.c_ulonglong),
+                    ("ullAvailVirtual", ctypes.c_ulonglong),
+                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+    st = MEMORYSTATUSEX()
+    st.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
+    ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(st))
+    return st.ullAvailPhys / (1 << 30)
+
+
+def pick_workers(stage: str) -> int:
+    global _last_workers
+    free = free_ram_gb()
+    w = LOW_RAM_WORKERS if free < LOW_RAM_GB else MAX_WORKERS
+    if w != _last_workers:
+        log(f"{stage}: worker limit -> {w} (free RAM {free:.1f} GB, "
+            f"threshold {LOW_RAM_GB} GB)")
+        _last_workers = w
+    return w
 
 
 def write_status(stage: str, detail: str, done_n: int | None = None,
                  total_n: int | None = None, eta_h: float | None = None) -> None:
     progress = f"{done_n}/{total_n} jobs done" if done_n is not None else ""
     eta = f"~{eta_h:.1f} h remaining (measured rates)" if eta_h else ""
+    workers = f"{_last_workers} (free RAM {free_ram_gb():.1f} GB)" if _last_workers else "n/a"
     STATUS.write_text(f"""# CALIBURN pipeline status
 
 - **State**: {stage}
 - **Detail**: {detail}
 - **Progress**: {progress}
 - **ETA**: {eta}
+- **Workers**: {workers}
 - **Last update**: {now()}
-- **Scheduled task**: {TASK_NAME} (deregisters itself when DONE_ALL.md exists)
-- **Live log**: logs/autopilot.log
+- **Resume registration**: Startup folder CALIBURN-AUTOPILOT.vbs (hidden; removes itself when DONE_ALL.md exists)
+- **Live log**: logs/autopilot.log (per-job logs under logs/jobs/)
 """, encoding="utf-8")
 
 
@@ -84,8 +134,7 @@ def halt(cause: str, evidence: str, resume_cmd: str) -> None:
 ```
 {resume_cmd}
 ```
-The scheduled task {TASK_NAME} stays registered; once the cause is fixed and
-this file is deleted, the pipeline resumes on next logon (or run the command).
+Delete this file after fixing; the pipeline resumes at next logon (or run the command).
 """, encoding="utf-8")
     write_status("HALTED", cause)
     log(f"HALT: {cause}")
@@ -100,7 +149,7 @@ def record_stage(name: str, seconds: float) -> None:
 
 def run(cmd: list[str], timeout: int = 7200, cwd: Path = ROOT) -> subprocess.CompletedProcess:
     return subprocess.run(cmd, cwd=str(cwd), env=ENV, capture_output=True,
-                          text=True, timeout=timeout)
+                          text=True, timeout=timeout, creationflags=CREATE_FLAGS)
 
 
 def single_instance_guard() -> None:
@@ -108,13 +157,52 @@ def single_instance_guard() -> None:
         try:
             pid = int(PIDFILE.read_text().strip())
             out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV"],
-                                 capture_output=True, text=True).stdout
+                                 capture_output=True, text=True,
+                                 creationflags=CREATE_FLAGS).stdout
             if f'"{pid}"' in out and "python" in out.lower():
-                print(f"another autopilot instance is alive (pid {pid}); exiting")
+                log(f"another autopilot instance is alive (pid {pid}); exiting")
                 sys.exit(0)
         except Exception:
             pass
     PIDFILE.write_text(str(os.getpid()))
+
+
+def run_pool(stage: str, jobs: list, make_cmd, job_key, total_done0: int,
+             total: int) -> dict:
+    """Windowless adaptive worker pool. Returns {key: returncode}.
+
+    Worker count is re-evaluated from free RAM at every job handoff (reap or
+    spawn opportunity). Each job's output goes to logs/jobs/<key>.log.
+    """
+    pending = list(jobs)
+    active: dict = {}
+    walls: list[float] = []
+    results: dict = {}
+    while pending or active:
+        limit = pick_workers(stage)
+        for p in list(active):
+            if p.poll() is None:
+                continue
+            job, t0, fh = active.pop(p)
+            fh.close()
+            mins = (time.time() - t0) / 60
+            walls.append(mins)
+            results[job_key(job)] = p.returncode
+            done_n = total_done0 + len(results)
+            eta = ((len(pending) + len(active)) * (sum(walls) / len(walls))
+                   / max(1, limit) / 60) if walls else None
+            log(f"{stage} job {job_key(job)}: rc={p.returncode} {mins:.1f} min")
+            write_status(stage, f"last: {job_key(job)} rc={p.returncode}",
+                         done_n, total, eta_h=eta)
+        while pending and len(active) < limit:
+            job = pending.pop(0)
+            fh = open(JOBLOGS / f"{job_key(job)}.log", "a", encoding="utf-8")
+            p = subprocess.Popen(make_cmd(job), cwd=str(ROOT), env=ENV,
+                                 stdout=fh, stderr=subprocess.STDOUT,
+                                 creationflags=CREATE_FLAGS)
+            active[p] = (job, time.time(), fh)
+        time.sleep(10)
+    return results
 
 
 # ---------------------------------------------------------------- Stage 2
@@ -136,9 +224,9 @@ def s2_part_path(level: str, seed: int, group: str) -> Path:
 def s2_jobs() -> list[dict]:
     jobs = []
     for level, seed, group in itertools.product(S2_LEVELS, S2_SEEDS, S2_GROUPS):
-        jobs.append({"kind": "s2", "level": level, "seed": seed, "group": group,
+        jobs.append({"level": level, "seed": seed, "group": group,
                      "out": s2_part_path(level, seed, group)})
-    jobs.append({"kind": "s2", "level": "natural", "seed": 11, "group": "bocpd",
+    jobs.append({"level": "natural", "seed": 11, "group": "bocpd",
                  "out": PARTS / "cicids_Lnat_s11_bocpd.csv"})
     return jobs
 
@@ -147,56 +235,40 @@ def s2_missing() -> list[dict]:
     return [j for j in s2_jobs() if not (j["out"].exists() and j["out"].stat().st_size > 0)]
 
 
-def run_s2_job(job: dict) -> tuple[dict, bool, str]:
-    out = PARTS / (f"cicids_Lnat_s11_bocpd.csv" if job["level"] == "natural" else
+def s2_key(job: dict) -> str:
+    return f"L{job['level']}_s{job['seed']}_{job['group']}"
+
+
+def s2_cmd(job: dict) -> list[str]:
+    out = PARTS / ("cicids_Lnat_s11_bocpd.csv" if job["level"] == "natural" else
                    f"cicids_L{job['level']}_s{job['seed']}_{job['group']}.csv")
-    cmd = [PY, str(ROOT / "scripts/run_prevalence_sweep.py"), "--level", job["level"],
-           "--seed", str(job["seed"]), "--methods", *S2_GROUPS[job["group"]],
-           "--out", str(out)]
-    t0 = time.time()
-    try:
-        r = run(cmd, timeout=6 * 3600)
-        ok = r.returncode == 0 and out.exists() and out.stat().st_size > 0
-        return job, ok, f"{(time.time() - t0) / 60:.1f} min rc={r.returncode}" + \
-            ("" if ok else f" err={r.stderr[-400:]}")
-    except Exception as exc:
-        return job, False, f"exception: {exc}"
+    return [PY, str(ROOT / "scripts/run_prevalence_sweep.py"), "--level", job["level"],
+            "--seed", str(job["seed"]), "--methods", *S2_GROUPS[job["group"]],
+            "--out", str(out)]
 
 
 def stage_s2_resume() -> None:
-    missing = s2_missing()
     total = len(s2_jobs())
+    missing = s2_missing()
     if not missing:
         return
     log(f"S2-RESUME: {len(missing)} of {total} jobs remaining")
     t_stage = time.time()
-    walls: list[float] = []
-    failed_once: set[str] = set()
+    fail_counts: dict[str, int] = {}
     while missing:
-        done_before = total - len(missing)
-        write_status("S2-RESUME", f"running {min(WORKERS, len(missing))} workers",
-                     done_before, total,
-                     eta_h=(len(missing) * (sum(walls) / len(walls)) / WORKERS / 3600)
-                     if walls else None)
-        with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-            futs = {pool.submit(run_s2_job, j): j for j in missing}
-            for fut in as_completed(futs):
-                job, ok, info = fut.result()
-                key = f"L{job['level']}_s{job['seed']}_{job['group']}"
-                log(f"S2 job {key}: {'OK' if ok else 'FAILED'} ({info})")
-                if ok:
-                    walls.append(float(info.split()[0]) * 60)
-                elif key in failed_once:
-                    halt(f"Stage 2 job {key} failed twice",
-                         info, f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
-                else:
-                    failed_once.add(key)
-                done_n = total - len(s2_missing())
-                write_status("S2-RESUME", f"last: {key} {'OK' if ok else 'RETRY'}",
-                             done_n, total,
-                             eta_h=(len(s2_missing()) * (sum(walls) / max(1, len(walls)))
-                                    / WORKERS / 3600) if walls else None)
-        missing = s2_missing()
+        run_pool("S2-RESUME", missing, s2_cmd, s2_key, total - len(missing), total)
+        still = s2_missing()
+        for j in still:
+            k = s2_key(j)
+            fail_counts[k] = fail_counts.get(k, 0) + 1
+            if fail_counts[k] >= 2:
+                tail = ""
+                jl = JOBLOGS / f"{k}.log"
+                if jl.exists():
+                    tail = jl.read_text(encoding="utf-8", errors="replace")[-1500:]
+                halt(f"Stage 2 job {k} failed twice", tail,
+                     f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
+        missing = still
     record_stage("S2-RESUME", time.time() - t_stage)
     log("S2-RESUME complete")
 
@@ -270,7 +342,8 @@ print(json.dumps(out))
 """
     r = run([PY, "-c", code], timeout=3600)
     if r.returncode != 0:
-        halt("S3 probe failed", r.stderr[-1500:], f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
+        halt("S3 probe failed", r.stderr[-1500:],
+             f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
     rates = json.loads(r.stdout.strip().splitlines()[-1])
     TPARTS.mkdir(parents=True, exist_ok=True)
     probe_file.write_text(json.dumps(rates, indent=2))
@@ -281,9 +354,8 @@ print(json.dumps(out))
 def s3_decide_reductions() -> dict:
     if REDUCTIONS.exists():
         return json.loads(REDUCTIONS.read_text())
-    from math import isnan  # noqa: F401
     sys.path.insert(0, str(ROOT / "scripts"))
-    from run_baseline_tuning import GRIDS, grid_points  # noqa: E402
+    from run_baseline_tuning import grid_points  # noqa: E402
     rates = s3_probe_rates()
     decision = {"train_frac": 1.0, "grid": "full", "datasets": S3_DATASETS,
                 "ladder_log": [], "projection_h": None}
@@ -299,12 +371,11 @@ def s3_decide_reductions() -> dict:
                     continue
                 pts = max(1, int(round(len(grid_points(m)) * grids_scale)))
                 total_s += stream * ms / 1000.0 * pts
-            total_s += 45 * 60 * 4 * grids_scale  # lof grid, coarse allowance
-            # finals: 3 seeds full stream for stochastic + deterministic reruns
+            total_s += 45 * 60 * 4 * grids_scale  # lof grid allowance
             for m in ("hst", "loda", "rrcf", "iforest_asd"):
                 ms = rates.get(f"{ds}_{m}_ms") or 0
                 total_s += n * 0.85 * ms / 1000.0 * 3
-        return total_s / 3600 / WORKERS  # wall hours at 4 workers (optimistic mix)
+        return total_s / 3600 / MAX_WORKERS
 
     p = project(1.0, 1.0, S3_DATASETS)
     decision["ladder_log"].append(f"full protocol projection: {p:.1f} h wall")
@@ -337,12 +408,6 @@ def coarse_grid(method: str) -> list[dict]:
     return [dict(zip(keys, combo)) for combo in itertools.product(*(coarse[k] for k in keys))]
 
 
-def s3_grid_points(method: str, decision: dict) -> list[dict]:
-    sys.path.insert(0, str(ROOT / "scripts"))
-    from run_baseline_tuning import grid_points
-    return coarse_grid(method) if decision["grid"] == "coarse" else grid_points(method)
-
-
 def stage_s3() -> None:
     final_csv = ROOT / "results/baseline_tuning.csv"
     if final_csv.exists():
@@ -358,36 +423,25 @@ def stage_s3() -> None:
     jobs = []
     for ds in decision["datasets"]:
         for method in S3_METHODS:
-            pts = s3_grid_points(method, decision)
+            pts = coarse_grid(method) if decision["grid"] == "coarse" else full_points(method)
             full = full_points(method)
             for i, pt in enumerate(pts):
                 idx = full.index(pt) if pt in full else i
                 out = TPARTS / f"grid_{ds}_{method}_{idx:03d}.csv"
                 if not (out.exists() and out.stat().st_size > 0):
-                    jobs.append((ds, method, idx))
+                    jobs.append({"ds": ds, "method": method, "idx": idx})
     log(f"S3-RUN: {len(jobs)} grid jobs to run")
-    total = len(jobs)
-    done_ctr = 0
 
-    def run_grid_job(j):
-        ds, method, idx = j
-        cmd = [PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "grid",
-               "--dataset", ds, "--method", method, "--point", str(idx),
-               "--train-frac", str(decision["train_frac"])]
-        t0 = time.time()
-        r = run(cmd, timeout=8 * 3600)
-        return j, r.returncode == 0, (time.time() - t0) / 60
+    def cmd(j):
+        return [PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "grid",
+                "--dataset", j["ds"], "--method", j["method"], "--point", str(j["idx"]),
+                "--train-frac", str(decision["train_frac"])]
 
-    walls = []
-    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        futs = [pool.submit(run_grid_job, j) for j in jobs]
-        for fut in as_completed(futs):
-            j, ok, mins = fut.result()
-            done_ctr += 1
-            walls.append(mins)
-            log(f"S3 grid {j}: {'OK' if ok else 'CRASH-LOGGED'} {mins:.1f} min")
-            write_status("S3-RUN", f"grid {j[0]}/{j[1]} pt{j[2]}", done_ctr, total,
-                         eta_h=(total - done_ctr) * (sum(walls) / len(walls)) / WORKERS / 60)
+    def key(j):
+        return f"grid_{j['ds']}_{j['method']}_{j['idx']:03d}"
+
+    if jobs:
+        run_pool("S3-RUN", jobs, cmd, key, 0, len(jobs))
 
     for ds in decision["datasets"]:
         for method in S3_METHODS:
@@ -397,12 +451,12 @@ def stage_s3() -> None:
             r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "final",
                      "--dataset", ds, "--method", method], timeout=12 * 3600)
             log(f"S3 final {ds}/{method}: rc={r.returncode} {r.stdout[-200:]}")
-        for method in ("ecod", "copod"):  # carried forward, defaults documented
+        for method in ("ecod", "copod"):
             tag = TPARTS / f"final_{ds}_{method}_default.csv"
             if not tag.exists():
-                r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "final",
-                         "--dataset", ds, "--method", method, "--params-json", "{}"],
-                        timeout=4 * 3600)
+                r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase",
+                         "final", "--dataset", ds, "--method", method,
+                         "--params-json", "{}"], timeout=4 * 3600)
                 log(f"S3 final-default {ds}/{method}: rc={r.returncode}")
 
     r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--merge", str(TPARTS),
@@ -438,7 +492,7 @@ def stage_s4() -> None:
         return
     rates = s3_probe_rates()
     n = rates.get("litnet2020_n", 1_500_000)
-    bocpd_ms = 4.8  # measured in-situ CICIDS mix rate; LITNET similar order
+    bocpd_ms = 4.8  # measured in-situ mixed-schedule rate on CICIDS; same order on LITNET
     proj_h = n * bocpd_ms / 1000 / 3600 + 0.5
     scope.parent.mkdir(parents=True, exist_ok=True)
     scope.write_text(json.dumps({"projection_h": proj_h, "fits": proj_h <= 12.0}))
@@ -478,10 +532,11 @@ def stage_wrap() -> None:
     if not Path(bash).exists():
         bash = "bash"
     r = subprocess.run([bash, "scripts/run_smoke_test.sh"], cwd=str(ROOT), env=ENV,
-                       capture_output=True, text=True, timeout=3600)
+                       capture_output=True, text=True, timeout=3600,
+                       creationflags=CREATE_FLAGS)
     if r.returncode != 0:
         halt("smoke test failed at wrap-up", (r.stdout + r.stderr)[-2000:],
-             f'bash scripts/run_smoke_test.sh')
+             "bash scripts/run_smoke_test.sh")
 
     log("WRAP: RUN_REPORT completion")
     freeze = run([PY, "-m", "pip", "freeze"]).stdout
@@ -508,9 +563,15 @@ Stage 3 reductions decision:
 {json.dumps(reductions, indent=2)}
 ```
 
+2026-08-08 incident: the first detached launch used a cmd/python chain with a
+visible console; closing that window sent STATUS_CONTROL_C_EXIT to all
+workers. Relaunched windowless (pythonw + CREATE_NO_WINDOW +
+CREATE_NEW_PROCESS_GROUP everywhere) with a RAM-adaptive worker pool
+(3 workers under 5 GB free, else 4, re-checked at every job handoff).
+
 Power settings: NOT modified by the agent (system-settings policy). The
 pre-authorized commands are staged in scripts/apply_power_settings.cmd for
-the operator; resilience is provided by the logon scheduled task instead.
+the operator; resilience is provided by the logon Startup entry instead.
 
 pip freeze:
 ```
@@ -520,8 +581,10 @@ pip freeze:
 """)
 
     log("WRAP: commit + push")
+
     def git(*args):
-        return subprocess.run(["git", *args], cwd=str(ROOT), capture_output=True, text=True)
+        return subprocess.run(["git", *args], cwd=str(ROOT), capture_output=True,
+                              text=True, creationflags=CREATE_FLAGS)
     git("add", "-A")
     git("add", "-f", "results/")
     git("commit", "-m", "exp: autopilot completion — Stage 2/3(/4) results, "
@@ -543,6 +606,7 @@ pip freeze:
         ROOT / "results/appendix_a_replacement.tex",
         ROOT / "findings_tuning.md",
         ROOT / "results/burnrate_litnet.csv",
+        ROOT / "results/burnrate_litnet_table.tex",
         ROOT / "figures/fig7_burnrate_litnet.pdf",
         ROOT / "findings_burnrate.md",
         ROOT / "findings_paper_overlap.md",
@@ -566,22 +630,24 @@ Branch: exp/prevalence-and-tuning ({push_note})
 - RUN_REPORT.md (the reductions + gate sections)
 """, encoding="utf-8")
     subprocess.run(["schtasks", "/delete", "/tn", TASK_NAME, "/f"],
-                   capture_output=True, text=True)
-    startup = Path(os.environ["APPDATA"]) / \
-        "Microsoft/Windows/Start Menu/Programs/Startup/CALIBURN-AUTOPILOT.cmd"
-    if startup.exists():
-        startup.unlink()
-    write_status("COMPLETE", "all stages done; scheduled task deregistered")
+                   capture_output=True, text=True, creationflags=CREATE_FLAGS)
+    startup_dir = Path(os.environ["APPDATA"]) / \
+        "Microsoft/Windows/Start Menu/Programs/Startup"
+    for name in ("CALIBURN-AUTOPILOT.cmd", "CALIBURN-AUTOPILOT.vbs"):
+        f = startup_dir / name
+        if f.exists():
+            f.unlink()
+    write_status("COMPLETE", "all stages done; resume registration removed")
     log("WRAP complete — DONE_ALL.md written")
 
 
 def main() -> None:
     if DONE.exists():
-        print("DONE_ALL.md exists; nothing to do")
+        log("DONE_ALL.md exists; nothing to do")
         return
     if HALTFILE.exists():
         write_status("HALTED", "HALT.md present — fix the cause and delete HALT.md")
-        print("HALT.md present; refusing to run until it is removed")
+        log("HALT.md present; refusing to run until it is removed")
         return
     single_instance_guard()
     if "--infer" in sys.argv:
@@ -590,7 +656,8 @@ def main() -> None:
         for j in miss:
             print(f"  L{j['level']} s{j['seed']} {j['group']}")
         return
-    log(f"autopilot start (pid {os.getpid()})")
+    log(f"autopilot start (pid {os.getpid()}, windowless={sys.executable.endswith('pythonw.exe')})")
+    pick_workers("startup")
     try:
         stage_s2_resume()
         stage_s2_merge()
