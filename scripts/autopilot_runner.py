@@ -95,12 +95,36 @@ def free_ram_gb() -> float:
 def pick_workers(stage: str) -> int:
     global _last_workers
     free = free_ram_gb()
-    w = LOW_RAM_WORKERS if free < LOW_RAM_GB else MAX_WORKERS
+    if stage.startswith("S3"):
+        # Stage 3 jobs carry a heavier per-job footprint (full-dataset loads
+        # per grid point); the 2026-08-10 WinError 1450 exhaustion proved the
+        # machine cannot sustain more. Min 2, 3 only above 8 GB free, never 4.
+        w = 3 if free > 8.0 else 2
+    else:
+        w = LOW_RAM_WORKERS if free < LOW_RAM_GB else MAX_WORKERS
     if w != _last_workers:
         log(f"{stage}: worker limit -> {w} (free RAM {free:.1f} GB, "
-            f"threshold {LOW_RAM_GB} GB)")
+            f"profile {'S3: 2, 3 above 8GB' if stage.startswith('S3') else f'default: {LOW_RAM_WORKERS} under {LOW_RAM_GB}GB else {MAX_WORKERS}'})")
         _last_workers = w
     return w
+
+
+def is_transient_os_error(exc: BaseException) -> bool:
+    """Resource-flavored OS errors that warrant wait-and-retry, never HALT.
+
+    HALT stays reserved for verification failures, data integrity failures,
+    and missing artifacts. FileNotFoundError and friends are NOT transient.
+    """
+    if isinstance(exc, MemoryError):
+        return True
+    if isinstance(exc, OSError):
+        win = getattr(exc, "winerror", None)
+        if win in (8, 1450, 1455):  # NOT_ENOUGH_MEMORY / NO_SYSTEM_RESOURCES / COMMITMENT_LIMIT
+            return True
+        import errno
+        if exc.errno in (errno.ENOMEM, errno.EAGAIN):
+            return True
+    return False
 
 
 def write_status(stage: str, detail: str, done_n: int | None = None,
@@ -178,30 +202,50 @@ def run_pool(stage: str, jobs: list, make_cmd, job_key, total_done0: int,
     active: dict = {}
     walls: list[float] = []
     results: dict = {}
+    backoff = 60
     while pending or active:
-        limit = pick_workers(stage)
-        for p in list(active):
-            if p.poll() is None:
-                continue
-            job, t0, fh = active.pop(p)
-            fh.close()
-            mins = (time.time() - t0) / 60
-            walls.append(mins)
-            results[job_key(job)] = p.returncode
-            done_n = total_done0 + len(results)
-            eta = ((len(pending) + len(active)) * (sum(walls) / len(walls))
-                   / max(1, limit) / 60) if walls else None
-            log(f"{stage} job {job_key(job)}: rc={p.returncode} {mins:.1f} min")
-            write_status(stage, f"last: {job_key(job)} rc={p.returncode}",
-                         done_n, total, eta_h=eta)
-        while pending and len(active) < limit:
-            job = pending.pop(0)
-            fh = open(JOBLOGS / f"{job_key(job)}.log", "a", encoding="utf-8")
-            p = subprocess.Popen(make_cmd(job), cwd=str(ROOT), env=ENV,
-                                 stdout=fh, stderr=subprocess.STDOUT,
-                                 creationflags=CREATE_FLAGS)
-            active[p] = (job, time.time(), fh)
-        time.sleep(10)
+        try:
+            limit = pick_workers(stage)
+            for p in list(active):
+                if p.poll() is None:
+                    continue
+                job, t0, fh = active.pop(p)
+                fh.close()
+                mins = (time.time() - t0) / 60
+                walls.append(mins)
+                results[job_key(job)] = p.returncode
+                done_n = total_done0 + len(results)
+                eta = ((len(pending) + len(active)) * (sum(walls) / len(walls))
+                       / max(1, limit) / 60) if walls else None
+                log(f"{stage} job {job_key(job)}: rc={p.returncode} {mins:.1f} min")
+                write_status(stage, f"last: {job_key(job)} rc={p.returncode}",
+                             done_n, total, eta_h=eta)
+            while pending and len(active) < limit:
+                job = pending[0]
+                fh = open(JOBLOGS / f"{job_key(job)}.log", "a", encoding="utf-8")
+                try:
+                    p = subprocess.Popen(make_cmd(job), cwd=str(ROOT), env=ENV,
+                                         stdout=fh, stderr=subprocess.STDOUT,
+                                         creationflags=CREATE_FLAGS)
+                except BaseException:
+                    fh.close()
+                    raise
+                pending.pop(0)
+                active[p] = (job, time.time(), fh)
+            backoff = 60  # healthy iteration resets the backoff
+            time.sleep(10)
+        except Exception as exc:
+            if not is_transient_os_error(exc):
+                raise
+            log(f"{stage}: transient OS resource pressure ({exc!r}); "
+                f"waiting {backoff}s before retry (in-flight jobs keep running)")
+            write_status(stage, f"paused {backoff}s on OS resource pressure ({exc!r})",
+                         total_done0 + len(results), total)
+            try:
+                time.sleep(backoff)
+            except Exception:
+                pass
+            backoff = min(backoff * 2, 900)
     return results
 
 
@@ -660,19 +704,33 @@ def main() -> None:
     pick_workers("startup")
     write_status("STARTING", f"runner up (pid {os.getpid()}); "
                              f"{len(s2_missing())} of {len(s2_jobs())} S2 jobs remaining")
-    try:
-        stage_s2_resume()
-        stage_s2_merge()
-        stage_s2_deliver()
-        stage_s3()
-        stage_s3_deliver()
-        stage_s4()
-        stage_wrap()
-    except SystemExit:
-        raise
-    except Exception:
-        halt("unexpected exception in autopilot", traceback.format_exc()[-3000:],
-             f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
+    for stage_fn in (stage_s2_resume, stage_s2_merge, stage_s2_deliver,
+                     stage_s3, stage_s3_deliver, stage_s4, stage_wrap):
+        backoff = 60
+        while True:
+            try:
+                stage_fn()
+                break
+            except SystemExit:
+                raise
+            except Exception as exc:
+                if is_transient_os_error(exc):
+                    # Stages are idempotent; wait out the resource pressure and
+                    # re-enter. Only verification/integrity/missing-artifact
+                    # conditions may write HALT.md.
+                    log(f"transient OS resource error in {stage_fn.__name__}: "
+                        f"{exc!r}; retrying in {backoff}s")
+                    write_status("WAITING", f"{stage_fn.__name__} paused {backoff}s "
+                                            f"on OS resource pressure ({exc!r})")
+                    try:
+                        time.sleep(backoff)
+                    except Exception:
+                        pass
+                    backoff = min(backoff * 2, 900)
+                    continue
+                halt("unexpected exception in autopilot",
+                     traceback.format_exc()[-3000:],
+                     f'"{PY}" "{ROOT / "scripts/autopilot_runner.py"}"')
 
 
 if __name__ == "__main__":
