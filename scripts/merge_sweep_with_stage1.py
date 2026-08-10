@@ -65,6 +65,11 @@ def main() -> None:
     reuse = pd.DataFrame(reuse_rows)
 
     merged = pd.concat([sweep, reuse], ignore_index=True)
+    # Canonicalize the level key to the 2 dp target label: the harness cells
+    # carry the achieved natural rate rounded to 4 dp (22.0601) while reuse
+    # rows carry the label (22.06) — a float-key collision that would split
+    # the natural level into two pseudo-levels with complementary NaN.
+    merged["level_target_pct"] = merged["level_target_pct"].round(2)
     merged = merged.sort_values(["level_target_pct", "method", "resample_seed"]).reset_index(drop=True)
 
     # Internal control: the harness-recomputed natural bocpd_slo row must
@@ -82,6 +87,30 @@ def main() -> None:
                 raise SystemExit("INTERNAL CONTROL FAILED — do not use the sweep CSV")
     else:
         print("WARNING: natural bocpd control rows incomplete; control not yet checkable")
+
+    # Coalesce duplicate natural rows: where the SAME (method, seed) run has
+    # both a harness (sweep_cell) row and a stage1_reuse row — the control
+    # pair — merge them into one complete row, non-null values from the
+    # harness row first, filled from the reuse row; provenance records both
+    # and that the control verified them identical.
+    nat_mask = merged["is_natural"] == True  # noqa: E712
+    dup_keys = merged[nat_mask].groupby(["method", "resample_seed"])["provenance"].nunique()
+    dup_keys = dup_keys[dup_keys > 1].index
+    drop_idx = []
+    for method, seed in dup_keys:
+        pair = merged[nat_mask & (merged["method"] == method)
+                      & (merged["resample_seed"] == seed)]
+        cell = pair[pair["provenance"] == "sweep_cell"]
+        ref = pair[pair["provenance"] == "stage1_reuse"]
+        if cell.empty or ref.empty:
+            continue
+        combined = cell.iloc[0].combine_first(ref.iloc[0])
+        combined["provenance"] = "sweep_cell+stage1_reuse(control-verified)"
+        merged.loc[cell.index[0]] = combined
+        drop_idx.extend(ref.index.tolist())
+    if drop_idx:
+        merged = merged.drop(index=drop_idx).reset_index(drop=True)
+        print(f"coalesced {len(drop_idx)} duplicate natural control row(s)")
 
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     merged.to_csv(a.out, index=False)

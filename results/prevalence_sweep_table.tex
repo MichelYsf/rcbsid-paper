@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lccccc}
+\toprule
+Method & 5\% & 10\% & 22.06\% (nat.) & 40\% & 64\% \\
+\midrule
+CALIBURN (raw scores, Stage-1 threshold) & 0.367 $\pm$ 0.001 & 0.447 $\pm$ 0.002 & 0.545 & 0.494 $\pm$ 0.002 & 0.620 $\pm$ 0.001 \\
+CALIBURN V1 (isotonic + CRC $\alpha{=}0.01$) & 0.371 $\pm$ 0.002 & 0.466 $\pm$ 0.004 & 0.641 & 0.578 $\pm$ 0.002 & 0.683 $\pm$ 0.002 \\
+CALIBURN V3 (isotonic + Elkan $\tau^*{=}0.091$) & 0.371 $\pm$ 0.002 & 0.466 $\pm$ 0.004 & 0.641 & 0.578 $\pm$ 0.002 & 0.683 $\pm$ 0.002 \\
+CALIBURN V4 (raw + Elkan $\tau^*{=}0.091$) & 0.367 $\pm$ 0.001 & 0.447 $\pm$ 0.002 & 0.545 & 0.494 $\pm$ 0.002 & 0.620 $\pm$ 0.001 \\
+LODA & 0.208 $\pm$ 0.007 & 0.247 $\pm$ 0.005 & 0.342 $\pm$ 0.005 & 0.399 $\pm$ 0.005 & 0.525 $\pm$ 0.005 \\
+HST & 0.199 $\pm$ 0.081 & 0.300 $\pm$ 0.099 & 0.433 $\pm$ 0.078 & 0.476 $\pm$ 0.056 & 0.499 $\pm$ 0.032 \\
+LOF (batch ref.) & 0.538 $\pm$ 0.001 & 0.697 $\pm$ 0.001 & 0.863 & 0.897 $\pm$ 0.006 & 0.905 $\pm$ 0.010 \\
+ECOD (batch ref.) & 0.166 $\pm$ 0.001 & 0.252 & 0.419 & 0.527 $\pm$ 0.001 & 0.678 $\pm$ 0.001 \\
+\bottomrule
+\end{tabular}
+\caption{AUC-PR across attack-prevalence levels with the dataset held fixed (CICIDS2017, interleaved corrected stream, resampled per level; chronological 70/15/15 split applied after resampling). Values are mean $\pm$ std over three resample seeds (11, 23, 47); the variance source is the resampling draw, since CALIBURN itself is deterministic. The 22.06\% column is the natural stream with no resampling and reproduces the published Table~5 configuration exactly. Stochastic baselines (LODA, HST) additionally re-seed the method with the resample seed.}
+\label{tab:prevalence-sweep}
+\end{table}
