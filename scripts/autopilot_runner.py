@@ -66,10 +66,50 @@ def now() -> str:
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
+def safe_sleep(seconds: float) -> None:
+    """Sleep that cannot be killed by OS resource pressure: one-second slices,
+    any failure of sleep itself is absorbed with a busy-wait slice."""
+    deadline = time.monotonic() + seconds
+    while True:
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            return
+        try:
+            time.sleep(min(1.0, remaining))
+        except Exception:
+            t0 = time.monotonic()
+            while time.monotonic() - t0 < 1.0:
+                pass
+
+
+def _write_with_retries(write_fn, attempts: int = 3, delay: float = 0.5) -> bool:
+    for _ in range(attempts):
+        try:
+            write_fn()
+            return True
+        except Exception:
+            safe_sleep(delay)
+    return False
+
+
+_log_buffer: list[str] = []
+
+
 def log(msg: str) -> None:
+    """Append to the log. NEVER raises: on persistent write failure the lines
+    are buffered in memory and flushed when writes succeed again (2026-08-12
+    incident: log() raising EINVAL inside the pressure handler escaped the
+    resilience wrapper and halted the pipeline)."""
     line = f"[{now()}] {msg}"
-    with open(LOG, "a", encoding="utf-8") as fh:
-        fh.write(line + "\n")
+    _log_buffer.append(line)
+
+    def flush():
+        with open(LOG, "a", encoding="utf-8") as fh:
+            for buffered in _log_buffer:
+                fh.write(buffered + "\n")
+
+    if _write_with_retries(flush):
+        _log_buffer.clear()
     try:
         print(line, flush=True)
     except Exception:
@@ -96,10 +136,10 @@ def pick_workers(stage: str) -> int:
     global _last_workers
     free = free_ram_gb()
     if stage.startswith("S3"):
-        # Stage 3 jobs carry a heavier per-job footprint (full-dataset loads
-        # per grid point); the 2026-08-10 WinError 1450 exhaustion proved the
-        # machine cannot sustain more. Min 2, 3 only above 8 GB free, never 4.
-        w = 3 if free > 8.0 else 2
+        # Capped flat at 2 for the remainder of Stage 3 (2026-08-12 directive):
+        # the pressure events originate outside the pipeline, so headroom is
+        # not ours to spend regardless of momentary free RAM.
+        w = 2
     else:
         w = LOW_RAM_WORKERS if free < LOW_RAM_GB else MAX_WORKERS
     if w != _last_workers:
@@ -129,10 +169,16 @@ def is_transient_os_error(exc: BaseException) -> bool:
 
 def write_status(stage: str, detail: str, done_n: int | None = None,
                  total_n: int | None = None, eta_h: float | None = None) -> None:
-    progress = f"{done_n}/{total_n} jobs done" if done_n is not None else ""
-    eta = f"~{eta_h:.1f} h remaining (measured rates)" if eta_h else ""
-    workers = f"{_last_workers} (free RAM {free_ram_gb():.1f} GB)" if _last_workers else "n/a"
-    STATUS.write_text(f"""# CALIBURN pipeline status
+    """Rewrite the status file. NEVER raises; silently skipped on persistent
+    write failure (the next status write refreshes it)."""
+    try:
+        progress = f"{done_n}/{total_n} jobs done" if done_n is not None else ""
+        eta = f"~{eta_h:.1f} h remaining (measured rates)" if eta_h else ""
+        workers = f"{_last_workers} (free RAM {free_ram_gb():.1f} GB)" if _last_workers else "n/a"
+    except Exception:
+        progress = eta = ""
+        workers = "n/a"
+    _write_with_retries(lambda: STATUS.write_text(f"""# CALIBURN pipeline status
 
 - **State**: {stage}
 - **Detail**: {detail}
@@ -142,11 +188,15 @@ def write_status(stage: str, detail: str, done_n: int | None = None,
 - **Last update**: {now()}
 - **Resume registration**: Startup folder CALIBURN-AUTOPILOT.vbs (hidden; removes itself when DONE_ALL.md exists)
 - **Live log**: logs/autopilot.log (per-job logs under logs/jobs/)
-""", encoding="utf-8")
+""", encoding="utf-8"))
 
 
 def halt(cause: str, evidence: str, resume_cmd: str) -> None:
-    HALTFILE.write_text(f"""# PIPELINE HALTED — {now()}
+    # Reserved for verification / integrity / missing-artifact failures only.
+    # The HALT.md write itself gets extended retries; if it still cannot be
+    # written, exit anyway — the logon relaunch will re-reach the same
+    # verification failure and halt again (self-consistent).
+    _write_with_retries(lambda: HALTFILE.write_text(f"""# PIPELINE HALTED — {now()}
 
 ## Cause
 {cause}
@@ -159,7 +209,7 @@ def halt(cause: str, evidence: str, resume_cmd: str) -> None:
 {resume_cmd}
 ```
 Delete this file after fixing; the pipeline resumes at next logon (or run the command).
-""", encoding="utf-8")
+""", encoding="utf-8"), attempts=10, delay=2.0)
     write_status("HALTED", cause)
     log(f"HALT: {cause}")
     sys.exit(2)
@@ -220,31 +270,43 @@ def run_pool(stage: str, jobs: list, make_cmd, job_key, total_done0: int,
                 log(f"{stage} job {job_key(job)}: rc={p.returncode} {mins:.1f} min")
                 write_status(stage, f"last: {job_key(job)} rc={p.returncode}",
                              done_n, total, eta_h=eta)
-            while pending and len(active) < limit:
-                job = pending[0]
-                fh = open(JOBLOGS / f"{job_key(job)}.log", "a", encoding="utf-8")
-                try:
-                    p = subprocess.Popen(make_cmd(job), cwd=str(ROOT), env=ENV,
-                                         stdout=fh, stderr=subprocess.STDOUT,
-                                         creationflags=CREATE_FLAGS)
-                except BaseException:
-                    fh.close()
-                    raise
-                pending.pop(0)
-                active[p] = (job, time.time(), fh)
-            backoff = 60  # healthy iteration resets the backoff
-            time.sleep(10)
+            below_floor = free_ram_gb() < 2.0
+            if below_floor and pending:
+                log(f"{stage}: free RAM below 2 GB floor; pausing new spawns, "
+                    f"rechecking in 60s ({len(active)} in flight)")
+                write_status(stage, "spawns paused: free RAM under 2 GB floor",
+                             total_done0 + len(results), total)
+                safe_sleep(60)
+            else:
+                while pending and len(active) < limit and free_ram_gb() >= 2.0:
+                    job = pending[0]
+                    fh = open(JOBLOGS / f"{job_key(job)}.log", "a", encoding="utf-8")
+                    try:
+                        p = subprocess.Popen(make_cmd(job), cwd=str(ROOT), env=ENV,
+                                             stdout=fh, stderr=subprocess.STDOUT,
+                                             creationflags=CREATE_FLAGS)
+                    except BaseException:
+                        fh.close()
+                        raise
+                    pending.pop(0)
+                    active[p] = (job, time.time(), fh)
+                backoff = 60  # healthy iteration resets the backoff
+                safe_sleep(10)
         except Exception as exc:
             if not is_transient_os_error(exc):
                 raise
-            log(f"{stage}: transient OS resource pressure ({exc!r}); "
-                f"waiting {backoff}s before retry (in-flight jobs keep running)")
-            write_status(stage, f"paused {backoff}s on OS resource pressure ({exc!r})",
-                         total_done0 + len(results), total)
+            # Everything inside this handler is never-raise (buffered log,
+            # retried status write, sliced sleep). Belt and suspenders: any
+            # failure inside handling is treated as continued pressure and
+            # extends the backoff — it can never escape to the halt path.
             try:
-                time.sleep(backoff)
+                log(f"{stage}: transient OS resource pressure ({exc!r}); "
+                    f"waiting {backoff}s before retry (in-flight jobs keep running)")
+                write_status(stage, f"paused {backoff}s on OS resource pressure",
+                             total_done0 + len(results), total)
             except Exception:
-                pass
+                backoff = min(backoff * 2, 900)
+            safe_sleep(backoff)
             backoff = min(backoff * 2, 900)
     return results
 
@@ -487,17 +549,28 @@ def stage_s3() -> None:
     if jobs:
         run_pool("S3-RUN", jobs, cmd, key, 0, len(jobs))
 
+    def wait_for_ram_floor(context: str) -> None:
+        # Long finals run for hours; new spawns pause below the 2 GB floor
+        # and free RAM is rechecked every 60 seconds.
+        while free_ram_gb() < 2.0:
+            log(f"S3 finals: free RAM below 2 GB floor before {context}; "
+                f"pausing spawn, rechecking in 60s")
+            write_status("S3-RUN", f"final spawn paused ({context}): RAM under 2 GB")
+            safe_sleep(60)
+
     for ds in decision["datasets"]:
         for method in S3_METHODS:
             tag = TPARTS / f"final_{ds}_{method}_tuned.csv"
             if tag.exists():
                 continue
+            wait_for_ram_floor(f"{ds}/{method}")
             r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "final",
                      "--dataset", ds, "--method", method], timeout=12 * 3600)
             log(f"S3 final {ds}/{method}: rc={r.returncode} {r.stdout[-200:]}")
         for method in ("ecod", "copod"):
             tag = TPARTS / f"final_{ds}_{method}_default.csv"
             if not tag.exists():
+                wait_for_ram_floor(f"{ds}/{method} default")
                 r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase",
                          "final", "--dataset", ds, "--method", method,
                          "--params-json", "{}"], timeout=4 * 3600)
@@ -718,14 +791,14 @@ def main() -> None:
                     # Stages are idempotent; wait out the resource pressure and
                     # re-enter. Only verification/integrity/missing-artifact
                     # conditions may write HALT.md.
-                    log(f"transient OS resource error in {stage_fn.__name__}: "
-                        f"{exc!r}; retrying in {backoff}s")
-                    write_status("WAITING", f"{stage_fn.__name__} paused {backoff}s "
-                                            f"on OS resource pressure ({exc!r})")
                     try:
-                        time.sleep(backoff)
+                        log(f"transient OS resource error in {stage_fn.__name__}: "
+                            f"{exc!r}; retrying in {backoff}s")
+                        write_status("WAITING", f"{stage_fn.__name__} paused {backoff}s "
+                                                f"on OS resource pressure")
                     except Exception:
-                        pass
+                        backoff = min(backoff * 2, 900)
+                    safe_sleep(backoff)
                     backoff = min(backoff * 2, 900)
                     continue
                 halt("unexpected exception in autopilot",
