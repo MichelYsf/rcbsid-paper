@@ -1,0 +1,14 @@
+{
+  "litnet2020_n": 1500000,
+  "litnet2020_hst_ms": 0.7689486399991438,
+  "litnet2020_loda_ms": 16.762054740003077,
+  "litnet2020_rrcf_ms": 17.178752259997417,
+  "litnet2020_iforest_asd_ms": 6.092353279999224,
+  "litnet2020_kitnet_ms": 1.498844200000167,
+  "cicids2017_n": 1600000,
+  "cicids2017_hst_ms": 0.8906061800022144,
+  "cicids2017_loda_ms": 17.44225323999999,
+  "cicids2017_rrcf_ms": 39.84756673999946,
+  "cicids2017_iforest_asd_ms": 3.4591931199945973,
+  "cicids2017_kitnet_ms": 1.6967556999996305
+}

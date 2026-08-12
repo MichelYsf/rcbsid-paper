@@ -1,0 +1,2 @@
+dataset,method,phase,params,seed,train_frac,n_train,n_val,val_auc_pr,error,wall_s
+litnet2020,loda,grid,"{""n_bins"": 10, ""n_random_cuts"": 500}",11,0.4,420000,225000,,"MemoryError: Unable to allocate 1.95 MiB for an array with shape (512, 500) and data type float64",9375.0

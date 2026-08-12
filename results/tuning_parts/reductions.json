@@ -1,0 +1,15 @@
+{
+  "train_frac": 0.4,
+  "grid": "coarse",
+  "datasets": [
+    "litnet2020"
+  ],
+  "ladder_log": [
+    "full protocol projection: 91.9 h wall",
+    "rung 1 (40% train substream tuning): 61.2 h wall",
+    "rung 2 (drop middle grid values): 43.5 h wall",
+    "rung 3 (LITNET-2020 only): 17.3 h wall",
+    "2026-08-10 repair directive: confirmed ladder already applied at S3 entry (rung 1 40% substream subsumed by rungs 2+3); resuming under S3 worker profile min 2 / 3 above 8GB / never 4 after WinError 1450"
+  ],
+  "projection_h": 17.289683799207754
+}
