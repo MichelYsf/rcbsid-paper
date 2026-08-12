@@ -25,8 +25,9 @@ import time
 import traceback
 from pathlib import Path
 
+IS_WINDOWS = os.name == "nt"
 ROOT = Path(__file__).resolve().parents[1]
-PY = str(ROOT / ".venv/Scripts/python.exe")
+PY = str(ROOT / (".venv/Scripts/python.exe" if IS_WINDOWS else ".venv/bin/python"))
 LOGS = ROOT / "logs"
 LOGS.mkdir(exist_ok=True)
 JOBLOGS = LOGS / "jobs"
@@ -39,13 +40,15 @@ DONE = ROOT / "DONE_ALL.md"
 STAGE_TIMES = LOGS / "stage_times.json"
 PARTS = ROOT / "results/sweep_parts"
 TPARTS = ROOT / "results/tuning_parts"
-MAX_WORKERS = 4
+MAX_WORKERS = int(os.environ.get("CALIBURN_WORKERS", "4"))
 LOW_RAM_WORKERS = 3
 LOW_RAM_GB = 5.0
 TASK_NAME = "CALIBURN-AUTOPILOT"
 
-# No window, and a separate process group so no Ctrl event can reach workers.
-CREATE_FLAGS = subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP
+# Windows: no window + separate process group so no Ctrl event reaches
+# workers. POSIX: plain subprocesses (run the runner itself under nohup/tmux).
+CREATE_FLAGS = (subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP) \
+    if IS_WINDOWS else 0
 
 # Under pythonw there is no console: stdout/stderr are invalid. Redirect them
 # to a file so stray prints and tracebacks are never lost.
@@ -117,6 +120,16 @@ def log(msg: str) -> None:
 
 
 def free_ram_gb() -> float:
+    if not IS_WINDOWS:
+        try:
+            with open("/proc/meminfo") as fh:
+                for line in fh:
+                    if line.startswith("MemAvailable:"):
+                        return int(line.split()[1]) / (1 << 20)
+        except Exception:
+            return 99.0  # no meminfo -> do not throttle
+        return 99.0
+
     class MEMORYSTATUSEX(ctypes.Structure):
         _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
                     ("ullTotalPhys", ctypes.c_ulonglong),
@@ -136,10 +149,10 @@ def pick_workers(stage: str) -> int:
     global _last_workers
     free = free_ram_gb()
     if stage.startswith("S3"):
-        # Capped flat at 2 for the remainder of Stage 3 (2026-08-12 directive):
-        # the pressure events originate outside the pipeline, so headroom is
-        # not ours to spend regardless of momentary free RAM.
-        w = 2
+        # Laptop (2026-08-12 directive): capped flat at 2 — the pressure
+        # events originate outside the pipeline. Dedicated cloud hardware:
+        # CALIBURN_WORKERS governs (migration directive: 6 on c7i.2xlarge).
+        w = 2 if IS_WINDOWS else MAX_WORKERS
     else:
         w = LOW_RAM_WORKERS if free < LOW_RAM_GB else MAX_WORKERS
     if w != _last_workers:
@@ -230,12 +243,22 @@ def single_instance_guard() -> None:
     if PIDFILE.exists():
         try:
             pid = int(PIDFILE.read_text().strip())
-            out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV"],
-                                 capture_output=True, text=True,
-                                 creationflags=CREATE_FLAGS).stdout
-            if f'"{pid}"' in out and "python" in out.lower():
+            if IS_WINDOWS:
+                out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV"],
+                                     capture_output=True, text=True,
+                                     creationflags=CREATE_FLAGS).stdout
+                alive = f'"{pid}"' in out and "python" in out.lower()
+            else:
+                try:
+                    os.kill(pid, 0)
+                    alive = True
+                except OSError:
+                    alive = False
+            if alive:
                 log(f"another autopilot instance is alive (pid {pid}); exiting")
                 sys.exit(0)
+        except SystemExit:
+            raise
         except Exception:
             pass
     PIDFILE.write_text(str(os.getpid()))
@@ -645,8 +668,8 @@ def stage_wrap() -> None:
     r = run([PY, "-m", "pytest", "-q"], timeout=3600)
     if r.returncode != 0:
         halt("pytest failed at wrap-up", r.stdout[-2000:], f'"{PY}" -m pytest -q')
-    bash = r"C:\Program Files\Git\bin\bash.exe"
-    if not Path(bash).exists():
+    bash = r"C:\Program Files\Git\bin\bash.exe" if IS_WINDOWS else "bash"
+    if IS_WINDOWS and not Path(bash).exists():
         bash = "bash"
     r = subprocess.run([bash, "scripts/run_smoke_test.sh"], cwd=str(ROOT), env=ENV,
                        capture_output=True, text=True, timeout=3600,
@@ -746,14 +769,15 @@ Branch: exp/prevalence-and-tuning ({push_note})
 - results/appendix_a_replacement.tex
 - RUN_REPORT.md (the reductions + gate sections)
 """, encoding="utf-8")
-    subprocess.run(["schtasks", "/delete", "/tn", TASK_NAME, "/f"],
-                   capture_output=True, text=True, creationflags=CREATE_FLAGS)
-    startup_dir = Path(os.environ["APPDATA"]) / \
-        "Microsoft/Windows/Start Menu/Programs/Startup"
-    for name in ("CALIBURN-AUTOPILOT.cmd", "CALIBURN-AUTOPILOT.vbs"):
-        f = startup_dir / name
-        if f.exists():
-            f.unlink()
+    if IS_WINDOWS:
+        subprocess.run(["schtasks", "/delete", "/tn", TASK_NAME, "/f"],
+                       capture_output=True, text=True, creationflags=CREATE_FLAGS)
+        startup_dir = Path(os.environ.get("APPDATA", "")) / \
+            "Microsoft/Windows/Start Menu/Programs/Startup"
+        for name in ("CALIBURN-AUTOPILOT.cmd", "CALIBURN-AUTOPILOT.vbs"):
+            f = startup_dir / name
+            if f.exists():
+                f.unlink()
     write_status("COMPLETE", "all stages done; resume registration removed")
     log("WRAP complete — DONE_ALL.md written")
 
