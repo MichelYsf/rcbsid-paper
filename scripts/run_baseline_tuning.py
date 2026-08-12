@@ -100,13 +100,24 @@ def to_wrapper_params(method: str, point: dict, stream_len: int | None = None) -
 
 
 def load_stream(dataset: str):
+    """Load the stream with an .npy cache: parallel grid workers memory-map
+    the shared feature matrix instead of each parsing the CSV (six concurrent
+    pandas parses OOM-killed workers on the 15 GB EC2 box)."""
     cfg = yaml.safe_load(DATASET_CONFIGS[dataset].read_text())
     ds = cfg["datasets"][0]
+    folder = Path(ds["path"])
+    cache_x, cache_y = folder / "cache_X.npy", folder / "cache_y.npy"
+    sources = list(folder.glob("*.csv"))
+    if cache_x.exists() and cache_y.exists() and sources and \
+            cache_x.stat().st_mtime > max(f.stat().st_mtime for f in sources):
+        return cfg, np.load(cache_x, mmap_mode="r"), np.load(cache_y)
     df = load_dataset_folder(ds["path"], ds["label_column"])
     tcol = ds.get("time_column")
     if tcol and tcol in df.columns:
         df = df.sort_values(tcol, kind="mergesort").reset_index(drop=True)
     X, y, _ = prepare_xy(df, ds["label_column"])
+    np.save(cache_x, X)
+    np.save(cache_y, y)
     return cfg, X, y
 
 
