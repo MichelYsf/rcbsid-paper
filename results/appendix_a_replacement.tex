@@ -1,0 +1,19 @@
+% Appendix A replacement: baseline tuning protocol (replaces the
+% framework-defaults / no-tuning paragraph).
+Baseline hyperparameters are no longer framework defaults. Every tunable
+baseline was tuned by exhaustive grid search with selection on
+\emph{validation} AUC-PR only --- the same chronological validation split
+that CALIBURN's calibration layer uses --- so the comparison is symmetric:
+no method, proposed or baseline, ever touches test labels before the final
+evaluation. The grids were fixed a priori: HST
+$\{25,50,100\}$ trees $\times$ depth $\{10,15,20\}$ $\times$ window
+$\{100,250,500\}$; LODA bins $\{10,20,50\}$ $\times$ projections
+$\{100,200,500\}$; RRCF trees $\{40,100\}$ $\times$ tree size
+$\{256,512\}$; iForest\_ASD estimators $\{50,100,200\}$ $\times$ window
+$\{1024,2048,4096\}$; KitNET max autoencoder size $\{5,10,20\}$ with
+grace periods scaled proportionally to stream length; LOF neighbours
+$\{10,20,35,50\}$. ECOD and COPOD expose no tunable hyperparameters and
+are carried forward unchanged. Because the full-stream grid exceeded the compute ceiling, grid points were evaluated on the first chronologically contiguous 40\% of the training split followed by the full validation split; the selected configuration was then re-run on the full stream for the reported test numbers. 9 grid point(s) crashed; each is logged with its error in the released results and excluded from selection.
+Stochastic methods report final test numbers over seeds 11, 23, and 47
+after selection; deterministic methods are single-run. Tuning was performed
+on LITNET-2020 and CICIDS2017 only.

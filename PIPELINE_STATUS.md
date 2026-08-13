@@ -1,10 +1,6 @@
-# CALIBURN pipeline status
+# CALIBURN status — EC2 i-0a474922fd3f64d86 (spot, 4 workers, gp3 500MB/s)
 
-- **State**: S3-RUN
-- **Detail**: spawns paused: free RAM under 2 GB floor
-- **Progress**: 0/18 jobs done
-- **ETA**: 
-- **Workers**: 2 (free RAM 1.0 GB)
-- **Last update**: 2026-08-12 07:10:51
-- **Resume registration**: Startup folder CALIBURN-AUTOPILOT.vbs (hidden; removes itself when DONE_ALL.md exists)
-- **Live log**: logs/autopilot.log (per-job logs under logs/jobs/)
+- 09:27Z CICIDSgrid=18/24 finals=0/8 running=[loda,rrcf,] DONE=N HALT=N TUNCSV=N
+- Tuning dataset: CICIDS2017 (LITNET abandoned: validation has 6 attacks)
+- Grid spawns stop 10:40Z | finals stop 12:10Z | watchdog terminates 12:35Z
+- Pulled home 2026-08-13 09:27 UTC

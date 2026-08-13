@@ -16,6 +16,14 @@ DEFAULTS = {
 }
 STREAM_GROUP = ["hst", "loda", "rrcf", "iforest_asd", "kitnet", "xstream"]
 
+# Measured validation-split health (2026-08-13, from the built streams).
+# A selection made against a handful of positives is noise, and any table of
+# "selected configs" must say so on its face or it will be misread as usable.
+VALIDATION_HEALTH = {
+    "litnet2020": {"prevalence_pct": 0.003, "attacks": 6, "n": 225_000, "usable": False},
+    "cicids2017": {"prevalence_pct": 21.70, "attacks": 52_085, "n": 240_000, "usable": True},
+}
+
 t = pd.read_csv(CSV)
 for col in ("phase", "method", "dataset", "params", "error"):
     if col not in t.columns:
@@ -66,8 +74,26 @@ for ds, dpath in DEFAULTS.items():
             continue
         # Validation-only outcome: report the selections that WOULD be used,
         # clearly marked as not yet confirmed on the test stream.
-        lines.append(f"## {ds}: validation-stage selections only (no finals completed)")
+        health = VALIDATION_HEALTH.get(ds, {})
+        void = health and not health.get("usable", True)
+        suffix = " — **SELECTIONS VOID**" if void else ""
+        lines.append(f"## {ds}: validation-stage selections only (no finals completed){suffix}")
         lines.append("")
+        if void:
+            lines.append(f"> **Do not use these configurations.** {ds}'s validation split "
+                         f"holds **{health['attacks']} attacks in {health['n']:,} rows** "
+                         f"({health['prevalence_pct']}% prevalence), because the trial "
+                         f"config sets `time_column: null` and the stream stays in file "
+                         f"order. Selecting by validation AUC-PR on that many positives is "
+                         f"noise, not tuning — which is why the values below sit far below "
+                         f"the 5.2% chance line. They are listed only to document what the "
+                         f"grid produced. Tuning was reallocated to CICIDS2017.")
+            lines.append("")
+        elif health:
+            lines.append(f"Validation split: {health['attacks']:,} attacks in "
+                         f"{health['n']:,} rows ({health['prevalence_pct']}% prevalence) — "
+                         f"selection is statistically meaningful here.")
+            lines.append("")
         lines.append("| baseline | selected config (max validation AUC-PR) | val AUC-PR | grid points used |")
         lines.append("|---|---|---|---|")
         for method in sorted(sel["method"].unique()):

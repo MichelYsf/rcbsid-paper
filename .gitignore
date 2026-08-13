@@ -11,3 +11,4 @@ __pycache__/
 /logs/
 /data/downloads/
 /external/
+caliburn-s3-key.pem

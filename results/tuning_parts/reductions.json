@@ -2,14 +2,21 @@
   "train_frac": 0.4,
   "grid": "coarse",
   "datasets": [
-    "litnet2020"
+    "cicids2017"
   ],
   "ladder_log": [
     "full protocol projection: 91.9 h wall",
     "rung 1 (40% train substream tuning): 61.2 h wall",
     "rung 2 (drop middle grid values): 43.5 h wall",
     "rung 3 (LITNET-2020 only): 17.3 h wall",
-    "2026-08-10 repair directive: confirmed ladder already applied at S3 entry (rung 1 40% substream subsumed by rungs 2+3); resuming under S3 worker profile min 2 / 3 above 8GB / never 4 after WinError 1450"
+    "2026-08-10 repair directive: confirmed ladder already applied at S3 entry (rung 1 40% substream subsumed by rungs 2+3); resuming under S3 worker profile min 2 / 3 above 8GB / never 4 after WinError 1450",
+    "2026-08-13: LITNET-2020 tuning abandoned as statistically void \u2014 the trial config uses time_column:null, so file order puts the attack-dense udp_flood block in train and leaves validation with 6 attacks in 225,000 rows (0.003%). Validation-AUC-PR selection on 6 positives is noise. Reallocated the remaining bounded window to CICIDS2017 (validation ~21.7% attacks), which was in the runbook's original two-dataset scope; rung-3 had dropped it purely for compute."
   ],
-  "projection_h": 17.289683799207754
+  "projection_h": 17.289683799207754,
+  "litnet_split_prevalence": {
+    "train_pct": 7.426,
+    "val_pct": 0.003,
+    "val_attacks": 6,
+    "test_pct": 0.059
+  }
 }

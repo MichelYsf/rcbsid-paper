@@ -175,3 +175,71 @@ order, burn-rate evaluation maps events to true parsed timestamps.
 See `findings_paper_overlap.md`. Verdict: shared lineage, not duplicated
 material; the sibling's alerting is single-threshold and windowless (quoted
 verbatim there), CALIBURN's is genuinely multi-window multi-burn.
+
+---
+
+## AWS migration and close-out — 2026-08-13
+
+Stage 3 was migrated to AWS EC2 after the laptop proved unable to sustain it.
+
+**Instance**: `i-0a474922fd3f64d86`, c7i.2xlarge **spot** @ $0.194/h,
+eu-central-1a, Ubuntu 24.04, 100 GB gp3 (modified live to 6000 IOPS /
+500 MB/s mid-run). Launched 2026-08-12 09:16:08 UTC, reclaimed by AWS at
+approximately 2026-08-13 11:03 UTC.
+
+**Ended by spot capacity withdrawal, not by the cost guard or the watchdog**:
+`instance-terminated-no-capacity` — "Your Spot instance was terminated because
+there is no Spot capacity available that matches your request." The root
+volume had DeleteOnTermination=true and no snapshot existed, so artifacts
+created after the last successful pull (09:27 UTC) were lost with it — roughly
+1.5 h of results, including any finals that had started.
+
+**Runtime and cost**: ~25.8 instance-hours x $0.194/h = **~$5.00**, inside the
+$8 guard. Approximately $3.90 of that was an idle window on 2026-08-12 caused
+by an operator error described below.
+
+### Cross-architecture note
+
+Stage 3 selection ran on x86_64 Linux (EC2) while Stages 0-2 ran on Windows.
+Selection uses validation AUC-PR only and never touches test labels, so
+cross-architecture floating-point differences are acceptable for selection
+and are noted here for the record. The Stage 1 reproduction gate and the
+Stage 2 internal control were both established on the original machine and
+were **not** recomputed on EC2; they are banked.
+
+### Incidents, all logged rather than smoothed over
+
+1. **`pkill` self-kill (operator error, ~$3.90).** `pkill -f autopilot_runner`
+   matched its own SSH shell, killing the runner, the workers and itself; the
+   resulting exit 255 read as "command failed", so the box sat idle for 20 h.
+   Fixed by bracket-trick patterns (`[a]utopilot_runner`).
+2. **EBS throughput saturation.** Six workers memory-mapping the feature cache
+   pinned the gp3 volume at exactly its 125 MB/s baseline. Volume modified
+   live to 500 MB/s (confirmed by CloudWatch reaching the new ceiling).
+3. **The real bottleneck was memory, not I/O.** HalfSpaceTrees at depth 20
+   allocates ~2^21 nodes per tree; unbounded it OOM-killed workers and
+   thrashed the box so hard that sshd could not fork (banner-exchange
+   timeouts) and six workers completed zero jobs in 45 minutes. Resolved with
+   a per-worker RLIMIT_AS cap; all depth-20 HST points now fail fast and are
+   dropped and logged under the runbook's crash rule.
+4. **LITNET-2020 tuning abandoned as statistically void** — see
+   `findings_tuning.md`. Its validation split holds 6 attacks in 225,000 rows.
+   The window was reallocated to CICIDS2017 (validation 21.70%), which was in
+   the runbook's original two-dataset scope.
+5. **Bounded-run hardening.** Deadline budgeting, hard abandonment of
+   in-flight jobs at the cutoff (verified against real subprocesses), a merge
+   that skips unreadable partials, and deliverable generators that survive a
+   grid-only merge — so a truncated run yields honest partial tables instead
+   of nothing.
+
+### What Stage 3 actually produced
+
+23 usable grid points (18 CICIDS2017, 5 LITNET-2020 counted as usable of 14
+attempted), 9 dropped and logged, **0 of 8 finals**. Validation-stage
+selections exist for five CICIDS2017 baselines; no default-versus-tuned test
+comparison was produced, and `findings_tuning.md` explicitly declines to draw
+that verdict rather than implying one from validation numbers.
+
+Stage 4 was not reached; `findings_burnrate.md` records the scoping.
+
+**Verification at close-out**: `pytest -q` 35 passed; smoke test green.

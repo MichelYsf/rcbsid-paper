@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llccc}
+\toprule
+Method & Config & AUC-PR & AUC-ROC & F1 \\
+\midrule
+CALIBURN & default & 0.943 det. & 0.998 det. & 0.617 det. \\
+LODA & default & 0.425 $\pm$ 0.016 & 0.845 $\pm$ 0.008 & 0.453 $\pm$ 0.013 \\
+HST & default & 0.261 $\pm$ 0.097 & 0.848 $\pm$ 0.041 & 0.366 $\pm$ 0.129 \\
+ECOD & default & 0.229 det. & 0.737 det. & 0.325 det. \\
+COPOD & default & 0.208 det. & 0.780 det. & 0.273 det. \\
+iForest\_ASD & default & 0.130 $\pm$ 0.009 & 0.784 $\pm$ 0.011 & 0.251 $\pm$ 0.006 \\
+LOF & default & 0.099 det. & 0.509 det. & 0.125 det. \\
+KitNET & default & 0.086 det. & 0.600 det. & 0.145 det. \\
+RRCF & default & 0.074 $\pm$ 0.001 & 0.546 $\pm$ 0.005 & 0.127 \\
+\bottomrule
+\end{tabular}
+\caption{AUC-PR, AUC-ROC, and F1 on LITNET-2020 (3-seed mean $\pm$ std), framework-default and validation-tuned configurations. Deterministic methods are marked ``det.'' Selection used validation AUC-PR only.}
+\label{tab:litnet-tuned}
+\end{table}

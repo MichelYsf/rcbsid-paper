@@ -1,0 +1,2 @@
+dataset,method,phase,params,seed,train_frac,n_train,n_val,val_auc_pr,val_auc_roc,error,wall_s
+cicids2017,iforest_asd,grid,"{""n_estimators"": 200, ""window_size"": 4096}",11,0.4,448000,240000,0.21488281266578807,,,5001.7

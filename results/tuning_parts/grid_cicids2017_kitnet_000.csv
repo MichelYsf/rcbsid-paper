@@ -1,0 +1,2 @@
+dataset,method,phase,params,seed,train_frac,n_train,n_val,val_auc_pr,val_auc_roc,error,wall_s
+cicids2017,kitnet,grid,"{""max_size_ae"": 5}",11,0.4,448000,240000,0.2010961052377565,,,479.7

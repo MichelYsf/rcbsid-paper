@@ -1,0 +1,2 @@
+dataset,method,phase,params,seed,train_frac,n_train,n_val,val_auc_pr,val_auc_roc,error,wall_s
+cicids2017,loda,grid,"{""n_bins"": 10, ""n_random_cuts"": 100}",11,0.4,448000,240000,0.3573740693715479,,,2317.4
