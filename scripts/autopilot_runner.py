@@ -284,7 +284,8 @@ def deadline_epoch() -> float | None:
 
 
 def run_pool(stage: str, jobs: list, make_cmd, job_key, total_done0: int,
-             total: int, spawn_cutoff: float | None = None) -> dict:
+             total: int, spawn_cutoff: float | None = None,
+             hard_cutoff: float | None = None) -> dict:
     """Windowless adaptive worker pool. Returns {key: returncode}.
 
     Worker count is re-evaluated from free RAM at every job handoff (reap or
@@ -312,6 +313,29 @@ def run_pool(stage: str, jobs: list, make_cmd, job_key, total_done0: int,
                 log(f"{stage} job {job_key(job)}: rc={p.returncode} {mins:.1f} min")
                 write_status(stage, f"last: {job_key(job)} rc={p.returncode}",
                              done_n, total, eta_h=eta)
+            if hard_cutoff and active and time.time() > hard_cutoff:
+                # Stopping spawns is not enough: a single multi-hour job still
+                # in flight would block this pool past the deadline, so the
+                # later phases (finals, merge, deliverables) would never run
+                # and the bounded window would yield raw partials only. Its
+                # result could not land before the terminator anyway.
+                log(f"{stage}: hard cutoff — abandoning {len(active)} in-flight job(s); "
+                    f"their work cannot land before the deadline")
+                for p, (job, _t0, fh) in list(active.items()):
+                    results[job_key(job)] = "abandoned_at_deadline"
+                    try:
+                        p.terminate()
+                    except Exception:
+                        pass
+                    try:
+                        fh.close()
+                    except Exception:
+                        pass
+                active.clear()
+                pending = []
+                write_status(stage, "hard cutoff: in-flight jobs abandoned",
+                             total_done0 + len(results), total)
+                break
             if spawn_cutoff and pending and time.time() > spawn_cutoff:
                 # Bounded run: stop starting new work so the remaining budget
                 # goes to draining in-flight jobs and producing deliverables.
@@ -622,7 +646,8 @@ def stage_s3() -> None:
             f"hard deadline {datetime.datetime.utcfromtimestamp(dl):%H:%M}Z")
 
     if jobs:
-        run_pool("S3-RUN", jobs, cmd, key, 0, len(jobs), spawn_cutoff=grid_cutoff)
+        run_pool("S3-RUN", jobs, cmd, key, 0, len(jobs), spawn_cutoff=grid_cutoff,
+                 hard_cutoff=(grid_cutoff + 600) if grid_cutoff else None)
 
     # Finals go through the same pool as the grid. They are independent per
     # (dataset, method) full-stream passes, so running them sequentially left
@@ -656,7 +681,8 @@ def stage_s3() -> None:
         final_jobs.sort(key=lambda j: order.get(j["method"], 9))
         log(f"S3-FINALS: {len(final_jobs)} final jobs to run (pooled, cheapest first)")
         run_pool("S3-FINALS", final_jobs, final_cmd, final_key, 0, len(final_jobs),
-                 spawn_cutoff=finals_cutoff)
+                 spawn_cutoff=finals_cutoff,
+                 hard_cutoff=(finals_cutoff + 300) if finals_cutoff else None)
 
     r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--merge", str(TPARTS),
              "--out", str(final_csv)])
