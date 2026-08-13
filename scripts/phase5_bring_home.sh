@@ -109,27 +109,33 @@ echo "--- runtime ${HOURS} h, cost \$${COST} ---"
 {
   echo "# DONE_ALL — $(date -u '+%Y-%m-%d %H:%M:%S') UTC"
   echo
-  echo "Branch \`exp/prevalence-and-tuning\`. Stage 3/4 ran on AWS EC2"
-  echo "\`c7i.2xlarge\` spot (\`$IID\`, eu-central-1a, gp3 100 GB upgraded live to"
-  echo "6000 IOPS / 500 MB/s). $TERM_NOTE."
+  echo "Branch \`exp/prevalence-and-tuning\`. Stage 3/4 finals run on AWS EC2"
+  echo "\`c7i.2xlarge\` **on-demand** (\`$IID\`, eu-central-1a, gp3 100 GB at"
+  echo "6000 IOPS / 500 MB/s from launch). $TERM_NOTE."
   echo
-  echo "**Instance runtime ${HOURS} h at \$${RATE}/h spot = \$${COST}.**"
+  echo "**Instance runtime ${HOURS} h at \$${RATE}/h on-demand = \$${COST}.**"
+  echo "Caps in force: 6 h wall and \$4 spend, whichever first; neither extended."
   echo
   echo "## Stage 3 coverage actually achieved"
   echo
-  echo "- CICIDS2017 grid points evaluated: **$GRID / 24**"
-  echo "- LITNET-2020 grid points evaluated: $GRIDL (abandoned — see below)"
-  echo "- Final (full-stream) runs completed: **$FIN / 8**"
+  echo "- CICIDS2017 grid points: **$GRID** on disk (of 20 after the rrcf reduction)"
+  echo "- LITNET-2020 grid points: **$GRIDL** on disk (of 20 after the rrcf reduction)"
+  echo "- Final (full-stream) runs completed: **$FIN**"
   echo
-  echo "**LITNET-2020 tuning was abandoned as statistically void.** Its trial"
-  echo "config sets \`time_column: null\`, so the stream stays in file order and the"
-  echo "70/15/15 split yields train 7.426% / validation **0.003%** / test 0.059%"
-  echo "attack prevalence — the validation split holds **6 attacks in 225,000 rows**,"
-  echo "so validation-AUC-PR selection there is noise. The window was reallocated to"
-  echo "CICIDS2017 (validation 21.70%, 52,085 attacks), which was in the runbook's"
-  echo "original two-dataset scope. This also bears on the manuscript: the published"
-  echo "LITNET numbers are computed on that same 0.059% test slice while the paper"
-  echo "describes LITNET as the \"5.2% rare-attack regime\" — see findings_tuning.md."
+  echo "**LITNET-2020 was rebuilt correctly for this run** with"
+  echo "\`build_litnet_labeled.py\` + \`interleave_litnet.py\`, and"
+  echo "\`check_stream_health.py\` passed: 1,499,999 adjacent attack-type changes and"
+  echo "splits 4.928% / 5.218% / 6.498% (14,621 test attacks). The earlier claim that"
+  echo "the PAPER's LITNET evaluation was degenerate has been **retracted** — that was"
+  echo "this harness omitting the interleave step. See the corrected incident in"
+  echo "RUN_REPORT.md and findings_tuning.md."
+  echo
+  echo "**Documented grid reduction:** all RRCF grid points were dropped on both"
+  echo "datasets under the runbook's grid rules (measured 2.5-5 h per point, never"
+  echo "completed inside a bounded window; ranked last of nine on LITNET in the"
+  echo "published Table 4). RRCF therefore carries its documented DEFAULT"
+  echo "configuration in all tables, as ECOD and COPOD do. Reason recorded in"
+  echo "results/tuning_parts/reductions.json."
   echo
   echo "## Deliverables"
   echo
@@ -153,9 +159,9 @@ git add -f results figures findings_*.md RUN_REPORT.md DONE_ALL.md PIPELINE_STAT
 git commit -q -m "exp: bring the AWS Stage 3/4 run home; terminate instance
 
 $TERM_NOTE. Instance runtime ${HOURS} h = \$${COST} spot.
-CICIDS2017 grid $GRID/24, finals $FIN/8. LITNET tuning abandoned as
-statistically void (validation split holds 6 attacks in 225,000 rows).
-DONE_ALL.md records exactly which deliverables were produced.
+CICIDS2017 grid $GRID, LITNET-2020 grid $GRIDL, finals $FIN. LITNET was
+rebuilt correctly (interleave + health gate); rrcf dropped as a documented
+grid reduction. DONE_ALL.md records exactly which deliverables were produced.
 
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>" && echo "committed"
 if git push -q origin exp/prevalence-and-tuning 2>/dev/null; then
