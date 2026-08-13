@@ -277,11 +277,25 @@ def main() -> None:
     parts_dir.mkdir(parents=True, exist_ok=True)
 
     if a.merge:
+        # Skip unreadable partials rather than failing the whole merge: a job
+        # killed mid-write (deadline abandonment, OOM) can leave a truncated
+        # CSV, and losing every deliverable to one bad file is the wrong
+        # trade. Skips are printed so they appear in the run log.
         files = sorted(Path(a.merge).glob("*.csv"))
-        df = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
+        frames, skipped = [], []
+        for f in files:
+            try:
+                frames.append(pd.read_csv(f))
+            except Exception as exc:
+                skipped.append(f"{f.name}: {type(exc).__name__}")
+        if not frames:
+            raise SystemExit(f"no readable partials in {a.merge}")
+        df = pd.concat(frames, ignore_index=True)
         Path(a.out).parent.mkdir(parents=True, exist_ok=True)
         df.to_csv(a.out, index=False)
-        print(f"merged {len(files)} partials -> {a.out} ({len(df)} rows)")
+        print(f"merged {len(frames)} partials -> {a.out} ({len(df)} rows)")
+        if skipped:
+            print(f"SKIPPED {len(skipped)} unreadable partial(s): {'; '.join(skipped)}")
         return
 
     if a.select:
