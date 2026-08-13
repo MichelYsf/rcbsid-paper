@@ -264,8 +264,27 @@ def single_instance_guard() -> None:
     PIDFILE.write_text(str(os.getpid()))
 
 
+def deadline_epoch() -> float | None:
+    """Hard wall-clock deadline (UTC epoch) from CALIBURN_DEADLINE_UTC.
+
+    Set when the run is bounded by an external terminator (e.g. the cloud
+    watchdog). Without it the pipeline behaves exactly as before.
+    """
+    v = os.environ.get("CALIBURN_DEADLINE_UTC", "").strip()
+    if not v:
+        return None
+    try:
+        return float(v)
+    except ValueError:
+        try:
+            return datetime.datetime.strptime(v, "%Y-%m-%d %H:%M:%S").replace(
+                tzinfo=datetime.timezone.utc).timestamp()
+        except Exception:
+            return None
+
+
 def run_pool(stage: str, jobs: list, make_cmd, job_key, total_done0: int,
-             total: int) -> dict:
+             total: int, spawn_cutoff: float | None = None) -> dict:
     """Windowless adaptive worker pool. Returns {key: returncode}.
 
     Worker count is re-evaluated from free RAM at every job handoff (reap or
@@ -293,6 +312,16 @@ def run_pool(stage: str, jobs: list, make_cmd, job_key, total_done0: int,
                 log(f"{stage} job {job_key(job)}: rc={p.returncode} {mins:.1f} min")
                 write_status(stage, f"last: {job_key(job)} rc={p.returncode}",
                              done_n, total, eta_h=eta)
+            if spawn_cutoff and pending and time.time() > spawn_cutoff:
+                # Bounded run: stop starting new work so the remaining budget
+                # goes to draining in-flight jobs and producing deliverables.
+                log(f"{stage}: spawn cutoff reached — {len(pending)} job(s) will not "
+                    f"start; draining {len(active)} in flight")
+                write_status(stage, f"spawn cutoff: {len(pending)} job(s) skipped",
+                             total_done0 + len(results), total)
+                for j in pending:
+                    results[job_key(j)] = "not_started"
+                pending = []
             below_floor = free_ram_gb() < 2.0
             if below_floor and pending:
                 log(f"{stage}: free RAM below 2 GB floor; pausing new spawns, "
@@ -569,8 +598,23 @@ def stage_s3() -> None:
     def key(j):
         return f"grid_{j['ds']}_{j['method']}_{j['idx']:03d}"
 
+    # Bounded-run budgeting: reserve time for finals and for the deliverable
+    # generation, so a run that cannot finish everything still produces the
+    # tuning tables and findings rather than nothing at all.
+    dl = deadline_epoch()
+    grid_cutoff = finals_cutoff = None
+    if dl:
+        finals_reserve = float(os.environ.get("CALIBURN_FINALS_RESERVE_S", 5400))
+        deliver_reserve = float(os.environ.get("CALIBURN_DELIVER_RESERVE_S", 1500))
+        grid_cutoff = dl - finals_reserve - deliver_reserve
+        finals_cutoff = dl - deliver_reserve
+        log(f"S3 deadline budgeting: grid spawns stop "
+            f"{datetime.datetime.utcfromtimestamp(grid_cutoff):%H:%M}Z, finals stop "
+            f"{datetime.datetime.utcfromtimestamp(finals_cutoff):%H:%M}Z, "
+            f"hard deadline {datetime.datetime.utcfromtimestamp(dl):%H:%M}Z")
+
     if jobs:
-        run_pool("S3-RUN", jobs, cmd, key, 0, len(jobs))
+        run_pool("S3-RUN", jobs, cmd, key, 0, len(jobs), spawn_cutoff=grid_cutoff)
 
     # Finals go through the same pool as the grid. They are independent per
     # (dataset, method) full-stream passes, so running them sequentially left
@@ -596,8 +640,15 @@ def stage_s3() -> None:
         return f"final_{j['ds']}_{j['method']}_{'default' if j['default'] else 'tuned'}"
 
     if final_jobs:
-        log(f"S3-FINALS: {len(final_jobs)} final jobs to run (pooled)")
-        run_pool("S3-FINALS", final_jobs, final_cmd, final_key, 0, len(final_jobs))
+        # Cheapest-first so a truncated window still yields tuned rows for as
+        # many methods as possible (batch references and light streamers land
+        # long before rrcf/iforest_asd on the full stream).
+        order = {"lof": 0, "ecod": 1, "copod": 2, "kitnet": 3, "hst": 4,
+                 "loda": 5, "iforest_asd": 6, "rrcf": 7}
+        final_jobs.sort(key=lambda j: order.get(j["method"], 9))
+        log(f"S3-FINALS: {len(final_jobs)} final jobs to run (pooled, cheapest first)")
+        run_pool("S3-FINALS", final_jobs, final_cmd, final_key, 0, len(final_jobs),
+                 spawn_cutoff=finals_cutoff)
 
     r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--merge", str(TPARTS),
              "--out", str(final_csv)])
@@ -629,6 +680,19 @@ def stage_s4() -> None:
     fig = ROOT / "figures/fig7_burnrate_litnet.pdf"
     out_csv = ROOT / "results/burnrate_litnet.csv"
     if (out_csv.exists() and fig.exists()) or (ROOT / "findings_burnrate.md").exists():
+        return
+    dl = deadline_epoch()
+    if dl and time.time() > dl - 2400:
+        (ROOT / "findings_burnrate.md").write_text(
+            f"# Burn-rate validation scoping\n\nStage 4 was not run. The bounded "
+            f"cloud window (hard deadline "
+            f"{datetime.datetime.utcfromtimestamp(dl):%Y-%m-%d %H:%M} UTC) was "
+            f"consumed by the Stage 3 tuning grid and finals, which carry higher "
+            f"priority. No burn-rate numbers are reported rather than rushed ones; "
+            f"the harness (scripts/run_burnrate_litnet.py, the span check, and "
+            f"scripts/figures/fig7_burnrate_litnet.py) is committed and ready to run "
+            f"when hardware time is available.\n")
+        log("S4: skipped — insufficient time before the hard deadline")
         return
     rates = s3_probe_rates()
     n = rates.get("litnet2020_n", 1_500_000)

@@ -17,7 +17,35 @@ DEFAULTS = {
 STREAM_GROUP = ["hst", "loda", "rrcf", "iforest_asd", "kitnet", "xstream"]
 
 t = pd.read_csv(CSV)
+for col in ("phase", "method", "dataset", "params", "error"):
+    if col not in t.columns:
+        t[col] = ""
+for col in ("auc_pr", "val_auc_pr"):
+    if col not in t.columns:
+        t[col] = float("nan")
+
 lines = ["# Findings: baseline tuning (Stage 3)", ""]
+
+# Coverage first: a truncated run must say plainly what it did and did not
+# produce, before any verdict is read.
+grid = t[t["phase"] == "grid"]
+finals = t[t["phase"].astype(str).str.startswith("final")]
+dropped = grid[grid["val_auc_pr"].isna()]
+if len(dropped) or finals.empty:
+    lines.append("## Coverage and completeness")
+    lines.append("")
+    lines.append(f"- Grid points evaluated: {len(grid) - len(dropped)} usable, "
+                 f"{len(dropped)} crashed and dropped (runbook rule: drop and log).")
+    for _, r in dropped.iterrows():
+        lines.append(f"  - DROPPED `{r['method']}` `{r['params']}` — {str(r['error'])[:90]}")
+    if finals.empty:
+        lines.append("- **No final (full-stream) runs completed.** Selection results "
+                     "below are validation-only; no tuned test numbers exist yet, so "
+                     "no default-versus-tuned verdict can be drawn.")
+    else:
+        have = sorted(finals["method"].unique())
+        lines.append(f"- Final runs completed for: {', '.join(have)}.")
+    lines.append("")
 lines.append("Selection criterion: validation AUC-PR only — the same chronological "
              "validation split CALIBURN's calibration layer uses. Test labels were "
              "never read during selection. Reductions applied are logged in "
@@ -30,8 +58,27 @@ for ds, dpath in DEFAULTS.items():
     base = pd.read_csv(dpath)
     base = base[base["auc_pr"].notna()]
     tuned = t[(t["dataset"] == ds) & (t["phase"] == "final_tuned") & t["auc_pr"].notna()]
-    if tuned.empty and ds != "litnet2020":
-        lines.append(f"## {ds}: not tuned (reduction rung; documented defaults carried)")
+    if tuned.empty:
+        sel = t[(t["dataset"] == ds) & (t["phase"] == "grid") & t["val_auc_pr"].notna()]
+        if sel.empty:
+            lines.append(f"## {ds}: not tuned (reduction rung; documented defaults carried)")
+            lines.append("")
+            continue
+        # Validation-only outcome: report the selections that WOULD be used,
+        # clearly marked as not yet confirmed on the test stream.
+        lines.append(f"## {ds}: validation-stage selections only (no finals completed)")
+        lines.append("")
+        lines.append("| baseline | selected config (max validation AUC-PR) | val AUC-PR | grid points used |")
+        lines.append("|---|---|---|---|")
+        for method in sorted(sel["method"].unique()):
+            g = sel[sel["method"] == method].sort_values("val_auc_pr", ascending=False)
+            best = g.iloc[0]
+            lines.append(f"| {method} | `{best['params']}` | {best['val_auc_pr']:.4f} | {len(g)} |")
+        lines.append("")
+        lines.append("**No verdict is drawn on whether CALIBURN still leads after "
+                     "tuning**: that comparison requires test-set numbers from the "
+                     "full-stream final runs, which did not complete in the available "
+                     "window. Selection above touched validation labels only.")
         lines.append("")
         continue
     cal = base[base["method"] == "bocpd_slo"]["auc_pr"].mean()
