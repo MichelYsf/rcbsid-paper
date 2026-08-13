@@ -572,32 +572,32 @@ def stage_s3() -> None:
     if jobs:
         run_pool("S3-RUN", jobs, cmd, key, 0, len(jobs))
 
-    def wait_for_ram_floor(context: str) -> None:
-        # Long finals run for hours; new spawns pause below the 2 GB floor
-        # and free RAM is rechecked every 60 seconds.
-        while free_ram_gb() < 2.0:
-            log(f"S3 finals: free RAM below 2 GB floor before {context}; "
-                f"pausing spawn, rechecking in 60s")
-            write_status("S3-RUN", f"final spawn paused ({context}): RAM under 2 GB")
-            safe_sleep(60)
-
+    # Finals go through the same pool as the grid. They are independent per
+    # (dataset, method) full-stream passes, so running them sequentially left
+    # most of the machine idle — the single biggest lever on wall time, and
+    # therefore on cloud cost. The pool already enforces the RAM floor.
+    final_jobs = []
     for ds in decision["datasets"]:
         for method in S3_METHODS:
-            tag = TPARTS / f"final_{ds}_{method}_tuned.csv"
-            if tag.exists():
-                continue
-            wait_for_ram_floor(f"{ds}/{method}")
-            r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "final",
-                     "--dataset", ds, "--method", method], timeout=12 * 3600)
-            log(f"S3 final {ds}/{method}: rc={r.returncode} {r.stdout[-200:]}")
-        for method in ("ecod", "copod"):
-            tag = TPARTS / f"final_{ds}_{method}_default.csv"
-            if not tag.exists():
-                wait_for_ram_floor(f"{ds}/{method} default")
-                r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase",
-                         "final", "--dataset", ds, "--method", method,
-                         "--params-json", "{}"], timeout=4 * 3600)
-                log(f"S3 final-default {ds}/{method}: rc={r.returncode}")
+            if not (TPARTS / f"final_{ds}_{method}_tuned.csv").exists():
+                final_jobs.append({"ds": ds, "method": method, "default": False})
+        for method in ("ecod", "copod"):  # no tunables: carried forward, documented
+            if not (TPARTS / f"final_{ds}_{method}_default.csv").exists():
+                final_jobs.append({"ds": ds, "method": method, "default": True})
+
+    def final_cmd(j):
+        c = [PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "final",
+             "--dataset", j["ds"], "--method", j["method"]]
+        if j["default"]:
+            c += ["--params-json", "{}"]
+        return c
+
+    def final_key(j):
+        return f"final_{j['ds']}_{j['method']}_{'default' if j['default'] else 'tuned'}"
+
+    if final_jobs:
+        log(f"S3-FINALS: {len(final_jobs)} final jobs to run (pooled)")
+        run_pool("S3-FINALS", final_jobs, final_cmd, final_key, 0, len(final_jobs))
 
     r = run([PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--merge", str(TPARTS),
              "--out", str(final_csv)])
