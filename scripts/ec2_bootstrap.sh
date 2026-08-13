@@ -67,6 +67,11 @@ EOF
 .venv/bin/python scripts/build_cicids_labeled.py
 .venv/bin/python scripts/interleave_cicids.py
 .venv/bin/python scripts/build_litnet_labeled.py
+# LITNET REQUIRES the same round-robin interleave as CICIDS. Omitting it (as an
+# earlier version of this script did) leaves three contiguous attack-type blocks,
+# so validation and test become pure spam and every downstream number is garbage.
+.venv/bin/python scripts/interleave_litnet.py
+.venv/bin/python scripts/check_stream_health.py
 
 python3 - <<'EOF'
 import subprocess

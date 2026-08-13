@@ -1,2 +1,0 @@
-dataset,method,phase,params,seed,train_frac,n_train,n_val,val_auc_pr,val_auc_roc,error,wall_s
-litnet2020,rrcf,grid,"{""num_trees"": 40, ""tree_size"": 256}",11,0.4,420000,225000,3.28860974172528e-05,,,8889.9

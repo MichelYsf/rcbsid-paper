@@ -1,0 +1,2 @@
+VOID,dataset,method,phase,params,seed,train_frac,n_train,n_val,val_auc_pr,error,wall_s,void_reason
+True,litnet2020,hst,grid,"{""max_depth"": 20, ""num_trees"": 25, ""window_size"": 500}",11,0.4,420000,225000,,MemoryError: ,54.5,"VOID: computed on an un-interleaved LITNET stream (scripts/interleave_litnet.py was omitted by this harness's build). Validation/test were pure spam blocks (6 and 132 attacks). Not evidence about LITNET, the baselines, or CALIBURN."

@@ -1,0 +1,2 @@
+VOID,dataset,method,phase,params,seed,train_frac,n_train,n_val,val_auc_pr,val_auc_roc,error,wall_s,void_reason
+True,litnet2020,loda,grid,"{""n_bins"": 10, ""n_random_cuts"": 100}",11,0.4,420000,225000,0.0235363039469393,,,3819.5,"VOID: computed on an un-interleaved LITNET stream (scripts/interleave_litnet.py was omitted by this harness's build). Validation/test were pure spam blocks (6 and 132 attacks). Not evidence about LITNET, the baselines, or CALIBURN."

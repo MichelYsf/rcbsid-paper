@@ -1,2 +1,0 @@
-dataset,method,phase,params,seed,train_frac,n_train,n_val,val_auc_pr,val_auc_roc,error,wall_s
-litnet2020,hst,grid,"{""max_depth"": 10, ""num_trees"": 100, ""window_size"": 500}",11,0.4,420000,225000,0.00015877828527502056,,,899.5

@@ -34,6 +34,48 @@ for col in ("auc_pr", "val_auc_pr"):
 
 lines = ["# Findings: baseline tuning (Stage 3)", ""]
 
+# --- corrected incident: emitted by the generator so the retraction cannot be
+# --- lost the next time this file is regenerated.
+lines += [
+    "## CORRECTED INCIDENT — retraction of an earlier claim about LITNET-2020",
+    "",
+    "An earlier version of this document, of DONE_ALL.md, of RUN_REPORT.md and of",
+    "results/tuning_parts/reductions.json asserted that the **paper's** LITNET-2020",
+    "evaluation was built on a degenerate split (validation holding 6 attacks, a",
+    "0.059% test slice) and that this undermined Table 9's calibration and the CRC",
+    "exchangeability assumption. **That claim was wrong and is fully retracted. The",
+    "paper's LITNET evaluation is sound.** The defect was in this harness.",
+    "",
+    "What actually happened:",
+    "",
+    "- Both the EC2 bootstrap (`scripts/ec2_bootstrap.sh`) and the local Stage 0",
+    "  build ran `scripts/build_litnet_labeled.py` and then went straight to the",
+    "  runner, **omitting `scripts/interleave_litnet.py`**. The CICIDS2017 path did",
+    "  run its equivalent (`interleave_cicids.py`), which is why only LITNET was",
+    "  affected.",
+    "- The resulting stream was **three contiguous attack-type blocks** (measured: 2",
+    "  adjacent `attack_type` changes across 1,500,000 rows, where round-robin gives",
+    "  ~1,499,999). Validation and test were therefore **100% `spam`**, whose native",
+    "  attack rate is 0.06% — hence 6 attacks in validation and 132 in test.",
+    "- **Every LITNET grid result from this run is an artifact of that broken stream",
+    "  and is void.** The partials are quarantined under",
+    "  `results/tuning_parts/void_litnet_uninterleaved/` and excluded from",
+    "  `baseline_tuning.csv`.",
+    "- The **published** LITNET evaluation uses a correctly interleaved stream: an",
+    "  in-memory reconstruction of the documented interleave gives train 4.928% /",
+    "  validation 5.218% / **test 6.498% (14,621 attacks in 225,000 rows)**. Two",
+    "  independent checks agree: the paper's Table 12 ablation row (alert rate 0.057,",
+    "  precision 0.976, recall 0.850) implies 6.54% prevalence and predicts FPR",
+    "  0.0015 against the 0.001 reported; and LOF's precision 0.0667 at recall 0.9605",
+    "  bounds test prevalence at <= 6.95%. A 0.059% slice would require an alert rate",
+    "  of 0.051% against the 5.7% reported — wrong by two orders of magnitude.",
+    "- **The reallocation of Stage 3 from LITNET-2020 to CICIDS2017 was therefore",
+    "  made on a false premise.** The CICIDS2017 tuning below is itself valid and",
+    "  its validation split is healthy, but LITNET tuning should not have been",
+    "  dropped and remains legitimate unfinished work.",
+    "",
+]
+
 # Coverage first: a truncated run must say plainly what it did and did not
 # produce, before any verdict is read.
 grid = t[t["phase"] == "grid"]
@@ -80,14 +122,16 @@ for ds, dpath in DEFAULTS.items():
         lines.append(f"## {ds}: validation-stage selections only (no finals completed){suffix}")
         lines.append("")
         if void:
-            lines.append(f"> **Do not use these configurations.** {ds}'s validation split "
-                         f"holds **{health['attacks']} attacks in {health['n']:,} rows** "
-                         f"({health['prevalence_pct']}% prevalence), because the trial "
-                         f"config sets `time_column: null` and the stream stays in file "
-                         f"order. Selecting by validation AUC-PR on that many positives is "
-                         f"noise, not tuning — which is why the values below sit far below "
-                         f"the 5.2% chance line. They are listed only to document what the "
-                         f"grid produced. Tuning was reallocated to CICIDS2017.")
+            lines.append(f"> **VOID — do not use these configurations, and do not read them "
+                         f"as evidence about {ds} or about CALIBURN.** They were computed on "
+                         f"a **broken stream that this harness built**, not on the dataset "
+                         f"the paper evaluates. See the corrected-incident section above: "
+                         f"`scripts/interleave_litnet.py` was never run, so the stream was "
+                         f"three contiguous attack-type blocks and the validation split held "
+                         f"**{health['attacks']} attacks in {health['n']:,} rows** "
+                         f"({health['prevalence_pct']}%). The published evaluation uses a "
+                         f"correctly interleaved stream with a ~6.5% test slice. These rows "
+                         f"are retained only to document what the broken run produced.")
             lines.append("")
         elif health:
             lines.append(f"Validation split: {health['attacks']:,} attacks in "

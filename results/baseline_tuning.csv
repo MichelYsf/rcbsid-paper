@@ -17,17 +17,3 @@ cicids2017,loda,grid,"{""n_bins"": 10, ""n_random_cuts"": 100}",11,0.4,448000,24
 cicids2017,loda,grid,"{""n_bins"": 50, ""n_random_cuts"": 100}",11,0.4,448000,240000,0.3246540774395195,,,2415.1
 cicids2017,lof,grid,"{""n_neighbors"": 10}",11,0.4,448000,240000,0.8467230301310927,,,564.9
 cicids2017,lof,grid,"{""n_neighbors"": 50}",11,0.4,448000,240000,0.8490195844521471,,,523.0
-litnet2020,hst,grid,"{""max_depth"": 10, ""num_trees"": 25, ""window_size"": 100}",11,0.4,420000,225000,0.0003818669381774,,,359.1
-litnet2020,hst,grid,"{""max_depth"": 10, ""num_trees"": 25, ""window_size"": 500}",11,0.4,420000,225000,0.0001978740937137,,,211.9
-litnet2020,hst,grid,"{""max_depth"": 20, ""num_trees"": 25, ""window_size"": 100}",11,0.4,420000,225000,,,MemoryError: ,47.1
-litnet2020,hst,grid,"{""max_depth"": 20, ""num_trees"": 25, ""window_size"": 500}",11,0.4,420000,225000,,,MemoryError: ,54.5
-litnet2020,hst,grid,"{""max_depth"": 10, ""num_trees"": 100, ""window_size"": 100}",11,0.4,420000,225000,0.0002368426409986,,,1381.3
-litnet2020,hst,grid,"{""max_depth"": 10, ""num_trees"": 100, ""window_size"": 500}",11,0.4,420000,225000,0.000158778285275,,,899.5
-litnet2020,hst,grid,"{""max_depth"": 20, ""num_trees"": 100, ""window_size"": 100}",11,0.4,420000,225000,,,MemoryError: ,47.5
-litnet2020,hst,grid,"{""max_depth"": 20, ""num_trees"": 100, ""window_size"": 500}",11,0.4,420000,225000,,,MemoryError: ,46.9
-litnet2020,loda,grid,"{""n_bins"": 10, ""n_random_cuts"": 100}",11,0.4,420000,225000,0.0235363039469393,,,3819.5
-litnet2020,loda,grid,"{""n_bins"": 10, ""n_random_cuts"": 500}",11,0.4,420000,225000,,,"MemoryError: Unable to allocate 1.95 MiB for an array with shape (512, 500) and data type float64",9375.0
-litnet2020,loda,grid,"{""n_bins"": 50, ""n_random_cuts"": 500}",11,0.4,420000,225000,0.0198210131420881,,,11690.2
-litnet2020,rrcf,grid,"{""num_trees"": 40, ""tree_size"": 256}",11,0.4,420000,225000,3.28860974172528e-05,,,8889.9
-litnet2020,rrcf,grid,"{""num_trees"": 40, ""tree_size"": 512}",11,0.4,420000,225000,3.003916710825504e-05,,,10621.7
-litnet2020,rrcf,grid,"{""num_trees"": 100, ""tree_size"": 256}",11,0.4,420000,225000,3.4370811916257416e-05,,,18265.2

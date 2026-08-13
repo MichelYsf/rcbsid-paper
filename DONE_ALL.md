@@ -27,7 +27,7 @@ documented in RUN_REPORT.md rather than glossed over.
 ## Stage 3 coverage actually achieved
 
 - CICIDS2017 grid points evaluated: **18 of 24**
-- LITNET-2020 grid points: 14 attempted, **abandoned as statistically void**
+- LITNET-2020 grid points: 14 attempted, **VOID** (broken un-interleaved stream built by this harness — see corrected incident below)
 - Final (full-stream) runs completed: **0 of 8**
 
 Because no finals completed, **`table4_litnet_tuned.tex` and
@@ -53,24 +53,44 @@ eight HST `max_depth=20` configurations (genuinely infeasible — river
 allocates ~2^21 nodes per tree, exceeding 6 GiB per worker) and one LODA point
 lost to an over-tight 3 GiB address-space cap that was my error, since raised.
 
-## LITNET-2020: why its tuning was abandoned
+## CORRECTED INCIDENT — the LITNET-2020 claim is retracted
 
-`configs/experiment_litnet_trial.yaml` sets `time_column: null`, so the stream
-stays in file order and the chronological 70/15/15 split yields train 7.426% /
-validation **0.003%** / test 0.059% attack prevalence. **The validation split
-holds 6 attacks in 225,000 rows**, so validation-AUC-PR selection there is
-noise, not tuning. The window was reallocated to CICIDS2017, which was in the
-runbook's original two-dataset scope.
+An earlier version of this file asserted that the **paper's** LITNET-2020
+evaluation used a 0.059% test slice (~133 attacks), that Table 9's calibration
+was fit on 6 positives, and that the CRC exchangeability assumption was
+violated. **That claim was wrong and is fully retracted. The paper's LITNET
+evaluation is sound.** The defect was in this harness.
 
-**This bears on the manuscript and is the most important finding of Stage 3.**
-The published LITNET numbers are computed on that same 0.059% test slice
-(~133 attacks in 225,000 rows) while the paper describes LITNET as the "5.2%
-rare-attack regime" — 5.2% is the dataset-wide rate. The headline result
-(AUC-PR 0.943, 2.21x the next-best method) therefore rests on ranking ~133
-flows, Table 9's isotonic calibration is fit on the 6-positive validation
-split, and the train→val→test prevalence swing violates the exchangeability
-assumption the CRC section relies on. Nothing was changed: this is a
-manuscript decision, not an agent decision. See `findings_tuning.md`.
+- **Root cause:** `scripts/ec2_bootstrap.sh` and the by-hand local Stage 0
+  build ran `build_litnet_labeled.py` but **omitted
+  `scripts/interleave_litnet.py`**. The CICIDS2017 path did run its equivalent,
+  so only LITNET was affected.
+- **Effect:** the stream was three contiguous attack-type blocks (2 adjacent
+  `attack_type` changes across 1,500,000 rows; round-robin gives ~1,499,999),
+  so validation and test were **100% `spam`** (native rate 0.06%) — 6 and 132
+  attacks.
+- **All 14 LITNET grid partials from this run are void** — artifacts of the
+  broken stream. They are quarantined under
+  `results/tuning_parts/void_litnet_uninterleaved/`, each row marked
+  `VOID=True` with a reason, and excluded from `baseline_tuning.csv`.
+- **The published evaluation uses a ~6.5% test slice: 14,621 attacks in
+  225,000 rows.** In-memory reconstruction of the documented interleave gives
+  train 4.928% / val 5.218% / test 6.498%. Independently confirmed by the
+  Table 12 ablation row (alert 0.057, precision 0.976, recall 0.850 ⇒ 6.54%,
+  predicting FPR 0.0015 vs the 0.001 reported) and by LOF's precision 0.0667
+  at recall 0.9605 (prevalence ≤ 6.95%). A 0.059% slice would require a 0.051%
+  alert rate against the 5.7% reported — wrong by two orders of magnitude.
+- **The reallocation of Stage 3 to CICIDS2017 was made on a false premise.**
+  The CICIDS2017 tuning is itself valid (validation: 52,085 attacks in 240,000
+  rows), but LITNET tuning should not have been dropped and remains legitimate
+  unfinished work.
+- **Nothing in the manuscript needs changing on account of this run.**
+
+Root-cause fixes shipped: interleave added to `ec2_bootstrap.sh`; new
+`scripts/build_datasets_local.sh` (canonical local build); new
+`scripts/check_stream_health.py` gate refusing <1,000 attack-type changes or
+<1% validation prevalence, wired into bootstrap and preflight; and
+`tests/test_stream_health.py` (5 regression tests).
 
 ## Deliverables
 
@@ -80,12 +100,12 @@ Produced:
 - [x] `results/prevalence_sweep_table.tex` — Stage 2 LaTeX table (mean ± std over 3 resample seeds)
 - [x] `figures/fig6_prevalence_sweep.pdf` — Stage 2 figure
 - [x] `findings_prevalence.md` — Stage 2 findings
-- [x] `results/baseline_tuning.csv` — Stage 3, 32 rows (23 usable grid points, 9 dropped)
+- [x] `results/baseline_tuning.csv` — Stage 3, 18 rows, CICIDS2017 only (void LITNET partials excluded)
 - [x] `results/table4_litnet_tuned.tex` — defaults only (no finals)
 - [x] `results/table5_cicids_tuned.tex` — defaults only (no finals)
 - [x] `results/tuning_delta_summary.tex` — no tuned rows (no finals)
 - [x] `results/appendix_a_replacement.tex` — Appendix A tuning-protocol block
-- [x] `findings_tuning.md` — Stage 3 findings, incl. the LITNET split finding
+- [x] `findings_tuning.md` — Stage 3 findings, incl. the corrected-incident retraction
 - [x] `findings_burnrate.md` — Stage 4 scoping note (why it did not run)
 - [x] `findings_paper_overlap.md` — sibling/CALIBURN overlap report
 - [x] `RUN_REPORT.md` — full report: gates, reductions, migration, all incidents
@@ -111,7 +131,7 @@ case the finals are retried; delete them if not.
 
 ## Paste into the Claude chat for manuscript integration
 
-- `findings_tuning.md` — **read this first**; it contains the LITNET split finding
+- `findings_tuning.md` — **read this first**; it opens with the corrected-incident retraction
 - `findings_prevalence.md`
 - `results/prevalence_sweep_table.tex`
 - `results/appendix_a_replacement.tex`

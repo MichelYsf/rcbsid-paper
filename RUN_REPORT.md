@@ -243,3 +243,62 @@ that verdict rather than implying one from validation numbers.
 Stage 4 was not reached; `findings_burnrate.md` records the scoping.
 
 **Verification at close-out**: `pytest -q` 35 passed; smoke test green.
+
+---
+
+## CORRECTED INCIDENT (2026-08-13) — retraction of the LITNET-2020 claim
+
+An earlier section of this report, along with `findings_tuning.md`,
+`DONE_ALL.md` and `results/tuning_parts/reductions.json`, claimed that the
+**paper's** LITNET-2020 evaluation rested on a degenerate split — validation
+holding 6 attacks, a 0.059% test slice of ~133 flows — and that this
+undermined the Table 9 calibration and the CRC exchangeability assumption.
+
+**That claim was wrong and is fully retracted. The paper's LITNET evaluation
+is sound.** The defect was in this harness.
+
+**Root cause.** `scripts/ec2_bootstrap.sh` and the by-hand local Stage 0 build
+both ran `scripts/build_litnet_labeled.py` and went straight to the runner,
+omitting **`scripts/interleave_litnet.py`**. The CICIDS2017 path did run its
+equivalent (`interleave_cicids.py`), so only LITNET was affected.
+
+**Evidence of the broken build.** The on-disk stream had **2** adjacent
+`attack_type` changes across 1,500,000 rows (round-robin gives ~1,499,999) —
+three contiguous blocks. Validation and test were therefore **100% `spam`**
+(native attack rate 0.06%), giving 6 and 132 attacks. Measured splits:
+train 1,050,000 / 77,973 / 7.426%; val 225,000 / 6 / 0.003%;
+test 225,000 / 132 / 0.059%.
+
+**What the correct pipeline gives.** An in-memory reconstruction of the
+documented interleave yields train 4.928% / val 5.218% /
+**test 6.498% = 14,621 attacks in 225,000 rows**. Two independent checks
+agree: the paper's Table 12 ablation row (alert rate 0.057, precision 0.976,
+recall 0.850) implies 6.54% prevalence and predicts FPR 0.0015 against the
+0.001 reported; and LOF's precision 0.0667 at recall 0.9605 bounds test
+prevalence at <= 6.95%. A 0.059% slice would require an alert rate of 0.051%
+against the 5.7% reported — wrong by two orders of magnitude.
+
+**Consequences, stated plainly.**
+
+1. All 14 LITNET grid partials from this run are **artifacts of the broken
+   stream and are void**. They are quarantined under
+   `results/tuning_parts/void_litnet_uninterleaved/`, every row carries
+   `VOID=True` and a `void_reason`, and they are excluded from
+   `results/baseline_tuning.csv` (now CICIDS2017 only, 18 rows).
+2. The **reallocation of Stage 3 from LITNET-2020 to CICIDS2017 was made on a
+   false premise.** The CICIDS2017 tuning is itself valid — its validation
+   split holds 52,085 attacks in 240,000 rows — but LITNET tuning should not
+   have been dropped and remains legitimate unfinished work.
+3. Nothing in the manuscript needs changing on account of this run.
+
+**Root-cause fixes shipped with this correction.**
+
+- `scripts/interleave_litnet.py` added to `scripts/ec2_bootstrap.sh`.
+- `scripts/build_datasets_local.sh` added as the canonical local build so the
+  by-hand path that caused this cannot recur.
+- `scripts/check_stream_health.py` gate: refuses to proceed if a stream shows
+  fewer than 1,000 adjacent attack-type changes or a validation prevalence
+  below 1%. Wired into `ec2_bootstrap.sh` and `run_preflight.sh`.
+- `tests/test_stream_health.py`: 5 regression tests covering the blocked
+  layout, the interleaved layout, a sparse validation split, and the
+  thresholds themselves.
