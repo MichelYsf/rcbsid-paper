@@ -2,6 +2,7 @@
   "train_frac": 0.4,
   "grid": "coarse",
   "datasets": [
+    "litnet2020",
     "cicids2017"
   ],
   "ladder_log": [
@@ -11,7 +12,8 @@
     "rung 3 (LITNET-2020 only): 17.3 h wall",
     "2026-08-10 repair directive: confirmed ladder already applied at S3 entry (rung 1 40% substream subsumed by rungs 2+3); resuming under S3 worker profile min 2 / 3 above 8GB / never 4 after WinError 1450",
     "2026-08-13: LITNET-2020 tuning abandoned as statistically void \u2014 the trial config uses time_column:null, so file order puts the attack-dense udp_flood block in train and leaves validation with 6 attacks in 225,000 rows (0.003%). Validation-AUC-PR selection on 6 positives is noise. Reallocated the remaining bounded window to CICIDS2017 (validation ~21.7% attacks), which was in the runbook's original two-dataset scope; rung-3 had dropped it purely for compute.",
-    "2026-08-13 RETRACTION: the preceding entry was WRONG and is retracted. LITNET-2020 tuning was NOT statistically void because of the paper or its config \u2014 it was void because THIS harness omitted scripts/interleave_litnet.py in both the EC2 bootstrap and the local Stage 0 build, leaving the stream as three contiguous attack-type blocks so validation/test were pure spam (6 and 132 attacks). The published LITNET evaluation is sound and uses a ~6.5% test slice (14,621 attacks in 225,000 rows), confirmed by in-memory reconstruction of the documented interleave and independently by the Table 12 ablation row (implies 6.54%, predicts FPR 0.0015 vs 0.001 reported) and the LOF precision bound (<=6.95%). The reallocation to CICIDS2017 was therefore made on a FALSE PREMISE; CICIDS tuning is itself valid, but LITNET tuning should not have been dropped. The 14 LITNET grid partials are void and quarantined under results/tuning_parts/void_litnet_uninterleaved/."
+    "2026-08-13 RETRACTION: the preceding entry was WRONG and is retracted. LITNET-2020 tuning was NOT statistically void because of the paper or its config \u2014 it was void because THIS harness omitted scripts/interleave_litnet.py in both the EC2 bootstrap and the local Stage 0 build, leaving the stream as three contiguous attack-type blocks so validation/test were pure spam (6 and 132 attacks). The published LITNET evaluation is sound and uses a ~6.5% test slice (14,621 attacks in 225,000 rows), confirmed by in-memory reconstruction of the documented interleave and independently by the Table 12 ablation row (implies 6.54%, predicts FPR 0.0015 vs 0.001 reported) and the LOF precision bound (<=6.95%). The reallocation to CICIDS2017 was therefore made on a FALSE PREMISE; CICIDS tuning is itself valid, but LITNET tuning should not have been dropped. The 14 LITNET grid partials are void and quarantined under results/tuning_parts/void_litnet_uninterleaved/.",
+    "2026-08-13 FINALS RUN (authorized): LITNET-2020 rebuilt correctly (build_litnet_labeled.py + interleave_litnet.py; check_stream_health.py PASSED: 1,499,999 attack-type changes, splits 4.928/5.218/6.498%) and restored to scope alongside CICIDS2017. DOCUMENTED GRID REDUCTION under the runbook's grid rules: ALL RRCF grid points are dropped on BOTH datasets. Reason: measured cost 8,890-18,265 s per point (2.5-5 h), by far the most expensive method and never observed to complete a point inside any bounded window; the published Table 4 ranks RRCF last of nine on LITNET (AUC-PR 0.074), so the tuned-vs-default comparison loses the least information here while freeing roughly half the grid budget. RRCF therefore carries its documented DEFAULT configuration in all tables, exactly as ECOD/COPOD do."
   ],
   "projection_h": 17.289683799207754,
   "litnet_split_prevalence": {
@@ -26,5 +28,8 @@
     "correct_interleaved_test_pct": 6.498,
     "correct_interleaved_test_attacks": 14621,
     "root_cause": "scripts/interleave_litnet.py was never run by this harness"
-  }
+  },
+  "skip_methods": [
+    "rrcf"
+  ]
 }

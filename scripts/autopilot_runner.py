@@ -264,6 +264,24 @@ def single_instance_guard() -> None:
     PIDFILE.write_text(str(os.getpid()))
 
 
+def spend_deadline_epoch() -> float | None:
+    """Convert a spend cap into a wall-clock instant.
+
+    CALIBURN_SPEND_CAP_USD with CALIBURN_HOURLY_USD and CALIBURN_START_EPOCH
+    (instance launch). The effective deadline is whichever of the wall and
+    spend limits arrives first; neither is ever extended.
+    """
+    try:
+        cap = float(os.environ["CALIBURN_SPEND_CAP_USD"])
+        rate = float(os.environ["CALIBURN_HOURLY_USD"])
+        start = float(os.environ["CALIBURN_START_EPOCH"])
+    except (KeyError, ValueError):
+        return None
+    if rate <= 0:
+        return None
+    return start + (cap / rate) * 3600.0
+
+
 def deadline_epoch() -> float | None:
     """Hard wall-clock deadline (UTC epoch) from CALIBURN_DEADLINE_UTC.
 
@@ -271,16 +289,20 @@ def deadline_epoch() -> float | None:
     watchdog). Without it the pipeline behaves exactly as before.
     """
     v = os.environ.get("CALIBURN_DEADLINE_UTC", "").strip()
-    if not v:
-        return None
-    try:
-        return float(v)
-    except ValueError:
+    wall = None
+    if v:
         try:
-            return datetime.datetime.strptime(v, "%Y-%m-%d %H:%M:%S").replace(
-                tzinfo=datetime.timezone.utc).timestamp()
-        except Exception:
-            return None
+            wall = float(v)
+        except ValueError:
+            try:
+                wall = datetime.datetime.strptime(v, "%Y-%m-%d %H:%M:%S").replace(
+                    tzinfo=datetime.timezone.utc).timestamp()
+            except Exception:
+                wall = None
+    spend = spend_deadline_epoch()
+    # Whichever cap arrives first binds. Neither is ever extended.
+    candidates = [x for x in (wall, spend) if x]
+    return min(candidates) if candidates else None
 
 
 def run_pool(stage: str, jobs: list, make_cmd, job_key, total_done0: int,
@@ -489,7 +511,24 @@ def stage_s2_deliver() -> None:
 
 # ---------------------------------------------------------------- Stage 3
 S3_DATASETS = ["litnet2020", "cicids2017"]
-S3_METHODS = ["hst", "loda", "rrcf", "iforest_asd", "kitnet", "lof"]
+S3_ALL_METHODS = ["hst", "loda", "rrcf", "iforest_asd", "kitnet", "lof"]
+
+
+def s3_methods(decision: dict | None = None) -> list[str]:
+    """Tunable methods minus any documented reduction.
+
+    A method listed in reductions.json's `skip_methods` is dropped from the
+    grid and from the finals, and carries its documented DEFAULT configuration
+    in the tables (as ECOD/COPOD always do). The reason lives in the same file
+    so the reduction is auditable rather than implicit.
+    """
+    skip = set(os.environ.get("CALIBURN_SKIP_METHODS", "").split(",")) - {""}
+    if decision:
+        skip |= set(decision.get("skip_methods", []))
+    return [m for m in S3_ALL_METHODS if m not in skip]
+
+
+S3_METHODS = S3_ALL_METHODS  # back-compat for callers that do not pass a decision
 REDUCTIONS = TPARTS / "reductions.json"
 S3_CEILING_H = 36.0
 
@@ -602,9 +641,13 @@ def stage_s3() -> None:
     from run_baseline_tuning import grid_points as full_points
 
     t_stage = time.time()
+    methods = s3_methods(decision)
+    if set(S3_ALL_METHODS) - set(methods):
+        log(f"S3: documented reduction — skipping "
+            f"{sorted(set(S3_ALL_METHODS) - set(methods))} (see reductions.json)")
     jobs = []
     for ds in decision["datasets"]:
-        for method in S3_METHODS:
+        for method in methods:
             pts = coarse_grid(method) if decision["grid"] == "coarse" else full_points(method)
             full = full_points(method)
             for i, pt in enumerate(pts):
@@ -655,7 +698,7 @@ def stage_s3() -> None:
     # therefore on cloud cost. The pool already enforces the RAM floor.
     final_jobs = []
     for ds in decision["datasets"]:
-        for method in S3_METHODS:
+        for method in s3_methods(decision):
             if not (TPARTS / f"final_{ds}_{method}_tuned.csv").exists():
                 final_jobs.append({"ds": ds, "method": method, "default": False})
         for method in ("ecod", "copod"):  # no tunables: carried forward, documented
