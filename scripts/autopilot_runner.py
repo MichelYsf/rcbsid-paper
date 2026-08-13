@@ -588,7 +588,15 @@ def stage_s3() -> None:
                 out = TPARTS / f"grid_{ds}_{method}_{idx:03d}.csv"
                 if not (out.exists() and out.stat().st_size > 0):
                     jobs.append({"ds": ds, "method": method, "idx": idx})
-    log(f"S3-RUN: {len(jobs)} grid jobs to run")
+    # Cheapest method first. Job order cannot affect any result (each point is
+    # independent and seed-deterministic), but under a bounded window it
+    # decides WHICH points get evaluated: measured per-point costs span
+    # ~2.3 min (hst) to ~5 h (rrcf), so method order alone is the difference
+    # between selections for five methods and selections for two.
+    grid_cost = {"hst": 0, "kitnet": 1, "lof": 2, "iforest_asd": 3, "loda": 4, "rrcf": 5}
+    jobs.sort(key=lambda j: (grid_cost.get(j["method"], 9), j["idx"]))
+    log(f"S3-RUN: {len(jobs)} grid jobs to run (cheapest method first: "
+        f"{', '.join(dict.fromkeys(j['method'] for j in jobs))})")
 
     def cmd(j):
         return [PY, str(ROOT / "scripts/run_baseline_tuning.py"), "--phase", "grid",
