@@ -65,9 +65,12 @@ add "findings_burnrate.md"                  "Stage 4: findings or scoping note"
 add "findings_paper_overlap.md"             "Sub-task: sibling/CALIBURN overlap report"
 add "RUN_REPORT.md"                         "Full run report"
 
-GRID=$(ls results/tuning_parts 2>/dev/null | grep -c '^grid_cicids' || echo 0)
-GRIDL=$(ls results/tuning_parts 2>/dev/null | grep -c '^grid_litnet' || echo 0)
-FIN=$(ls results/tuning_parts 2>/dev/null | grep -c '^final_' || echo 0)
+# NB: `grep -c || echo 0` emits TWO lines when grep matches nothing (grep
+# prints 0 and exits 1, then echo adds another 0), which corrupted the
+# generated counts. grep -c always prints a number, so no fallback is needed.
+GRID=$(ls results/tuning_parts 2>/dev/null | grep -c '^grid_cicids')
+GRIDL=$(ls results/tuning_parts 2>/dev/null | grep -c '^grid_litnet')
+FIN=$(ls results/tuning_parts 2>/dev/null | grep -c '^final_')
 
 # ---- 3. terminate and verify --------------------------------------------
 TERM_NOTE="instance left running by request (--keep-instance)"
@@ -78,10 +81,16 @@ if [ "$KEEP" = "0" ]; then
   for i in $(seq 1 30); do
     ST=$("$AWS" ec2 describe-instances --instance-ids "$IID" \
          --query 'Reservations[0].Instances[0].State.Name' --output text 2>/dev/null)
-    echo "  state: $ST"
-    [ "$ST" = "terminated" ] && break
+    echo "  state: ${ST:-<record purged>}"
+    # An empty/None state means the instance record is already gone (spot
+    # reclaim purges it), which is terminal — without this the loop polled a
+    # non-existent instance for its full 10 minutes.
+    case "$ST" in
+      terminated|""|None) break;;
+    esac
     sleep 20
   done
+  [ -z "$ST" ] || [ "$ST" = "None" ] && ST="gone (record purged)"
   VST=$("$AWS" ec2 describe-volumes --volume-ids "$VOL" \
         --query 'Volumes[0].State' --output text 2>&1 | tail -1)
   case "$VST" in
