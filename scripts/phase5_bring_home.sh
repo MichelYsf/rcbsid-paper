@@ -11,13 +11,13 @@ set -uo pipefail
 
 REPO="C:/Users/CYBERWIZARD/projects/rcbsid-paper"
 PEM="$REPO/caliburn-s3-key.pem"
-HOST="ubuntu@18.153.67.72"
-IID="i-0a474922fd3f64d86"
-VOL="vol-094c20d2274329a3e"
+HOST="${CALIBURN_HOST:-ubuntu@3.70.72.121}"
+IID="${CALIBURN_IID:-i-0de18850edfab1a40}"
+VOL="${CALIBURN_VOL:-vol-01968761956323f00}"
 AWS="/c/Program Files/Amazon/AWSCLIV2/aws.exe"
 export AWS_DEFAULT_REGION=eu-central-1
-LAUNCH_EPOCH=$(date -u -d '2026-08-12 09:16:08' +%s)
-RATE=0.194
+LAUNCH_EPOCH=${CALIBURN_LAUNCH_EPOCH:-1786645130}
+RATE=${CALIBURN_RATE:-0.4032}
 KEEP=0
 [ "${1:-}" = "--keep-instance" ] && KEEP=1
 
