@@ -151,8 +151,25 @@ on LITNET-2020 and CICIDS2017 only.
     print(f"wrote {OUT / 'appendix_a_replacement.tex'}")
 
 
+def _normalize(tuning: pd.DataFrame) -> pd.DataFrame:
+    """Guarantee the columns the builders index.
+
+    A truncated run can produce a baseline_tuning.csv containing only grid
+    rows (which carry val_auc_pr, not auc_pr/auc_roc/f1). Without this, every
+    builder raises KeyError and the whole deliverable step dies — losing the
+    partial tables that the bounded-run design exists to preserve.
+    """
+    for col in ("dataset", "method", "phase", "params", "error"):
+        if col not in tuning.columns:
+            tuning[col] = ""
+    for col in ("auc_pr", "auc_roc", "f1", "val_auc_pr", "train_frac"):
+        if col not in tuning.columns:
+            tuning[col] = float("nan")
+    return tuning
+
+
 def main() -> None:
-    tuning = pd.read_csv(TUNING)
+    tuning = _normalize(pd.read_csv(TUNING))
     build_table("litnet2020",
                 "AUC-PR, AUC-ROC, and F1 on LITNET-2020 (3-seed mean $\\pm$ std), "
                 "framework-default and validation-tuned configurations. Deterministic "
