@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import itertools
 import json
+import os
 import time
 import traceback
 import sys
@@ -231,7 +232,32 @@ def select_best(parts_dir: Path, dataset: str, method: str) -> tuple[dict, pd.Da
     return json.loads(best["params"]), df
 
 
+def _cap_address_space(gib: float = 3.0) -> None:
+    """Fail fast instead of dragging the whole box down.
+
+    HST at 100 trees x depth 20 allocates ~2^21 nodes per tree (multiple GiB
+    in one grid point). Without a cap, such a point exhausts RAM, the kernel
+    OOM-kills workers mid-job, and the machine thrashes so hard that nothing
+    else completes either (observed 2026-08-13: 45 min at 6 workers, zero
+    jobs finished). With a per-worker cap the offending point raises
+    MemoryError, is logged and dropped per the runbook's crash rule, and the
+    remaining grid keeps making progress.
+    """
+    if os.name == "nt":
+        return
+    try:
+        import resource
+        limit = int(gib * (1 << 30))
+        soft, hard = resource.getrlimit(resource.RLIMIT_AS)
+        if hard != resource.RLIM_INFINITY:
+            limit = min(limit, hard)
+        resource.setrlimit(resource.RLIMIT_AS, (limit, hard))
+    except Exception:
+        pass  # capping is best-effort; never block a run over it
+
+
 def main() -> None:
+    _cap_address_space(float(os.environ.get("CALIBURN_WORKER_MEM_GIB", "3.0")))
     p = argparse.ArgumentParser()
     p.add_argument("--phase", choices=["grid", "final"])
     p.add_argument("--dataset", choices=list(DATASET_CONFIGS))
