@@ -177,16 +177,54 @@ for ds, dpath in DEFAULTS.items():
                 best_stream_tuned, best_stream_name = dv, f"{method} (default)"
     lines.append("")
     lead = cal - best_stream_tuned
-    lines.append(f"CALIBURN (untuned, deterministic) AUC-PR: **{cal:.3f}**. Best "
-                 f"streaming baseline after tuning: **{best_stream_name} "
-                 f"{best_stream_tuned:.3f}**. Lead: **{lead:+.3f}** "
-                 f"({cal / best_stream_tuned:.2f}x)." if best_stream_tuned > 0 else "")
-    lines.append("")
-    verdict = ("CALIBURN still leads the streaming group after symmetric tuning"
-               if lead > 0 else
-               "CALIBURN NO LONGER leads the streaming group after symmetric tuning")
-    lines.append(f"**Verdict (mechanical, threshold = lead > 0) on {ds}: {verdict}.**")
-    lines.append("")
+    if best_stream_tuned > 0:
+        lines.append(f"CALIBURN (untuned, deterministic) AUC-PR: **{cal:.3f}**. Best "
+                     f"streaming baseline in this comparison: **{best_stream_name} "
+                     f"{best_stream_tuned:.3f}**. Lead: **{lead:+.3f}** "
+                     f"({cal / best_stream_tuned:.2f}x).")
+        lines.append("")
+
+    # A "symmetric tuning" verdict is only earned if the strongest baselines
+    # actually received tuned TEST numbers. Where the leader is still carrying
+    # its default configuration, say so instead of claiming symmetry.
+    tuned_methods = set(tuned["method"].unique())
+    untuned_leader = "(default)" in str(best_stream_name)
+    missing = [m for m in STREAM_GROUP
+               if m in set(base["method"].unique()) and m not in tuned_methods]
+    if untuned_leader or missing:
+        lines.append(f"**Verdict withheld — the comparison is NOT yet symmetric.** "
+                     f"Tuned test numbers exist only for "
+                     f"{', '.join(sorted(tuned_methods)) or 'no method'}; "
+                     f"{', '.join(missing) or 'the remaining methods'} still carry "
+                     f"DEFAULT configurations because their final (full-stream) runs "
+                     f"did not complete"
+                     + (f", including the current leader **{best_stream_name}**"
+                        if untuned_leader else "") +
+                     f". CALIBURN's apparent lead of {lead:+.3f} is therefore a "
+                     f"tuned-vs-partially-default comparison and must not be quoted "
+                     f"as evidence that CALIBURN survives symmetric tuning.")
+        lines.append("")
+        # Batch references appear as e.g. `lof_batch_ref` in the defaults table.
+        def _default_auc(m: str) -> float:
+            known = set(base["method"].unique())
+            key = m if m in known else f"{m}_batch_ref"
+            return float(base[base["method"] == key]["auc_pr"].mean()) if key in known \
+                else float("nan")
+
+        deltas = []
+        for m in sorted(tuned_methods):
+            dv, tv = _default_auc(m), float(tuned[tuned["method"] == m]["auc_pr"].mean())
+            arrow = "no change" if abs(tv - dv) < 5e-4 else ("worse" if tv < dv else "better")
+            deltas.append(f"{m} {dv:.3f} -> {tv:.3f} ({arrow})")
+        lines.append("For the baselines that WERE finalised, tuning did not improve "
+                     "them: " + "; ".join(deltas) + ".")
+        lines.append("")
+    else:
+        verdict = ("CALIBURN still leads the streaming group after symmetric tuning"
+                   if lead > 0 else
+                   "CALIBURN NO LONGER leads the streaming group after symmetric tuning")
+        lines.append(f"**Verdict (mechanical, threshold = lead > 0) on {ds}: {verdict}.**")
+        lines.append("")
 
 n_crash = int(t[(t["phase"] == "grid")]["error"].fillna("").astype(bool).sum())
 lines.append(f"Grid points that crashed and were dropped (logged): {n_crash}.")

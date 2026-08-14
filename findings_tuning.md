@@ -59,9 +59,11 @@ Selection criterion: validation AUC-PR only — the same chronological validatio
 | kitnet | 0.086 | 0.066 | -0.020 | `{"max_size_ae": 5}` |
 | lof | 0.099 | 0.099 | -0.000 | `{"n_neighbors": 50}` |
 
-CALIBURN (untuned, deterministic) AUC-PR: **0.943**. Best streaming baseline after tuning: **loda (default) 0.425**. Lead: **+0.518** (2.22x).
+CALIBURN (untuned, deterministic) AUC-PR: **0.943**. Best streaming baseline in this comparison: **loda (default) 0.425**. Lead: **+0.518** (2.22x).
 
-**Verdict (mechanical, threshold = lead > 0) on litnet2020: CALIBURN still leads the streaming group after symmetric tuning.**
+**Verdict withheld — the comparison is NOT yet symmetric.** Tuned test numbers exist only for kitnet, lof; hst, loda, rrcf, iforest_asd still carry DEFAULT configurations because their final (full-stream) runs did not complete, including the current leader **loda (default)**. CALIBURN's apparent lead of +0.518 is therefore a tuned-vs-partially-default comparison and must not be quoted as evidence that CALIBURN survives symmetric tuning.
+
+For the baselines that WERE finalised, tuning did not improve them: kitnet 0.086 -> 0.066 (worse); lof 0.099 -> 0.099 (no change).
 
 ## cicids2017: validation-stage selections only (no finals completed)
 

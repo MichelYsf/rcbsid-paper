@@ -302,3 +302,73 @@ against the 5.7% reported — wrong by two orders of magnitude.
 - `tests/test_stream_health.py`: 5 regression tests covering the blocked
   layout, the interleaved layout, a sparse validation split, and the
   thresholds themselves.
+
+---
+
+## FINALS RUN (2026-08-13 18:18Z - 2026-08-14 00:05Z)
+
+Instance `i-0de18850edfab1a40`, c7i.2xlarge **on-demand**, eu-central-1a, gp3
+100 GB at 6000 IOPS / 500 MB/s from launch. **Runtime 5.79 h at $0.4032/h =
+$2.33.** Caps: 6 h wall and $4 spend, whichever first; the wall bound, and
+neither was extended. Terminated with verification; volume deleted
+(`InvalidVolume.NotFound`). Snapshots `snap-09be952951db9af1e` (pre-run) and
+`snap-008f2633123c89f4f` (grid complete, pre-finals).
+
+**LITNET-2020 rebuilt correctly** (`build_litnet_labeled.py` +
+`interleave_litnet.py`), `check_stream_health.py` PASSED both locally and on
+the instance: 1,499,999 adjacent attack-type changes, splits 4.928 / 5.218 /
+6.498 %, test 14,621 attacks.
+
+**Independent confirmation that the rebuild is the paper's stream:** the
+default (untuned) finals reproduce the published trials bit-for-bit —
+CICIDS ECOD 0.418966 and COPOD 0.423156; LITNET ECOD 0.229143 and COPOD
+0.208127. This closes out the retracted claim: the paper's LITNET evaluation
+was always sound, and the correctly built stream reproduces it exactly.
+
+### Coverage
+
+- Grid: LITNET-2020 18/20, CICIDS2017 18/20 usable+dropped (28 usable points
+  across both). Documented drops: all 8 HST `max_depth=20` configs
+  (MemoryError, ~2^21 nodes/tree exceeds the per-worker cap).
+- Finals: **6 of 10** — ECOD and COPOD defaults on both datasets, plus tuned
+  KitNET and LOF on LITNET-2020.
+
+### Reductions applied, all recorded in reductions.json
+
+1. **RRCF dropped entirely** on both datasets (measured 2.5-5 h per grid
+   point, never completed inside a bounded window; ranked last of nine on
+   LITNET in the published Table 4). Carries its documented DEFAULT
+   configuration, as ECOD/COPOD do.
+2. **LODA and iForest_ASD finals dropped** at 21:35Z when the arithmetic no
+   longer fit: finals use the full train split with 3 seeds (~6x a grid
+   point), projecting to ~4.7 h and ~3-10 h against a ~1h25m window. Their
+   remaining grid points were abandoned for the same reason. They retain
+   VALIDATION-STAGE SELECTIONS ONLY.
+
+### Result, stated without overclaiming
+
+Tuning did not improve either finalised baseline on LITNET-2020: KitNET
+0.086 -> 0.066 (worse), LOF 0.099 -> 0.099 (no change). **No verdict is drawn
+on whether CALIBURN survives symmetric tuning**, because the strongest
+streaming baseline (LODA, 0.425) still carries its default configuration —
+its final never ran. `findings_tuning.md` withholds that verdict explicitly
+rather than quoting CALIBURN's +0.518 lead as if the comparison were
+symmetric.
+
+### Incidents
+
+- The operator's public IP changed twice mid-run (212.28.237.94 ->
+  80.81.144.9 -> 77.246.68.57), each time blackholing SSH at the security
+  group AND silently stalling the detached puller (9 consecutive failed pulls
+  between ~19:30Z and 21:32Z). Fixed both times by re-pointing the SG.
+- 6 workers OOM-killed the first finals; finals are far heavier than grid jobs
+  (LOF builds neighbour structures over ~1.07M points). Reduced to 3 workers.
+- The 6 GiB per-worker address-space cap was too tight for CICIDS full-stream
+  finals (`MemoryError` allocating 564 MiB for (879698, 84)); raised to 11 GiB
+  and the affected finals were retried successfully.
+- WRAP halted on `run_smoke_test.sh: python: command not found` — the script
+  hardcoded `python`, which does not exist on Ubuntu. **Not a scientific
+  failure**: pytest passed and every Stage 3 deliverable had already been
+  generated. Fixed to `${PY:-python3}`; smoke test and pytest (40 passed) are
+  green.
+- Stage 4 self-skipped: at 23:58Z far less than 45 minutes remained.

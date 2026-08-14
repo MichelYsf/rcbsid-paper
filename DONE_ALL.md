@@ -56,3 +56,20 @@ results/tuning_parts/reductions.json.
 - results/tuning_delta_summary.tex
 - results/appendix_a_replacement.tex
 - RUN_REPORT.md  (reductions, gates, migration note)
+
+## Result summary (finals run)
+
+Default finals reproduce the published trials **exactly** — CICIDS ECOD
+0.418966 / COPOD 0.423156, LITNET ECOD 0.229143 / COPOD 0.208127 — confirming
+the rebuilt interleaved LITNET stream is the stream the paper evaluated.
+
+Tuning did not improve either finalised baseline on LITNET-2020: KitNET
+0.086 -> 0.066 (worse), LOF 0.099 -> 0.099 (no change).
+
+**No symmetric-tuning verdict is drawn.** LODA (0.425), the strongest
+streaming baseline, still carries its DEFAULT configuration because its final
+did not run, so CALIBURN's +0.518 lead is a tuned-vs-partially-default
+comparison. findings_tuning.md withholds the verdict explicitly.
+
+Remaining work to close Stage 3: finals for LODA, iForest_ASD and HST on both
+datasets, plus KitNET/LOF on CICIDS2017 (~2-4 h of compute).
