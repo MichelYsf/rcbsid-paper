@@ -1,6 +1,6 @@
-# CALIBURN status — EC2 i-0a474922fd3f64d86 (spot, 4 workers, gp3 500MB/s)
+# CALIBURN status (local copy, pulled by detached puller)
 
-- 09:27Z CICIDSgrid=18/24 finals=0/8 running=[loda,rrcf,] DONE=N HALT=N TUNCSV=N
-- Tuning dataset: CICIDS2017 (LITNET abandoned: validation has 6 attacks)
-- Grid spawns stop 10:40Z | finals stop 12:10Z | watchdog terminates 12:35Z
-- Pulled home 2026-08-13 09:27 UTC
+- Last successful pull: 2026-08-14 00:03:23 UTC
+- Grid partials: 36 | Finals: 6
+- Host: ubuntu@3.70.72.121
+- Deliverables can be generated entirely from this local copy.

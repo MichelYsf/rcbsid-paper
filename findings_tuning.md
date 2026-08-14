@@ -39,16 +39,29 @@ What actually happened:
 
 ## Coverage and completeness
 
-- Grid points evaluated: 14 usable, 4 crashed and dropped (runbook rule: drop and log).
+- Grid points evaluated: 28 usable, 8 crashed and dropped (runbook rule: drop and log).
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 25, "window_size": 100}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 25, "window_size": 500}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 100, "window_size": 100}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 100, "window_size": 500}` — MemoryError: 
-- **No final (full-stream) runs completed.** Selection results below are validation-only; no tuned test numbers exist yet, so no default-versus-tuned verdict can be drawn.
+  - DROPPED `hst` `{"max_depth": 20, "num_trees": 25, "window_size": 100}` — MemoryError: 
+  - DROPPED `hst` `{"max_depth": 20, "num_trees": 25, "window_size": 500}` — MemoryError: 
+  - DROPPED `hst` `{"max_depth": 20, "num_trees": 100, "window_size": 100}` — MemoryError: 
+  - DROPPED `hst` `{"max_depth": 20, "num_trees": 100, "window_size": 500}` — MemoryError: 
+- Final runs completed for: copod, ecod, kitnet, lof.
 
 Selection criterion: validation AUC-PR only — the same chronological validation split CALIBURN's calibration layer uses. Test labels were never read during selection. Reductions applied are logged in results/tuning_parts/reductions.json and RUN_REPORT.md.
 
-## litnet2020: not tuned (reduction rung; documented defaults carried)
+## litnet2020
+
+| baseline | default AUC-PR | tuned AUC-PR | delta | selected config |
+|---|---|---|---|---|
+| kitnet | 0.086 | 0.066 | -0.020 | `{"max_size_ae": 5}` |
+| lof | 0.099 | 0.099 | -0.000 | `{"n_neighbors": 50}` |
+
+CALIBURN (untuned, deterministic) AUC-PR: **0.943**. Best streaming baseline after tuning: **loda (default) 0.425**. Lead: **+0.518** (2.22x).
+
+**Verdict (mechanical, threshold = lead > 0) on litnet2020: CALIBURN still leads the streaming group after symmetric tuning.**
 
 ## cicids2017: validation-stage selections only (no finals completed)
 
@@ -64,4 +77,4 @@ Validation split: 52,085 attacks in 240,000 rows (21.7% prevalence) — selectio
 
 **No verdict is drawn on whether CALIBURN still leads after tuning**: that comparison requires test-set numbers from the full-stream final runs, which did not complete in the available window. Selection above touched validation labels only.
 
-Grid points that crashed and were dropped (logged): 4.
+Grid points that crashed and were dropped (logged): 8.

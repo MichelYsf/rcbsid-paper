@@ -13,7 +13,7 @@ $\{256,512\}$; iForest\_ASD estimators $\{50,100,200\}$ $\times$ window
 $\{1024,2048,4096\}$; KitNET max autoencoder size $\{5,10,20\}$ with
 grace periods scaled proportionally to stream length; LOF neighbours
 $\{10,20,35,50\}$. ECOD and COPOD expose no tunable hyperparameters and
-are carried forward unchanged. Because the full-stream grid exceeded the compute ceiling, grid points were evaluated on the first chronologically contiguous 40\% of the training split followed by the full validation split; the selected configuration was then re-run on the full stream for the reported test numbers. 4 grid point(s) crashed; each is logged with its error in the released results and excluded from selection.
+are carried forward unchanged. Because the full-stream grid exceeded the compute ceiling, grid points were evaluated on the first chronologically contiguous 40\% of the training split followed by the full validation split; the selected configuration was then re-run on the full stream for the reported test numbers. 8 grid point(s) crashed; each is logged with its error in the released results and excluded from selection.
 Stochastic methods report final test numbers over seeds 11, 23, and 47
 after selection; deterministic methods are single-run. Tuning was performed
 on LITNET-2020 and CICIDS2017 only.

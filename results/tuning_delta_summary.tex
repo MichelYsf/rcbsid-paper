@@ -5,6 +5,8 @@
 \toprule
 Dataset & Baseline & default AUC-PR & tuned AUC-PR & $\Delta$ \\
 \midrule
+litnet2020 & KitNET (max_size_ae=5) & 0.086 & 0.066 & -0.020 \\
+litnet2020 & LOF (n_neighbors=50) & 0.099 & 0.099 & -0.000 \\
 \bottomrule
 \end{tabular}
 \caption{Default versus validation-tuned AUC-PR per baseline. Tuning selects on validation AUC-PR only (the same split CALIBURN's calibration layer uses); test labels are never read during selection.}
