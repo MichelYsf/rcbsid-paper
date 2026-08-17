@@ -1,0 +1,275 @@
+{
+  "SelfTestManifested": [
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260817T221515_49aa8db0",
+      "manifest": "selftest_provenance_gate_20260817T221515_49aa8db0.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:15.887971+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260817T221517_3432d09a",
+      "manifest": "selftest_provenance_gate_20260817T221517_3432d09a.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:17.531632+00:00"
+    }
+  ],
+  "Stage1BocpdsloAucprDiff": [
+    {
+      "value": 2.846684505897201e-07,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/auc_pr",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1BocpdsloAucrocDiff": [
+    {
+      "value": 7.499538092758939e-07,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/auc_roc",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1BocpdsloF1Diff": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/f1",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1BocpdsloPrecisionDiff": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/precision",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1BocpdsloRecallDiff": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/recall",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1EcodbatchrefAucprDiff": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/auc_pr",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1EcodbatchrefAucrocDiff": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/auc_roc",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1EcodbatchrefF1Diff": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/f1",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1EcodbatchrefPrecisionDiff": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/precision",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage1EcodbatchrefRecallDiff": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/recall",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproCicids2017EcodAucpr": [
+    {
+      "value": 0.418965884610567,
+      "unit": "",
+      "desc": "cicids2017 ecod auc_pr reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproCicids2017EcodAucroc": [
+    {
+      "value": 0.8075728351061373,
+      "unit": "",
+      "desc": "cicids2017 ecod auc_roc reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproCicids2017EcodF1": [
+    {
+      "value": 0.6608455997494519,
+      "unit": "",
+      "desc": "cicids2017 ecod f1 reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproCicids2017CopodAucpr": [
+    {
+      "value": 0.423156400711175,
+      "unit": "",
+      "desc": "cicids2017 copod auc_pr reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproCicids2017CopodAucroc": [
+    {
+      "value": 0.8117111519918692,
+      "unit": "",
+      "desc": "cicids2017 copod auc_roc reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproCicids2017CopodF1": [
+    {
+      "value": 0.6315339457576926,
+      "unit": "",
+      "desc": "cicids2017 copod f1 reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproLitnet2020EcodAucpr": [
+    {
+      "value": 0.229143068911574,
+      "unit": "",
+      "desc": "litnet2020 ecod auc_pr reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproLitnet2020EcodAucroc": [
+    {
+      "value": 0.7367741472468452,
+      "unit": "",
+      "desc": "litnet2020 ecod auc_roc reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproLitnet2020EcodF1": [
+    {
+      "value": 0.3246141348497157,
+      "unit": "",
+      "desc": "litnet2020 ecod f1 reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproLitnet2020CopodAucpr": [
+    {
+      "value": 0.2081268016942385,
+      "unit": "",
+      "desc": "litnet2020 copod auc_pr reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproLitnet2020CopodAucroc": [
+    {
+      "value": 0.7799536395399809,
+      "unit": "",
+      "desc": "litnet2020 copod auc_roc reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "ReproLitnet2020CopodF1": [
+    {
+      "value": 0.2731094221052184,
+      "unit": "",
+      "desc": "litnet2020 copod f1 reproduced on the rebuilt stream",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "Stage0DeterministicChecksFailed": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "count of deterministic reproduction failures at Stage 0",
+      "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+      "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
+      "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+      "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ]
+}
