@@ -5,8 +5,13 @@
 \toprule
 Dataset & Baseline & default AUC-PR & tuned AUC-PR & $\Delta$ \\
 \midrule
+litnet2020 & HST (max_depth=10, num_trees=25, window_size=500) & 0.261 & 0.518 & +0.257 \\
+litnet2020 & iForest\_ASD (n_estimators=50, window_size=4096) & 0.130 & 0.144 & +0.014 \\
 litnet2020 & KitNET (max_size_ae=5) & 0.086 & 0.066 & -0.020 \\
 litnet2020 & LOF (n_neighbors=50) & 0.099 & 0.099 & -0.000 \\
+cicids2017 & HST (max_depth=10, num_trees=100, window_size=500) & 0.433 & 0.444 & +0.010 \\
+cicids2017 & KitNET (max_size_ae=20) & 0.191 & 0.186 & -0.006 \\
+cicids2017 & LOF (n_neighbors=50) & 0.863 & 0.851 & -0.012 \\
 \bottomrule
 \end{tabular}
 \caption{Default versus validation-tuned AUC-PR per baseline. Tuning selects on validation AUC-PR only (the same split CALIBURN's calibration layer uses); test labels are never read during selection.}

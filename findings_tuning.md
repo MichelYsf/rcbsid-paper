@@ -39,16 +39,20 @@ What actually happened:
 
 ## Coverage and completeness
 
-- Grid points evaluated: 28 usable, 8 crashed and dropped (runbook rule: drop and log).
+- Grid points evaluated: 28 usable, 12 crashed and dropped (runbook rule: drop and log).
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 25, "window_size": 100}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 25, "window_size": 500}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 100, "window_size": 100}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 100, "window_size": 500}` — MemoryError: 
+  - DROPPED `loda` `{"n_bins": 10, "n_random_cuts": 500}` — NOT EVALUATED: n_random_cuts=500 point abandoned at the deadline on 2026-08-13 (~4 h per p
+  - DROPPED `loda` `{"n_bins": 50, "n_random_cuts": 500}` — NOT EVALUATED: n_random_cuts=500 point abandoned at the deadline on 2026-08-13 (~4 h per p
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 25, "window_size": 100}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 25, "window_size": 500}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 100, "window_size": 100}` — MemoryError: 
   - DROPPED `hst` `{"max_depth": 20, "num_trees": 100, "window_size": 500}` — MemoryError: 
-- Final runs completed for: copod, ecod, kitnet, lof.
+  - DROPPED `loda` `{"n_bins": 10, "n_random_cuts": 500}` — NOT EVALUATED: n_random_cuts=500 point abandoned at the deadline on 2026-08-13 (~4 h per p
+  - DROPPED `loda` `{"n_bins": 50, "n_random_cuts": 500}` — NOT EVALUATED: n_random_cuts=500 point abandoned at the deadline on 2026-08-13 (~4 h per p
+- Final runs completed for: copod, ecod, hst, iforest_asd, kitnet, lof.
 
 Selection criterion: validation AUC-PR only — the same chronological validation split CALIBURN's calibration layer uses. Test labels were never read during selection. Reductions applied are logged in results/tuning_parts/reductions.json and RUN_REPORT.md.
 
@@ -56,27 +60,29 @@ Selection criterion: validation AUC-PR only — the same chronological validatio
 
 | baseline | default AUC-PR | tuned AUC-PR | delta | selected config |
 |---|---|---|---|---|
+| hst | 0.261 | 0.518 | +0.257 | `{"max_depth": 10, "num_trees": 25, "window_size": 500}` |
+| iforest_asd | 0.130 | 0.144 | +0.014 | `{"n_estimators": 50, "window_size": 4096}` |
 | kitnet | 0.086 | 0.066 | -0.020 | `{"max_size_ae": 5}` |
 | lof | 0.099 | 0.099 | -0.000 | `{"n_neighbors": 50}` |
 
-CALIBURN (untuned, deterministic) AUC-PR: **0.943**. Best streaming baseline in this comparison: **loda (default) 0.425**. Lead: **+0.518** (2.22x).
+CALIBURN (untuned, deterministic) AUC-PR: **0.943**. Best streaming baseline in this comparison: **hst 0.518**. Lead: **+0.425** (1.82x).
 
-**Verdict withheld — the comparison is NOT yet symmetric.** Tuned test numbers exist only for kitnet, lof; hst, loda, rrcf, iforest_asd still carry DEFAULT configurations because their final (full-stream) runs did not complete, including the current leader **loda (default)**. CALIBURN's apparent lead of +0.518 is therefore a tuned-vs-partially-default comparison and must not be quoted as evidence that CALIBURN survives symmetric tuning.
+**Verdict withheld — the comparison is NOT yet symmetric.** Tuned test numbers exist only for hst, iforest_asd, kitnet, lof; loda, rrcf still carry DEFAULT configurations because their final (full-stream) runs did not complete. CALIBURN's apparent lead of +0.425 is therefore a tuned-vs-partially-default comparison and must not be quoted as evidence that CALIBURN survives symmetric tuning.
 
-For the baselines that WERE finalised, tuning did not improve them: kitnet 0.086 -> 0.066 (worse); lof 0.099 -> 0.099 (no change).
+For the baselines that WERE finalised, tuning did not improve them: hst 0.261 -> 0.518 (better); iforest_asd 0.130 -> 0.144 (better); kitnet 0.086 -> 0.066 (worse); lof 0.099 -> 0.099 (no change).
 
-## cicids2017: validation-stage selections only (no finals completed)
+## cicids2017
 
-Validation split: 52,085 attacks in 240,000 rows (21.7% prevalence) — selection is statistically meaningful here.
+| baseline | default AUC-PR | tuned AUC-PR | delta | selected config |
+|---|---|---|---|---|
+| hst | 0.433 | 0.444 | +0.010 | `{"max_depth": 10, "num_trees": 100, "window_size": 500}` |
+| kitnet | 0.191 | 0.186 | -0.006 | `{"max_size_ae": 20}` |
+| lof | 0.863 | 0.851 | -0.012 | `{"n_neighbors": 50}` |
 
-| baseline | selected config (max validation AUC-PR) | val AUC-PR | grid points used |
-|---|---|---|---|
-| hst | `{"max_depth": 10, "num_trees": 100, "window_size": 500}` | 0.2650 | 4 |
-| iforest_asd | `{"n_estimators": 200, "window_size": 4096}` | 0.2149 | 4 |
-| kitnet | `{"max_size_ae": 20}` | 0.2082 | 2 |
-| loda | `{"n_bins": 10, "n_random_cuts": 100}` | 0.3574 | 2 |
-| lof | `{"n_neighbors": 50}` | 0.8490 | 2 |
+CALIBURN (untuned, deterministic) AUC-PR: **0.545**. Best streaming baseline in this comparison: **hst 0.444**. Lead: **+0.101** (1.23x).
 
-**No verdict is drawn on whether CALIBURN still leads after tuning**: that comparison requires test-set numbers from the full-stream final runs, which did not complete in the available window. Selection above touched validation labels only.
+**Verdict withheld — the comparison is NOT yet symmetric.** Tuned test numbers exist only for hst, kitnet, lof; loda, rrcf, iforest_asd still carry DEFAULT configurations because their final (full-stream) runs did not complete. CALIBURN's apparent lead of +0.101 is therefore a tuned-vs-partially-default comparison and must not be quoted as evidence that CALIBURN survives symmetric tuning.
 
-Grid points that crashed and were dropped (logged): 8.
+For the baselines that WERE finalised, tuning did not improve them: hst 0.433 -> 0.444 (better); kitnet 0.191 -> 0.186 (worse); lof 0.863 -> 0.851 (worse).
+
+Grid points that crashed and were dropped (logged): 12.

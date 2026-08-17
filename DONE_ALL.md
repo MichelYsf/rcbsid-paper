@@ -1,17 +1,17 @@
-# DONE_ALL — 2026-08-14 00:06:07 UTC
+# DONE_ALL — 2026-08-17 09:51:32 UTC
 
 Branch `exp/prevalence-and-tuning`. Stage 3/4 finals run on AWS EC2
-`c7i.2xlarge` **on-demand** (`i-0de18850edfab1a40`, eu-central-1a, gp3 100 GB at
-6000 IOPS / 500 MB/s from launch). instance terminated (state=terminated), volume vol-01968761956323f00: deleted (not found — DeleteOnTermination honoured).
+`c7i.2xlarge` **on-demand** (`i-01cdbf26eb6699d75`, eu-central-1a, gp3 100 GB at
+6000 IOPS / 500 MB/s from launch). instance terminated (state=terminated), volume vol-049e26b01e2604a7c: deleted (not found — DeleteOnTermination honoured).
 
-**Instance runtime 5.79 h at $0.4032/h on-demand = $2.33.**
+**Instance runtime 3.83 h at $0.4032/h on-demand = $1.54.**
 Caps in force: 6 h wall and $4 spend, whichever first; neither extended.
 
 ## Stage 3 coverage actually achieved
 
-- CICIDS2017 grid points: **18** on disk (of 20 after the rrcf reduction)
-- LITNET-2020 grid points: **18** on disk (of 20 after the rrcf reduction)
-- Final (full-stream) runs completed: **6**
+- CICIDS2017 grid points: **20** on disk (of 20 after the rrcf reduction)
+- LITNET-2020 grid points: **20** on disk (of 20 after the rrcf reduction)
+- Final (full-stream) runs completed: **11**
 
 **LITNET-2020 was rebuilt correctly for this run** with
 `build_litnet_labeled.py` + `interleave_litnet.py`, and
@@ -56,20 +56,3 @@ results/tuning_parts/reductions.json.
 - results/tuning_delta_summary.tex
 - results/appendix_a_replacement.tex
 - RUN_REPORT.md  (reductions, gates, migration note)
-
-## Result summary (finals run)
-
-Default finals reproduce the published trials **exactly** — CICIDS ECOD
-0.418966 / COPOD 0.423156, LITNET ECOD 0.229143 / COPOD 0.208127 — confirming
-the rebuilt interleaved LITNET stream is the stream the paper evaluated.
-
-Tuning did not improve either finalised baseline on LITNET-2020: KitNET
-0.086 -> 0.066 (worse), LOF 0.099 -> 0.099 (no change).
-
-**No symmetric-tuning verdict is drawn.** LODA (0.425), the strongest
-streaming baseline, still carries its DEFAULT configuration because its final
-did not run, so CALIBURN's +0.518 lead is a tuned-vs-partially-default
-comparison. findings_tuning.md withholds the verdict explicitly.
-
-Remaining work to close Stage 3: finals for LODA, iForest_ASD and HST on both
-datasets, plus KitNET/LOF on CICIDS2017 (~2-4 h of compute).
