@@ -67,9 +67,9 @@ Selection criterion: validation AUC-PR only — the same chronological validatio
 
 CALIBURN (untuned, deterministic) AUC-PR: **0.943**. Best streaming baseline in this comparison: **hst 0.518**. Lead: **+0.425** (1.82x).
 
-**Verdict withheld — the comparison is NOT yet symmetric.** Tuned test numbers exist only for hst, iforest_asd, kitnet, lof; loda, rrcf still carry DEFAULT configurations because their final (full-stream) runs did not complete. CALIBURN's apparent lead of +0.425 is therefore a tuned-vs-partially-default comparison and must not be quoted as evidence that CALIBURN survives symmetric tuning.
+**Verdict withheld — the comparison is NOT yet symmetric.** Every tunable method must carry a tuned test number before a symmetric-tuning verdict is earned. Tuned finals exist for hst, iforest_asd, kitnet, lof; **loda still carry DEFAULT configurations** because their final runs did not complete. (rrcf carries its default by DOCUMENTED reduction and is not counted against symmetry.) CALIBURN's apparent lead of +0.425 is therefore a tuned-vs-partially-default comparison and must not be quoted as evidence that CALIBURN survives symmetric tuning.
 
-For the baselines that WERE finalised, tuning did not improve them: hst 0.261 -> 0.518 (better); iforest_asd 0.130 -> 0.144 (better); kitnet 0.086 -> 0.066 (worse); lof 0.099 -> 0.099 (no change).
+For the baselines that WERE finalised, tuning helped some baselines and not others: hst 0.261 -> 0.518 (better); iforest_asd 0.130 -> 0.144 (better); kitnet 0.086 -> 0.066 (worse); lof 0.099 -> 0.099 (no change).
 
 ## cicids2017
 
@@ -81,8 +81,8 @@ For the baselines that WERE finalised, tuning did not improve them: hst 0.261 ->
 
 CALIBURN (untuned, deterministic) AUC-PR: **0.545**. Best streaming baseline in this comparison: **hst 0.444**. Lead: **+0.101** (1.23x).
 
-**Verdict withheld — the comparison is NOT yet symmetric.** Tuned test numbers exist only for hst, kitnet, lof; loda, rrcf, iforest_asd still carry DEFAULT configurations because their final (full-stream) runs did not complete. CALIBURN's apparent lead of +0.101 is therefore a tuned-vs-partially-default comparison and must not be quoted as evidence that CALIBURN survives symmetric tuning.
+**Verdict withheld — the comparison is NOT yet symmetric.** Every tunable method must carry a tuned test number before a symmetric-tuning verdict is earned. Tuned finals exist for hst, kitnet, lof; **loda, iforest_asd still carry DEFAULT configurations** because their final runs did not complete. (rrcf carries its default by DOCUMENTED reduction and is not counted against symmetry.) CALIBURN's apparent lead of +0.101 is therefore a tuned-vs-partially-default comparison and must not be quoted as evidence that CALIBURN survives symmetric tuning.
 
-For the baselines that WERE finalised, tuning did not improve them: hst 0.433 -> 0.444 (better); kitnet 0.191 -> 0.186 (worse); lof 0.863 -> 0.851 (worse).
+For the baselines that WERE finalised, tuning helped some baselines and not others: hst 0.433 -> 0.444 (better); kitnet 0.191 -> 0.186 (worse); lof 0.863 -> 0.851 (worse).
 
 Grid points that crashed and were dropped (logged): 12.

@@ -372,3 +372,65 @@ symmetric.
   generated. Fixed to `${PY:-python3}`; smoke test and pytest (40 passed) are
   green.
 - Stage 4 self-skipped: at 23:58Z far less than 45 minutes remained.
+
+---
+
+## FINALS COMPLETION RUN (2026-08-17 06:01Z - 09:50Z) — last compute of the project
+
+Instance `i-01cdbf26eb6699d75`, c7i.2xlarge **on-demand**, eu-central-1a, gp3
+100 GB at 6000 IOPS / 500 MB/s. **Runtime 3.83 h at $0.4032/h = $1.54.**
+Caps: 4 h wall and $2.50 spend, whichever first; the wall bound at 10:01:45Z,
+neither extended. Terminated with verification; volume `vol-049e26b01e2604a7c`
+deleted. Pre-finals snapshot `snap-0c3f130db41ed7586`. Detached 15-minute
+puller ran throughout (survived a session loss mid-run; nothing was lost).
+
+Bootstrap gates all passed on the rebuilt LITNET-2020 (integrity, stream
+health with 1,499,999 attack-type changes, row counts). Scope: the 8 missing
+finals only, no new grid work; all 8 selections were already available.
+
+### Finals landed: 5 of 8 (11 of 14 overall)
+
+| dataset | method | default AUC-PR | tuned AUC-PR | delta |
+|---|---|---|---|---|
+| litnet2020 | hst | 0.261 | **0.518** | **+0.257** |
+| litnet2020 | iforest_asd | 0.130 | 0.144 | +0.014 |
+| cicids2017 | hst | 0.433 | 0.444 | +0.010 |
+| cicids2017 | kitnet | 0.191 | 0.186 | -0.006 |
+| cicids2017 | lof | 0.863 | 0.851 | -0.012 |
+
+Abandoned at the 09:41Z hard cutoff (in flight, could not land): CICIDS
+iForest_ASD, LITNET LODA, CICIDS LODA. **LODA remains default on both datasets;
+iForest_ASD remains default on CICIDS2017.** LODA finals cost ~4.7 h each and
+never fit any window authorized for this project.
+
+### Verdict, as the generator now states it
+
+**Withheld on both datasets.** The rule: every tunable method must carry a
+tuned test number before a symmetric-tuning verdict is earned. On LITNET-2020,
+loda still carries its default; on CICIDS2017, loda and iforest_asd do. rrcf
+carries its default by DOCUMENTED reduction and is not counted against
+symmetry. CALIBURN's leads (+0.425 on LITNET over tuned HST 0.518; +0.101 on
+CICIDS over tuned HST 0.444) are therefore tuned-vs-partially-default and are
+not quoted as evidence of surviving symmetric tuning.
+
+Substantively, tuning helped some baselines and not others: HST gained
+markedly on LITNET (0.261 -> 0.518) and slightly on CICIDS; KitNET and LOF got
+slightly worse on CICIDS; LOF was unchanged on LITNET. CALIBURN leads every
+finalised baseline on both datasets regardless.
+
+### Incident
+
+WRAP halted on the smoke test again — this time because the runner invoked
+the smoke script without `$PY`, so it fell back to Ubuntu's system `python3`,
+which lacks the pinned dependencies. Not a scientific failure: pytest passed
+and every deliverable had already been generated. Fixed: the runner now
+passes the venv interpreter as `$PY`. Smoke and pytest (40 passed) are green.
+
+### Generator corrections made while regenerating
+
+- The findings generator wrote "tuning did not improve them" while listing
+  `(better)` entries — false once HST +0.257 landed. It now characterises the
+  finalised set correctly ("helped some and not others" / "improved every" /
+  "did not improve any").
+- It counted rrcf as a missing final. rrcf is a documented reduction, not an
+  incomplete run; it is now excluded from the symmetry test and named as such.

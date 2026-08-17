@@ -816,12 +816,16 @@ def stage_wrap() -> None:
     bash = r"C:\Program Files\Git\bin\bash.exe" if IS_WINDOWS else "bash"
     if IS_WINDOWS and not Path(bash).exists():
         bash = "bash"
-    r = subprocess.run([bash, "scripts/run_smoke_test.sh"], cwd=str(ROOT), env=ENV,
+    # The smoke script honours $PY; point it at the venv interpreter so it does
+    # not fall back to a system python that lacks the pinned dependencies (the
+    # 2026-08-14 and 2026-08-17 wrap halts were exactly this, on Ubuntu).
+    smoke_env = dict(ENV, PY=PY)
+    r = subprocess.run([bash, "scripts/run_smoke_test.sh"], cwd=str(ROOT), env=smoke_env,
                        capture_output=True, text=True, timeout=3600,
                        creationflags=CREATE_FLAGS)
     if r.returncode != 0:
         halt("smoke test failed at wrap-up", (r.stdout + r.stderr)[-2000:],
-             "bash scripts/run_smoke_test.sh")
+             f'PY="{PY}" bash scripts/run_smoke_test.sh')
 
     log("WRAP: RUN_REPORT completion")
     freeze = run([PY, "-m", "pip", "freeze"]).stdout

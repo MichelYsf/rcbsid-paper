@@ -189,18 +189,30 @@ for ds, dpath in DEFAULTS.items():
     # its default configuration, say so instead of claiming symmetry.
     tuned_methods = set(tuned["method"].unique())
     untuned_leader = "(default)" in str(best_stream_name)
-    missing = [m for m in STREAM_GROUP
-               if m in set(base["method"].unique()) and m not in tuned_methods]
-    if untuned_leader or missing:
+    # Methods dropped by a DOCUMENTED reduction (reductions.json skip_methods)
+    # legitimately carry defaults and do not make the comparison asymmetric;
+    # only tunable methods whose finals simply did not complete do.
+    try:
+        _red = json.load(open(ROOT / "results/tuning_parts/reductions.json"))
+        reduced = set(_red.get("skip_methods", []))
+    except Exception:
+        reduced = set()
+    tunable_here = [m for m in STREAM_GROUP if m in set(base["method"].unique())
+                    and m not in reduced and m != "xstream"]
+    missing = [m for m in tunable_here if m not in tuned_methods]
+    if missing or untuned_leader:
         lines.append(f"**Verdict withheld — the comparison is NOT yet symmetric.** "
-                     f"Tuned test numbers exist only for "
+                     f"Every tunable method must carry a tuned test number before a "
+                     f"symmetric-tuning verdict is earned. Tuned finals exist for "
                      f"{', '.join(sorted(tuned_methods)) or 'no method'}; "
-                     f"{', '.join(missing) or 'the remaining methods'} still carry "
-                     f"DEFAULT configurations because their final (full-stream) runs "
-                     f"did not complete"
+                     f"**{', '.join(missing) or 'the remaining methods'} still carry "
+                     f"DEFAULT configurations** because their final runs did not complete"
                      + (f", including the current leader **{best_stream_name}**"
                         if untuned_leader else "") +
-                     f". CALIBURN's apparent lead of {lead:+.3f} is therefore a "
+                     f". "
+                     + (f"(rrcf carries its default by DOCUMENTED reduction and is not "
+                        f"counted against symmetry.) " if "rrcf" in reduced else "")
+                     + f"CALIBURN's apparent lead of {lead:+.3f} is therefore a "
                      f"tuned-vs-partially-default comparison and must not be quoted "
                      f"as evidence that CALIBURN survives symmetric tuning.")
         lines.append("")
@@ -211,19 +223,27 @@ for ds, dpath in DEFAULTS.items():
             return float(base[base["method"] == key]["auc_pr"].mean()) if key in known \
                 else float("nan")
 
-        deltas = []
+        deltas, n_better = [], 0
         for m in sorted(tuned_methods):
             dv, tv = _default_auc(m), float(tuned[tuned["method"] == m]["auc_pr"].mean())
             arrow = "no change" if abs(tv - dv) < 5e-4 else ("worse" if tv < dv else "better")
+            n_better += arrow == "better"
             deltas.append(f"{m} {dv:.3f} -> {tv:.3f} ({arrow})")
-        lines.append("For the baselines that WERE finalised, tuning did not improve "
-                     "them: " + "; ".join(deltas) + ".")
+        summary = ("tuning helped some baselines and not others"
+                   if 0 < n_better < len(deltas) else
+                   "tuning improved every finalised baseline" if n_better == len(deltas)
+                   else "tuning did not improve any finalised baseline")
+        lines.append(f"For the baselines that WERE finalised, {summary}: "
+                     + "; ".join(deltas) + ".")
         lines.append("")
     else:
         verdict = ("CALIBURN still leads the streaming group after symmetric tuning"
                    if lead > 0 else
                    "CALIBURN NO LONGER leads the streaming group after symmetric tuning")
-        lines.append(f"**Verdict (mechanical, threshold = lead > 0) on {ds}: {verdict}.**")
+        lines.append(f"**Verdict (mechanical, threshold = lead > 0) on {ds}: {verdict}.** "
+                     f"Every tunable method carries a tuned test number"
+                     + (" (rrcf at its default by documented reduction)" if "rrcf" in reduced else "")
+                     + f"; the comparison is symmetric.")
         lines.append("")
 
 n_crash = int(t[(t["phase"] == "grid")]["error"].fillna("").astype(bool).sum())

@@ -56,3 +56,55 @@ results/tuning_parts/reductions.json.
 - results/tuning_delta_summary.tex
 - results/appendix_a_replacement.tex
 - RUN_REPORT.md  (reductions, gates, migration note)
+
+## Result summary — PROJECT COMPLETE (finals-completion run 2026-08-17)
+
+Three cloud runs total: $2.33 + $1.54 = **$3.87 on-demand** (plus ~$5.00 on the
+earlier spot instance, of which ~$3.90 was an idle-window operator error).
+
+**Finals: 11 of 14.** Tuned test numbers exist for hst, kitnet, lof (both
+datasets) and iforest_asd (LITNET only). Default references ecod/copod on
+both. **Not finalised: loda (both datasets) and iforest_asd (CICIDS2017)** —
+abandoned in flight at the hard cutoff; loda finals cost ~4.7 h each and never
+fit any authorized window. rrcf is default by DOCUMENTED reduction.
+
+| dataset | method | default | tuned | delta |
+|---|---|---|---|---|
+| litnet2020 | hst | 0.261 | **0.518** | **+0.257** |
+| litnet2020 | iforest_asd | 0.130 | 0.144 | +0.014 |
+| litnet2020 | kitnet | 0.086 | 0.066 | -0.020 |
+| litnet2020 | lof | 0.099 | 0.099 | 0.000 |
+| cicids2017 | hst | 0.433 | 0.444 | +0.010 |
+| cicids2017 | kitnet | 0.191 | 0.186 | -0.006 |
+| cicids2017 | lof | 0.863 | 0.851 | -0.012 |
+
+**Symmetric-tuning verdict: WITHHELD on both datasets**, by the rule that every
+tunable method must carry a tuned test number first. loda is default on both;
+iforest_asd is default on CICIDS2017. CALIBURN's leads over the best tuned
+streaming baseline — +0.425 on LITNET (0.943 vs tuned HST 0.518) and +0.101 on
+CICIDS (0.545 vs tuned HST 0.444) — are tuned-vs-partially-default and are
+NOT quoted as evidence of surviving symmetric tuning. `findings_tuning.md`
+states exactly which rows remain default.
+
+Substantively: tuning helped some baselines and not others. HST gained
+markedly on LITNET (+0.257) and slightly on CICIDS; KitNET and LOF got
+slightly worse on CICIDS; LOF unchanged on LITNET. CALIBURN leads every
+finalised baseline on both datasets.
+
+Default finals reproduce the published trials bit-for-bit (CICIDS ECOD
+0.418966 / COPOD 0.423156; LITNET ECOD 0.229143 / COPOD 0.208127),
+confirming the rebuilt interleaved LITNET stream is the paper's stream.
+
+**To close the remaining gap** (a symmetric verdict): loda finals on both
+datasets (~4.7 h each) and iforest_asd on CICIDS (~3-5 h) — roughly 12-15
+worker-hours, ~$1.50-2.50 on-demand. All selections and partials are on the
+branch; the runner resumes from disk.
+
+## Verification at close-out
+
+`pytest -q`: **40 passed**. Smoke test: **green** (with `$PY` = venv). Branch
+pushed. AWS: all three instances terminated with verified state; all volumes
+deleted; snapshots snap-09be952951db9af1e, snap-008f2633123c89f4f,
+snap-0c3f130db41ed7586 remain (delete when no longer wanted; a few cents per
+month each). Key pair `caliburn-s3-key` and SG `sg-07aa8be9303e7cbb4` remain
+(free).
