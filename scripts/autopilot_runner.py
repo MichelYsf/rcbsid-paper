@@ -719,8 +719,12 @@ def stage_s3() -> None:
         # Cheapest-first so a truncated window still yields tuned rows for as
         # many methods as possible (batch references and light streamers land
         # long before rrcf/iforest_asd on the full stream).
-        order = {"lof": 0, "ecod": 1, "copod": 2, "kitnet": 3, "hst": 4,
-                 "loda": 5, "iforest_asd": 6, "rrcf": 7}
+        # Ordered by MEASURED final cost from the 2026-08-13 run, not by guess:
+        # hst ~24-49 min, kitnet ~77-110 min, lof ~130 min, iforest_asd ~3-5 h,
+        # loda ~4-4.7 h. Under a bounded window this ordering decides how many
+        # finals land, so the cheap-and-certain ones must go first.
+        order = {"ecod": 0, "copod": 1, "hst": 2, "kitnet": 3, "lof": 4,
+                 "iforest_asd": 5, "loda": 6, "rrcf": 7}
         final_jobs.sort(key=lambda j: order.get(j["method"], 9))
         log(f"S3-FINALS: {len(final_jobs)} final jobs to run (pooled, cheapest first)")
         run_pool("S3-FINALS", final_jobs, final_cmd, final_key, 0, len(final_jobs),

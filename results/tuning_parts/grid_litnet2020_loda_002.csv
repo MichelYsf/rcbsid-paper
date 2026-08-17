@@ -1,0 +1,2 @@
+dataset,method,phase,params,seed,train_frac,val_auc_pr,error,wall_s
+litnet2020,loda,grid,"{""n_bins"": 10, ""n_random_cuts"": 500}",11,0.4,,"NOT EVALUATED: n_random_cuts=500 point abandoned at the deadline on 2026-08-13 (~4 h per point, outside every bounded window authorized for this project). The loda selection is made from the completed n_random_cuts=100 points and is therefore drawn from 2 of 4 coarse-grid points; recorded as a documented gap.",0
