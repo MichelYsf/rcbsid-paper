@@ -17,6 +17,51 @@
       "manifest": "selftest_provenance_gate_20260817T221517_3432d09a.json",
       "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
       "finished_utc": "2026-08-17T22:15:17.531632+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260818T113227_f18a4561",
+      "manifest": "selftest_provenance_gate_20260818T113227_f18a4561.json",
+      "git_commit": "fde920e4333309efdd2021d9f6c4b19673154930-dirty",
+      "finished_utc": "2026-08-18T11:32:27.068210+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260818T113503_eaddac39",
+      "manifest": "selftest_provenance_gate_20260818T113503_eaddac39.json",
+      "git_commit": "fde920e4333309efdd2021d9f6c4b19673154930-dirty",
+      "finished_utc": "2026-08-18T11:35:03.371323+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260818T113518_e54ba5b5",
+      "manifest": "selftest_provenance_gate_20260818T113518_e54ba5b5.json",
+      "git_commit": "fde920e4333309efdd2021d9f6c4b19673154930-dirty",
+      "finished_utc": "2026-08-18T11:35:18.035949+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260818T113610_b1bc35c8",
+      "manifest": "selftest_provenance_gate_20260818T113610_b1bc35c8.json",
+      "git_commit": "fde920e4333309efdd2021d9f6c4b19673154930-dirty",
+      "finished_utc": "2026-08-18T11:36:10.734868+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260818T113933_638f1537",
+      "manifest": "selftest_provenance_gate_20260818T113933_638f1537.json",
+      "git_commit": "fde920e4333309efdd2021d9f6c4b19673154930-dirty",
+      "finished_utc": "2026-08-18T11:39:33.292210+00:00"
     }
   ],
   "Stage1BocpdsloAucprDiff": [
@@ -270,6 +315,358 @@
       "manifest": "stage0_reproduction_checks_20260817T221558_53c31fe7.json",
       "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
       "finished_utc": "2026-08-17T22:15:58.770992+00:00"
+    }
+  ],
+  "StreamLitnetBlasterWormRows": [
+    {
+      "value": 500000,
+      "unit": "",
+      "desc": "litnet_blaster_worm rows",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetBlasterWormPrevalencePct": [
+    {
+      "value": 0.6562,
+      "unit": "\\%",
+      "desc": "litnet_blaster_worm overall attack prevalence",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetBlasterWormTestPrevalencePct": [
+    {
+      "value": 3.544,
+      "unit": "\\%",
+      "desc": "litnet_blaster_worm test-split prevalence",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetBlasterWormTestAttacks": [
+    {
+      "value": 2658,
+      "unit": "",
+      "desc": "litnet_blaster_worm test attacks",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetBlasterWormRunMedian": [
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "litnet_blaster_worm attack run-length median",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetBlasterWormRunPninety": [
+    {
+      "value": 2.0,
+      "unit": "",
+      "desc": "litnet_blaster_worm attack run-length p90",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetBlasterWormRunMax": [
+    {
+      "value": 5,
+      "unit": "",
+      "desc": "litnet_blaster_worm attack run-length max",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetBlasterWormSpanMinutes": [
+    {
+      "value": 1.62,
+      "unit": "min",
+      "desc": "litnet_blaster_worm capture span",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetSpamRows": [
+    {
+      "value": 500000,
+      "unit": "",
+      "desc": "litnet_spam rows",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetSpamPrevalencePct": [
+    {
+      "value": 0.0276,
+      "unit": "\\%",
+      "desc": "litnet_spam overall attack prevalence",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetSpamTestPrevalencePct": [
+    {
+      "value": 0.176,
+      "unit": "\\%",
+      "desc": "litnet_spam test-split prevalence",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetSpamTestAttacks": [
+    {
+      "value": 132,
+      "unit": "",
+      "desc": "litnet_spam test attacks",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetSpamRunMedian": [
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "litnet_spam attack run-length median",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetSpamRunPninety": [
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "litnet_spam attack run-length p90",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetSpamRunMax": [
+    {
+      "value": 2,
+      "unit": "",
+      "desc": "litnet_spam attack run-length max",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetSpamSpanMinutes": [
+    {
+      "value": 39122.23,
+      "unit": "min",
+      "desc": "litnet_spam capture span",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetUdpFloodRows": [
+    {
+      "value": 500000,
+      "unit": "",
+      "desc": "litnet_udp_flood rows",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetUdpFloodPrevalencePct": [
+    {
+      "value": 14.9384,
+      "unit": "\\%",
+      "desc": "litnet_udp_flood overall attack prevalence",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetUdpFloodTestPrevalencePct": [
+    {
+      "value": 15.7747,
+      "unit": "\\%",
+      "desc": "litnet_udp_flood test-split prevalence",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetUdpFloodTestAttacks": [
+    {
+      "value": 11831,
+      "unit": "",
+      "desc": "litnet_udp_flood test attacks",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetUdpFloodRunMedian": [
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "litnet_udp_flood attack run-length median",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetUdpFloodRunPninety": [
+    {
+      "value": 2.0,
+      "unit": "",
+      "desc": "litnet_udp_flood attack run-length p90",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetUdpFloodRunMax": [
+    {
+      "value": 20,
+      "unit": "",
+      "desc": "litnet_udp_flood attack run-length max",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamLitnetUdpFloodSpanMinutes": [
+    {
+      "value": 3.97,
+      "unit": "min",
+      "desc": "litnet_udp_flood capture span",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamCicids2017Rows": [
+    {
+      "value": 1600000,
+      "unit": "",
+      "desc": "cicids2017 rows",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamCicids2017PrevalencePct": [
+    {
+      "value": 22.0601,
+      "unit": "\\%",
+      "desc": "cicids2017 overall attack prevalence",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamCicids2017TestPrevalencePct": [
+    {
+      "value": 68.235,
+      "unit": "\\%",
+      "desc": "cicids2017 test-split prevalence",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamCicids2017TestAttacks": [
+    {
+      "value": 163764,
+      "unit": "",
+      "desc": "cicids2017 test attacks",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamCicids2017RunMedian": [
+    {
+      "value": 2.0,
+      "unit": "",
+      "desc": "cicids2017 attack run-length median",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamCicids2017RunPninety": [
+    {
+      "value": 70.0,
+      "unit": "",
+      "desc": "cicids2017 attack run-length p90",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamCicids2017RunMax": [
+    {
+      "value": 2522,
+      "unit": "",
+      "desc": "cicids2017 attack run-length max",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
+    }
+  ],
+  "StreamCicids2017SpanMinutes": [
+    {
+      "value": 6246.71,
+      "unit": "min",
+      "desc": "cicids2017 capture span",
+      "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+      "manifest": "stage1_natural_streams_20260818T114117_285582fc.json",
+      "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+      "finished_utc": "2026-08-18T11:44:29.529644+00:00"
     }
   ]
 }
