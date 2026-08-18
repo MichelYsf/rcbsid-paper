@@ -67,11 +67,14 @@ def agrees(manuscript_raw: str, manifest_value) -> bool:
 
 def check(targets: list[Path]) -> int:
     index = load_macro_index()
-    orphans, mismatches, ok = [], [], []
+    orphans, mismatches, ok, missing = [], [], [], []
     scanned = 0
     for t in targets:
         if not t.exists():
-            print(f"[skip] {t} (absent)")
+            # A target that cannot be read is NOT a pass. Silently skipping an
+            # absent manuscript let a wrong path green the gate (found in the
+            # Stage 0 self-audit), which would defeat the governing rule.
+            missing.append(str(t))
             continue
         scanned += 1
         macros = parse_macros(t.read_text(encoding="utf-8", errors="replace"))
@@ -92,6 +95,17 @@ def check(targets: list[Path]) -> int:
         print(f"  ORPHAN    {f}: \\{n} = {v}  -- no manifest produced this number")
     for f, n, v, mv, rid in mismatches:
         print(f"  MISMATCH  {f}: \\{n} = {v}  but manifest {rid} recorded {mv}")
+    for m in missing:
+        print(f"  MISSING   {m}  -- target absent, nothing could be verified")
+    if missing:
+        print("")
+        print("GATE FAILED - a target could not be read; an unverifiable "
+              "manuscript is never a pass.")
+        return 1
+    if scanned == 0:
+        print("")
+        print("GATE FAILED - zero files scanned; the gate must never pass vacuously.")
+        return 1
     if orphans or mismatches:
         print("\nGATE FAILED — a number without a manifest is deleted, never drafted.")
         return 1

@@ -87,3 +87,25 @@ def test_macro_index_roundtrip(tmp_path, monkeypatch):
     idx = json.loads((tmp_path / "macro_index.json").read_text())
     assert set(idx) == {"Alpha", "Beta"}
     assert idx["Alpha"][0]["value"] == 0.1
+
+
+# --- Regression: the gate must never pass vacuously -------------------------
+# Found in the Stage 0 self-audit (2026-08-17): check_provenance.py printed
+# "GATE PASSED" for an absent manuscript, so a wrong or renamed path silently
+# greened the build and the governing rule could be bypassed entirely.
+
+def test_gate_fails_on_absent_target(tmp_path):
+    import check_provenance as cp
+    assert cp.check([tmp_path / "does_not_exist.tex"]) == 1
+
+
+def test_gate_fails_on_zero_targets():
+    import check_provenance as cp
+    assert cp.check([]) == 1
+
+
+def test_gate_still_fails_on_orphan(tmp_path):
+    import check_provenance as cp
+    f = tmp_path / "orphan.tex"
+    f.write_text(chr(92) + "newcommand{" + chr(92) + "DefinitelyNotManifested}{0.4242}" + chr(10), encoding="utf-8")
+    assert cp.check([f]) == 1
