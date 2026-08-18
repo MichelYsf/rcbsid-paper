@@ -74,21 +74,30 @@ class KitNETWrapper:
         return float(z / (1.0 + z))
 
     def score_one(self, x) -> float:
+        """Score the CURRENT observation.
+
+        A7 fix: this previously returned the score cached by the PREVIOUS
+        learn_one() call, so every reported KitNET number was shifted by one
+        observation. KitNET-py's process(x) is fused (score+update), so it is
+        called here and learn_one() becomes a no-op for the same point.
+        """
         x = as_array(x)
         if self.native:
-            # KitNET-py exposes a fused process(x) API rather than separate
-            # score/learn calls. learn_one() caches process(x)'s RMSE score;
-            # score_one() returns the most recently cached value. This creates
-            # a one-sample offset, which is standard for wrapping fused
-            # streaming APIs and avoids silently returning constant zeros.
+            s = self.model.process(x)
+            self._last_native_score = scalar_score(s) if s is not None else 0.0
+            self._consumed = True
             return float(self._last_native_score)
         z = self.scaler.transform(x)
         err = self.model.score(z)
         return self._normalize_error(err)
 
     def learn_one(self, x) -> None:
+        """No-op when native: score_one() already ran the fused process(x)."""
         x = as_array(x)
         if self.native:
+            if getattr(self, "_consumed", False):
+                self._consumed = False
+                return
             s = self.model.process(x)
             self._last_native_score = scalar_score(s) if s is not None else 0.0
             return

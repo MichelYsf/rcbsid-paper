@@ -56,7 +56,25 @@ def _score_stream_with_warmup(model, X_warm, X_score):
     return np.asarray(scores, dtype=float)
 
 
-def _burn_rate_count(y_true, y_pred, cfg):
+def _burn_rate_count(y_pred, cfg):
+    """Label-free burn-rate alert count over RECORD windows.
+
+    A10 fix, two defects:
+
+    1. The previous implementation consumed ground truth and counted false
+       negatives as budget events:
+           budget_event = (yp == 1 and yt == 0) or (yp == 0 and yt == 1)
+       That is an oracle. At decision time the system cannot know whether a
+       crossing was a true or false alarm, and it can never observe a miss.
+       The budget is now what the paper says it is: an ALERT budget metered by
+       label-free threshold crossings (yp == 1).
+
+    2. The windows are named in minutes in the config but are consumed as
+       counts of records. Without per-record timestamps they are RECORD
+       windows, and are now named as such. Wall-clock burn-rate alerting on a
+       real timeline is reported separately, and only for CICIDS2017, whose
+       capture span supports 60/360/4320-minute windows (see SCOPE_DECISIONS).
+    """
     rules_cfg = cfg.get('burn_rate_alerting', {})
     slo = float(rules_cfg.get('slo', 0.999))
     rules = []
@@ -72,12 +90,9 @@ def _burn_rate_count(y_true, y_pred, cfg):
         return 0
     alert = MultiWindowBurnRateAlert(slo=slo, rules=rules)
     count = 0
-    for yt, yp in zip(np.asarray(y_true).astype(int), np.asarray(y_pred).astype(int)):
-        # Budget event when the detector either pages unnecessarily or misses an incident.
-        budget_event = float((yp == 1 and yt == 0) or (yp == 0 and yt == 1))
-        count += int(alert.update(budget_event))
+    for yp in np.asarray(y_pred).astype(int):
+        count += int(alert.update(float(yp == 1)))
     return count
-
 
 def _evaluate_row(dataset_name, method, seed, y_test, scores_test, threshold, elapsed, cfg, fallback=False):
     scores_arr = np.asarray(scores_test, dtype=float)
@@ -85,7 +100,7 @@ def _evaluate_row(dataset_name, method, seed, y_test, scores_test, threshold, el
     y_pred = (scores_arr >= threshold).astype(int)
     metrics.update(latency_summary(detection_latencies(y_test, y_pred)))
     metrics['throughput_eps'] = float(len(y_test) / elapsed) if elapsed > 0 else float('nan')
-    metrics['burn_rate_alerts'] = _burn_rate_count(y_test, y_pred, cfg)
+    metrics['burn_rate_alerts_record_windows'] = _burn_rate_count(y_pred, cfg)
     metrics['score_std'] = float(np.nanstd(scores_arr)) if len(scores_arr) else float('nan')
     metrics['score_min'] = float(np.nanmin(scores_arr)) if len(scores_arr) else float('nan')
     metrics['score_max'] = float(np.nanmax(scores_arr)) if len(scores_arr) else float('nan')

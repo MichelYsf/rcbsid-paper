@@ -62,6 +62,15 @@
       "manifest": "selftest_provenance_gate_20260818T113933_638f1537.json",
       "git_commit": "fde920e4333309efdd2021d9f6c4b19673154930-dirty",
       "finished_utc": "2026-08-18T11:39:33.292210+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260818T120339_1337a4e9",
+      "manifest": "selftest_provenance_gate_20260818T120339_1337a4e9.json",
+      "git_commit": "060661b2bd6db8a2bfe6c652f0a9734c2766a867-dirty",
+      "finished_utc": "2026-08-18T12:03:39.471455+00:00"
     }
   ],
   "Stage1BocpdsloAucprDiff": [

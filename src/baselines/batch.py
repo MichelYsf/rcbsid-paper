@@ -44,9 +44,14 @@ def _minmax(scores):
     return (scores - lo) / (hi - lo)
 
 
-def run_batch_reference(name: str, X_train, X_eval, seed: int = 42, n_neighbors: int = 35):
+LAST_FALLBACK: dict[str, bool] = {}
+
+
+def run_batch_reference(name: str, X_train, X_eval, seed: int = 42, n_neighbors: int = 35,
+                        allow_fallback: bool = True):
     # n_neighbors applies to LOF only (default 35 = the published configuration).
     name = name.lower()
+    LAST_FALLBACK[name] = False
     X_train = np.asarray(X_train, dtype=float)
     X_eval = np.asarray(X_eval, dtype=float)
     if name in {'ecod', 'copod'}:
@@ -59,7 +64,13 @@ def run_batch_reference(name: str, X_train, X_eval, seed: int = 42, n_neighbors:
                 model = COPOD()
             model.fit(X_train)
             return _minmax(model.decision_function(X_eval))
-        except Exception:
+        except Exception as exc:
+            # A9 fix: this fallback was silent, so a reviewer could not tell
+            # whether a published ECOD/COPOD number came from PyOD at all.
+            if not allow_fallback:
+                raise RuntimeError(
+                    f"{name}: PyOD unavailable and fallback disabled") from exc
+            LAST_FALLBACK[name] = True
             model = _EmpiricalTailDetector(mode=name).fit(X_train)
             return _minmax(model.decision_function(X_eval))
     if name == 'lof':
@@ -67,7 +78,11 @@ def run_batch_reference(name: str, X_train, X_eval, seed: int = 42, n_neighbors:
             model = LocalOutlierFactor(n_neighbors=int(n_neighbors), novelty=True, contamination='auto')
             model.fit(X_train)
             return _minmax(-model.score_samples(X_eval))
-        except Exception:
+        except Exception as exc:
+            if not allow_fallback:
+                raise RuntimeError(
+                    "lof: scikit-learn LOF unavailable and fallback disabled") from exc
+            LAST_FALLBACK['lof'] = True
             model = _EmpiricalTailDetector(mode='ecod').fit(X_train)
             return _minmax(model.decision_function(X_eval))
     raise KeyError(f'Unknown batch reference baseline: {name}')

@@ -9,7 +9,10 @@ class RRCFWrapper:
         try:
             import rrcf  # type: ignore
             self.rrcf = rrcf
-            self.forest = [rrcf.RCTree() for _ in range(n_trees)]
+            # A8 fix: the seed was accepted and never applied, so every
+            # 'seeded' RRCF run shared one uncontrolled random state.
+            self.forest = [rrcf.RCTree(random_state=int(seed) + k)
+                           for k in range(n_trees)]
             self.tree_size = tree_size
             self.index = 0
             self.native = True
@@ -23,15 +26,31 @@ class RRCFWrapper:
             self.model = WindowDistanceScorer(n_features=n_features, window_size=tree_size)
 
     def score_one(self, x) -> float:
+        """Score the CURRENT observation.
+
+        A7 fix: this previously returned codisp(self.index - 1), i.e. the score
+        of the PREVIOUS point, so every reported RRCF number was shifted by one
+        observation. RRCF's co-displacement is only defined for a point that is
+        in the forest, so the current point is inserted here and scored; the
+        insertion is the model update, which is why learn_one() is now a no-op.
+        """
         x = as_array(x)
         if not self.native:
             return self.model.score_one(x)
-        if self.index == 0:
-            return 0.0
+        i = self.index
+        for tree in self.forest:
+            if len(tree.leaves) >= self.tree_size:
+                try:
+                    tree.forget_point(i - self.tree_size)
+                except Exception:
+                    pass
+            tree.insert_point(x, index=i)
+        self.index += 1
+        self._consumed = True
         scores = []
         for tree in self.forest:
             try:
-                scores.append(float(tree.codisp(self.index - 1)))
+                scores.append(float(tree.codisp(i)))
             except Exception:
                 pass
         if not scores:
@@ -40,9 +59,18 @@ class RRCFWrapper:
         return raw / (1.0 + raw)
 
     def learn_one(self, x) -> None:
+        """No-op when native: score_one() already inserted the point.
+
+        Scoring RRCF requires the point to be in the forest, so insertion IS
+        the update. Keeping a second insertion here would double-count every
+        observation.
+        """
         x = as_array(x)
         if not self.native:
             self.model.learn_one(x)
+            return
+        if getattr(self, "_consumed", False):
+            self._consumed = False
             return
         i = self.index
         for tree in self.forest:
