@@ -34,7 +34,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from provenance import load_macro_index  # noqa: E402
+from provenance import build_index, load_macro_index  # noqa: E402
 
 DEFAULT_TARGETS = [ROOT / "paper" / "numbers.tex"]
 NEWCOMMAND = re.compile(r"\\newcommand\{\\([A-Za-z][A-Za-z0-9]*)\}\{([^}]*)\}")
@@ -85,8 +85,49 @@ def distinct_values(records: list[dict]) -> list:
     return seen
 
 
-def check(targets: list[Path]) -> int:
+def index_drift(stored: dict, computed: dict) -> list[str]:
+    """Ways the stored macro index disagrees with the manifests on disk.
+
+    macro_index.json is DERIVED. On 2026-08-19 it was found in the working tree
+    missing 43 macros - every S4 number the manuscript cites - while all the
+    manifests that produced them sat untouched beside it. A gate that reads the
+    index without checking it will report that a vanished number still traces
+    to a manifest. So the index is now evidence to be verified, not consulted.
+    """
+    problems = []
+    for name in sorted(set(computed) - set(stored)):
+        problems.append("missing from index: " + name +
+                        " (a manifest emits it, the index does not carry it)")
+    for name in sorted(set(stored) - set(computed)):
+        problems.append("stale in index: " + name +
+                        " (no manifest on disk emits it)")
+    for name in sorted(set(stored) & set(computed)):
+        sv = [r.get("value") for r in stored[name]]
+        cv = [r.get("value") for r in computed[name]]
+        if [str(x) for x in sv] != [str(x) for x in cv]:
+            problems.append("value drift in index: " + name +
+                            " stored=" + str(sv) + " manifests=" + str(cv))
+    return problems
+
+
+def check(targets: list[Path], verify_index: bool = True) -> int:
     index = load_macro_index()
+    if verify_index:
+        try:
+            drift = index_drift(index, build_index())
+        except Exception as exc:                       # never mask a real check
+            drift = ["could not rebuild the index from manifests: " + repr(exc)]
+        if drift:
+            print("provenance gate: macro index does NOT match the manifests on disk")
+            for d in drift[:25]:
+                print("  INDEX  " + d)
+            if len(drift) > 25:
+                print("  INDEX  ... and " + str(len(drift) - 25) + " more")
+            print("")
+            print("GATE FAILED - the macro index is a derived artifact and it has "
+                  "drifted from its manifests; regenerate it with "
+                  "`python scripts/provenance.py` and re-run.")
+            return 1
     orphans, mismatches, ok, missing, ambiguous = [], [], [], [], []
     scanned = 0
     for t in targets:

@@ -1,0 +1,243 @@
+{
+  "run_id": "s4_contrast_deliverables_20260819T113331_a7a5eadd",
+  "name": "s4_contrast_deliverables",
+  "git_commit": "565f194f9be96afcaf0ae2e867585abbb9d1b89e-dirty",
+  "config_sha256": "0155c8bbf11d244db932df32a0ae741f1889d7660d6de2bac293d6e4626a578d",
+  "config": {
+    "parts": [
+      "contrast_cicids_natural.csv",
+      "contrast_cicids_synthetic.csv",
+      "contrast_litnet_natural.csv",
+      "contrast_litnet_synthetic.csv"
+    ],
+    "claim": "construction, not prevalence, drives regime structure",
+    "cicids_contrast": "true timestamp order vs day-of-week round robin, identical record multiset",
+    "litnet_contrast": "three natural per-type streams vs the pooled composite (labelled synthetic)"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\rebuild_parts\\contrast_cicids_natural.csv",
+      "sha256": "12b22ebb6abe0490327f905c1a3f086aa014dcc20548488c46dad68a7cc5c659"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\rebuild_parts\\contrast_cicids_synthetic.csv",
+      "sha256": "716ea57f463282cc0371bc0a71bc24ade21f94937c650ce00cfc30fb95de5db4"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\rebuild_parts\\contrast_litnet_natural.csv",
+      "sha256": "a8b6f1c12041a7aa1f11c1d1406db1d5cb28b335e860a358c108d02bedc8f1bf"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\rebuild_parts\\contrast_litnet_synthetic.csv",
+      "sha256": "8a541a44b5c9cd4d4cceece53e4e7d094357874f098420036cc437f86ba2d685"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\construction_contrast.csv",
+      "exists": true,
+      "sha256": "f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_contrast.md",
+      "exists": true,
+      "sha256": "5621ea9b11b5dfb64b19fa8dfeb7631d97bf6ff03ca7ac87aaacab1f9b7d2d15"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\table_construction_contrast.tex",
+      "exists": true,
+      "sha256": "6b7b46b693d33683d2149cbbdf2c3da6de65a3cce3670b94d8ff5bf046dcc412"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-19T11:33:31.384056+00:00",
+  "finished_utc": "2026-08-19T11:33:31.413057+00:00",
+  "wall_seconds": 0.029001,
+  "macros": {
+    "SFourCicidsNaturalTestPrev": {
+      "value": 68.235,
+      "unit": "%",
+      "desc": "CICIDS2017 held-out prevalence, true timestamp order"
+    },
+    "SFourCicidsInterleavedTestPrev": {
+      "value": 25.2396,
+      "unit": "%",
+      "desc": "CICIDS2017 held-out prevalence, day-of-week round robin"
+    },
+    "SFourCicidsPrevShiftPp": {
+      "value": -42.9954,
+      "unit": "pp",
+      "desc": "held-out prevalence shift caused by construction alone"
+    },
+    "SFourCicidsNaturalTestAttacks": {
+      "value": 163764,
+      "unit": "",
+      "desc": "CICIDS2017 held-out attacks, natural order"
+    },
+    "SFourCicidsInterleavedTestAttacks": {
+      "value": 60575,
+      "unit": "",
+      "desc": "CICIDS2017 held-out attacks, interleaved"
+    },
+    "SFourCicidsNaturalProposedDetectorAucpr": {
+      "value": 0.728337,
+      "unit": "",
+      "desc": "CICIDS natural proposed_detector AUC-PR"
+    },
+    "SFourCicidsSyntheticProposedDetectorAucpr": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "CICIDS interleaved proposed_detector AUC-PR"
+    },
+    "SFourCicidsNaturalHstAucpr": {
+      "value": 0.588902,
+      "unit": "",
+      "desc": "CICIDS natural hst AUC-PR"
+    },
+    "SFourCicidsSyntheticHstAucpr": {
+      "value": 0.513623,
+      "unit": "",
+      "desc": "CICIDS interleaved hst AUC-PR"
+    },
+    "SFourCicidsNaturalEcodAucpr": {
+      "value": 0.755142,
+      "unit": "",
+      "desc": "CICIDS natural ecod AUC-PR"
+    },
+    "SFourCicidsSyntheticEcodAucpr": {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "CICIDS interleaved ecod AUC-PR"
+    },
+    "SFourCicidsRankingPreserved": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the method ranking is identical across arms"
+    },
+    "SFourLitnetUdpFloodTestPrev": {
+      "value": 15.7747,
+      "unit": "%",
+      "desc": "LITNET udp_flood held-out prevalence"
+    },
+    "SFourLitnetBlasterWormTestPrev": {
+      "value": 3.544,
+      "unit": "%",
+      "desc": "LITNET blaster_worm held-out prevalence"
+    },
+    "SFourLitnetSpamTestPrev": {
+      "value": 0.176,
+      "unit": "%",
+      "desc": "LITNET spam held-out prevalence"
+    },
+    "SFourLitnetPooledTestPrev": {
+      "value": 6.4982,
+      "unit": "%",
+      "desc": "LITNET pooled composite held-out prevalence"
+    },
+    "SFourLitnetPooledInsideRange": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if pooled prevalence lies inside the per-type range"
+    },
+    "SFourLitnetUdpFloodProposedDetectorAucpr": {
+      "value": 0.394428,
+      "unit": "",
+      "desc": "LITNET udp_flood proposed_detector AUC-PR"
+    },
+    "SFourLitnetUdpFloodHstAucpr": {
+      "value": 0.552675,
+      "unit": "",
+      "desc": "LITNET udp_flood hst AUC-PR"
+    },
+    "SFourLitnetUdpFloodEcodAucpr": {
+      "value": 0.321185,
+      "unit": "",
+      "desc": "LITNET udp_flood ecod AUC-PR"
+    },
+    "SFourLitnetBlasterWormProposedDetectorAucpr": {
+      "value": 0.964091,
+      "unit": "",
+      "desc": "LITNET blaster_worm proposed_detector AUC-PR"
+    },
+    "SFourLitnetBlasterWormHstAucpr": {
+      "value": 0.147731,
+      "unit": "",
+      "desc": "LITNET blaster_worm hst AUC-PR"
+    },
+    "SFourLitnetBlasterWormEcodAucpr": {
+      "value": 0.03571,
+      "unit": "",
+      "desc": "LITNET blaster_worm ecod AUC-PR"
+    },
+    "SFourLitnetSpamProposedDetectorAucpr": {
+      "value": 0.846154,
+      "unit": "",
+      "desc": "LITNET spam proposed_detector AUC-PR"
+    },
+    "SFourLitnetSpamHstAucpr": {
+      "value": 0.008447,
+      "unit": "",
+      "desc": "LITNET spam hst AUC-PR"
+    },
+    "SFourLitnetSpamEcodAucpr": {
+      "value": 0.106805,
+      "unit": "",
+      "desc": "LITNET spam ecod AUC-PR"
+    },
+    "SFourLitnetPooledProposedDetectorAucpr": {
+      "value": 0.943056,
+      "unit": "",
+      "desc": "LITNET pooled proposed_detector AUC-PR"
+    },
+    "SFourLitnetPooledHstAucpr": {
+      "value": 0.23884,
+      "unit": "",
+      "desc": "LITNET pooled hst AUC-PR"
+    },
+    "SFourLitnetPooledEcodAucpr": {
+      "value": 0.229143,
+      "unit": "",
+      "desc": "LITNET pooled ecod AUC-PR"
+    },
+    "SFourLitnetStreamsMatchingPooledRanking": {
+      "value": 1,
+      "unit": "",
+      "desc": "natural per-type streams whose method ranking matches the pooled composite"
+    },
+    "SFourLitnetNaturalStreamsRanked": {
+      "value": 3,
+      "unit": "",
+      "desc": "natural per-type streams with a defined ranking"
+    },
+    "SFourLitnetStreamsProposedNotBest": {
+      "value": 1,
+      "unit": "",
+      "desc": "natural streams where the proposed detector is not the best method"
+    },
+    "SFourExcludedCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "cells excluded with a recorded reason"
+    }
+  },
+  "notes": "aggregation only; no metric is recomputed here",
+  "extra": {
+    "merged_sha256": "f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e",
+    "rows_merged": 18,
+    "arms_present": [
+      "cicids2017/interleaved_synthetic",
+      "cicids2017/natural",
+      "litnet_blaster_worm/natural",
+      "litnet_pooled/composite_synthetic",
+      "litnet_spam/natural",
+      "litnet_udp_flood/natural"
+    ]
+  }
+}

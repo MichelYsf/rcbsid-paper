@@ -1,0 +1,163 @@
+{
+  "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+  "name": "cicids_subsample_audit",
+  "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+  "config_sha256": "932550219f5ef05bfdb3c02aaa3da8f78766b82758fd344bd909cf56a21d16e6",
+  "config": {
+    "per_day_budgets": {
+      "monday": 300000,
+      "tuesday": 300000,
+      "wednesday": 350000,
+      "thursday": 300000,
+      "friday": 350000
+    },
+    "source": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017_original",
+    "labeled": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017\\cicids2017_labeled.csv",
+    "question": "is the 1.6M-row 'whole week' a census or a budget?"
+  },
+  "seed": 0,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017\\cicids2017_labeled.csv",
+      "sha256": "5b73cd71ee47e54a15260ef994cb6fe3047c52465c0ceea68543710db043fe5f"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017_original\\monday.csv",
+      "sha256": "51fe5dc962626efb4ae70dce0303072fb780da0932822b651202ee9c2fbc1aff"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017_original\\tuesday.csv",
+      "sha256": "e2a0a5b631dfc6b455cc9f9a88b944110637d70a7f74171473925f76f38b6b0c"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017_original\\wednesday.csv",
+      "sha256": "bf46c5f3c792e8817381f724511229569606918eaf07ac986d7a2592b6341bc2"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017_original\\thursday.csv",
+      "sha256": "78a4d11eaf473d099e30e71ddb01e0f38218e844c0a9cdd36602145d674af482"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017_original\\friday.csv",
+      "sha256": "ebd499e6f23bd59f9cb81bec28178491b02b925fa5640a24215c9437d79482d0"
+    }
+  ],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-19T08:57:04.431336+00:00",
+  "finished_utc": "2026-08-19T08:57:16.083152+00:00",
+  "wall_seconds": 11.651816,
+  "macros": {
+    "CicidsWeekRawRows": {
+      "value": 2099976,
+      "unit": "",
+      "desc": "rows in the improved CICIDS2017 per-day CSVs"
+    },
+    "CicidsWeekAttemptedDropped": {
+      "value": 11979,
+      "unit": "",
+      "desc": "rows dropped for a ' - Attempted' label"
+    },
+    "CicidsWeekEligibleRows": {
+      "value": 2087997,
+      "unit": "",
+      "desc": "capture-week rows eligible after the Attempted drop"
+    },
+    "CicidsWeekUsedRows": {
+      "value": 1600000,
+      "unit": "",
+      "desc": "rows actually used by the labeled dataset"
+    },
+    "CicidsWeekRetentionPct": {
+      "value": 76.628,
+      "unit": "%",
+      "desc": "fraction of the eligible capture week retained"
+    },
+    "CicidsWeekTruePrevalencePct": {
+      "value": 24.2065,
+      "unit": "%",
+      "desc": "attack prevalence of the full eligible capture week"
+    },
+    "CicidsWeekUsedPrevalencePct": {
+      "value": 22.0601,
+      "unit": "%",
+      "desc": "attack prevalence of the subsampled labeled dataset"
+    },
+    "CicidsWeekPrevalenceBiasPp": {
+      "value": -2.1464,
+      "unit": "pp",
+      "desc": "prevalence bias induced by the fixed per-day budgets"
+    },
+    "CicidsWeekMinDayRetentionPct": {
+      "value": 64.399,
+      "unit": "%",
+      "desc": "least-retained capture day"
+    },
+    "CicidsWeekMaxDayRetentionPct": {
+      "value": 93.156,
+      "unit": "%",
+      "desc": "most-retained capture day"
+    }
+  },
+  "notes": "measures what fraction of the capture week the labeled dataset retains, and the prevalence bias the fixed per-day budgets induce",
+  "extra": {
+    "per_day": {
+      "monday": {
+        "raw": 371624,
+        "attempted_dropped": 0,
+        "eligible": 371624,
+        "budget": 300000,
+        "used": 300000,
+        "retention_pct": 80.727,
+        "attacks_eligible": 0,
+        "day_prevalence_pct": 0.0
+      },
+      "tuesday": {
+        "raw": 322078,
+        "attempted_dropped": 39,
+        "eligible": 322039,
+        "budget": 300000,
+        "used": 300000,
+        "retention_pct": 93.156,
+        "attacks_eligible": 6933,
+        "day_prevalence_pct": 2.1528
+      },
+      "wednesday": {
+        "raw": 496641,
+        "attempted_dropped": 5876,
+        "eligible": 490765,
+        "budget": 350000,
+        "used": 350000,
+        "retention_pct": 71.317,
+        "attacks_eligible": 171645,
+        "day_prevalence_pct": 34.975
+      },
+      "thursday": {
+        "raw": 362076,
+        "attempted_dropped": 1997,
+        "eligible": 360079,
+        "budget": 300000,
+        "used": 300000,
+        "retention_pct": 83.315,
+        "attacks_eligible": 71907,
+        "day_prevalence_pct": 19.9698
+      },
+      "friday": {
+        "raw": 547557,
+        "attempted_dropped": 4067,
+        "eligible": 543490,
+        "budget": 350000,
+        "used": 350000,
+        "retention_pct": 64.399,
+        "attacks_eligible": 254946,
+        "day_prevalence_pct": 46.9091
+      }
+    }
+  }
+}

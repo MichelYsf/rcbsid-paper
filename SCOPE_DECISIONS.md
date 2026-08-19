@@ -177,6 +177,10 @@ Corrected: the commit is captured at construction and recorded as
 `git_commit_at_write`, with `repo_changed_during_run` set when they differ, so
 a repository edited mid-run is visible instead of silent. Two regression tests.
 
+> **This section is corrected by CI-12.** The attribution table below is
+> wrong in three places. It is left in place rather than edited, because
+> corrections are recorded here, not silently applied.
+
 **True attribution of the four S4 arms**, established from the diffs rather
 than from the manifests:
 
@@ -200,3 +204,115 @@ a computed value, and most of it lies in the CICIDS synthetic path that
 17.4 h to reproduce values the diff shows cannot change. That is a judgement,
 and it is recorded here so a reviewer can disagree with it rather than
 discover it.
+
+### CI-10 — every ranking in Stage 4 rests on a single HST draw
+`--seeds` defaults to `[11]`, and the proposed detector is hardcoded to seed 11
+and runs once. The proposed detector and ECOD are deterministic on this data,
+so **one HST sample decides each reported ranking**. The LITNET composite's
+second/third place turns on a margin of 0.0097 (HST 0.2388 against ECOD
+0.2291) while HST's own published standard deviation on that identical
+225,000-row composite is 0.097 to 0.253 (`results/table4_litnet_tuned.tex`,
+raw seeds 0.259 / 0.530 / 0.765). The margin is roughly a tenth of a standard
+deviation: the "composite ranking matches 1 of 3 streams" count is not
+established.
+
+Partially addressed rather than fixed. Extra HST seeds were bought within the
+run's wall cap for the LITNET composite (seeds 23 and 47) and for both CICIDS
+arms (seed 23); the three LITNET per-type natural streams could not be covered
+before the cap. Until every cell has at least three seeds, no ranking COUNT and
+no per-stream ranking attribution may enter the manuscript.
+
+What does survive seeding, and is stated in `findings_contrast.md` for that
+reason: the proposed detector and ECOD are both deterministic here, so
+**ECOD > proposed under natural order and proposed > ECOD under the synthetic
+construction** is a seed-free result. HST's placement is not.
+
+### CI-11 — the Stage 4 findings document printed orphan numbers
+Adversarial review REFUTED the sentence "every number below is a provenance
+macro". Seven of thirty-three printed numbers had no `emit_macro` call: the
+three AUC-PR delta values and the four LITNET held-out attack counts. One of
+them, the pooled count **14,621**, appeared in no manifest anywhere in the
+repository while being written as a bare literal into
+`results/table_construction_contrast.tex`, which is manuscript-bound. That is
+precisely the orphan the governing rule forbids, produced by the machinery
+built to prevent it.
+
+Two things also became clear about the gate's reach. It targets
+`paper/numbers.tex` only and parses `\newcommand` definitions only, so it never
+read the findings document or the LaTeX table at all; and because
+`numbers.tex` is generated *from* the macro index it is checked against, a pass
+immediately after generation demonstrates faithful transcription and nothing
+stronger. `emit_numbers_tex.py` said so in its header, but the gate's own PASS
+message did not, and this file had not logged it.
+
+Corrected: every number the generator prints is now emitted as a macro, and the
+LaTeX table carries **macro references only** — no data literal survives in it,
+so a number cannot again sit in a manuscript-bound file outside the gate's
+view. The cross-arm delta column was removed outright (see CI-13).
+
+### CI-12 — CI-9's own attribution table was wrong
+The correction written to fix commit attribution was itself misattributed, in
+three places. Commit timestamps are `+03:00`; converting to UTC:
+`db004dc` 06:06:29Z, `99805a9` 06:37:44Z, `1fbc615` 06:59:44Z.
+
+| arm | started (UTC) | manifest records | actually ran |
+|---|---|---|---|
+| `litnet_natural` | 2026-08-18 12:45:10 | `db004dc` | an **uncommitted working tree** — the harness was committed 100 s later as `4edfeb0` |
+| `litnet_synthetic` | 2026-08-19 06:40:27 | `1fbc615` | `99805a9` |
+| `cicids_synthetic` | 2026-08-19 06:40:27 | `1fbc615` | `99805a9` |
+| `cicids_natural` | 2026-08-19 09:08:13 | `1fbc615` | `1fbc615` — **the manifest was right** |
+
+So: (1) CI-9 filed `cicids_natural` under `99805a9`, but that arm is the
+*re-run* after the OOM, started two hours after `1fbc615` was committed — its
+manifest was correct and my correction was not. (2) CI-9 said the repository
+moved "two hours after they began"; the real gap is **19 minutes**. (3) CI-9
+called `litnet_natural`'s `db004dc` "correct", but that arm started 17.4 hours
+before `db004dc` existed, from a tree where `run_construction_contrast.py` was
+not yet committed to anything. Its recorded commit is a write-time artefact
+like the others.
+
+The value-neutrality conclusion is unaffected: `db004dc` does not touch the
+harness, so the only harness difference between `litnet_natural` and the rest
+remains the `4edfeb0 → 99805a9` memory-management commit, verified by diff to
+change no computed value. What was wrong was the labelling, twice over — first
+in the manifests, then in the correction of the manifests. That is the argument
+for capturing the commit at run start in code, which is now done, rather than
+reconstructing it by hand afterwards.
+
+### CI-13 — the macro index drifted silently, and AUC-PR was compared across moving floors
+Two further findings from the same review.
+
+**The index.** `results/manifests/macro_index.json` was found in the working
+tree carrying 78 macros where the manifests on disk supported 121 — every
+Stage 4 number the manuscript cites had vanished from it, while the manifests
+that produced them sat untouched beside it. The index is a *derived* artefact
+that any process running the reindexer against a different manifest directory
+can rewrite, and the gate read it without checking it. A gate that trusts a
+derived artefact will report that a vanished number still traces to a manifest.
+Corrected: the gate now rebuilds the index from the manifests and FAILS on any
+drift — macros missing, macros with no manifest behind them, or values that
+disagree — with four regression tests.
+
+**The floor.** AUC-PR's chance floor equals the test prevalence, which is
+exactly the quantity the construction moves (0.682 natural against 0.252
+synthetic). The published "delta (syn − nat)" column therefore subtracted
+across a floor that had shifted 43 points. Read against their floors, *every*
+method scores higher on the synthetic arm, and in the natural arm HST sits
+**0.093 below chance** while nothing clears the floor by more than 0.073 — so
+the natural triple must not be read as a performance claim at all. The delta
+column is withdrawn; lift above floor is reported beside every raw value.
+
+### CI-14 — the cost watchdog stopped the box on a stale completion marker
+The instance watchdog stopped when it saw
+`results/rebuild_parts/contrast_done.json`, on the assumption that the marker
+meant the machine was idle. When the re-run of the CICIDS natural arm finished
+at 11:32Z the runner rewrote that marker; the watchdog read it, slept its
+30-minute grace and shut the instance down at 12:02Z — three minutes after a
+new set of seed jobs had been launched on it. Those jobs were lost.
+
+Nothing else was: stopping preserves the volume by design, all four primary
+arms were already committed and pushed, and the instance was restarted and the
+jobs relaunched inside the same wall cap. The watchdog is now **deadline-only**.
+A completion marker written by one job is not evidence that a machine is idle,
+and a cost guard that infers idleness from a file another process controls will
+eventually kill live work.

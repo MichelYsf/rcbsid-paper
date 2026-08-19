@@ -1,0 +1,134 @@
+{
+  "run_id": "cicids_heldout_composition_20260819T120420_ebb7c281",
+  "name": "cicids_heldout_composition",
+  "git_commit": "c7d50e66696b7dd96c4baa488b7cfa20dea0dfe7-dirty",
+  "git_commit_at_write": "c7d50e66696b7dd96c4baa488b7cfa20dea0dfe7-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "fa664f3a9087708e4f8bb7a83b58a0cd2a0d202ae1d0b6d26cc24e96e7420646",
+  "config": {
+    "train": 0.7,
+    "val": 0.15,
+    "source": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv",
+    "question": "what do the two held-out slices actually contain?"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv",
+      "sha256": "96d41208b789ae8a1f446e5db952ca9fa0c7cd564b86455a3cb813329009767a"
+    }
+  ],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-19T12:04:20.109662+00:00",
+  "finished_utc": "2026-08-19T12:04:49.700542+00:00",
+  "wall_seconds": 29.59088,
+  "macros": {
+    "CicidsArmRows": {
+      "value": 1600000,
+      "unit": "",
+      "desc": "rows in each CICIDS arm"
+    },
+    "CicidsArmAttacks": {
+      "value": 352962,
+      "unit": "",
+      "desc": "attacks in each CICIDS arm (identical by permutation)"
+    },
+    "CicidsArmPrevalencePct": {
+      "value": 22.060125,
+      "unit": "%",
+      "desc": "whole-stream prevalence, identical in both arms"
+    },
+    "CicidsPermutationVerified": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if both arms hold the same record multiset"
+    },
+    "CicidsHeldoutSize": {
+      "value": 240000,
+      "unit": "",
+      "desc": "held-out records per arm"
+    },
+    "CicidsHeldoutOverlap": {
+      "value": 78000,
+      "unit": "",
+      "desc": "records held out by BOTH arms"
+    },
+    "CicidsHeldoutOverlapPct": {
+      "value": 32.5,
+      "unit": "%",
+      "desc": "held-out slice overlap between the two arms"
+    },
+    "CicidsSyntheticHeldoutAttacksAreSubset": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if synthetic held-out attacks are a subset of natural"
+    },
+    "CicidsAttacksMovedOutOfHeldout": {
+      "value": 103189,
+      "unit": "",
+      "desc": "attacks the interleaving moves out of the held-out slice"
+    },
+    "CicidsNaturalHeldoutDays": {
+      "value": 1,
+      "unit": "",
+      "desc": "capture days represented in the natural held-out slice"
+    },
+    "CicidsSyntheticHeldoutDays": {
+      "value": 5,
+      "unit": "",
+      "desc": "capture days represented in the synthetic held-out slice"
+    },
+    "CicidsSyntheticHeldoutAttackDays": {
+      "value": 1,
+      "unit": "",
+      "desc": "capture days contributing ANY attack to the synthetic held-out slice"
+    },
+    "CicidsNaturalHeldoutSpanMinutes": {
+      "value": 204.2,
+      "unit": "min",
+      "desc": "wall-clock span of the natural held-out slice"
+    }
+  },
+  "notes": "measures held-out slice overlap and day composition; asserts the permutation mechanically rather than by code-reading",
+  "extra": {
+    "natural_heldout_by_day": {
+      "2017-07-07": {
+        "rows": 240000,
+        "attacks": 163764
+      }
+    },
+    "synthetic_heldout_by_day": {
+      "2017-07-03": {
+        "rows": 28000,
+        "attacks": 0
+      },
+      "2017-07-04": {
+        "rows": 28000,
+        "attacks": 0
+      },
+      "2017-07-05": {
+        "rows": 78000,
+        "attacks": 0
+      },
+      "2017-07-06": {
+        "rows": 28000,
+        "attacks": 0
+      },
+      "2017-07-07": {
+        "rows": 78000,
+        "attacks": 60575
+      }
+    },
+    "natural_heldout_window": {
+      "start": "2017-07-07T16:38:30.519345000",
+      "end": "2017-07-07T20:02:40.977798000"
+    }
+  }
+}

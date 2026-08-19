@@ -131,7 +131,7 @@ def test_gate_fails_when_two_runs_claim_one_macro_differently(tmp_path, monkeypa
                         {"value": 83, "run_id": "arm_synthetic", "manifest": "b.json"}]}
     monkeypatch.setattr(cp, "load_macro_index", lambda: index)
     # The manuscript agrees with one of them; that must not be enough.
-    assert cp.check([_tex(tmp_path, "amb.tex", "Shared", "84")]) == 1
+    assert cp.check([_tex(tmp_path, "amb.tex", "Shared", "84")], verify_index=False) == 1
 
 
 def test_gate_allows_two_runs_that_agree(tmp_path, monkeypatch):
@@ -139,7 +139,7 @@ def test_gate_allows_two_runs_that_agree(tmp_path, monkeypatch):
     index = {"Shared": [{"value": 84, "run_id": "arm_natural", "manifest": "a.json"},
                         {"value": 84, "run_id": "arm_synthetic", "manifest": "b.json"}]}
     monkeypatch.setattr(cp, "load_macro_index", lambda: index)
-    assert cp.check([_tex(tmp_path, "ok.tex", "Shared", "84")]) == 0
+    assert cp.check([_tex(tmp_path, "ok.tex", "Shared", "84")], verify_index=False) == 0
 
 
 def test_distinct_values_treats_equal_floats_as_one():
@@ -175,3 +175,44 @@ def test_unchanged_repo_is_not_flagged(monkeypatch):
     d = prov.ProvenanceRun("r", seed=1).to_dict()
     assert d["git_commit"] == "stable"
     assert d["repo_changed_during_run"] is False
+
+
+# --- Regression: the macro index is derived, so it must be VERIFIED ---------
+# Found 2026-08-19 by adversarial review. macro_index.json was sitting in the
+# working tree missing 43 macros - every S4 number the manuscript cites - while
+# all the manifests that produced them sat untouched beside it. The gate read
+# the index and would have reported a vanished number as manifest-backed.
+
+def test_gate_fails_when_index_is_missing_a_manifested_macro(tmp_path, monkeypatch):
+    import check_provenance as cp
+    stored = {}                                     # index lost everything
+    computed = {"Real": [{"value": 1.0, "run_id": "r", "manifest": "r.json"}]}
+    monkeypatch.setattr(cp, "load_macro_index", lambda: stored)
+    monkeypatch.setattr(cp, "build_index", lambda: computed)
+    assert cp.check([_tex(tmp_path, "x.tex", "Real", "1.0")]) == 1
+
+
+def test_gate_fails_when_index_carries_an_unmanifested_macro(tmp_path, monkeypatch):
+    import check_provenance as cp
+    stored = {"Ghost": [{"value": 9.0, "run_id": "r", "manifest": "gone.json"}]}
+    monkeypatch.setattr(cp, "load_macro_index", lambda: stored)
+    monkeypatch.setattr(cp, "build_index", lambda: {})
+    assert cp.check([_tex(tmp_path, "x.tex", "Ghost", "9.0")]) == 1
+
+
+def test_gate_fails_when_index_value_disagrees_with_its_manifest(tmp_path, monkeypatch):
+    import check_provenance as cp
+    stored = {"V": [{"value": 0.5, "run_id": "r", "manifest": "r.json"}]}
+    computed = {"V": [{"value": 0.9, "run_id": "r", "manifest": "r.json"}]}
+    monkeypatch.setattr(cp, "load_macro_index", lambda: stored)
+    monkeypatch.setattr(cp, "build_index", lambda: computed)
+    # manuscript agrees with the INDEX; the index disagrees with the manifest
+    assert cp.check([_tex(tmp_path, "x.tex", "V", "0.5")]) == 1
+
+
+def test_gate_passes_when_index_matches_manifests(tmp_path, monkeypatch):
+    import check_provenance as cp
+    same = {"V": [{"value": 0.5, "run_id": "r", "manifest": "r.json"}]}
+    monkeypatch.setattr(cp, "load_macro_index", lambda: same)
+    monkeypatch.setattr(cp, "build_index", lambda: dict(same))
+    assert cp.check([_tex(tmp_path, "x.tex", "V", "0.5")]) == 0

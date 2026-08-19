@@ -208,8 +208,18 @@ def provenance_run(name: str, **kw):
         run.write()
 
 
-def _reindex_macros() -> None:
-    """Rebuild results/manifests/macro_index.json from all manifests."""
+def build_index() -> dict:
+    """Compute the macro index from the manifests on disk, WITHOUT writing it.
+
+    Split out from _reindex_macros so the gate can check the stored index
+    against the manifests rather than trusting it. macro_index.json is a
+    DERIVED artifact: on 2026-08-19 it was found in the working tree missing 43
+    macros - every S4 number the manuscript cites - while all the manifests
+    that produced them sat untouched beside it. Anything that runs the
+    reindexer against a different manifest directory can silently rewrite it,
+    and a gate that reads it without verifying it will happily report that a
+    vanished number "traces to a manifest".
+    """
     index: dict[str, list] = {}
     if MANIFEST_DIR.exists():
         for f in sorted(MANIFEST_DIR.glob("*.json")):
@@ -226,6 +236,12 @@ def _reindex_macros() -> None:
                     "manifest": f.name, "git_commit": d.get("git_commit"),
                     "finished_utc": d.get("finished_utc"),
                 })
+    return index
+
+
+def _reindex_macros() -> None:
+    """Rebuild results/manifests/macro_index.json from all manifests."""
+    index = build_index()
     MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
     MACRO_INDEX.write_text(json.dumps(index, indent=2, default=str), encoding="utf-8")
 

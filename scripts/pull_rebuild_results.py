@@ -18,7 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 KEY = ROOT / "caliburn-s3-key.pem"
-HOST = "ubuntu@35.158.242.107"
+HOST = "ubuntu@18.196.81.175"
 REMOTE = "/home/ubuntu/rcbsid-paper"
 DEADLINE = 1787149285          # 8 h wall cap
 STOP_AT = DEADLINE + 45 * 60

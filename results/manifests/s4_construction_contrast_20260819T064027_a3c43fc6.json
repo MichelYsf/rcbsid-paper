@@ -1,0 +1,91 @@
+{
+  "run_id": "s4_construction_contrast_20260819T064027_a3c43fc6",
+  "name": "s4_construction_contrast",
+  "git_commit": "1fbc61501113bc8549588d9b4ec852fd63698b36",
+  "config_sha256": "45aa1b91334f9af64b989f075f8b192a44390cbb3c5f16bd29614f4ef05bdcfd",
+  "config": {
+    "contrast": "litnet_composition",
+    "budget": 0,
+    "seeds": [
+      11
+    ],
+    "train": 0.7,
+    "val": 0.15,
+    "streaming": [
+      "hst"
+    ],
+    "batch": [
+      "ecod"
+    ],
+    "reduction": "LODA dropped (12.09 ms/row); fixed record budget per arm",
+    "claim": "construction, not prevalence, drives regime"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "/home/ubuntu/rcbsid-paper/data/raw/natural/litnet2020_udp_flood_natural.csv",
+      "sha256": "8826727bd816dcdc90c1e9a6a9b29d18d816a7ad418394aadca186d3263e0bdd"
+    },
+    {
+      "path": "/home/ubuntu/rcbsid-paper/data/raw/natural/litnet2020_blaster_worm_natural.csv",
+      "sha256": "afac47d41d814e8fcbac9656da5e196cef1dc31a45f5d17f7e274ff8a21a63c9"
+    },
+    {
+      "path": "/home/ubuntu/rcbsid-paper/data/raw/natural/litnet2020_spam_natural.csv",
+      "sha256": "e6a9f9e47b90acd48ebc810f88643e2331238c5dcf9271c215d991a15cebfaa8"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/home/ubuntu/rcbsid-paper/results/rebuild_parts/contrast_litnet_synthetic.csv",
+      "exists": true,
+      "sha256": "8a541a44b5c9cd4d4cceece53e4e7d094357874f098420036cc437f86ba2d685"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "ffdc2cc31b2f68ed022acf62b3ab3ab70944f3a5acdcf556b99fc3e0f4dff04f",
+    "pip_freeze_sha256": "9427f7afc6c72420d582578a78664e0c9664d99f251cf4c881b9d2418e748d7d",
+    "python": "3.11.15",
+    "platform": "Linux-6.17.0-1019-aws-x86_64-with-glibc2.39",
+    "executable": "/home/ubuntu/rcbsid-paper/.venv/bin/python"
+  },
+  "started_utc": "2026-08-19T06:40:27.723647+00:00",
+  "finished_utc": "2026-08-19T08:48:59.776379+00:00",
+  "wall_seconds": 7712.052732,
+  "macros": {
+    "ContrastLitnetUdpFloodDim": {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet udp_flood feature dimensionality d"
+    },
+    "ContrastLitnetBlasterWormDim": {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet blaster_worm feature dimensionality d"
+    },
+    "ContrastLitnetSpamDim": {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet spam feature dimensionality d"
+    },
+    "ContrastLitnetPooledCompositeSyntheticProposedDetectorAucpr": {
+      "value": 0.943056,
+      "unit": "",
+      "desc": "litnet_pooled/composite_synthetic/proposed_detector AUC-PR"
+    },
+    "ContrastLitnetPooledCompositeSyntheticHstAucpr": {
+      "value": 0.23884,
+      "unit": "",
+      "desc": "litnet_pooled/composite_synthetic/hst AUC-PR"
+    },
+    "ContrastLitnetPooledCompositeSyntheticEcodAucpr": {
+      "value": 0.229143,
+      "unit": "",
+      "desc": "litnet_pooled/composite_synthetic/ecod AUC-PR"
+    }
+  },
+  "notes": "natural vs synthetic construction; all else held constant",
+  "extra": {
+    "output_sha256": "8a541a44b5c9cd4d4cceece53e4e7d094357874f098420036cc437f86ba2d685"
+  }
+}
