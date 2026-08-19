@@ -95,6 +95,14 @@ def cell(df: pd.DataFrame, stream: str, arm: str, method: str, col: str):
     return float(s.mean()) if len(s) else None
 
 
+def ranking(df: pd.DataFrame, stream: str, arm: str) -> list[str]:
+    """Methods ordered by AUC-PR, best first. Missing cells drop out."""
+    vals = {m: cell(df, stream, arm, m, "auc_pr")
+            for m in ["proposed_detector", "hst", "ecod"]}
+    vals = {k: v for k, v in vals.items() if v is not None}
+    return [k for k, _ in sorted(vals.items(), key=lambda kv: -kv[1])]
+
+
 def fmt(v, dp: int = 3, pct: bool = False) -> str:
     if v is None:
         return "not measured"
@@ -236,12 +244,8 @@ def main() -> int:
                          " | " + dv + " |")
             L.append("")
             # mechanical verdict: does the ranking change between arms?
-            def ranking(arm: str):
-                vals = {m: cell(df, "cicids2017", arm, m, "auc_pr")
-                        for m in ["proposed_detector", "hst", "ecod"]}
-                vals = {k: v for k, v in vals.items() if v is not None}
-                return [k for k, _ in sorted(vals.items(), key=lambda kv: -kv[1])]
-            rn, rs = ranking("natural"), ranking("interleaved_synthetic")
+            rn = ranking(df, "cicids2017", "natural")
+            rs = ranking(df, "cicids2017", "interleaved_synthetic")
             same = rn == rs
             run.emit_macro("SFourCicidsRankingPreserved", 1 if same else 0,
                            desc="1 if the method ranking is identical across arms")
@@ -330,6 +334,47 @@ def main() -> int:
             cells.append(fmt(v))
         L.append("| `pooled` (**synthetic**) | " + " | ".join(cells) + " |")
         L.append("")
+
+        # ---- what the composite does to the method ranking ----------------
+        pooled_rank = ranking(df, "litnet_pooled", "composite_synthetic")
+        nat_ranks = {t: ranking(df, "litnet_" + t, "natural") for t in LITNET_TYPES}
+        nat_ranks = {t: r for t, r in nat_ranks.items() if r}
+        if pooled_rank and nat_ranks:
+            agree = [t for t, r in nat_ranks.items() if r == pooled_rank]
+            run.emit_macro("SFourLitnetStreamsMatchingPooledRanking", len(agree),
+                           desc="natural per-type streams whose method ranking "
+                                "matches the pooled composite")
+            run.emit_macro("SFourLitnetNaturalStreamsRanked", len(nat_ranks),
+                           desc="natural per-type streams with a defined ranking")
+            lost = [t for t, r in nat_ranks.items() if r and r[0] != "proposed_detector"]
+            run.emit_macro("SFourLitnetStreamsProposedNotBest", len(lost),
+                           desc="natural streams where the proposed detector is "
+                                "not the best method")
+            L.append("### What pooling does to the method ranking")
+            L.append("")
+            L.append("Ranking on the pooled composite: **" +
+                     " > ".join(METHOD_LABEL[m] for m in pooled_rank) + "**.")
+            L.append("")
+            for t, r in nat_ranks.items():
+                L.append("- `" + t + "` (natural): " +
+                         " > ".join(METHOD_LABEL[m] for m in r) +
+                         ("  — matches the composite" if r == pooled_rank
+                          else "  — **differs from the composite**"))
+            L.append("")
+            L.append("**Verdict (mechanical, threshold = identical ordering):** the "
+                     "composite's ranking reproduces **" + str(len(agree)) + " of " +
+                     str(len(nat_ranks)) + "** natural per-type streams.")
+            L.append("")
+            if lost:
+                L.append("This cuts against the proposed method, and is reported for "
+                         "that reason. On the composite the proposed detector is best "
+                         "by a wide margin. Evaluated per stream in natural order it "
+                         "is **not** the best method on " + str(len(lost)) + " of " +
+                         str(len(nat_ranks)) + " streams (" +
+                         ", ".join("`" + t + "`" for t in lost) + "). The composite "
+                         "reports a uniform dominance that the constituent streams do "
+                         "not show.")
+                L.append("")
 
         # ---- exclusions, stated never silent ------------------------------
         L.append("## Excluded cells")
