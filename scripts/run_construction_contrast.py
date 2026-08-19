@@ -106,7 +106,11 @@ def interleave_by_type(df: pd.DataFrame) -> pd.DataFrame:
     return df.loc[order].reset_index(drop=True)
 
 
-def run_arm(run, tag: str, arm: str, X, y, seeds: list[int]) -> list[dict]:
+def run_arm(run, tag: str, arm: str, X, y, seeds: list[int],
+            methods: list[str] | None = None) -> list[dict]:
+    """methods=None runs the full set (the default, and what the four committed
+    arms ran). Restricting it lets extra SEEDS be added for the one stochastic
+    method without re-paying for the deterministic ones."""
     (Xtr, ytr), (Xva, yva), (Xte, yte) = _split_chronological(X, y, TRAIN, VAL)
     default_thr = posterior_threshold(1.0, 10.0, PROPOSED["default_incident_prior"])
     n_feat = X.shape[1]
@@ -133,18 +137,29 @@ def run_arm(run, tag: str, arm: str, X, y, seeds: list[int]) -> list[dict]:
                   "elapsed_s": round(elapsed, 2), "uses_fallback": bool(fallback),
                   "test_attacks": n_atk})
         rows.append(m)
-        run.emit_macro("Contrast" + camel(tag, arm, method) + "Aucpr",
-                       round(float(m["auc_pr"]), 6),
-                       desc=f"{tag}/{arm}/{method} AUC-PR")
+        macro = "Contrast" + camel(tag, arm, method) + "Aucpr"
+        if seed != 11:
+            # Seed-suffixed, because two seeds of one cell are two different
+            # numbers: emitting both under one name would make the macro
+            # AMBIGUOUS (CI-5) and fail the gate, correctly.
+            macro += "Seed" + str(seed)
+        run.emit_macro(macro, round(float(m["auc_pr"]), 6),
+                       desc=f"{tag}/{arm}/{method} AUC-PR (seed {seed})")
         return m
 
-    t0 = time.time()
-    model = _make_bocpd(PROPOSED, 11)
-    _score_stream_with_warmup(model, Xtr, Xva)
-    st = _score_stream_with_warmup(model, np.empty((0, n_feat)), Xte)
-    record("proposed_detector", 11, st, default_thr, time.time() - t0)
+    want = set(methods) if methods else None
 
-    for method in STREAMING:
+    def wanted(m: str) -> bool:
+        return want is None or m in want
+
+    if wanted("proposed_detector"):
+        t0 = time.time()
+        model = _make_bocpd(PROPOSED, 11)
+        _score_stream_with_warmup(model, Xtr, Xva)
+        st = _score_stream_with_warmup(model, np.empty((0, n_feat)), Xte)
+        record("proposed_detector", 11, st, default_thr, time.time() - t0)
+
+    for method in [m for m in STREAMING if wanted(m)]:
         for seed in seeds:
             t0 = time.time()
             mdl = make_streaming_baseline(method, n_features=n_feat, seed=seed,
@@ -163,7 +178,7 @@ def run_arm(run, tag: str, arm: str, X, y, seeds: list[int]) -> list[dict]:
             record(method, seed, ste, thr, time.time() - t0,
                    bool(getattr(mdl, "uses_fallback", False)))
 
-    for method in BATCH:
+    for method in [m for m in BATCH if wanted(m)]:
         t0 = time.time()
         Xfit = Xtr[ytr == 0] if np.any(ytr == 0) else Xtr
         ev = run_batch_reference(method, Xfit, np.vstack([Xva, Xte]), seed=11,
@@ -186,13 +201,18 @@ def main() -> int:
                     choices=["both", "natural", "synthetic"],
                     help="run one arm per invocation to stay under the wall cap")
     ap.add_argument("--seeds", type=int, nargs="*", default=[11])
+    ap.add_argument("--methods", nargs="*", default=None,
+                    choices=["proposed_detector", "hst", "ecod"],
+                    help="restrict which methods run; default is all three. Used to "
+                         "add seeds for the stochastic baseline without re-paying "
+                         "for the deterministic methods.")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
     nat = ROOT / "data/raw/natural"
     with provenance_run("s4_construction_contrast",
                         config={"contrast": a.contrast, "budget": a.budget,
-                                "seeds": a.seeds, "train": TRAIN, "val": VAL,
+                                "seeds": a.seeds, "methods": a.methods, "train": TRAIN, "val": VAL,
                                 "streaming": STREAMING, "batch": BATCH,
                                 "reduction": "LODA dropped (12.09 ms/row); "
                                              "fixed record budget per arm",
@@ -215,7 +235,7 @@ def main() -> int:
                 if not want_syn:
                     del df
                     gc.collect()
-                rows += run_arm(run, "cicids2017", "natural", Xn, yn, a.seeds)
+                rows += run_arm(run, "cicids2017", "natural", Xn, yn, a.seeds, a.methods)
             if want_syn:
                 # Memory, not statistics: Xn exists only to report d. Holding it
                 # while the interleaved copy is materialised peaks near 2x on the
@@ -231,7 +251,7 @@ def main() -> int:
                 del di
                 gc.collect()
                 rows += run_arm(run, "cicids2017", "interleaved_synthetic",
-                                Xi, yi, a.seeds)
+                                Xi, yi, a.seeds, a.methods)
 
         else:  # litnet_composition
             per = {"udp_flood": nat / "litnet2020_udp_flood_natural.csv",
@@ -248,7 +268,7 @@ def main() -> int:
                 run.emit_macro("Contrast" + camel("litnet", t) + "Dim", int(X.shape[1]),
                                desc=f"litnet {t} feature dimensionality d")
                 if want_nat:
-                    rows += run_arm(run, "litnet_" + t, "natural", X, y, a.seeds)
+                    rows += run_arm(run, "litnet_" + t, "natural", X, y, a.seeds, a.methods)
                 del X, y, d
                 gc.collect()
             if want_syn:
@@ -259,7 +279,7 @@ def main() -> int:
                 del pooled
                 gc.collect()
                 rows += run_arm(run, "litnet_pooled", "composite_synthetic",
-                                Xp, yp, a.seeds)
+                                Xp, yp, a.seeds, a.methods)
 
         out = Path(a.out)
         out.parent.mkdir(parents=True, exist_ok=True)
