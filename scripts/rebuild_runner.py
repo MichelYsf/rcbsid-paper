@@ -40,6 +40,9 @@ PIDFILE = LOGS / "rebuild.pid"
 STATUS = ROOT / "REBUILD_STATUS.md"
 HALT = ROOT / "HALT.md"
 DONE = ROOT / "REBUILD_DONE.md"
+# Per-job subprocess ceiling. The CICIDS arms project to 6-8 CPU-hours, so the
+# previous 6 h ceiling would have killed them and written NOTHING. 12 h.
+JOB_TIMEOUT_S = 12 * 3600
 PARTS = ROOT / "results/rebuild_parts"
 PARTS.mkdir(parents=True, exist_ok=True)
 
@@ -198,7 +201,33 @@ def halt(cause, evidence, resume):
     sys.exit(2)
 
 
-def run(cmd, timeout=7200):
+def write_timeout_partial(out_path, tag, seconds, detail=""):
+    """A killed job must leave evidence, never silence.
+
+    Writes a durable one-row partial recording that the cell was terminated by
+    the wall ceiling, so downstream merges and the findings generator report an
+    explicit exclusion with a reason instead of a missing file that looks
+    indistinguishable from work never attempted.
+    """
+    try:
+        import csv
+        out_path = Path(out_path)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", newline="", encoding="utf-8") as fh:
+            w = csv.writer(fh)
+            w.writerow(["stream", "arm", "method", "excluded_reason",
+                        "timeout_seconds", "recorded_utc"])
+            w.writerow([tag, "n/a", "n/a",
+                        "TIMEOUT: job exceeded the " + str(seconds) +
+                        "s per-job ceiling and was terminated; no metrics were "
+                        "produced. " + str(detail),
+                        seconds, now()])
+        return True
+    except Exception:
+        return False
+
+
+def run(cmd, timeout=JOB_TIMEOUT_S):
     return subprocess.run(cmd, cwd=str(ROOT), env=ENV, capture_output=True,
                           text=True, timeout=timeout, creationflags=CREATE_FLAGS)
 
@@ -247,6 +276,14 @@ JOBS = [
 
 
 def stage_contrast():
+    """Run the remaining contrast arms, in parallel when permitted.
+
+    Sizing measured on real data: litnet_synthetic ~3.2 CPU-h; each CICIDS arm
+    ~6.4 CPU-h (d=84, detector 3.65 ms/row, HST 13.37 ms/row) => ~16.1 CPU-h
+    for the three remaining arms. Sequentially that breaks an 8 h wall cap, so
+    on a multi-core host the arms run CONCURRENTLY (longest arm ~6.4 h) via
+    CALIBURN_PARALLEL. Completed arms are skipped: resume never recomputes.
+    """
     marker = PARTS / "contrast_done.json"
     if marker.exists():
         return
@@ -254,36 +291,74 @@ def stage_contrast():
     if not script.exists():
         halt("S4 harness missing", str(script) + " is not present",
              '"' + PY + '" "' + str(script) + '"')
-    total = len(JOBS)
-    walls = []
-    for i, (tag, args) in enumerate(JOBS, 1):
+
+    pending = []
+    for tag, args in JOBS:
         out = PARTS / ("contrast_" + tag + ".csv")
         if out.exists() and out.stat().st_size > 0:
+            log("S4 " + tag + ": already on disk, skipping (resume)")
             continue
-        eta = None
-        if walls:
-            eta = (total - i + 1) * (sum(walls) / len(walls)) / 3600.0
-        write_status("S4-CONTRAST", "running " + tag, i - 1, total, eta)
-        backoff = 60
-        while True:
+        pending.append((tag, args, out))
+    total = len(JOBS)
+    if not pending:
+        marker.write_text(json.dumps({"finished": now()}), encoding="utf-8")
+        write_status("S4-CONTRAST", "complete", total, total)
+        return
+
+    par = int(os.environ.get("CALIBURN_PARALLEL", "1"))
+    log("S4: " + str(len(pending)) + " arm(s) pending, parallelism " + str(par))
+
+    active = {}
+    started = {}
+    queue = list(pending)
+    while queue or active:
+        while queue and len(active) < par:
+            tag, args, out = queue.pop(0)
+            fh = open(LOGS / ("job_" + tag + ".log"), "a", encoding="utf-8")
+            proc = subprocess.Popen(
+                [PY, str(script)] + args + ["--seeds", "11", "--out", str(out)],
+                cwd=str(ROOT), env=ENV, stdout=fh, stderr=subprocess.STDOUT,
+                creationflags=CREATE_FLAGS)
+            active[proc] = (tag, out, fh)
+            started[tag] = time.time()
+            log("S4 " + tag + ": started (pid " + str(proc.pid) + ")")
+            write_status("S4-CONTRAST", "running " + ", ".join(
+                t for t, _, _ in active.values()),
+                total - len(queue) - len(active), total)
+        for proc in list(active):
+            if proc.poll() is None:
+                # enforce the per-job ceiling ourselves
+                if time.time() - started[active[proc][0]] > JOB_TIMEOUT_S:
+                    tag, out, fh = active.pop(proc)
+                    try:
+                        proc.kill()
+                    except Exception:
+                        pass
+                    try:
+                        fh.close()
+                    except Exception:
+                        pass
+                    write_timeout_partial(out, tag, JOB_TIMEOUT_S, "killed by runner ceiling")
+                    log("S4 " + tag + ": TIMEOUT at ceiling; durable partial written")
+                continue
+            tag, out, fh = active.pop(proc)
             try:
-                t0 = time.time()
-                r = run([PY, str(script)] + args + ["--seeds", "11",
-                        "--out", str(out)], timeout=6 * 3600)
-                walls.append(time.time() - t0)
-                log("S4 " + tag + ": rc=" + str(r.returncode) + " in " +
-                    ("%.1f" % ((time.time() - t0) / 60.0)) + " min")
-                if r.returncode != 0:
-                    log("S4 " + tag + " stderr: " + (r.stderr or "")[-500:])
-                break
-            except Exception as exc:
-                if not transient(exc):
-                    raise
-                log("S4 " + tag + ": transient " + repr(exc) + "; retry in " +
-                    str(backoff) + "s")
-                write_status("S4-CONTRAST", "paused on resource pressure", i - 1, total)
-                safe_sleep(backoff)
-                backoff = min(backoff * 2, 900)
+                fh.close()
+            except Exception:
+                pass
+            mins = (time.time() - started[tag]) / 60.0
+            log("S4 " + tag + ": rc=" + str(proc.returncode) +
+                " in " + ("%.1f" % mins) + " min")
+            if proc.returncode != 0 and not out.exists():
+                write_timeout_partial(out, tag, int(time.time() - started[tag]),
+                                      "non-zero exit " + str(proc.returncode) +
+                                      "; see logs/job_" + tag + ".log")
+                log("S4 " + tag + ": failed without output; exclusion recorded")
+            done_n = sum(1 for t, _ in JOBS
+                         if (PARTS / ("contrast_" + t + ".csv")).exists())
+            write_status("S4-CONTRAST", "last finished " + tag, done_n, total)
+        safe_sleep(20)
+
     marker.write_text(json.dumps({"finished": now()}), encoding="utf-8")
     write_status("S4-CONTRAST", "complete", total, total)
 
