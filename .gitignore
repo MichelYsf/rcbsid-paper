@@ -12,3 +12,4 @@ __pycache__/
 /data/downloads/
 /external/
 caliburn-s3-key.pem
+results/_dryrun/
