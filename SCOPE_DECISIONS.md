@@ -139,3 +139,27 @@ does not depend on it, but the exact number does and must be stated with it.
 No prior number is withdrawn. What is corrected is the description: "whole
 week" should read "76.63% proportional subsample of the capture week, with a
 -2.15 pp prevalence bias from fixed per-day budgets".
+
+### CI-8 — a crashed job was recorded as a timeout
+On 2026-08-19 the CICIDS natural contrast arm was killed by the Linux OOM
+killer at 8,680 s (anon-RSS 10,450,436 kB; `dmesg` confirms `oom-kill` on pid
+6043). The runner's failure recorder hardcoded one sentence for every failure
+mode, so the durable exclusion it wrote read:
+
+> TIMEOUT: job exceeded the 8680s per-job ceiling and was terminated
+
+Both halves are false. The ceiling is 43,200 s, not 8,680 s, and the cause was
+memory exhaustion, not elapsed time. A reviewer reading that exclusion would
+have concluded the arm was too slow and that the fix was a longer ceiling —
+the opposite of the truth, which is that two arms peaked in ECOD at the same
+moment on a 16 GB box.
+
+Corrected: failures now record their real cause, with signal decoding
+(`SIGKILL` is reported as probable OOM), the elapsed time and the true ceiling
+in separate columns, and four regression tests including an end-to-end one
+asserting an OOM record never mentions a ceiling. The arm itself was re-run to
+completion rather than left excluded, so no result rests on this.
+
+The general rule this incident argues for: an excluded cell that states the
+wrong reason is worse than a missing file, because a missing file invites
+investigation while a confident wrong reason closes it.

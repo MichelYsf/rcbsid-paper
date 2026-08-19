@@ -201,13 +201,36 @@ def halt(cause, evidence, resume):
     sys.exit(2)
 
 
-def write_timeout_partial(out_path, tag, seconds, detail=""):
-    """A killed job must leave evidence, never silence.
+def describe_exit(returncode) -> str:
+    """Plain-language cause for a subprocess return code."""
+    try:
+        rc = int(returncode)
+    except (TypeError, ValueError):
+        return "unknown exit status " + str(returncode)
+    if rc < 0:
+        sig = -rc
+        if sig == 9:
+            return ("killed by signal 9 (SIGKILL); on Linux this is normally "
+                    "the OOM killer, so read it as memory exhaustion, not slowness")
+        if sig == 15:
+            return "terminated by signal 15 (SIGTERM)"
+        return "killed by signal " + str(sig)
+    return "exited non-zero with status " + str(rc)
 
-    Writes a durable one-row partial recording that the cell was terminated by
-    the wall ceiling, so downstream merges and the findings generator report an
-    explicit exclusion with a reason instead of a missing file that looks
-    indistinguishable from work never attempted.
+
+def write_failure_partial(out_path, tag, seconds, cause, detail=""):
+    """A killed job must leave evidence, never silence - and the evidence must
+    say what actually happened.
+
+    The first version of this hardcoded "TIMEOUT: job exceeded the Ns per-job
+    ceiling and was terminated" for EVERY failure, including crashes. When the
+    CICIDS natural arm was OOM-killed at 8,680 s on 2026-08-19 it was recorded
+    as having exceeded a ceiling of 8,680 s - but the ceiling is 43,200 s, and
+    the cause was memory, not time. A reviewer reading that exclusion would
+    have concluded the job was too slow and drawn precisely the wrong lesson.
+
+    An excluded cell has to state its real cause, or the exclusion is worse
+    than a missing file: it is a confident wrong answer.
     """
     try:
         import csv
@@ -216,12 +239,14 @@ def write_timeout_partial(out_path, tag, seconds, detail=""):
         with open(out_path, "w", newline="", encoding="utf-8") as fh:
             w = csv.writer(fh)
             w.writerow(["stream", "arm", "method", "excluded_reason",
-                        "timeout_seconds", "recorded_utc"])
-            w.writerow([tag, "n/a", "n/a",
-                        "TIMEOUT: job exceeded the " + str(seconds) +
-                        "s per-job ceiling and was terminated; no metrics were "
-                        "produced. " + str(detail),
-                        seconds, now()])
+                        "cause", "elapsed_seconds", "job_ceiling_seconds",
+                        "recorded_utc"])
+            reason = ("after " + str(seconds) + "s: " + str(cause) +
+                      "; no metrics were produced")
+            if detail:
+                reason += ". " + str(detail)
+            w.writerow([tag, "n/a", "n/a", reason, str(cause), seconds,
+                        JOB_TIMEOUT_S, now()])
         return True
     except Exception:
         return False
@@ -338,7 +363,10 @@ def stage_contrast():
                         fh.close()
                     except Exception:
                         pass
-                    write_timeout_partial(out, tag, JOB_TIMEOUT_S, "killed by runner ceiling")
+                    write_failure_partial(
+                        out, tag, JOB_TIMEOUT_S,
+                        "exceeded the per-job wall ceiling",
+                        "killed by the runner, not by the OS")
                     log("S4 " + tag + ": TIMEOUT at ceiling; durable partial written")
                 continue
             tag, out, fh = active.pop(proc)
@@ -350,10 +378,11 @@ def stage_contrast():
             log("S4 " + tag + ": rc=" + str(proc.returncode) +
                 " in " + ("%.1f" % mins) + " min")
             if proc.returncode != 0 and not out.exists():
-                write_timeout_partial(out, tag, int(time.time() - started[tag]),
-                                      "non-zero exit " + str(proc.returncode) +
-                                      "; see logs/job_" + tag + ".log")
-                log("S4 " + tag + ": failed without output; exclusion recorded")
+                write_failure_partial(out, tag, int(time.time() - started[tag]),
+                                      describe_exit(proc.returncode),
+                                      "see logs/job_" + tag + ".log")
+                log("S4 " + tag + ": failed without output (" +
+                    describe_exit(proc.returncode) + "); exclusion recorded")
             done_n = sum(1 for t, _ in JOBS
                          if (PARTS / ("contrast_" + t + ".csv")).exists())
             write_status("S4-CONTRAST", "last finished " + tag, done_n, total)

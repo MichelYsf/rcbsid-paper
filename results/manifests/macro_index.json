@@ -268,6 +268,50 @@
       "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
+  "ContrastCicidsDim": [
+    {
+      "value": 84,
+      "unit": "",
+      "desc": "CICIDS2017 feature dimensionality d",
+      "run_id": "s4_construction_contrast_20260819T064027_20f44694",
+      "manifest": "s4_construction_contrast_20260819T064027_20f44694.json",
+      "git_commit": "1fbc61501113bc8549588d9b4ec852fd63698b36-dirty",
+      "finished_utc": "2026-08-19T09:05:30.114850+00:00"
+    }
+  ],
+  "ContrastCicids2017InterleavedSyntheticProposedDetectorAucpr": [
+    {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "cicids2017/interleaved_synthetic/proposed_detector AUC-PR",
+      "run_id": "s4_construction_contrast_20260819T064027_20f44694",
+      "manifest": "s4_construction_contrast_20260819T064027_20f44694.json",
+      "git_commit": "1fbc61501113bc8549588d9b4ec852fd63698b36-dirty",
+      "finished_utc": "2026-08-19T09:05:30.114850+00:00"
+    }
+  ],
+  "ContrastCicids2017InterleavedSyntheticHstAucpr": [
+    {
+      "value": 0.513623,
+      "unit": "",
+      "desc": "cicids2017/interleaved_synthetic/hst AUC-PR",
+      "run_id": "s4_construction_contrast_20260819T064027_20f44694",
+      "manifest": "s4_construction_contrast_20260819T064027_20f44694.json",
+      "git_commit": "1fbc61501113bc8549588d9b4ec852fd63698b36-dirty",
+      "finished_utc": "2026-08-19T09:05:30.114850+00:00"
+    }
+  ],
+  "ContrastCicids2017InterleavedSyntheticEcodAucpr": [
+    {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "cicids2017/interleaved_synthetic/ecod AUC-PR",
+      "run_id": "s4_construction_contrast_20260819T064027_20f44694",
+      "manifest": "s4_construction_contrast_20260819T064027_20f44694.json",
+      "git_commit": "1fbc61501113bc8549588d9b4ec852fd63698b36-dirty",
+      "finished_utc": "2026-08-19T09:05:30.114850+00:00"
+    }
+  ],
   "ContrastLitnetPooledCompositeSyntheticProposedDetectorAucpr": [
     {
       "value": 0.943056,
@@ -418,6 +462,15 @@
       "manifest": "selftest_provenance_gate_20260819T065920_e087a7e8.json",
       "git_commit": "64a5892d1352cbc5ff3c2e11f9477cce2bbdbd94-dirty",
       "finished_utc": "2026-08-19T06:59:20.955771+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260819T091021_83560b5f",
+      "manifest": "selftest_provenance_gate_20260819T091021_83560b5f.json",
+      "git_commit": "506efeadf09f7724dfc8f09bc0e4789f931bc7be-dirty",
+      "finished_utc": "2026-08-19T09:10:21.331286+00:00"
     }
   ],
   "Stage1BocpdsloAucprDiff": [
