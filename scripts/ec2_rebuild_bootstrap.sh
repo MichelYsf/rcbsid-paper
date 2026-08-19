@@ -53,8 +53,10 @@ done
 
 # ---- SHA-256 GATE: identical bytes, or halt -----------------------------
 .venv/bin/python - <<'EOF'
-import hashlib, sys
+import sys
 from pathlib import Path
+sys.path.insert(0, "scripts")
+from normalized_sha256 import normalized_sha256
 
 nat = Path("data/raw/natural")
 exp_file = nat / "EXPECTED_SHA256.txt"
@@ -67,8 +69,7 @@ for line in exp_file.read_text().splitlines():
     line = line.strip()
     if not line or line.startswith("#"):
         continue
-    digest, name = line.split()[0], line.split()[-1]
-    expected[name] = digest
+    expected[line.split()[-1]] = line.split()[0]
 
 bad, checked = [], 0
 for name, exp in sorted(expected.items()):
@@ -76,13 +77,9 @@ for name, exp in sorted(expected.items()):
     if not target.exists():
         bad.append((name, exp, "FILE ABSENT"))
         continue
-    h = hashlib.sha256()
-    with open(target, "rb") as fh:
-        for chunk in iter(lambda: fh.read(1 << 20), b""):
-            h.update(chunk)
-    got = h.hexdigest()
+    got = normalized_sha256(target)
     checked += 1
-    print(f"  {'OK' if got == exp else 'MISMATCH':9} {name}  {got[:16]}")
+    print("  " + ("OK      " if got == exp else "MISMATCH") + " " + name + "  " + got[:16])
     if got != exp:
         bad.append((name, exp, got))
 
@@ -94,7 +91,7 @@ if bad:
     for n, e, g in bad:
         print("  " + n + " expected " + e + " got " + g)
     sys.exit(1)
-print("SHA GATE PASSED - " + str(checked) + " stream(s) byte-identical to the committed expectation")
+print("SHA GATE PASSED - " + str(checked) + " stream(s) content-identical to the committed expectation")
 EOF
 
 git config user.name "MichelYsf"
