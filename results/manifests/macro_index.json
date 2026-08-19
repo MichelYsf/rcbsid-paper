@@ -326,6 +326,44 @@
       "finished_utc": "2026-08-18T12:38:22.624841+00:00"
     }
   ],
+  "SelfTestAmbiguous": [
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "two runs, two values",
+      "run_id": "selftest_provenance_ambiguity_20260819T065224_f8be8123",
+      "manifest": "selftest_provenance_ambiguity_20260819T065224_f8be8123.json",
+      "git_commit": "d684a97fd2d19fa4f230745ffdbfedddd24d01c2-dirty",
+      "finished_utc": "2026-08-19T06:52:24.686160+00:00"
+    },
+    {
+      "value": 2.0,
+      "unit": "",
+      "desc": "two runs, two values",
+      "run_id": "selftest_provenance_ambiguity_20260819T065225_d48a2fdb",
+      "manifest": "selftest_provenance_ambiguity_20260819T065225_d48a2fdb.json",
+      "git_commit": "d684a97fd2d19fa4f230745ffdbfedddd24d01c2-dirty",
+      "finished_utc": "2026-08-19T06:52:25.443136+00:00"
+    },
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "two runs, two values",
+      "run_id": "selftest_provenance_ambiguity_20260819T065255_ccc32249",
+      "manifest": "selftest_provenance_ambiguity_20260819T065255_ccc32249.json",
+      "git_commit": "d684a97fd2d19fa4f230745ffdbfedddd24d01c2-dirty",
+      "finished_utc": "2026-08-19T06:52:55.723825+00:00"
+    },
+    {
+      "value": 2.0,
+      "unit": "",
+      "desc": "two runs, two values",
+      "run_id": "selftest_provenance_ambiguity_20260819T065256_8b71b18d",
+      "manifest": "selftest_provenance_ambiguity_20260819T065256_8b71b18d.json",
+      "git_commit": "d684a97fd2d19fa4f230745ffdbfedddd24d01c2-dirty",
+      "finished_utc": "2026-08-19T06:52:56.621929+00:00"
+    }
+  ],
   "SelfTestManifested": [
     {
       "value": 0.4242,
@@ -407,6 +445,24 @@
       "manifest": "selftest_provenance_gate_20260819T060626_bc781e44.json",
       "git_commit": "4edfeb0001cb620bb7abc5f88d08d242ebcd83d6-dirty",
       "finished_utc": "2026-08-19T06:06:26.773625+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260819T065222_fee2b9b8",
+      "manifest": "selftest_provenance_gate_20260819T065222_fee2b9b8.json",
+      "git_commit": "d684a97fd2d19fa4f230745ffdbfedddd24d01c2-dirty",
+      "finished_utc": "2026-08-19T06:52:22.941136+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260819T065255_e8591f06",
+      "manifest": "selftest_provenance_gate_20260819T065255_e8591f06.json",
+      "git_commit": "d684a97fd2d19fa4f230745ffdbfedddd24d01c2-dirty",
+      "finished_utc": "2026-08-19T06:52:55.011048+00:00"
     }
   ],
   "Stage1BocpdsloAucprDiff": [

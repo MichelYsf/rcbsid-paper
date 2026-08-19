@@ -58,3 +58,22 @@ The Stage 3 tuning study (11/14 finals, branch `exp/prevalence-and-tuning`) ran
 entirely on interleaved composites. Those numbers remain valid *as measurements
 of the synthetic protocol* and are relabelled accordingly; they are not
 evidence about natural-order behaviour.
+
+### CI-5 — the provenance gate's soundness was overstated a second time
+On 2026-08-17 the gate was found to pass vacuously on an absent or empty target
+set; that hole was closed and the gate was then treated as proven. On
+2026-08-19 a second hole was found in the same function: a macro was resolved
+as `index[name][-1]`, the manifest written *last*. Manifests are appended, and
+parallel experiment arms legitimately re-emit shared macros (feature
+dimensionality, for one), so two arms disagreeing about a symbol would have
+been resolved silently in favour of whichever finished second — while the
+manuscript number still reported as "traces to a run manifest".
+
+Corrected: a macro claimed by two manifests with different values is now a
+failure in its own right (`AMBIGUOUS`), independent of whether the manuscript
+agrees with one of them, with three regression tests. What is withdrawn is not
+a number but a claim about the gate: any statement that the gate was *proven*
+sound before 2026-08-19 should be read as "passed the tests written for it at
+the time". No published number is affected — no macro in the current index has
+conflicting values — but the assurance the gate provided was weaker than
+recorded, and that is the kind of thing this file exists to say out loud.

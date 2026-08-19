@@ -109,3 +109,40 @@ def test_gate_still_fails_on_orphan(tmp_path):
     f = tmp_path / "orphan.tex"
     f.write_text(chr(92) + "newcommand{" + chr(92) + "DefinitelyNotManifested}{0.4242}" + chr(10), encoding="utf-8")
     assert cp.check([f]) == 1
+
+
+# --- Regression: a macro claimed by two runs with different values ----------
+# The gate resolved a macro to index[name][-1], i.e. whichever manifest was
+# written last. Parallel experiment arms legitimately re-emit shared macros, so
+# a disagreement between two arms would have been resolved silently in favour
+# of the arm that happened to finish second, while the manuscript number still
+# "traced to a manifest". Ambiguous sourcing is now a failure in its own right.
+
+def _tex(tmp_path, name, macro, value):
+    f = tmp_path / name
+    f.write_text(chr(92) + "newcommand{" + chr(92) + macro + "}{" + value + "}" + chr(10),
+                 encoding="utf-8")
+    return f
+
+
+def test_gate_fails_when_two_runs_claim_one_macro_differently(tmp_path, monkeypatch):
+    import check_provenance as cp
+    index = {"Shared": [{"value": 84, "run_id": "arm_natural", "manifest": "a.json"},
+                        {"value": 83, "run_id": "arm_synthetic", "manifest": "b.json"}]}
+    monkeypatch.setattr(cp, "load_macro_index", lambda: index)
+    # The manuscript agrees with one of them; that must not be enough.
+    assert cp.check([_tex(tmp_path, "amb.tex", "Shared", "84")]) == 1
+
+
+def test_gate_allows_two_runs_that_agree(tmp_path, monkeypatch):
+    import check_provenance as cp
+    index = {"Shared": [{"value": 84, "run_id": "arm_natural", "manifest": "a.json"},
+                        {"value": 84, "run_id": "arm_synthetic", "manifest": "b.json"}]}
+    monkeypatch.setattr(cp, "load_macro_index", lambda: index)
+    assert cp.check([_tex(tmp_path, "ok.tex", "Shared", "84")]) == 0
+
+
+def test_distinct_values_treats_equal_floats_as_one():
+    import check_provenance as cp
+    recs = [{"value": 0.5, "run_id": "a"}, {"value": 0.5000000000001, "run_id": "b"}]
+    assert len(cp.distinct_values(recs)) == 1
