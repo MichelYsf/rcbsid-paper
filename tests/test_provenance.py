@@ -146,3 +146,32 @@ def test_distinct_values_treats_equal_floats_as_one():
     import check_provenance as cp
     recs = [{"value": 0.5, "run_id": "a"}, {"value": 0.5000000000001, "run_id": "b"}]
     assert len(cp.distinct_values(recs)) == 1
+
+
+# --- Regression: the manifest must name the code that RAN -------------------
+# Found 2026-08-19 on the S4 contrast arms. git_commit() was called only when
+# the manifest was written, so three arms that started on 99805a9 and ran for
+# ~2.5 h were recorded as 1fbc615 - a commit made two hours after they began,
+# because the repository was updated mid-run. A long run outlives edits to its
+# own repository, so the commit must be captured at construction.
+
+def test_git_commit_is_captured_at_run_start(monkeypatch):
+    calls = []
+
+    def fake_commit():
+        calls.append(len(calls))
+        return "commit_" + str(len(calls))
+
+    monkeypatch.setattr(prov, "git_commit", fake_commit)
+    run = prov.ProvenanceRun("r", seed=1)      # first call happens here
+    d = run.to_dict()                           # second call happens here
+    assert d["git_commit"] == "commit_1", "manifest must record the START commit"
+    assert d["git_commit_at_write"] == "commit_2"
+    assert d["repo_changed_during_run"] is True
+
+
+def test_unchanged_repo_is_not_flagged(monkeypatch):
+    monkeypatch.setattr(prov, "git_commit", lambda: "stable")
+    d = prov.ProvenanceRun("r", seed=1).to_dict()
+    assert d["git_commit"] == "stable"
+    assert d["repo_changed_during_run"] is False

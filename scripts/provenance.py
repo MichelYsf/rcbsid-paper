@@ -141,6 +141,12 @@ class ProvenanceRun:
         self.notes = notes
         self.macros: dict[str, Any] = {}
         self.extra: dict[str, Any] = {}
+        # The commit whose code is ACTUALLY RUNNING. Captured at construction,
+        # not at write: a long run outlives edits to its own repository. Three
+        # S4 contrast arms were attributed to a commit made two hours after
+        # they started, because git_commit() was only called when the manifest
+        # was written. The code that ran is the code that must be recorded.
+        self.git_commit_start = git_commit()
         self.run_id = (f"{name}_{self.started:%Y%m%dT%H%M%S}_"
                        f"{sha256_obj([name, config, seed, self.started.isoformat()])[:8]}")
 
@@ -158,10 +164,16 @@ class ProvenanceRun:
     # writing ---------------------------------------------------------------
     def to_dict(self) -> dict:
         finished = datetime.datetime.now(datetime.timezone.utc)
+        commit_at_write = git_commit()
         return {
             "run_id": self.run_id,
             "name": self.name,
-            "git_commit": git_commit(),
+            # git_commit is the commit the run STARTED on - the code that
+            # produced these numbers. The write-time commit is kept alongside
+            # so a repository edited mid-run is visible rather than silent.
+            "git_commit": self.git_commit_start,
+            "git_commit_at_write": commit_at_write,
+            "repo_changed_during_run": bool(commit_at_write != self.git_commit_start),
             "config_sha256": sha256_obj(self.config) if self.config is not None else None,
             "config": self.config if isinstance(self.config, (dict, list, str, int, float)) else str(self.config),
             "seed": self.seed,

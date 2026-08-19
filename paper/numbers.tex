@@ -10,15 +10,35 @@
 % when it catches typed values, stale numbers after a rerun, and macros
 % two runs disagree about.
 
-\newcommand{\ContrastLitnetBlasterWormDim}{36}  % litnet blaster_worm feature dimensionality d -- s4_construction_contrast_20260818T124510_2b2d27b1
+\newcommand{\CicidsWeekAttemptedDropped}{11979}  % rows dropped for a ' - Attempted' label -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekEligibleRows}{2087997}  % capture-week rows eligible after the Attempted drop -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekMaxDayRetentionPct}{93.156}  % most-retained capture day [%] -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekMinDayRetentionPct}{64.399}  % least-retained capture day [%] -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekPrevalenceBiasPp}{-2.1464}  % prevalence bias induced by the fixed per-day budgets [pp] -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekRawRows}{2099976}  % rows in the improved CICIDS2017 per-day CSVs -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekRetentionPct}{76.628}  % fraction of the eligible capture week retained [%] -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekTruePrevalencePct}{24.2065}  % attack prevalence of the full eligible capture week [%] -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekUsedPrevalencePct}{22.0601}  % attack prevalence of the subsampled labeled dataset [%] -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\CicidsWeekUsedRows}{1600000}  % rows actually used by the labeled dataset -- cicids_subsample_audit_20260819T085704_3ed9b901
+\newcommand{\ContrastCicids2017InterleavedSyntheticEcodAucpr}{0.418966}  % cicids2017/interleaved_synthetic/ecod AUC-PR -- s4_construction_contrast_20260819T064027_20f44694
+\newcommand{\ContrastCicids2017InterleavedSyntheticHstAucpr}{0.513623}  % cicids2017/interleaved_synthetic/hst AUC-PR -- s4_construction_contrast_20260819T064027_20f44694
+\newcommand{\ContrastCicids2017InterleavedSyntheticProposedDetectorAucpr}{0.544998}  % cicids2017/interleaved_synthetic/proposed_detector AUC-PR -- s4_construction_contrast_20260819T064027_20f44694
+\newcommand{\ContrastCicids2017NaturalEcodAucpr}{0.755142}  % cicids2017/natural/ecod AUC-PR -- s4_construction_contrast_20260819T090813_46e9bd32
+\newcommand{\ContrastCicids2017NaturalHstAucpr}{0.588902}  % cicids2017/natural/hst AUC-PR -- s4_construction_contrast_20260819T090813_46e9bd32
+\newcommand{\ContrastCicids2017NaturalProposedDetectorAucpr}{0.728337}  % cicids2017/natural/proposed_detector AUC-PR -- s4_construction_contrast_20260819T090813_46e9bd32
+\newcommand{\ContrastCicidsDim}{84}  % CICIDS2017 feature dimensionality d -- s4_construction_contrast_20260819T090813_46e9bd32
+\newcommand{\ContrastLitnetBlasterWormDim}{36}  % litnet blaster_worm feature dimensionality d -- s4_construction_contrast_20260819T064027_a3c43fc6
 \newcommand{\ContrastLitnetBlasterWormNaturalEcodAucpr}{0.03571}  % litnet_blaster_worm/natural/ecod AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetBlasterWormNaturalHstAucpr}{0.147731}  % litnet_blaster_worm/natural/hst AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetBlasterWormNaturalProposedDetectorAucpr}{0.964091}  % litnet_blaster_worm/natural/proposed_detector AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
-\newcommand{\ContrastLitnetSpamDim}{36}  % litnet spam feature dimensionality d -- s4_construction_contrast_20260818T124510_2b2d27b1
+\newcommand{\ContrastLitnetPooledCompositeSyntheticEcodAucpr}{0.229143}  % litnet_pooled/composite_synthetic/ecod AUC-PR -- s4_construction_contrast_20260819T064027_a3c43fc6
+\newcommand{\ContrastLitnetPooledCompositeSyntheticHstAucpr}{0.23884}  % litnet_pooled/composite_synthetic/hst AUC-PR -- s4_construction_contrast_20260819T064027_a3c43fc6
+\newcommand{\ContrastLitnetPooledCompositeSyntheticProposedDetectorAucpr}{0.943056}  % litnet_pooled/composite_synthetic/proposed_detector AUC-PR -- s4_construction_contrast_20260819T064027_a3c43fc6
+\newcommand{\ContrastLitnetSpamDim}{36}  % litnet spam feature dimensionality d -- s4_construction_contrast_20260819T064027_a3c43fc6
 \newcommand{\ContrastLitnetSpamNaturalEcodAucpr}{0.106805}  % litnet_spam/natural/ecod AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetSpamNaturalHstAucpr}{0.008447}  % litnet_spam/natural/hst AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetSpamNaturalProposedDetectorAucpr}{0.846154}  % litnet_spam/natural/proposed_detector AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
-\newcommand{\ContrastLitnetUdpFloodDim}{36}  % litnet udp_flood feature dimensionality d -- s4_construction_contrast_20260818T124510_2b2d27b1
+\newcommand{\ContrastLitnetUdpFloodDim}{36}  % litnet udp_flood feature dimensionality d -- s4_construction_contrast_20260819T064027_a3c43fc6
 \newcommand{\ContrastLitnetUdpFloodNaturalEcodAucpr}{0.321185}  % litnet_udp_flood/natural/ecod AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetUdpFloodNaturalHstAucpr}{0.552675}  % litnet_udp_flood/natural/hst AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetUdpFloodNaturalProposedDetectorAucpr}{0.394428}  % litnet_udp_flood/natural/proposed_detector AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
@@ -34,7 +54,40 @@
 \newcommand{\ReproLitnet2020EcodAucpr}{0.229143068911574}  % litnet2020 ecod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\ReproLitnet2020EcodAucroc}{0.7367741472468452}  % litnet2020 ecod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\ReproLitnet2020EcodF1}{0.3246141348497157}  % litnet2020 ecod f1 reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\SelfTestManifested}{0.4242}  % gate acceptance -- selftest_provenance_gate_20260819T065255_e8591f06
+\newcommand{\SFourCicidsInterleavedTestAttacks}{60575}  % CICIDS2017 held-out attacks, interleaved -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsInterleavedTestPrev}{25.2396}  % CICIDS2017 held-out prevalence, day-of-week round robin [%] -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsNaturalEcodAucpr}{0.755142}  % CICIDS natural ecod AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsNaturalHstAucpr}{0.588902}  % CICIDS natural hst AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsNaturalProposedDetectorAucpr}{0.728337}  % CICIDS natural proposed_detector AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsNaturalTestAttacks}{163764}  % CICIDS2017 held-out attacks, natural order -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsNaturalTestPrev}{68.235}  % CICIDS2017 held-out prevalence, true timestamp order [%] -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsPrevShiftPp}{-42.9954}  % held-out prevalence shift caused by construction alone [pp] -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsRankingPreserved}{0}  % 1 if the method ranking is identical across arms -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsSyntheticEcodAucpr}{0.418966}  % CICIDS interleaved ecod AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsSyntheticHstAucpr}{0.513623}  % CICIDS interleaved hst AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourCicidsSyntheticProposedDetectorAucpr}{0.544998}  % CICIDS interleaved proposed_detector AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourExcludedCells}{0}  % cells excluded with a recorded reason -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetBlasterWormEcodAucpr}{0.03571}  % LITNET blaster_worm ecod AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetBlasterWormHstAucpr}{0.147731}  % LITNET blaster_worm hst AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetBlasterWormProposedDetectorAucpr}{0.964091}  % LITNET blaster_worm proposed_detector AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetBlasterWormTestPrev}{3.544}  % LITNET blaster_worm held-out prevalence [%] -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetNaturalStreamsRanked}{3}  % natural per-type streams with a defined ranking -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetPooledEcodAucpr}{0.229143}  % LITNET pooled ecod AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetPooledHstAucpr}{0.23884}  % LITNET pooled hst AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetPooledInsideRange}{1}  % 1 if pooled prevalence lies inside the per-type range -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetPooledProposedDetectorAucpr}{0.943056}  % LITNET pooled proposed_detector AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetPooledTestPrev}{6.4982}  % LITNET pooled composite held-out prevalence [%] -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetSpamEcodAucpr}{0.106805}  % LITNET spam ecod AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetSpamHstAucpr}{0.008447}  % LITNET spam hst AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetSpamProposedDetectorAucpr}{0.846154}  % LITNET spam proposed_detector AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetSpamTestPrev}{0.176}  % LITNET spam held-out prevalence [%] -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetStreamsMatchingPooledRanking}{1}  % natural per-type streams whose method ranking matches the pooled composite -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetStreamsProposedNotBest}{1}  % natural streams where the proposed detector is not the best method -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetUdpFloodEcodAucpr}{0.321185}  % LITNET udp_flood ecod AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetUdpFloodHstAucpr}{0.552675}  % LITNET udp_flood hst AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetUdpFloodProposedDetectorAucpr}{0.394428}  % LITNET udp_flood proposed_detector AUC-PR -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SFourLitnetUdpFloodTestPrev}{15.7747}  % LITNET udp_flood held-out prevalence [%] -- s4_contrast_deliverables_20260819T113331_a7a5eadd
+\newcommand{\SelfTestManifested}{0.4242}  % gate acceptance -- selftest_provenance_gate_20260819T091021_83560b5f
 \newcommand{\Stage0DeterministicChecksFailed}{0}  % count of deterministic reproduction failures at Stage 0 -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\Stage1BocpdsloAucprDiff}{2.846684505897201e-07}  % Stage1 repro |new-published| for bocpd_slo/auc_pr -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\Stage1BocpdsloAucrocDiff}{7.499538092758939e-07}  % Stage1 repro |new-published| for bocpd_slo/auc_roc -- stage0_reproduction_checks_20260817T221558_53c31fe7

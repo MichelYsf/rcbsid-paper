@@ -163,3 +163,40 @@ completion rather than left excluded, so no result rests on this.
 The general rule this incident argues for: an excluded cell that states the
 wrong reason is worse than a missing file, because a missing file invites
 investigation while a confident wrong reason closes it.
+
+### CI-9 — manifests named the commit at write time, not the code that ran
+`ProvenanceRun.to_dict()` called `git_commit()` when the manifest was written.
+A run that takes hours outlives edits to its own repository, so three S4
+contrast arms that started on `99805a9` and ran ~2.5 h were recorded as
+`1fbc615` — a commit made two hours after they began, when the instance
+checkout was updated mid-run. The manifests were internally consistent and
+completely wrong about which code produced the numbers.
+
+Corrected: the commit is captured at construction and recorded as
+`git_commit`; the write-time commit is kept beside it as
+`git_commit_at_write`, with `repo_changed_during_run` set when they differ, so
+a repository edited mid-run is visible instead of silent. Two regression tests.
+
+**True attribution of the four S4 arms**, established from the diffs rather
+than from the manifests:
+
+| arm | manifest says | actually ran |
+|---|---|---|
+| `litnet_natural` | `db004dc` | `db004dc` (correct) |
+| `litnet_synthetic` | `1fbc615` | `99805a9` |
+| `cicids_synthetic` | `1fbc615` | `99805a9` |
+| `cicids_natural` | `1fbc615` | `99805a9` |
+
+`git diff 99805a9 HEAD -- scripts/run_construction_contrast.py src/` is empty,
+so the last three arms ran harness code identical to the current tree. The one
+real difference is `db004dc → 99805a9`, which `litnet_natural` predates: that
+commit adds `import gc`, `del` statements, `gc.collect()` calls, makes a
+`frames.append` conditional, and drops a redundant `.copy()` whose callee
+returns a new frame regardless. Every change is memory management; none alters
+a computed value, and most of it lies in the CICIDS synthetic path that
+`litnet_natural` never executes.
+
+`litnet_natural` has therefore **not** been re-run. Re-running it would cost
+17.4 h to reproduce values the diff shows cannot change. That is a judgement,
+and it is recorded here so a reviewer can disagree with it rather than
+discover it.
