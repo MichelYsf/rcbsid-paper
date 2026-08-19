@@ -160,16 +160,11 @@ def selftest() -> int:
                         notes="Stage 0 gate acceptance test") as run:
         run.emit_macro("SelfTestManifested", 0.4242, desc="gate acceptance")
 
-    # Two runs claiming one symbol with different values. Parallel experiment
-    # arms legitimately re-emit shared macros (feature dimensionality, say), so
-    # the gate must distinguish "both agree" from "they disagree and the last
-    # one silently won". The macro name is unique to this test; no manuscript
-    # references it, so the manifests it leaves behind cannot affect real numbers.
-    for v in (1.0, 2.0):
-        with provenance_run("selftest_provenance_ambiguity",
-                            config={"selftest": True, "v": v}, seed=0,
-                            notes="gate must reject a doubly-claimed macro") as run:
-            run.emit_macro("SelfTestAmbiguous", v, desc="two runs, two values")
+    # Ambiguous sourcing (CI-5) is covered hermetically in
+    # tests/test_provenance.py with an injected index. It is deliberately NOT
+    # exercised here: doing so would write two mutually contradictory manifests
+    # into the real provenance store on every selftest run, which is precisely
+    # the contamination the check exists to detect.
 
     with tempfile.TemporaryDirectory() as td:
         good = Path(td) / "good.tex"
@@ -192,20 +187,13 @@ def selftest() -> int:
         if rc_drift == 0:
             failures.append("gate PASSED on a value that contradicts its manifest")
 
-        amb = Path(td) / "ambiguous.tex"
-        amb.write_text("\\newcommand{\\SelfTestAmbiguous}{1.0}\n", encoding="utf-8")
-        rc_amb = check([amb])
-        if rc_amb == 0:
-            failures.append("gate PASSED on a macro two runs claim with "
-                            "different values (not uniquely sourced)")
-
     print("\n--- selftest ---")
     if failures:
         for f in failures:
             print(f"  FAIL: {f}")
         return 1
-    print("  PASS: fails on orphan, drift, and ambiguous sourcing; "
-          "passes on a uniquely manifested number")
+    print("  PASS: fails on orphan and drift, passes on a manifested number "
+          "(ambiguous sourcing covered in tests/test_provenance.py)")
     return 0
 
 

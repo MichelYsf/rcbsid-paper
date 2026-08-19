@@ -77,3 +77,27 @@ sound before 2026-08-19 should be read as "passed the tests written for it at
 the time". No published number is affected — no macro in the current index has
 conflicting values — but the assurance the gate provided was weaker than
 recorded, and that is the kind of thing this file exists to say out loud.
+
+### CI-6 — two smoke-test manifests were live in the provenance store
+The CI-5 ambiguity check, run for the first time on 2026-08-19, immediately
+found three manifests named `s4_construction_contrast` claiming the same macros
+with different values. Two were smoke tests taken while the S4 harness was
+being designed — `budget` 9,000 and 30,000 records against a prefix of the
+LITNET streams, 193 s and 287 s of wall time, writing `_smoke_litnet.csv` and
+`_smoke2.csv`. The third, `…T124510_2b2d27b1`, is the real full-stream run
+(62,609 s) whose values are the ones in the committed CSV.
+
+They have been moved to `results/manifests/superseded/` with the reason
+recorded there. Nothing was deleted; the directory is outside the non-recursive
+glob that builds the macro index, so the manifests survive in git history
+without contributing numbers.
+
+What is withdrawn is a piece of confidence, not a number. The manuscript would
+in fact have carried the correct values, because the index is built from
+`sorted(glob(...))` and the canonical run's timestamped filename happens to
+sort last. That is an accident of when the smoke tests were taken. Had either
+been run an hour later, a 9,000-row prefix measurement would have entered the
+manuscript under the full run's macro names, and every check in place at the
+time would have reported green. Smoke tests must not write into the same
+provenance store as results; until the harness enforces that, the ambiguity
+check is what stands between a trial run and the manuscript.
