@@ -1,0 +1,97 @@
+{
+  "run_id": "s4_construction_contrast_20260818T123941_7b00764c",
+  "name": "s4_construction_contrast",
+  "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
+  "config_sha256": "1880ca21293b7c271d050c6a252bb9018311a9fd723a8aecfaba5acb1c236bc1",
+  "config": {
+    "contrast": "litnet_composition",
+    "budget": 30000,
+    "seeds": [
+      11
+    ],
+    "train": 0.7,
+    "val": 0.15,
+    "streaming": [
+      "hst"
+    ],
+    "batch": [
+      "ecod"
+    ],
+    "reduction": "LODA dropped (12.09 ms/row); fixed record budget per arm",
+    "claim": "construction, not prevalence, drives regime"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_udp_flood_natural.csv",
+      "sha256": "3bb6753b505e10bcb0e06062ff34aa338c9f352bc5faa69d7feca6abd4b5a297"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_blaster_worm_natural.csv",
+      "sha256": "9dba5f0ec9355376ace930750232ba53ea00ad76de4e07427a511c035be64d17"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_spam_natural.csv",
+      "sha256": "5f837b84445883caf2c100028185814378beea66563c48329418ed02be0563e1"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "results\\rebuild_parts\\_smoke2.csv",
+      "exists": true,
+      "sha256": "e464e751368d884bf1700398a65983ef1a00115da903513a6297613ee63f5f80"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-18T12:39:41.063429+00:00",
+  "finished_utc": "2026-08-18T12:44:28.158097+00:00",
+  "wall_seconds": 287.094668,
+  "macros": {
+    "ContrastLitnetUdpFloodDim": {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet udp_flood feature dimensionality d"
+    },
+    "ContrastLitnetUdpFloodNaturalProposedDetectorAucpr": {
+      "value": 0.206796,
+      "unit": "",
+      "desc": "litnet_udp_flood/natural/proposed_detector AUC-PR"
+    },
+    "ContrastLitnetUdpFloodNaturalHstAucpr": {
+      "value": 0.586701,
+      "unit": "",
+      "desc": "litnet_udp_flood/natural/hst AUC-PR"
+    },
+    "ContrastLitnetUdpFloodNaturalEcodAucpr": {
+      "value": 0.319869,
+      "unit": "",
+      "desc": "litnet_udp_flood/natural/ecod AUC-PR"
+    },
+    "ContrastLitnetBlasterWormDim": {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet blaster_worm feature dimensionality d"
+    },
+    "ContrastLitnetSpamDim": {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet spam feature dimensionality d"
+    }
+  },
+  "notes": "natural vs synthetic construction; all else held constant",
+  "extra": {
+    "litnet_blaster_worm_natural_proposed_detector_excluded": "test slice holds 0 attacks (< 20); AUC-PR not defined, cell excluded",
+    "litnet_blaster_worm_natural_hst_excluded": "test slice holds 0 attacks (< 20); AUC-PR not defined, cell excluded",
+    "litnet_blaster_worm_natural_ecod_excluded": "test slice holds 0 attacks (< 20); AUC-PR not defined, cell excluded",
+    "litnet_spam_natural_proposed_detector_excluded": "test slice holds 0 attacks (< 20); AUC-PR not defined, cell excluded",
+    "litnet_spam_natural_hst_excluded": "test slice holds 0 attacks (< 20); AUC-PR not defined, cell excluded",
+    "litnet_spam_natural_ecod_excluded": "test slice holds 0 attacks (< 20); AUC-PR not defined, cell excluded",
+    "output_sha256": "e464e751368d884bf1700398a65983ef1a00115da903513a6297613ee63f5f80"
+  }
+}

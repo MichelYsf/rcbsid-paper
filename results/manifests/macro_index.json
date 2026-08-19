@@ -17,6 +17,15 @@
       "manifest": "s4_construction_contrast_20260818T123941_7b00764c.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:44:28.158097+00:00"
+    },
+    {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet udp_flood feature dimensionality d",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetUdpFloodNaturalProposedDetectorAucpr": [
@@ -37,6 +46,15 @@
       "manifest": "s4_construction_contrast_20260818T123941_7b00764c.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:44:28.158097+00:00"
+    },
+    {
+      "value": 0.394428,
+      "unit": "",
+      "desc": "litnet_udp_flood/natural/proposed_detector AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetUdpFloodNaturalHstAucpr": [
@@ -57,6 +75,15 @@
       "manifest": "s4_construction_contrast_20260818T123941_7b00764c.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:44:28.158097+00:00"
+    },
+    {
+      "value": 0.552675,
+      "unit": "",
+      "desc": "litnet_udp_flood/natural/hst AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetUdpFloodNaturalEcodAucpr": [
@@ -77,6 +104,15 @@
       "manifest": "s4_construction_contrast_20260818T123941_7b00764c.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:44:28.158097+00:00"
+    },
+    {
+      "value": 0.321185,
+      "unit": "",
+      "desc": "litnet_udp_flood/natural/ecod AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetBlasterWormDim": [
@@ -97,6 +133,15 @@
       "manifest": "s4_construction_contrast_20260818T123941_7b00764c.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:44:28.158097+00:00"
+    },
+    {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet blaster_worm feature dimensionality d",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetBlasterWormNaturalProposedDetectorAucpr": [
@@ -108,6 +153,15 @@
       "manifest": "s4_construction_contrast_20260818T123509_281ee7ae.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:38:22.624841+00:00"
+    },
+    {
+      "value": 0.964091,
+      "unit": "",
+      "desc": "litnet_blaster_worm/natural/proposed_detector AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetBlasterWormNaturalHstAucpr": [
@@ -119,6 +173,15 @@
       "manifest": "s4_construction_contrast_20260818T123509_281ee7ae.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:38:22.624841+00:00"
+    },
+    {
+      "value": 0.147731,
+      "unit": "",
+      "desc": "litnet_blaster_worm/natural/hst AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetBlasterWormNaturalEcodAucpr": [
@@ -130,6 +193,15 @@
       "manifest": "s4_construction_contrast_20260818T123509_281ee7ae.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:38:22.624841+00:00"
+    },
+    {
+      "value": 0.03571,
+      "unit": "",
+      "desc": "litnet_blaster_worm/natural/ecod AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetSpamDim": [
@@ -150,6 +222,15 @@
       "manifest": "s4_construction_contrast_20260818T123941_7b00764c.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:44:28.158097+00:00"
+    },
+    {
+      "value": 36,
+      "unit": "",
+      "desc": "litnet spam feature dimensionality d",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetSpamNaturalProposedDetectorAucpr": [
@@ -161,6 +242,15 @@
       "manifest": "s4_construction_contrast_20260818T123509_281ee7ae.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:38:22.624841+00:00"
+    },
+    {
+      "value": 0.846154,
+      "unit": "",
+      "desc": "litnet_spam/natural/proposed_detector AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetSpamNaturalHstAucpr": [
@@ -172,6 +262,15 @@
       "manifest": "s4_construction_contrast_20260818T123509_281ee7ae.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:38:22.624841+00:00"
+    },
+    {
+      "value": 0.008447,
+      "unit": "",
+      "desc": "litnet_spam/natural/hst AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetSpamNaturalEcodAucpr": [
@@ -183,6 +282,15 @@
       "manifest": "s4_construction_contrast_20260818T123509_281ee7ae.json",
       "git_commit": "62689ab9216a35bd5ec678cda2f3d341341d1445-dirty",
       "finished_utc": "2026-08-18T12:38:22.624841+00:00"
+    },
+    {
+      "value": 0.106805,
+      "unit": "",
+      "desc": "litnet_spam/natural/ecod AUC-PR",
+      "run_id": "s4_construction_contrast_20260818T124510_2b2d27b1",
+      "manifest": "s4_construction_contrast_20260818T124510_2b2d27b1.json",
+      "git_commit": "db004dc7c2d4a9f66021c284830f3988cedba510",
+      "finished_utc": "2026-08-19T06:08:39.644463+00:00"
     }
   ],
   "ContrastLitnetPooledCompositeSyntheticProposedDetectorAucpr": [
