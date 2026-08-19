@@ -1,4 +1,114 @@
 {
+  "CicidsWeekRawRows": [
+    {
+      "value": 2099976,
+      "unit": "",
+      "desc": "rows in the improved CICIDS2017 per-day CSVs",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekAttemptedDropped": [
+    {
+      "value": 11979,
+      "unit": "",
+      "desc": "rows dropped for a ' - Attempted' label",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekEligibleRows": [
+    {
+      "value": 2087997,
+      "unit": "",
+      "desc": "capture-week rows eligible after the Attempted drop",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekUsedRows": [
+    {
+      "value": 1600000,
+      "unit": "",
+      "desc": "rows actually used by the labeled dataset",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekRetentionPct": [
+    {
+      "value": 76.628,
+      "unit": "%",
+      "desc": "fraction of the eligible capture week retained",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekTruePrevalencePct": [
+    {
+      "value": 24.2065,
+      "unit": "%",
+      "desc": "attack prevalence of the full eligible capture week",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekUsedPrevalencePct": [
+    {
+      "value": 22.0601,
+      "unit": "%",
+      "desc": "attack prevalence of the subsampled labeled dataset",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekPrevalenceBiasPp": [
+    {
+      "value": -2.1464,
+      "unit": "pp",
+      "desc": "prevalence bias induced by the fixed per-day budgets",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekMinDayRetentionPct": [
+    {
+      "value": 64.399,
+      "unit": "%",
+      "desc": "least-retained capture day",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
+  "CicidsWeekMaxDayRetentionPct": [
+    {
+      "value": 93.156,
+      "unit": "%",
+      "desc": "most-retained capture day",
+      "run_id": "cicids_subsample_audit_20260819T085704_3ed9b901",
+      "manifest": "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "git_commit": "5c751e9827b2a13c35c33acb6a52458be14fb7c0-dirty",
+      "finished_utc": "2026-08-19T08:57:16.083152+00:00"
+    }
+  ],
   "ContrastLitnetUdpFloodDim": [
     {
       "value": 36,
@@ -272,6 +382,42 @@
       "manifest": "selftest_provenance_gate_20260819T060626_bc781e44.json",
       "git_commit": "4edfeb0001cb620bb7abc5f88d08d242ebcd83d6-dirty",
       "finished_utc": "2026-08-19T06:06:26.773625+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260819T065222_fee2b9b8",
+      "manifest": "selftest_provenance_gate_20260819T065222_fee2b9b8.json",
+      "git_commit": "d684a97fd2d19fa4f230745ffdbfedddd24d01c2-dirty",
+      "finished_utc": "2026-08-19T06:52:22.941136+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260819T065255_e8591f06",
+      "manifest": "selftest_provenance_gate_20260819T065255_e8591f06.json",
+      "git_commit": "d684a97fd2d19fa4f230745ffdbfedddd24d01c2-dirty",
+      "finished_utc": "2026-08-19T06:52:55.011048+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260819T065919_980753f2",
+      "manifest": "selftest_provenance_gate_20260819T065919_980753f2.json",
+      "git_commit": "64a5892d1352cbc5ff3c2e11f9477cce2bbdbd94-dirty",
+      "finished_utc": "2026-08-19T06:59:19.587693+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260819T065920_e087a7e8",
+      "manifest": "selftest_provenance_gate_20260819T065920_e087a7e8.json",
+      "git_commit": "64a5892d1352cbc5ff3c2e11f9477cce2bbdbd94-dirty",
+      "finished_utc": "2026-08-19T06:59:20.955771+00:00"
     }
   ],
   "Stage1BocpdsloAucprDiff": [

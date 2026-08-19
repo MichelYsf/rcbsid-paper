@@ -101,3 +101,41 @@ manuscript under the full run's macro names, and every check in place at the
 time would have reported green. Smoke tests must not write into the same
 provenance store as results; until the harness enforces that, the ambiguity
 check is what stands between a trial run and the manuscript.
+
+### CI-7 — the CICIDS2017 "whole week" is a 76.63% budgeted subsample
+Stage 1 describes `cicids2017_natural.csv` as the whole capture week at
+1,600,000 rows. That figure is exactly round because it is a **budget, not a
+census**: `scripts/build_cicids_labeled.py` assigns each day a fixed quota
+(300k/300k/350k/300k/350k) and proportionally stride-subsamples the day to fit.
+Measured and manifested by `scripts/audit_cicids_subsample.py`:
+
+| quantity | value |
+|---|---|
+| raw rows in the improved per-day CSVs | 2,099,976 |
+| dropped for a ` - Attempted` label | 11,979 |
+| eligible rows | 2,087,997 |
+| rows actually used | 1,600,000 (**76.63%**) |
+| true eligible-week prevalence | **24.2065%** |
+| subsampled prevalence | **22.0601%** |
+| bias from the fixed budgets | **-2.1464 pp** |
+
+The subsample preserves prevalence *within* each day but not the mix *between*
+days, because a fixed quota cuts a larger day harder and the attack-heavy days
+are the largest. Retention runs from 64.4% (Friday, 46.91% attacks) to 93.2%
+(Tuesday, 2.15% attacks) — that is, retention is anti-correlated with attack
+density, which is precisely the direction that lowers measured prevalence.
+
+**What this does and does not touch.** It does *not* affect the S4 construction
+contrast: both arms hold the identical record multiset and differ only in
+order, so the order-only comparison stands exactly as measured. What it
+qualifies is the *absolute* prevalence figures. The "22.06% moderate regime"
+was therefore doubly constructed — first by a subsampling budget that removed
+2.15 pp of prevalence, then by an interleaving that redistributed what was
+left. Neither step is a property of network traffic. The natural-order
+68.235% held-out figure is likewise conditioned on this subsample; the
+qualitative finding (chronological order concentrates attacks in the tail)
+does not depend on it, but the exact number does and must be stated with it.
+
+No prior number is withdrawn. What is corrected is the description: "whole
+week" should read "76.63% proportional subsample of the capture week, with a
+-2.15 pp prevalence bias from fixed per-day budgets".
