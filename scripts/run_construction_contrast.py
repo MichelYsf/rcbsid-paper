@@ -34,6 +34,7 @@ differ only in the ORDER of the records they see.
 from __future__ import annotations
 
 import argparse
+import gc
 import sys
 import time
 from pathlib import Path
@@ -211,10 +212,24 @@ def main() -> int:
             run.emit_macro("ContrastCicidsDim", int(Xn.shape[1]),
                            desc="CICIDS2017 feature dimensionality d")
             if want_nat:
+                if not want_syn:
+                    del df
+                    gc.collect()
                 rows += run_arm(run, "cicids2017", "natural", Xn, yn, a.seeds)
             if want_syn:
-                di = interleave_by_day(df.copy())
+                # Memory, not statistics: Xn exists only to report d. Holding it
+                # while the interleaved copy is materialised peaks near 2x on the
+                # 1.6M-row stream, which is what would OOM a 16 GB box. Freeing it
+                # changes no computed value - the arms still see the same records
+                # in a different order.
+                del Xn, yn
+                gc.collect()
+                di = interleave_by_day(df)
+                del df
+                gc.collect()
                 Xi, yi, _ = prepare_xy(di, "label")
+                del di
+                gc.collect()
                 rows += run_arm(run, "cicids2017", "interleaved_synthetic",
                                 Xi, yi, a.seeds)
 
@@ -227,15 +242,22 @@ def main() -> int:
             for t, p in per.items():
                 run.declared_inputs.append(str(p))
                 d = pd.read_csv(p, nrows=share, low_memory=False)
-                frames.append(d)
+                if want_syn:
+                    frames.append(d)
                 X, y, _ = prepare_xy(d.copy(), "label")
                 run.emit_macro("Contrast" + camel("litnet", t) + "Dim", int(X.shape[1]),
                                desc=f"litnet {t} feature dimensionality d")
                 if want_nat:
                     rows += run_arm(run, "litnet_" + t, "natural", X, y, a.seeds)
+                del X, y, d
+                gc.collect()
             if want_syn:
                 pooled = interleave_by_type(pd.concat(frames, ignore_index=True))
+                frames.clear()
+                gc.collect()
                 Xp, yp, _ = prepare_xy(pooled, "label")
+                del pooled
+                gc.collect()
                 rows += run_arm(run, "litnet_pooled", "composite_synthetic",
                                 Xp, yp, a.seeds)
 
