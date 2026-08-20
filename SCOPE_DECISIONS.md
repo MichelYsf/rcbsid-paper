@@ -30,6 +30,41 @@ degeneracy are supporting findings, not the headline.
 6. **The tuning study is re-scoped** to whichever streams remain valid under 1-5;
    only what fits the caps is run, and exclusions are documented.
 
+7. **No ranking claim from a single seed.** For any method with a stochastic
+   component, a ranking may be stated only if the seed distribution is reported
+   explicitly alongside it; otherwise the claim is withheld. **Deterministic
+   versus deterministic is the only comparison the paper may state flatly.**
+   Forced by measurement, not caution: on the LITNET composite, HST across
+   seeds 11/23/47 is 0.2388 / 0.1776 / 0.3678 (mean 0.2614, sd 0.0971) against
+   a deterministic ECOD 0.2291 — the ordering flips with the seed, so the
+   "composite ranking matches 1 of 3 streams" count was stable only by
+   accident, while the stream it named changed. In this contrast the proposed
+   detector and ECOD are deterministic and HST is not; every flat ranking
+   statement must therefore be a proposed-versus-ECOD statement.
+
+8. **The central claim, stated exactly as measured.** The paper's primary
+   contribution is the construction contrast, and it is to be written in these
+   terms and no stronger:
+
+   > On CICIDS2017, holding the record multiset identical and changing only the
+   > order, the held-out prevalence moves by 42.995 percentage points
+   > (68.235% → 25.240%), the held-out slice becomes nearly disjoint from the
+   > natural one (78,000 of 240,000 records shared, 32.5%), and the
+   > deterministic ordering of ECOD against the proposed detector inverts
+   > (ECOD 0.755 > proposed 0.728 natural; proposed 0.545 > ECOD 0.419
+   > synthetic).
+
+   Three things this is **not**, and may not be written as:
+   - **not a full ranking reversal** — it is a rotation, Kendall tau -0.333,
+     with 1 of 3 pairwise orderings preserved (proposed > HST holds in both);
+   - **not a causal claim about prevalence in deployment** — the effect is
+     measured under a fixed 70/15/15 tail split, no split-rule sensitivity
+     check exists, and the mechanism is dilution by attack-free days rather
+     than any redistribution of attacks;
+   - **not a performance claim** — read against a chance floor equal to test
+     prevalence, no method clears floor by more than 0.073 on the natural arm
+     and HST sits 0.093 below it.
+
 ## Corrected incidents created by this re-scope
 
 Recorded here rather than silently changing prior text.
