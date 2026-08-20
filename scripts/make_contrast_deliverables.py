@@ -49,6 +49,7 @@ from provenance import load_macro_index, provenance_run, sha256_file  # noqa: E4
 
 PARTS = ROOT / "results/rebuild_parts"
 SEED_PARTS = ROOT / "results/seed_parts"
+SWEEP = ROOT / "results/prevalence_sweep_cicids.csv"
 MERGED = ROOT / "results/construction_contrast.csv"
 FINDINGS = ROOT / "findings_contrast.md"
 TABLE = ROOT / "results/table_construction_contrast.tex"
@@ -106,6 +107,36 @@ def load_seed_parts() -> pd.DataFrame:
             d["source_part"] = f.name
             frames.append(d)
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+
+
+def load_sweep_extra_seeds() -> pd.DataFrame:
+    """Extra HST seeds for the CICIDS interleaved cell, from the Stage 2 sweep.
+
+    The Stage 2 prevalence sweep's UNRESAMPLED level is not merely similar to
+    the S4 interleaved arm - it is the same cell. Same 240,000-row held-out
+    slice, same achieved prevalence 0.252396, and the HST and ECOD values are
+    bit-identical across a Windows-to-Linux boundary (the proposed detector
+    agrees to 2.8e-07). The sweep therefore already held a third HST draw,
+    seed 47, before any cloud time was bought for a second.
+
+    Read from the archived sweep rather than copied into results/seed_parts,
+    so the number keeps pointing at the run that actually produced it.
+    """
+    if not SWEEP.exists():
+        return pd.DataFrame()
+    d = pd.read_csv(SWEEP)
+    d = d[(d["level_target_pct"] == 22.06) & (d["method"] == "hst")]
+    if d.empty:
+        return pd.DataFrame()
+    out = pd.DataFrame({
+        "stream": "cicids2017",
+        "arm": "interleaved_synthetic",
+        "method": "hst",
+        "seed": d["seed"].astype(int).to_numpy(),
+        "auc_pr": d["auc_pr"].astype(float).to_numpy(),
+    })
+    out["source_part"] = "prevalence_sweep_cicids.csv (Stage 2, unresampled level)"
+    return out
 
 
 def cell(df: pd.DataFrame, stream: str, arm: str, method: str, col: str):
@@ -567,6 +598,16 @@ def main() -> int:
 
         # ---- seed sensitivity ---------------------------------------------
         sd_df = load_seed_parts()
+        sweep_extra = load_sweep_extra_seeds()
+        if not sweep_extra.empty:
+            run.declared_inputs.append(str(SWEEP))
+            sd_df = (pd.concat([sd_df, sweep_extra], ignore_index=True)
+                     if not sd_df.empty else sweep_extra)
+            # one row per (stream, arm, seed): the two sources agree where they
+            # overlap, so dropping duplicates cannot hide a disagreement here,
+            # and the equality is asserted in findings_prevalence.md
+            sd_df = sd_df.drop_duplicates(subset=["stream", "arm", "method", "seed"],
+                                          keep="first")
         L.append("## Seed sensitivity of the rankings")
         L.append("")
         L.append("HST is the only stochastic method in this contrast; the proposed "

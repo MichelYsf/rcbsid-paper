@@ -51,3 +51,8 @@ Superseded by the run that adds the seed-sensitivity section, after three
 extra-seed HST runs were recovered from the stopped instance. Its macros are
 unchanged and correct; it simply predates the evidence that the HST/ECOD
 ordering on the LITNET composite flips with the seed.
+
+## s4_contrast_deliverables_20260820T081139_a5bf9183.json
+Superseded when the Stage 2 sweep was found to hold a third HST seed for the
+CICIDS interleaved cell (CI-16). Its seed-sensitivity section reported 1 of 2
+cells flipping; the correct figure is 2 of 2.

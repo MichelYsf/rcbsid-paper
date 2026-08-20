@@ -351,3 +351,49 @@ jobs relaunched inside the same wall cap. The watchdog is now **deadline-only**.
 A completion marker written by one job is not evidence that a machine is idle,
 and a cost guard that infers idleness from a file another process controls will
 eventually kill live work.
+
+### CI-15 — the prevalence sweep's chance floor was wrong at the unresampled level
+`findings_prevalence.md` printed a chance floor of 0.221 for the level it
+captioned "22.06% (natural)". That level is **not** resampled to a target — it
+keeps the interleaved stream's own held-out slice, whose achieved prevalence is
+**0.252396**. AUC-PR's floor is the test prevalence, so the floor was
+understated by 3.2 points and every lift reported at that level was inflated by
+the same amount. The proposed detector's lift there is **+0.2926**, not the
++0.324 the old floor implied.
+
+The four resampled levels were unaffected — their achieved prevalence lands on
+the target (0.0495, 0.0990, 0.4000, 0.6400) — which is precisely why the error
+survived: four rows of five were right, so the column looked consistent.
+
+Corrected in the relabelled Stage 2 deliverable, which now takes every floor
+from `achieved_test_prev` rather than from the nominal level, and prints the
+floor beside every value. The caption "22.06% (natural)" was the CI-1 error
+verbatim and is replaced by "unresampled".
+
+### CI-16 — cloud time was spent re-deriving a seed the repository already held
+The Stage 2 sweep's unresampled cell is not merely comparable to the Stage 4
+CICIDS interleaved arm — **it is the same cell**: the same 240,000-row held-out
+slice at the same achieved prevalence 0.252396. It already contained HST at
+three seeds. On 2026-08-19 an EC2 instance was started to buy a *second* HST
+seed for that cell, at 5,732 s of compute, re-deriving 0.4270 — a value already
+sitting in `results/prevalence_sweep_cicids.csv`. Check the archived artifacts
+before buying compute; the cost here was small but the mistake was avoidable
+and entirely mine.
+
+**A claim is corrected by this.** With only seeds 11 and 23 the Stage 4 seed
+section reported that on CICIDS interleaved "HST stays ahead of ECOD but the
+margin collapses from 0.0946 to 0.0080", and counted the HST/ECOD ordering as
+flipping in 1 of 2 covered cells. The third draw, seed 47, gives HST **0.3585**
+against a deterministic ECOD 0.4190. HST does not stay ahead. The ordering
+flips in **2 of 2** covered cells, and the count and the surrounding sentence
+are corrected accordingly. This strengthens binding rule 7 rather than
+qualifying it: two of two stochastic-versus-deterministic orderings in this
+experiment reverse under a seed change.
+
+**One result of this comparison is positive and worth recording.** The two runs
+were produced on different machines, operating systems and interpreter builds —
+the sweep on Windows / Python 3.11.9, the Stage 4 arm on Linux / Python 3.11.15
+with a different resolved wheel set. HST and ECOD agree **bit-for-bit**, and
+the proposed detector agrees to **2.8e-07**. That is an unplanned
+cross-platform reproduction of the interleaved cell, and it is stronger
+evidence for the pipeline's determinism than anything designed for the purpose.

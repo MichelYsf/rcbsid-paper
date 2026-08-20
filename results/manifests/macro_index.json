@@ -252,6 +252,1469 @@
       "finished_utc": "2026-08-19T08:57:16.083152+00:00"
     }
   ],
+  "STwoLFiveFloor": [
+    {
+      "value": 0.049524,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the 5% level",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveProposedMean": [
+    {
+      "value": 0.367164,
+      "unit": "",
+      "desc": "5% proposed detector AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveProposedSd": [
+    {
+      "value": 0.000502,
+      "unit": "",
+      "desc": "5% proposed detector AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveProposedN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "5% proposed detector draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveProposedLift": [
+    {
+      "value": 0.31764,
+      "unit": "",
+      "desc": "5% proposed detector AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveProposedDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "5% proposed detector 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveHstMean": [
+    {
+      "value": 0.199261,
+      "unit": "",
+      "desc": "5% HST AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveHstSd": [
+    {
+      "value": 0.081017,
+      "unit": "",
+      "desc": "5% HST AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveHstN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "5% HST draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveHstLift": [
+    {
+      "value": 0.149737,
+      "unit": "",
+      "desc": "5% HST AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveHstDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "5% HST 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLodaMean": [
+    {
+      "value": 0.207581,
+      "unit": "",
+      "desc": "5% LODA AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLodaSd": [
+    {
+      "value": 0.006909,
+      "unit": "",
+      "desc": "5% LODA AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLodaN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "5% LODA draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLodaLift": [
+    {
+      "value": 0.158057,
+      "unit": "",
+      "desc": "5% LODA AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLodaDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "5% LODA 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveEcodMean": [
+    {
+      "value": 0.166239,
+      "unit": "",
+      "desc": "5% ECOD (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveEcodSd": [
+    {
+      "value": 0.000755,
+      "unit": "",
+      "desc": "5% ECOD (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveEcodN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "5% ECOD (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveEcodLift": [
+    {
+      "value": 0.116715,
+      "unit": "",
+      "desc": "5% ECOD (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveEcodDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "5% ECOD (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLofMean": [
+    {
+      "value": 0.537596,
+      "unit": "",
+      "desc": "5% LOF (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLofSd": [
+    {
+      "value": 0.000791,
+      "unit": "",
+      "desc": "5% LOF (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLofN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "5% LOF (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLofLift": [
+    {
+      "value": 0.488072,
+      "unit": "",
+      "desc": "5% LOF (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFiveLofDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "5% LOF (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenFloor": [
+    {
+      "value": 0.099004,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the 10% level",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenProposedMean": [
+    {
+      "value": 0.447213,
+      "unit": "",
+      "desc": "10% proposed detector AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenProposedSd": [
+    {
+      "value": 0.002447,
+      "unit": "",
+      "desc": "10% proposed detector AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenProposedN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "10% proposed detector draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenProposedLift": [
+    {
+      "value": 0.34821,
+      "unit": "",
+      "desc": "10% proposed detector AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenProposedDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "10% proposed detector 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenHstMean": [
+    {
+      "value": 0.299702,
+      "unit": "",
+      "desc": "10% HST AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenHstSd": [
+    {
+      "value": 0.098871,
+      "unit": "",
+      "desc": "10% HST AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenHstN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "10% HST draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenHstLift": [
+    {
+      "value": 0.200699,
+      "unit": "",
+      "desc": "10% HST AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenHstDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "10% HST 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLodaMean": [
+    {
+      "value": 0.247426,
+      "unit": "",
+      "desc": "10% LODA AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLodaSd": [
+    {
+      "value": 0.005473,
+      "unit": "",
+      "desc": "10% LODA AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLodaN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "10% LODA draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLodaLift": [
+    {
+      "value": 0.148423,
+      "unit": "",
+      "desc": "10% LODA AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLodaDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "10% LODA 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenEcodMean": [
+    {
+      "value": 0.252198,
+      "unit": "",
+      "desc": "10% ECOD (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenEcodSd": [
+    {
+      "value": 0.000335,
+      "unit": "",
+      "desc": "10% ECOD (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenEcodN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "10% ECOD (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenEcodLift": [
+    {
+      "value": 0.153194,
+      "unit": "",
+      "desc": "10% ECOD (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenEcodDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "10% ECOD (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLofMean": [
+    {
+      "value": 0.697003,
+      "unit": "",
+      "desc": "10% LOF (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLofSd": [
+    {
+      "value": 0.00104,
+      "unit": "",
+      "desc": "10% LOF (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLofN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "10% LOF (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLofLift": [
+    {
+      "value": 0.597999,
+      "unit": "",
+      "desc": "10% LOF (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLTenLofDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "10% LOF (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledFloor": [
+    {
+      "value": 0.252396,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the unresampled level",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledProposedMean": [
+    {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "unresampled proposed detector AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledProposedSd": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "unresampled proposed detector AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledProposedN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled proposed detector draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledProposedLift": [
+    {
+      "value": 0.292602,
+      "unit": "",
+      "desc": "unresampled proposed detector AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledProposedDeterministic": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "unresampled proposed detector 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledHstMean": [
+    {
+      "value": 0.433044,
+      "unit": "",
+      "desc": "unresampled HST AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledHstSd": [
+    {
+      "value": 0.077736,
+      "unit": "",
+      "desc": "unresampled HST AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledHstN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled HST draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledHstLift": [
+    {
+      "value": 0.180648,
+      "unit": "",
+      "desc": "unresampled HST AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledHstDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "unresampled HST 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLodaMean": [
+    {
+      "value": 0.341715,
+      "unit": "",
+      "desc": "unresampled LODA AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLodaSd": [
+    {
+      "value": 0.004734,
+      "unit": "",
+      "desc": "unresampled LODA AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLodaN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled LODA draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLodaLift": [
+    {
+      "value": 0.08932,
+      "unit": "",
+      "desc": "unresampled LODA AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLodaDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "unresampled LODA 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledEcodMean": [
+    {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledEcodSd": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledEcodN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledEcodLift": [
+    {
+      "value": 0.16657,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledEcodDeterministic": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLofMean": [
+    {
+      "value": 0.863194,
+      "unit": "",
+      "desc": "unresampled LOF (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLofSd": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "unresampled LOF (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLofN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled LOF (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLofLift": [
+    {
+      "value": 0.610798,
+      "unit": "",
+      "desc": "unresampled LOF (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLUnresampledLofDeterministic": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "unresampled LOF (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyFloor": [
+    {
+      "value": 0.399995,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the 40% level",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyProposedMean": [
+    {
+      "value": 0.494217,
+      "unit": "",
+      "desc": "40% proposed detector AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyProposedSd": [
+    {
+      "value": 0.001688,
+      "unit": "",
+      "desc": "40% proposed detector AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyProposedN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "40% proposed detector draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyProposedLift": [
+    {
+      "value": 0.094221,
+      "unit": "",
+      "desc": "40% proposed detector AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyProposedDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "40% proposed detector 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyHstMean": [
+    {
+      "value": 0.476031,
+      "unit": "",
+      "desc": "40% HST AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyHstSd": [
+    {
+      "value": 0.056079,
+      "unit": "",
+      "desc": "40% HST AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyHstN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "40% HST draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyHstLift": [
+    {
+      "value": 0.076036,
+      "unit": "",
+      "desc": "40% HST AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyHstDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "40% HST 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLodaMean": [
+    {
+      "value": 0.399422,
+      "unit": "",
+      "desc": "40% LODA AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLodaSd": [
+    {
+      "value": 0.004975,
+      "unit": "",
+      "desc": "40% LODA AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLodaN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "40% LODA draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLodaLift": [
+    {
+      "value": -0.000573,
+      "unit": "",
+      "desc": "40% LODA AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLodaDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "40% LODA 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyEcodMean": [
+    {
+      "value": 0.527364,
+      "unit": "",
+      "desc": "40% ECOD (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyEcodSd": [
+    {
+      "value": 0.000678,
+      "unit": "",
+      "desc": "40% ECOD (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyEcodN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "40% ECOD (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyEcodLift": [
+    {
+      "value": 0.127368,
+      "unit": "",
+      "desc": "40% ECOD (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyEcodDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "40% ECOD (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLofMean": [
+    {
+      "value": 0.896968,
+      "unit": "",
+      "desc": "40% LOF (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLofSd": [
+    {
+      "value": 0.00603,
+      "unit": "",
+      "desc": "40% LOF (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLofN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "40% LOF (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLofLift": [
+    {
+      "value": 0.496973,
+      "unit": "",
+      "desc": "40% LOF (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLFortyLofDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "40% LOF (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourFloor": [
+    {
+      "value": 0.639991,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the 64% level",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourProposedMean": [
+    {
+      "value": 0.619546,
+      "unit": "",
+      "desc": "64% proposed detector AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourProposedSd": [
+    {
+      "value": 0.001135,
+      "unit": "",
+      "desc": "64% proposed detector AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourProposedN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "64% proposed detector draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourProposedLift": [
+    {
+      "value": -0.020445,
+      "unit": "",
+      "desc": "64% proposed detector AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourProposedDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "64% proposed detector 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourHstMean": [
+    {
+      "value": 0.499341,
+      "unit": "",
+      "desc": "64% HST AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourHstSd": [
+    {
+      "value": 0.031574,
+      "unit": "",
+      "desc": "64% HST AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourHstN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "64% HST draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourHstLift": [
+    {
+      "value": -0.14065,
+      "unit": "",
+      "desc": "64% HST AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourHstDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "64% HST 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLodaMean": [
+    {
+      "value": 0.524691,
+      "unit": "",
+      "desc": "64% LODA AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLodaSd": [
+    {
+      "value": 0.004935,
+      "unit": "",
+      "desc": "64% LODA AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLodaN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "64% LODA draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLodaLift": [
+    {
+      "value": -0.1153,
+      "unit": "",
+      "desc": "64% LODA AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLodaDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "64% LODA 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourEcodMean": [
+    {
+      "value": 0.678404,
+      "unit": "",
+      "desc": "64% ECOD (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourEcodSd": [
+    {
+      "value": 0.000505,
+      "unit": "",
+      "desc": "64% ECOD (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourEcodN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "64% ECOD (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourEcodLift": [
+    {
+      "value": 0.038413,
+      "unit": "",
+      "desc": "64% ECOD (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourEcodDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "64% ECOD (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLofMean": [
+    {
+      "value": 0.904855,
+      "unit": "",
+      "desc": "64% LOF (batch) AUC-PR mean",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLofSd": [
+    {
+      "value": 0.009953,
+      "unit": "",
+      "desc": "64% LOF (batch) AUC-PR sd over draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLofN": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "64% LOF (batch) draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLofLift": [
+    {
+      "value": 0.264865,
+      "unit": "",
+      "desc": "64% LOF (batch) AUC-PR above chance",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLSixtyFourLofDeterministic": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "64% LOF (batch) 1 if identical across draws",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoProposedLevelsBelowFloor": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "levels where the proposed detector's mean AUC-PR is below its chance floor",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLofBeatsProposedLevels": [
+    {
+      "value": 5,
+      "unit": "",
+      "desc": "levels where LOF's mean AUC-PR exceeds the proposed detector's",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
+  "STwoLevelsCovered": [
+    {
+      "value": 5,
+      "unit": "",
+      "desc": "prevalence levels covered",
+      "run_id": "s2_prevalence_relabelled_20260820T082620_005ffef6",
+      "manifest": "s2_prevalence_relabelled_20260820T082620_005ffef6.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:26:20.995858+00:00"
+    }
+  ],
   "ContrastLitnetUdpFloodDim": [
     {
       "value": 36,
@@ -631,10 +2094,10 @@
       "value": 68.235,
       "unit": "%",
       "desc": "CICIDS2017 held-out prevalence, true timestamp order",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsInterleavedTestPrev": [
@@ -642,10 +2105,10 @@
       "value": 25.2396,
       "unit": "%",
       "desc": "CICIDS2017 held-out prevalence, day-of-week round robin",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsPrevShiftPp": [
@@ -653,10 +2116,10 @@
       "value": -42.9954,
       "unit": "pp",
       "desc": "held-out prevalence shift caused by construction alone",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalTestAttacks": [
@@ -664,10 +2127,10 @@
       "value": 163764,
       "unit": "",
       "desc": "CICIDS2017 held-out attacks, natural order",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsInterleavedTestAttacks": [
@@ -675,10 +2138,10 @@
       "value": 60575,
       "unit": "",
       "desc": "CICIDS2017 held-out attacks, interleaved",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalChanceFloor": [
@@ -686,10 +2149,10 @@
       "value": 0.68235,
       "unit": "",
       "desc": "AUC-PR chance floor, CICIDS natural arm",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsSyntheticChanceFloor": [
@@ -697,10 +2160,10 @@
       "value": 0.252396,
       "unit": "",
       "desc": "AUC-PR chance floor, CICIDS interleaved arm",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalProposedDetectorAucpr": [
@@ -708,10 +2171,10 @@
       "value": 0.728337,
       "unit": "",
       "desc": "CICIDS natural proposed_detector AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalProposedDetectorLift": [
@@ -719,10 +2182,10 @@
       "value": 0.045987,
       "unit": "",
       "desc": "CICIDS natural proposed_detector AUC-PR above chance",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsSyntheticProposedDetectorAucpr": [
@@ -730,10 +2193,10 @@
       "value": 0.544998,
       "unit": "",
       "desc": "CICIDS interleaved proposed_detector AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsSyntheticProposedDetectorLift": [
@@ -741,10 +2204,10 @@
       "value": 0.292602,
       "unit": "",
       "desc": "CICIDS interleaved proposed_detector AUC-PR above chance",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalHstAucpr": [
@@ -752,10 +2215,10 @@
       "value": 0.588902,
       "unit": "",
       "desc": "CICIDS natural hst AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalHstLift": [
@@ -763,10 +2226,10 @@
       "value": -0.093448,
       "unit": "",
       "desc": "CICIDS natural hst AUC-PR above chance",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsSyntheticHstAucpr": [
@@ -774,10 +2237,10 @@
       "value": 0.513623,
       "unit": "",
       "desc": "CICIDS interleaved hst AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsSyntheticHstLift": [
@@ -785,10 +2248,10 @@
       "value": 0.261227,
       "unit": "",
       "desc": "CICIDS interleaved hst AUC-PR above chance",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalEcodAucpr": [
@@ -796,10 +2259,10 @@
       "value": 0.755142,
       "unit": "",
       "desc": "CICIDS natural ecod AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalEcodLift": [
@@ -807,10 +2270,10 @@
       "value": 0.072792,
       "unit": "",
       "desc": "CICIDS natural ecod AUC-PR above chance",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsSyntheticEcodAucpr": [
@@ -818,10 +2281,10 @@
       "value": 0.418966,
       "unit": "",
       "desc": "CICIDS interleaved ecod AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsSyntheticEcodLift": [
@@ -829,10 +2292,10 @@
       "value": 0.16657,
       "unit": "",
       "desc": "CICIDS interleaved ecod AUC-PR above chance",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalMethodsBelowChance": [
@@ -840,10 +2303,10 @@
       "value": 1,
       "unit": "",
       "desc": "methods below the chance floor in the natural arm",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsNaturalBestLift": [
@@ -851,10 +2314,10 @@
       "value": 0.072792,
       "unit": "",
       "desc": "best lift above chance in the natural arm",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsRankingPreserved": [
@@ -862,10 +2325,10 @@
       "value": 0,
       "unit": "",
       "desc": "1 if the method ranking is identical across arms",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsRankingKendallTau": [
@@ -873,10 +2336,10 @@
       "value": -0.3333,
       "unit": "",
       "desc": "Kendall tau between the two arms' method rankings",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsPairwiseOrderingsPreserved": [
@@ -884,10 +2347,10 @@
       "value": 1,
       "unit": "",
       "desc": "pairwise method orderings preserved across arms",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourCicidsPairwiseOrderingsTotal": [
@@ -895,10 +2358,10 @@
       "value": 3,
       "unit": "",
       "desc": "pairwise method orderings compared across arms",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetUdpFloodTestPrev": [
@@ -906,10 +2369,10 @@
       "value": 15.7747,
       "unit": "%",
       "desc": "LITNET udp_flood held-out prevalence",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetUdpFloodTestAttacks": [
@@ -917,10 +2380,10 @@
       "value": 11831,
       "unit": "",
       "desc": "LITNET udp_flood held-out attacks",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetBlasterWormTestPrev": [
@@ -928,10 +2391,10 @@
       "value": 3.544,
       "unit": "%",
       "desc": "LITNET blaster_worm held-out prevalence",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetBlasterWormTestAttacks": [
@@ -939,10 +2402,10 @@
       "value": 2658,
       "unit": "",
       "desc": "LITNET blaster_worm held-out attacks",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetSpamTestPrev": [
@@ -950,10 +2413,10 @@
       "value": 0.176,
       "unit": "%",
       "desc": "LITNET spam held-out prevalence",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetSpamTestAttacks": [
@@ -961,10 +2424,10 @@
       "value": 132,
       "unit": "",
       "desc": "LITNET spam held-out attacks",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetPooledTestPrev": [
@@ -972,10 +2435,10 @@
       "value": 6.4982,
       "unit": "%",
       "desc": "LITNET pooled composite held-out prevalence",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetPooledTestAttacks": [
@@ -983,10 +2446,10 @@
       "value": 14621,
       "unit": "",
       "desc": "LITNET pooled composite held-out attacks",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetPooledInsideRange": [
@@ -994,10 +2457,10 @@
       "value": 1,
       "unit": "",
       "desc": "1 if pooled prevalence lies inside the per-type range",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetUdpFloodProposedDetectorAucpr": [
@@ -1005,10 +2468,10 @@
       "value": 0.394428,
       "unit": "",
       "desc": "LITNET udp_flood proposed_detector AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetUdpFloodHstAucpr": [
@@ -1016,10 +2479,10 @@
       "value": 0.552675,
       "unit": "",
       "desc": "LITNET udp_flood hst AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetUdpFloodEcodAucpr": [
@@ -1027,10 +2490,10 @@
       "value": 0.321185,
       "unit": "",
       "desc": "LITNET udp_flood ecod AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetBlasterWormProposedDetectorAucpr": [
@@ -1038,10 +2501,10 @@
       "value": 0.964091,
       "unit": "",
       "desc": "LITNET blaster_worm proposed_detector AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetBlasterWormHstAucpr": [
@@ -1049,10 +2512,10 @@
       "value": 0.147731,
       "unit": "",
       "desc": "LITNET blaster_worm hst AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetBlasterWormEcodAucpr": [
@@ -1060,10 +2523,10 @@
       "value": 0.03571,
       "unit": "",
       "desc": "LITNET blaster_worm ecod AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetSpamProposedDetectorAucpr": [
@@ -1071,10 +2534,10 @@
       "value": 0.846154,
       "unit": "",
       "desc": "LITNET spam proposed_detector AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetSpamHstAucpr": [
@@ -1082,10 +2545,10 @@
       "value": 0.008447,
       "unit": "",
       "desc": "LITNET spam hst AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetSpamEcodAucpr": [
@@ -1093,10 +2556,10 @@
       "value": 0.106805,
       "unit": "",
       "desc": "LITNET spam ecod AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetPooledProposedDetectorAucpr": [
@@ -1104,10 +2567,10 @@
       "value": 0.943056,
       "unit": "",
       "desc": "LITNET pooled proposed_detector AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetPooledHstAucpr": [
@@ -1115,10 +2578,10 @@
       "value": 0.23884,
       "unit": "",
       "desc": "LITNET pooled hst AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetPooledEcodAucpr": [
@@ -1126,10 +2589,10 @@
       "value": 0.229143,
       "unit": "",
       "desc": "LITNET pooled ecod AUC-PR",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetStreamsMatchingPooledRanking": [
@@ -1137,10 +2600,10 @@
       "value": 1,
       "unit": "",
       "desc": "natural per-type streams whose method ranking matches the pooled composite",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetNaturalStreamsRanked": [
@@ -1148,10 +2611,10 @@
       "value": 3,
       "unit": "",
       "desc": "natural per-type streams with a defined ranking",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourLitnetStreamsProposedNotBest": [
@@ -1159,10 +2622,10 @@
       "value": 1,
       "unit": "",
       "desc": "natural streams where the proposed detector is not the best method",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedCellsCovered": [
@@ -1170,54 +2633,54 @@
       "value": 2,
       "unit": "",
       "desc": "cells with more than one HST seed",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedCicids2017InterleavedSyntheticHstSeeds": [
     {
-      "value": 2,
+      "value": 3,
       "unit": "",
       "desc": "cicids2017/interleaved_synthetic HST seed count",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedCicids2017InterleavedSyntheticHstMean": [
     {
-      "value": 0.470313,
+      "value": 0.433044,
       "unit": "",
       "desc": "cicids2017/interleaved_synthetic HST AUC-PR mean over seeds",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedCicids2017InterleavedSyntheticHstSd": [
     {
-      "value": 0.061249,
+      "value": 0.077736,
       "unit": "",
       "desc": "cicids2017/interleaved_synthetic HST AUC-PR sd over seeds",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedCicids2017InterleavedSyntheticRankingFlips": [
     {
-      "value": 0,
+      "value": 1,
       "unit": "",
       "desc": "cicids2017/interleaved_synthetic 1 if the HST/ECOD ordering flips across seeds",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedLitnetPooledCompositeSyntheticHstSeeds": [
@@ -1225,10 +2688,10 @@
       "value": 3,
       "unit": "",
       "desc": "litnet_pooled/composite_synthetic HST seed count",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedLitnetPooledCompositeSyntheticHstMean": [
@@ -1236,10 +2699,10 @@
       "value": 0.2614,
       "unit": "",
       "desc": "litnet_pooled/composite_synthetic HST AUC-PR mean over seeds",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedLitnetPooledCompositeSyntheticHstSd": [
@@ -1247,10 +2710,10 @@
       "value": 0.097068,
       "unit": "",
       "desc": "litnet_pooled/composite_synthetic HST AUC-PR sd over seeds",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedLitnetPooledCompositeSyntheticRankingFlips": [
@@ -1258,21 +2721,21 @@
       "value": 1,
       "unit": "",
       "desc": "litnet_pooled/composite_synthetic 1 if the HST/ECOD ordering flips across seeds",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourSeedCellsWithFlippedRanking": [
     {
-      "value": 1,
+      "value": 2,
       "unit": "",
       "desc": "cells where the HST/ECOD ordering flips across seeds",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourExcludedCells": [
@@ -1280,10 +2743,10 @@
       "value": 0,
       "unit": "",
       "desc": "cells excluded with a recorded reason",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SFourTableUnmacroedCells": [
@@ -1291,10 +2754,10 @@
       "value": 0,
       "unit": "",
       "desc": "table cells that had no macro to reference",
-      "run_id": "s4_contrast_deliverables_20260820T081139_a5bf9183",
-      "manifest": "s4_contrast_deliverables_20260820T081139_a5bf9183.json",
-      "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
-      "finished_utc": "2026-08-20T08:11:40.201472+00:00"
+      "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+      "manifest": "s4_contrast_deliverables_20260820T082833_05219839.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
   "SelfTestManifested": [
@@ -1468,6 +2931,15 @@
       "manifest": "selftest_provenance_gate_20260820T081410_4f35b13e.json",
       "git_commit": "82bd5608e195c338817731249795c250533b6c06-dirty",
       "finished_utc": "2026-08-20T08:14:10.653736+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260820T083044_e7c6eb76",
+      "manifest": "selftest_provenance_gate_20260820T083044_e7c6eb76.json",
+      "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+      "finished_utc": "2026-08-20T08:30:44.661120+00:00"
     }
   ],
   "Stage1BocpdsloAucprDiff": [

@@ -1,37 +1,44 @@
-# Findings: prevalence sweep within CICIDS2017 (Stage 2)
+# findings_prevalence — prevalence *within the synthetic construction* (Stage 2)
 
-The paper's regime-dependence claim confounds attack prevalence with dataset identity. This experiment holds the dataset fixed (the same interleaved corrected CICIDS2017 stream) and varies prevalence by stratified resampling: 5, 10, 22.06 (natural), 40, 64 percent, three resample seeds (11/23/47). CALIBURN is deterministic; the variance source is the resampling draw.
+Generating run: `s2_prevalence_relabelled_20260820T082620_005ffef6`. Every number below is a provenance macro.
 
-## Headline table (AUC-PR, mean over resample seeds)
+## What this experiment is, and is not
 
-| prevalence | CALIBURN (raw) | best streaming | best batch | chance floor |
-|---|---|---|---|---|
-| 5% | 0.367 | 0.208 (loda) | 0.538 (lof) | 0.050 |
-| 10% | 0.447 | 0.300 (hst) | 0.697 (lof) | 0.100 |
-| 22.06% | 0.545 | 0.433 (hst) | 0.863 (lof) | 0.221 |
-| 40% | 0.494 | 0.476 (hst) | 0.897 (lof) | 0.400 |
-| 64% | 0.620 | 0.525 (loda) | 0.905 (lof) | 0.640 |
+It holds the dataset fixed — **the interleaved (synthetic) CICIDS2017 stream** — and varies attack prevalence by stratified resampling. Under binding scope rule 3 it is retained and relabelled: a controlled experiment *on a synthetic construction*, **not** evidence about prevalence in deployment. It has not been rerun.
 
-## Question 1: low-prevalence advantage
+Under rule 5 the rare/moderate/inverted regime taxonomy is deleted. Under CI-1 the level previously captioned "22.06% (natural)" is relabelled **unresampled**: in true timestamp order the CICIDS held-out prevalence is 68.235%, and nothing in this experiment is natural order. 22.06% is the interleaved stream's whole-stream prevalence; its held-out prevalence is 25.240%.
 
-At 5% prevalence CALIBURN's AUC-PR is 0.367 vs 0.208 for the best streaming baseline (lead +0.160) and 0.538 for the best batch reference (lead -0.170). At natural prevalence the same leads are +0.112 (streaming) and -0.318 (batch).
+## AUC-PR by prevalence level
 
-**Verdict (mechanical, threshold = lead > 0):** the low-prevalence advantage REPRODUCES against the streaming group but NOT against the batch reference when prevalence is lowered inside CICIDS2017 alone.
+Mean over three resampling draws (seeds 11/23/47), with standard deviation and the per-draw values. **Lift is measured against the achieved held-out prevalence**, which is the AUC-PR chance floor.
 
-## Question 2: high-prevalence collapse (CRC mechanism)
-
-| prevalence | V1 F1 | V1 alert rate | V1 CRC tau | V3 FPR | V4 F1 | CALIBURN AUC-PR minus floor |
+| level | chance floor | proposed detector | HST | LODA | ECOD (batch) | LOF (batch) |
 |---|---|---|---|---|---|---|
-| 5% | 0.000 | 0.0000 | 0.235 | 0.150 | 0.406 | +0.317 |
-| 10% | 0.000 | 0.0000 | 0.318 | 0.175 | 0.600 | +0.347 |
-| 22.06% | 0.000 | 0.0000 | 0.485 | 0.999 | 0.695 | +0.324 |
-| 40% | 0.000 | 0.0000 | 0.599 | 1.000 | 0.471 | +0.094 |
-| 64% | 0.000 | 0.0000 | 0.705 | 1.000 | 0.229 | -0.020 |
+| 5% | 0.0495 | 0.3672 ±0.0005 | 0.1993 ±0.0810 | 0.2076 ±0.0069 | 0.1662 ±0.0008 | 0.5376 ±0.0008 |
+| 10% | 0.0990 | 0.4472 ±0.0024 | 0.2997 ±0.0989 | 0.2474 ±0.0055 | 0.2522 ±0.0003 | 0.6970 ±0.0010 |
+| unresampled | 0.2524 | 0.5450 ±0.0000 *det* | 0.4330 ±0.0777 | 0.3417 ±0.0047 | 0.4190 ±0.0000 *det* | 0.8632 ±0.0000 *det* |
+| 40% | 0.4000 | 0.4942 ±0.0017 | 0.4760 ±0.0561 | 0.3994 ±0.0050 | 0.5274 ±0.0007 | 0.8970 ±0.0060 |
+| 64% | 0.6400 | 0.6195 ±0.0011 | 0.4993 ±0.0316 | 0.5247 ±0.0049 | 0.6784 ±0.0005 | 0.9049 ±0.0100 |
 
-**Verdict (mechanical):** V1 F1 < 0.05 at every level >= 40%: True. V1 F1 > 0.10 at some level <= 10%: False. CALIBURN AUC-PR within 0.05 of the prevalence floor at every level >= 40%: False. The high-prevalence collapse DOES NOT fully reproduce inside one dataset, and the ranking degeneracy near the floor does not accompany it.
+`*det*` marks a cell identical across all three draws. At the unresampled level no resampling occurs, so every draw sees the same records and the deterministic methods return identical values; at the resampled levels their small spread is the draw, not the model.
 
-## Interpretation constraint
+## Lift above chance
 
-Because the dataset, features, preprocessing, and stream construction are identical across levels, any pattern above is attributable to prevalence (and the resampling it requires), not to dataset identity. Where the within-dataset pattern matches the cross-dataset Figure 5 pattern, the regime-dependence reading survives this control; where it does not, the cross-dataset pattern was carrying dataset-identity effects.
+| level | proposed detector | HST | LODA | ECOD (batch) | LOF (batch) |
+|---|---|---|---|---|---|
+| 5% | +0.3176 | +0.1497 | +0.1581 | +0.1167 | +0.4881 |
+| 10% | +0.3482 | +0.2007 | +0.1484 | +0.1532 | +0.5980 |
+| unresampled | +0.2926 | +0.1806 | +0.0893 | +0.1666 | +0.6108 |
+| 40% | +0.0942 | +0.0760 | -0.0006 | +0.1274 | +0.4970 |
+| 64% | -0.0204 | -0.1406 | -0.1153 | +0.0384 | +0.2649 |
 
-Construction notes: stratified per-split resampling (see RUN_REPORT and commit d8d0796) was required because the interleaved stream has a structural attack-share gradient across splits; above-natural levels retain 97.3% of attacks. The natural column reuses the bit-exact Stage 1 rows for baselines (provenance column in the CSV) and recomputes CALIBURN through the sweep harness as the internal control.
+## Findings
+
+**1. A batch reference dominates at every level.** LOF's mean AUC-PR exceeds the proposed detector's at **5 of 5** levels, by 0.19 to 0.44. At the unresampled level both are identical across draws, so this comparison is **deterministic versus deterministic** and rule 7 permits it flatly: LOF 0.8632 against the proposed detector 0.5450, a gap of 0.3182 on the same held-out slice.
+
+**2. The proposed detector's lift falls as prevalence rises, and goes negative.** Lift above chance runs +0.3176 at 5%, +0.3482 at 10%, +0.2926 unresampled, +0.0942 at 40%, and **-0.0204 at 64%** — below the floor a constant predictor achieves. This is the honest form of the 'low-prevalence advantage': it is a lift-versus-prevalence gradient inside one synthetic construction, and it does not survive to high prevalence.
+
+**3. Rankings involving HST are withheld (rule 7).** HST's standard deviation across three draws reaches 0.0989 at the 10% level and 0.0810 at 5% — larger than several gaps the previous version of this document reported as findings. Its per-draw values are printed above; no ranking claim involving HST is stated here.
+
+**4. What this cannot show.** Every row is the interleaved construction. Stage 4 measures the same detector and baselines on the *natural-order* stream and finds a different ordering, so nothing in this table transfers to natural order or to deployment.
+
