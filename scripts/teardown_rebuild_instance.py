@@ -77,6 +77,12 @@ def main() -> int:
                     help="actually terminate; without it this is a dry check")
     ap.add_argument("--keep-snapshot", action="store_true",
                     help="retain the pre-CICIDS snapshot (it bills monthly)")
+    ap.add_argument("--compute-hours", type=float, default=None,
+                    help="measured instance RUNNING hours; without it the script "
+                         "assumes continuous running since launch, which "
+                         "overstates cost for an instance that was stopped")
+    ap.add_argument("--ebs-hours", type=float, default=None,
+                    help="hours the volume has existed (it bills while stopped)")
     ap.add_argument("--force", action="store_true",
                     help="terminate despite failed result checks (records why)")
     a = ap.parse_args()
@@ -111,14 +117,22 @@ def main() -> int:
     print("current instance state: " + state)
 
     # ---- cost, measured from the billed window ---------------------------
+    # Compute and EBS bill on DIFFERENT clocks and conflating them is wrong by
+    # a lot. A stopped instance bills no compute but its volume keeps billing;
+    # this run was stopped for ~18 h between the wall cap and teardown. EC2
+    # does not report cumulative running time, and reconstructing it needs
+    # CloudTrail, so running hours are passed in from the operator record and
+    # EBS hours are taken from the volume creation time.
     end = int(time.time())
-    hours = max(0.0, (end - launch) / 3600.0)
+    hours = a.compute_hours if a.compute_hours is not None else max(0.0, (end - launch) / 3600.0)
+    ebs_hours = a.ebs_hours if a.ebs_hours is not None else hours
     compute = hours * hourly
     ebs = (VOL_GB * EBS_GB_MONTH + max(0, VOL_IOPS - 3000) * EBS_IOPS_MONTH +
-           max(0, VOL_TPUT - 125) * EBS_TPUT_MONTH) / 730.0 * hours
+           max(0, VOL_TPUT - 125) * EBS_TPUT_MONTH) / 730.0 * ebs_hours
     print("")
     print("MEASURED COST (list prices, eu-central-1)")
-    print("  wall clock billed : %.2f h" % hours)
+    print("  instance running  : %.2f h (compute billed)" % hours)
+    print("  volume existed    : %.2f h (EBS billed, including while stopped)" % ebs_hours)
     print("  compute           : %.2f h x $%.4f/h = $%.2f" % (hours, hourly, compute))
     print("  EBS gp3 (100 GB, 6000 IOPS, 500 MB/s) = $%.2f" % ebs)
     total = compute + ebs
