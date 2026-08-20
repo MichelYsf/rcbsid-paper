@@ -1,0 +1,3 @@
+  litnet_pooled        composite_synthetic    ecod               AUC-PR=0.2291 prev= 6.498% atk=14621
+  litnet_pooled        composite_synthetic    hst                AUC-PR=0.2388 prev= 6.498% atk=14621
+  litnet_pooled        composite_synthetic    proposed_detector  AUC-PR=0.9431 prev= 6.498% atk=14621

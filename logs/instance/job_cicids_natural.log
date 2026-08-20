@@ -1,0 +1,3 @@
+  cicids2017           natural                ecod               AUC-PR=0.7551 prev=68.235% atk=163764
+  cicids2017           natural                hst                AUC-PR=0.5889 prev=68.235% atk=163764
+  cicids2017           natural                proposed_detector  AUC-PR=0.7283 prev=68.235% atk=163764

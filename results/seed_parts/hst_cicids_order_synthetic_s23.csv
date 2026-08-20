@@ -1,0 +1,2 @@
+auc_roc,auc_pr,precision,recall,f1,brier,ece_10,stream,arm,method,seed,threshold,n_test,test_prevalence,elapsed_s,uses_fallback,test_attacks
+0.8041590954642504,0.42700355639237336,0.2602779162298266,1.0,0.4130484441216882,0.19537615682048498,0.23057097854823638,cicids2017,interleaved_synthetic,hst,23,0.21422867902647436,240000,0.2523958333333333,5732.43,False,60575

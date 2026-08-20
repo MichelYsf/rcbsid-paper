@@ -1,0 +1,2 @@
+stream,arm,method,excluded_reason,timeout_seconds,recorded_utc
+cicids_natural,n/a,n/a,TIMEOUT: job exceeded the 8680s per-job ceiling and was terminated; no metrics were produced. non-zero exit -9; see logs/job_cicids_natural.log,8680,2026-08-19 09:05:06
