@@ -26,11 +26,16 @@ day starting the instance to retrieve results before destroying the volume;
 that is compute outside the experiment's 8 h and is recorded here rather than
 folded in. The $6 spend cap was not reached.
 
-**Still billing, NOT from this run:** three 100 GiB snapshots from the earlier
-finals missions (`snap-0c3f130db41ed7586` 2026-08-17, `snap-09be952951db9af1e`
-and `snap-008f2633123c89f4f` 2026-08-13). Roughly $2–3/month depending on used
-blocks. Left in place — they are prior-mission data and deleting them is the
-operator's call.
+**Region is empty.** On 2026-08-20 the three remaining 100 GiB snapshots from
+the earlier finals missions were deleted on the operator's instruction:
+`snap-09be952951db9af1e` and `snap-008f2633123c89f4f` (2026-08-13, both of
+`vol-01968761956323f00`, an incremental chain) and `snap-0c3f130db41ed7586`
+(2026-08-17, of `vol-049e26b01e2604a7c`). Each is individually confirmed gone
+by `InvalidSnapshot.NotFound`, and eu-central-1 now holds **0 snapshots,
+0 volumes and 0 non-terminated instances**. Estimated recurring storage cost
+avoided: **~$1.30-2.20/month** (an estimate: the account lacks
+ebs:ListSnapshotBlocks, so actual stored blocks could not be measured).
+No AWS resource from this project is billing.
 
 ## What S4 established
 
