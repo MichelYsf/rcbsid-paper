@@ -397,3 +397,40 @@ with a different resolved wheel set. HST and ECOD agree **bit-for-bit**, and
 the proposed detector agrees to **2.8e-07**. That is an unplanned
 cross-platform reproduction of the interleaved cell, and it is stronger
 evidence for the pipeline's determinism than anything designed for the purpose.
+
+### CI-17 — the run-length posterior is degenerate in two regimes A2 did not cover
+Audit finding A2 established that `P(r_t = 0)` is pinned to the hazard rate and
+never responds to a change point. Stage 3 reproduces that exactly: through the
+50-record window after a 6-sigma shift, `P(r=0)` is 0.001000 against a hazard of
+0.001000, with a maximum deviation of 1.4e-15 anywhere between initialisation
+and truncation. The reason is algebraic rather than empirical — the
+change-point branch is `log h + logsumexp(log p - nll)` and the growth branch
+sums to `log(1-h) +` the same `logsumexp`, so the predictive term cancels in the
+normalisation and `P(r=0)` equals the hazard **for any data whatsoever**.
+
+Two regimes A2 did not report, found while re-measuring it:
+
+- **t = 0**: the run array has length one, so `P(r=0)` is trivially 1.0.
+- **t >= `max_run_length` (500)**: truncation drops growth mass *before*
+  normalisation, so the cancellation breaks and `P(r=0)` wanders — mean 0.0110,
+  maximum 1.0000. Every stream in this paper is far longer than 500 records, so
+  **the published runs spent nearly all of their length in this regime**, where
+  the run-length posterior is neither the hazard nor a change-point signal but
+  an artefact of the cap.
+
+Neither regime is a detection, and both will mislead anyone who summarises the
+posterior with a maximum over the whole stream. My first Stage 3 probe did
+exactly that and reported a peak of 1.0, which reads as "the posterior responds
+strongly" and would have contradicted a correct audit finding. The measurement
+was not wrong; the summary statistic mixed three regimes. Recorded because the
+error is the interesting part: an aggregate over a window that spans a regime
+change is not a measurement of either regime.
+
+**A second correction, to my own prose rather than to a number.** The Stage 3
+document initially said the change-point branch "binds on a small minority of
+real records". It binds on **75.04%** — but at a mean contributed score of
+**0.0025**, meaning both terms are essentially zero there and the branch wins a
+comparison between two near-zero numbers. Both the original sentence and the
+naive reading of the corrected figure ("the change-point term does most of the
+work") are wrong in opposite directions. The document now states the share and
+the contributed magnitude together, because either alone misleads.

@@ -1,0 +1,136 @@
+{
+  "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+  "name": "s3_score_threshold_verification",
+  "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+  "git_commit_at_write": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "4c26aa7b412021ecb5a0c6dea9517cd0eeada46bcb650ed07431d126f58279e8",
+  "config": {
+    "probe": "6-sigma mean shift, 3-D, hazard 1e-3",
+    "binding_sample_rows": 50000,
+    "stream": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv"
+  },
+  "seed": 11,
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_score_threshold.md",
+      "exists": true,
+      "sha256": "ef186796fba9adc901fc27427b4ce11dea62b0c3d66016db04007ceac613e9c5"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-20T08:46:59.058763+00:00",
+  "finished_utc": "2026-08-20T08:51:32.727660+00:00",
+  "wall_seconds": 273.668897,
+  "macros": {
+    "SThreeProbeHazard": {
+      "value": 0.001,
+      "unit": "",
+      "desc": "hazard rate used in the change-point probe"
+    },
+    "SThreePrZeroPreMean": {
+      "value": 0.001,
+      "unit": "",
+      "desc": "mean P(r=0) before the 6-sigma shift"
+    },
+    "SThreePrZeroResponsePeak": {
+      "value": 0.001,
+      "unit": "",
+      "desc": "peak P(r=0) in the 50-record window after the 6-sigma shift"
+    },
+    "SThreePrZeroPinnedToHazard": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if P(r=0) in the change-point window equals the hazard"
+    },
+    "SThreePrZeroSteadyMaxDeviation": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "max |P(r=0) - hazard| after init and before truncation"
+    },
+    "SThreeRunLengthCap": {
+      "value": 500,
+      "unit": "",
+      "desc": "max_run_length at which truncation begins"
+    },
+    "SThreePrZeroInitValue": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "P(r=0) at t=0, when the run array has length one"
+    },
+    "SThreePrZeroTruncatedMean": {
+      "value": 0.01099,
+      "unit": "",
+      "desc": "mean P(r=0) once the run array is truncated"
+    },
+    "SThreePrZeroTruncatedMax": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "max P(r=0) once the run array is truncated"
+    },
+    "SThreeProbeScorePeak": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "peak returned score in the change-point window"
+    },
+    "SThreeBindingRows": {
+      "value": 49970,
+      "unit": "",
+      "desc": "records examined for which term sets the score"
+    },
+    "SThreeChangePointBindingRows": {
+      "value": 37497,
+      "unit": "",
+      "desc": "records where the change-point branch sets the score"
+    },
+    "SThreeChangePointBindingPct": {
+      "value": 75.039,
+      "unit": "%",
+      "desc": "share of records where the change-point branch binds"
+    },
+    "SThreeShortRunWeight": {
+      "value": 0.25,
+      "unit": "",
+      "desc": "weight on the change-point auxiliary term"
+    },
+    "SThreeChangePointBindingMeanValue": {
+      "value": 0.002531,
+      "unit": "",
+      "desc": "mean score contributed where the change-point branch sets the score"
+    },
+    "SThreeThresholdLitnet": {
+      "value": 0.655172,
+      "unit": "",
+      "desc": "threshold at incident prior 0.05 (LITNET config)"
+    },
+    "SThreeThresholdCicids": {
+      "value": 0.261745,
+      "unit": "",
+      "desc": "threshold at incident prior 0.22 (CICIDS config)"
+    },
+    "SThreeThresholdCostOnly": {
+      "value": 0.090909,
+      "unit": "",
+      "desc": "the paper's Eq. (12) cost-only threshold C_FP/(C_FP+C_FN)"
+    },
+    "SThreeThresholdMatchesPaper": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the implemented threshold equals the paper's Eq. (12)"
+    },
+    "SThreeLatencyUsesAClock": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the latency module measures wall-clock time"
+    }
+  },
+  "notes": "re-measures A1-A4 against the current code; no prose is asserted that a number here does not support",
+  "extra": {}
+}

@@ -1715,6 +1715,226 @@
       "finished_utc": "2026-08-20T08:26:20.995858+00:00"
     }
   ],
+  "SThreeProbeHazard": [
+    {
+      "value": 0.001,
+      "unit": "",
+      "desc": "hazard rate used in the change-point probe",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreePrZeroPreMean": [
+    {
+      "value": 0.001,
+      "unit": "",
+      "desc": "mean P(r=0) before the 6-sigma shift",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreePrZeroResponsePeak": [
+    {
+      "value": 0.001,
+      "unit": "",
+      "desc": "peak P(r=0) in the 50-record window after the 6-sigma shift",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreePrZeroPinnedToHazard": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if P(r=0) in the change-point window equals the hazard",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreePrZeroSteadyMaxDeviation": [
+    {
+      "value": 0.0,
+      "unit": "",
+      "desc": "max |P(r=0) - hazard| after init and before truncation",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeRunLengthCap": [
+    {
+      "value": 500,
+      "unit": "",
+      "desc": "max_run_length at which truncation begins",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreePrZeroInitValue": [
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "P(r=0) at t=0, when the run array has length one",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreePrZeroTruncatedMean": [
+    {
+      "value": 0.01099,
+      "unit": "",
+      "desc": "mean P(r=0) once the run array is truncated",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreePrZeroTruncatedMax": [
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "max P(r=0) once the run array is truncated",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeProbeScorePeak": [
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "peak returned score in the change-point window",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeBindingRows": [
+    {
+      "value": 49970,
+      "unit": "",
+      "desc": "records examined for which term sets the score",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeChangePointBindingRows": [
+    {
+      "value": 37497,
+      "unit": "",
+      "desc": "records where the change-point branch sets the score",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeChangePointBindingPct": [
+    {
+      "value": 75.039,
+      "unit": "%",
+      "desc": "share of records where the change-point branch binds",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeShortRunWeight": [
+    {
+      "value": 0.25,
+      "unit": "",
+      "desc": "weight on the change-point auxiliary term",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeChangePointBindingMeanValue": [
+    {
+      "value": 0.002531,
+      "unit": "",
+      "desc": "mean score contributed where the change-point branch sets the score",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeThresholdLitnet": [
+    {
+      "value": 0.655172,
+      "unit": "",
+      "desc": "threshold at incident prior 0.05 (LITNET config)",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeThresholdCicids": [
+    {
+      "value": 0.261745,
+      "unit": "",
+      "desc": "threshold at incident prior 0.22 (CICIDS config)",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeThresholdCostOnly": [
+    {
+      "value": 0.090909,
+      "unit": "",
+      "desc": "the paper's Eq. (12) cost-only threshold C_FP/(C_FP+C_FN)",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeThresholdMatchesPaper": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the implemented threshold equals the paper's Eq. (12)",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
+  "SThreeLatencyUsesAClock": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the latency module measures wall-clock time",
+      "run_id": "s3_score_threshold_verification_20260820T084659_1e2b01b8",
+      "manifest": "s3_score_threshold_verification_20260820T084659_1e2b01b8.json",
+      "git_commit": "61df0b15758cfa00ed0e5e2f1854f1f4a2c37c53-dirty",
+      "finished_utc": "2026-08-20T08:51:32.727660+00:00"
+    }
+  ],
   "ContrastLitnetUdpFloodDim": [
     {
       "value": 36,

@@ -56,3 +56,8 @@ ordering on the LITNET composite flips with the seed.
 Superseded when the Stage 2 sweep was found to hold a third HST seed for the
 CICIDS interleaved cell (CI-16). Its seed-sensitivity section reported 1 of 2
 cells flipping; the correct figure is 2 of 2.
+
+## s3_score_threshold_verification_20260820T084128_ce4545b5.json
+First Stage 3 run, superseded within the hour. Its numbers were right but two
+sentences in the document it generated contradicted them - written from an
+expectation formed before the measurement rather than from the measurement.

@@ -131,6 +131,26 @@
 \newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstSeeds}{3}  % litnet_pooled/composite_synthetic HST seed count -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourSeedLitnetPooledCompositeSyntheticRankingFlips}{1}  % litnet_pooled/composite_synthetic 1 if the HST/ECOD ordering flips across seeds -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourTableUnmacroedCells}{0}  % table cells that had no macro to reference -- s4_contrast_deliverables_20260820T082833_05219839
+\newcommand{\SThreeBindingRows}{49970}  % records examined for which term sets the score -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeChangePointBindingMeanValue}{0.002531}  % mean score contributed where the change-point branch sets the score -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeChangePointBindingPct}{75.039}  % share of records where the change-point branch binds [%] -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeChangePointBindingRows}{37497}  % records where the change-point branch sets the score -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeLatencyUsesAClock}{0}  % 1 if the latency module measures wall-clock time -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreePrZeroInitValue}{1}  % P(r=0) at t=0, when the run array has length one -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreePrZeroPinnedToHazard}{1}  % 1 if P(r=0) in the change-point window equals the hazard -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreePrZeroPreMean}{0.001}  % mean P(r=0) before the 6-sigma shift -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreePrZeroResponsePeak}{0.001}  % peak P(r=0) in the 50-record window after the 6-sigma shift -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreePrZeroSteadyMaxDeviation}{0}  % max |P(r=0) - hazard| after init and before truncation -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreePrZeroTruncatedMax}{1}  % max P(r=0) once the run array is truncated -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreePrZeroTruncatedMean}{0.01099}  % mean P(r=0) once the run array is truncated -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeProbeHazard}{0.001}  % hazard rate used in the change-point probe -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeProbeScorePeak}{1}  % peak returned score in the change-point window -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeRunLengthCap}{500}  % max_run_length at which truncation begins -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeShortRunWeight}{0.25}  % weight on the change-point auxiliary term -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeThresholdCicids}{0.261745}  % threshold at incident prior 0.22 (CICIDS config) -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeThresholdCostOnly}{0.090909}  % the paper's Eq. (12) cost-only threshold C_FP/(C_FP+C_FN) -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeThresholdLitnet}{0.655172}  % threshold at incident prior 0.05 (LITNET config) -- s3_score_threshold_verification_20260820T084659_1e2b01b8
+\newcommand{\SThreeThresholdMatchesPaper}{0}  % 1 if the implemented threshold equals the paper's Eq. (12) -- s3_score_threshold_verification_20260820T084659_1e2b01b8
 \newcommand{\STwoLFiveEcodDeterministic}{0}  % 5% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260820T082620_005ffef6
 \newcommand{\STwoLFiveEcodLift}{0.116715}  % 5% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260820T082620_005ffef6
 \newcommand{\STwoLFiveEcodMean}{0.166239}  % 5% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260820T082620_005ffef6
@@ -264,7 +284,7 @@
 \newcommand{\STwoLevelsCovered}{5}  % prevalence levels covered -- s2_prevalence_relabelled_20260820T082620_005ffef6
 \newcommand{\STwoLofBeatsProposedLevels}{5}  % levels where LOF's mean AUC-PR exceeds the proposed detector's -- s2_prevalence_relabelled_20260820T082620_005ffef6
 \newcommand{\STwoProposedLevelsBelowFloor}{1}  % levels where the proposed detector's mean AUC-PR is below its chance floor -- s2_prevalence_relabelled_20260820T082620_005ffef6
-\newcommand{\SelfTestManifested}{0.4242}  % gate acceptance -- selftest_provenance_gate_20260820T081410_4f35b13e
+\newcommand{\SelfTestManifested}{0.4242}  % gate acceptance -- selftest_provenance_gate_20260820T083044_e7c6eb76
 \newcommand{\Stage0DeterministicChecksFailed}{0}  % count of deterministic reproduction failures at Stage 0 -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\Stage1BocpdsloAucprDiff}{2.846684505897201e-07}  % Stage1 repro |new-published| for bocpd_slo/auc_pr -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\Stage1BocpdsloAucrocDiff}{7.499538092758939e-07}  % Stage1 repro |new-published| for bocpd_slo/auc_roc -- stage0_reproduction_checks_20260817T221558_53c31fe7
