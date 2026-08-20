@@ -2980,6 +2980,182 @@
       "finished_utc": "2026-08-20T08:28:33.904347+00:00"
     }
   ],
+  "SFiveClaimChangePointSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'ChangePoint' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimSloThresholdSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'SloThreshold' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimBurnRateSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'BurnRate' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimThreeDatasetsSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'ThreeDatasets' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimChronologicalSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Chronological' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimStreamingBaselinesSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'StreamingBaselines' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimBatchReferencesSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'BatchReferences' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimStatisticalTestsSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'StatisticalTests' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimLatencySupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Latency' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimConstructionSupported": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if claim 'Construction' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimArtifactsSupported": [
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Artifacts' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimsSupported": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "claims with verdict SUPPORTED",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimsPartial": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "claims with verdict PARTIAL",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimsUnsupported": [
+    {
+      "value": 4,
+      "unit": "",
+      "desc": "claims with verdict UNSUPPORTED",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimsWithdrawn": [
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "claims with verdict WITHDRAWN",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
+  "SFiveClaimsTotal": [
+    {
+      "value": 11,
+      "unit": "",
+      "desc": "contribution claims assessed",
+      "run_id": "s5_verified_contributions_20260820T085552_1ae23176",
+      "manifest": "s5_verified_contributions_20260820T085552_1ae23176.json",
+      "git_commit": "fabe0fbf96601ea02f11563d647432ef4149b1f8-dirty",
+      "finished_utc": "2026-08-20T08:55:52.766355+00:00"
+    }
+  ],
   "SelfTestManifested": [
     {
       "value": 0.4242,
