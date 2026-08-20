@@ -1,11 +1,11 @@
 # CALIBURN honest rebuild — status
 
-- **State**: S4 COMPLETE. Cloud compute finished and torn down.
-- **Last update**: 2026-08-20 08:25 UTC
+- **State**: S2, S3, S4 and S5 complete. Cloud compute finished and torn down; region empty.
+- **Last update**: 2026-08-20 (post-cleanup)
 - **Branch**: `rebuild/honest-v1`
 - **Framing**: `SCOPE_DECISIONS.md` (per-stream, never composite; the construction
-  contrast is the headline; 14 corrected incidents recorded)
-- **Gate**: green — 165 manifested macros, 0 orphans, 0 mismatches, 0 ambiguous,
+  contrast is the headline; 17 corrected incidents recorded)
+- **Gate**: green — 334 manifested macros, 0 orphans, 0 mismatches, 0 ambiguous,
   macro index verified against its manifests. 72 tests pass.
 
 ## Cloud state — nothing is running, nothing is billing
@@ -81,8 +81,11 @@ natural held-out slice is one 204.2-minute Friday-evening window.
 
 ## Stages remaining
 
-S3, S5, S6, S7, S8 and WRAP are unstarted: score/threshold prose honesty,
-verified contributions, the corrected-BOCPD ablation (≤90 min), the ACM
-manuscript rebuild, missing related work, the GenAI usage statement, the
-companion-paper disclosure, and `PUBLISH_INSTRUCTIONS.md`. Nothing is published
-or submitted anywhere.
+S6, S7, S8 and WRAP remain: the corrected change-point statistic and its
+bounded ablation (<=90 min, local), the ACM manuscript rebuild, missing related
+work, the GenAI usage statement, the companion-paper disclosure, and
+`PUBLISH_INSTRUCTIONS.md`. Nothing is published or submitted anywhere.
+
+S2 relabelled the prevalence sweep (CI-15, CI-16); S3 re-measured the score and
+threshold against the current code (CI-17); S5 audited all 11 contribution
+claims - 1 SUPPORTED, 3 PARTIAL, 4 UNSUPPORTED, 3 WITHDRAWN.
