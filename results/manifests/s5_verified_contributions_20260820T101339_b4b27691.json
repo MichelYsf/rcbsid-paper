@@ -1,0 +1,118 @@
+{
+  "run_id": "s5_verified_contributions_20260820T101339_b4b27691",
+  "name": "s5_verified_contributions",
+  "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
+  "git_commit_at_write": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "eac2880af4c585ff29693dbb29bfbe799ddca8e32733a875ddb7ffeec57024e1",
+  "config": {
+    "claims": 11,
+    "sources": [
+      "paper/rewrite_sections.md abstract",
+      "SCOPE_DECISIONS.md new primary contribution"
+    ]
+  },
+  "seed": 11,
+  "inputs": [],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_contributions.md",
+      "exists": true,
+      "sha256": "c6b6d8ca23b5194a4ca70e13b1c79e96f2369752d82fc5d75c868faa0f498140"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-20T10:13:39.429594+00:00",
+  "finished_utc": "2026-08-20T10:13:39.507301+00:00",
+  "wall_seconds": 0.077707,
+  "macros": {
+    "SFiveClaimChangePointSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'ChangePoint' is fully supported by a manifested run"
+    },
+    "SFiveClaimSloThresholdSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'SloThreshold' is fully supported by a manifested run"
+    },
+    "SFiveClaimBurnRateSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'BurnRate' is fully supported by a manifested run"
+    },
+    "SFiveClaimThreeDatasetsSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'ThreeDatasets' is fully supported by a manifested run"
+    },
+    "SFiveClaimChronologicalSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Chronological' is fully supported by a manifested run"
+    },
+    "SFiveClaimStreamingBaselinesSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'StreamingBaselines' is fully supported by a manifested run"
+    },
+    "SFiveClaimBatchReferencesSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'BatchReferences' is fully supported by a manifested run"
+    },
+    "SFiveClaimStatisticalTestsSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'StatisticalTests' is fully supported by a manifested run"
+    },
+    "SFiveClaimLatencySupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Latency' is fully supported by a manifested run"
+    },
+    "SFiveClaimConstructionSupported": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if claim 'Construction' is fully supported by a manifested run"
+    },
+    "SFiveClaimArtifactsSupported": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Artifacts' is fully supported by a manifested run"
+    },
+    "SFiveClaimsSupported": {
+      "value": 1,
+      "unit": "",
+      "desc": "claims with verdict SUPPORTED"
+    },
+    "SFiveClaimsPartial": {
+      "value": 3,
+      "unit": "",
+      "desc": "claims with verdict PARTIAL"
+    },
+    "SFiveClaimsUnsupported": {
+      "value": 4,
+      "unit": "",
+      "desc": "claims with verdict UNSUPPORTED"
+    },
+    "SFiveClaimsWithdrawn": {
+      "value": 3,
+      "unit": "",
+      "desc": "claims with verdict WITHDRAWN"
+    },
+    "SFiveClaimsTotal": {
+      "value": 11,
+      "unit": "",
+      "desc": "contribution claims assessed"
+    }
+  },
+  "notes": "each claimed contribution checked against implementations and manifested runs; verdicts mechanical where possible",
+  "extra": {}
+}

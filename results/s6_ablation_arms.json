@@ -1,0 +1,17 @@
+{
+  "run_id": "s6_bocpd_corrected_ablation_20260820T094323_d28cfa65",
+  "prefix_rows": 200000,
+  "stream": "litnet2020_udp_flood_natural.csv",
+  "arms": {
+    "original": {
+      "auc_pr": 0.397486,
+      "auc_roc": 0.848216,
+      "elapsed": 743.2
+    },
+    "corrected": {
+      "auc_pr": 0.169912,
+      "auc_roc": 0.50962,
+      "elapsed": 586.3
+    }
+  }
+}

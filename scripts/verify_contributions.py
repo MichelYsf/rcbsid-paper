@@ -113,8 +113,12 @@ def main() -> int:
                      "The auxiliary change-point term contributes a mean of 0.0025 "
                      "on the records where it binds.",
             action="The evaluated system is **prequential global-Gaussian tail "
-                   "scoring**. It may not be described as change-point detection "
-                   "unless Stage 6's corrected statistic changes the measurement.",
+                   "scoring**. Stage 6 has now run and did NOT rescue this: the "
+                   "corrected statistic makes P(r=0) respond (peak 1.000000 against "
+                   "a hazard of 0.001000) but saturates the composed score - 92.7% "
+                   "of its values are exactly 0.25 - giving an AUC-ROC of 0.5096, "
+                   "which is chance. Both variants are degenerate, in opposite "
+                   "directions. The verdict stands.",
             ok=bool("s3_score_threshold_verification" in names),
         ),
         dict(

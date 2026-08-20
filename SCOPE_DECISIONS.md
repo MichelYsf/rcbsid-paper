@@ -434,3 +434,51 @@ comparison between two near-zero numbers. Both the original sentence and the
 naive reading of the corrected figure ("the change-point term does most of the
 work") are wrong in opposite directions. The document now states the share and
 the contributed magnitude together, because either alone misleads.
+
+### CI-18 — Stage 6 reduced to a 30-minute cap, and its first reading was wrong
+**Scope reduction (operator constraint, 2026-08-20).** Stage 6 was capped at 30
+minutes of local compute, down from 90, with no cloud. Scope was cut to fit and
+the cuts are limitations of the result: one stream
+(`litnet2020_udp_flood_natural`, d=36) rather than four, with CICIDS2017
+excluded because at d=84 a two-arm full-stream run is about 3.3 hours; a fixed
+200,000-record prefix rather than the full 500,000; `blaster_worm` and `spam`
+excluded independently because their attacks sit at the end of the stream so no
+prefix holds test attacks; and one seed, which binding rule 7 permits because
+both variants are deterministic. Measured cost: 22.3 minutes for the ablation
+plus 2.0 minutes to add the diagnostic, against the 30-minute cap.
+
+**The finding.** The correction audit finding A2 prescribes — a prior-predictive
+term on the reset branch — was implemented and does make `P(r=0)` respond: peak
+1.000000 after a 6-sigma shift against 0.001000 for the evaluated detector, a
+1000x change. On real data it collapses detection: AUC-PR 0.1699 against
+0.3975, and an AUC-ROC of 0.5096, which is chance.
+
+**The first reading of that was wrong and nearly shipped.** The obvious
+conclusion — "repairing the change-point statistic degrades detection" — is not
+what the data shows. A saturation diagnostic measured why: under the corrected
+statistic the run-length posterior sits on short runs at *every* step (mean
+`P(r<=5)` = 1.0000), so the `0.25 * P(r<=5)` branch saturates and **92.7% of its
+scores are exactly 0.25**. It emits 747 distinct score values where the original
+emits 3,899. A score that is constant on most records cannot rank, and that is
+all an AUC-ROC of 0.5096 means.
+
+So both variants are degenerate in opposite directions: the evaluated detector
+**never** resets, because `P(r=0)` is algebraically pinned to the hazard; this
+correction **always** resets, because a nu=2 Student-t prior predictive prefers
+a fresh run to any fitted run for nearly every point. Neither is change-point
+detection, and the comparison between them says nothing about whether a correct
+change-point statistic would help.
+
+**An earlier correction attempt also failed, differently.** Using the global
+slowly-adapting Gaussian as the prior predictive changed nothing (`P(r=0)` peak
+0.001001 against a hazard of 0.001000): immediately after a change the global
+model is as stale as the run-conditional ones, so both branches take the same
+penalty. A reset branch is informative only if a surprising point is *better*
+explained by starting over, which requires a vague predictive — and a vague
+enough predictive resets always. The working scale lies between, and locating
+it is a hyperparameter search that the cap excludes and the no-selecting-on-test
+rule constrains.
+
+**Stage 6 therefore establishes a failure mode, not a working correction**, and
+the manuscript may claim no more than that. The Stage 5 verdict on the
+change-point contribution stays WITHDRAWN: Stage 6 did not rescue it.

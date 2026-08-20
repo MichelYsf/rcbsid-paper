@@ -1,6 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 import numpy as np
+from scipy.special import gammaln
 from scipy.stats import chi2
 
 
@@ -12,6 +13,16 @@ class TruncatedBOCPDConfig:
     incident_prior: float = 0.01
     warmup: int = 30
     short_run_mass: int = 5
+    # Stage 6. False reproduces the evaluated detector exactly, including its
+    # defect; True uses the corrected change-point statistic.
+    #
+    # The defect (audit A2, re-measured in Stage 3): the reset branch uses the
+    # same run-conditional predictive `nll` as the growth branch, so it cancels
+    # in the normalisation and P(r=0) equals the hazard for ANY data. The fix
+    # A2 prescribes is a PRIOR-predictive term on the reset branch - the
+    # likelihood of x under a freshly started run rather than under the
+    # existing ones - so that the two branches respond to the data differently.
+    prior_predictive_reset: bool = False
 
 
 class TruncatedGaussianBOCPD:
@@ -75,6 +86,39 @@ class TruncatedGaussianBOCPD:
         diff = x[None, :] - self.means
         return 0.5 * np.sum(np.log(2.0 * np.pi * var) + (diff * diff) / var, axis=1)
 
+    def _prior_predictive_nll(self, x: np.ndarray) -> float:
+        """Negative log-likelihood of x under a FRESHLY started run.
+
+        This must be a VAGUE predictive, and the first attempt at Stage 6 got
+        that wrong. Plugging in the global slowly-adapting Gaussian does not
+        correct anything: immediately after a change the global model is just as
+        stale as the run-conditional ones, both branches take the same penalty,
+        and P(r=0) stays at the hazard (measured: 0.001001 against a hazard of
+        0.001000). A reset branch is only informative if a surprising point is
+        *better* explained by starting over than by continuing.
+
+        So the reset branch uses the proper Normal-Inverse-Gamma prior
+        predictive, which is a Student-t. With the weakly-informative
+        hyperparameters kappa0 = 1 and alpha0 = 1, and beta0 set to the global
+        variance, the predictive is a t with nu = 2 degrees of freedom and
+        squared scale 2 * sigma^2_global: twice the variance and heavy tails.
+        Nothing here is tuned - these are the standard vague settings, and no
+        value was chosen by looking at a result.
+        """
+        if (self.global_mean is None or self.global_m2 is None
+                or self.global_count < 2):
+            return float(self._predictive_nll(x)[0])
+        var = np.maximum(self.global_m2 / max(self.global_count - 1, 1),
+                         self.config.variance_floor)
+        nu = 2.0                      # 2 * alpha0 with alpha0 = 1
+        scale2 = 2.0 * var            # beta0/alpha0 * (1 + 1/kappa0)
+        diff = x - self.global_mean
+        # diagonal multivariate Student-t log density, summed over dimensions
+        logpdf = (gammaln((nu + 1.0) / 2.0) - gammaln(nu / 2.0)
+                  - 0.5 * np.log(nu * np.pi * scale2)
+                  - ((nu + 1.0) / 2.0) * np.log1p((diff * diff) / (nu * scale2)))
+        return float(-np.sum(logpdf))
+
     def _predictive_tail_score(self, x: np.ndarray) -> float:
         """Tail score under the dominant pre-update run.
 
@@ -106,7 +150,14 @@ class TruncatedGaussianBOCPD:
 
         nll = self._predictive_nll(x)
         growth = self.log_run_probs + np.log1p(-self.config.hazard) - nll
-        cp = self._logsumexp(self.log_run_probs + np.log(self.config.hazard) - nll)
+        if self.config.prior_predictive_reset:
+            # Corrected: the reset branch is scored under a freshly started run,
+            # so the predictive term no longer cancels against the growth branch
+            # and P(r=0) becomes a function of the data.
+            cp = float(self._logsumexp(self.log_run_probs + np.log(self.config.hazard))
+                       - self._prior_predictive_nll(x))
+        else:
+            cp = self._logsumexp(self.log_run_probs + np.log(self.config.hazard) - nll)
         new_log_probs = np.concatenate(([cp], growth))
         if len(new_log_probs) > self.config.max_run_length:
             new_log_probs = new_log_probs[: self.config.max_run_length]

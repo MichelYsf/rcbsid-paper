@@ -1,6 +1,6 @@
 # findings_contributions — every claim against the runs that exist (Stage 5)
 
-Generating run: `s5_verified_contributions_20260820T085552_1ae23176`. Every count is a provenance macro.
+Generating run: `s5_verified_contributions_20260820T101339_b4b27691`. Every count is a provenance macro.
 
 The governing rule forbids a number without a manifest. Stage 5 applies the same test to the **claims**: for each contribution the paper asserts, is there an implementation, and is there a manifested run that exercised it on the data the paper reports?
 
@@ -19,7 +19,7 @@ The governing rule forbids a number without a manifest. Stage 5 applies the same
 
 **Evidence.** Stage 3 (`s3_score_threshold_verification`) measures `P(r=0)` at 0.001000 against a hazard of 0.001000 through the change-point window, deviating by at most 1.4e-15 between initialisation and truncation — the predictive term cancels algebraically, so the posterior is the hazard for any data. The auxiliary change-point term contributes a mean of 0.0025 on the records where it binds.
 
-**Action.** The evaluated system is **prequential global-Gaussian tail scoring**. It may not be described as change-point detection unless Stage 6's corrected statistic changes the measurement.
+**Action.** The evaluated system is **prequential global-Gaussian tail scoring**. Stage 6 has now run and did NOT rescue this: the corrected statistic makes P(r=0) respond (peak 1.000000 against a hazard of 0.001000) but saturates the composed score - 92.7% of its values are exactly 0.25 - giving an AUC-ROC of 0.5096, which is chance. Both variants are degenerate, in opposite directions. The verdict stands.
 
 ## PARTIAL — SloThreshold
 

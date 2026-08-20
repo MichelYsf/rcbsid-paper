@@ -61,3 +61,18 @@ cells flipping; the correct figure is 2 of 2.
 First Stage 3 run, superseded within the hour. Its numbers were right but two
 sentences in the document it generated contradicted them - written from an
 expectation formed before the measurement rather than from the measurement.
+
+## s6_bocpd_corrected_ablation_20260820T094323_d28cfa65.json
+The Stage 6 ablation as first run (22.3 min of local compute). Its measured
+values are correct and are carried forward unchanged - the arm metrics in
+`results/s6_ablation_arms.json` come from this run and cite its id. It is
+retired because the document it generated read the result as "repairing the
+change-point statistic degrades detection", which the saturation diagnostic
+shows is the wrong reading: the corrected variant emits a constant 0.25 on 93%
+of records and cannot rank at all. Superseded rather than recomputed, because
+re-paying 22 minutes to reword a document would breach the 30-minute cap.
+
+## s5_verified_contributions_20260820T085552_1ae23176.json
+Superseded when Stage 6 completed: the ChangePoint entry said the verdict held
+"unless Stage 6 changes the measurement". Stage 6 ran and did not change it.
+Counts and macro values are identical; only the action text is updated.
