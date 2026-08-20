@@ -1,6 +1,6 @@
 # findings_contrast — construction, not prevalence (Stage 4)
 
-Generating run: `s4_contrast_deliverables_20260819T121304_c90469b2`.
+Generating run: `s4_contrast_deliverables_20260820T081139_a5bf9183`.
 Every number below is emitted as a provenance macro by this run (the manifest named above), by the per-arm runs it aggregates, or by the `cicids_heldout_composition` audit where cited.
 
 > Adversarial review on 2026-08-19 refuted an earlier version of this sentence. Seven printed numbers had no `emit_macro` call, and one of them - the pooled attack count 14,621 - appeared in no manifest anywhere while being written into a manuscript-bound LaTeX table. That is exactly the orphan the governing rule forbids. Those macros are now emitted, and the sentence is asserted only because the generator emits a macro for every number it prints.
@@ -86,6 +86,19 @@ Ranking on the pooled composite: **proposed detector > HST > ECOD**.
 **Verdict (mechanical, threshold = identical ordering):** the composite's ranking reproduces **1 of 3** natural per-type streams.
 
 This cuts against the proposed method, and is reported for that reason. On the composite the proposed detector is best by a wide margin. Evaluated per stream in natural order it is **not** the best method on 1 of 3 streams (`udp_flood`). The composite reports a uniform dominance that the constituent streams do not show.
+
+## Seed sensitivity of the rankings
+
+HST is the only stochastic method in this contrast; the proposed detector and ECOD are deterministic on this data. Every ranking above therefore turns on a single HST draw unless stated otherwise. Extra seeds were bought for the cells where the margin was smallest.
+
+| stream / arm | HST by seed | mean | sd | deterministic rival |
+|---|---|---|---|---|
+| `cicids2017` / interleaved_synthetic | s11 0.5136, s23 0.4270 | 0.4703 | 0.0612 | ECOD 0.4190 |
+| `litnet_pooled` / composite_synthetic | s11 0.2388, s23 0.1776, s47 0.3678 | 0.2614 | 0.0971 | ECOD 0.2291 — **ordering flips** |
+
+**In 1 of 2 covered cells the HST/ECOD ordering flips with the seed.** A ranking that changes when only the random seed changes is not a result. No ranking COUNT and no per-stream ranking attribution from this document may enter the manuscript until every cell carries at least three seeds; the three LITNET per-type natural streams and the CICIDS natural arm are still single-seed, the latter because the run was stopped by the cost cap mid-job.
+
+What survives seeding, and is the result the argument rests on: the proposed detector and ECOD are both deterministic here, so **ECOD > proposed under natural order and proposed > ECOD under the synthetic construction** cannot move with a seed.
 
 ## Excluded cells
 

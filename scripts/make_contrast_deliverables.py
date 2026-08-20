@@ -48,6 +48,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from provenance import load_macro_index, provenance_run, sha256_file  # noqa: E402
 
 PARTS = ROOT / "results/rebuild_parts"
+SEED_PARTS = ROOT / "results/seed_parts"
 MERGED = ROOT / "results/construction_contrast.csv"
 FINDINGS = ROOT / "findings_contrast.md"
 TABLE = ROOT / "results/table_construction_contrast.tex"
@@ -83,6 +84,28 @@ def load_parts() -> tuple[pd.DataFrame, list[Path], list[str]]:
                              str(r.get("arm")) + "/" + str(r.get("method")) +
                              " -> " + str(r["excluded_reason"]))
     return pd.concat(frames, ignore_index=True), files, notes
+
+
+def load_seed_parts() -> pd.DataFrame:
+    """Extra-seed runs, kept SEPARATE from the primary frame on purpose.
+
+    Merging them would make cell() average across seeds and silently change
+    every headline AUC-PR - and emit those changed values under macro names the
+    per-arm manifests already claim, which the gate would (correctly) call
+    ambiguous. The primary tables stay at seed 11; the spread is reported here.
+    """
+    if not SEED_PARTS.exists():
+        return pd.DataFrame()
+    files = sorted(SEED_PARTS.glob("*.csv"))
+    if not files:
+        return pd.DataFrame()
+    frames = []
+    for f in files:
+        d = pd.read_csv(f)
+        if "auc_pr" in d.columns:
+            d["source_part"] = f.name
+            frames.append(d)
+    return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
 
 
 def cell(df: pd.DataFrame, stream: str, arm: str, method: str, col: str):
@@ -541,6 +564,82 @@ def main() -> int:
                          "reports a uniform dominance that the constituent streams do "
                          "not show.")
                 L.append("")
+
+        # ---- seed sensitivity ---------------------------------------------
+        sd_df = load_seed_parts()
+        L.append("## Seed sensitivity of the rankings")
+        L.append("")
+        L.append("HST is the only stochastic method in this contrast; the proposed "
+                 "detector and ECOD are deterministic on this data. Every ranking "
+                 "above therefore turns on a single HST draw unless stated "
+                 "otherwise. Extra seeds were bought for the cells where the margin "
+                 "was smallest.")
+        L.append("")
+        if sd_df.empty:
+            L.append("*No extra-seed runs are on disk. Every ranking above rests on "
+                     "one HST draw and no ranking count should be quoted.*")
+            L.append("")
+            run.emit_macro("SFourSeedCellsCovered", 0,
+                           desc="cells with more than one HST seed")
+        else:
+            groups = []
+            for (stream, arm), g in sd_df.groupby(["stream", "arm"]):
+                base = cell(df, stream, arm, "hst", "auc_pr")
+                vals = sorted(set(
+                    [(int(r["seed"]), float(r["auc_pr"])) for _, r in g.iterrows()] +
+                    ([(11, base)] if base is not None else [])))
+                if len(vals) < 2:
+                    continue
+                groups.append((stream, arm, vals))
+            run.emit_macro("SFourSeedCellsCovered", len(groups),
+                           desc="cells with more than one HST seed")
+            L.append("| stream / arm | HST by seed | mean | sd | deterministic rival |")
+            L.append("|---|---|---|---|---|")
+            flips = 0
+            for stream, arm, vals in groups:
+                xs = [v for _, v in vals]
+                mean = sum(xs) / len(xs)
+                var = sum((x - mean) ** 2 for x in xs) / (len(xs) - 1)
+                sdev = var ** 0.5
+                rival = cell(df, stream, arm, "ecod", "auc_pr")
+                key = camel(stream, arm)
+                run.emit_macro("SFourSeed" + key + "HstSeeds", len(xs),
+                               desc=stream + "/" + arm + " HST seed count")
+                run.emit_macro("SFourSeed" + key + "HstMean", round(mean, 6),
+                               desc=stream + "/" + arm + " HST AUC-PR mean over seeds")
+                run.emit_macro("SFourSeed" + key + "HstSd", round(sdev, 6),
+                               desc=stream + "/" + arm + " HST AUC-PR sd over seeds")
+                flipped = (rival is not None and
+                           min(xs) < rival < max(xs))
+                if flipped:
+                    flips += 1
+                run.emit_macro("SFourSeed" + key + "RankingFlips", 1 if flipped else 0,
+                               desc=stream + "/" + arm +
+                                    " 1 if the HST/ECOD ordering flips across seeds")
+                L.append("| `" + stream + "` / " + arm + " | " +
+                         ", ".join("s%d %.4f" % (sd_, v) for sd_, v in vals) +
+                         " | " + ("%.4f" % mean) + " | " + ("%.4f" % sdev) + " | ECOD " +
+                         (("%.4f" % rival) if rival is not None else "n/a") +
+                         (" — **ordering flips**" if flipped else "") + " |")
+            L.append("")
+            run.emit_macro("SFourSeedCellsWithFlippedRanking", flips,
+                           desc="cells where the HST/ECOD ordering flips across seeds")
+            if flips:
+                L.append("**In " + str(flips) + " of " + str(len(groups)) +
+                         " covered cells the HST/ECOD ordering flips with the seed.** "
+                         "A ranking that changes when only the random seed changes is "
+                         "not a result. No ranking COUNT and no per-stream ranking "
+                         "attribution from this document may enter the manuscript "
+                         "until every cell carries at least three seeds; the three "
+                         "LITNET per-type natural streams and the CICIDS natural arm "
+                         "are still single-seed, the latter because the run was "
+                         "stopped by the cost cap mid-job.")
+                L.append("")
+            L.append("What survives seeding, and is the result the argument rests on: "
+                     "the proposed detector and ECOD are both deterministic here, so "
+                     "**ECOD > proposed under natural order and proposed > ECOD under "
+                     "the synthetic construction** cannot move with a seed.")
+            L.append("")
 
         # ---- exclusions, stated never silent ------------------------------
         L.append("## Excluded cells")

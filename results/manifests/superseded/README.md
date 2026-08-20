@@ -45,3 +45,9 @@ Intermediate same-session iteration of the corrected deliverables run, retired
 immediately: it still wrote the LaTeX table as bare literals. Superseded by the
 run whose table carries only macro references, so that no number in a
 manuscript-bound file can sit outside the provenance gate's view.
+
+## s4_contrast_deliverables_20260819T121304_c90469b2.json
+Superseded by the run that adds the seed-sensitivity section, after three
+extra-seed HST runs were recovered from the stopped instance. Its macros are
+unchanged and correct; it simply predates the evidence that the HST/ECOD
+ordering on the LITNET composite flips with the seed.
