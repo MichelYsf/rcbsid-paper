@@ -14,6 +14,8 @@
 \newcommand{\CicidsArmPrevalencePct}{22.060125}  % whole-stream prevalence, identical in both arms [%] -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsArmRows}{1600000}  % rows in each CICIDS arm -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsAttacksMovedOutOfHeldout}{103189}  % attacks the interleaving moves out of the held-out slice -- cicids_heldout_composition_20260819T120420_ebb7c281
+\newcommand{\CicidsFridayHeldoutDensityPct}{77.66}  % attack density of the synthetic arm's Friday held-out sub-slice [%] -- supplementary_macros_20260824T102403_89c8967a
+\newcommand{\CicidsHeldoutAttackFreeRows}{162000}  % synthetic held-out rows from days contributing zero attacks (Mon-Thu) -- supplementary_macros_20260824T102403_89c8967a
 \newcommand{\CicidsHeldoutOverlap}{78000}  % records held out by BOTH arms -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsHeldoutOverlapPct}{32.5}  % held-out slice overlap between the two arms [%] -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsHeldoutSize}{240000}  % held-out records per arm -- cicids_heldout_composition_20260819T120420_ebb7c281
@@ -94,6 +96,7 @@
 \newcommand{\SFourCicidsNaturalEcodLift}{0.072792}  % CICIDS natural ecod AUC-PR above chance -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourCicidsNaturalHstAucpr}{0.588902}  % CICIDS natural hst AUC-PR -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourCicidsNaturalHstLift}{-0.093448}  % CICIDS natural hst AUC-PR above chance -- s4_contrast_deliverables_20260820T082833_05219839
+\newcommand{\SFourCicidsNaturalHstLiftAbs}{0.093448}  % magnitude of HST's below-chance lift, natural arm -- supplementary_macros_20260824T102403_89c8967a
 \newcommand{\SFourCicidsNaturalMethodsBelowChance}{1}  % methods below the chance floor in the natural arm -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourCicidsNaturalProposedDetectorAucpr}{0.728337}  % CICIDS natural proposed_detector AUC-PR -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourCicidsNaturalProposedDetectorLift}{0.045987}  % CICIDS natural proposed_detector AUC-PR above chance -- s4_contrast_deliverables_20260820T082833_05219839
@@ -101,6 +104,7 @@
 \newcommand{\SFourCicidsNaturalTestPrev}{68.235}  % CICIDS2017 held-out prevalence, true timestamp order [%] -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourCicidsPairwiseOrderingsPreserved}{1}  % pairwise method orderings preserved across arms -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourCicidsPairwiseOrderingsTotal}{3}  % pairwise method orderings compared across arms -- s4_contrast_deliverables_20260820T082833_05219839
+\newcommand{\SFourCicidsPrevShiftAbsPp}{42.9954}  % magnitude of the held-out prevalence shift [pp] -- supplementary_macros_20260824T102403_89c8967a
 \newcommand{\SFourCicidsPrevShiftPp}{-42.9954}  % held-out prevalence shift caused by construction alone [pp] -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourCicidsRankingKendallTau}{-0.3333}  % Kendall tau between the two arms' method rankings -- s4_contrast_deliverables_20260820T082833_05219839
 \newcommand{\SFourCicidsRankingPreserved}{0}  % 1 if the method ranking is identical across arms -- s4_contrast_deliverables_20260820T082833_05219839
@@ -161,6 +165,7 @@
 \newcommand{\SSixDiagOriginalFracAtCap}{0.004733}  % original fraction of scores exactly at the 0.25 cap -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
 \newcommand{\SSixDiagOriginalMeanShortRunMass}{0.006472}  % original mean posterior mass on runs <= 5 -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
 \newcommand{\SSixDiagOriginalScoreSd}{0.218999}  % original score standard deviation -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
+\newcommand{\SSixDiagWindowRows}{15000}  % records covered by the Stage-6 score-distribution diagnostic -- supplementary_macros_20260824T102403_89c8967a
 \newcommand{\SSixExcluded}{0}  % 1 if the ablation was excluded -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
 \newcommand{\SSixOriginalAucpr}{0.397486}  % original variant AUC-PR (from cached run) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
 \newcommand{\SSixOriginalAucroc}{0.848216}  % original variant AUC-ROC (from cached run) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
@@ -328,7 +333,7 @@
 \newcommand{\STwoLevelsCovered}{5}  % prevalence levels covered -- s2_prevalence_relabelled_20260824T094843_2ef126ae
 \newcommand{\STwoLofBeatsProposedLevels}{5}  % levels where LOF's mean AUC-PR exceeds the proposed detector's -- s2_prevalence_relabelled_20260824T094843_2ef126ae
 \newcommand{\STwoProposedLevelsBelowFloor}{1}  % levels where the proposed detector's mean AUC-PR is below its chance floor -- s2_prevalence_relabelled_20260824T094843_2ef126ae
-\newcommand{\SelfTestManifested}{0.4242}  % gate acceptance -- selftest_provenance_gate_20260824T093750_b2b42ed3
+\newcommand{\SelfTestManifested}{0.4242}  % gate acceptance -- selftest_provenance_gate_20260824T100714_6f4ea026
 \newcommand{\StageZeroDeterministicChecksFailed}{0}  % count of deterministic reproduction failures at Stage 0 -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\StageOneBocpdsloAucprDiff}{2.846684505897201e-07}  % Stage1 repro |new-published| for bocpd_slo/auc_pr -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\StageOneBocpdsloAucrocDiff}{7.499538092758939e-07}  % Stage1 repro |new-published| for bocpd_slo/auc_roc -- stage0_reproduction_checks_20260817T221558_53c31fe7

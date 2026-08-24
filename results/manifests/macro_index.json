@@ -3680,6 +3680,24 @@
       "manifest": "selftest_provenance_gate_20260824T093750_b2b42ed3.json",
       "git_commit": "d65220696f5d237575c7ec55a7e3304381311f82-dirty",
       "finished_utc": "2026-08-24T09:37:50.351948+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260824T100714_6f4ea026",
+      "manifest": "selftest_provenance_gate_20260824T100714_6f4ea026.json",
+      "git_commit": "c93865e9f3775f01089a67f4d0ae3774f643c6e3-dirty",
+      "finished_utc": "2026-08-24T10:07:14.737402+00:00"
+    },
+    {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance",
+      "run_id": "selftest_provenance_gate_20260824T103711_0a3e6fd0",
+      "manifest": "selftest_provenance_gate_20260824T103711_0a3e6fd0.json",
+      "git_commit": "36a85d1a489bebe953b95e6f404503266d0b4df1-dirty",
+      "finished_utc": "2026-08-24T10:37:11.051909+00:00"
     }
   ],
   "Stage1BocpdsloAucprDiff": [
@@ -4573,6 +4591,61 @@
       "manifest": "stage1_natural_streams_20260819T062728_87db5780.json",
       "git_commit": "ff1bde7fed22d42dd4aa8bc5b846b309d1529b08",
       "finished_utc": "2026-08-19T06:28:50.987226+00:00"
+    }
+  ],
+  "CicidsHeldoutAttackFreeRows": [
+    {
+      "value": 162000,
+      "unit": "",
+      "desc": "synthetic held-out rows from days contributing zero attacks (Mon-Thu)",
+      "run_id": "supplementary_macros_20260824T102403_89c8967a",
+      "manifest": "supplementary_macros_20260824T102403_89c8967a.json",
+      "git_commit": "36a85d1a489bebe953b95e6f404503266d0b4df1-dirty",
+      "finished_utc": "2026-08-24T10:24:03.283322+00:00"
+    }
+  ],
+  "CicidsFridayHeldoutDensityPct": [
+    {
+      "value": 77.66,
+      "unit": "%",
+      "desc": "attack density of the synthetic arm's Friday held-out sub-slice",
+      "run_id": "supplementary_macros_20260824T102403_89c8967a",
+      "manifest": "supplementary_macros_20260824T102403_89c8967a.json",
+      "git_commit": "36a85d1a489bebe953b95e6f404503266d0b4df1-dirty",
+      "finished_utc": "2026-08-24T10:24:03.283322+00:00"
+    }
+  ],
+  "SFourCicidsNaturalHstLiftAbs": [
+    {
+      "value": 0.093448,
+      "unit": "",
+      "desc": "magnitude of HST's below-chance lift, natural arm",
+      "run_id": "supplementary_macros_20260824T102403_89c8967a",
+      "manifest": "supplementary_macros_20260824T102403_89c8967a.json",
+      "git_commit": "36a85d1a489bebe953b95e6f404503266d0b4df1-dirty",
+      "finished_utc": "2026-08-24T10:24:03.283322+00:00"
+    }
+  ],
+  "SFourCicidsPrevShiftAbsPp": [
+    {
+      "value": 42.9954,
+      "unit": "pp",
+      "desc": "magnitude of the held-out prevalence shift",
+      "run_id": "supplementary_macros_20260824T102403_89c8967a",
+      "manifest": "supplementary_macros_20260824T102403_89c8967a.json",
+      "git_commit": "36a85d1a489bebe953b95e6f404503266d0b4df1-dirty",
+      "finished_utc": "2026-08-24T10:24:03.283322+00:00"
+    }
+  ],
+  "SSixDiagWindowRows": [
+    {
+      "value": 15000,
+      "unit": "",
+      "desc": "records covered by the Stage-6 score-distribution diagnostic",
+      "run_id": "supplementary_macros_20260824T102403_89c8967a",
+      "manifest": "supplementary_macros_20260824T102403_89c8967a.json",
+      "git_commit": "36a85d1a489bebe953b95e6f404503266d0b4df1-dirty",
+      "finished_utc": "2026-08-24T10:24:03.283322+00:00"
     }
   ]
 }

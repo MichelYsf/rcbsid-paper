@@ -482,3 +482,38 @@ rule constrains.
 **Stage 6 therefore establishes a failure mode, not a working correction**, and
 the manuscript may claim no more than that. The Stage 5 verdict on the
 change-point contribution stays WITHDRAWN: Stage 6 did not rescue it.
+
+### CI-19 — the manuscript reintroduced the CI-1 class error, and the ledger inherited it
+The F8 contradiction sweep (three independent auditors over the compiled
+manuscript, 2026-08-24) returned 7 BLOCKING, 10 WORDING and 6 NIT findings.
+All were fixed before FINALIZE_DONE. Three deserve permanent record:
+
+**The worst: "natural-order" applied to the interleaved slice — CI-1's error,
+reintroduced by the author of the correction.** The introduction stated the
+LOF-versus-detector result (0.8632 vs 0.5450) "on the identical natural-order
+held-out slice". That slice is the *interleaved unresampled* stream's held-out
+slice (floor 0.2524); the detector's natural-order value is 0.7283. The claim
+ledger's row I15 carried the same words, so the ledger — built to catch
+exactly this — validated the defect instead: **a ledger written by the same
+hand as the manuscript shares the manuscript's blind spots.** The gate checks
+that ledger references *exist*, not that their gists are *true*; the sweep's
+independence is what caught it. Both fixed; ledger gists for A5, A6, A8, I11,
+I15, I16 tightened in the same pass.
+
+**"Monotonically" falsified by its own macros.** The Section 6 sentence
+claimed lift "falls monotonically from +0.3176 at 5% ... to −0.020 at 64%"
+while its own second value (+0.3482 at 10%) rises from the first. Replaced
+with the peak-then-fall form the findings file always used.
+
+**The heredoc \r class, completed.** Prior incidents recorded `\b`→backspace
+and `\t`→tab damage from shell-mangled Python heredocs; this sweep found the
+third member: `\ref` became a literal carriage return + "ef{...}", which a
+later universal-newlines read/write cycle converted into a mid-token line
+break — rendering "(Table eftab:litnet)" in the shipped PDF while the
+0-undefined-references check passed vacuously (a `\ref` that has lost its
+backslash is not a reference). The general rule, now enforced by practice:
+**backslash-bearing text never goes through the shell heredoc; it goes
+through Write-tool script files.** Also fixed en route: five typed literals
+manifested (`supplementary_macros` run), single-seed HST placements removed
+from flat rankings (rule 7), arXiv IDs stripped from the anonymous build and
+reinstated only in the named arXiv variant by `build_arxiv_variant.py`.
