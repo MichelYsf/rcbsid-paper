@@ -1,0 +1,187 @@
+{
+  "run_id": "s6_bocpd_corrected_ablation_20260824T092655_a47acf51",
+  "name": "s6_bocpd_corrected_ablation",
+  "git_commit": "d65220696f5d237575c7ec55a7e3304381311f82-dirty",
+  "git_commit_at_write": "d65220696f5d237575c7ec55a7e3304381311f82-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "ae5dc4423253ae9ca09e2dad664601dad5740a5ba13581a4f31832fc8f608543",
+  "config": {
+    "stream": "litnet2020_udp_flood_natural.csv",
+    "prefix_rows": 200000,
+    "hazard": 0.001,
+    "train": 0.7,
+    "val": 0.15,
+    "wall_cap_s": 1800,
+    "reduction": "30-minute local cap: one stream, 200k prefix, one seed, CICIDS excluded at d=84"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_udp_flood_natural.csv",
+      "sha256": "3bb6753b505e10bcb0e06062ff34aa338c9f352bc5faa69d7feca6abd4b5a297"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_bocpd_ablation.md",
+      "exists": true,
+      "sha256": "7345a78790931a9c543b2cd4533c4e78646b7f3374798355bfbcae57201cd85d"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-24T09:26:55.321480+00:00",
+  "finished_utc": "2026-08-24T09:29:30.602702+00:00",
+  "wall_seconds": 155.281222,
+  "macros": {
+    "SSixProbeHazard": {
+      "value": 0.001,
+      "unit": "",
+      "desc": "hazard used in the probe"
+    },
+    "SSixProbeOriginalPeak": {
+      "value": 0.001,
+      "unit": "",
+      "desc": "peak P(r=0) after a 6-sigma shift, evaluated detector"
+    },
+    "SSixProbeCorrectedPeak": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "peak P(r=0) after a 6-sigma shift, corrected statistic"
+    },
+    "SSixProbeCorrectedRatio": {
+      "value": 1000.0,
+      "unit": "",
+      "desc": "corrected peak P(r=0) as a multiple of the hazard"
+    },
+    "SSixProbeOriginalRatio": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "original peak P(r=0) as a multiple of the hazard"
+    },
+    "SSixPrefixRows": {
+      "value": 200000,
+      "unit": "",
+      "desc": "prefix records evaluated"
+    },
+    "SSixTestRows": {
+      "value": 30000,
+      "unit": "",
+      "desc": "held-out records"
+    },
+    "SSixTestAttacks": {
+      "value": 4840,
+      "unit": "",
+      "desc": "held-out attacks"
+    },
+    "SSixChanceFloor": {
+      "value": 0.161333,
+      "unit": "",
+      "desc": "AUC-PR chance floor on this prefix (test prevalence)"
+    },
+    "SSixOriginalAucpr": {
+      "value": 0.397486,
+      "unit": "",
+      "desc": "original variant AUC-PR (from cached run)"
+    },
+    "SSixOriginalAucroc": {
+      "value": 0.848216,
+      "unit": "",
+      "desc": "original variant AUC-ROC (from cached run)"
+    },
+    "SSixOriginalElapsedS": {
+      "value": 743.2,
+      "unit": "",
+      "desc": "original variant wall seconds (from cached run)"
+    },
+    "SSixCorrectedAucpr": {
+      "value": 0.169912,
+      "unit": "",
+      "desc": "corrected variant AUC-PR (from cached run)"
+    },
+    "SSixCorrectedAucroc": {
+      "value": 0.50962,
+      "unit": "",
+      "desc": "corrected variant AUC-ROC (from cached run)"
+    },
+    "SSixCorrectedElapsedS": {
+      "value": 586.3,
+      "unit": "",
+      "desc": "corrected variant wall seconds (from cached run)"
+    },
+    "SSixArmsRecomputed": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the arm metrics were recomputed this run"
+    },
+    "SSixExcluded": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the ablation was excluded"
+    },
+    "SSixTotalWallS": {
+      "value": 155.3,
+      "unit": "",
+      "desc": "total Stage 6 local compute, seconds"
+    },
+    "SSixWallCapS": {
+      "value": 1800,
+      "unit": "",
+      "desc": "the operator's wall cap"
+    },
+    "SSixAucprDelta": {
+      "value": -0.227574,
+      "unit": "",
+      "desc": "corrected minus original AUC-PR on this prefix"
+    },
+    "SSixDiagOriginalScoreSd": {
+      "value": 0.218999,
+      "unit": "",
+      "desc": "original score standard deviation"
+    },
+    "SSixDiagOriginalDistinctScores": {
+      "value": 3899,
+      "unit": "",
+      "desc": "original distinct score values emitted"
+    },
+    "SSixDiagOriginalFracAtCap": {
+      "value": 0.004733,
+      "unit": "",
+      "desc": "original fraction of scores exactly at the 0.25 cap"
+    },
+    "SSixDiagOriginalMeanShortRunMass": {
+      "value": 0.006472,
+      "unit": "",
+      "desc": "original mean posterior mass on runs <= 5"
+    },
+    "SSixDiagCorrectedScoreSd": {
+      "value": 0.159341,
+      "unit": "",
+      "desc": "corrected score standard deviation"
+    },
+    "SSixDiagCorrectedDistinctScores": {
+      "value": 747,
+      "unit": "",
+      "desc": "corrected distinct score values emitted"
+    },
+    "SSixDiagCorrectedFracAtCap": {
+      "value": 0.9274,
+      "unit": "",
+      "desc": "corrected fraction of scores exactly at the 0.25 cap"
+    },
+    "SSixDiagCorrectedMeanShortRunMass": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "corrected mean posterior mass on runs <= 5"
+    }
+  },
+  "notes": "corrected reset branch (Student-t prior predictive) vs the evaluated detector, paired on one fixed slice",
+  "extra": {
+    "arm_metrics_reused_from": "s6_bocpd_corrected_ablation_20260820T094323_d28cfa65"
+  }
+}

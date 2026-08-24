@@ -227,6 +227,18 @@ def main() -> int:
                 # stage at 30 minutes.
                 arms = cached["arms"]
                 run.note("arm_metrics_reused_from", cached.get("run_id"))
+                # The cached path must STILL emit the arm macros, or the table
+                # this run writes is backed by nothing - the exact orphan class
+                # CI-11 recorded. Values come from the cache, which cites the
+                # manifested run that produced them.
+                for _n, _v in arms.items():
+                    _k = _n.capitalize()
+                    run.emit_macro("SSix" + _k + "Aucpr", round(float(_v["auc_pr"]), 6),
+                                   desc=_n + " variant AUC-PR (from cached run)")
+                    run.emit_macro("SSix" + _k + "Aucroc", round(float(_v["auc_roc"]), 6),
+                                   desc=_n + " variant AUC-ROC (from cached run)")
+                    run.emit_macro("SSix" + _k + "ElapsedS", round(float(_v["elapsed"]), 1),
+                                   desc=_n + " variant wall seconds (from cached run)")
                 run.emit_macro("SSixArmsRecomputed", 0,
                                desc="1 if the arm metrics were recomputed this run")
             for name, corr in ([] if arms else (("original", False), ("corrected", True))):

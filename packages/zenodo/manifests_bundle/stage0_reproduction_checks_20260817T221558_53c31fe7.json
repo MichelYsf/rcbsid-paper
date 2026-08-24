@@ -1,0 +1,153 @@
+{
+  "run_id": "stage0_reproduction_checks_20260817T221558_53c31fe7",
+  "name": "stage0_reproduction_checks",
+  "git_commit": "6af616b2e696188d885bf000f13640ca49e4ea6a-dirty",
+  "config_sha256": "85ea220a552f78a9c2347e4f725b07357a92eff0b655032b75045919676c4849",
+  "config": {
+    "check_a": "stage1 gate",
+    "check_b": "deterministic batch refs"
+  },
+  "seed": null,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results_cicids_trial\\tables\\main_metrics_raw.csv",
+      "sha256": "a6ef28f14b88442a7300daa98d66e4247ef2146dd3ccba3a1c37538fcda2bede"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results_litnet_trial\\tables\\main_metrics_raw.csv",
+      "sha256": "7bc3e92025e563eb900b729f0a92245235bff6fe3cca5526d836f544d459fdf0"
+    }
+  ],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-17T22:15:58.676509+00:00",
+  "finished_utc": "2026-08-17T22:15:58.770992+00:00",
+  "wall_seconds": 0.094483,
+  "macros": {
+    "Stage1BocpdsloAucprDiff": {
+      "value": 2.846684505897201e-07,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/auc_pr"
+    },
+    "Stage1BocpdsloAucrocDiff": {
+      "value": 7.499538092758939e-07,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/auc_roc"
+    },
+    "Stage1BocpdsloF1Diff": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/f1"
+    },
+    "Stage1BocpdsloPrecisionDiff": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/precision"
+    },
+    "Stage1BocpdsloRecallDiff": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for bocpd_slo/recall"
+    },
+    "Stage1EcodbatchrefAucprDiff": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/auc_pr"
+    },
+    "Stage1EcodbatchrefAucrocDiff": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/auc_roc"
+    },
+    "Stage1EcodbatchrefF1Diff": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/f1"
+    },
+    "Stage1EcodbatchrefPrecisionDiff": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/precision"
+    },
+    "Stage1EcodbatchrefRecallDiff": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "Stage1 repro |new-published| for ecod_batch_ref/recall"
+    },
+    "ReproCicids2017EcodAucpr": {
+      "value": 0.418965884610567,
+      "unit": "",
+      "desc": "cicids2017 ecod auc_pr reproduced on the rebuilt stream"
+    },
+    "ReproCicids2017EcodAucroc": {
+      "value": 0.8075728351061373,
+      "unit": "",
+      "desc": "cicids2017 ecod auc_roc reproduced on the rebuilt stream"
+    },
+    "ReproCicids2017EcodF1": {
+      "value": 0.6608455997494519,
+      "unit": "",
+      "desc": "cicids2017 ecod f1 reproduced on the rebuilt stream"
+    },
+    "ReproCicids2017CopodAucpr": {
+      "value": 0.423156400711175,
+      "unit": "",
+      "desc": "cicids2017 copod auc_pr reproduced on the rebuilt stream"
+    },
+    "ReproCicids2017CopodAucroc": {
+      "value": 0.8117111519918692,
+      "unit": "",
+      "desc": "cicids2017 copod auc_roc reproduced on the rebuilt stream"
+    },
+    "ReproCicids2017CopodF1": {
+      "value": 0.6315339457576926,
+      "unit": "",
+      "desc": "cicids2017 copod f1 reproduced on the rebuilt stream"
+    },
+    "ReproLitnet2020EcodAucpr": {
+      "value": 0.229143068911574,
+      "unit": "",
+      "desc": "litnet2020 ecod auc_pr reproduced on the rebuilt stream"
+    },
+    "ReproLitnet2020EcodAucroc": {
+      "value": 0.7367741472468452,
+      "unit": "",
+      "desc": "litnet2020 ecod auc_roc reproduced on the rebuilt stream"
+    },
+    "ReproLitnet2020EcodF1": {
+      "value": 0.3246141348497157,
+      "unit": "",
+      "desc": "litnet2020 ecod f1 reproduced on the rebuilt stream"
+    },
+    "ReproLitnet2020CopodAucpr": {
+      "value": 0.2081268016942385,
+      "unit": "",
+      "desc": "litnet2020 copod auc_pr reproduced on the rebuilt stream"
+    },
+    "ReproLitnet2020CopodAucroc": {
+      "value": 0.7799536395399809,
+      "unit": "",
+      "desc": "litnet2020 copod auc_roc reproduced on the rebuilt stream"
+    },
+    "ReproLitnet2020CopodF1": {
+      "value": 0.2731094221052184,
+      "unit": "",
+      "desc": "litnet2020 copod f1 reproduced on the rebuilt stream"
+    },
+    "Stage0DeterministicChecksFailed": {
+      "value": 0,
+      "unit": "",
+      "desc": "count of deterministic reproduction failures at Stage 0"
+    }
+  },
+  "notes": "Stage 0.2 gate: published deterministic references must reproduce bit-for-bit before the rebuild proceeds.",
+  "extra": {
+    "failures": []
+  }
+}

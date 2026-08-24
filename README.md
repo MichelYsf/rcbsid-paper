@@ -1,75 +1,90 @@
-# RCBSID Paper Reproducibility Package v5
+# Benchmark Stream Construction, Not Attack Prevalence — reproducibility package
 
-GitHub-ready package for the revised paper:
+This repository is the artifact for the rebuilt manuscript in `paper/main.tex`
+(branch `rebuild/honest-v1`). It exists in its present form because earlier
+versions of this work (arXiv:2605.24696 v1/v2) reported results produced under
+a composite stream construction and described a scoring rule the code did not
+implement. An adversarial review and a line-by-line audit established both;
+this package is the rebuild from that audit. The correction history is not
+hidden: `SCOPE_DECISIONS.md` records the binding scope rules and **18 numbered
+corrected incidents**, `AUDIT_FINDINGS.md` records the audit (A1–A13), and
+`SUPERSEDED.md` lists every stale artifact class so nothing old can be
+mistaken for current.
 
-**SLO-Aware Streaming Intrusion Detection: Risk-Calibrated Bayesian Changepoint Alerting with Burn-Rate Budgets**
+## What the paper shows
 
-## Core fixes implemented
+1. **The construction contrast** (`findings_contrast.md`). On CICIDS2017, the
+   identical 1,600,000-record multiset evaluated in true timestamp order versus
+   day-of-week round robin: held-out prevalence moves 68.235% → 25.240%, the
+   held-out slices share only 32.5% of their records, and the ordering of the
+   two deterministic methods (ECOD vs the evaluated detector) inverts. The
+   ranking change is a rotation (Kendall τ = −0.333), not a reversal.
+2. **The pooling identity on LITNET-2020**. The composite's single 6.498%
+   prevalence is the equal-budget mixture of three disjoint captures spanning
+   0.176%–15.775%; it is a property of assembly, not of any capture.
+3. **Method identity** (`findings_score_threshold.md`). The evaluated
+   detector's run-length posterior equals the hazard rate for any data; the
+   system is prequential global-Gaussian tail scoring. The textbook repair
+   saturates the score and detects nothing (`findings_bocpd_ablation.md`) —
+   both variants are degenerate, in opposite directions.
+4. **Findings that cut against the detector, stated as findings**: batch LOF
+   beats it 0.8632 vs 0.5450 on the identical natural-order slice, and its
+   lift over the chance floor goes negative at 64% prevalence
+   (`findings_prevalence.md`).
 
-1. Main comparison now uses online streaming baselines: Kitsune/KitNET, HS-Trees, LODA, xStream, RRCF, and streaming Isolation Forest.
-2. LOF, ECOD, and COPOD are kept only as batch-reference rows.
-3. A third dataset, LITNET-2020, is added.
-4. CICIDS2017 is specified as the Engelen-corrected version.
-5. Chronological splits only, with fixed seeds.
-6. Wilcoxon signed-rank tests and Holm-Bonferroni correction are specified.
-7. Detection latency, calibration, false-alarm rate, and throughput are added.
-8. The unsupported O(1) complexity claim is removed.
-9. The corrected complexity is O(kd) per event with run-length truncation k and feature dimension d.
-10. The contribution is reframed as SLO-aware IDS thresholding and burn-rate alerting.
+## The governing rule
 
+**No number, table, or figure enters the manuscript unless it was produced by
+a script in this repo that wrote, in the same execution, an archived run
+manifest** (git commit, config hash, input SHA-256, seed, environment hash,
+timestamps, output paths). Enforcement:
 
-## Audit fixes
+- `scripts/provenance.py` — the manifest spine; manifests live in
+  `results/manifests/`, retired ones in `results/manifests/superseded/` with
+  reasons.
+- `scripts/emit_numbers_tex.py` — generates `paper/numbers.tex`; the
+  manuscript contains no numeric literals, only macro references.
+- `scripts/check_provenance.py` — fails the build on orphans, on macros two
+  runs claim with different values, and on drift between the derived macro
+  index and the manifests behind it.
+- `scripts/check_manuscript_macros.py` — every macro the manuscript uses must
+  be defined.
+- `CLAIM_LEDGER.md` — every abstract/introduction sentence mapped to its
+  generating run; ledger entries are gate-checked.
 
-This package addresses the blocking issues identified across the audit reports:
-
-- fixed the BOCPD scoring function and added synthetic sanity tests;
-- added concrete wrappers for all six streaming baselines;
-- rewrote the experiment runner so it actually iterates over datasets, seeds, streaming baselines, and batch references;
-- fixed the River/SciPy and PySAD/PyOD dependency conflicts;
-- added LITNET normalization, CSV-to-Parquet conversion, and smoke-test scripts;
-- hardened native-baseline verification so publication runs cannot silently use fallback or constant-zero baselines;
-- replaced upstream-broken PySAD LODA with a dependency-free native LODA implementation; xStream still uses `scalar_score` for PySAD output conversion.
-
-Run local validation with:
-
-```bash
-python -m pytest -q
-bash scripts/run_smoke_test.sh
-```
-
-Final publication numbers must still be generated from the real datasets, not from the synthetic smoke test.
-
-## One-command reproduction
-
-After downloading datasets into `data/raw`, run:
-
-```bash
-bash scripts/reproduce_all.sh
-```
-
-## Dataset folders
-
-```text
-data/raw/unsw_nb15/
-data/raw/cicids2017_engelen/
-data/raw/litnet2020/
-```
-
-Do not commit raw datasets. Use DVC for checksums and Zenodo for final archived artifacts.
-
-## Zenodo release
-
-After final results are produced, create a GitHub release and archive it on Zenodo. Replace `10.5281/zenodo.XXXXXXX` in `CITATION.cff`, the paper, and README with the issued DOI.
-
-
-## Publication baseline safety
-
-`configs/experiment_full.yaml` sets `allow_fallback_baselines: false`. This is intentional: full paper experiments must fail if HS-Trees, KitNET, LODA, xStream, RRCF, or iForestASD cannot run natively. Smoke tests may use fallbacks, but reviewer-facing tables must not.
-
-Before launching the full run, execute:
+## Reproducing
 
 ```bash
-python scripts/verify_native_baselines.py
+python -m venv .venv && .venv/bin/pip install -r requirements.txt
+python -m pytest -q                          # full test suite
+python scripts/check_provenance.py           # the gate
 ```
 
-If this fails, install the missing dependency or native implementation first. In particular, native KitNET requires the `ymirsky/KitNET-py` implementation, or a compatible `KitNET` module, on `PYTHONPATH`.
+Stream reconstruction from the original public captures:
+`scripts/build_cicids_labeled.py`, `scripts/build_litnet_labeled.py`,
+`scripts/build_natural_streams.py`; verify against the committed expectation
+with `scripts/normalized_sha256.py` (hashes are line-ending-normalised —
+raw-byte SHA-256 of CSVs is not portable across platforms).
+
+Key experiment entry points, each writing manifests:
+`scripts/run_construction_contrast.py` (Stage 4, the central experiment),
+`scripts/make_findings_prevalence.py` (Stage 2, relabelled),
+`scripts/verify_score_threshold.py` (Stage 3),
+`scripts/run_bocpd_ablation.py` (Stage 6),
+`scripts/verify_contributions.py` (Stage 5).
+
+## Honest limitations, up front
+
+Two benchmarks, one split rule (70/15/15 chronological; no split-rule
+sensitivity analysis exists). ECOD is fitted benign-only and is
+label-privileged. Stochastic baselines carry seed distributions or are
+withheld — the HST/ECOD ordering flips with the seed in 2 of 2 cells where
+extra seeds were bought. The CICIDS dataset is a 76.63% budgeted subsample
+with a measured −2.15 pp prevalence bias. KitNET, xStream, RRCF, and
+streaming iForest have wrappers in `src/baselines/` but **no manifested runs
+in this rebuild** and therefore carry no numbers anywhere.
+
+## Citation
+
+See `CITATION.cff`. No Zenodo deposit exists yet; the first publication of
+this artifact will mint the DOI.

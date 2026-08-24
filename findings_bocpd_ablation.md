@@ -1,6 +1,6 @@
 # findings_bocpd_ablation — the corrected change-point statistic (Stage 6)
 
-Generating run: `s6_bocpd_corrected_ablation_20260820T101012_e216266e`. Every number is a provenance macro.
+Generating run: `s6_bocpd_corrected_ablation_20260824T092655_a47acf51`. Every number is a provenance macro.
 
 ## Scope reduction, stated up front
 
@@ -11,7 +11,7 @@ The operator capped Stage 6 at **30 minutes of local compute** (down from 90) wi
 - **blaster_worm and spam excluded** for an independent reason: their attacks sit at the end of the stream, so any prefix holds no test attacks.
 - **One seed**, permitted by binding rule 7 because both variants are deterministic (Stage 2 measured this detector at sd 0.0000 across three draws).
 
-Total local compute: **121.1 s** against a cap of 1800 s.
+Total local compute: **155.3 s** against a cap of 1800 s.
 
 ## Does the corrected statistic respond to a change point?
 

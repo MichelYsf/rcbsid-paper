@@ -34,7 +34,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from provenance import build_index, load_macro_index  # noqa: E402
+from provenance import MANIFEST_DIR, build_index, load_macro_index, tex_macro_name  # noqa: E402
 
 DEFAULT_TARGETS = [ROOT / "paper" / "numbers.tex"]
 NEWCOMMAND = re.compile(r"\\newcommand\{\\([A-Za-z][A-Za-z0-9]*)\}\{([^}]*)\}")
@@ -139,7 +139,9 @@ def check(targets: list[Path], verify_index: bool = True) -> int:
             continue
         scanned += 1
         macros = parse_macros(t.read_text(encoding="utf-8", errors="replace"))
+        alias = {tex_macro_name(k): k for k in index}
         for name, raw in macros.items():
+            name = alias.get(name, name)
             if not is_numeric(raw):
                 continue                      # prose macro, not a number
             if name not in index:
@@ -187,6 +189,50 @@ def check(targets: list[Path], verify_index: bool = True) -> int:
         print("\nGATE FAILED — a number without a manifest is deleted, never drafted.")
         return 1
     print("GATE PASSED — every number in the manuscript traces to a run manifest.")
+    return 0
+
+
+LEDGER = ROOT / "CLAIM_LEDGER.md"
+
+
+def check_ledger() -> int:
+    """Every manifest:<run_id> and file:<path> in CLAIM_LEDGER.md must exist.
+
+    The ledger maps each abstract/introduction sentence to its generating run.
+    An entry pointing at a manifest that does not exist is an orphaned CLAIM -
+    the sentence-level analogue of an orphaned number - and fails the build.
+    An absent or empty ledger also fails: the manuscript's headline claims
+    must be mapped, not merely mappable.
+    """
+    import re as _re
+    if not LEDGER.exists():
+        print("LEDGER FAILED - CLAIM_LEDGER.md is absent.")
+        return 1
+    text = LEDGER.read_text(encoding="utf-8", errors="replace")
+    refs_m = _re.findall(r"manifest:([A-Za-z0-9_]+)", text)
+    refs_f = _re.findall(r"file:([A-Za-z0-9_./-]+)", text)
+    rows = _re.findall(r"^\| [AI]\d+ \|", text, flags=_re.M)
+    problems = []
+    for rid in sorted(set(refs_m)):
+        if not (MANIFEST_DIR / (rid + ".json")).exists():
+            problems.append("manifest missing: " + rid)
+    for f in sorted(set(refs_f)):
+        if not (ROOT / f).exists():
+            problems.append("file missing: " + f)
+    print("claim ledger: %d sentence rows, %d manifest refs (%d unique), "
+          "%d file refs (%d unique)"
+          % (len(rows), len(refs_m), len(set(refs_m)),
+             len(refs_f), len(set(refs_f))))
+    if not rows:
+        print("LEDGER FAILED - no sentence rows found; the ledger must map "
+              "the abstract and introduction, not merely exist.")
+        return 1
+    if problems:
+        for pr in problems:
+            print("  ORPHANED CLAIM  " + pr)
+        print("LEDGER FAILED - a claim references a source that does not exist.")
+        return 1
+    print("LEDGER PASSED - every claim reference resolves.")
     return 0
 
 
@@ -242,11 +288,20 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("targets", nargs="*", type=Path, default=None)
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--ledger", action="store_true",
+                    help="check CLAIM_LEDGER.md only")
+    ap.add_argument("--no-ledger", action="store_true",
+                    help="skip the ledger check (pre-ledger workflows)")
     a = ap.parse_args()
     if a.selftest:
         return selftest()
+    if a.ledger:
+        return check_ledger()
     targets = a.targets or DEFAULT_TARGETS
-    return check(list(targets))
+    rc = check(list(targets))
+    if not a.no_ledger and LEDGER.exists():
+        rc = max(rc, check_ledger())
+    return rc
 
 
 if __name__ == "__main__":

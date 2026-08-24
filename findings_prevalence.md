@@ -1,6 +1,6 @@
 # findings_prevalence — prevalence *within the synthetic construction* (Stage 2)
 
-Generating run: `s2_prevalence_relabelled_20260820T082620_005ffef6`. Every number below is a provenance macro.
+Generating run: `s2_prevalence_relabelled_20260824T094843_2ef126ae`. Every number below is a provenance macro.
 
 ## What this experiment is, and is not
 

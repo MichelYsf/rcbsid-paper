@@ -1,0 +1,12 @@
+# EXPECTED_SHA256 (NORMALISED) - natural-order evaluation streams
+# Hashes are computed over content with line endings normalised to LF.
+# Raw-byte hashing is NOT portable: pandas writes the platform terminator, so
+# a Windows-built stream (CRLF) differs from a Linux-built one (LF) by exactly
+# one byte per row while carrying identical content. Verified 2026-08-19:
+# laptop and EC2 instance agree on all four streams under this normalisation.
+# Compute with: python scripts/normalized_sha256.py <files>
+# format: <normalised sha256>  <filename>
+0b2bb36bb9ecef6e9924d9ed1deee264e9ba565763e77a00e423da4feb63008f  cicids2017_natural.csv
+afac47d41d814e8fcbac9656da5e196cef1dc31a45f5d17f7e274ff8a21a63c9  litnet2020_blaster_worm_natural.csv
+e6a9f9e47b90acd48ebc810f88643e2331238c5dcf9271c215d991a15cebfaa8  litnet2020_spam_natural.csv
+8826727bd816dcdc90c1e9a6a9b29d18d816a7ad418394aadca186d3263e0bdd  litnet2020_udp_flood_natural.csv

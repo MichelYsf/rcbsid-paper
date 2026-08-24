@@ -1,0 +1,73 @@
+{
+  "run_id": "s4_construction_contrast_20260819T090813_46e9bd32",
+  "name": "s4_construction_contrast",
+  "git_commit": "1fbc61501113bc8549588d9b4ec852fd63698b36-dirty",
+  "config_sha256": "bfe8af7160e4d9cdb29bcaa949a43d677173d322c380f33dde964e0c527301cd",
+  "config": {
+    "contrast": "cicids_order",
+    "budget": 0,
+    "seeds": [
+      11
+    ],
+    "train": 0.7,
+    "val": 0.15,
+    "streaming": [
+      "hst"
+    ],
+    "batch": [
+      "ecod"
+    ],
+    "reduction": "LODA dropped (12.09 ms/row); fixed record budget per arm",
+    "claim": "construction, not prevalence, drives regime"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "/home/ubuntu/rcbsid-paper/data/raw/natural/cicids2017_natural.csv",
+      "sha256": "0b2bb36bb9ecef6e9924d9ed1deee264e9ba565763e77a00e423da4feb63008f"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/home/ubuntu/rcbsid-paper/results/rebuild_parts/contrast_cicids_natural.csv",
+      "exists": true,
+      "sha256": "12b22ebb6abe0490327f905c1a3f086aa014dcc20548488c46dad68a7cc5c659"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "ffdc2cc31b2f68ed022acf62b3ab3ab70944f3a5acdcf556b99fc3e0f4dff04f",
+    "pip_freeze_sha256": "9427f7afc6c72420d582578a78664e0c9664d99f251cf4c881b9d2418e748d7d",
+    "python": "3.11.15",
+    "platform": "Linux-6.17.0-1019-aws-x86_64-with-glibc2.39",
+    "executable": "/home/ubuntu/rcbsid-paper/.venv/bin/python"
+  },
+  "started_utc": "2026-08-19T09:08:13.098601+00:00",
+  "finished_utc": "2026-08-19T11:32:16.647844+00:00",
+  "wall_seconds": 8643.549243,
+  "macros": {
+    "ContrastCicidsDim": {
+      "value": 84,
+      "unit": "",
+      "desc": "CICIDS2017 feature dimensionality d"
+    },
+    "ContrastCicids2017NaturalProposedDetectorAucpr": {
+      "value": 0.728337,
+      "unit": "",
+      "desc": "cicids2017/natural/proposed_detector AUC-PR"
+    },
+    "ContrastCicids2017NaturalHstAucpr": {
+      "value": 0.588902,
+      "unit": "",
+      "desc": "cicids2017/natural/hst AUC-PR"
+    },
+    "ContrastCicids2017NaturalEcodAucpr": {
+      "value": 0.755142,
+      "unit": "",
+      "desc": "cicids2017/natural/ecod AUC-PR"
+    }
+  },
+  "notes": "natural vs synthetic construction; all else held constant",
+  "extra": {
+    "output_sha256": "12b22ebb6abe0490327f905c1a3f086aa014dcc20548488c46dad68a7cc5c659"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "run_id": "selftest_provenance_gate_20260818T113227_f18a4561",
+  "name": "selftest_provenance_gate",
+  "git_commit": "fde920e4333309efdd2021d9f6c4b19673154930-dirty",
+  "config_sha256": "4927516579457449123a46183ffae02649ebc1d4538272a30cc7716a7da289fd",
+  "config": {
+    "selftest": true
+  },
+  "seed": 0,
+  "inputs": [],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-18T11:32:27.068210+00:00",
+  "finished_utc": "2026-08-18T11:32:27.068210+00:00",
+  "wall_seconds": 0.0,
+  "macros": {
+    "SelfTestManifested": {
+      "value": 0.4242,
+      "unit": "",
+      "desc": "gate acceptance"
+    }
+  },
+  "notes": "Stage 0 gate acceptance test",
+  "extra": {}
+}

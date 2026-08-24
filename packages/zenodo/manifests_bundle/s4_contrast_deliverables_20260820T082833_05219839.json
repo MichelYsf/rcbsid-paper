@@ -1,0 +1,389 @@
+{
+  "run_id": "s4_contrast_deliverables_20260820T082833_05219839",
+  "name": "s4_contrast_deliverables",
+  "git_commit": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+  "git_commit_at_write": "ab6172c9f1e5f2b4754eef05570e1113a18c0933-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "0155c8bbf11d244db932df32a0ae741f1889d7660d6de2bac293d6e4626a578d",
+  "config": {
+    "parts": [
+      "contrast_cicids_natural.csv",
+      "contrast_cicids_synthetic.csv",
+      "contrast_litnet_natural.csv",
+      "contrast_litnet_synthetic.csv"
+    ],
+    "claim": "construction, not prevalence, drives regime structure",
+    "cicids_contrast": "true timestamp order vs day-of-week round robin, identical record multiset",
+    "litnet_contrast": "three natural per-type streams vs the pooled composite (labelled synthetic)"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\rebuild_parts\\contrast_cicids_natural.csv",
+      "sha256": "12b22ebb6abe0490327f905c1a3f086aa014dcc20548488c46dad68a7cc5c659"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\rebuild_parts\\contrast_cicids_synthetic.csv",
+      "sha256": "716ea57f463282cc0371bc0a71bc24ade21f94937c650ce00cfc30fb95de5db4"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\rebuild_parts\\contrast_litnet_natural.csv",
+      "sha256": "a8b6f1c12041a7aa1f11c1d1406db1d5cb28b335e860a358c108d02bedc8f1bf"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\rebuild_parts\\contrast_litnet_synthetic.csv",
+      "sha256": "8a541a44b5c9cd4d4cceece53e4e7d094357874f098420036cc437f86ba2d685"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\prevalence_sweep_cicids.csv",
+      "sha256": "ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\construction_contrast.csv",
+      "exists": true,
+      "sha256": "f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_contrast.md",
+      "exists": true,
+      "sha256": "1e0bd4acc79724c4782ac83c2eb2fa1005f839ed1d5004415b0fa89b787f0d40"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\table_construction_contrast.tex",
+      "exists": true,
+      "sha256": "8f14cd8e8ae68db1fe11c5788571cdf08dc8c894ea356bea4b6eb3c3098f597c"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-20T08:28:33.828551+00:00",
+  "finished_utc": "2026-08-20T08:28:33.904347+00:00",
+  "wall_seconds": 0.075796,
+  "macros": {
+    "SFourCicidsNaturalTestPrev": {
+      "value": 68.235,
+      "unit": "%",
+      "desc": "CICIDS2017 held-out prevalence, true timestamp order"
+    },
+    "SFourCicidsInterleavedTestPrev": {
+      "value": 25.2396,
+      "unit": "%",
+      "desc": "CICIDS2017 held-out prevalence, day-of-week round robin"
+    },
+    "SFourCicidsPrevShiftPp": {
+      "value": -42.9954,
+      "unit": "pp",
+      "desc": "held-out prevalence shift caused by construction alone"
+    },
+    "SFourCicidsNaturalTestAttacks": {
+      "value": 163764,
+      "unit": "",
+      "desc": "CICIDS2017 held-out attacks, natural order"
+    },
+    "SFourCicidsInterleavedTestAttacks": {
+      "value": 60575,
+      "unit": "",
+      "desc": "CICIDS2017 held-out attacks, interleaved"
+    },
+    "SFourCicidsNaturalChanceFloor": {
+      "value": 0.68235,
+      "unit": "",
+      "desc": "AUC-PR chance floor, CICIDS natural arm"
+    },
+    "SFourCicidsSyntheticChanceFloor": {
+      "value": 0.252396,
+      "unit": "",
+      "desc": "AUC-PR chance floor, CICIDS interleaved arm"
+    },
+    "SFourCicidsNaturalProposedDetectorAucpr": {
+      "value": 0.728337,
+      "unit": "",
+      "desc": "CICIDS natural proposed_detector AUC-PR"
+    },
+    "SFourCicidsNaturalProposedDetectorLift": {
+      "value": 0.045987,
+      "unit": "",
+      "desc": "CICIDS natural proposed_detector AUC-PR above chance"
+    },
+    "SFourCicidsSyntheticProposedDetectorAucpr": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "CICIDS interleaved proposed_detector AUC-PR"
+    },
+    "SFourCicidsSyntheticProposedDetectorLift": {
+      "value": 0.292602,
+      "unit": "",
+      "desc": "CICIDS interleaved proposed_detector AUC-PR above chance"
+    },
+    "SFourCicidsNaturalHstAucpr": {
+      "value": 0.588902,
+      "unit": "",
+      "desc": "CICIDS natural hst AUC-PR"
+    },
+    "SFourCicidsNaturalHstLift": {
+      "value": -0.093448,
+      "unit": "",
+      "desc": "CICIDS natural hst AUC-PR above chance"
+    },
+    "SFourCicidsSyntheticHstAucpr": {
+      "value": 0.513623,
+      "unit": "",
+      "desc": "CICIDS interleaved hst AUC-PR"
+    },
+    "SFourCicidsSyntheticHstLift": {
+      "value": 0.261227,
+      "unit": "",
+      "desc": "CICIDS interleaved hst AUC-PR above chance"
+    },
+    "SFourCicidsNaturalEcodAucpr": {
+      "value": 0.755142,
+      "unit": "",
+      "desc": "CICIDS natural ecod AUC-PR"
+    },
+    "SFourCicidsNaturalEcodLift": {
+      "value": 0.072792,
+      "unit": "",
+      "desc": "CICIDS natural ecod AUC-PR above chance"
+    },
+    "SFourCicidsSyntheticEcodAucpr": {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "CICIDS interleaved ecod AUC-PR"
+    },
+    "SFourCicidsSyntheticEcodLift": {
+      "value": 0.16657,
+      "unit": "",
+      "desc": "CICIDS interleaved ecod AUC-PR above chance"
+    },
+    "SFourCicidsNaturalMethodsBelowChance": {
+      "value": 1,
+      "unit": "",
+      "desc": "methods below the chance floor in the natural arm"
+    },
+    "SFourCicidsNaturalBestLift": {
+      "value": 0.072792,
+      "unit": "",
+      "desc": "best lift above chance in the natural arm"
+    },
+    "SFourCicidsRankingPreserved": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the method ranking is identical across arms"
+    },
+    "SFourCicidsRankingKendallTau": {
+      "value": -0.3333,
+      "unit": "",
+      "desc": "Kendall tau between the two arms' method rankings"
+    },
+    "SFourCicidsPairwiseOrderingsPreserved": {
+      "value": 1,
+      "unit": "",
+      "desc": "pairwise method orderings preserved across arms"
+    },
+    "SFourCicidsPairwiseOrderingsTotal": {
+      "value": 3,
+      "unit": "",
+      "desc": "pairwise method orderings compared across arms"
+    },
+    "SFourLitnetUdpFloodTestPrev": {
+      "value": 15.7747,
+      "unit": "%",
+      "desc": "LITNET udp_flood held-out prevalence"
+    },
+    "SFourLitnetUdpFloodTestAttacks": {
+      "value": 11831,
+      "unit": "",
+      "desc": "LITNET udp_flood held-out attacks"
+    },
+    "SFourLitnetBlasterWormTestPrev": {
+      "value": 3.544,
+      "unit": "%",
+      "desc": "LITNET blaster_worm held-out prevalence"
+    },
+    "SFourLitnetBlasterWormTestAttacks": {
+      "value": 2658,
+      "unit": "",
+      "desc": "LITNET blaster_worm held-out attacks"
+    },
+    "SFourLitnetSpamTestPrev": {
+      "value": 0.176,
+      "unit": "%",
+      "desc": "LITNET spam held-out prevalence"
+    },
+    "SFourLitnetSpamTestAttacks": {
+      "value": 132,
+      "unit": "",
+      "desc": "LITNET spam held-out attacks"
+    },
+    "SFourLitnetPooledTestPrev": {
+      "value": 6.4982,
+      "unit": "%",
+      "desc": "LITNET pooled composite held-out prevalence"
+    },
+    "SFourLitnetPooledTestAttacks": {
+      "value": 14621,
+      "unit": "",
+      "desc": "LITNET pooled composite held-out attacks"
+    },
+    "SFourLitnetPooledInsideRange": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if pooled prevalence lies inside the per-type range"
+    },
+    "SFourLitnetUdpFloodProposedDetectorAucpr": {
+      "value": 0.394428,
+      "unit": "",
+      "desc": "LITNET udp_flood proposed_detector AUC-PR"
+    },
+    "SFourLitnetUdpFloodHstAucpr": {
+      "value": 0.552675,
+      "unit": "",
+      "desc": "LITNET udp_flood hst AUC-PR"
+    },
+    "SFourLitnetUdpFloodEcodAucpr": {
+      "value": 0.321185,
+      "unit": "",
+      "desc": "LITNET udp_flood ecod AUC-PR"
+    },
+    "SFourLitnetBlasterWormProposedDetectorAucpr": {
+      "value": 0.964091,
+      "unit": "",
+      "desc": "LITNET blaster_worm proposed_detector AUC-PR"
+    },
+    "SFourLitnetBlasterWormHstAucpr": {
+      "value": 0.147731,
+      "unit": "",
+      "desc": "LITNET blaster_worm hst AUC-PR"
+    },
+    "SFourLitnetBlasterWormEcodAucpr": {
+      "value": 0.03571,
+      "unit": "",
+      "desc": "LITNET blaster_worm ecod AUC-PR"
+    },
+    "SFourLitnetSpamProposedDetectorAucpr": {
+      "value": 0.846154,
+      "unit": "",
+      "desc": "LITNET spam proposed_detector AUC-PR"
+    },
+    "SFourLitnetSpamHstAucpr": {
+      "value": 0.008447,
+      "unit": "",
+      "desc": "LITNET spam hst AUC-PR"
+    },
+    "SFourLitnetSpamEcodAucpr": {
+      "value": 0.106805,
+      "unit": "",
+      "desc": "LITNET spam ecod AUC-PR"
+    },
+    "SFourLitnetPooledProposedDetectorAucpr": {
+      "value": 0.943056,
+      "unit": "",
+      "desc": "LITNET pooled proposed_detector AUC-PR"
+    },
+    "SFourLitnetPooledHstAucpr": {
+      "value": 0.23884,
+      "unit": "",
+      "desc": "LITNET pooled hst AUC-PR"
+    },
+    "SFourLitnetPooledEcodAucpr": {
+      "value": 0.229143,
+      "unit": "",
+      "desc": "LITNET pooled ecod AUC-PR"
+    },
+    "SFourLitnetStreamsMatchingPooledRanking": {
+      "value": 1,
+      "unit": "",
+      "desc": "natural per-type streams whose method ranking matches the pooled composite"
+    },
+    "SFourLitnetNaturalStreamsRanked": {
+      "value": 3,
+      "unit": "",
+      "desc": "natural per-type streams with a defined ranking"
+    },
+    "SFourLitnetStreamsProposedNotBest": {
+      "value": 1,
+      "unit": "",
+      "desc": "natural streams where the proposed detector is not the best method"
+    },
+    "SFourSeedCellsCovered": {
+      "value": 2,
+      "unit": "",
+      "desc": "cells with more than one HST seed"
+    },
+    "SFourSeedCicids2017InterleavedSyntheticHstSeeds": {
+      "value": 3,
+      "unit": "",
+      "desc": "cicids2017/interleaved_synthetic HST seed count"
+    },
+    "SFourSeedCicids2017InterleavedSyntheticHstMean": {
+      "value": 0.433044,
+      "unit": "",
+      "desc": "cicids2017/interleaved_synthetic HST AUC-PR mean over seeds"
+    },
+    "SFourSeedCicids2017InterleavedSyntheticHstSd": {
+      "value": 0.077736,
+      "unit": "",
+      "desc": "cicids2017/interleaved_synthetic HST AUC-PR sd over seeds"
+    },
+    "SFourSeedCicids2017InterleavedSyntheticRankingFlips": {
+      "value": 1,
+      "unit": "",
+      "desc": "cicids2017/interleaved_synthetic 1 if the HST/ECOD ordering flips across seeds"
+    },
+    "SFourSeedLitnetPooledCompositeSyntheticHstSeeds": {
+      "value": 3,
+      "unit": "",
+      "desc": "litnet_pooled/composite_synthetic HST seed count"
+    },
+    "SFourSeedLitnetPooledCompositeSyntheticHstMean": {
+      "value": 0.2614,
+      "unit": "",
+      "desc": "litnet_pooled/composite_synthetic HST AUC-PR mean over seeds"
+    },
+    "SFourSeedLitnetPooledCompositeSyntheticHstSd": {
+      "value": 0.097068,
+      "unit": "",
+      "desc": "litnet_pooled/composite_synthetic HST AUC-PR sd over seeds"
+    },
+    "SFourSeedLitnetPooledCompositeSyntheticRankingFlips": {
+      "value": 1,
+      "unit": "",
+      "desc": "litnet_pooled/composite_synthetic 1 if the HST/ECOD ordering flips across seeds"
+    },
+    "SFourSeedCellsWithFlippedRanking": {
+      "value": 2,
+      "unit": "",
+      "desc": "cells where the HST/ECOD ordering flips across seeds"
+    },
+    "SFourExcludedCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "cells excluded with a recorded reason"
+    },
+    "SFourTableUnmacroedCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "table cells that had no macro to reference"
+    }
+  },
+  "notes": "aggregation only; no metric is recomputed here",
+  "extra": {
+    "merged_sha256": "f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e",
+    "rows_merged": 18,
+    "arms_present": [
+      "cicids2017/interleaved_synthetic",
+      "cicids2017/natural",
+      "litnet_blaster_worm/natural",
+      "litnet_pooled/composite_synthetic",
+      "litnet_spam/natural",
+      "litnet_udp_flood/natural"
+    ]
+  }
+}

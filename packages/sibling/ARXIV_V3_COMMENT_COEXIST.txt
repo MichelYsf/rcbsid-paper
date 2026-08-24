@@ -1,0 +1,42 @@
+arXiv v3 Comments-field text, BRANCH C variant (coexists with an active TIFS
+submission of the companion paper; use only if the operator chooses Branch C
+in SIBLING_DECISION.md):
+
+v3: substantial correction and rebuild. v1/v2 reported results produced under
+a composite benchmark construction and described a scoring rule the released
+code did not implement; both were established by an adversarial audit of the
+archived artifacts. v3 rebuilds the study: the composite construction is
+retained only as an explicitly labeled synthetic protocol and contrasted
+against natural-order evaluation on identical records; the detector is
+characterized as implemented; every reported number traces to an archived run
+manifest, and a sentence-level claim ledger ships with the artifact. Title
+changed accordingly (previously "CALIBURN: Operationally Calibrated Streaming
+Intrusion Detection with Regime-Dependent Conformal Risk Control"). A
+correction process for a companion manuscript sharing parts of the codebase
+(arXiv:2510.09619) is underway and has been disclosed to the editors of both
+venues. 26 pages.
+
+---
+
+arXiv v3 Comments-field text, BRANCH W variant (companion withdrawn from
+TIFS before this goes public; the default per the standing recommendation):
+
+v3: substantial correction and rebuild. v1/v2 reported results produced under
+a composite benchmark construction and described a scoring rule the released
+code did not implement; both were established by an adversarial audit of the
+archived artifacts. v3 rebuilds the study: the composite construction is
+retained only as an explicitly labeled synthetic protocol and contrasted
+against natural-order evaluation on identical records; the detector is
+characterized as implemented; every reported number traces to an archived run
+manifest, and a sentence-level claim ledger ships with the artifact. Title
+changed accordingly (previously "CALIBURN: Operationally Calibrated Streaming
+Intrusion Detection with Regime-Dependent Conformal Risk Control"). The
+companion manuscript sharing parts of the codebase (arXiv:2510.09619) has
+been withdrawn from journal consideration by the author pending its own
+correction. 26 pages.
+
+---
+
+NOTE: the "26 pages" figure is a placeholder until the final compiled page
+count is known; FINALIZE_DONE.md step "arXiv package" records where to update
+it. Do not paste either variant until the sibling decision is made.

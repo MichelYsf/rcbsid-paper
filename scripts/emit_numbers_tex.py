@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from check_provenance import distinct_values  # noqa: E402
-from provenance import load_macro_index  # noqa: E402
+from provenance import load_macro_index, tex_macro_name  # noqa: E402
 
 OUT = ROOT / "paper" / "numbers.tex"
 
@@ -103,7 +103,7 @@ def main() -> int:
         if unit:
             comment += " [" + unit + "]"
         comment += " -- " + str(rec.get("run_id"))
-        lines.append("\\newcommand{\\" + name + "}{" + body + "}" + comment)
+        lines.append("\\newcommand{\\" + tex_macro_name(name) + "}{" + body + "}" + comment)
     lines.append("")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

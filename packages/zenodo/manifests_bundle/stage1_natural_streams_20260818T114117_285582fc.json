@@ -1,0 +1,275 @@
+{
+  "run_id": "stage1_natural_streams_20260818T114117_285582fc",
+  "name": "stage1_natural_streams",
+  "git_commit": "419125e91dd3d7afa1b331ec7cf1bc4df91d77f3-dirty",
+  "config_sha256": "3c6bd10f5d48beb66f377f9d9e0a33058850b31445b0ce4c866d266cee41e328",
+  "config": {
+    "train": 0.7,
+    "val": 0.15,
+    "policy": "per-attack-type for LITNET (disjoint captures); global timestamp sort for CICIDS"
+  },
+  "seed": null,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\litnet2020\\litnet2020_labeled.csv",
+      "sha256": "0a7dcefc7c8d41e243623c5a5874fa47f851da3b8b5629fe7651b7848a5c0c21"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\cicids2017\\cicids2017_labeled.csv",
+      "sha256": "5b73cd71ee47e54a15260ef994cb6fe3047c52465c0ceea68543710db043fe5f"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_blaster_worm_natural.csv",
+      "exists": true,
+      "sha256": "9dba5f0ec9355376ace930750232ba53ea00ad76de4e07427a511c035be64d17"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_spam_natural.csv",
+      "exists": true,
+      "sha256": "5f837b84445883caf2c100028185814378beea66563c48329418ed02be0563e1"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_udp_flood_natural.csv",
+      "exists": true,
+      "sha256": "3bb6753b505e10bcb0e06062ff34aa338c9f352bc5faa69d7feca6abd4b5a297"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv",
+      "exists": true,
+      "sha256": "96d41208b789ae8a1f446e5db952ca9fa0c7cd564b86455a3cb813329009767a"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "81117fc7b44f043857eab0b252b6267a93c7dd5fc22b1b3bf2053b95a69965bd",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-18T11:41:17.355514+00:00",
+  "finished_utc": "2026-08-18T11:44:29.529644+00:00",
+  "wall_seconds": 192.17413,
+  "macros": {
+    "StreamLitnetBlasterWormRows": {
+      "value": 500000,
+      "unit": "",
+      "desc": "litnet_blaster_worm rows"
+    },
+    "StreamLitnetBlasterWormPrevalencePct": {
+      "value": 0.6562,
+      "unit": "\\%",
+      "desc": "litnet_blaster_worm overall attack prevalence"
+    },
+    "StreamLitnetBlasterWormTestPrevalencePct": {
+      "value": 3.544,
+      "unit": "\\%",
+      "desc": "litnet_blaster_worm test-split prevalence"
+    },
+    "StreamLitnetBlasterWormTestAttacks": {
+      "value": 2658,
+      "unit": "",
+      "desc": "litnet_blaster_worm test attacks"
+    },
+    "StreamLitnetBlasterWormRunMedian": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "litnet_blaster_worm attack run-length median"
+    },
+    "StreamLitnetBlasterWormRunPninety": {
+      "value": 2.0,
+      "unit": "",
+      "desc": "litnet_blaster_worm attack run-length p90"
+    },
+    "StreamLitnetBlasterWormRunMax": {
+      "value": 5,
+      "unit": "",
+      "desc": "litnet_blaster_worm attack run-length max"
+    },
+    "StreamLitnetBlasterWormSpanMinutes": {
+      "value": 1.62,
+      "unit": "min",
+      "desc": "litnet_blaster_worm capture span"
+    },
+    "StreamLitnetSpamRows": {
+      "value": 500000,
+      "unit": "",
+      "desc": "litnet_spam rows"
+    },
+    "StreamLitnetSpamPrevalencePct": {
+      "value": 0.0276,
+      "unit": "\\%",
+      "desc": "litnet_spam overall attack prevalence"
+    },
+    "StreamLitnetSpamTestPrevalencePct": {
+      "value": 0.176,
+      "unit": "\\%",
+      "desc": "litnet_spam test-split prevalence"
+    },
+    "StreamLitnetSpamTestAttacks": {
+      "value": 132,
+      "unit": "",
+      "desc": "litnet_spam test attacks"
+    },
+    "StreamLitnetSpamRunMedian": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "litnet_spam attack run-length median"
+    },
+    "StreamLitnetSpamRunPninety": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "litnet_spam attack run-length p90"
+    },
+    "StreamLitnetSpamRunMax": {
+      "value": 2,
+      "unit": "",
+      "desc": "litnet_spam attack run-length max"
+    },
+    "StreamLitnetSpamSpanMinutes": {
+      "value": 39122.23,
+      "unit": "min",
+      "desc": "litnet_spam capture span"
+    },
+    "StreamLitnetUdpFloodRows": {
+      "value": 500000,
+      "unit": "",
+      "desc": "litnet_udp_flood rows"
+    },
+    "StreamLitnetUdpFloodPrevalencePct": {
+      "value": 14.9384,
+      "unit": "\\%",
+      "desc": "litnet_udp_flood overall attack prevalence"
+    },
+    "StreamLitnetUdpFloodTestPrevalencePct": {
+      "value": 15.7747,
+      "unit": "\\%",
+      "desc": "litnet_udp_flood test-split prevalence"
+    },
+    "StreamLitnetUdpFloodTestAttacks": {
+      "value": 11831,
+      "unit": "",
+      "desc": "litnet_udp_flood test attacks"
+    },
+    "StreamLitnetUdpFloodRunMedian": {
+      "value": 1.0,
+      "unit": "",
+      "desc": "litnet_udp_flood attack run-length median"
+    },
+    "StreamLitnetUdpFloodRunPninety": {
+      "value": 2.0,
+      "unit": "",
+      "desc": "litnet_udp_flood attack run-length p90"
+    },
+    "StreamLitnetUdpFloodRunMax": {
+      "value": 20,
+      "unit": "",
+      "desc": "litnet_udp_flood attack run-length max"
+    },
+    "StreamLitnetUdpFloodSpanMinutes": {
+      "value": 3.97,
+      "unit": "min",
+      "desc": "litnet_udp_flood capture span"
+    },
+    "StreamCicids2017Rows": {
+      "value": 1600000,
+      "unit": "",
+      "desc": "cicids2017 rows"
+    },
+    "StreamCicids2017PrevalencePct": {
+      "value": 22.0601,
+      "unit": "\\%",
+      "desc": "cicids2017 overall attack prevalence"
+    },
+    "StreamCicids2017TestPrevalencePct": {
+      "value": 68.235,
+      "unit": "\\%",
+      "desc": "cicids2017 test-split prevalence"
+    },
+    "StreamCicids2017TestAttacks": {
+      "value": 163764,
+      "unit": "",
+      "desc": "cicids2017 test attacks"
+    },
+    "StreamCicids2017RunMedian": {
+      "value": 2.0,
+      "unit": "",
+      "desc": "cicids2017 attack run-length median"
+    },
+    "StreamCicids2017RunPninety": {
+      "value": 70.0,
+      "unit": "",
+      "desc": "cicids2017 attack run-length p90"
+    },
+    "StreamCicids2017RunMax": {
+      "value": 2522,
+      "unit": "",
+      "desc": "cicids2017 attack run-length max"
+    },
+    "StreamCicids2017SpanMinutes": {
+      "value": 6246.71,
+      "unit": "min",
+      "desc": "cicids2017 capture span"
+    }
+  },
+  "notes": "Stage 1: natural-order streams replace interleaved composites",
+  "extra": {
+    "litnet_blaster_worm_sha256": "9dba5f0ec9355376ace930750232ba53ea00ad76de4e07427a511c035be64d17",
+    "litnet_blaster_worm_splits": {
+      "train": 0.0,
+      "val": 0.008306666666666667,
+      "test": 0.03544,
+      "test_attacks": 2658,
+      "n": 500000
+    },
+    "litnet_blaster_worm_run_lengths": {
+      "n_runs": 2632,
+      "median": 1.0,
+      "p90": 2.0,
+      "max": 5
+    },
+    "litnet_spam_sha256": "5f837b84445883caf2c100028185814378beea66563c48329418ed02be0563e1",
+    "litnet_spam_splits": {
+      "train": 1.7142857142857142e-05,
+      "val": 0.0,
+      "test": 0.00176,
+      "test_attacks": 132,
+      "n": 500000
+    },
+    "litnet_spam_run_lengths": {
+      "n_runs": 135,
+      "median": 1.0,
+      "p90": 1.0,
+      "max": 2
+    },
+    "litnet_udp_flood_sha256": "3bb6753b505e10bcb0e06062ff34aa338c9f352bc5faa69d7feca6abd4b5a297",
+    "litnet_udp_flood_splits": {
+      "train": 0.14783714285714286,
+      "val": 0.14824,
+      "test": 0.15774666666666667,
+      "test_attacks": 11831,
+      "n": 500000
+    },
+    "litnet_udp_flood_run_lengths": {
+      "n_runs": 52443,
+      "median": 1.0,
+      "p90": 2.0,
+      "max": 20
+    },
+    "cicids2017_sha256": "96d41208b789ae8a1f446e5db952ca9fa0c7cd564b86455a3cb813329009767a",
+    "cicids2017_splits": {
+      "train": 0.11729732142857142,
+      "val": 0.2409375,
+      "test": 0.68235,
+      "test_attacks": 163764,
+      "n": 1600000
+    },
+    "cicids2017_run_lengths": {
+      "n_runs": 9963,
+      "median": 2.0,
+      "p90": 70.0,
+      "max": 2522
+    }
+  }
+}

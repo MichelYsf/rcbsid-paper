@@ -258,7 +258,7 @@ def main() -> int:
         for lvl, lkey, llabel in LEVELS:
             if df[df["level_target_pct"] == lvl].empty:
                 continue
-            row = [llabel, "\\STwo" + lkey + "Floor"]
+            row = [llabel.replace(chr(37), chr(92)+chr(37)), "\\STwo" + lkey + "Floor"]
             for _, mkey, _ in METHODS:
                 row.append("\\STwo" + lkey + mkey + "Mean"
                            if (lkey, mkey) in means else "--")

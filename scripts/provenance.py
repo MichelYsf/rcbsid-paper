@@ -246,6 +246,24 @@ def _reindex_macros() -> None:
     MACRO_INDEX.write_text(json.dumps(index, indent=2, default=str), encoding="utf-8")
 
 
+_DIGIT_WORDS = {"0": "Zero", "1": "One", "2": "Two", "3": "Three",
+                "4": "Four", "5": "Five", "6": "Six", "7": "Seven",
+                "8": "Eight", "9": "Nine"}
+
+
+def tex_macro_name(name: str) -> str:
+    """LaTeX-legal control-sequence name for an index macro.
+
+    LaTeX control sequences are letters only. emit_macro always allowed digits
+    (StreamCicids2017Rows), so numbers.tex carried \newcommand definitions
+    that no TeX engine can parse - the file would have failed at \input
+    before the manuscript's first paragraph. Digits are transliterated to
+    words at the transcription layer; the macro index keeps original names,
+    and the gate resolves manuscript names back through this same function.
+    """
+    return "".join(_DIGIT_WORDS.get(c, c) for c in name)
+
+
 def load_macro_index() -> dict:
     if not MACRO_INDEX.exists():
         return {}
