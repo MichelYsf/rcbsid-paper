@@ -87,3 +87,26 @@ Superseded same-day by a regeneration: the LaTeX table it wrote carried
 unescaped percent signs in the level labels, which LaTeX reads as comments -
 the row terminators vanished and the manuscript could not compile. Macro
 values are identical in the replacement.
+
+## s2_prevalence_relabelled_20260824T094843_2ef126ae.json
+Superseded by the review-round regeneration: amendment G requires normalized
+lift (AP-p)/(1-p) beside every additive lift, and the individual per-draw
+values wherever spread is claimed. Macro values for the previously emitted
+names are unchanged.
+
+## supplementary_macros_20260824T102403_89c8967a.json
+Superseded by the review round: amendment G adds normalized lift (AP-p)/(1-p)
+for the contrast arms and the Stage 6 ablation. Previously emitted values are
+unchanged.
+
+## s4_contrast_deliverables_20260820T082833_05219839.json
+Superseded by the review round: amendment G requires the individual seed
+values to be printed wherever spread is claimed, so the deliverables run now
+emits per-draw macros. All previously emitted values are unchanged.
+
+## review_bounded_analyses_20260826T223442_cfe47f09.json
+Superseded within the same round: the first analyses run claimed exact
+reproduction of the natural arm when it differs by 1.8e-05 (a cross-platform
+difference of the class recorded in CI-16), and did not emit the composition
+and margin macros the corrected conclusions need. All measured values are
+unchanged in the replacement.

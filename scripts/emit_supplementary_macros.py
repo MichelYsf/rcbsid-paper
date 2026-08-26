@@ -87,6 +87,33 @@ def main() -> int:
                        desc="records covered by the Stage-6 score-distribution "
                             "diagnostic")
 
+        # 4) Amendment G: normalized lift (AP - p) / (1 - p). Additive lift has
+        #    a prevalence-dependent ceiling of 1-p, so additive values are not
+        #    comparable across arms whose prevalence differs by 43 points -
+        #    which is exactly the comparison this paper makes.
+        dm = deliv["macros"]
+        am = abl["macros"]
+
+        def nl(ap_v, p_v):
+            return (float(ap_v) - float(p_v)) / (1.0 - float(p_v))
+
+        for arm, floor_key in (("Natural", "SFourCicidsNaturalChanceFloor"),
+                               ("Synthetic", "SFourCicidsSyntheticChanceFloor")):
+            floor = dm[floor_key]["value"]
+            for meth in ("ProposedDetector", "Ecod", "Hst"):
+                k = "SFourCicids" + arm + meth + "Aucpr"
+                if k in dm:
+                    run.emit_macro("SFourCicids" + arm + meth + "NormLift",
+                                   round(nl(dm[k]["value"], floor), 6),
+                                   desc="CICIDS " + arm + " " + meth +
+                                        " normalized lift (AP-p)/(1-p)")
+        s6floor = am["SSixChanceFloor"]["value"]
+        for v in ("Original", "Corrected"):
+            run.emit_macro("SSix" + v + "NormLift",
+                           round(nl(am["SSix" + v + "Aucpr"]["value"], s6floor), 6),
+                           desc="Stage 6 " + v.lower() +
+                                " normalized lift (AP-p)/(1-p)")
+
         print("emitted 5 supplementary macros")
         print("  attack-free held-out rows:", attack_free)
         print("  Friday held-out density  : %.3f%%" % density)

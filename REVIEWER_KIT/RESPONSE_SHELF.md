@@ -95,3 +95,82 @@ corrections is not a paper with no errors. **Evidence:**
 ## From the fresh round
 
 (appended by the triage pass; one entry per shelved item)
+
+## From the fresh round (26 Aug 2026)
+
+Items the one-round triage classified SHELF: judgment, or new work whose cost
+exceeded the round's 3-hour analysis cap. Each carries the measured or
+estimated cost of doing it, so a revision window can be planned rather than
+guessed.
+
+### S7. "Determinism does not establish a stable winner" (review T8)
+
+**Verified TRUE.** No confidence interval, repeated split, or event-block
+bootstrap is reported anywhere. **Response.** We agree and have removed every
+"winner" formulation: the manuscript now reports a *measured ordering under the
+stated protocol* and says so. The right instrument is an event-block or
+rolling-origin procedure, not an IID row bootstrap — attack runs on CICIDS2017
+have median/p90/max length 2/70/2522, so rows are not exchangeable. Estimated
+cost: a moving-block bootstrap over the archived per-record score vectors is
+cheap (minutes) once block length is justified; justifying block length against
+the run-length distribution is the actual work, roughly a revision-window day.
+The score vectors now exist in the artifact, so this needs no re-scoring.
+
+### S8. Factorial decomposition of the assembly treatment (review T6)
+
+**Verified TRUE that the design does not identify order alone.** **Response.**
+The manuscript now states the estimand as the complete assembly pipeline under
+a fixed split rule and makes no order-only claim. A factorial or
+prevalence-matched design — separate interventions on training order, test
+order, split membership, and prevalence — is the natural next experiment. Cost:
+each additional CICIDS arm is one full prequential pass, measured at
+3.524 ms/record on the reference machine, so about 1.6 hours per arm plus batch
+refits; a 2x2x2 factorial is roughly 13 hours of single-machine compute.
+
+### S9. Protocol-aligned ECOD comparison (review T7)
+
+**Verified TRUE.** ECOD is fitted on benign-only training rows. **Response.**
+ECOD is now presented throughout as a *label-privileged diagnostic reference*
+and all method-superiority language is removed. Aligning information access
+properly means either giving the streaming methods the same benign-only warm
+start or refitting ECOD without label access; both change what ECOD is, so the
+comparison would need re-designing rather than re-running. Cost: one full pass
+per configuration (~1.6 h each) plus design work.
+
+### S10. Truncated-regime characterization of the posterior (review T11, T12)
+
+**Verified TRUE that the exact result covers only the pre-cap regime.**
+**Response.** The manuscript now states the three facts separately — exact
+cancellation below the cap, measured wandering at and beyond it, and that the
+scored quantity is P(r<=5) rather than P(r=0) — and claims nothing about
+data-independence over the truncated regime. Characterizing the truncated
+recurrence analytically is a mathematical contribution in its own right and is
+out of scope for a revision window; an empirical characterization over the
+archived component dumps is affordable (hours).
+
+### S11. Broader validation of the change-point repair (review T15)
+
+**Verified TRUE.** One prior, one stream, one prefix, no tuning. **Response.**
+The manuscript now says "one untuned instance" everywhere and draws no
+conclusion about tuned variants. A meaningful corrected-BOCPD result needs a
+training/validation tuning protocol for the prior scale and at least two
+streams; cost is dominated by the tuning grid, roughly 8-20 hours depending on
+grid size, and it must not select on test labels.
+
+### S12. Systematic literature survey of assembly practice (review T2)
+
+**Verified TRUE that no survey exists.** **Response.** The frequency claims are
+withdrawn: the manuscript now says only that the contrasted assembly is the one
+used by the audited earlier evaluation, with interleaving and pooling also
+discussed in the cited benchmark-criticism literature. A coded survey of
+streaming-IDS evaluations would be a contribution of its own; cost is
+weeks, not revision-window hours.
+
+### S13. Artifact audit (review T20)
+
+**UNVERIFIABLE from the review packet** — the reviewer had no repository
+access, correctly noting that manifests prove lineage, not correctness.
+**Response.** The anonymized artifact accompanies the submission, and the
+manuscript now states explicitly that provenance establishes traceability and
+integrity and *not* that code, labels, preprocessing or interpretation are
+correct.

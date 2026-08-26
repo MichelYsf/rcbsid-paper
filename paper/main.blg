@@ -65,45 +65,45 @@ Warning--no number and no volume in vandeburg2020evaluation
 Warning--page numbers missing in both pages and numpages fields in vandeburg2020evaluation
 Warning--no number and no volume in vovk2005alrw
 Warning--page numbers missing in both pages and numpages fields in vovk2005alrw
-You've used 25 entries,
+You've used 26 entries,
             6273 wiz_defined-function locations,
-            1643 strings with 22227 characters,
-and the built_in function-call counts, 26504 in all, are:
-= -- 3427
-> -- 867
+            1650 strings with 22429 characters,
+and the built_in function-call counts, 27797 in all, are:
+= -- 3636
+> -- 906
 < -- 0
-+ -- 298
-- -- 301
-* -- 1825
-:= -- 2485
-add.period$ -- 117
-call.type$ -- 25
-change.case$ -- 176
-chr.to.int$ -- 25
-cite$ -- 76
-duplicate$ -- 2388
-empty$ -- 1697
-format.name$ -- 389
-if$ -- 6661
++ -- 311
+- -- 313
+* -- 1920
+:= -- 2599
+add.period$ -- 122
+call.type$ -- 26
+change.case$ -- 184
+chr.to.int$ -- 26
+cite$ -- 77
+duplicate$ -- 2490
+empty$ -- 1769
+format.name$ -- 405
+if$ -- 7002
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 109
-newline$ -- 232
-num.names$ -- 175
-pop$ -- 1133
+missing$ -- 113
+newline$ -- 241
+num.names$ -- 182
+pop$ -- 1166
 preamble$ -- 1
-purify$ -- 376
+purify$ -- 392
 quote$ -- 0
-skip$ -- 800
+skip$ -- 835
 stack$ -- 0
-substring$ -- 1550
-swap$ -- 155
+substring$ -- 1656
+swap$ -- 167
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 553
+type$ -- 569
 warning$ -- 51
-while$ -- 122
+while$ -- 128
 width$ -- 0
-write$ -- 487
+write$ -- 507
 (There were 51 warnings)

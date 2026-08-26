@@ -646,6 +646,16 @@ def main() -> int:
                 key = camel(stream, arm)
                 run.emit_macro("SFourSeed" + key + "HstSeeds", len(xs),
                                desc=stream + "/" + arm + " HST seed count")
+                # Amendment G: print the individual draws wherever spread is
+                # claimed. A mean and sd over three values is a fragile
+                # summary; the values themselves are not.
+                ORD = ["One", "Two", "Three", "Four", "Five"]
+                for di, (sd_, dv) in enumerate(vals):
+                    if di < len(ORD):
+                        run.emit_macro("SFourSeed" + key + "HstDraw" + ORD[di],
+                                       round(float(dv), 6),
+                                       desc=stream + "/" + arm +
+                                            " HST AUC-PR at seed " + str(sd_))
                 run.emit_macro("SFourSeed" + key + "HstMean", round(mean, 6),
                                desc=stream + "/" + arm + " HST AUC-PR mean over seeds")
                 run.emit_macro("SFourSeed" + key + "HstSd", round(sdev, 6),

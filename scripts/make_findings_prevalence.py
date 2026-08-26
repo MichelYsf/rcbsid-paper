@@ -170,7 +170,21 @@ def main() -> int:
                                desc=llabel + " " + mlabel + " AUC-PR above chance")
                 run.emit_macro("STwo" + lkey + mkey + "Deterministic", 1 if det else 0,
                                desc=llabel + " " + mlabel + " 1 if identical across draws")
-                cells.append("%.4f ±%.4f%s" % (mean, sd, "" if not det else " *det*"))
+                # Amendment G: additive lift AP-p has a prevalence-dependent
+                # ceiling of 1-p, so it is not comparable across levels. The
+                # normalized form divides by the available headroom.
+                norm = (mean - floor) / (1.0 - floor) if floor < 1.0 else float("nan")
+                run.emit_macro("STwo" + lkey + mkey + "NormLift", round(norm, 6),
+                               desc=llabel + " " + mlabel +
+                                    " normalized lift (AP-p)/(1-p)")
+                ORD = ["One", "Two", "Three", "Four", "Five"]
+                for si, xv in enumerate(xs):
+                    run.emit_macro("STwo" + lkey + mkey + "Draw" + ORD[si],
+                                   round(xv, 6),
+                                   desc=llabel + " " + mlabel + " draw " + str(si + 1))
+                cells.append("%.4f ±%.4f%s<br><sub>%s</sub>"
+                             % (mean, sd, "" if not det else " *det*",
+                                ", ".join("%.4f" % v for v in xs)))
             A("| " + llabel + " | " + ("%.4f" % floor) + " | " + " | ".join(cells) + " |")
         A("")
         A("`*det*` marks a cell identical across all three draws. At the "
@@ -181,6 +195,10 @@ def main() -> int:
 
         # ---- lift table --------------------------------------------------
         A("## Lift above chance")
+        A("")
+        A("Additive lift `AP-p` has a ceiling of `1-p`, so it is not comparable "
+          "across levels; the normalized form `(AP-p)/(1-p)` is given beneath "
+          "each additive value.")
         A("")
         A("| level | " + " | ".join(lbl for _, _, lbl in METHODS) + " |")
         A("|---" * (len(METHODS) + 1) + "|")
@@ -198,7 +216,8 @@ def main() -> int:
                 lift = means[(lkey, mkey)] - floor
                 if mkey == "Proposed" and lift < 0:
                     below += 1
-                cells.append("%+.4f" % lift)
+                nrm = lift / (1.0 - floor) if floor < 1.0 else float("nan")
+                cells.append("%+.4f<br><sub>norm %+.4f</sub>" % (lift, nrm))
             A("| " + llabel + " | " + " | ".join(cells) + " |")
         A("")
         run.emit_macro("STwoProposedLevelsBelowFloor", below,

@@ -137,13 +137,22 @@ class TruncatedGaussianBOCPD:
         # chi2.cdf is high for large residuals. Clip to avoid exact 0/1.
         return float(np.clip(chi2.cdf(stat, df=int(self.n_features or x.shape[0])), 0.0, 1.0))
 
-    def update_score(self, x) -> float:
+    def update_score(self, x, return_components: bool = False):
+        """Score one record. With return_components, also return the two
+        branch values the score is the max of: (score, tail, 0.25*P(r<=5)).
+
+        The components are values update_score already computes, so returning
+        them costs nothing and changes no behaviour on the default path. This
+        exists so a branch-wise discrimination analysis can use exactly the
+        numbers the detector used, rather than recomputing them out of order -
+        an error already made once (the Stage 3 binding measurement).
+        """
         x = np.asarray(x, dtype=float)
         if x.ndim != 1:
             raise ValueError("x must be a 1D feature vector")
         if self.counts is None:
             self._init_stats(x)
-            return 0.0
+            return (0.0, 0.0, 0.0) if return_components else 0.0
 
         # Score must be computed from the pre-update predictive distribution.
         tail_score = self._predictive_tail_score(x)
@@ -196,4 +205,6 @@ class TruncatedGaussianBOCPD:
         self.global_mean += g_delta / self.global_count
         self.global_m2 += g_delta * (x - self.global_mean)
         self.n_seen += 1
+        if return_components:
+            return score, tail_score, 0.25 * short_run_score
         return score

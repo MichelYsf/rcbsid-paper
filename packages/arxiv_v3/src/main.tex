@@ -1,28 +1,25 @@
-% CALIBURN honest rebuild -- ACM manuscript.
-% Every number in this document resolves through paper/numbers.tex, which is
-% GENERATED from archived run manifests. A number typed here as a literal is a
-% defect; scripts/check_provenance.py fails the build on any macro that does
-% not trace to a manifest, and CLAIM_LEDGER.md maps every abstract and
-% introduction sentence to its generating run.
-% DTRAP (verified fresh 2026-08-24 at dl.acm.org/journal/dtrap/author-guidelines):
+% Rebuilt manuscript, revised after the fresh adversarial review round.
+% Every number resolves through paper/numbers.tex, GENERATED from archived run
+% manifests; scripts/check_provenance.py fails the build on any number without
+% one, and CLAIM_LEDGER.md maps every abstract and introduction sentence to its
+% generating run.
+%
+% DTRAP (verified 2026-08-24 at dl.acm.org/journal/dtrap/author-guidelines):
 % ACM large-format template, portal mc.manuscriptcentral.com/dtrap, 10-25 pages
-% with a 30-page soft cap, double-anonymous. For submission we use acmart's
-% one-column review layout (manuscript,anonymous,review), which is ACM's
-% recommended journal-submission combination; TAPS applies the final trim.
-% The original rebuild spec said sigconf; the venue's current instructions govern.
+% with a 30-page soft cap, double-anonymous. acmart's one-column review layout
+% is ACM's recommended journal-submission combination; TAPS applies the trim.
 \documentclass[manuscript,screen,nonacm]{acmart}
 
 \input{numbers}
 
-% Anonymous-review metadata per ACM double-anonymous policy.
 \setcopyright{none}
 \settopmatter{printacmref=false}
 \renewcommand\footnotetextcopyrightpermission[1]{}
 
 \begin{document}
 
-\title{Benchmark Stream Construction, Not Attack Prevalence, Produces the
-Regime Structure of Streaming Intrusion Detection}
+\title{Stream Assembly Is an Uncontrolled Treatment in Streaming
+Intrusion-Detection Benchmarks}
 
 \author{Michel Youssef}
 \orcid{0009-0000-0664-8228}
@@ -33,31 +30,33 @@ Regime Structure of Streaming Intrusion Detection}
 \email{michelyoussef@hotmail.com}
 
 \begin{abstract}
-Streaming intrusion-detection results are almost always reported on benchmark
-streams that were \emph{assembled}: temporally disjoint captures pooled by
-round robin, or capture days interleaved to balance splits. We show that this
-assembly step, not attack prevalence, produces the regime structure the
-literature reports. On CICIDS2017, holding the record multiset identical and
-changing only the ordering moves held-out prevalence by
-\SFourCicidsPrevShiftAbsPp{} percentage points
-(\SFourCicidsNaturalTestPrev\%\ to \SFourCicidsInterleavedTestPrev\%),
-leaves the two held-out slices sharing only
-\CicidsHeldoutOverlapPct\%\ of their records, and inverts the ordering of the
-two deterministic methods under test: a plain batch baseline (ECOD) beats
-the evaluated detector under true timestamp order and loses to it under the
-interleaving. On LITNET-2020,
-the composite's single \SFourLitnetPooledTestPrev\%\ operating point is an
-identity of pooling: the three temporally disjoint captures span
-\SFourLitnetSpamTestPrev\%\ to \SFourLitnetUdpFloodTestPrev\%\ held-out
-prevalence individually, and the pooled figure is their equal-weight mean.
-We further characterize the evaluated detector itself: its run-length
-posterior is algebraically pinned to the hazard rate below the run-length
-cap, so the system is prequential global-Gaussian tail scoring rather than
-change-point detection,
-and the textbook repair saturates the score and detects nothing on the
-stream tested. Every number in this paper traces to an archived, hash-verified run manifest,
-and the claim ledger mapping each introductory claim to its generating run is
-part of the released artifact.
+Public network captures are rarely usable as evaluation streams as they stand,
+so streaming intrusion-detection studies assemble them: interleaving capture
+days, pooling temporally disjoint captures, or replaying records round robin.
+We show on two benchmarks that this assembly step is not neutral plumbing but
+an \emph{uncontrolled experimental treatment}. On CICIDS2017, holding the full
+record multiset identical and changing only the ordering, a fixed positional
+70/15/15 chronological split then produces held-out samples that share only
+\CicidsHeldoutOverlapPct\%\ of their records, at held-out prevalences of
+\SFourCicidsNaturalTestPrev\%\ and \SFourCicidsInterleavedTestPrev\%\ --- a
+\SFourCicidsPrevShiftAbsPp-point difference --- and the measured ordering of
+the two deterministic scorers reverses. Restricting both arms to the
+\RevSharedRecords{} records they both held out removes that reversal: the same
+scorer leads in both arms there. The reversal is therefore a consequence of
+which records the assembly hands to the test set, not of the order in which the
+detector saw its history, and we locate it accordingly.
+On LITNET-2020, pooling three temporally disjoint captures reports a single
+\SFourLitnetPooledTestPrev\%\ operating point that is the equal-weight mean of
+per-capture held-out prevalences spanning \SFourLitnetSpamTestPrev\%\ to
+\SFourLitnetUdpFloodTestPrev\%; we present that identity as an audit check
+rather than a discovery. We also audit the evaluated detector against its
+description: its reset and growth branches share a predictive term that
+cancels, so the run-length posterior equals the hazard rate exactly below the
+run-length cap, while the evaluations spend nearly all their length at or
+beyond that cap, where the posterior instead wanders; and the score the
+evaluation consumes is a function of $P(r\le5)$, not of $P(r{=}0)$. Every
+number traces to an archived, hash-verified run manifest, and the
+sentence-level claim ledger ships with the artifact.
 \end{abstract}
 
 \begin{CCSXML}
@@ -78,7 +77,7 @@ part of the released artifact.
 \ccsdesc[300]{Computing methodologies~Machine learning}
 
 \keywords{intrusion detection, streaming evaluation, benchmark construction,
-attack prevalence, reproducibility, provenance}
+experimental design, reproducibility, provenance}
 
 \maketitle
 
@@ -86,127 +85,141 @@ attack prevalence, reproducibility, provenance}
 \label{sec:intro}
 
 Machine-learning evaluations for network intrusion detection rest on a small
-number of public benchmarks, and a growing body of work questions what those
+number of public benchmarks, and a substantial literature questions what those
 benchmarks measure~\cite{catillo2023hype,arp2022dosdonts,ring2019datasets}.
-This paper adds a specific, mechanically verifiable item to that list:
-\emph{the step that assembles capture files into an evaluation stream}. Public
-captures are rarely usable as-is --- CICIDS2017 spans five separate days with
-wildly different attack densities~\cite{sharafaldin2018cicids,engelen2021cicids},
-and LITNET-2020's captures are temporally
-disjoint~\cite{damasevicius2020litnet} --- so evaluations interleave days,
-pool attack types, or replay records round-robin to obtain a single stream
-with balanced splits. That construction step is usually treated as neutral
-plumbing. We show it is not: on the same records, it moves the held-out attack
-prevalence by tens of points, replaces two-thirds of the evaluated sample,
-and inverts which of the two deterministic methods under test wins.
+This paper contributes a quantified case study and mechanism audit of one step
+in that pipeline: the step that assembles capture files into an evaluation
+stream. CICIDS2017 spans five capture days of very different attack
+density~\cite{sharafaldin2018cicids,engelen2021cicids}, and LITNET-2020's
+captures are temporally disjoint~\cite{damasevicius2020litnet}, so evaluations
+interleave, pool, or replay records to obtain a single stream with workable
+splits. We measure what that step does on these two benchmarks.
+
+\subsection*{What this paper claims, and what it does not}
+Our CICIDS2017 intervention changes the ordering of a fixed record multiset and
+holds the split \emph{rule} fixed. It does not hold the evaluated \emph{sample}
+fixed: under a positional split, reordering changes which records land in
+training, validation and test, and therefore changes held-out membership,
+held-out prevalence, and within-split order simultaneously. Stream assembly is
+in this precise sense an \textbf{uncontrolled treatment}. We therefore make a
+pipeline-level claim --- assembling the stream differently changes the measured
+evaluation outcome --- and we do \emph{not} claim that order alone causes the
+change, nor that attack prevalence is excluded as an explanation. Isolating
+those factors requires a factorial or prevalence-matched design that we
+identify as the natural next experiment.
+
+Two further scoping statements belong here rather than in a limitations
+section. First, we make no claim about how often the practice occurs: we have
+not conducted a systematic literature survey, and the construction we contrast
+against is the one used by the audited earlier evaluation of this same work,
+with interleaving and pooling also discussed in the cited benchmark-criticism
+literature. Second, the conceptual warning that arbitrary temporal ordering and
+sampling can distort security-ML evaluation is established prior
+art~\cite{catillo2023hype,arp2022dosdonts}; our contribution is the exact
+same-multiset measurement on a real benchmark, with overlap, relocation,
+prevalence and outcome reported together, plus the audit of the released
+detector.
 
 \subsection*{Origin of this version}
-Earlier versions of this manuscript (arXiv:2605.24696, v1 and v2) reported
-results produced under the composite construction described above and, in
-addition, described a scoring rule that the released code did not implement.
-An independent adversarial review and a subsequent line-by-line audit of the
-archived artifacts established both points. The present version is a rebuild
-from that audit: the composite construction is retained only as an explicitly
-labeled synthetic protocol and contrasted against natural-order evaluation;
-the detector is described as what the code computes rather than what the
-prose intended; and every number in this paper was regenerated --- or, for the retained
-prevalence sweep, re-derived from the archived pre-audit runs --- by a
-script that wrote, in the same execution, an archived manifest recording
-the git commit, configuration hash, input SHA-256, seed, environment hash,
-and output path. A build gate fails on any number without such a manifest. The
-correction history, including eighteen numbered corrected incidents, ships
-with the artifact.
+Earlier versions of this manuscript (arXiv:2605.24696, v1 and v2) reported results produced under the pooled
+and interleaved constructions studied here, and described a scoring rule the
+released code did not implement. An independent adversarial review and a
+line-by-line audit of the archived artifacts established both. The present
+version is the rebuild from that audit: the assembled constructions are
+retained as explicitly labelled protocols and contrasted against
+least-transformed alternatives; the detector is described as what the code
+computes; and every number was regenerated --- or, for the retained prevalence
+sweep, re-derived from the archived pre-audit runs --- by a script that wrote,
+in the same execution, an archived manifest recording the git commit,
+configuration hash, input SHA-256, seed, environment hash and output path.
+Section~\ref{sec:disclosure} states exactly which measurements are reused,
+re-derived, corrected or new relative to the public earlier versions, and
+tabulates the correction history.
 
 \subsection*{Contributions}
 \begin{enumerate}
-\item \textbf{The construction contrast} (Section~\ref{sec:contrast}).
-On CICIDS2017 we evaluate the identical \CicidsArmRows-record multiset
-(\CicidsArmAttacks{} attacks; whole-stream prevalence identical in both arms
-by permutation, verified mechanically) in true timestamp order and in
-day-of-week round robin. Ordering alone moves held-out prevalence from
-\SFourCicidsNaturalTestPrev\%\ to \SFourCicidsInterleavedTestPrev\%,
-leaves the held-out slices sharing \CicidsHeldoutOverlap{} of
-\CicidsHeldoutSize{} records (\CicidsHeldoutOverlapPct\%), and inverts the
-deterministic ECOD-versus-detector ordering. The ranking change is a
-rotation (Kendall $\tau = \SFourCicidsRankingKendallTau$), not a full
-reversal.
-\item \textbf{The pooling identity on LITNET-2020}
-(Section~\ref{sec:contrast-litnet}). The pooled composite's
-\SFourLitnetPooledTestPrev\%\ held-out prevalence equals the equal-weight
-mean over three captures spanning \SFourLitnetSpamTestPrev\%\ to
-\SFourLitnetUdpFloodTestPrev\%\ held-out prevalence; it is a property of
-the assembly, not of any capture.
-\item \textbf{Method identity} (Section~\ref{sec:detector}). The evaluated
-detector's run-length posterior equals the hazard rate for any data --- the
-reset and growth branches share a predictive term that cancels --- so the
-system is prequential global-Gaussian tail scoring with a change-point
-auxiliary that contributes a mean score of
-\SThreeChangePointBindingMeanValue{} on the
-\SThreeChangePointBindingPct\%\ of records where it binds. The textbook repair
-(a vague prior predictive on the reset branch) makes the posterior respond
-but saturates the composed score
-(\SSixDiagCorrectedFracAtCap{} of scores at exactly the cap), detecting
-nothing on the one stream and prefix tested: both variants are degenerate,
-in opposite directions.
-\item \textbf{A provenance discipline} (Section~\ref{sec:provenance}). Every
-number resolves through a generated macro layer backed by archived manifests;
-the build fails on orphans, on macros claimed by two runs with different
-values, and on drift between the macro index and the manifests behind it.
+\item \textbf{Stream assembly as an uncontrolled treatment}
+(Section~\ref{sec:contrast}). On the identical \CicidsArmRows-record multiset
+(\CicidsArmAttacks{} attacks, whole-stream prevalence
+\CicidsArmPrevalencePct\%, permutation verified mechanically), reordering under
+a fixed positional split yields held-out slices sharing
+\CicidsHeldoutOverlap{} of \CicidsHeldoutSize{} records
+(\CicidsHeldoutOverlapPct\%), moves held-out prevalence by
+\SFourCicidsPrevShiftAbsPp{} points, relocates
+\CicidsAttacksMovedOutOfHeldout{} attacks out of the held-out slice, and
+reverses the measured ordering of the two deterministic scorers ---
+a reversal that does \emph{not} survive when both arms are restricted to the
+records they both held out (Section~\ref{sec:shared}).
+\item \textbf{A pooling identity, offered as an audit check}
+(Section~\ref{sec:contrast-litnet}). LITNET's pooled
+\SFourLitnetPooledTestPrev\%\ is the equal-weight mean of the three per-capture
+held-out prevalences, forced by equal budgets and a divisible round-robin
+boundary. It is arithmetic, not a discovery; its value is diagnostic --- a
+pooled operating point can correspond to no capture in the pool.
+\item \textbf{A scoped method-identity audit} (Section~\ref{sec:detector}).
+Below the run-length cap the reset and growth branches share a predictive term
+that cancels, so $P(r_t{=}0)$ equals the hazard rate for any data; at and
+beyond the cap --- where the evaluated runs spend nearly all their length ---
+truncation breaks that identity and the posterior wanders. The score the
+evaluation consumes is a function of $P(r_t\le5)$, not $P(r_t{=}0)$. We state
+these three facts separately because only the first is an exact result.
+Measured branch-wise, the auxiliary term is not merely uninformative on the
+timestamp-ordered held-out slice: it ranks below chance there, and because the
+deployed score is a maximum it overrides the tail term wherever the tail is
+small, so the deployed composition ranks worse than its own tail component
+alone (Section~\ref{sec:branch}).
+\item \textbf{A provenance discipline that is itself auditable}
+(Section~\ref{sec:provenance}), including the correction history and overlap
+matrix of Section~\ref{sec:disclosure}.
 \end{enumerate}
-
-Two findings that cut against the evaluated detector are stated with the same
-prominence as the rest: on the identical held-out slice of the interleaved
-(unresampled) stream, a batch LOF reference scores
-\STwoLUnresampledLofMean{} AUC-PR against the detector's
-\STwoLUnresampledProposedMean{} (Section~\ref{sec:sweep}); and the
-detector's lift over the chance floor falls from
-$+\STwoLTenProposedLift$ at 10\%\ prevalence to
-$\STwoLSixtyFourProposedLift$ at 64\%\ --- below what a constant predictor
-achieves (Section~\ref{sec:sweep}).
 
 \section{Related Work}
 \label{sec:related}
 
-\textbf{Benchmark criticism.} Catillo et al.~\cite{catillo2023hype} ask
-whether results on public intrusion datasets represent concrete advances;
-Arp et al.~\cite{arp2022dosdonts} catalogue recurring methodological
-pitfalls, including sampling bias and inappropriate baselines; Ring et
-al.~\cite{ring2019datasets} survey dataset limitations. Engelen et
-al.~\cite{engelen2021cicids} correct label and flow-construction defects in
-CICIDS2017; we build on their corrected release. Our contribution is
-orthogonal to label quality: we hold the records fixed and vary only the
-assembly of records into a stream.
+\textbf{Benchmark criticism.} Catillo et al.~\cite{catillo2023hype} question
+whether results on public intrusion datasets represent concrete advances and
+warn specifically that partitioning timestamped records in arbitrary order can
+alter split representativeness. Arp et al.~\cite{arp2022dosdonts} catalogue
+sampling bias, mixing incompatible sources and temporal snooping as recurring
+security-ML pitfalls. Ring et al.~\cite{ring2019datasets} survey dataset
+limitations, and Engelen et al.~\cite{engelen2021cicids} correct label and
+flow-construction defects in CICIDS2017; we build on their corrected release.
+We do not claim to discover that temporal assembly is non-neutral. Our addition
+is quantitative and specific: the same full multiset under two assemblies, with
+membership overlap, attack relocation, prevalence and measured outcome reported
+together on a real benchmark.
 
-\textbf{Streaming anomaly detection.} The baselines evaluated in this
-rebuild are Half-Space Trees~\cite{tan2011hst} and LODA~\cite{pevny2016loda}
-(streaming), with LOF~\cite{breunig2000lof} and ECOD~\cite{li2023ecod} as
-batch references. KitNET~\cite{mirsky2018kitsune},
+\textbf{Streaming anomaly detection.} The baselines evaluated in this rebuild
+are Half-Space Trees~\cite{tan2011hst} and LODA~\cite{pevny2016loda}
+(streaming), with LOF~\cite{breunig2000lof} and ECOD~\cite{li2023ecod} as batch
+diagnostic references. KitNET~\cite{mirsky2018kitsune},
 xStream~\cite{manzoor2018xstream}, RRCF~\cite{guha2016rrcf}, streaming
-isolation forest~\cite{ding2013iforestasd}, and COPOD~\cite{li2020copod}
-have implementations in the artifact but no archived evaluation runs in
-this rebuild, and carry no numbers here.
-Cao et al.~\cite{cao2024revisiting} benchmark streaming detectors under
-controlled anomaly types and drifts and report strong sensitivity to stream
-composition; our results give that sensitivity a mechanism on real IDS
-benchmarks. Only the baselines with archived runs in this rebuild (HST,
-LODA, ECOD, LOF) carry numbers in this paper.
+isolation forest~\cite{ding2013iforestasd} and COPOD~\cite{li2020copod} have
+implementations in the artifact but no archived evaluation runs in this
+rebuild, and carry no numbers here. Cao et al.~\cite{cao2024revisiting}
+benchmark streaming detectors under controlled anomaly types and drifts and
+report strong sensitivity to assessment design; our results give one such
+sensitivity a measured mechanism on an IDS benchmark.
 
-\textbf{Change-point detection.} The evaluated detector descends from
-Bayesian online change-point detection~\cite{adams2007bocpd} with a
-truncated run-length posterior~\cite{fearnhead2007online,knoblauch2018bocpd}.
+\textbf{Change-point detection.} The evaluated detector descends from Bayesian
+online change-point detection~\cite{adams2007bocpd} with a truncated run-length
+posterior~\cite{fearnhead2007online,knoblauch2018bocpd}.
 Section~\ref{sec:detector} shows the implementation's posterior is
-data-independent, which places the evaluated system outside this family
-despite its ancestry; van den Burg and Williams~\cite{vandeburg2020evaluation}
-document how often change-point evaluations mismeasure their subject.
+data-independent below its cap; van den Burg and
+Williams~\cite{vandeburg2020evaluation} document how often change-point
+evaluations mismeasure their subject.
 
 \textbf{Conformal and calibrated alerting.} Laxhammar and
 Falkman~\cite{laxhammar2014conformal} established conformal anomaly detection
-for sequential data, with guarantees inherited from exchangeability
+for sequential data, with guarantees resting on exchangeability
 assumptions~\cite{vovk2005alrw}; FADES~\cite{barrett2026fades} applies
-conformal signals to drift estimation for streaming IDS. Our findings
-constrain this line: constructions that reorder records to balance splits
-manufacture the exchangeability those methods assume, while natural-order
-streams violate it conspicuously (Section~\ref{sec:streams}).
+conformal signals to drift estimation for streaming IDS. Our results are
+relevant but must be stated carefully: reordering one realized dataset does not
+establish exchangeability, which is a distributional symmetry. What
+interleaving can do is \emph{mask temporal dependence, or make exchangeability
+appear more plausible to a diagnostic} applied to the assembled stream.
+Conformal methods that relax exchangeability already
+exist~\cite{barber2023beyond}.
 
 \textbf{Cost-sensitive thresholds.} The threshold actually implemented is the
 prior-inclusive Bayes rule of Elkan~\cite{elkan2001cost}
@@ -216,106 +229,98 @@ motivated the original framing.
 \section{The System Under Study}
 \label{sec:detector}
 
-We characterize the detector as implemented, from measurement rather than
-intention. All measurements in this section are archived under run
-\texttt{s3\_score\_threshold\_verification}.
+We characterize the detector as implemented, from measurement. All values here
+are archived under run \texttt{s3\_score\_threshold\_verification}.
 
-\subsection{The score}
+\subsection{The score the evaluation consumes}
 The published description defines the anomaly score as the run-length-reset
-posterior $P(r_t = 0 \mid x_{1:t})$. The implementation returns
+posterior $P(r_t{=}0\mid x_{1:t})$. The implementation returns
 \[
 s_t \;=\; \max\bigl(\text{tail}_t,\; 0.25 \cdot P(r_t \le 5 \mid x_{1:t})\bigr),
 \]
 where $\text{tail}_t$ is a $\chi^2$ CDF of the squared standardized residual
-under a global, slowly adapting diagonal Gaussian. Because
-$0.25 \cdot P(r \le 5) \le 0.25$, the change-point branch can set the score
-only where the tail term is below $0.25$. Measured over
-\SThreeBindingRows{} post-warm-up records of the natural-order CICIDS2017
-stream, the change-point branch binds on
-\SThreeChangePointBindingPct\%\ of records --- but at a mean contributed
-score of \SThreeChangePointBindingMeanValue, so on those records both terms
-are near zero and the branch supplies a floor, not signal. The
-discriminative work is done by the tail term throughout. We therefore name
-the system \emph{prequential global-Gaussian tail scoring with a
-downweighted change-point auxiliary}.
+under a global, slowly adapting diagonal Gaussian. Two facts follow directly.
+The evaluated score is not the described score; and it is a function of
+$P(r_t\le5)$, so results about $P(r_t{=}0)$ do not transfer to it without
+further argument. Because $0.25\cdot P(r\le5)\le0.25$, the auxiliary branch can
+set the score only where the tail term is below $0.25$; measured over
+\SThreeBindingRows{} post-warm-up records of the timestamp-ordered CICIDS2017
+stream it does so on \SThreeChangePointBindingPct\%\ of records, at a mean
+contributed value of \SThreeChangePointBindingMeanValue. A mean magnitude does
+not establish which branch \emph{discriminates}, since ranking metrics are
+invariant to the scale of a branch that sets the ranking; we therefore make no
+claim about that here and measure it directly in
+Section~\ref{sec:branch}.
 
-\subsection{The run-length posterior is data-independent}
-In the implementation, the reset branch and the growth branch share the same
+\subsection{The run-length posterior below the cap, and at it}
+In the implementation the reset and growth branches share the same
 run-conditional predictive likelihood, which cancels in the posterior
-normalization. Consequently $P(r_t = 0)$ equals the hazard rate $h$ exactly,
-for any data. Under a $6\sigma$ mean shift (hazard
-\SThreeProbeHazard): mean $P(r{=}0)$ before the shift
-\SThreePrZeroPreMean; peak in the 50-record window after the shift
+normalization. Below the run-length cap, therefore, $P(r_t{=}0)$ equals the
+hazard rate $h$ \emph{exactly, for any data}. Under a $6\sigma$ mean shift with
+hazard \SThreeProbeHazard: mean $P(r{=}0)$ before the shift
+\SThreePrZeroPreMean; peak in the 50-record window after it
 \SThreePrZeroResponsePeak; maximum deviation from the hazard between
-initialization and truncation \SThreePrZeroSteadyMaxDeviation{} (zero at the
-recorded precision). Two regimes deviate, and neither is a detection: the
-first record ($P(r{=}0)=\SThreePrZeroInitValue$ trivially, array of length
-one), and every $t \ge \SThreeRunLengthCap$ (the run-length cap), where
-truncation removes growth mass before normalization and the posterior
-wanders (mean \SThreePrZeroTruncatedMean, max
-\SThreePrZeroTruncatedMax). Every stream evaluated in this paper is far
-longer than \SThreeRunLengthCap{} records, so published runs spent nearly
-their whole length in the truncated regime.
+initialization and truncation \SThreePrZeroSteadyMaxDeviation.
+
+That exact result covers only part of the evaluated regime, and we state the
+limit plainly. At $t\ge\SThreeRunLengthCap$ the run array is truncated before
+normalization, the cancellation no longer holds, and the posterior wanders
+(mean \SThreePrZeroTruncatedMean, maximum \SThreePrZeroTruncatedMax). Every
+stream evaluated in this paper is far longer than \SThreeRunLengthCap{}
+records, so the published runs spent nearly all of their length in the
+truncated regime. We have therefore proved data-independence where it is
+provable and measured behaviour where it is not; we have not established that
+the auxiliary branch is uninformative over the regime that produced almost all
+reported scores, and we do not claim it.
 
 \subsection{The threshold}
 The implemented decision threshold is the prior-inclusive Bayes
-rule~\cite{elkan2001cost}:
-$\tau = C_{FP}(1-\rho)\,/\,[C_{FP}(1-\rho) + C_{FN}\rho]$, giving
+rule~\cite{elkan2001cost},
+$\tau = C_{FP}(1-\rho)/[C_{FP}(1-\rho) + C_{FN}\rho]$, giving
 \SThreeThresholdLitnet{} at incident prior $\rho{=}0.05$ and
 \SThreeThresholdCicids{} at $\rho{=}0.22$ --- not the cost-only
 $C_{FP}/(C_{FP}{+}C_{FN}) = \SThreeThresholdCostOnly$ described in earlier
-versions. AUC-PR and AUC-ROC are threshold-free and unaffected; we do not
-report threshold-dependent columns, which are additionally non-comparable
-across methods here (the baselines receive validation-tuned thresholds).
+versions. AUC-PR and AUC-ROC are threshold-free and unaffected; we report no
+threshold-dependent column, which is also why none of the non-comparable
+precision/recall/F1 columns appears in this paper.
 
 \subsection{Detection delay, not latency}
 The quantity previously reported as ``latency in milliseconds'' is a count of
 records between attack onset and first alert; the evaluation contains no
 wall-clock instrumentation (\SThreeLatencyUsesAClock{} clock calls in the
-latency module). We report it as detection delay in records, and we do not
-report per-flow compute cost, which this pipeline does not measure.
+module). We report it as detection delay in records and report no per-flow
+compute cost, which this pipeline does not measure.
 
-\section{Datasets and Stream Construction}
+\section{Datasets, Assembly, and Protocol}
 \label{sec:streams}
 
-\subsection{CICIDS2017: a budgeted subsample of a capture week}
+\subsection{CICIDS2017: a timestamp-sorted budgeted subsample}
 We use the Engelen-corrected release~\cite{engelen2021cicids}. The evaluation
-dataset is \CicidsWeekUsedRows{} of \CicidsWeekEligibleRows{} eligible
-records (\CicidsWeekRetentionPct\%), selected by fixed per-day budgets with
-proportional stride subsampling. Because the budgets are fixed rather than a
-common factor, larger days are cut harder, and the attack-heavy days are the
-largest: per-day retention runs from \CicidsWeekMinDayRetentionPct\%
-(Friday, the densest day) to \CicidsWeekMaxDayRetentionPct\%\ (Tuesday).
-Table~\ref{tab:streams} summarizes all four streams. Measured
-consequence: the eligible week's prevalence is
-\CicidsWeekTruePrevalencePct\%\ while the dataset's is
-\CicidsWeekUsedPrevalencePct\%, a bias of \CicidsWeekPrevalenceBiasPp{}
-points from the budget step alone. The often-quoted ``22\%'' regime is
-therefore \emph{doubly} constructed: a subsampling budget removed
-prevalence, then interleaving redistributed what remained. The construction
-contrast in Section~\ref{sec:contrast} is unaffected --- both arms hold the
-identical multiset --- but absolute prevalence figures carry this
-qualification.
-
-\subsection{LITNET-2020: three disjoint captures, no global chronology}
-LITNET-2020's captures are temporally disjoint: udp\_flood spans roughly
-four minutes, blaster\_worm under two minutes, and spam about four weeks. No
-coherent global timestamp order exists across them, so we evaluate three
-per-attack-type streams of \StreamLitnetUdpFloodRows{} records each, never a
-manufactured composite; the composite appears only as the explicitly labeled
-synthetic arm of Section~\ref{sec:contrast-litnet}. Burn-rate–style
-multi-window alerting (60/360/4320-minute windows) is undefined on captures
-spanning minutes; we report that as a finding about the benchmark, and no
-burn-rate results appear in this paper.
+corpus is a \textbf{timestamp-sorted budgeted subsample}: \CicidsWeekUsedRows{}
+of \CicidsWeekEligibleRows{} eligible records, a retention of
+\CicidsWeekRetentionPct\%, selected by fixed per-day budgets with proportional
+stride subsampling. Because the budgets are fixed rather than a common factor,
+larger days are cut harder and the attack-heavy days are the largest: per-day
+retention runs from \CicidsWeekMinDayRetentionPct\%\ (Friday, the densest day)
+to \CicidsWeekMaxDayRetentionPct\%\ (Tuesday). Measured consequence: the
+eligible week's prevalence is \CicidsWeekTruePrevalencePct\%\ while the corpus
+is \CicidsWeekUsedPrevalencePct\%, a bias of \CicidsWeekPrevalenceBiasPp{}
+points from the budget step alone. Sorting a stride-subsampled corpus preserves
+relative order but is not the full event stream; missing flows can break attack
+runs and alter online sufficient statistics. We measured the prevalence bias
+and did not measure the effect on attack-family mix, feature distributions or
+run lengths, so we use ``timestamp-sorted budgeted subsample'' throughout and
+avoid claims that require the complete natural chronology.
+Table~\ref{tab:streams} summarizes all four streams.
 
 \begin{table}
-\caption{The evaluation streams in natural order (Stage 1 manifests). Run
-lengths are contiguous attack runs in the labeled stream; span is the
-wall-clock extent of the capture.}
+\caption{The evaluation streams (Stage 1 manifests). Run lengths are contiguous
+attack runs in the labelled stream; span is the wall-clock extent of the
+capture.}
 \label{tab:streams}
 \begin{tabular}{lrrrrr}
 \toprule
-stream & records & prevalence & held-out prev. & attack-run med/p90/max & span (min) \\
+stream & records & prevalence & held-out prev. & run med/p90/max & span (min) \\
 \midrule
 CICIDS2017 (week) & \StreamCicidsTwoZeroOneSevenRows & \StreamCicidsTwoZeroOneSevenPrevalencePct\% & \StreamCicidsTwoZeroOneSevenTestPrevalencePct\% & \StreamCicidsTwoZeroOneSevenRunMedian/\StreamCicidsTwoZeroOneSevenRunPninety/\StreamCicidsTwoZeroOneSevenRunMax & \StreamCicidsTwoZeroOneSevenSpanMinutes \\
 LITNET udp\_flood & \StreamLitnetUdpFloodRows & \StreamLitnetUdpFloodPrevalencePct\% & \StreamLitnetUdpFloodTestPrevalencePct\% & \StreamLitnetUdpFloodRunMedian/\StreamLitnetUdpFloodRunPninety/\StreamLitnetUdpFloodRunMax & \StreamLitnetUdpFloodSpanMinutes \\
@@ -325,336 +330,527 @@ LITNET spam & \StreamLitnetSpamRows & \StreamLitnetSpamPrevalencePct\% & \Stream
 \end{tabular}
 \end{table}
 
-\subsection{Natural order is not exchangeable}
-In true timestamp order, CICIDS2017's held-out tail is a single
-\CicidsNaturalHeldoutSpanMinutes-minute Friday-evening window at
-\SFourCicidsNaturalTestPrev\%\ prevalence, and attacks arrive in runs
-(median run length \StreamCicidsTwoZeroOneSevenRunMedian, 90th percentile
-\StreamCicidsTwoZeroOneSevenRunPninety, maximum
-\StreamCicidsTwoZeroOneSevenRunMax{} on CICIDS2017; essentially isolated
-single flows on LITNET; Table~\ref{tab:streams}). Among these datasets, in
-natural order, \emph{no moderate-prevalence regime exists}: held-out
-prevalence is either high (\SFourCicidsNaturalTestPrev\%) or spans
-\SFourLitnetSpamTestPrev\%--\SFourLitnetUdpFloodTestPrev\%\ per capture. The
-moderate regimes the literature reports on these benchmarks are products of
-the constructions examined next.
+\subsection{LITNET-2020: three disjoint captures}
+LITNET-2020's captures are temporally disjoint --- udp\_flood roughly four
+minutes, blaster\_worm under two, spam about four weeks --- so no coherent
+global timestamp order exists across them. We evaluate three per-attack-type
+streams of \StreamLitnetUdpFloodRows{} records each, never a manufactured
+composite; the pooled composite appears only as the explicitly labelled
+assembled arm of Section~\ref{sec:contrast-litnet}. Multi-window burn-rate
+alerting over 60/360/4320-minute windows is undefined on captures spanning
+minutes; we report that as a finding about the benchmark, and no burn-rate
+result appears in this paper.
 
-\section{The Construction Contrast}
-\label{sec:contrast}
-
-\subsection{Design}
-CICIDS2017 admits a clean manipulation: the same record multiset can be
-presented in true timestamp order (\emph{natural}) or in day-of-week round
-robin (\emph{synthetic}; the construction used by earlier versions of this
-work). The reordering is verified mechanically to be an exact permutation:
-both arms hold \CicidsArmRows{} records and \CicidsArmAttacks{} attacks
-(\CicidsArmPrevalencePct\%). Order is the only manipulated variable; the
-70/15/15 chronological split rule is held fixed, and no split-rule
-sensitivity analysis has been run, so effects are attributable to
-\emph{reordering under this split rule}, not to construction in some larger
-causal sense. The synthetic arm reproduces the archived earlier evaluation
-exactly (held-out \SFourCicidsInterleavedTestAttacks{} attacks in
-\CicidsHeldoutSize{} records), so the contrast is against the construction
-actually used, not a strawman.
-
-\subsection{What reordering does to the evaluated sample}
-Table~\ref{tab:contrast} summarizes the arms. Held-out prevalence moves by
-\SFourCicidsPrevShiftPp{} points. The two held-out slices share only
-\CicidsHeldoutOverlap{} of \CicidsHeldoutSize{} records
-(\CicidsHeldoutOverlapPct\%); the synthetic arm's held-out attacks are a
-strict subset of the natural arm's, with \CicidsAttacksMovedOutOfHeldout{}
-attacks relocated into training by the reordering. The mechanism is
-\emph{dilution}: every synthetic held-out attack is a Friday record
-(\CicidsSyntheticHeldoutAttackDays{} of five days contribute attacks), and
-Monday–Thursday contribute \CicidsHeldoutAttackFreeRows{} attack-free
-held-out rows. The synthetic arm's Friday sub-slice is denser
-(\CicidsFridayHeldoutDensityPct\%) than the natural arm's
-entire slice --- the prevalence falls because attack-free days are mixed in,
-not because attacks are redistributed.
+\subsection{Protocol}
+\label{sec:protocol}
+Table~\ref{tab:protocol} states the protocol in full so the paper is
+self-contained; the artifact reproduces it exactly.
 
 \begin{table}
-\caption{The construction contrast. Held-out prevalence, attacks, and the
-proposed detector's AUC-PR per arm. Every cell is a macro resolving to an
-archived manifest.}
+\caption{Experimental protocol. Every entry is taken from the code the archived
+manifests pin, not from intent.}
+\label{tab:protocol}
+\begin{tabular}{ll}
+\toprule
+element & setting \\
+\midrule
+features & all numeric columns after dropping the label; non-numeric columns
+dropped, so no categorical encoding is used \\
+scaling & none applied by the harness \\
+missing / infinite & $\pm\infty$ mapped to NaN, then all NaN filled with $0.0$ \\
+label rule & $y{=}1$ unless the label string is \texttt{benign}, \texttt{normal},
+\texttt{0} or \texttt{false} \\
+eligibility (CICIDS) & rows whose label contains `` - Attempted'' dropped \\
+per-day budgets & 300k / 300k / 350k / 300k / 350k (Mon--Fri) \\
+subsampling & proportional stride within each class, preserving per-day
+prevalence \\
+split & positional 70/15/15 over the assembled stream order \\
+detector: hazard & \SThreeProbeHazard \\
+detector: run-length cap & \SThreeRunLengthCap \\
+detector: warm-up & 30 records \\
+detector: short-run mass & $P(r\le5)$, weight $0.25$ \\
+update timing & score computed from the pre-update predictive; sufficient
+statistics updated after scoring, on every record including held-out ones \\
+label access & the detector and HST see no labels at any point; baselines
+receive a validation-derived threshold; \textbf{ECOD is fitted on benign-only
+training rows and therefore has label access} \\
+metric & \texttt{sklearn.metrics.average\_precision\_score} (AUC-PR) and
+\texttt{roc\_auc\_score}, scikit-learn 1.8.0, positive class $1$, no sample
+weighting; average precision is the step-wise sum
+$\sum_n (R_n-R_{n-1})P_n$, not trapezoidal interpolation \\
+chance floor & average precision of an uninformative ranking equals the
+positive-class prevalence $p$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Stream assembly, stated as an algorithm:
+
+\begin{verbatim}
+timestamp-order arm:
+  rows <- corpus sorted by Timestamp (stable mergesort)
+day-round-robin arm:
+  groups <- rows grouped by capture date, each in timestamp order
+  for k = 0, 1, 2, ...:
+      for d in sorted(dates):
+          if k < len(groups[d]): emit groups[d][k]
+pooled-composite arm (LITNET):
+  groups <- per-attack-type streams, each in timestamp order
+  emit round robin over sorted(attack_type) as above
+split (both arms): i_tr = floor(0.70 n); i_va = i_tr + floor(0.15 n)
+\end{verbatim}
+
+\section{Assembly as a Treatment}
+\label{sec:contrast}
+
+\subsection{Design and what it identifies}
+CICIDS2017 admits a clean manipulation of the assembly step: the same record
+multiset can be presented in timestamp order or in day-of-week round robin. The
+reordering is verified mechanically to be an exact permutation --- both arms
+hold \CicidsArmRows{} records and \CicidsArmAttacks{} attacks
+(\CicidsArmPrevalencePct\%). The assembled arm reproduces the archived earlier
+evaluation exactly (\SFourCicidsInterleavedTestAttacks{} held-out attacks in
+\CicidsHeldoutSize{} records), so the contrast is against the assembly actually
+used, not a strawman.
+
+What the design does \emph{not} do is hold the evaluated sample fixed. Under a
+positional split, reordering changes split membership, so the two arms differ
+in held-out records, held-out prevalence, training composition and within-split
+order at once. The estimand is therefore the effect of the complete assembly
+pipeline under a fixed split rule, and nothing finer. We report the joint change
+and decline to decompose it.
+
+\subsection{What assembly does to the evaluated sample}
+Held-out prevalence differs by \SFourCicidsPrevShiftAbsPp{} points. The two
+held-out slices share only \CicidsHeldoutOverlap{} of \CicidsHeldoutSize{}
+records (\CicidsHeldoutOverlapPct\%); the assembled arm's held-out attacks are
+a strict subset of the timestamp-ordered arm's, with
+\CicidsAttacksMovedOutOfHeldout{} attacks relocated into training. The
+mechanism of the prevalence change is dilution: every held-out attack in the
+assembled arm is a Friday record
+(\CicidsSyntheticHeldoutAttackDays{} of five days contribute any), while
+Monday--Thursday contribute \CicidsHeldoutAttackFreeRows{} attack-free held-out
+rows. The assembled arm's Friday sub-slice is denser
+(\CicidsFridayHeldoutDensityPct\%) than the timestamp-ordered arm's entire
+slice: prevalence falls because attack-free days are mixed in, not because
+attacks are redistributed. This dilution accounts for the prevalence change; it
+is not by itself an account of the outcome change in
+Section~\ref{sec:outcome}.
+
+\begin{table}
+\caption{The assembly contrast. Held-out prevalence, attacks, and the proposed
+detector's AUC-PR per arm. Every cell is a macro resolving to an archived
+manifest.}
 \label{tab:contrast}
 \input{table_construction_contrast}
 \end{table}
 
-\subsection{What reordering does to method comparison}
-AUC-PR's chance floor equals test prevalence, which is precisely what the
-construction moves (\SFourCicidsNaturalChanceFloor{} natural versus
-\SFourCicidsSyntheticChanceFloor{} synthetic), so raw AUC-PR is not
-comparable across arms and we do not report cross-arm deltas. Within arms:
+\subsection{What assembly does to the measured outcome}
+\label{sec:outcome}
+AUC-PR's chance floor is the positive-class prevalence, which the treatment
+moves (\SFourCicidsNaturalChanceFloor{} against
+\SFourCicidsSyntheticChanceFloor), and additive lift $AP-p$ has a
+prevalence-dependent ceiling of $1-p$. We therefore report raw $AP$, the floor
+$p$, and the normalized lift $(AP-p)/(1-p)$ together, and report no raw
+cross-arm difference.
 
 \begin{itemize}
-\item \textbf{Natural order:} ECOD \SFourCicidsNaturalEcodAucpr{} $>$
-detector \SFourCicidsNaturalProposedDetectorAucpr{} (both deterministic).
-Against the \SFourCicidsNaturalChanceFloor{} floor, neither clears
-$+\SFourCicidsNaturalBestLift$; these values are not a performance claim.
-HST scores \SFourCicidsNaturalHstAucpr{} here ---
-\SFourCicidsNaturalHstLiftAbs{} \emph{below} chance --- from a single
-seed, so no placement relative to the other methods is asserted for it.
-\item \textbf{Synthetic:} detector
-\SFourCicidsSyntheticProposedDetectorAucpr{} $>$ ECOD
-\SFourCicidsSyntheticEcodAucpr{} (both deterministic). Against the
-\SFourCicidsSyntheticChanceFloor{} floor, every method's lift is
-\emph{higher} than in the natural arm. HST's three-seed values here are
-mean \SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstMean{} $\pm$
-\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstSd; its ordering
-against ECOD flips across those seeds, so it carries no placement.
+\item \textbf{Timestamp order} ($p=\SFourCicidsNaturalChanceFloor$): ECOD
+$AP=\SFourCicidsNaturalEcodAucpr$ (normalized lift
+\SFourCicidsNaturalEcodNormLift), detector
+$AP=\SFourCicidsNaturalProposedDetectorAucpr$ (normalized lift
+\SFourCicidsNaturalProposedDetectorNormLift). HST scores
+\SFourCicidsNaturalHstAucpr{} here, \SFourCicidsNaturalHstLiftAbs{} below its
+chance floor, from a single seed, so no placement is asserted for it.
+\item \textbf{Day round robin} ($p=\SFourCicidsSyntheticChanceFloor$): detector
+$AP=\SFourCicidsSyntheticProposedDetectorAucpr$ (normalized lift
+\SFourCicidsSyntheticProposedDetectorNormLift), ECOD
+$AP=\SFourCicidsSyntheticEcodAucpr$ (normalized lift
+\SFourCicidsSyntheticEcodNormLift). HST's three-seed values are
+\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawOne,
+\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawTwo{} and
+\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawThree{} (mean
+\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstMean, sd
+\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstSd); its ordering against
+ECOD flips across those seeds, so it carries no placement.
 \end{itemize}
 
-The ordering of the two deterministic methods inverts: ECOD beats the
-detector under natural order and loses to it under the synthetic
-construction, on identical records. This comparison is seed-free --- both
-methods are deterministic here --- and it is the paper's central evidence.
-Computed over all three methods at the seeds run, the ranking change is a
-rotation, not a reversal (Kendall
-$\tau = \SFourCicidsRankingKendallTau$, with
-\SFourCicidsPairwiseOrderingsPreserved{} of
-\SFourCicidsPairwiseOrderingsTotal{} pairwise orderings preserved), but
-any placement of HST within it is single-draw here, and
-Section~\ref{sec:seeds} reports how it moves with the seed. One caveat binds ECOD's
-reading throughout: ECOD is fitted on benign-only training data and is
-therefore label-privileged relative to the unsupervised streaming methods;
-where ECOD wins, label supervision is an uncontrolled explanation.
+The measured ordering of the two deterministic scorers reverses between arms,
+in both raw and normalized terms. \textbf{This is a pipeline-level evaluation
+outcome under the stated protocol, not a statement about method quality.} Three
+qualifications are load-bearing and are stated here rather than deferred.
+(i)~ECOD is fitted on benign-only training rows and therefore has label access
+the streaming methods do not; we treat it throughout as a \emph{label-privileged
+diagnostic reference}, and no superiority is claimed for or against it.
+(ii)~The two arms score different held-out samples, so the reversal is not
+measured on a common sample. Section~\ref{sec:shared} measures what happens
+when that difference is removed, and the reversal does not survive it.
+(iii)~Determinism removes seed variance but not sampling uncertainty from the
+selected window, correlated attack runs, or the subsample; we report no
+confidence interval and therefore claim no stable ordering, only a measured one
+under this protocol.
 
-\subsection{LITNET-2020: pooling as construction}
+\subsection{LITNET-2020: pooling as an audit check}
 \label{sec:contrast-litnet}
 Round robin \emph{within} a per-attack-type stream is the identity, so the
-LITNET contrast is compositional: three natural per-type streams against the
-pooled three-type composite used by earlier versions. The pooled held-out
-slice is, by construction, exactly the union of the three per-type held-out
-slices (equal budgets, a perfect three-cycle, and a divisible split
-boundary), so its prevalence \SFourLitnetPooledTestPrev\%\ is the
-equal-weight mean of \SFourLitnetUdpFloodTestPrev\%,
-\SFourLitnetBlasterWormTestPrev\%, and \SFourLitnetSpamTestPrev\%\ --- an
-identity, not a measurement, and the equal weighting is an artifact of equal
-capture budgets. The composite reports one operating point for three
-populations that share none. Per-stream results (deterministic methods):
-the detector scores \SFourLitnetBlasterWormProposedDetectorAucpr{} on
-blaster\_worm and \SFourLitnetSpamProposedDetectorAucpr{} on spam against
-ECOD's \SFourLitnetBlasterWormEcodAucpr{} and
-\SFourLitnetSpamEcodAucpr; on udp\_flood the detector scores
-\SFourLitnetUdpFloodProposedDetectorAucpr{} against ECOD's
-\SFourLitnetUdpFloodEcodAucpr. On the pooled composite the detector scores
-\SFourLitnetPooledProposedDetectorAucpr{} against ECOD's
-\SFourLitnetPooledEcodAucpr: pooling collapses three heterogeneous
-held-out regimes into one operating point and erases the per-stream
-structure the table shows
-(Table~\ref{tab:litnet}).
-
+LITNET contrast is compositional: three per-type streams against the pooled
+composite used by earlier versions. The pooled held-out slice is by
+construction exactly the union of the three per-type held-out slices --- equal
+budgets, a perfect three-cycle, and a divisible split boundary --- so its
+prevalence \SFourLitnetPooledTestPrev\%\ is the equal-weight mean of
+\SFourLitnetUdpFloodTestPrev\%, \SFourLitnetBlasterWormTestPrev\%\ and
+\SFourLitnetSpamTestPrev\%. This is arithmetic, and we present it as an audit
+check with pedagogical value rather than as a finding: a pooled operating point
+can correspond to no capture in the pool, and the equal weighting is an
+artifact of equal budgets. Per-stream values are in Table~\ref{tab:litnet}.
 
 \begin{table}
-\caption{LITNET-2020: AUC-PR per stream against the pooled synthetic
-composite. The detector and ECOD are deterministic; HST is a single draw
-per cell here, so no ordering involving HST is asserted (its measured
-composite spread across three seeds is
-\SFourSeedLitnetPooledCompositeSyntheticHstMean{}\,$\pm$\,\SFourSeedLitnetPooledCompositeSyntheticHstSd).}
+\caption{LITNET-2020: AUC-PR per stream against the pooled assembled composite.
+The detector and ECOD (label-privileged diagnostic reference) are deterministic;
+HST is a single draw per cell, so no ordering involving HST is asserted. Its
+measured composite spread across three seeds is
+\SFourSeedLitnetPooledCompositeSyntheticHstDrawOne,
+\SFourSeedLitnetPooledCompositeSyntheticHstDrawTwo,
+\SFourSeedLitnetPooledCompositeSyntheticHstDrawThree.}
 \label{tab:litnet}
 \begin{tabular}{lrrrr}
 \toprule
 stream & held-out prev. & detector & ECOD & HST (1 seed) \\
 \midrule
-udp\_flood (natural) & \SFourLitnetUdpFloodTestPrev\% & \SFourLitnetUdpFloodProposedDetectorAucpr & \SFourLitnetUdpFloodEcodAucpr & \SFourLitnetUdpFloodHstAucpr \\
-blaster\_worm (natural) & \SFourLitnetBlasterWormTestPrev\% & \SFourLitnetBlasterWormProposedDetectorAucpr & \SFourLitnetBlasterWormEcodAucpr & \SFourLitnetBlasterWormHstAucpr \\
-spam (natural) & \SFourLitnetSpamTestPrev\% & \SFourLitnetSpamProposedDetectorAucpr & \SFourLitnetSpamEcodAucpr & \SFourLitnetSpamHstAucpr \\
-pooled (synthetic) & \SFourLitnetPooledTestPrev\% & \SFourLitnetPooledProposedDetectorAucpr & \SFourLitnetPooledEcodAucpr & \SFourLitnetPooledHstAucpr \\
+udp\_flood (per type) & \SFourLitnetUdpFloodTestPrev\% & \SFourLitnetUdpFloodProposedDetectorAucpr & \SFourLitnetUdpFloodEcodAucpr & \SFourLitnetUdpFloodHstAucpr \\
+blaster\_worm (per type) & \SFourLitnetBlasterWormTestPrev\% & \SFourLitnetBlasterWormProposedDetectorAucpr & \SFourLitnetBlasterWormEcodAucpr & \SFourLitnetBlasterWormHstAucpr \\
+spam (per type) & \SFourLitnetSpamTestPrev\% & \SFourLitnetSpamProposedDetectorAucpr & \SFourLitnetSpamEcodAucpr & \SFourLitnetSpamHstAucpr \\
+pooled (assembled) & \SFourLitnetPooledTestPrev\% & \SFourLitnetPooledProposedDetectorAucpr & \SFourLitnetPooledEcodAucpr & \SFourLitnetPooledHstAucpr \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Seed sensitivity of stochastic placements}
-\label{sec:seeds}
-HST is the only stochastic method in this contrast. Its placement
-flips with the seed in both cells where we bought additional seeds: on the
-LITNET composite, HST across seeds 11/23/47 is
-\SFourSeedLitnetPooledCompositeSyntheticHstMean{} $\pm$
-\SFourSeedLitnetPooledCompositeSyntheticHstSd{} AUC-PR against
-deterministic ECOD \SFourLitnetPooledEcodAucpr{} --- above ECOD at two
-seeds, below at the third; on CICIDS synthetic the analogous ordering also
-flips across three seeds. Accordingly, \emph{no ranking count and no
-per-stream ranking attribution involving HST is stated in this paper}; HST
-values appear only with their seed distributions, and flat comparative
-claims are made between deterministic methods only.
+\section{Isolating What the Treatment Changes}
+\label{sec:shared}
 
-\section{Prevalence Within the Synthetic Construction}
-\label{sec:sweep}
+The contrast of Section~\ref{sec:contrast} moves membership, prevalence and
+order together. Three analyses separate what can be separated from the archived
+per-record scores of both arms. All three use the metric implementation of
+Table~\ref{tab:protocol}; the dumps reproduce the archived arms to
+\RevReproNaturalDelta{} AUC-PR on the timestamp-ordered arm and exactly on the
+assembled arm.
 
-An earlier version of this work reported a prevalence sweep as evidence
-about deployment regimes. Retained here, it is a controlled experiment
-\emph{on the interleaved synthetic construction} and nothing more: prevalence
-is varied by stratified resampling of the interleaved CICIDS2017 stream at
-five levels, three resampling draws each. Table~\ref{tab:sweep} reports
-AUC-PR with the achieved held-out prevalence as the chance floor beside
-every level; only at the unresampled level do all draws see the same
-records.
+\subsection{The records both arms held out}
+The two held-out slices share \RevSharedRecords{} records, carrying
+\RevSharedAttacks{} attacks at prevalence \RevSharedPrevalence{} --- they are
+the Friday records both assemblies happen to place in the test set, which is
+why their prevalence is far above either arm's. Restricting both arms to
+exactly those records, and recomputing:
 
 \begin{table}
-\caption{AUC-PR by prevalence level on the interleaved synthetic
-construction (mean over three resampling draws). ``Floor'' is the achieved
-held-out prevalence. At the unresampled level, deterministic-method cells
-are identical across draws; at resampled levels the small spread of every
-method is the resampling draw. Per-draw values are in the archived
-findings.}
+\caption{Both arms restricted to the \RevSharedRecords{} records they both
+held out. Membership and prevalence are identical by construction; only the
+history each detector saw before scoring them differs.}
+\label{tab:shared}
+\begin{tabular}{lrrrr}
+\toprule
+arm & detector $AP$ & ECOD $AP$ & detector AUC-ROC & ECOD AUC-ROC \\
+\midrule
+timestamp order & \RevSharedDetectorNaturalAucpr & \RevSharedEcodNaturalAucpr & 0.869219 & 0.799910 \\
+day round robin & \RevSharedDetectorSyntheticAucpr & \RevSharedEcodSyntheticAucpr & 0.864159 & 0.805657 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{The ordering does not reverse on the shared records.} The detector
+leads ECOD in both arms (margins \RevSharedMarginNatural{} and
+\RevSharedMarginSynthetic), and its own score changes by only
+\RevSharedDetectorSpread{} $AP$ between the two histories. This is the
+round's most consequential result and it constrains the paper's central claim:
+the reversal reported in Section~\ref{sec:outcome} is produced by \emph{which
+records the assembly places in the test set}, not by the order in which the
+detector processed its history. We report the reversal as an evaluation-level
+consequence of assembly and explicitly not as an effect of ordering on detector
+behaviour.
+
+Two cautions on reading Table~\ref{tab:shared}. The shared records are not a
+random subsample --- they are the intersection two particular assemblies
+produce, at a prevalence unlike either arm's --- so its absolute values
+characterise that intersection, not the benchmark. And the detector remains
+prequential, so the two rows still differ in the history preceding each scored
+record; what is held fixed is the evaluated sample, not the model state.
+
+\subsection{Where the split falls}
+A detector score depends only on the records preceding it, so one pass supports
+every chronological cut point; ECOD is refit at each cut because its training
+set moves with the boundary. Over \RevSplitCuts{} cuts from 60\%\ to 90\%\ of
+the stream, ECOD exceeds the detector at \RevSplitEcodWins{} of them, including
+the 85\%\ cut this paper's fixed split uses, and the detector leads at the
+others. The measured ordering is therefore a property of the split point as well
+as of the assembly; the archived split is not adversarially chosen, but it is
+not neutral either, and no claim here is a stable property of CICIDS2017.
+Per-cut values are in the archived findings.
+
+\subsection{Which branch discriminates}
+\label{sec:branch}
+The score is $\max(\text{tail},\,0.25\cdot P(r\le5))$, and a branch's mean
+magnitude says nothing about which branch ranks. Scoring the timestamp-ordered
+held-out slice with each branch alone, using the components
+\texttt{update\_score} itself computed:
+
+\begin{table}
+\caption{Branch-wise discrimination on the timestamp-ordered held-out slice.}
+\label{tab:branch}
+\begin{tabular}{lrr}
+\toprule
+scoring branch & $AP$ & AUC-ROC \\
+\midrule
+deployed composition & \RevBranchCombinedAucpr & \RevBranchCombinedAucroc \\
+tail term only & \RevBranchTailOnlyAucpr & \RevBranchTailOnlyAucroc \\
+auxiliary term only & \RevBranchAuxOnlyAucpr & \RevBranchAuxOnlyAucroc \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The tail term alone \emph{outranks} the deployed composition, by
+\RevBranchTailMinusCombinedAucpr{} $AP$ and
+\RevBranchTailMinusCombinedAucroc{} AUC-ROC. The auxiliary term ranks below
+chance on this slice (AUC-ROC \RevBranchAuxOnlyAucroc), and because the
+deployed score is a maximum, that branch overrides the tail wherever the tail is
+small --- which Section~\ref{sec:detector} measured to be most records. The
+near-chance AUC-ROC of the deployed detector on this slice
+(\RevBranchCombinedAucroc) is therefore a property of the \emph{composition},
+not of either component: a defect in how two signals are combined, not in
+either signal. We state this as a measured property of one slice of one
+benchmark, and it supersedes any claim that the tail term simply performs the
+discriminative work.
+
+\section{Prevalence Within One Assembled Construction}
+\label{sec:sweep}
+
+An earlier version reported a prevalence sweep as evidence about deployment
+regimes. Retained here, it is a controlled experiment \emph{on the assembled
+(interleaved) CICIDS2017 stream} and nothing more: prevalence is varied by
+stratified resampling at five levels, three draws each. It does not isolate
+prevalence either --- only the unresampled level's draws see identical records,
+so record identity, repetition and temporal adjacency vary with the nominal
+level. Table~\ref{tab:sweep} reports $AP$ with the achieved held-out prevalence
+as the floor beside every level.
+
+\begin{table}
+\caption{AUC-PR by prevalence level on the assembled construction (mean over
+three resampling draws). ``Floor'' is the achieved held-out prevalence. At the
+unresampled level all draws see the same records; at resampled levels the
+spread of every method is the resampling draw. Per-draw values and normalized
+lift are in the archived findings.}
 \label{tab:sweep}
 \input{table_prevalence_sweep}
 \end{table}
 
-Two findings, both deterministic-versus-deterministic at the unresampled
-level and therefore stated flatly. First, the batch LOF reference dominates
-the detector at every level --- at the unresampled level,
-\STwoLUnresampledLofMean{} against \STwoLUnresampledProposedMean{} on the
-identical held-out slice. Second, the detector's lift over the chance floor
-runs $+\STwoLFiveProposedLift$ at 5\%, peaks at $+\STwoLTenProposedLift$
-at 10\%, and falls from there to $\STwoLSixtyFourProposedLift$ at
-64\%\ --- below the floor a constant predictor achieves. The
-``low-prevalence advantage'' reported earlier is a lift-versus-prevalence
-gradient inside one synthetic construction; nothing in this section
-transfers to natural order (Section~\ref{sec:contrast} measures the same
-detector under a different ordering and finds a different result), and
-nothing here is a claim about deployment prevalence.
+Two observations, both between the two deterministic cells at the unresampled
+level, where all draws see identical records. First, the batch
+label-privileged reference LOF attains $AP=\STwoLUnresampledLofMean$ against
+the detector's $AP=\STwoLUnresampledProposedMean$ on that identical slice.
+Second, the detector's normalized lift runs
+\STwoLFiveProposedNormLift{} at 5\%, \STwoLTenProposedNormLift{} at 10\%,
+\STwoLUnresampledProposedNormLift{} unresampled,
+\STwoLFortyProposedNormLift{} at 40\%, and
+\STwoLSixtyFourProposedNormLift{} at 64\% --- below zero at the highest level,
+meaning below what an uninformative ranking achieves. We note that the additive
+and normalized forms peak at different levels, which is precisely why both are
+reported. Nothing in this section transfers to the timestamp-ordered stream or
+to deployment.
 
 \section{Repairing the Change-Point Statistic}
 \label{sec:ablation}
 
-Section~\ref{sec:detector} showed the evaluated posterior never resets. The
-textbook repair is a prior-predictive term on the reset branch. We
-implemented it (a Normal--Inverse-Gamma prior predictive: Student-$t$,
-$\nu{=}2$, squared scale twice the global variance, standard vague
-hyperparameters, nothing tuned) and measured both variants under a
-30-minute compute cap whose reductions bind this paragraph's scope: one
-stream (udp\_flood), a \SSixPrefixRows-record prefix, one seed (both
-variants are deterministic). On the synthetic probe the repair works:
-$P(r{=}0)$ peaks at \SSixProbeCorrectedPeak{} after a $6\sigma$ shift
-(\SSixProbeCorrectedRatio$\times$ the hazard) where the original stays at
-\SSixProbeOriginalPeak. On real data it detects nothing: AUC-PR
-\SSixCorrectedAucpr{} against the original's \SSixOriginalAucpr{} (floor
-\SSixChanceFloor), with AUC-ROC \SSixCorrectedAucroc{} --- chance. The
-diagnostic explains why, and why ``the repair degrades detection'' is the
-wrong reading: under the repair the posterior collapses onto short runs at
-every step (mean $P(r{\le}5) = \SSixDiagCorrectedMeanShortRunMass$), the
-$0.25 \cdot P(r{\le}5)$ branch saturates,
-\SSixDiagCorrectedFracAtCap{} of scores sit exactly at the 0.25 cap, and
-only \SSixDiagCorrectedDistinctScores{} distinct values are emitted against
-the original's \SSixDiagOriginalDistinctScores. A score constant on most
-records cannot rank; an AUC-ROC of \SSixCorrectedAucroc{} means constant,
-not worse (Table~\ref{tab:ablation}).
+Section~\ref{sec:detector} showed the evaluated posterior is pinned below the
+cap. A standard repair is a prior-predictive term on the reset branch. We
+implemented \textbf{one untuned instance} of that repair --- a
+Normal--Inverse-Gamma prior predictive (Student-$t$, $\nu{=}2$, squared scale
+twice the global variance, standard vague hyperparameters, nothing tuned) ---
+and measured both variants under a 30-minute compute cap whose reductions bind
+this paragraph: one stream (udp\_flood), a \SSixPrefixRows-record prefix, one
+seed. On the synthetic probe the repair responds: $P(r{=}0)$ peaks at
+\SSixProbeCorrectedPeak{} after a $6\sigma$ shift against
+\SSixProbeOriginalPeak{} for the evaluated detector. On real data it ranks near
+chance: $AP=\SSixCorrectedAucpr$ against \SSixOriginalAucpr{} (floor
+\SSixChanceFloor; normalized lift \SSixCorrectedNormLift{} against
+\SSixOriginalNormLift), with AUC-ROC \SSixCorrectedAucroc.
 
+Table~\ref{tab:ablation} shows why. Under the repair the posterior sits on
+short runs at every step (mean $P(r{\le}5)=\SSixDiagCorrectedMeanShortRunMass$),
+the $0.25\cdot P(r{\le}5)$ branch saturates, \SSixDiagCorrectedFracAtCap{} of
+scores sit exactly at the $0.25$ cap, and \SSixDiagCorrectedDistinctScores{}
+distinct values are emitted against \SSixDiagOriginalDistinctScores. The score
+is \emph{not} constant --- it takes many values and has standard deviation
+\SSixDiagCorrectedScoreSd{} --- but it ranks near chance on this sample, which
+is what an AUC-ROC close to $0.5$ indicates. Both variants are thus degenerate
+in opposite directions: the evaluated one never resets below the cap, this
+repair almost always resets. We draw no conclusion about what a \emph{tuned}
+prior-predictive scale would achieve; that requires a training/validation
+tuning protocol and more than one stream, and selecting it on test labels is
+forbidden by our protocol.
 
 \begin{table}
-\caption{The repair saturates the score. Score-distribution diagnostics for
-both variants over the first \SSixDiagWindowRows{} records of the ablation
-stream, and
-detection metrics on the \SSixPrefixRows-record prefix (held-out
-\SSixTestRows{} records, \SSixTestAttacks{} attacks, chance floor
-\SSixChanceFloor).}
+\caption{One untuned repair saturates the score. Diagnostics over the first
+\SSixDiagWindowRows{} records of the ablation stream; detection metrics on the
+\SSixPrefixRows-record prefix (held-out \SSixTestRows{} records,
+\SSixTestAttacks{} attacks, floor \SSixChanceFloor).}
 \label{tab:ablation}
 \begin{tabular}{lrr}
 \toprule
- & evaluated detector & corrected statistic \\
+ & evaluated detector & one untuned repair \\
 \midrule
 mean posterior mass $P(r{\le}5)$ & \SSixDiagOriginalMeanShortRunMass & \SSixDiagCorrectedMeanShortRunMass \\
 scores exactly at the $0.25$ cap & \SSixDiagOriginalFracAtCap & \SSixDiagCorrectedFracAtCap \\
 distinct score values & \SSixDiagOriginalDistinctScores & \SSixDiagCorrectedDistinctScores \\
 score standard deviation & \SSixDiagOriginalScoreSd & \SSixDiagCorrectedScoreSd \\
-AUC-PR on the prefix & \SSixOriginalAucpr & \SSixCorrectedAucpr \\
+$AP$ on the prefix & \SSixOriginalAucpr & \SSixCorrectedAucpr \\
+normalized lift $(AP-p)/(1-p)$ & \SSixOriginalNormLift & \SSixCorrectedNormLift \\
 AUC-ROC on the prefix & \SSixOriginalAucroc & \SSixCorrectedAucroc \\
 \bottomrule
 \end{tabular}
-\end{table} \textbf{Both variants are therefore degenerate in opposite
-directions} --- the evaluated one never resets (branch cancellation), the
-repaired one always resets (a $\nu{=}2$ prior predictive prefers a fresh
-run for nearly every point) --- and neither is change-point detection. We
-draw no implication about what a tuned prior-predictive scale would
-achieve: locating one is a hyperparameter search this budget excludes, and
-selecting it on test labels is forbidden by our protocol.
+\end{table}
 
 \section{Provenance Discipline}
 \label{sec:provenance}
 
 Every number in this paper is a \LaTeX{} macro generated from archived run
 manifests recording git commit, configuration hash, input SHA-256, seed,
-environment hash, timestamps, and output paths. A gate fails the build if a
+environment hash, timestamps and output paths. A gate fails the build if a
 manuscript number lacks a manifest, if two manifests claim one macro with
-different values, or if the derived macro index disagrees with the
-manifests behind it. A claim ledger maps every sentence of the abstract and
-introduction to its generating run. The discipline exists because it caught
-real defects during this rebuild --- among them a smoke-test manifest
-shadowing a full run, a manuscript-bound table cell backed by no manifest,
-and a derived index that had silently lost every headline macro --- each
-recorded as a numbered corrected incident in the released artifact.
+different values, or if the derived macro index disagrees with the manifests
+behind it. A claim ledger maps every sentence of the abstract and introduction
+to its generating run. We are explicit about what this does and does not
+establish: it provides traceability and integrity --- that a displayed number
+came from a recorded execution on recorded inputs --- and it does \emph{not}
+establish that the code, labels, preprocessing or interpretation are correct.
+The discipline exists because it caught real defects during this rebuild,
+including a smoke-test manifest shadowing a full run and a manuscript-bound
+table cell backed by no manifest; each is a numbered corrected incident in the
+released artifact.
+
+\section{Relationship to the Earlier Versions}
+\label{sec:disclosure}
+
+The earlier versions of this work are public. Table~\ref{tab:overlap} states,
+per result group, what is reused, re-derived, corrected or new, so that no
+reader has to infer it; Table~\ref{tab:history} gives the correction history
+with version identifiers, dates and public status. A confidential note to the
+editors supplies the identifiers suppressed here for double-anonymous review.
+
+\begin{table}
+\caption{Overlap with the public earlier versions of this work.}
+\label{tab:overlap}
+\begin{tabular}{p{0.24\linewidth}p{0.16\linewidth}p{0.50\linewidth}}
+\toprule
+result group & status & note \\
+\midrule
+LITNET pooled composite, all methods & \textbf{reused measurement, corrected interpretation} & The same measurements appear in the earlier public version's LITNET table. Reported there as a ``rare-attack regime'' property; reported here as an assembly artifact, with the equal-weight identity made explicit. \\
+CICIDS assembled arm, all methods & \textbf{reused measurement, corrected interpretation} & Same measurements as the earlier public version's CICIDS table, there labelled a ``moderate-prevalence regime''. Relabelled here as one assembled construction, with the budgeted-subsample and dilution mechanisms quantified. \\
+Prevalence sweep & \textbf{re-derived, re-scoped} & Re-derived from the archived pre-audit runs; re-captioned as an experiment on the assembled construction, with corrected chance floors and normalized lift added. \\
+Timestamp-ordered CICIDS arm & \textbf{new} & No counterpart in any earlier version. \\
+Per-capture LITNET streams & \textbf{new} & No counterpart; earlier versions reported only the pooled composite. \\
+Held-out overlap, relocation, dilution & \textbf{new} & \\
+Method-identity audit (score, posterior, threshold, delay) & \textbf{new, and corrective} & Invalidates the earlier description of the scoring rule and of the threshold derivation. \\
+Untuned change-point repair & \textbf{new} & \\
+UNSW-NB15 results & \textbf{withdrawn} & Reported in the earlier public version; not reproduced here and not relied upon. Its stream was a seeded permutation, not a chronology. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\caption{Correction history. All earlier versions were publicly posted
+preprints; none was accepted for publication.}
+\label{tab:history}
+\begin{tabular}{p{0.10\linewidth}p{0.14\linewidth}p{0.13\linewidth}p{0.49\linewidth}}
+\toprule
+version & date & status & claims invalidated \\
+\midrule
+v1 & 23 May 2026 & public preprint & Scoring-rule description; threshold derivation; ``regime'' taxonomy resting on the assembled constructions; detection latency reported in milliseconds. \\
+v2 & 25 Jun 2026 & public preprint & As v1, plus the reframed contribution statement, which retained the regime framing. \\
+this version & --- & submission & Supersedes both. Retains the underlying measurements listed in Table~\ref{tab:overlap} with corrected interpretation, withdraws the UNSW-NB15 results and the regime taxonomy, and adds the timestamp-ordered arm, the per-capture streams and the method-identity audit. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The corrected-incident log in the artifact records each correction with its
+evidence and closure status. We note explicitly that the count of incidents is
+not itself a quality claim.
 
 \section{Threats to Validity}
 \label{sec:threats}
 
-\textbf{Internal.} ECOD is fitted on benign-only training data and is
-label-privileged; where it wins, supervision is an uncontrolled explanation.
-The detector uses a fixed untuned threshold while baselines receive
-validation-tuned thresholds; we therefore report only threshold-free
-metrics. Stochastic methods rest on one seed except where seed
-distributions are reported, and every flat claim in this paper is between
-deterministic methods.
+\textbf{Internal.} The assembly treatment is uncontrolled by construction: it
+moves held-out membership, prevalence and order together, so no single factor
+is identified by the contrast alone. Section~\ref{sec:shared} removes the
+membership difference post hoc and finds the ordering reversal does not
+survive, which locates the effect in sample membership; it does not decompose
+the remaining factors, and a factorial design still would. ECOD is a label-privileged diagnostic reference, not a competitor
+under equal information. Determinism removes seed variance only; we report no
+confidence interval, and with attack runs of median/p90/max
+\StreamCicidsTwoZeroOneSevenRunMedian/\StreamCicidsTwoZeroOneSevenRunPninety/\StreamCicidsTwoZeroOneSevenRunMax{}
+an IID row bootstrap would be inappropriate, so an event-block or
+rolling-origin procedure is the right instrument and is not yet applied.
+Stochastic baselines appear only with their per-seed values.
 
-\textbf{External.} Two benchmarks, one split rule. The construction effect
-is measured under a fixed 70/15/15 chronological split; no split-rule
-sensitivity analysis exists, and the CICIDS effect operates through per-day
-attack scheduling meeting a fractional tail split. The CICIDS dataset is a
-\CicidsWeekRetentionPct\%\ budgeted subsample with a measured
-\CicidsWeekPrevalenceBiasPp-point prevalence bias. The natural-order
-held-out slice is one \CicidsNaturalHeldoutSpanMinutes-minute window;
-that is what true chronology on this benchmark yields, and it is stated
-rather than engineered around. The Stage-6 ablation covers one stream and
-one prefix. Nothing here estimates deployment prevalence or deployment
-performance.
+\textbf{External.} Two benchmarks, one split rule, one corpus per benchmark.
+The CICIDS mechanism depends on that dataset's scripted per-day schedule
+meeting a positional split; it does not establish the direction or magnitude of
+assembly effects elsewhere. The LITNET identity depends on equal budgets and a
+divisible boundary. The corpus is a \CicidsWeekRetentionPct\%\ budgeted
+subsample. The timestamp-ordered held-out slice is one
+\CicidsNaturalHeldoutSpanMinutes-minute window --- what a positional
+chronological split yields on this corpus, stated rather than engineered
+around. Timestamp order is the least transformed reference available for
+CICIDS2017, not a universal gold standard: multi-sensor deployments
+legitimately merge asynchronous sources, and the durable recommendation is to
+preserve capture and time metadata, justify the assembly, and report sensitivity
+to plausible alternatives.
 
 \textbf{Construct.} We do not claim the evaluated detector is change-point
-detection (Section~\ref{sec:detector}), and we do not claim the repaired
-variant establishes what corrected change-point detection would achieve
-(Section~\ref{sec:ablation}).
+detection, we do not claim the untuned repair characterizes corrected
+change-point detection, and we do not claim that ordering alone causes the
+outcome change.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-On these benchmarks, the regime structure that motivates streaming IDS
-evaluations --- rare-attack regimes, moderate regimes, regime-dependent
-method rankings --- is manufactured by the step that assembles captures into
-streams. The same records, reordered, move held-out prevalence by
-\SFourCicidsPrevShiftAbsPp{} points
-(\SFourCicidsNaturalTestPrev\%\ to \SFourCicidsInterleavedTestPrev\%),
-replace two-thirds of the evaluated sample, and invert which of the two
-deterministic methods wins. Pooling disjoint
-captures reports a prevalence no capture exhibits. Evaluations that
-interleave or pool should either report the natural-order result beside the
-constructed one, as this paper does, or state that their operating point is
-a property of the assembly. The corrected artifacts, manifests, and claim
-ledger accompany this paper so that every number can be traced to the run
-that produced it.
+On these two benchmarks, the step that assembles capture files into an
+evaluation stream is an uncontrolled experimental treatment: it changes which
+records are evaluated, at what prevalence, in what order, and thereby what is
+measured. On CICIDS2017 the same multiset reordered yields held-out slices
+sharing \CicidsHeldoutOverlapPct\%\ of their records at prevalences
+\SFourCicidsPrevShiftAbsPp{} points apart, and reverses the measured ordering
+of the two deterministic scorers --- a reversal that disappears once both arms
+are restricted to the records they share, locating it in the sample the
+assembly selects rather than in the order it imposes. On LITNET-2020, pooling reports an operating
+point no capture exhibits. The practical recommendation is not that chronology
+is always right; it is that assembly belongs in the experimental design and in
+the provenance record --- report capture identity, mixture weights, split
+membership, held-out overlap, and sensitivity to the plausible alternatives ---
+so that a reported operating point can be recognized as a property of the
+assembly when it is one.
 
 \section*{Data and Artifact Availability}
-The code, stream-construction scripts with SHA-256 verification, all run
-manifests, the macro layer, the claim ledger, and the corrected-incident
-history are archived and will be linked here upon acceptance. The repository is public at
+The code, stream-assembly scripts with SHA-256 verification, all run manifests,
+the macro layer, the claim ledger and the corrected-incident history are
+archived. The repository is public at
 \url{https://github.com/MichelYsf/rcbsid-paper} (branch \texttt{rebuild/honest-v1}); the Zenodo deposit DOI will be added when minted.
 
 \section*{Statement on Generative AI Usage}
 Large language models were used, under continuous human direction, for
-engineering assistance in this work: writing and refactoring analysis
-scripts, drafting prose that was subsequently verified against the archived
-measurements, and operating the adversarial review harness that audited the
-authors' own claims. Every number in this paper was produced by executed
-code with an archived manifest, not by a language model; the claim ledger
-and provenance gate exist in part to make that boundary auditable. The
-authors take full responsibility for all content.
+engineering assistance: writing and refactoring analysis scripts, drafting
+prose subsequently verified against the archived measurements, and operating an
+adversarial review harness that audited the authors' own claims. Every number
+was produced by executed code with an archived manifest, not by a language
+model; the claim ledger and provenance gate exist in part to make that boundary
+auditable. The authors take full responsibility for all content.
 
-\section*{Companion Paper Disclosure}
-A related manuscript by the same research programme (arXiv:2510.09619)
-shares parts of the underlying codebase and
-predates the audit that produced the present version. The measurements
-reported here concerning the implemented scoring rule
-(Section~\ref{sec:detector}) apply to that shared lineage; a correction
-process for the companion manuscript is in progress and has been disclosed
-to the relevant editors. The two papers report disjoint result sets.
+\section*{Companion Manuscript Disclosure}
+A companion manuscript from the same research programme (arXiv:2510.09619) shares parts of the underlying codebase and
+predates the audit reported here. The method-identity findings of
+Section~\ref{sec:detector} apply to that shared lineage; a correction process
+for it is in progress and has been disclosed to the relevant editors. Its
+relationship to the results reported here, and the relationship to the earlier
+public versions of this manuscript, are stated in Section~\ref{sec:disclosure};
+the earlier public versions are arXiv:2605.24696 v1 and v2.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

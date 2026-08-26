@@ -1,6 +1,6 @@
 # findings_contrast — construction, not prevalence (Stage 4)
 
-Generating run: `s4_contrast_deliverables_20260820T082833_05219839`.
+Generating run: `s4_contrast_deliverables_20260826T203706_083c4e0e`.
 Every number below is emitted as a provenance macro by this run (the manifest named above), by the per-arm runs it aggregates, or by the `cicids_heldout_composition` audit where cited.
 
 > Adversarial review on 2026-08-19 refuted an earlier version of this sentence. Seven printed numbers had no `emit_macro` call, and one of them - the pooled attack count 14,621 - appeared in no manifest anywhere while being written into a manuscript-bound LaTeX table. That is exactly the orphan the governing rule forbids. Those macros are now emitted, and the sentence is asserted only because the generator emits a macro for every number it prints.

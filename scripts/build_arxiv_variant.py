@@ -50,11 +50,14 @@ def main() -> int:
 \\email{michelyoussef@hotmail.com}"""),
         ("Earlier versions of this manuscript reported",
          "Earlier versions of this manuscript (arXiv:2605.24696, v1 and v2) reported"),
-        ("A related manuscript by the same research programme (reference suppressed\n"
+        ("A companion manuscript from the same research programme (reference suppressed\n"
          "for double-anonymous review) shares",
-         "A related manuscript by the same research programme (arXiv:2510.09619)\nshares"),
-        ("During\ndouble-anonymous review, the artifact is available through the "
-         "submission\nsystem's anonymous artifact channel.",
+         "A companion manuscript from the same research programme "
+         "(arXiv:2510.09619) shares"),
+        ("identifiers are supplied to the editors confidentially.",
+         "the earlier public versions are arXiv:2605.24696 v1 and v2."),
+        ("During double-anonymous review, the artifact is available through the\n"
+         "submission system's anonymous artifact channel.",
          "The repository is public at\n"
          "\\url{https://github.com/MichelYsf/rcbsid-paper} (branch "
          "\\texttt{rebuild/honest-v1}); the Zenodo deposit DOI will be added "

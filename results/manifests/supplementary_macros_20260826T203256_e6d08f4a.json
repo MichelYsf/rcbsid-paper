@@ -1,0 +1,108 @@
+{
+  "run_id": "supplementary_macros_20260826T203256_e6d08f4a",
+  "name": "supplementary_macros",
+  "git_commit": "4baf1021f45539c7cc2506b358bf802a4169748d-dirty",
+  "git_commit_at_write": "4baf1021f45539c7cc2506b358bf802a4169748d-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "48f0e407c75e5e59e3aa78701cb423c393f672b777f97c80934b21caed6546eb",
+  "config": {
+    "reason": "F8 sweep item B6: replace typed literals with manifested macros; derivations only, no new compute"
+  },
+  "seed": 0,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\cicids_heldout_composition_20260819T120420_ebb7c281.json",
+      "sha256": "740f38ddfb5899ea36b11fb7237ea29e90dff72ad366ccc1f045790032615bba"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\s4_contrast_deliverables_20260820T082833_05219839.json",
+      "sha256": "9711dab01eb2458dd4f354452d56645e4ce1f67718529072ae2e6a72e2c02900"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\s6_bocpd_corrected_ablation_20260824T092655_a47acf51.json",
+      "sha256": "05998188aae0be59dbb9421fa4b92362da8eca1c0299a9216f052c700f72973d"
+    }
+  ],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-26T20:32:56.241485+00:00",
+  "finished_utc": "2026-08-26T20:32:56.312441+00:00",
+  "wall_seconds": 0.070956,
+  "macros": {
+    "CicidsHeldoutAttackFreeRows": {
+      "value": 162000,
+      "unit": "",
+      "desc": "synthetic held-out rows from days contributing zero attacks (Mon-Thu)"
+    },
+    "CicidsFridayHeldoutDensityPct": {
+      "value": 77.66,
+      "unit": "%",
+      "desc": "attack density of the synthetic arm's Friday held-out sub-slice"
+    },
+    "SFourCicidsNaturalHstLiftAbs": {
+      "value": 0.093448,
+      "unit": "",
+      "desc": "magnitude of HST's below-chance lift, natural arm"
+    },
+    "SFourCicidsPrevShiftAbsPp": {
+      "value": 42.9954,
+      "unit": "pp",
+      "desc": "magnitude of the held-out prevalence shift"
+    },
+    "SSixDiagWindowRows": {
+      "value": 15000,
+      "unit": "",
+      "desc": "records covered by the Stage-6 score-distribution diagnostic"
+    },
+    "SFourCicidsNaturalProposedDetectorNormLift": {
+      "value": 0.144773,
+      "unit": "",
+      "desc": "CICIDS Natural ProposedDetector normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsNaturalEcodNormLift": {
+      "value": 0.229158,
+      "unit": "",
+      "desc": "CICIDS Natural Ecod normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsNaturalHstNormLift": {
+      "value": -0.294185,
+      "unit": "",
+      "desc": "CICIDS Natural Hst normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsSyntheticProposedDetectorNormLift": {
+      "value": 0.391386,
+      "unit": "",
+      "desc": "CICIDS Synthetic ProposedDetector normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsSyntheticEcodNormLift": {
+      "value": 0.222805,
+      "unit": "",
+      "desc": "CICIDS Synthetic Ecod normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsSyntheticHstNormLift": {
+      "value": 0.349419,
+      "unit": "",
+      "desc": "CICIDS Synthetic Hst normalized lift (AP-p)/(1-p)"
+    },
+    "SSixOriginalNormLift": {
+      "value": 0.281581,
+      "unit": "",
+      "desc": "Stage 6 original normalized lift (AP-p)/(1-p)"
+    },
+    "SSixCorrectedNormLift": {
+      "value": 0.010229,
+      "unit": "",
+      "desc": "Stage 6 corrected normalized lift (AP-p)/(1-p)"
+    }
+  },
+  "notes": "each value re-derived from the archived manifest named in inputs",
+  "extra": {
+    "window_source": "saturation_diagnostic() default in scripts/run_bocpd_ablation.py at the commit pinned by s6_bocpd_corrected_ablation_20260824T092655_a47acf51; the ablation manifest did not record it (noted, not hidden)"
+  }
+}

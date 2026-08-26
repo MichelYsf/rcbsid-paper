@@ -18,3 +18,5 @@ paper/main.log
 paper/main.out
 paper/main.blg
 packages/arxiv_v3/src/main.bbl
+
+results/score_dumps/

@@ -517,3 +517,123 @@ through Write-tool script files.** Also fixed en route: five typed literals
 manifested (`supplementary_macros` run), single-seed HST placements removed
 from flat rankings (rule 7), arXiv IDs stripped from the anonymous build and
 reinstated only in the named arXiv variant by `build_arxiv_variant.py`.
+
+### CI-20 — the fresh review's overlap finding is right; its identification is not
+The 26 August 2026 adversarial review returned MAJOR REVISION with three
+blocking findings. Verification-first triage confirmed most of its factual
+claims and refuted one identification. Both directions are recorded, because a
+review that is right about a defect and wrong about its cause will mislead the
+response if it is accepted whole.
+
+**Verified TRUE and acted on.**
+- The arithmetic checks (T4, T17) reproduce exactly: 352,962/1,600,000 =
+  22.060125%; 163,764/240,000 = 68.235%; 60,575/240,000 = 25.2396%; overlap
+  78,000/240,000 = 32.5%; and (15.7747 + 3.544 + 0.176)/3 = 6.498233 against
+  the emitted 6.4982.
+- "AUC-ROC 0.50962 means constant" is false (T13): the repaired variant emits
+  747 distinct values with standard deviation 0.159341. The manuscript now says
+  **near-chance ranking**, never constant.
+- The identification objection (T5, T6) is correct and is the round's most
+  important finding. Held-out membership, prevalence and order all change
+  together, so no claim may attribute the outcome to ordering alone. Every such
+  claim is withdrawn, including from the title.
+- The method-identity objection (T12) is correct: exact cancellation is proved
+  only below the run-length cap, while the evaluations spend nearly all their
+  length beyond it, and the scored quantity is a function of P(r<=5) rather
+  than P(r=0). The manuscript now states the three facts separately.
+- The mean-magnitude objection (T11) is correct: a branch's mean contribution
+  says nothing about which branch *ranks*. The "tail term does the
+  discriminative work" sentence was removed pending direct measurement.
+
+**Verified TRUE, and materially more serious than the review could see.** The
+review's T18 compares this submission against the public CALIBURN preprint
+(arXiv:2605.24696) and finds the same rounded values. Checked directly against
+that PDF: CALIBURN v2's Table 4 reports CALIBURN 0.943, HST 0.261 ± 0.097,
+ECOD 0.229; its Table 5 reports LOF 0.863, CALIBURN 0.545, HST 0.433 ± 0.078,
+ECOD 0.419, LODA 0.342. Those are our LITNET pooled and CICIDS unresampled
+cells at lower precision — the deterministic values exactly, and the HST values
+matching our three-draw means rather than our seed-11 cells. The overlap is
+real, substantial, and was **not** disclosed per result group. It is now, in
+the manuscript's own overlap matrix and correction-history table, plus a
+confidential prior-appearance note to the editors.
+
+**Verified FALSE — the identification.** The review infers that CALIBURN "is
+the suppressed companion" and that the sentence "the two papers report disjoint
+result sets" is therefore false. CALIBURN is not the companion: it is *this
+manuscript's own earlier version*, which the manuscript already disclosed as
+such in its origin paragraph. The suppressed companion is a different
+manuscript, and this project's own archived overlap analysis
+(`findings_paper_overlap.md`, 2026-08-06) records that it reports **no
+quantitative results anywhere** — zero tables — so it has no numeric overlap to
+disclose. The disjointness sentence was therefore accurate as written about the
+paper it referred to.
+
+That does not rescue the sentence, and it has been deleted on the operator's
+instruction. The reason is better than the review's: a sentence whose truth
+depends on which of two related papers the reader thinks is meant is a bad
+sentence in a double-anonymous submission where the reference is suppressed.
+What replaces it is not a denial but a table — reused, re-derived, corrected,
+new, withdrawn — covering the versions that actually overlap.
+
+**Recorded for the process, not the paper.** The review had no repository
+access and said so, correctly flagging that manifests prove lineage rather than
+correctness. Every one of its factual claims was checked against code,
+manifests or the archived PDFs before being accepted; one identification did
+not survive that check. This is the same discipline that produced CI-19, where
+the failure ran the other way — our own ledger validated our own error.
+
+### CI-21 — the headline reversal does not survive on the shared records
+The fresh review's central objection was that the rank inversion is measured on
+held-out slices sharing only 32.5% of their records. Analysis A1 tested it
+directly: both arms restricted to exactly the 78,000 records
+both held out, both deterministic methods recomputed there.
+
+**The inversion does not survive.** On the shared records the detector leads
+ECOD in *both* arms — 0.905613 against 0.844487 under timestamp order, and
+0.900371 against 0.849842 under day round robin. The detector's own score moves
+by only 0.005242 AUC-PR between the two histories. The reversal reported in the
+manuscript is therefore produced by **which records the assembly places in the
+test set**, not by the order in which the detector processed its history.
+
+What is withdrawn: any reading of the contrast as evidence that ordering
+changes detector behaviour, and the implicit suggestion that the reversal is a
+property of the detectors rather than of the evaluation. What survives, and is
+now the paper's claim: stream assembly is an uncontrolled treatment whose
+membership component dominates the measured outcome — which is a sharper and
+better-supported statement than the one it replaces.
+
+Two further results from the same round change claims:
+
+**A2 — the ordering depends on the split point.** Across seven chronological
+cuts from 60% to 90% of the stream, ECOD exceeds the detector at three,
+including the 85% cut the paper's fixed split uses; the detector leads at the
+other four. The archived split is not adversarially chosen but it is not
+neutral, and no ordering claim here is a stable property of CICIDS2017.
+
+**A3 — the composition, not the tail term, is the defect.** Scoring the
+timestamp-ordered held-out slice with each branch alone: the tail term alone
+reaches AUC-PR 0.831832 / AUC-ROC 0.829281, while the deployed composition
+reaches 0.728355 / 0.526623 — the tail term **outranks the deployed detector**
+by 0.103477 AUC-PR and 0.302658 AUC-ROC. The auxiliary branch ranks *below*
+chance (AUC-ROC 0.281890) and, because the score is a maximum, overrides the
+tail wherever the tail is small. The near-chance ranking of the deployed
+detector is a property of how the two signals are combined, not of either
+signal.
+
+This corrects the removed Stage 3 sentence in the opposite direction from the
+review's expectation. The review argued that a small mean contribution cannot
+establish that the tail term does the discriminative work; correct. The
+measurement shows the tail term does *more* than the deployed score, and that
+the auxiliary branch is actively harmful to ranking. Neither the original claim
+nor the reviewer's suspected alternative was right.
+
+**Method note.** These analyses were affordable only because the detector's
+score for a record depends solely on the records before it: one instrumented
+prequential pass per arm (7,775 s and 7,768 s, 4.86 ms/record, run in parallel
+within the round's three-hour cap) yields per-record scores and branch
+components for every split point and every subset. The instrumentation hook
+returns values `update_score` already computes and was verified bit-identical
+on the default path before use. The dumps reproduce the archived arms exactly
+on the assembled arm and to 1.8e-05 AUC-PR on the timestamp-ordered arm, whose
+archived value was produced on Linux against this pass on Windows — the
+cross-platform class recorded in CI-16.

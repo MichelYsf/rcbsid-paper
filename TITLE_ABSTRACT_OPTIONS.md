@@ -1,67 +1,82 @@
-# TITLE_ABSTRACT_OPTIONS — ledger-checked alternatives
+# TITLE_ABSTRACT_OPTIONS — revised for the fresh-review round
 
-Every claim in every option below maps to CLAIM_LEDGER.md rows A1–A9; no
-option introduces a claim the ledger does not carry. The manuscript currently
-uses Title 1 + Abstract A. Swapping is a find-replace in `paper/main.tex`,
-nothing else moves.
+**Binding constraint (operator amendment A).** No title, abstract, or claim may
+attribute the rank change to ordering alone or causally exclude prevalence: the
+held-out slices share only \CicidsHeldoutOverlapPct\% of their records, so
+membership, prevalence and order move together. Stream assembly is an
+uncontrolled experimental treatment. **"Not Attack Prevalence" is removed from
+the title.**
+
+Every candidate below is checked against CLAIM_LEDGER.md: each asserts only
+what rows A1–A9 and I1–I16 carry, and none asserts an isolated causal factor.
 
 ## Titles
 
-**T1 (current).** *Benchmark Stream Construction, Not Attack Prevalence,
-Produces the Regime Structure of Streaming Intrusion Detection*
-— Declarative, states the finding. Risk: reads strong; the paper's fencing
-(rotation not reversal, no deployment causality) is in the body, and a
-skimming referee may test the title against the strongest reading.
+**T1 (current, in `paper/main.tex`).**
+*Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection
+Benchmarks*
 
-**T2.** *The Assembly Is the Regime: How Stream Construction Manufactures
-Evaluation Conditions in Streaming Intrusion Detection*
-— Slightly hedged, mechanism-first. Risk: "manufactures" carries rhetorical
-charge; DTRAP referees may prefer flatter wording.
+Ledger check: asserts (a) that assembly is a treatment and (b) that it is
+uncontrolled. (a) is supported by A2/I4; (b) by A3+A4+I10 jointly — membership,
+prevalence and order all change. Asserts no isolated factor and no method
+superiority. **Recommended**: it states the design fact that survived review,
+and the design fact is the contribution.
 
-**T3.** *Same Records, Different Regime: Ordering and Pooling Effects in
-Streaming Intrusion-Detection Benchmarks*
-— The most conservative; promises exactly the two experiments delivered
-(ordering contrast, pooling identity). Risk: undersells the method-identity
-findings (Sections 3 and 7), which reviewers of the prior version will look
-for.
+**T2.**
+*Same Records, Different Evaluation: Held-Out Membership, Prevalence and Order
+Change Together When Benchmark Streams Are Assembled*
+
+Ledger check: "same records" is A3/I9 (full multiset, verified permutation);
+"different evaluation" is A4/I10; the three-way conjunction is exactly the
+uncontrolled-treatment claim. Slightly more explicit than T1 about *why* the
+treatment is uncontrolled, at the cost of length. Safe alternative if a referee
+finds T1's "uncontrolled" too compressed.
+
+**T3.**
+*A Case Study and Mechanism Audit of Stream Assembly in CICIDS2017 and
+LITNET-2020*
+
+Ledger check: claims only a case study and an audit, both fully supported; adds
+the two dataset names so no generalization is implied. This is the most
+conservative option and matches the positioning amendment D mandates
+("quantified case study and mechanism audit"). Use if the editors push back on
+any generalization at all. Risk: undersells the method-identity audit, which a
+reader of the earlier versions will look for.
 
 ## Abstracts
 
-**Abstract A (current, in `paper/main.tex`).** Ledger rows A1–A9. Leads with
-the construction finding, states the CICIDS contrast with its three numbers
-(prevalence shift, slice overlap, deterministic inversion), the LITNET
-pooling identity, then the method-identity findings, then the provenance
-discipline.
+**Abstract A (current).** Ledger rows A1–A9. Leads with assembly-as-treatment,
+states the joint change (overlap, both prevalences, the difference), calls the
+ordering reversal a pipeline-level outcome, then the LITNET identity as an audit
+check, then the scoped method-identity facts, then provenance.
 
-**Abstract B (alternative, correction-forward).** Ledger rows A1–A9 plus
-I5–I8. For use if the venue or editor prefers the correction history in the
-abstract rather than only in the introduction:
+**Abstract B (correction-forward).** Rows A1–A9 plus I5–I8, for use if the
+editors prefer the correction history surfaced in the abstract:
 
-> Earlier versions of this work reported streaming intrusion-detection
-> results produced under a composite benchmark construction and described a
-> scoring rule the released code did not implement. This version rebuilds
-> the study from an adversarial audit and reports what survives. Holding the
-> CICIDS2017 record multiset identical and changing only the ordering moves
-> held-out prevalence by 43 percentage points, leaves the natural and
-> synthetic held-out slices sharing 32.5% of their records, and inverts the
-> ordering of the two deterministic methods under test; the full ranking
-> change is a rotation (Kendall τ = −0.333). On LITNET-2020, the composite's
-> single 6.5% prevalence is an identity of pooling three temporally disjoint
-> captures spanning 0.18%–15.8%. The evaluated detector's run-length
-> posterior is algebraically pinned to its hazard rate, making the system
-> prequential global-Gaussian tail scoring rather than change-point
-> detection; the textbook repair saturates the score and detects nothing.
-> Every number traces to an archived, hash-verified run manifest, and the
-> sentence-level claim ledger ships with the artifact.
+> Earlier versions of this work reported streaming intrusion-detection results
+> produced on assembled evaluation streams and described a scoring rule the
+> released code did not implement. This version rebuilds the study from an
+> adversarial audit and reports what survives. On CICIDS2017, holding the full
+> record multiset identical and changing only the assembly order, a fixed
+> positional split produces held-out samples sharing 32.5% of their records at
+> prevalences 43 points apart, and the measured ordering of the two
+> deterministic scorers reverses; because membership, prevalence and order move
+> together, the design identifies the assembly pipeline as the treatment and no
+> factor within it. On LITNET-2020, pooling three temporally disjoint captures
+> reports an operating point that is the equal-weight mean of the per-capture
+> held-out prevalences and corresponds to no capture. We further audit the
+> evaluated detector against its description, and state separately what is
+> proved (branch cancellation below the run-length cap), what is measured (a
+> wandering posterior at and beyond it, where the evaluations live), and what
+> the evaluation actually consumes (a function of P(r<=5)). Every number traces
+> to an archived, hash-verified run manifest.
 
-Ledger check for Abstract B: sentence 1–2 → I5–I8; sentence 3 → A3–A5;
-sentence 4 → A6; sentence 5 → A7–A8; sentence 6 → A9. Verified 2026-08-24
-against CLAIM_LEDGER.md; the gate's `--ledger` mode covers the referenced
-rows' sources.
+Ledger check for B: sentence 1–2 → I5–I8; 3 → A3+A4+A5 with the
+non-identification clause; 4 → A6; 5 → A7 (scoped); 6 → A9.
 
 ## Recommendation
 
-T1 + Abstract A for DTRAP (the venue rewards direct findings; the origin
-paragraph in the introduction carries the correction openly). If the editor
-requests the correction be surfaced earlier, switch to Abstract B without
-changing anything else.
+**T1 + Abstract A.** If the editors prefer the correction surfaced earlier,
+switch to Abstract B without changing anything else. If a referee objects that
+"uncontrolled treatment" is itself a strong framing, T2 says the same thing in
+plainer words and T3 retreats to pure case study.
