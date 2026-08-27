@@ -73,9 +73,11 @@ sentence-level claim ledger ships with the artifact.
 \end{CCSXML}
 \ccsdesc[500]{Security and privacy~Intrusion detection systems}
 \ccsdesc[300]{Computing methodologies~Machine learning}
+\ccsdesc[300]{General and reference~Evaluation}
 
-\keywords{intrusion detection, streaming evaluation, benchmark construction,
-experimental design, reproducibility, provenance}
+\keywords{streaming network intrusion detection, benchmark stream
+construction, evaluation methodology, experimental design, conformal risk
+control, reproducibility, provenance}
 
 \maketitle
 
@@ -130,9 +132,10 @@ computes; and every number was regenerated --- or, for the retained prevalence
 sweep, re-derived from the archived pre-audit runs --- by a script that wrote,
 in the same execution, an archived manifest recording the git commit,
 configuration hash, input SHA-256, seed, environment hash and output path.
-Section~\ref{sec:disclosure} states exactly which measurements are reused,
-re-derived, corrected or new relative to the public earlier versions, and
-tabulates the correction history.
+Section~\ref{sec:disclosure} states which measurements this paper shares with
+those versions and which are new; the per-result-group account and the dated
+correction history are supplied to the editors confidentially, because
+printing them here would defeat anonymization.
 
 \subsection*{Contributions}
 \begin{enumerate}
@@ -168,7 +171,7 @@ small, so the deployed composition ranks worse than its own tail component
 alone (Section~\ref{sec:branch}).
 \item \textbf{A provenance discipline that is itself auditable}
 (Section~\ref{sec:provenance}), including the correction history and overlap
-matrix of Section~\ref{sec:disclosure}.
+statement of Section~\ref{sec:disclosure}.
 \end{enumerate}
 
 \section{Related Work}
@@ -210,8 +213,17 @@ evaluations mismeasure their subject.
 \textbf{Conformal and calibrated alerting.} Laxhammar and
 Falkman~\cite{laxhammar2014conformal} established conformal anomaly detection
 for sequential data, with guarantees resting on exchangeability
-assumptions~\cite{vovk2005alrw}; FADES~\cite{barrett2026fades} applies
-conformal signals to drift estimation for streaming IDS. Our results are
+assumptions~\cite{vovk2005alrw}. Three 2026 lines run concurrent with this work
+and are distinct from it. FIRCE~\cite{barrett2026firce} and its successor
+FADES~\cite{barrett2026fades} integrate conformal evaluation into streaming IDS
+pipelines to drive drift detection and adaptive retraining; both propose
+detection machinery and evaluate it, whereas this paper proposes no detector and
+instead audits what an evaluation pipeline measures. Gurjar and
+Camp~\cite{gurjar2026tailrisk} forecast tail-risk escalation in enterprise alert
+streams with extreme-value methods over 251 million Suricata alerts --- a
+forecasting task on operational alert volume, not a question about how a
+benchmark is assembled. None of the three examines the assembly step. Our
+results are
 relevant but must be stated carefully: reordering one realized dataset does not
 establish exchangeability, which is a distributional symmetry. What
 interleaving can do is \emph{mask temporal dependence, or make exchangeability
@@ -724,53 +736,30 @@ including a smoke-test manifest shadowing a full run and a manuscript-bound
 table cell backed by no manifest; each is a numbered corrected incident in the
 released artifact.
 
-\section{Relationship to the Earlier Versions}
+\section{Relationship to Prior Versions of This Work}
 \label{sec:disclosure}
 
-The earlier versions of this work are public. Table~\ref{tab:overlap} states,
-per result group, what is reused, re-derived, corrected or new, so that no
-reader has to infer it; Table~\ref{tab:history} gives the correction history
-with version identifiers, dates and public status. A confidential note to the
-editors supplies the identifiers suppressed here for double-anonymous review.
+Earlier versions of this manuscript were publicly posted and are superseded by
+this one. Because a per-result-group account of what is reused, re-derived,
+corrected, withdrawn or new would identify those versions --- and they are not
+anonymous --- that account is supplied to the editors confidentially rather
+than printed here, together with the dated version history and the list of
+claims each correction invalidates.
 
-\begin{table}
-\caption{Overlap with the public earlier versions of this work.}
-\label{tab:overlap}
-\begin{tabular}{p{0.24\linewidth}p{0.16\linewidth}p{0.50\linewidth}}
-\toprule
-result group & status & note \\
-\midrule
-LITNET pooled composite, all methods & \textbf{reused measurement, corrected interpretation} & The same measurements appear in the earlier public version's LITNET table. Reported there as a ``rare-attack regime'' property; reported here as an assembly artifact, with the equal-weight identity made explicit. \\
-CICIDS assembled arm, all methods & \textbf{reused measurement, corrected interpretation} & Same measurements as the earlier public version's CICIDS table, there labelled a ``moderate-prevalence regime''. Relabelled here as one assembled construction, with the budgeted-subsample and dilution mechanisms quantified. \\
-Prevalence sweep & \textbf{re-derived, re-scoped} & Re-derived from the archived pre-audit runs; re-captioned as an experiment on the assembled construction, with corrected chance floors and normalized lift added. \\
-Timestamp-ordered CICIDS arm & \textbf{new} & No counterpart in any earlier version. \\
-Per-capture LITNET streams & \textbf{new} & No counterpart; earlier versions reported only the pooled composite. \\
-Held-out overlap, relocation, dilution & \textbf{new} & \\
-Method-identity audit (score, posterior, threshold, delay) & \textbf{new, and corrective} & Invalidates the earlier description of the scoring rule and of the threshold derivation. \\
-Untuned change-point repair & \textbf{new} & \\
-UNSW-NB15 results & \textbf{withdrawn} & Reported in the earlier public version; not reproduced here and not relied upon. Its stream was a seeded permutation, not a chronology. \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}
-\caption{Correction history. All earlier versions were publicly posted
-preprints; none was accepted for publication.}
-\label{tab:history}
-\begin{tabular}{p{0.10\linewidth}p{0.14\linewidth}p{0.13\linewidth}p{0.49\linewidth}}
-\toprule
-version & date & status & claims invalidated \\
-\midrule
-v1 & 23 May 2026 & public preprint & Scoring-rule description; threshold derivation; ``regime'' taxonomy resting on the assembled constructions; detection latency reported in milliseconds. \\
-v2 & 25 Jun 2026 & public preprint & As v1, plus the reframed contribution statement, which retained the regime framing. \\
-this version & --- & submission & Supersedes both. Retains the underlying measurements listed in Table~\ref{tab:overlap} with corrected interpretation, withdraws the UNSW-NB15 results and the regime taxonomy, and adds the timestamp-ordered arm, the per-capture streams and the method-identity audit. \\
-\bottomrule
-\end{tabular}
-\end{table}
+Three statements can be made in the body without breaking anonymity, and are
+made here because they bear on how the results should be read. First, some
+measurements in this paper also appear in the earlier versions: the pooled
+LITNET composite and the assembled CICIDS arm are the \emph{same
+measurements}, reported there under a regime interpretation that this paper
+withdraws and replaces with an assembly interpretation. Second, the
+timestamp-ordered CICIDS arm, the per-capture LITNET streams, the shared-record
+analysis, and the method-identity audit have no counterpart in any earlier
+version. Third, results on a third dataset that appeared in the earlier
+versions are withdrawn and are not relied upon anywhere in this paper.
 
 The corrected-incident log in the artifact records each correction with its
-evidence and closure status. We note explicitly that the count of incidents is
-not itself a quality claim.
+evidence and closure status. The count of incidents is not itself a quality
+claim.
 
 \section{Threats to Validity}
 \label{sec:threats}
@@ -832,14 +821,18 @@ the macro layer, the claim ledger and the corrected-incident history are
 archived. During double-anonymous review, the artifact is available through the
 submission system's anonymous artifact channel.
 
-\section*{Statement on Generative AI Usage}
-Large language models were used, under continuous human direction, for
-engineering assistance: writing and refactoring analysis scripts, drafting
-prose subsequently verified against the archived measurements, and operating an
-adversarial review harness that audited the authors' own claims. Every number
-was produced by executed code with an archived manifest, not by a language
-model; the claim ledger and provenance gate exist in part to make that boundary
-auditable. The authors take full responsibility for all content.
+\section*{Acknowledgements: Generative AI Usage}
+In accordance with the ACM Policy on Authorship, the authors disclose that
+generative AI tools were used in producing this work. Large language models
+were used, under continuous human direction, to write and refactor analysis
+scripts, to draft prose subsequently verified against the archived
+measurements, and to operate an adversarial review harness that audited the
+authors' own claims. No generative AI tool is an author of this work, and none
+produced any reported number: every number was generated by executed code that
+wrote an archived run manifest in the same execution, and the provenance gate
+and claim ledger exist in part to make that boundary externally auditable. The
+authors take full responsibility for the entire content of this work,
+including any portion drafted with such assistance.
 
 \section*{Companion Manuscript Disclosure}
 A companion manuscript from the same research programme (reference suppressed

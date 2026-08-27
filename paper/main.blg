@@ -8,6 +8,8 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Database file #1: references.bib
+Warning--I didn't find a database entry for "barrett2026firce"
+Warning--I didn't find a database entry for "gurjar2026tailrisk"
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'wiz_functions' (item size: 4) to 9000 items.
 Reallocating 'glb_str_end' (item size: 4) to 20 items.
@@ -67,7 +69,7 @@ Warning--no number and no volume in vovk2005alrw
 Warning--page numbers missing in both pages and numpages fields in vovk2005alrw
 You've used 26 entries,
             6273 wiz_defined-function locations,
-            1650 strings with 22429 characters,
+            1652 strings with 22463 characters,
 and the built_in function-call counts, 27797 in all, are:
 = -- 3636
 > -- 906
@@ -106,4 +108,4 @@ warning$ -- 51
 while$ -- 128
 width$ -- 0
 write$ -- 507
-(There were 51 warnings)
+(There were 53 warnings)

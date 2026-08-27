@@ -1,42 +1,51 @@
-arXiv v3 Comments-field text, BRANCH C variant (coexists with an active TIFS
-submission of the companion paper; use only if the operator chooses Branch C
-in SIBLING_DECISION.md):
+arXiv v3 Comments-field text.
 
-v3: substantial correction and rebuild. v1/v2 reported results produced under
-a composite benchmark construction and described a scoring rule the released
-code did not implement; both were established by an adversarial audit of the
-archived artifacts. v3 rebuilds the study: the composite construction is
-retained only as an explicitly labeled synthetic protocol and contrasted
-against natural-order evaluation on identical records; the detector is
-characterized as implemented; every reported number traces to an archived run
-manifest, and a sentence-level claim ledger ships with the artifact. Title
-changed accordingly (previously "CALIBURN: Operationally Calibrated Streaming
-Intrusion Detection with Regime-Dependent Conformal Risk Control"). A
-correction process for a companion manuscript sharing parts of the codebase
+THE DECISION IS MADE: the companion is being withdrawn from IEEE TIFS before
+this note goes public (caliburn_triage_round.md T4, superseding the earlier
+"operator chooses" framing in SIBLING_DECISION.md). Use the WITHDRAWAL variant
+below. The coexistence variant is retained at the bottom only as a record of
+the branch not taken; do not paste it.
+
+===============================================================================
+WITHDRAWAL VARIANT  <-- USE THIS ONE
+===============================================================================
+
+v3: substantial correction and rebuild. v1/v2 reported results produced on
+assembled evaluation streams (pooled captures, day-interleaved records) and
+interpreted the resulting operating points as dataset properties; they also
+described a scoring rule the released code did not implement, reported a
+detection-delay record count as a latency in milliseconds, derived the decision
+threshold by a rule other than the one stated, and included tables for which no
+archived computational origin exists. An adversarial review and a line-by-line
+audit of the archived artifacts established all of these. v3 rebuilds the
+study: the assembled constructions are retained as explicitly labelled
+protocols and contrasted against least-transformed alternatives; the detector
+is characterised as the code implements it; every reported number is generated
+by a script that writes an archived run manifest in the same execution, with a
+build gate that fails on any number lacking one; and a sentence-level claim
+ledger ships with the artifact. v1 and v2 also cited a Zenodo DOI that was
+never minted -- no such deposit existed; the artifact is being deposited for
+the first time with v3, and the placeholder is withdrawn. Title changed
+accordingly (previously "CALIBURN: Operationally Calibrated Streaming Intrusion
+Detection with Regime-Dependent Conformal Risk Control"). A companion
+manuscript sharing parts of the codebase (arXiv:2510.09619) has been withdrawn
+from journal consideration by the author pending its own correction. 13 pages.
+
+-------------------------------------------------------------------------------
+NOTE ON THE PAGE COUNT: 13 pages is the compiled length of the named arXiv
+variant as built on 2026-08-27 (packages/arxiv_v3/arxiv_v3_source.tar.gz).
+Re-check after any further edit before pasting.
+-------------------------------------------------------------------------------
+
+===============================================================================
+COEXISTENCE VARIANT  --  BRANCH NOT TAKEN, DO NOT PASTE
+===============================================================================
+
+v3: substantial correction and rebuild. [...same body as above...] A correction
+process for a companion manuscript sharing parts of the codebase
 (arXiv:2510.09619) is underway and has been disclosed to the editors of both
-venues. 26 pages.
+venues.
 
----
-
-arXiv v3 Comments-field text, BRANCH W variant (companion withdrawn from
-TIFS before this goes public; the default per the standing recommendation):
-
-v3: substantial correction and rebuild. v1/v2 reported results produced under
-a composite benchmark construction and described a scoring rule the released
-code did not implement; both were established by an adversarial audit of the
-archived artifacts. v3 rebuilds the study: the composite construction is
-retained only as an explicitly labeled synthetic protocol and contrasted
-against natural-order evaluation on identical records; the detector is
-characterized as implemented; every reported number traces to an archived run
-manifest, and a sentence-level claim ledger ships with the artifact. Title
-changed accordingly (previously "CALIBURN: Operationally Calibrated Streaming
-Intrusion Detection with Regime-Dependent Conformal Risk Control"). The
-companion manuscript sharing parts of the codebase (arXiv:2510.09619) has
-been withdrawn from journal consideration by the author pending its own
-correction. 26 pages.
-
----
-
-NOTE: the "26 pages" figure is a placeholder until the final compiled page
-count is known; FINALIZE_DONE.md step "arXiv package" records where to update
-it. Do not paste either variant until the sibling decision is made.
+Retained only so the record shows which wording was rejected and why: it
+asserts an active disclosure to a journal that, under the withdrawal decision,
+no longer holds the manuscript.

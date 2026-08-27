@@ -1,110 +1,117 @@
-# HUMAN_ACTIONS — everything that still needs a human, in execution order
+# HUMAN_ACTIONS — clicks and logins only, in execution order
 
-Only logins, clicks, one decision, and pasting reviewer output. No judgment
-calls except step 3. Every file referenced is in this repository.
+Nothing here needs judgment. The sibling decision has been made (withdraw); the
+one thing only you can supply is the TIFS manuscript ID, which is not on this
+machine. Every file referenced is in this repository.
+
+**Order matters.** The TIFS withdrawal goes first, so the journal hears from you
+before the public correction note appears. Zenodo before arXiv/DTRAP so the DOI
+can be carried into both.
 
 ---
 
 ## 0. ORCID confirmation (60 seconds)
 
-The resolved ORCID is **0009-0000-0664-8228**. Evidence: the public registry
-record at that iD is yours (name, country, your three arXiv works listed);
-the -8224 variant returns 404 — it does not exist.
+Your ORCID is **0009-0000-0664-8228** — the public registry record at that iD is
+yours and lists your papers; the `-8224` variant returns 404 and appears nowhere
+in the current packages.
 
-1. Go to https://orcid.org/signin and sign in.
-2. Confirm the iD shown under your name reads 0009-0000-0664-8228.
-3. Done. (-8224 was a transcription error; it appears nowhere current — it
-   was purged from CITATION.cff and all prepared packages.)
+1. Sign in at https://orcid.org/signin.
+2. Confirm the iD under your name reads 0009-0000-0664-8228.
 
-## 1. Fresh adversarial review round (no accounts needed)
+## 1. Retrieve the TIFS manuscript ID from email (5 minutes)
 
-1. Open `REVIEWER_KIT/REVIEWER_PROMPT.txt`; copy its full text.
-2. Paste it, with `REVIEWER_KIT/manuscript_review.pdf` attached, into each
-   fresh reviewer session you want (two independent sessions recommended).
-3. Save each review's output as `REVIEWER_KIT/review_fresh_<n>.md`.
-4. Tell the finalize agent "reviews are in" — it executes
-   `REVIEWER_KIT/REVIEW_TRIAGE_TEMPLATE.md` exactly once and regenerates the
-   packages. (One round only. That rule is in the template.)
+Searched and **not found** anywhere on this machine: profile, repository, and
+every prior session transcript. Search your mail for "Information Forensics",
+"atyponrex", or the title "Risk-Calibrated Bayesian Streaming Intrusion
+Detection with SRE-Aligned Decisions". From the submission confirmation email,
+copy two things:
 
-## 2. Zenodo deposit (login wall)
+- the **manuscript ID**, and
+- the **editorial-office email address** it was sent from or names.
+
+Note which system the confirmation points to: TIFS has migrated to the IEEE
+Author Portal (`https://ieee.atyponrex.com/journal/tifs-ieee`), so a submission
+made before the migration may still live in the older system.
+
+## 2. Send the TIFS withdrawal (login + email)
+
+Open `packages/sibling/WITHDRAWAL_LETTER_TIFS.md`.
+
+1. Replace both `[[MANUSCRIPT ID]]` placeholders (subject line and first
+   sentence) with the ID from step 1.
+2. **To:** Prof. Luisa Verdoliva, Editor-in-Chief — `verdoliv@unina.it`.
+   **Cc:** the editorial-office address from step 1.
+3. **Subject:** the subject line in the file.
+4. **Body:** the letter, verbatim. No attachments.
+5. If the Author Portal shows an explicit *Withdraw* action on the submission,
+   use it **as well as** the email — IEEE's guidance is that withdrawal is not
+   self-service, so the email is the operative request and the portal action, if
+   present, is confirmation. Do not rely on the portal action alone.
+6. **Save the confirmation**: the sent message and any acknowledgement, into
+   your records. Nothing downstream depends on it, but a withdrawal you cannot
+   evidence is a withdrawal you may have to argue about later.
+
+## 3. Zenodo deposit (login wall)
 
 1. Sign in at https://zenodo.org (GitHub or ORCID login).
-2. Click "New upload".
-3. Zip `packages/zenodo/manifests_bundle/` into `manifests_bundle.zip`
-   (right-click → Compress), then upload the five files listed at the bottom
-   of `packages/zenodo/zenodo_metadata.md`.
-4. Fill the form by copy-pasting each field from `zenodo_metadata.md`
-   (upload type, title, author+ORCID, license, version, related identifiers,
-   keywords, description).
-5. Click Publish. Copy the **version DOI** Zenodo shows.
-6. Paste that DOI into `CITATION.cff` (replace the sentence in `message:`
-   with the DOI in a new `doi:` field), commit, push.
+2. "New upload".
+3. Zip `packages/zenodo/manifests_bundle/` to `manifests_bundle.zip`, then
+   upload the files listed at the bottom of
+   `packages/zenodo/zenodo_metadata.md`.
+4. Fill the form by copy-paste from `zenodo_metadata.md`.
+5. Publish. Copy the **version DOI**.
 
-## 3. THE DECISION — sibling paper (read `SIBLING_DECISION.md`, choose one)
+## 4. Propagate the DOI (2 minutes, local)
 
-- **Branch W (recommended):** email `packages/sibling/WITHDRAWAL_LETTER_TIFS.md`
-  to the TIFS editorial office through the ScholarOne thread for the
-  submission of arXiv:2510.09619. Send BEFORE step 4.
-- **Branch C:** do not withdraw; instead email the TIFS editor a disclosure
-  (the letter's middle two paragraphs serve verbatim) the same day step 4
-  executes, and use the COEXIST comment variant in step 4.
+1. In `CITATION.cff`, replace the explanatory sentence in `message:` with a
+   `doi:` field carrying the version DOI.
+2. Commit and push.
 
-## 3b. Companion-disclosure paragraph matches the branch (2 minutes, local)
+## 5. arXiv v3 replacement (login wall)
 
-The manuscript's Companion Paper Disclosure currently reads (anonymous and
-named variants alike) "a correction process for the companion manuscript is
-in progress and has been disclosed to the relevant editors" - written to be
-true under EITHER branch once step 3 is executed. After deciding step 3:
-- Branch W: optionally strengthen the named (arXiv) variant to "has been
-  withdrawn from journal consideration by the author pending its own
-  correction" - edit packages/arxiv_v3/src/main.tex, recompile (three-pass),
-  re-tar. The neutral wording is also acceptable as-is.
-- Branch C: send the TIFS editor disclosure the same day, so the sentence is
-  true when v3 goes public. No edit needed.
-
-## 4. arXiv v3 replacement (login wall)
-
-1. Sign in at https://arxiv.org; go to your paper 2605.24696 → "Replace".
+1. Sign in at https://arxiv.org → paper 2605.24696 → **Replace**.
 2. Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz`.
-3. Title field: the new title from `packages/arxiv_v3/METADATA.md`.
-4. Comments field: the variant matching your step-3 decision, from
-   `packages/sibling/ARXIV_V3_COMMENT_COEXIST.txt`, with the page count set
-   to 10.
-5. Preview arXiv's compiled PDF; confirm 10 pages and your name on page 1.
+3. **Title:** the new title in `packages/arxiv_v3/METADATA.md`.
+4. **Comments:** the **WITHDRAWAL VARIANT** at the top of
+   `packages/sibling/ARXIV_V3_COMMENT_COEXIST.txt`. Do not use the coexistence
+   variant — it is retained only as a record of the branch not taken. Confirm
+   the page count in the text matches the compiled PDF.
+5. Preview arXiv's build; confirm the page count and your name on page 1.
 6. Submit the replacement.
 
-## 5. DTRAP submission (login wall)
+## 6. DTRAP submission (login wall)
 
-1. Sign in at **https://mc.manuscriptcentral.com/dtrap** (portal verified
-   current 2026-08-24; create/link your account with ORCID 0009-0000-0664-8228
-   if prompted).
-2. New submission → upload `packages/dtrap/manuscript_anonymous.pdf` as the
-   main document.
-3. Upload `packages/dtrap/artifact_anonymous.zip` and
-   `packages/dtrap/source_anonymous.tar.gz` as supplementary material NOT for
-   publication.
-4. Paste the cover letter from `packages/dtrap/COVER_LETTER.md` into the
-   cover-letter field.
-5. **Attach the ACM waiver confirmation**: the file
-   `ACM_waiver_confirmation_2026-08-07.pdf` is NOT on this machine — retrieve
-   it from your email (search "ACM waiver" around 2026-08-07) and attach it,
-   or reference the waiver ticket number in the fee section.
-6. If the editorial thread with Delman about your ORCID is still open, reply
-   with the body in `packages/dtrap/DELMAN_CLARIFICATION_REPLY.md`.
-7. Submit.
+1. Sign in at **https://mc.manuscriptcentral.com/dtrap** (verified 2026-08-24);
+   link ORCID 0009-0000-0664-8228 if prompted.
+2. Submission type: **full research paper** (not Field Note).
+3. Upload `packages/dtrap/manuscript_anonymous.pdf` as the main document.
+4. Upload `packages/dtrap/artifact_anonymous.zip` and
+   `packages/dtrap/source_anonymous.tar.gz` as supplementary material **not for
+   publication**.
+5. Cover letter: paste `packages/dtrap/COVER_LETTER.md`.
+6. **Confidential Comments to the Editor**: paste
+   `packages/dtrap/PRIOR_APPEARANCE_EDITOR_NOTE.md`. This is where the prior
+   appearance, the overlap matrix and the correction history live — they are
+   deliberately **not** in the manuscript, because printing them would
+   deanonymize the submission.
+7. **Attach the ACM waiver confirmation**: `ACM_waiver_confirmation_2026-08-07.pdf`
+   is **not on this machine** — retrieve it from email (search "ACM waiver"
+   around 2026-08-07), or reference the waiver ticket number in the fee section.
+8. If the editorial thread with Delman about your ORCID is still open, reply
+   with `packages/dtrap/DELMAN_CLARIFICATION_REPLY.md`.
+9. Submit.
 
-## 6. Optional — retire the AWS IAM access key
+## 7. Optional — retire the AWS IAM access key
 
-The rebuild's cloud phase is over; eu-central-1 holds nothing. The
-`michel-cli` access key on this machine no longer needs to exist.
+eu-central-1 holds nothing; the cloud phase is over.
 
-1. Sign in to the AWS console → IAM → Users → `michel-cli` → Security
-   credentials.
-2. Deactivate, then delete, the access key currently in
-   `C:\Users\CYBERWIZARD\.aws\credentials`.
-3. Delete that credentials entry locally.
+1. AWS console → IAM → Users → `michel-cli` → Security credentials.
+2. Deactivate, then delete, the key in `C:\Users\CYBERWIZARD\.aws\credentials`.
+3. Delete the local credentials entry.
 
 ---
 
-That is the complete list. Everything else — compiles, gates, tests, ledger,
-packages, anonymity checks — is done and verified; see `FINALIZE_REPORT.md`.
+Everything else — compiles, gates, ledger, tests, packages, anonymity scans — is
+done and verified. See `TRIAGE_REPORT.md` for this round and
+`FINALIZE_REPORT.md` for the previous one.
