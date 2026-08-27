@@ -174,3 +174,45 @@ access, correctly noting that manifests prove lineage, not correctness.
 manuscript now states explicitly that provenance establishes traceability and
 integrity and *not* that code, labels, preprocessing or interpretation are
 correct.
+
+---
+
+## Round-2 additions (submission-side and withdrawal round, 2026-08-27)
+
+### S14. "Your single pre-submission review is not convergence evidence."
+
+**Verified TRUE.** Only one review targets the submitted version; the two
+other reviews on file (2026-08-17) address the superseded pre-rebuild
+manuscript and were processed separately as V1–V12 in `AUDIT_FINDINGS.md`.
+**Response.** We agree and say so in `TRIAGE_REPORT.md`. Our mitigation was not
+to seek agreement but to seek verification: the three findings we acted on
+(identification, method-identity scope, mean-magnitude) were each settled by
+running an analysis against archived per-record scores, not by accepting the
+argument. A1 in particular *refuted our own headline*, which is the strongest
+available evidence that the round was not self-serving. Single-reviewer
+judgment items were shelved rather than acted on.
+
+### S15. "Why is the correction history not in the paper?"
+
+**Judgment, and the answer is anonymity.** **Response.** It was in the paper,
+and moving it out was a deliberate fix. Under ACM double-anonymous review,
+prior appearance is disclosed to editors, not referees; a per-result-group
+overlap matrix against named public preprints, plus a dated version history,
+identifies the authors. Both tables are in the confidential editor note in
+full, expanded with the claims each version invalidates. The anonymized body
+still states that prior versions exist, that some measurements are shared with
+corrected interpretation, that several results are new, and that one dataset's
+results are withdrawn — everything a referee needs to weigh the work, without
+the identifiers. If the editors prefer the tables in the body, we will move
+them back on request; the note says so explicitly.
+
+### S16. "A1 only removes the membership difference after the fact."
+
+**Verified TRUE, and stated in the paper.** **Response.** A1 is a post-hoc
+restriction to the shared records, not a prospective control: it holds the
+evaluated sample fixed but leaves each detector's prequential history intact,
+and the shared records are the intersection two particular assemblies produce,
+not a random subsample. That is why the paper reports A1 as locating the effect
+in sample membership rather than as decomposing the treatment, and why the
+factorial or prevalence-matched design (S8, ≈13 h) remains the named next
+experiment rather than a claim we make.
