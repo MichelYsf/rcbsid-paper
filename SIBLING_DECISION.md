@@ -37,7 +37,7 @@ was wrong:
 | artifact | disposition |
 |---|---|
 | `packages/sibling/WITHDRAWAL_LETTER_TIFS.md` | **RETIRED — do not send.** Header records why. |
-| `packages/sibling/ARXIV_V3_COMMENT_COEXIST.txt` | Both prior variants retired; a third variant that makes no venue claim is now the one to use. |
+| `packages/sibling/ARXIV_V3_COMMENT.txt` | Both prior variants retired; a third variant that makes no venue claim is now the one to use. |
 
 ## How the error happened, and the rule it produces
 

@@ -165,7 +165,7 @@ record:
 |---|---|---|
 | `paper/main.tex`, Companion Manuscript Disclosure | "a correction process ... has been disclosed to the relevant editors" | states the companion is a preprint, not under review, no other editor to inform, and names the earlier error |
 | `packages/dtrap/PRIOR_APPEARANCE_EDITOR_NOTE.md` | "the relevant journal has been or is being informed" | states the verified status, how it was verified, and that the error was the author's |
-| `packages/sibling/ARXIV_V3_COMMENT_COEXIST.txt` (withdrawal variant) | "has been withdrawn from journal consideration by the author" | retired; a third **no venue claim** variant is now the one to paste |
+| `packages/sibling/ARXIV_V3_COMMENT.txt` (withdrawal variant) | "has been withdrawn from journal consideration by the author" | retired; a third **no venue claim** variant is now the one to paste |
 | `packages/dtrap/COVER_LETTER.md` | pointed at the disclosure for "its status" | states the verified status directly |
 | `HUMAN_ACTIONS.md` | withdrawal-first ordering, two void steps | steps removed; order is Zenodo → DOI → arXiv v3 → DTRAP |
 | `SIBLING_DECISION.md` | two branches, both premised on the submission | replaced by the verified state and the rule it produced |

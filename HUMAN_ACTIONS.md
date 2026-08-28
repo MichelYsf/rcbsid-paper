@@ -72,11 +72,12 @@ do not deposit. Nothing else blocks the sequence.
 2. Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz`.
 3. **Title:** the new title in `packages/arxiv_v3/METADATA.md`.
 4. **Comments:** the **NO VENUE CLAIM VARIANT** at the top of
-   `packages/sibling/ARXIV_V3_COMMENT_COEXIST.txt`. The withdrawal and
+   `packages/sibling/ARXIV_V3_COMMENT.txt`. The withdrawal and
    coexistence variants below it are **retired and false** — both asserted a
    journal status for the companion preprint that does not exist — and are kept
-   only as a record. Replace `[[PAGES]]` with the page count of the compiled
-   PDF before pasting; this field is public and permanent.
+   only as a record of what was rejected. The variant already carries the page
+   count (**17**) and the provenance disclosure; confirm 17 against arXiv's own
+   build preview before pasting. This field is public and permanent.
 5. Preview arXiv's build; confirm the page count and your name on page 1.
 6. Submit the replacement.
 

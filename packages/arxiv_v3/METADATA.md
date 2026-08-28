@@ -17,7 +17,7 @@ change is part of the correction: the prior title names capabilities
 audit found unimplemented or withdrawn.
 
 **Comments field:** use the **NO VENUE CLAIM VARIANT** at the top of
-`../sibling/ARXIV_V3_COMMENT_COEXIST.txt`. The two variants below it are
+`../sibling/ARXIV_V3_COMMENT.txt`. The two variants below it are
 retired and false — both asserted a journal status for the companion preprint
 that does not exist (see `../../SIBLING_DECISION.md`, CI-25) — so do not paste
 either. The variant already carries the page count, **17 pages**; confirm it
