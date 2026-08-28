@@ -20,3 +20,15 @@ paper/main.blg
 packages/arxiv_v3/src/main.bbl
 
 results/score_dumps/
+
+# LaTeX build noise from the arXiv variant tree. main.pdf IS tracked (it is a
+# distinct deliverable, the named-author build); main.log is not, even though
+# check_overfull.py reads it -- that check requires a compile first and says so.
+packages/arxiv_v3/src/main.aux
+packages/arxiv_v3/src/main.blg
+packages/arxiv_v3/src/main.log
+packages/arxiv_v3/src/main.out
+packages/dtrap/src/main.aux
+packages/dtrap/src/main.blg
+packages/dtrap/src/main.log
+packages/dtrap/src/main.out

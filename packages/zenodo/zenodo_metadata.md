@@ -30,7 +30,7 @@ and this version's DOI. Paste the version DOI into `CITATION.cff` afterwards
 > run manifest (including retired manifests with their retirement reasons),
 > the generated macro layer, the sentence-level claim ledger, the
 > provenance gate that fails the build on any number without a manifest,
-> and the corrected-incident history (18 numbered incidents). Earlier
+> and the full corrected-incident history. Earlier
 > versions of the associated manuscript reported results produced under a
 > composite benchmark construction and described a scoring rule the code
 > did not implement; this package is the rebuild from the audit that
@@ -42,7 +42,10 @@ and this version's DOI. Paste the version DOI into `CITATION.cff` afterwards
 1. `rcbsid_rebuild_code.zip` — code, tests, paper source, findings, at the
    archived commit
 2. `manifests_bundle/` (zip it as `manifests_bundle.zip` before upload) —
-   every run manifest incl. `superseded/`
+   every run manifest incl. `superseded/` and its retirement reasons.
+   **A downloader must extract this into `results/manifests/` inside the code
+   zip before running the provenance gate**; the code zip deliberately carries
+   no manifests, so without this step every number reports as an orphan.
 3. `EXPECTED_SHA256.txt` — the committed stream expectation
 4. `construction_contrast.csv`, `prevalence_sweep_cicids.csv` — headline
    result tables

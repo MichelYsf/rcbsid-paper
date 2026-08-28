@@ -25,8 +25,8 @@ results produced under the composite construction that this paper now
 studies as its labeled synthetic arm, and described a scoring rule the
 released code did not implement. Both issues were established by an
 adversarial audit of the archived artifacts; the introduction discloses this
-in full, the artifact ships the audit and an eighteen-entry corrected-
-incident history, and every number in the manuscript traces to an archived
+in full, the artifact ships the audit and the full corrected-incident
+history, and every number in the manuscript traces to an archived
 run manifest through a build gate and a sentence-level claim ledger. We
 prefer the editors to have this history from us directly.
 
@@ -44,9 +44,10 @@ strings (verified mechanically). A public, author-named release of the same
 artifact will be linked in the camera-ready version.
 
 **Companion manuscript.** A related manuscript sharing parts of the audited
-codebase (arXiv:2510.09619) is in a correction process disclosed in the
-manuscript's Companion Paper Disclosure section; its status at the time of
-this submission is recorded there.
+codebase (arXiv:2510.09619) is a public preprint, is not under review at any
+venue, and is being corrected separately; the manuscript's Companion Manuscript
+Disclosure section states this, and the confidential editor note records how it
+was verified. This submission is under consideration at DTRAP and nowhere else.
 
 Thank you for your consideration.
 

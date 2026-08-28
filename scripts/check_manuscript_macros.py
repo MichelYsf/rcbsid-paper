@@ -35,13 +35,40 @@ def main() -> int:
     missing = sorted(u for u in used if u not in defined and u not in BUILTIN)
     print("manuscript macro check: %d used, %d defined in numbers.tex"
           % (len(used), len(defined)))
+    rc = 0
     if missing:
         for m in missing:
             print("  UNDEFINED  \\" + m)
         print("FAILED - the manuscript references macros numbers.tex does not define.")
-        return 1
-    print("PASSED - every manuscript macro resolves.")
-    return 0
+        rc = 1
+    else:
+        print("PASSED - every manuscript macro resolves.")
+
+    # An undefined CITATION is the same defect class as an undefined macro: the
+    # reader gets "[?]" where evidence should be. It is not caught by the
+    # 0-undefined-references check, because natbib reports missing citations as
+    # its own warning rather than as a LaTeX undefined reference -- which is how
+    # two citations added in the previous round reached a "0 undefined" verdict
+    # while resolving to nothing at all (CI-26).
+    bib = (ROOT / "paper/references.bib")
+    keys = set(re.findall(r"@\w+\{([^,\s]+)\s*,", bib.read_text(encoding="utf-8")))
+    cited: set[str] = set()
+    for t in TEX_INPUTS:
+        if t.exists():
+            for group in re.findall(r"\\cite[tp]?\*?(?:\[[^\]]*\])*\{([^}]*)\}",
+                                    t.read_text(encoding="utf-8")):
+                cited |= {k.strip() for k in group.split(",") if k.strip()}
+    dangling = sorted(cited - keys)
+    print("citation check: %d key(s) cited, %d defined in references.bib"
+          % (len(cited), len(keys)))
+    if dangling:
+        for d in dangling:
+            print("  UNDEFINED CITATION  " + d)
+        print("FAILED - a cited key has no bibliography entry; it renders as [?].")
+        rc = 1
+    else:
+        print("PASSED - every cited key resolves.")
+    return rc
 
 
 if __name__ == "__main__":

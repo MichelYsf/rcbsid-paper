@@ -87,3 +87,70 @@ Superseded same-day by a regeneration: the LaTeX table it wrote carried
 unescaped percent signs in the level labels, which LaTeX reads as comments -
 the row terminators vanished and the manuscript could not compile. Macro
 values are identical in the replacement.
+
+## s2_prevalence_relabelled_20260824T094843_2ef126ae.json
+Superseded by the review-round regeneration: amendment G requires normalized
+lift (AP-p)/(1-p) beside every additive lift, and the individual per-draw
+values wherever spread is claimed. Macro values for the previously emitted
+names are unchanged.
+
+## supplementary_macros_20260824T102403_89c8967a.json
+Superseded by the review round: amendment G adds normalized lift (AP-p)/(1-p)
+for the contrast arms and the Stage 6 ablation. Previously emitted values are
+unchanged.
+
+## s4_contrast_deliverables_20260820T082833_05219839.json
+Superseded by the review round: amendment G requires the individual seed
+values to be printed wherever spread is claimed, so the deliverables run now
+emits per-draw macros. All previously emitted values are unchanged.
+
+## review_bounded_analyses_20260826T223442_cfe47f09.json
+Superseded within the same round: the first analyses run claimed exact
+reproduction of the natural arm when it differs by 1.8e-05 (a cross-platform
+difference of the class recorded in CI-16), and did not emit the composition
+and margin macros the corrected conclusions need. All measured values are
+unchanged in the replacement.
+
+## review_bounded_analyses_20260826T224417_b8314db2.json
+## review_bounded_analyses_20260827T111130_ff5449e4.json
+Both are real full runs of the A1-A4 bounded analyses and both measured the
+same base values as the canonical run. They are retired because they emit four
+DERIVED macros computed from full-precision intermediates rather than from the
+reported six-decimal values: `RevSharedMarginNatural` (0.061125),
+`RevSharedEcodNaturalNormLift` (0.303874), `RevSharedDetectorSyntheticNormLift`
+(0.554029) and `RevSharedEcodSyntheticNormLift` (0.327844). Each disagreed in
+the sixth decimal with the arithmetic a reader performs on the values printed
+beside it, which binding rule 9 forbids (CI-28).
+
+The canonical run is `review_bounded_analyses_20260827T131839_87899899`, which
+derives those four from reported values (0.061126, 0.303872, 0.554027,
+0.327842) and reproduces every base measurement of its predecessors exactly.
+Retired 2026-08-27.
+
+## s4_contrast_deliverables_20260826T203706_083c4e0e.json
+Superseded by `s4_contrast_deliverables_20260827T124050_ec876714`, which
+regenerated `findings_contrast.md` and `results/table_construction_contrast.tex`
+after two withdrawn claims were corrected in the generator and the generator
+was, until then, never re-run (CI-27). The two manifests were compared macro by
+macro before this one was retired: **67 macros each, no macro present in one
+and absent from the other, and zero value differences.** Nothing the manuscript
+prints changes; the newer run is canonical because it produced the documents
+now in the tree. Retired 2026-08-27.
+
+## s2_prevalence_relabelled_20260826T203109_0d596e73.json
+Superseded by `s2_prevalence_relabelled_20260827T140708_90bc36cd`. The prevalence
+sweep's additive and normalized lifts were computed from full-precision means
+and floors rather than from their reported six-decimal values, so 14 of them
+disagreed in the sixth decimal with the AP and floor printed beside them in
+Table 7 -- including three of the five normalized lifts quoted in the sweep's
+own prose. Binding rule 9 forbids that, and the round-3 sweep found it because
+`check_decimals.py` did not cover the `STwoL*` group at all: the check reported
+"31 derived quantities ... PASSED" while these five were printed beside their
+operands and unexamined.
+
+The canonical run derives both from `reported()` values. The check now builds
+its sweep relations by reading the macro file rather than from a hand-kept
+list, so a level or method added later is covered when it is emitted rather
+than when someone remembers. Base measurements are unchanged in both runs --
+this is a derivation change, not a re-measurement. Retired 2026-08-27.
+

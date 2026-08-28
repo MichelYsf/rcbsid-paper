@@ -31,6 +31,7 @@ INCLUDE_FILES = [
     "REBUILD_DONE.md", "findings_contrast.md", "findings_prevalence.md",
     "findings_score_threshold.md", "findings_bocpd_ablation.md",
     "findings_contributions.md", "findings_streams.md",
+    "findings_review_analyses.md",
     "paper/main.tex", "paper/numbers.tex", "paper/references.bib",
     "results/construction_contrast.csv", "results/prevalence_sweep_cicids.csv",
     "results/table_construction_contrast.tex",
@@ -72,6 +73,31 @@ def main() -> int:
         files += [p for p in (ROOT / d).rglob("*") if p.is_file()]
     files += [ROOT / f for f in INCLUDE_FILES if (ROOT / f).exists()]
     files += [p for p in (ROOT / "results/manifests").rglob("*.json")]
+    # The retirement reasons live in a README beside the retired manifests, not
+    # in a manifest, so a *.json glob silently drops them (B8/CI-31).
+    _sup = ROOT / "results/manifests/superseded/README.md"
+    if _sup.exists():
+        files.append(_sup)
+
+    # Every file the claim ledger cites must be IN the artifact: a referee who
+    # extracts the zip and runs the ledger check is the first reader, and until
+    # this was added that check failed on the artifact's own missing evidence.
+    _ledger = ROOT / "CLAIM_LEDGER.md"
+    if _ledger.exists():
+        import re as _re
+        _cited = set(_re.findall(r"file:([A-Za-z0-9_./-]+)",
+                                 _ledger.read_text(encoding="utf-8")))
+        _missing = []
+        for _c in sorted(_cited):
+            _p = ROOT / _c
+            if not _p.exists():
+                continue
+            if _p not in files:
+                files.append(_p)
+                _missing.append(_c)
+        if _missing:
+            print("added %d ledger-cited file(s) the include list omitted: %s"
+                  % (len(_missing), ", ".join(_missing)))
 
     leaks: list[str] = []
     with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:

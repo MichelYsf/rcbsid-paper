@@ -1,67 +1,66 @@
-# SIBLING_DECISION — arXiv:2510.09619 ("Risk-Calibrated Bayesian Streaming
-# Intrusion Detection with SRE-Aligned Decisions"), currently under TIFS review
+# Companion manuscript (arXiv:2510.09619) — verified status
 
-**This is the one strategic decision the operator must make. Nothing below has
-been executed.** Both artifacts are drafted to final quality in
-`packages/sibling/` and referenced from `HUMAN_ACTIONS.md`.
+**There is no decision to make here, because the premise of the earlier version
+of this document was false.**
 
-## The situation
+## What was verified, when, and how
 
-The sibling paper shares the audited codebase lineage. The audit findings
-that force the present rebuild apply to it directly where they touch shared
-code: the implemented score is not the described score (A1), the run-length
-posterior is data-independent (A2, re-measured in Stage 3), the threshold is
-the prior-inclusive rule rather than the described cost-only rule (A3), and
-"latency in milliseconds" is a record count (A4). The sibling's v1 abstract
-also states its threshold derivation as the cost-only form. Its results were
-produced before the audit; some of its claims are therefore known-wrong in
-the same way v1/v2 of this paper were.
+**Verified 2026-08-27 by the author, in the IEEE Author Portal.** With the
+filters set to *All Publications* and *All Submission Statuses*, the account
+returns **exactly one record**:
 
-Meanwhile, this paper's arXiv v3 (the corrected version) will be public and
-will say, in its introduction, that earlier versions described a scoring rule
-the code did not implement. Anyone who reads v3 and then reads the sibling
-will see the contradiction within minutes.
+| record | status | date |
+|---|---|---|
+| `TDSC-2025-10-1842` | rejected | 22 October 2025 |
 
-## Branch W — withdraw from TIFS before v3 goes public
+That is a *Transactions on Dependable and Secure Computing* record, and it is
+closed. **There is no IEEE TIFS submission, and no open submission of any
+kind.** This document does not assert that the TDSC record corresponds to the
+companion manuscript; that was not checked and nothing here depends on it.
 
-**Artifact:** `packages/sibling/WITHDRAWAL_LETTER_TIFS.md` (final quality).
+**Verified state of the companion manuscript:** `arXiv:2510.09619`
+("Risk-Calibrated Bayesian Streaming Intrusion Detection with SRE-Aligned
+Decisions") is a **public arXiv preprint and nothing else**. It is not under
+review at any journal. No editor anywhere is waiting on it, and no editor has
+been informed of anything about it.
 
-Consequences:
-- Clean: no reviewer at TIFS spends further time on results the authors know
-  are affected; no editor learns of the defect from a third party.
-- The withdrawal is author-initiated and cites the shared-codebase
-  correction; this is the strongest possible position for a future
-  resubmission of a corrected sibling.
-- Cost: loses the submission's place in the TIFS queue; a corrected sibling
-  starts over, and its correction work (its own rebuild) is unfunded time.
-- Timing constraint: to keep the narrative accurate, the withdrawal should be
-  SENT before or simultaneously with the v3 arXiv replacement going public.
+## What this replaces
 
-## Branch C — keep the TIFS submission alive; coordinate a correction
+The previous version of this file offered two branches — *Branch W* (withdraw
+from TIFS before v3 goes public) and *Branch C* (keep the TIFS submission alive
+and coordinate a correction) — and recommended Branch W. **Both branches rested
+on a submission that does not exist.** They are void, not merely unchosen, and
+the recommendation is void with them. The artifacts they produced are retired
+in place rather than deleted, so the record shows what was prepared and why it
+was wrong:
 
-**Artifact:** `packages/sibling/ARXIV_V3_COMMENT_COEXIST.txt` — the v3
-correction-note wording drafted so it does not contradict an active TIFS
-submission (it speaks only about THIS paper's versions and the shared
-lineage, and says a correction process for the companion "is underway and
-disclosed to editors of both venues").
+| artifact | disposition |
+|---|---|
+| `packages/sibling/WITHDRAWAL_LETTER_TIFS.md` | **RETIRED — do not send.** Header records why. |
+| `packages/sibling/ARXIV_V3_COMMENT_COEXIST.txt` | Both prior variants retired; a third variant that makes no venue claim is now the one to use. |
 
-Consequences:
-- Requires actually disclosing to the TIFS editor immediately (the v3 note
-  asserts it), then either a major-revision request or an editor-directed
-  withdrawal anyway — the decision is deferred to the editor, not avoided.
-- Risk: if a TIFS referee finds the v3 confession before the disclosure
-  lands, the authors' position degrades from "self-corrected" to "caught".
-- Only defensible if the sibling's headline results can be shown unaffected
-  by A1–A4 quickly, which has NOT been established (no manifested runs cover
-  the sibling's tables).
+## How the error happened, and the rule it produces
 
-## Standing recommendation (recorded, not executed)
+The venue was researched carefully and the submission was never verified. The
+prior round fetched the TIFS editor-in-chief, the portal migration, and IEEE's
+withdrawal procedure, all correctly — and none of that research could establish
+the one fact everything rested on, namely that a submission existed. The
+manuscript ID was recorded as "not on this machine", which was treated as *the
+operator must look it up* when it was equally consistent with *there is nothing
+to look up*. An absent identifier is evidence about the record, not only about
+where the record is stored.
 
-**Withdraw before v3 goes public (Branch W).** The sibling's results rest on
-the same unaudited lineage; nothing manifested supports its tables; and the
-cost asymmetry is decisive — Branch W costs a queue position, Branch C risks
-the credibility of both papers and of the correction itself. The
-click-by-click sequencing (withdrawal first, v3 replacement second) is in
-`HUMAN_ACTIONS.md`. If the operator chooses Branch C instead, use the
-coexistence wording for the v3 Comments field and send the TIFS editor
-disclosure the same day — both texts are ready.
+**Rule.** Before preparing any artifact that asserts a venue relationship —
+a withdrawal, a disclosure, a correction note, a cover-letter sentence — the
+existence of that relationship must be verified against the venue's own system,
+and the verification recorded with its date and source. Venue *procedure*
+research is not verification of venue *status*. Recorded as **CI-25**.
+
+## What remains true and still needs doing
+
+The companion's *technical* problem is unchanged and is not a venue question:
+it shares part of the audited codebase, and the method-identity findings of the
+audit apply to that shared lineage. Correcting or replacing the preprint is a
+separate piece of work on a separate manuscript. Nothing in this repository's
+submission path depends on it, and no artifact here may assert that a
+correction has been disclosed to anyone, because it has not.

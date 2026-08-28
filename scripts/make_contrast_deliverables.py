@@ -283,8 +283,15 @@ def main() -> int:
                  "as some margins below. This is flagged where it bites.")
         L.append("")
 
-        # ---- CICIDS: same records, order only ----------------------------
-        L.append("## Contrast 1 — CICIDS2017, order only (prevalence held constant)")
+        # ---- CICIDS: same records, assembly changed ------------------------
+        # The heading and the two sentences below said "order only" and
+        # "prevalence held constant". Both were false and both were withdrawn:
+        # the whole-STREAM prevalence is held constant by the permutation, but
+        # the HELD-OUT prevalence moves 43 points, which is the paper's own
+        # headline. CI-21 (A1) then showed the reordering is not the operative
+        # variable at all. The claim that no split-rule sensitivity check
+        # exists was also overtaken - A2 runs seven cut points.
+        L.append("## Contrast 1 — CICIDS2017, one record multiset under two assemblies")
         L.append("")
         L.append("CICIDS2017 is a single capture week, so the same record multiset "
                  "can be presented in true timestamp order and in day-of-week round "
@@ -292,13 +299,20 @@ def main() -> int:
                  "permutation, not asserted from reading the code: both arms hold "
                  "`CicidsArmRows` records and `CicidsArmAttacks` attacks, a "
                  "whole-stream prevalence of `CicidsArmPrevalencePct` in each "
-                 "(`cicids_heldout_composition` manifest). Order is the only "
-                 "manipulated variable.")
+                 "(`cicids_heldout_composition` manifest). Ordering is the only "
+                 "thing the intervention *sets*; it is not the only thing that "
+                 "changes. Under a positional split, reordering also moves held-out "
+                 "membership and held-out prevalence, so the treatment is the "
+                 "assembly pipeline and not order in isolation.")
         L.append("")
         L.append("What follows is a change in the measured regime **under reordering "
-                 "with the 70/15/15 tail split held fixed**. No split-rule sensitivity "
-                 "check has been run, so the effect is not attributed to construction "
-                 "in isolation.")
+                 "with the 70/15/15 tail split held fixed**. Two later analyses bound "
+                 "what may be concluded from it: the shared-record restriction (A1) "
+                 "shows the ordering reversal does not survive on the records both "
+                 "arms held out, locating the effect in sample membership rather than "
+                 "in history order; and the split-rule sensitivity sweep (A2) shows "
+                 "the measured ordering also depends on where the cut falls. Both are "
+                 "in `findings_review_analyses.md`.")
         L.append("")
         if have_cicids_nat and have_cicids_syn:
             pn = cell(df, "cicids2017", "natural", "proposed_detector", "test_prevalence")

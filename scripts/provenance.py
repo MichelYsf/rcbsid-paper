@@ -87,6 +87,92 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+REPORT_DP = 6
+"""Decimal places at which a metric-valued number is REPORTED.
+
+Every dimensionless metric in this paper (AUC-PR, AUC-ROC, prevalence, chance
+floor, normalized lift) is reported at this precision, and a quantity derived
+from other reported quantities -- a margin, a spread, a delta, a normalized
+lift -- is computed from their REPORTED values, not from the full-precision
+values behind them.
+
+Why that way round. The alternative is to derive at full precision and round
+only for display, which keeps each statistic exactly what the underlying data
+says. It also makes the printed page fail to add up: the natural-arm margin
+computed at full precision rounds to 0.061125 while the two AUC-PR values
+printed beside it differ by 0.061126, and a reader checking the arithmetic
+finds a mismatch in a paper that invites exactly that check. Worse, the
+manifests store values already rounded to REPORT_DP, so the full-precision
+value is not even recoverable downstream -- the display layer cannot repair it.
+
+Deriving from reported values gives an exact guarantee instead: every derived
+number on the page equals the arithmetic a reader performs on the numbers
+printed beside it. The cost is that a derived quantity may differ from its
+full-precision counterpart by up to a few units in the last reported place --
+below 1e-05 here, and orders of magnitude below any effect this paper claims.
+scripts/check_decimals.py enforces the guarantee and fails the build if it
+ever stops holding.
+"""
+
+
+def reported(x) -> float:
+    """The value as the manuscript reports it. Derive from these, never from
+    the full-precision originals -- see REPORT_DP."""
+    return round(float(x), REPORT_DP)
+
+
+METRIC_SUFFIXES = (
+    "Aucpr", "Aucroc", "NormLift", "Lift", "Margin", "Spread",
+    "ChanceFloor", "Prevalence", "Delta",
+    # per-seed draws of a metric are that metric; the emitting loop's desc is
+    # too terse to say so, so the ordinal carries it
+    "DrawOne", "DrawTwo", "DrawThree", "DrawFour", "DrawFive",
+)
+"""Macro-name suffixes whose values are dimensionless metrics.
+
+These render at REPORT_DP decimal places, fixed width. It lives here rather
+than in the renderer because both the renderer and the check that verifies the
+renderer need it, and a policy each defines for itself is a policy that can
+drift.
+"""
+
+
+METRIC_DESC = (
+    "auc-pr", "auc-roc", "aucpr", "aucroc", "average precision",
+    "chance floor", "prevalence", "normalized lift", "lift above chance",
+)
+"""Vocabulary a run uses when it declares a dimensionless metric.
+
+Checked against the macro's own recorded description, which is authoritative
+in a way its name is not: a per-seed AUC-PR is an AUC-PR whatever the emitting
+loop chose to call it.
+"""
+
+
+def is_metric(name: str, desc: str = "", unit: str = "") -> bool:
+    """True for a dimensionless metric on [0,1], reported at REPORT_DP.
+
+    Percentage- and percentage-point-scaled values are deliberately NOT in
+    this family. They are the same quantities on a 100x scale, and forcing six
+    decimals on them fabricates digits: the pooled LITNET prevalence, emitted
+    at four decimals as 6.4982, renders as 6.498200 and then disagrees with the
+    equal-weight mean of its three constituents (6.498233) that the paper
+    states as an exact identity. The emitting run declares the scale in the
+    macro's unit, which reaches the generated file as a "[%]" or "[pp]" tag.
+    """
+    # Units and comment tags reach here in LaTeX-escaped form ("\%", "[\%]")
+    # from some emitters and bare from others, so normalise before comparing.
+    u = (unit or "").strip().lower().replace("\\", "")
+    if u in {"%", "pp", "percent", "percentage points"}:
+        return False
+    d = (desc or "").lower().replace("\\", "")
+    if "[%]" in d or "[pp]" in d:
+        return False
+    if d and any(k in d for k in METRIC_DESC):
+        return True
+    return any(name.endswith(suf) for suf in METRIC_SUFFIXES)
+
+
 def sha256_obj(obj: Any) -> str:
     """Stable hash of a config-like object (dicts sorted, floats repr'd)."""
     return sha256_bytes(json.dumps(obj, sort_keys=True, default=str).encode())

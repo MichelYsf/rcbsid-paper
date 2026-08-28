@@ -1,0 +1,1228 @@
+{
+  "run_id": "s2_prevalence_relabelled_20260827T140708_90bc36cd",
+  "name": "s2_prevalence_relabelled",
+  "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
+  "git_commit_at_write": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "60454e6588443e019b0f52e143a9ce7157b472a4f777b0c7f86f58ca4192495a",
+  "config": {
+    "source": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\prevalence_sweep_cicids.csv",
+    "levels": [
+      5.0,
+      10.0,
+      22.06,
+      40.0,
+      64.0
+    ],
+    "methods": [
+      "bocpd_slo",
+      "hst",
+      "loda",
+      "ecod_batch_ref",
+      "lof_batch_ref"
+    ],
+    "scope": "controlled experiment ON THE INTERLEAVED construction; not a deployment-prevalence claim (rule 3)",
+    "relabel_only": true,
+    "rerun": false
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\prevalence_sweep_cicids.csv",
+      "sha256": "ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_prevalence.md",
+      "exists": true,
+      "sha256": "1a3e87d647335d5daa1d8fe19d43d3be0bb664dd8ee26926107e4ebe76d4e6af"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\table_prevalence_sweep.tex",
+      "exists": true,
+      "sha256": "cac15960a644d0511c4a6e24c3a12a5b0a6d01764b49048d75bd679de99de3da"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-27T14:07:08.713796+00:00",
+  "finished_utc": "2026-08-27T14:07:08.782637+00:00",
+  "wall_seconds": 0.068841,
+  "macros": {
+    "STwoLFiveFloor": {
+      "value": 0.049524,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the 5% level"
+    },
+    "STwoLFiveProposedMean": {
+      "value": 0.367164,
+      "unit": "",
+      "desc": "5% proposed detector AUC-PR mean"
+    },
+    "STwoLFiveProposedSd": {
+      "value": 0.000502,
+      "unit": "",
+      "desc": "5% proposed detector AUC-PR sd over draws"
+    },
+    "STwoLFiveProposedN": {
+      "value": 3,
+      "unit": "",
+      "desc": "5% proposed detector draws"
+    },
+    "STwoLFiveProposedLift": {
+      "value": 0.31764,
+      "unit": "",
+      "desc": "5% proposed detector AUC-PR above chance"
+    },
+    "STwoLFiveProposedDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "5% proposed detector 1 if identical across draws"
+    },
+    "STwoLFiveProposedNormLift": {
+      "value": 0.33419,
+      "unit": "",
+      "desc": "5% proposed detector normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFiveProposedDrawOne": {
+      "value": 0.367004,
+      "unit": "",
+      "desc": "5% proposed detector draw 1"
+    },
+    "STwoLFiveProposedDrawTwo": {
+      "value": 0.366761,
+      "unit": "",
+      "desc": "5% proposed detector draw 2"
+    },
+    "STwoLFiveProposedDrawThree": {
+      "value": 0.367726,
+      "unit": "",
+      "desc": "5% proposed detector draw 3"
+    },
+    "STwoLFiveHstMean": {
+      "value": 0.199261,
+      "unit": "",
+      "desc": "5% HST AUC-PR mean"
+    },
+    "STwoLFiveHstSd": {
+      "value": 0.081017,
+      "unit": "",
+      "desc": "5% HST AUC-PR sd over draws"
+    },
+    "STwoLFiveHstN": {
+      "value": 3,
+      "unit": "",
+      "desc": "5% HST draws"
+    },
+    "STwoLFiveHstLift": {
+      "value": 0.149737,
+      "unit": "",
+      "desc": "5% HST AUC-PR above chance"
+    },
+    "STwoLFiveHstDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "5% HST 1 if identical across draws"
+    },
+    "STwoLFiveHstNormLift": {
+      "value": 0.157539,
+      "unit": "",
+      "desc": "5% HST normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFiveHstDrawOne": {
+      "value": 0.280596,
+      "unit": "",
+      "desc": "5% HST draw 1"
+    },
+    "STwoLFiveHstDrawTwo": {
+      "value": 0.198622,
+      "unit": "",
+      "desc": "5% HST draw 2"
+    },
+    "STwoLFiveHstDrawThree": {
+      "value": 0.118565,
+      "unit": "",
+      "desc": "5% HST draw 3"
+    },
+    "STwoLFiveLodaMean": {
+      "value": 0.207581,
+      "unit": "",
+      "desc": "5% LODA AUC-PR mean"
+    },
+    "STwoLFiveLodaSd": {
+      "value": 0.006909,
+      "unit": "",
+      "desc": "5% LODA AUC-PR sd over draws"
+    },
+    "STwoLFiveLodaN": {
+      "value": 3,
+      "unit": "",
+      "desc": "5% LODA draws"
+    },
+    "STwoLFiveLodaLift": {
+      "value": 0.158057,
+      "unit": "",
+      "desc": "5% LODA AUC-PR above chance"
+    },
+    "STwoLFiveLodaDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "5% LODA 1 if identical across draws"
+    },
+    "STwoLFiveLodaNormLift": {
+      "value": 0.166292,
+      "unit": "",
+      "desc": "5% LODA normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFiveLodaDrawOne": {
+      "value": 0.200772,
+      "unit": "",
+      "desc": "5% LODA draw 1"
+    },
+    "STwoLFiveLodaDrawTwo": {
+      "value": 0.214587,
+      "unit": "",
+      "desc": "5% LODA draw 2"
+    },
+    "STwoLFiveLodaDrawThree": {
+      "value": 0.207384,
+      "unit": "",
+      "desc": "5% LODA draw 3"
+    },
+    "STwoLFiveEcodMean": {
+      "value": 0.166239,
+      "unit": "",
+      "desc": "5% ECOD (batch) AUC-PR mean"
+    },
+    "STwoLFiveEcodSd": {
+      "value": 0.000755,
+      "unit": "",
+      "desc": "5% ECOD (batch) AUC-PR sd over draws"
+    },
+    "STwoLFiveEcodN": {
+      "value": 3,
+      "unit": "",
+      "desc": "5% ECOD (batch) draws"
+    },
+    "STwoLFiveEcodLift": {
+      "value": 0.116715,
+      "unit": "",
+      "desc": "5% ECOD (batch) AUC-PR above chance"
+    },
+    "STwoLFiveEcodDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "5% ECOD (batch) 1 if identical across draws"
+    },
+    "STwoLFiveEcodNormLift": {
+      "value": 0.122796,
+      "unit": "",
+      "desc": "5% ECOD (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFiveEcodDrawOne": {
+      "value": 0.167066,
+      "unit": "",
+      "desc": "5% ECOD (batch) draw 1"
+    },
+    "STwoLFiveEcodDrawTwo": {
+      "value": 0.166066,
+      "unit": "",
+      "desc": "5% ECOD (batch) draw 2"
+    },
+    "STwoLFiveEcodDrawThree": {
+      "value": 0.165585,
+      "unit": "",
+      "desc": "5% ECOD (batch) draw 3"
+    },
+    "STwoLFiveLofMean": {
+      "value": 0.537596,
+      "unit": "",
+      "desc": "5% LOF (batch) AUC-PR mean"
+    },
+    "STwoLFiveLofSd": {
+      "value": 0.000791,
+      "unit": "",
+      "desc": "5% LOF (batch) AUC-PR sd over draws"
+    },
+    "STwoLFiveLofN": {
+      "value": 3,
+      "unit": "",
+      "desc": "5% LOF (batch) draws"
+    },
+    "STwoLFiveLofLift": {
+      "value": 0.488072,
+      "unit": "",
+      "desc": "5% LOF (batch) AUC-PR above chance"
+    },
+    "STwoLFiveLofDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "5% LOF (batch) 1 if identical across draws"
+    },
+    "STwoLFiveLofNormLift": {
+      "value": 0.513503,
+      "unit": "",
+      "desc": "5% LOF (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFiveLofDrawOne": {
+      "value": 0.538135,
+      "unit": "",
+      "desc": "5% LOF (batch) draw 1"
+    },
+    "STwoLFiveLofDrawTwo": {
+      "value": 0.537965,
+      "unit": "",
+      "desc": "5% LOF (batch) draw 2"
+    },
+    "STwoLFiveLofDrawThree": {
+      "value": 0.536689,
+      "unit": "",
+      "desc": "5% LOF (batch) draw 3"
+    },
+    "STwoLTenFloor": {
+      "value": 0.099004,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the 10% level"
+    },
+    "STwoLTenProposedMean": {
+      "value": 0.447213,
+      "unit": "",
+      "desc": "10% proposed detector AUC-PR mean"
+    },
+    "STwoLTenProposedSd": {
+      "value": 0.002447,
+      "unit": "",
+      "desc": "10% proposed detector AUC-PR sd over draws"
+    },
+    "STwoLTenProposedN": {
+      "value": 3,
+      "unit": "",
+      "desc": "10% proposed detector draws"
+    },
+    "STwoLTenProposedLift": {
+      "value": 0.348209,
+      "unit": "",
+      "desc": "10% proposed detector AUC-PR above chance"
+    },
+    "STwoLTenProposedDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "10% proposed detector 1 if identical across draws"
+    },
+    "STwoLTenProposedNormLift": {
+      "value": 0.386471,
+      "unit": "",
+      "desc": "10% proposed detector normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLTenProposedDrawOne": {
+      "value": 0.449937,
+      "unit": "",
+      "desc": "10% proposed detector draw 1"
+    },
+    "STwoLTenProposedDrawTwo": {
+      "value": 0.446504,
+      "unit": "",
+      "desc": "10% proposed detector draw 2"
+    },
+    "STwoLTenProposedDrawThree": {
+      "value": 0.445199,
+      "unit": "",
+      "desc": "10% proposed detector draw 3"
+    },
+    "STwoLTenHstMean": {
+      "value": 0.299702,
+      "unit": "",
+      "desc": "10% HST AUC-PR mean"
+    },
+    "STwoLTenHstSd": {
+      "value": 0.098871,
+      "unit": "",
+      "desc": "10% HST AUC-PR sd over draws"
+    },
+    "STwoLTenHstN": {
+      "value": 3,
+      "unit": "",
+      "desc": "10% HST draws"
+    },
+    "STwoLTenHstLift": {
+      "value": 0.200698,
+      "unit": "",
+      "desc": "10% HST AUC-PR above chance"
+    },
+    "STwoLTenHstDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "10% HST 1 if identical across draws"
+    },
+    "STwoLTenHstNormLift": {
+      "value": 0.222751,
+      "unit": "",
+      "desc": "10% HST normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLTenHstDrawOne": {
+      "value": 0.400185,
+      "unit": "",
+      "desc": "10% HST draw 1"
+    },
+    "STwoLTenHstDrawTwo": {
+      "value": 0.296397,
+      "unit": "",
+      "desc": "10% HST draw 2"
+    },
+    "STwoLTenHstDrawThree": {
+      "value": 0.202526,
+      "unit": "",
+      "desc": "10% HST draw 3"
+    },
+    "STwoLTenLodaMean": {
+      "value": 0.247426,
+      "unit": "",
+      "desc": "10% LODA AUC-PR mean"
+    },
+    "STwoLTenLodaSd": {
+      "value": 0.005473,
+      "unit": "",
+      "desc": "10% LODA AUC-PR sd over draws"
+    },
+    "STwoLTenLodaN": {
+      "value": 3,
+      "unit": "",
+      "desc": "10% LODA draws"
+    },
+    "STwoLTenLodaLift": {
+      "value": 0.148422,
+      "unit": "",
+      "desc": "10% LODA AUC-PR above chance"
+    },
+    "STwoLTenLodaDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "10% LODA 1 if identical across draws"
+    },
+    "STwoLTenLodaNormLift": {
+      "value": 0.164731,
+      "unit": "",
+      "desc": "10% LODA normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLTenLodaDrawOne": {
+      "value": 0.241134,
+      "unit": "",
+      "desc": "10% LODA draw 1"
+    },
+    "STwoLTenLodaDrawTwo": {
+      "value": 0.250065,
+      "unit": "",
+      "desc": "10% LODA draw 2"
+    },
+    "STwoLTenLodaDrawThree": {
+      "value": 0.25108,
+      "unit": "",
+      "desc": "10% LODA draw 3"
+    },
+    "STwoLTenEcodMean": {
+      "value": 0.252198,
+      "unit": "",
+      "desc": "10% ECOD (batch) AUC-PR mean"
+    },
+    "STwoLTenEcodSd": {
+      "value": 0.000335,
+      "unit": "",
+      "desc": "10% ECOD (batch) AUC-PR sd over draws"
+    },
+    "STwoLTenEcodN": {
+      "value": 3,
+      "unit": "",
+      "desc": "10% ECOD (batch) draws"
+    },
+    "STwoLTenEcodLift": {
+      "value": 0.153194,
+      "unit": "",
+      "desc": "10% ECOD (batch) AUC-PR above chance"
+    },
+    "STwoLTenEcodDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "10% ECOD (batch) 1 if identical across draws"
+    },
+    "STwoLTenEcodNormLift": {
+      "value": 0.170027,
+      "unit": "",
+      "desc": "10% ECOD (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLTenEcodDrawOne": {
+      "value": 0.252016,
+      "unit": "",
+      "desc": "10% ECOD (batch) draw 1"
+    },
+    "STwoLTenEcodDrawTwo": {
+      "value": 0.251993,
+      "unit": "",
+      "desc": "10% ECOD (batch) draw 2"
+    },
+    "STwoLTenEcodDrawThree": {
+      "value": 0.252585,
+      "unit": "",
+      "desc": "10% ECOD (batch) draw 3"
+    },
+    "STwoLTenLofMean": {
+      "value": 0.697003,
+      "unit": "",
+      "desc": "10% LOF (batch) AUC-PR mean"
+    },
+    "STwoLTenLofSd": {
+      "value": 0.00104,
+      "unit": "",
+      "desc": "10% LOF (batch) AUC-PR sd over draws"
+    },
+    "STwoLTenLofN": {
+      "value": 3,
+      "unit": "",
+      "desc": "10% LOF (batch) draws"
+    },
+    "STwoLTenLofLift": {
+      "value": 0.597999,
+      "unit": "",
+      "desc": "10% LOF (batch) AUC-PR above chance"
+    },
+    "STwoLTenLofDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "10% LOF (batch) 1 if identical across draws"
+    },
+    "STwoLTenLofNormLift": {
+      "value": 0.663709,
+      "unit": "",
+      "desc": "10% LOF (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLTenLofDrawOne": {
+      "value": 0.698107,
+      "unit": "",
+      "desc": "10% LOF (batch) draw 1"
+    },
+    "STwoLTenLofDrawTwo": {
+      "value": 0.696041,
+      "unit": "",
+      "desc": "10% LOF (batch) draw 2"
+    },
+    "STwoLTenLofDrawThree": {
+      "value": 0.69686,
+      "unit": "",
+      "desc": "10% LOF (batch) draw 3"
+    },
+    "STwoLUnresampledFloor": {
+      "value": 0.252396,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the unresampled level"
+    },
+    "STwoLUnresampledProposedMean": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "unresampled proposed detector AUC-PR mean"
+    },
+    "STwoLUnresampledProposedSd": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "unresampled proposed detector AUC-PR sd over draws"
+    },
+    "STwoLUnresampledProposedN": {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled proposed detector draws"
+    },
+    "STwoLUnresampledProposedLift": {
+      "value": 0.292602,
+      "unit": "",
+      "desc": "unresampled proposed detector AUC-PR above chance"
+    },
+    "STwoLUnresampledProposedDeterministic": {
+      "value": 1,
+      "unit": "",
+      "desc": "unresampled proposed detector 1 if identical across draws"
+    },
+    "STwoLUnresampledProposedNormLift": {
+      "value": 0.391386,
+      "unit": "",
+      "desc": "unresampled proposed detector normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLUnresampledProposedDrawOne": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "unresampled proposed detector draw 1"
+    },
+    "STwoLUnresampledProposedDrawTwo": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "unresampled proposed detector draw 2"
+    },
+    "STwoLUnresampledProposedDrawThree": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "unresampled proposed detector draw 3"
+    },
+    "STwoLUnresampledHstMean": {
+      "value": 0.433044,
+      "unit": "",
+      "desc": "unresampled HST AUC-PR mean"
+    },
+    "STwoLUnresampledHstSd": {
+      "value": 0.077736,
+      "unit": "",
+      "desc": "unresampled HST AUC-PR sd over draws"
+    },
+    "STwoLUnresampledHstN": {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled HST draws"
+    },
+    "STwoLUnresampledHstLift": {
+      "value": 0.180648,
+      "unit": "",
+      "desc": "unresampled HST AUC-PR above chance"
+    },
+    "STwoLUnresampledHstDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "unresampled HST 1 if identical across draws"
+    },
+    "STwoLUnresampledHstNormLift": {
+      "value": 0.241636,
+      "unit": "",
+      "desc": "unresampled HST normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLUnresampledHstDrawOne": {
+      "value": 0.513623,
+      "unit": "",
+      "desc": "unresampled HST draw 1"
+    },
+    "STwoLUnresampledHstDrawTwo": {
+      "value": 0.427004,
+      "unit": "",
+      "desc": "unresampled HST draw 2"
+    },
+    "STwoLUnresampledHstDrawThree": {
+      "value": 0.358504,
+      "unit": "",
+      "desc": "unresampled HST draw 3"
+    },
+    "STwoLUnresampledLodaMean": {
+      "value": 0.341715,
+      "unit": "",
+      "desc": "unresampled LODA AUC-PR mean"
+    },
+    "STwoLUnresampledLodaSd": {
+      "value": 0.004734,
+      "unit": "",
+      "desc": "unresampled LODA AUC-PR sd over draws"
+    },
+    "STwoLUnresampledLodaN": {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled LODA draws"
+    },
+    "STwoLUnresampledLodaLift": {
+      "value": 0.089319,
+      "unit": "",
+      "desc": "unresampled LODA AUC-PR above chance"
+    },
+    "STwoLUnresampledLodaDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "unresampled LODA 1 if identical across draws"
+    },
+    "STwoLUnresampledLodaNormLift": {
+      "value": 0.119474,
+      "unit": "",
+      "desc": "unresampled LODA normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLUnresampledLodaDrawOne": {
+      "value": 0.338897,
+      "unit": "",
+      "desc": "unresampled LODA draw 1"
+    },
+    "STwoLUnresampledLodaDrawTwo": {
+      "value": 0.339068,
+      "unit": "",
+      "desc": "unresampled LODA draw 2"
+    },
+    "STwoLUnresampledLodaDrawThree": {
+      "value": 0.347181,
+      "unit": "",
+      "desc": "unresampled LODA draw 3"
+    },
+    "STwoLUnresampledEcodMean": {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) AUC-PR mean"
+    },
+    "STwoLUnresampledEcodSd": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) AUC-PR sd over draws"
+    },
+    "STwoLUnresampledEcodN": {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) draws"
+    },
+    "STwoLUnresampledEcodLift": {
+      "value": 0.16657,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) AUC-PR above chance"
+    },
+    "STwoLUnresampledEcodDeterministic": {
+      "value": 1,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) 1 if identical across draws"
+    },
+    "STwoLUnresampledEcodNormLift": {
+      "value": 0.222805,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLUnresampledEcodDrawOne": {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) draw 1"
+    },
+    "STwoLUnresampledEcodDrawTwo": {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) draw 2"
+    },
+    "STwoLUnresampledEcodDrawThree": {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "unresampled ECOD (batch) draw 3"
+    },
+    "STwoLUnresampledLofMean": {
+      "value": 0.863194,
+      "unit": "",
+      "desc": "unresampled LOF (batch) AUC-PR mean"
+    },
+    "STwoLUnresampledLofSd": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "unresampled LOF (batch) AUC-PR sd over draws"
+    },
+    "STwoLUnresampledLofN": {
+      "value": 3,
+      "unit": "",
+      "desc": "unresampled LOF (batch) draws"
+    },
+    "STwoLUnresampledLofLift": {
+      "value": 0.610798,
+      "unit": "",
+      "desc": "unresampled LOF (batch) AUC-PR above chance"
+    },
+    "STwoLUnresampledLofDeterministic": {
+      "value": 1,
+      "unit": "",
+      "desc": "unresampled LOF (batch) 1 if identical across draws"
+    },
+    "STwoLUnresampledLofNormLift": {
+      "value": 0.817007,
+      "unit": "",
+      "desc": "unresampled LOF (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLUnresampledLofDrawOne": {
+      "value": 0.863194,
+      "unit": "",
+      "desc": "unresampled LOF (batch) draw 1"
+    },
+    "STwoLUnresampledLofDrawTwo": {
+      "value": 0.863194,
+      "unit": "",
+      "desc": "unresampled LOF (batch) draw 2"
+    },
+    "STwoLUnresampledLofDrawThree": {
+      "value": 0.863194,
+      "unit": "",
+      "desc": "unresampled LOF (batch) draw 3"
+    },
+    "STwoLFortyFloor": {
+      "value": 0.399995,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the 40% level"
+    },
+    "STwoLFortyProposedMean": {
+      "value": 0.494217,
+      "unit": "",
+      "desc": "40% proposed detector AUC-PR mean"
+    },
+    "STwoLFortyProposedSd": {
+      "value": 0.001688,
+      "unit": "",
+      "desc": "40% proposed detector AUC-PR sd over draws"
+    },
+    "STwoLFortyProposedN": {
+      "value": 3,
+      "unit": "",
+      "desc": "40% proposed detector draws"
+    },
+    "STwoLFortyProposedLift": {
+      "value": 0.094222,
+      "unit": "",
+      "desc": "40% proposed detector AUC-PR above chance"
+    },
+    "STwoLFortyProposedDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "40% proposed detector 1 if identical across draws"
+    },
+    "STwoLFortyProposedNormLift": {
+      "value": 0.157035,
+      "unit": "",
+      "desc": "40% proposed detector normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFortyProposedDrawOne": {
+      "value": 0.496165,
+      "unit": "",
+      "desc": "40% proposed detector draw 1"
+    },
+    "STwoLFortyProposedDrawTwo": {
+      "value": 0.493171,
+      "unit": "",
+      "desc": "40% proposed detector draw 2"
+    },
+    "STwoLFortyProposedDrawThree": {
+      "value": 0.493315,
+      "unit": "",
+      "desc": "40% proposed detector draw 3"
+    },
+    "STwoLFortyHstMean": {
+      "value": 0.476031,
+      "unit": "",
+      "desc": "40% HST AUC-PR mean"
+    },
+    "STwoLFortyHstSd": {
+      "value": 0.056079,
+      "unit": "",
+      "desc": "40% HST AUC-PR sd over draws"
+    },
+    "STwoLFortyHstN": {
+      "value": 3,
+      "unit": "",
+      "desc": "40% HST draws"
+    },
+    "STwoLFortyHstLift": {
+      "value": 0.076036,
+      "unit": "",
+      "desc": "40% HST AUC-PR above chance"
+    },
+    "STwoLFortyHstDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "40% HST 1 if identical across draws"
+    },
+    "STwoLFortyHstNormLift": {
+      "value": 0.126726,
+      "unit": "",
+      "desc": "40% HST normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFortyHstDrawOne": {
+      "value": 0.540747,
+      "unit": "",
+      "desc": "40% HST draw 1"
+    },
+    "STwoLFortyHstDrawTwo": {
+      "value": 0.445629,
+      "unit": "",
+      "desc": "40% HST draw 2"
+    },
+    "STwoLFortyHstDrawThree": {
+      "value": 0.441718,
+      "unit": "",
+      "desc": "40% HST draw 3"
+    },
+    "STwoLFortyLodaMean": {
+      "value": 0.399422,
+      "unit": "",
+      "desc": "40% LODA AUC-PR mean"
+    },
+    "STwoLFortyLodaSd": {
+      "value": 0.004975,
+      "unit": "",
+      "desc": "40% LODA AUC-PR sd over draws"
+    },
+    "STwoLFortyLodaN": {
+      "value": 3,
+      "unit": "",
+      "desc": "40% LODA draws"
+    },
+    "STwoLFortyLodaLift": {
+      "value": -0.000573,
+      "unit": "",
+      "desc": "40% LODA AUC-PR above chance"
+    },
+    "STwoLFortyLodaDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "40% LODA 1 if identical across draws"
+    },
+    "STwoLFortyLodaNormLift": {
+      "value": -0.000955,
+      "unit": "",
+      "desc": "40% LODA normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFortyLodaDrawOne": {
+      "value": 0.402505,
+      "unit": "",
+      "desc": "40% LODA draw 1"
+    },
+    "STwoLFortyLodaDrawTwo": {
+      "value": 0.393683,
+      "unit": "",
+      "desc": "40% LODA draw 2"
+    },
+    "STwoLFortyLodaDrawThree": {
+      "value": 0.402079,
+      "unit": "",
+      "desc": "40% LODA draw 3"
+    },
+    "STwoLFortyEcodMean": {
+      "value": 0.527364,
+      "unit": "",
+      "desc": "40% ECOD (batch) AUC-PR mean"
+    },
+    "STwoLFortyEcodSd": {
+      "value": 0.000678,
+      "unit": "",
+      "desc": "40% ECOD (batch) AUC-PR sd over draws"
+    },
+    "STwoLFortyEcodN": {
+      "value": 3,
+      "unit": "",
+      "desc": "40% ECOD (batch) draws"
+    },
+    "STwoLFortyEcodLift": {
+      "value": 0.127369,
+      "unit": "",
+      "desc": "40% ECOD (batch) AUC-PR above chance"
+    },
+    "STwoLFortyEcodDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "40% ECOD (batch) 1 if identical across draws"
+    },
+    "STwoLFortyEcodNormLift": {
+      "value": 0.21228,
+      "unit": "",
+      "desc": "40% ECOD (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFortyEcodDrawOne": {
+      "value": 0.52813,
+      "unit": "",
+      "desc": "40% ECOD (batch) draw 1"
+    },
+    "STwoLFortyEcodDrawTwo": {
+      "value": 0.527121,
+      "unit": "",
+      "desc": "40% ECOD (batch) draw 2"
+    },
+    "STwoLFortyEcodDrawThree": {
+      "value": 0.52684,
+      "unit": "",
+      "desc": "40% ECOD (batch) draw 3"
+    },
+    "STwoLFortyLofMean": {
+      "value": 0.896968,
+      "unit": "",
+      "desc": "40% LOF (batch) AUC-PR mean"
+    },
+    "STwoLFortyLofSd": {
+      "value": 0.00603,
+      "unit": "",
+      "desc": "40% LOF (batch) AUC-PR sd over draws"
+    },
+    "STwoLFortyLofN": {
+      "value": 3,
+      "unit": "",
+      "desc": "40% LOF (batch) draws"
+    },
+    "STwoLFortyLofLift": {
+      "value": 0.496973,
+      "unit": "",
+      "desc": "40% LOF (batch) AUC-PR above chance"
+    },
+    "STwoLFortyLofDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "40% LOF (batch) 1 if identical across draws"
+    },
+    "STwoLFortyLofNormLift": {
+      "value": 0.828281,
+      "unit": "",
+      "desc": "40% LOF (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLFortyLofDrawOne": {
+      "value": 0.893394,
+      "unit": "",
+      "desc": "40% LOF (batch) draw 1"
+    },
+    "STwoLFortyLofDrawTwo": {
+      "value": 0.893581,
+      "unit": "",
+      "desc": "40% LOF (batch) draw 2"
+    },
+    "STwoLFortyLofDrawThree": {
+      "value": 0.90393,
+      "unit": "",
+      "desc": "40% LOF (batch) draw 3"
+    },
+    "STwoLSixtyFourFloor": {
+      "value": 0.639991,
+      "unit": "",
+      "desc": "achieved held-out prevalence (AUC-PR chance floor) at the 64% level"
+    },
+    "STwoLSixtyFourProposedMean": {
+      "value": 0.619546,
+      "unit": "",
+      "desc": "64% proposed detector AUC-PR mean"
+    },
+    "STwoLSixtyFourProposedSd": {
+      "value": 0.001135,
+      "unit": "",
+      "desc": "64% proposed detector AUC-PR sd over draws"
+    },
+    "STwoLSixtyFourProposedN": {
+      "value": 3,
+      "unit": "",
+      "desc": "64% proposed detector draws"
+    },
+    "STwoLSixtyFourProposedLift": {
+      "value": -0.020445,
+      "unit": "",
+      "desc": "64% proposed detector AUC-PR above chance"
+    },
+    "STwoLSixtyFourProposedDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "64% proposed detector 1 if identical across draws"
+    },
+    "STwoLSixtyFourProposedNormLift": {
+      "value": -0.05679,
+      "unit": "",
+      "desc": "64% proposed detector normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLSixtyFourProposedDrawOne": {
+      "value": 0.618354,
+      "unit": "",
+      "desc": "64% proposed detector draw 1"
+    },
+    "STwoLSixtyFourProposedDrawTwo": {
+      "value": 0.619668,
+      "unit": "",
+      "desc": "64% proposed detector draw 2"
+    },
+    "STwoLSixtyFourProposedDrawThree": {
+      "value": 0.620615,
+      "unit": "",
+      "desc": "64% proposed detector draw 3"
+    },
+    "STwoLSixtyFourHstMean": {
+      "value": 0.499341,
+      "unit": "",
+      "desc": "64% HST AUC-PR mean"
+    },
+    "STwoLSixtyFourHstSd": {
+      "value": 0.031574,
+      "unit": "",
+      "desc": "64% HST AUC-PR sd over draws"
+    },
+    "STwoLSixtyFourHstN": {
+      "value": 3,
+      "unit": "",
+      "desc": "64% HST draws"
+    },
+    "STwoLSixtyFourHstLift": {
+      "value": -0.14065,
+      "unit": "",
+      "desc": "64% HST AUC-PR above chance"
+    },
+    "STwoLSixtyFourHstDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "64% HST 1 if identical across draws"
+    },
+    "STwoLSixtyFourHstNormLift": {
+      "value": -0.390685,
+      "unit": "",
+      "desc": "64% HST normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLSixtyFourHstDrawOne": {
+      "value": 0.518017,
+      "unit": "",
+      "desc": "64% HST draw 1"
+    },
+    "STwoLSixtyFourHstDrawTwo": {
+      "value": 0.462886,
+      "unit": "",
+      "desc": "64% HST draw 2"
+    },
+    "STwoLSixtyFourHstDrawThree": {
+      "value": 0.51712,
+      "unit": "",
+      "desc": "64% HST draw 3"
+    },
+    "STwoLSixtyFourLodaMean": {
+      "value": 0.524691,
+      "unit": "",
+      "desc": "64% LODA AUC-PR mean"
+    },
+    "STwoLSixtyFourLodaSd": {
+      "value": 0.004935,
+      "unit": "",
+      "desc": "64% LODA AUC-PR sd over draws"
+    },
+    "STwoLSixtyFourLodaN": {
+      "value": 3,
+      "unit": "",
+      "desc": "64% LODA draws"
+    },
+    "STwoLSixtyFourLodaLift": {
+      "value": -0.1153,
+      "unit": "",
+      "desc": "64% LODA AUC-PR above chance"
+    },
+    "STwoLSixtyFourLodaDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "64% LODA 1 if identical across draws"
+    },
+    "STwoLSixtyFourLodaNormLift": {
+      "value": -0.32027,
+      "unit": "",
+      "desc": "64% LODA normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLSixtyFourLodaDrawOne": {
+      "value": 0.529653,
+      "unit": "",
+      "desc": "64% LODA draw 1"
+    },
+    "STwoLSixtyFourLodaDrawTwo": {
+      "value": 0.519783,
+      "unit": "",
+      "desc": "64% LODA draw 2"
+    },
+    "STwoLSixtyFourLodaDrawThree": {
+      "value": 0.524635,
+      "unit": "",
+      "desc": "64% LODA draw 3"
+    },
+    "STwoLSixtyFourEcodMean": {
+      "value": 0.678404,
+      "unit": "",
+      "desc": "64% ECOD (batch) AUC-PR mean"
+    },
+    "STwoLSixtyFourEcodSd": {
+      "value": 0.000505,
+      "unit": "",
+      "desc": "64% ECOD (batch) AUC-PR sd over draws"
+    },
+    "STwoLSixtyFourEcodN": {
+      "value": 3,
+      "unit": "",
+      "desc": "64% ECOD (batch) draws"
+    },
+    "STwoLSixtyFourEcodLift": {
+      "value": 0.038413,
+      "unit": "",
+      "desc": "64% ECOD (batch) AUC-PR above chance"
+    },
+    "STwoLSixtyFourEcodDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "64% ECOD (batch) 1 if identical across draws"
+    },
+    "STwoLSixtyFourEcodNormLift": {
+      "value": 0.1067,
+      "unit": "",
+      "desc": "64% ECOD (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLSixtyFourEcodDrawOne": {
+      "value": 0.678407,
+      "unit": "",
+      "desc": "64% ECOD (batch) draw 1"
+    },
+    "STwoLSixtyFourEcodDrawTwo": {
+      "value": 0.678907,
+      "unit": "",
+      "desc": "64% ECOD (batch) draw 2"
+    },
+    "STwoLSixtyFourEcodDrawThree": {
+      "value": 0.677897,
+      "unit": "",
+      "desc": "64% ECOD (batch) draw 3"
+    },
+    "STwoLSixtyFourLofMean": {
+      "value": 0.904855,
+      "unit": "",
+      "desc": "64% LOF (batch) AUC-PR mean"
+    },
+    "STwoLSixtyFourLofSd": {
+      "value": 0.009953,
+      "unit": "",
+      "desc": "64% LOF (batch) AUC-PR sd over draws"
+    },
+    "STwoLSixtyFourLofN": {
+      "value": 3,
+      "unit": "",
+      "desc": "64% LOF (batch) draws"
+    },
+    "STwoLSixtyFourLofLift": {
+      "value": 0.264864,
+      "unit": "",
+      "desc": "64% LOF (batch) AUC-PR above chance"
+    },
+    "STwoLSixtyFourLofDeterministic": {
+      "value": 0,
+      "unit": "",
+      "desc": "64% LOF (batch) 1 if identical across draws"
+    },
+    "STwoLSixtyFourLofNormLift": {
+      "value": 0.735715,
+      "unit": "",
+      "desc": "64% LOF (batch) normalized lift (AP-p)/(1-p)"
+    },
+    "STwoLSixtyFourLofDrawOne": {
+      "value": 0.914119,
+      "unit": "",
+      "desc": "64% LOF (batch) draw 1"
+    },
+    "STwoLSixtyFourLofDrawTwo": {
+      "value": 0.906115,
+      "unit": "",
+      "desc": "64% LOF (batch) draw 2"
+    },
+    "STwoLSixtyFourLofDrawThree": {
+      "value": 0.894332,
+      "unit": "",
+      "desc": "64% LOF (batch) draw 3"
+    },
+    "STwoProposedLevelsBelowFloor": {
+      "value": 1,
+      "unit": "",
+      "desc": "levels where the proposed detector's mean AUC-PR is below its chance floor"
+    },
+    "STwoLofBeatsProposedLevels": {
+      "value": 5,
+      "unit": "",
+      "desc": "levels where LOF's mean AUC-PR exceeds the proposed detector's"
+    },
+    "STwoLevelsCovered": {
+      "value": 5,
+      "unit": "",
+      "desc": "prevalence levels covered"
+    }
+  },
+  "notes": "Stage 2 relabelled, not rerun; floors corrected to achieved held-out prevalence; dispersion reported per rule 7",
+  "extra": {
+    "output_sha256": "1a3e87d647335d5daa1d8fe19d43d3be0bb664dd8ee26926107e4ebe76d4e6af"
+  }
+}

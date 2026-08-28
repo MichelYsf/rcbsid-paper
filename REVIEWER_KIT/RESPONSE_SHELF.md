@@ -73,9 +73,12 @@ resampling, interleaving) is precisely the construction step under study.
 The narrowness of the natural test window is itself a finding about the
 benchmark: CICIDS2017 cannot support a chronological evaluation with a
 representative test period, and constructions that appear to fix this
-manufacture the operating point instead. We agree a split-rule sensitivity
-analysis is the right next step and state it as future work; it does not
-exist yet and nothing in the paper pretends it does. **Evidence:**
+manufacture the operating point instead. We agreed a split-rule sensitivity
+analysis was the right next step, and it has since been run: A2 sweeps seven
+chronological cuts from 60% to 90% and finds ECOD ahead of the detector at
+three of them, including the cut this paper uses. The narrowness of the
+window stands; the claim that no such check exists does not, and has been
+withdrawn wherever it appeared. **Evidence:**
 `findings_contrast.md`; manifest `cicids_heldout_composition_*`;
 Section 8 (Threats).
 
@@ -87,10 +90,18 @@ not of its absence. Every number in the manuscript resolves through a macro
 generated from an archived manifest; the build fails on any number without
 one, on any macro two runs disagree about, and on drift between the index
 and its manifests; the abstract and introduction are sentence-mapped to
-generating runs in a gate-checked ledger. The eighteen corrected incidents
-are recorded because the discipline caught them. A paper with no visible
-corrections is not a paper with no errors. **Evidence:**
-`scripts/check_provenance.py`, `CLAIM_LEDGER.md`, `SCOPE_DECISIONS.md`.
+generating runs in a gate-checked ledger. Every corrected incident in the log
+is recorded because the discipline caught it. A paper with no visible
+corrections is not a paper with no errors. We would add one qualification
+rather than let this answer stand unqualified: the gate as originally written
+scanned only the *generated* numbers file, so it could not see a value typed
+directly into the manuscript, and three defects of that class did reach a green
+gate (CI-11, CI-19, and four AUC-ROC values in the shared-record table). That
+hole is now closed structurally — the scan covers the manuscript, everything it
+includes, and every file the claim ledger cites — and the incident that records
+it (CI-22) also records what the widened scan then caught. **Evidence:**
+`scripts/check_provenance.py`, `scripts/check_literals.py`, `CLAIM_LEDGER.md`,
+`SCOPE_DECISIONS.md` CI-22.
 
 ## From the fresh round
 

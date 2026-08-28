@@ -5,7 +5,7 @@ Everything listed here predates the honest rebuild on `rebuild/honest-v1`
 withdrawn composite construction, describes a scoring rule the code did not
 implement, or both. Nothing here is deleted — history is never deleted in this
 project — but nothing here may be cited, packaged, or republished. The current
-state of every claim is `SCOPE_DECISIONS.md` (18 corrected incidents),
+state of every claim is `SCOPE_DECISIONS.md` (the corrected-incident log),
 `findings_*.md`, and the manuscript in `paper/`.
 
 ## In this repository

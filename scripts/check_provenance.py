@@ -35,6 +35,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from provenance import MANIFEST_DIR, build_index, load_macro_index, tex_macro_name  # noqa: E402
+import check_control_chars  # noqa: E402
+import check_overfull  # noqa: E402
+import check_package_freshness  # noqa: E402
+import check_publish_ready  # noqa: E402
+import check_decimals  # noqa: E402
+import check_literals  # noqa: E402
 
 DEFAULT_TARGETS = [ROOT / "paper" / "numbers.tex"]
 NEWCOMMAND = re.compile(r"\\newcommand\{\\([A-Za-z][A-Za-z0-9]*)\}\{([^}]*)\}")
@@ -188,7 +194,9 @@ def check(targets: list[Path], verify_index: bool = True) -> int:
     if orphans or mismatches:
         print("\nGATE FAILED — a number without a manifest is deleted, never drafted.")
         return 1
-    print("GATE PASSED — every number in the manuscript traces to a run manifest.")
+    print("GATE PASSED — every macro resolved in the scanned target(s) traces to "
+          "a run manifest. (This check reads generated files only; typed literals "
+          "are the literal scan's job — see check_literals.py.)")
     return 0
 
 
@@ -211,7 +219,9 @@ def check_ledger() -> int:
     text = LEDGER.read_text(encoding="utf-8", errors="replace")
     refs_m = _re.findall(r"manifest:([A-Za-z0-9_]+)", text)
     refs_f = _re.findall(r"file:([A-Za-z0-9_./-]+)", text)
-    rows = _re.findall(r"^\| [AI]\d+ \|", text, flags=_re.M)
+    # [a-z]? because rows inserted between existing ones are lettered
+    # (A5b, A7b); without it the count silently omitted them.
+    rows = _re.findall(r"^\| [AI]\d+[a-z]? \|", text, flags=_re.M)
     problems = []
     for rid in sorted(set(refs_m)):
         if not (MANIFEST_DIR / (rid + ".json")).exists():
@@ -292,15 +302,89 @@ def main() -> int:
                     help="check CLAIM_LEDGER.md only")
     ap.add_argument("--no-ledger", action="store_true",
                     help="skip the ledger check (pre-ledger workflows)")
+    ap.add_argument("--no-literals", action="store_true",
+                    help="skip the typed-literal scan (diagnostic use only)")
+    ap.add_argument("--literals", action="store_true",
+                    help="run the typed-literal scan only")
+    ap.add_argument("--no-decimals", action="store_true",
+                    help="skip the decimal-consistency check")
+    ap.add_argument("--decimals", action="store_true",
+                    help="run the decimal-consistency check only")
+    ap.add_argument("--no-controlchars", action="store_true",
+                    help="skip the heredoc-damage scan")
+    ap.add_argument("--controlchars", action="store_true",
+                    help="run the heredoc-damage scan only")
+    ap.add_argument("--no-overfull", action="store_true",
+                    help="skip the overfull-hbox check")
+    ap.add_argument("--overfull", action="store_true",
+                    help="run the overfull-hbox check only")
+    ap.add_argument("--no-packages", action="store_true",
+                    help="skip the staged-package freshness check")
+    ap.add_argument("--packages", action="store_true",
+                    help="run the staged-package freshness check only")
+    ap.add_argument("--publish-ready", action="store_true",
+                    dest="publish_ready",
+                    help="pre-upload invariants: clean tree, pushed HEAD, "
+                         "no manifest citing a dirty commit. NOT part of "
+                         "the default gate.")
     a = ap.parse_args()
     if a.selftest:
         return selftest()
     if a.ledger:
         return check_ledger()
+    if a.literals:
+        return check_literals.main()
+    if a.decimals:
+        return check_decimals.main()
+    if a.controlchars:
+        return check_control_chars.main()
+    if a.overfull:
+        return check_overfull.main()
+    if a.packages:
+        return check_package_freshness.main()
+    if a.publish_ready:
+        return check_publish_ready.main()
     targets = a.targets or DEFAULT_TARGETS
     rc = check(list(targets))
     if not a.no_ledger and LEDGER.exists():
         rc = max(rc, check_ledger())
+    # The orphan check above reads paper/numbers.tex, which is GENERATED and so
+    # cannot contain an orphan. Every defect of the "number typed straight into
+    # the manuscript" class (CI-11, CI-19, and the round-2 AUC-ROC table) lived
+    # in a hand-written file this gate never opened. The literal scan closes
+    # that hole over the manuscript and every file the claim ledger cites.
+    if not a.no_literals:
+        print("")
+        rc = max(rc, check_literals.main())
+    # The orphan and literal checks both ask "does this number come from
+    # somewhere". Neither asks whether the numbers agree with each other
+    # once printed, which is how a margin came to disagree with the two
+    # values printed beside it in the same sentence.
+    if not a.no_decimals:
+        print("")
+        rc = max(rc, check_decimals.main())
+    # Every check above reads NUMBERS. None of them reads markup, which is
+    # how a \\ref whose backslash had been eaten by a shell heredoc reached
+    # a shipped PDF once already (CI-19) and reached a staged package again
+    # (CI-29). The compiler cannot see it either: a \\ref without its
+    # backslash is not a reference, so it is not an undefined one.
+    if not a.no_controlchars:
+        print("")
+        rc = max(rc, check_control_chars.main())
+    # Everything above reads SOURCES. None of it reads the typeset result,
+    # which is how half of five protocol-table rows shipped off the page in
+    # three PDFs behind a compile that exited 0 with no undefined
+    # references (CI-30).
+    if not a.no_overfull:
+        print("")
+        rc = max(rc, check_overfull.main())
+    # Everything above checks the SOURCES and the typeset result. None of
+    # it looks at what is actually staged for upload, which is how a Zenodo
+    # deposit sat a whole correction round behind the tree it claims to
+    # archive, under a DOI that cannot be taken back (CI-31).
+    if not a.no_packages:
+        print("")
+        rc = max(rc, check_package_freshness.main())
     return rc
 
 

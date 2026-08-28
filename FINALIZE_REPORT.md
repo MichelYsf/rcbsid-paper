@@ -38,6 +38,11 @@ Nothing was published, submitted, emailed, or sent anywhere.
   known-art detector, the 204-minute window, the correction history).
 - **F6**: `SIBLING_DECISION.md` + both artifacts final-quality; standing
   recommendation recorded (withdraw before v3); nothing executed.
+  **Superseded 2026-08-27 — the recommendation was void.** No TIFS submission
+  exists; verified in the IEEE Author Portal (one record, `TDSC-2025-10-1842`,
+  rejected 22 Oct 2025). F6's artifacts asserted a venue status that was false.
+  Retired in place; see `SIBLING_DECISION.md` and CI-25. That nothing was
+  executed is the only reason this reached no editor.
 - **F7**: all four packages built; DTRAP portal fetched fresh
   (ScholarOne at mc.manuscriptcentral.com/dtrap; ACM large-format; 10–25 pp;
   double-anonymous — cited from the author-guidelines page via search
@@ -85,7 +90,10 @@ reinstated only in the named variant by `scripts/build_arxiv_variant.py`.
   prior abstract's "[TO BE INSERTED]" comment.
 - The compiled manuscript is 10 pages against DTRAP's "most submissions
   10–25": at the low edge, deliberately — the response shelf carries the
-  compact-by-design answer.
+  compact-by-design answer. **Superseded 2026-08-27:** the fresh-review and
+  round-3 revisions took it to **17 pages**, mid-range, so this risk is closed.
+  The compact-by-design answer in the response shelf no longer applies and
+  should not be used.
 
 ## Residual risk register
 

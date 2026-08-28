@@ -1,14 +1,28 @@
 arXiv v3 Comments-field text.
 
-THE DECISION IS MADE: the companion is being withdrawn from IEEE TIFS before
-this note goes public (caliburn_triage_round.md T4, superseding the earlier
-"operator chooses" framing in SIBLING_DECISION.md). Use the WITHDRAWAL variant
-below. The coexistence variant is retained at the bottom only as a record of
-the branch not taken; do not paste it.
+=============================================================================
+USE THE "NO VENUE CLAIM" VARIANT BELOW. The two earlier variants are RETIRED
+and must not be pasted.
 
-===============================================================================
-WITHDRAWAL VARIANT  <-- USE THIS ONE
-===============================================================================
+Why: on 2026-08-27 the author verified in the IEEE Author Portal (filters: All
+Publications / All Submission Statuses) that the account holds exactly one
+record -- TDSC-2025-10-1842, rejected 22 October 2025 -- and no TIFS record of
+any kind. The companion manuscript arXiv:2510.09619 is a public preprint and
+is not under review at any journal. Both retired variants asserted a venue
+status for it: the withdrawal variant said it "has been withdrawn from journal
+consideration", the coexistence variant said a correction "has been disclosed
+to the editors of both venues". Both statements are false, and the arXiv
+Comments field is public and permanent. See SIBLING_DECISION.md and CI-25.
+
+The variant below says nothing whatever about where the companion has or has
+not been submitted. It keeps the never-minted-Zenodo-identifier clause, which
+is a correction this manuscript owes its readers regardless.
+=============================================================================
+
+
+=============================================================================
+NO VENUE CLAIM VARIANT  <-- USE THIS ONE
+=============================================================================
 
 v3: substantial correction and rebuild. v1/v2 reported results produced on
 assembled evaluation streams (pooled captures, day-interleaved records) and
@@ -27,25 +41,46 @@ ledger ships with the artifact. v1 and v2 also cited a Zenodo DOI that was
 never minted -- no such deposit existed; the artifact is being deposited for
 the first time with v3, and the placeholder is withdrawn. Title changed
 accordingly (previously "CALIBURN: Operationally Calibrated Streaming Intrusion
-Detection with Regime-Dependent Conformal Risk Control"). A companion
-manuscript sharing parts of the codebase (arXiv:2510.09619) has been withdrawn
-from journal consideration by the author pending its own correction. 13 pages.
+Detection with Regime-Dependent Conformal Risk Control"). A companion preprint
+sharing parts of the same codebase (arXiv:2510.09619) predates this audit; the
+method-identity findings reported here apply to that shared lineage, and it is
+being corrected separately. 17 pages.
 
--------------------------------------------------------------------------------
-NOTE ON THE PAGE COUNT: 13 pages is the compiled length of the named arXiv
-variant as built on 2026-08-27 (packages/arxiv_v3/arxiv_v3_source.tar.gz).
-Re-check after any further edit before pasting.
--------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+PAGE COUNT: 17, the compiled length of packages/arxiv_v3/arxiv_v3_source.tar.gz
+as rebuilt 2026-08-27 (13 before the round-3 additions, 16 before the
+three-auditor sweep's qualifying clauses). Re-check after
+any further edit before pasting; a stale figure in a public Comments field is
+exactly the class of error this version exists to correct.
+-----------------------------------------------------------------------------
 
-===============================================================================
-COEXISTENCE VARIANT  --  BRANCH NOT TAKEN, DO NOT PASTE
-===============================================================================
+Note on the companion sentence: it states only what is verifiable from the
+public record -- that the preprint exists, that it shares code, that the audit
+findings reach it, and that correction is in hand. It deliberately does not say
+where it has been submitted, whether it is under review, or whether any editor
+has been informed, because as of 2026-08-27 the answers are: nowhere, no, and
+no.
 
-v3: substantial correction and rebuild. [...same body as above...] A correction
-process for a companion manuscript sharing parts of the codebase
-(arXiv:2510.09619) is underway and has been disclosed to the editors of both
-venues.
 
-Retained only so the record shows which wording was rejected and why: it
-asserts an active disclosure to a journal that, under the withdrawal decision,
-no longer holds the manuscript.
+=============================================================================
+RETIRED VARIANT 1 -- WITHDRAWAL  --  FALSE, DO NOT PASTE
+=============================================================================
+
+Ended with: "A companion manuscript sharing parts of the codebase
+(arXiv:2510.09619) has been withdrawn from journal consideration by the author
+pending its own correction."
+
+FALSE. Nothing was withdrawn because nothing was submitted. Retired 2026-08-27.
+
+
+=============================================================================
+RETIRED VARIANT 2 -- COEXISTENCE  --  FALSE, DO NOT PASTE
+=============================================================================
+
+Ended with: "A correction process for a companion manuscript sharing parts of
+the codebase (arXiv:2510.09619) is underway and has been disclosed to the
+editors of both venues."
+
+FALSE on the second clause: there is no second venue and no editor has been
+disclosed to. Retired 2026-08-27. It had already been rejected once, on the
+different and also-mistaken ground that the withdrawal decision superseded it.

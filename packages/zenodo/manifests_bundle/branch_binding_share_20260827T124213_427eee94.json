@@ -1,0 +1,44 @@
+{
+  "run_id": "branch_binding_share_20260827T124213_427eee94",
+  "name": "branch_binding_share",
+  "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
+  "git_commit_at_write": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "2cd455763c219c2245ccf0bc8ac701a7c92c8a2279b160faf177ecf3615f9089",
+  "config": {
+    "slice": "natural-arm held-out slice (positional 70/15/15 tail)",
+    "definition": "auxiliary binds when its value exceeds the tail value, i.e. when it determines max(tail, aux)"
+  },
+  "seed": 0,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_natural_scores.npz",
+      "sha256": "be784bd7bc48cb6ba0f6aa9a6900be64705d9618cd8d62c6567698ec8a020c01"
+    }
+  ],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-27T12:42:13.747585+00:00",
+  "finished_utc": "2026-08-27T12:42:13.790561+00:00",
+  "wall_seconds": 0.042976,
+  "macros": {
+    "RevBranchAuxBindsHeldoutPct": {
+      "value": 58.452,
+      "unit": "%",
+      "desc": "share of the natural held-out slice on which the auxiliary branch exceeds the tail branch and so determines the deployed score"
+    },
+    "RevBranchHeldoutRows": {
+      "value": 240000,
+      "unit": "",
+      "desc": "records in the natural held-out slice used for the branch-binding share"
+    }
+  },
+  "notes": "derived from archived per-record components; no re-scoring",
+  "extra": {}
+}

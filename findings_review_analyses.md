@@ -1,6 +1,6 @@
 # findings_review_analyses — A1, A2, A3 (fresh-review round)
 
-Generating run: `review_bounded_analyses_20260826T224417_b8314db2`. Every number is a provenance macro.
+Generating run: `review_bounded_analyses_20260827T131839_87899899`. Every number is a provenance macro.
 
 ## Reproduction check
 
@@ -44,4 +44,17 @@ ECOD exceeds the detector at **3 of 7** cut points.
 **Verdict (mechanical, threshold 0.01 AUC-PR):** tail-only does NOT reproduce the combined score, so the claim that the tail term performs the discriminative work of the deployed score is NOT SUPPORTED.
 
 The direction matters and is not the one the objection anticipated. Tail-only does not merely differ from the combined score, it **outranks** it: +0.103477 AUC-PR and +0.302658 AUC-ROC better. The auxiliary branch ranks *below* chance on this slice (AUC-ROC 0.281890), and because the deployed score is a maximum, that branch overrides the tail wherever the tail is small. The composition, not either component, is what produces the near-chance ranking of the deployed detector on this slice.
+
+## A4 — ECOD scores depend on the batch they are scored in
+
+Model fitted once on the same benign training rows; the evaluated index set is the same **240000** records in every row below. Only the number of records accompanying them in the `decision_function` call changes.
+
+| scored batch | evaluated records | ECOD AUC-PR |
+|---|---|---|
+| 240000 | 240000 | 0.758205 |
+| 300000 | 240000 | 0.760029 |
+| 360000 | 240000 | 0.762108 |
+| 480000 | 240000 | 0.755142 |
+
+Scoring the identical records alone rather than alongside the validation block moves ECOD's AUC-PR by **0.003063**; the full ladder spans 0.006966. This is not run-to-run noise — ECOD is deterministic and the fitted model is byte-identical across these rows.
 

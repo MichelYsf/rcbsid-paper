@@ -10,14 +10,21 @@ Execute `HUMAN_ACTIONS.md` top to bottom. In brief:
 
 0. **ORCID** — 60-second confirmation at orcid.org that your iD is
    0009-0000-0664-8228.
-1. **Reviewer round** — paste `REVIEWER_KIT/REVIEWER_PROMPT.txt` +
-   `REVIEWER_KIT/manuscript_review.pdf` into fresh reviewer sessions; save
-   outputs as `REVIEWER_KIT/review_fresh_<n>.md`.
+1. ~~**Reviewer round** — paste `REVIEWER_KIT/REVIEWER_PROMPT.txt` +
+   `REVIEWER_KIT/manuscript_review.pdf` into fresh reviewer sessions.~~
+   **CLOSED 2026-08-27.** The one-round rule was invoked and the round ran:
+   the review is archived as `REVIEWER_KIT/review_fresh_1.pdf` and its triage
+   is `TRIAGE_REPORT.md`. `HUMAN_ACTIONS.md`, which line 8 makes authoritative,
+   has no reviewer step; the operator's next action is ORCID, then Zenodo.
+   `manuscript_review.pdf` is kept in sync with `paper/main.pdf` and is
+   covered by the freshness gate, but nothing in the sequence uses it.
 2. **Zenodo** — publish the prepared bundle; paste the minted DOI into
    CITATION.cff.
-3. **THE DECISION** — sibling paper: withdraw from TIFS before v3
-   (recommended; letter ready) or coexist (wording ready). Then step 3b's
-   two-minute paragraph alignment.
+3. ~~**THE DECISION** — sibling paper: withdraw from TIFS before v3
+   (recommended; letter ready) or coexist (wording ready).~~ **VOID
+   2026-08-27.** Both branches assumed a TIFS submission that does not exist
+   (IEEE Author Portal: one record, `TDSC-2025-10-1842`, rejected 22 Oct 2025).
+   There is no decision and no withdrawal. See `SIBLING_DECISION.md`, CI-25.
 4. **arXiv v3** — upload `packages/arxiv_v3/arxiv_v3_source.tar.gz`, new
    title, chosen Comments variant.
 5. **DTRAP** — submit at mc.manuscriptcentral.com/dtrap with the anonymous

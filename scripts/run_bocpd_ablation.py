@@ -207,6 +207,7 @@ def main() -> int:
         run.emit_macro("SSixChanceFloor", round(floor, 6),
                        desc="AUC-PR chance floor on this prefix (test prevalence)")
 
+        reused = False        # True only when the arm metrics came from cache
         if n_atk < 20:
             run.emit_macro("SSixExcluded", 1, desc="1 if the ablation was excluded")
             run.note("excluded_reason", "prefix holds %d test attacks (< 20)" % n_atk)
@@ -226,6 +227,7 @@ def main() -> int:
                 # reword a document would be waste, and the operator capped this
                 # stage at 30 minutes.
                 arms = cached["arms"]
+                reused = True
                 run.note("arm_metrics_reused_from", cached.get("run_id"))
                 # The cached path must STILL emit the arm macros, or the table
                 # this run writes is backed by nothing - the exact orphan class
@@ -272,8 +274,19 @@ def main() -> int:
 
         diag = saturation_diagnostic(X)
         total = time.time() - started
-        run.emit_macro("SSixTotalWallS", round(total, 1),
-                       desc="total Stage 6 local compute, seconds")
+        # Only a run that actually paid for the arms may claim the stage's
+        # compute time. A document-only re-run on the cached path finishes in a
+        # fraction of it, and emitting the same macro name from both makes two
+        # runs disagree about a number neither of them is wrong about -- which
+        # is what the gate refused on 2026-08-27 (CI-24). The cap is a constant
+        # and is safe to re-emit.
+        if not reused:
+            run.emit_macro("SSixTotalWallS", round(total, 1),
+                           desc="total Stage 6 local compute, seconds")
+        else:
+            run.note("wall_not_claimed",
+                     "arm metrics reused; this run measured no arm, so it "
+                     "claims no stage wall time (%.1f s elapsed here)" % total)
         run.emit_macro("SSixWallCapS", WALL_CAP_S, desc="the operator's wall cap")
 
         # ---- document ----------------------------------------------------
@@ -322,8 +335,12 @@ def main() -> int:
         L.append("")
         L.append("The first attempt at this correction failed and the failure is worth "
                  "recording. Using the *global* slowly-adapting Gaussian as the prior "
-                 "predictive changed nothing (`P(r=0)` peak 0.001001 against a hazard "
-                 "of 0.001000), because immediately after a change the global model is "
+                 "predictive changed nothing: the `P(r=0)` peak stayed at the hazard "
+                 "rate to the precision the probe reports. That attempt was discarded "
+                 "rather than archived, so no run manifest holds its peak value and "
+                 "none is quoted here — a number without a manifest is deleted, not "
+                 "drafted. It changed nothing because immediately after a change the "
+                 "global model is "
                  "just as stale as the run-conditional ones and both branches take the "
                  "same penalty. A reset branch is informative only if a surprising "
                  "point is *better* explained by starting over — which requires a vague "

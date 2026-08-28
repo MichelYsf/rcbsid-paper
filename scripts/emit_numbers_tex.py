@@ -29,26 +29,42 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from check_provenance import distinct_values  # noqa: E402
-from provenance import load_macro_index, tex_macro_name  # noqa: E402
+from provenance import (  # noqa: E402
+    REPORT_DP, is_metric, load_macro_index, tex_macro_name)
 
 OUT = ROOT / "paper" / "numbers.tex"
 
 
-def render(value) -> str | None:
+# Metric-valued macro families are rendered at a FIXED width. repr() drops
+# trailing zeros, so 0.799910 printed as "0.79991" sat 5-wide beside 6-wide
+# neighbours in the same table, and unrounded floats leaked in at 15 and 16
+# decimals. Fixed-width rendering also makes the reported value unambiguous,
+# which the derived-quantity rule depends on (provenance.REPORT_DP).
+# Below this magnitude a fixed-width decimal really would erase the value: at
+# REPORT_DP=6 anything under 5e-07 rounds to 0.000000. The previous threshold
+# was 1e-4, and its stated justification was arithmetically wrong -- "%.6f" of
+# 1.8e-05 is 0.000018, which erases nothing. That mistake put the paper's only
+# exponent-form number one clause after a rule promising six decimals.
+SMALL = 5e-7
+
+
+def render(value, name: str = "", desc: str = "",
+           unit: str = "") -> str | None:
     """LaTeX body for a macro, or None if it is not a number."""
     if isinstance(value, bool):
         return str(int(value))
     if isinstance(value, int):
         return str(value)
-    if isinstance(value, float):
-        if value == int(value) and abs(value) < 1e15:
-            return str(int(value))
-        return repr(value)
-    try:
-        f = float(str(value))
-    except (TypeError, ValueError):
-        return None
-    return repr(f)
+    if not isinstance(value, float):
+        try:
+            value = float(str(value))
+        except (TypeError, ValueError):
+            return None
+    if value == int(value) and abs(value) < 1e15:
+        return str(int(value))
+    if is_metric(name, desc, unit) and abs(value) >= SMALL:
+        return ("%." + str(REPORT_DP) + "f") % value
+    return repr(value)
 
 
 def main() -> int:
@@ -64,7 +80,9 @@ def main() -> int:
             ambiguous.append((name, variants))
             continue
         rec = index[name][-1]
-        body = render(rec.get("value"))
+        body = render(rec.get("value"), name,
+                      str(rec.get("desc") or ""),
+                      str(rec.get("unit") or ""))
         if body is None:
             skipped.append(name)
             continue

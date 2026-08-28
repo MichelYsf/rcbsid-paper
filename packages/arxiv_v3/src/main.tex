@@ -54,8 +54,20 @@ description: its reset and growth branches share a predictive term that
 cancels, so the run-length posterior equals the hazard rate exactly below the
 run-length cap, while the evaluations spend nearly all their length at or
 beyond that cap, where the posterior instead wanders; and the score the
-evaluation consumes is a function of $P(r\le5)$, not of $P(r{=}0)$. Every
-number traces to an archived, hash-verified run manifest, and the
+evaluation consumes is a function of $P(r\le5)$, not of $P(r{=}0)$. Scoring
+that detector one branch at a time yields a separate result: its deployed
+$\max$ composition ranks \emph{worse than its own tail term alone}
+(\RevBranchTailMinusCombinedAucpr{} $AP$, \RevBranchTailMinusCombinedAucroc{}
+AUC-ROC), because the auxiliary branch is inverted rather than uninformative
+(AUC-ROC \RevBranchAuxOnlyAucroc) and a maximum lets it govern the rank
+wherever the tail is small --- a defect no metric computed on the assembled
+score can attribute. Finally, we quantify a batch dependence in the ECOD
+reference implementation, whose empirical CDFs are recomputed over the
+training matrix concatenated with the scored batch: holding the evaluated
+records and the fitted model fixed and changing only the accompanying batch
+moves its AUC-PR by \RevEcodBatchDelta, so published ECOD numbers are not
+comparable across studies that score different batch sizes. Every measured
+value traces to an archived, hash-verified run manifest, and the
 sentence-level claim ledger ships with the artifact.
 \end{abstract}
 
@@ -77,9 +89,13 @@ sentence-level claim ledger ships with the artifact.
 \ccsdesc[300]{Computing methodologies~Machine learning}
 \ccsdesc[300]{General and reference~Evaluation}
 
+% "conformal risk control" was dropped from this list: the only conformal
+% result in scope belongs to the superseded versions and appears here as
+% corroboration, not as a contribution, so keeping the keyword would steer
+% reviewer assignment toward a topic this paper does not advance.
 \keywords{streaming network intrusion detection, benchmark stream
-construction, evaluation methodology, experimental design, conformal risk
-control, reproducibility, provenance}
+construction, evaluation methodology, experimental design, anomaly detection
+benchmarks, reproducibility, provenance}
 
 \maketitle
 
@@ -166,11 +182,25 @@ beyond the cap --- where the evaluated runs spend nearly all their length ---
 truncation breaks that identity and the posterior wanders. The score the
 evaluation consumes is a function of $P(r_t\le5)$, not $P(r_t{=}0)$. We state
 these three facts separately because only the first is an exact result.
-Measured branch-wise, the auxiliary term is not merely uninformative on the
-timestamp-ordered held-out slice: it ranks below chance there, and because the
-deployed score is a maximum it overrides the tail term wherever the tail is
-small, so the deployed composition ranks worse than its own tail component
-alone (Section~\ref{sec:branch}).
+\item \textbf{A composition defect that costs more than it appears to}
+(Section~\ref{sec:branch}). Scored branch-wise on the timestamp-ordered
+held-out slice, the deployed $\max$ composition ranks \emph{worse than its own
+tail term alone} --- by \RevBranchTailMinusCombinedAucpr{} $AP$ and
+\RevBranchTailMinusCombinedAucroc{} AUC-ROC. The auxiliary branch is not
+uninformative but inverted (AUC-ROC \RevBranchAuxOnlyAucroc), and because the
+score is a maximum it governs the rank wherever the tail is small, dragging the
+deployed detector to near-chance AUC-ROC (\RevBranchCombinedAucroc) while its
+tail component reaches \RevBranchTailOnlyAucroc. No metric computed on the
+assembled score can attribute this, and the decomposition that finds it uses
+values the scorer already computes.
+\item \textbf{A measured batch dependence in a widely used baseline}
+(Section~\ref{sec:ecodbatch}). PyOD's ECOD recomputes its empirical CDFs over
+the training matrix concatenated with whatever batch is passed to
+\texttt{decision\_function}, so a record's score depends on which other records
+accompanied it. Holding the evaluated records and the fitted model identical
+and varying only the accompanying batch moves ECOD's AUC-PR by
+\RevEcodBatchDelta. Published ECOD numbers are therefore not comparable across
+studies that score different batch sizes.
 \item \textbf{A provenance discipline that is itself auditable}
 (Section~\ref{sec:provenance}), including the correction history and overlap
 statement of Section~\ref{sec:disclosure}.
@@ -187,10 +217,38 @@ sampling bias, mixing incompatible sources and temporal snooping as recurring
 security-ML pitfalls. Ring et al.~\cite{ring2019datasets} survey dataset
 limitations, and Engelen et al.~\cite{engelen2021cicids} correct label and
 flow-construction defects in CICIDS2017; we build on their corrected release.
-We do not claim to discover that temporal assembly is non-neutral. Our addition
-is quantitative and specific: the same full multiset under two assemblies, with
-membership overlap, attack relocation, prevalence and measured outcome reported
-together on a real benchmark.
+Catillo et al.~\cite{catillo2021critique} earlier showed that a detector
+learned on a public IDS dataset degrades against emulated attacks in a
+controlled network, which is the transfer-side counterpart of the question we
+ask on the construction side. We do not claim to discover that temporal
+assembly is non-neutral. Our addition is quantitative and specific: the same
+full multiset under two assemblies, with membership overlap, attack relocation,
+prevalence and measured outcome reported together on a real benchmark.
+
+\textbf{The evaluation protocol as the variable under study.} A line of work
+treats the protocol itself, rather than the model, as what determines a
+reported result. TESSERACT~\cite{pendlebury2019tesseract} shows that spatial
+and temporal bias in how train/test sets are constituted inflates malware
+classification results, and gives a construction discipline for removing it;
+Apruzzese et al.~\cite{apruzzese2022crosseval} formalise cross-evaluation and
+show how much a reported NIDS result depends on which corpora are combined;
+Olszewski et al.~\cite{olszewski2023reproducibility} find that a large fraction
+of tier-1 security ML papers cannot be reproduced from what they report.
+Concurrent with this work, Moczkodan and Ragab~\cite{moczkodan2026transformers}
+reformulate CICIDS2017 as a temporal task and find that a padding convention,
+not the architecture, determines whether Transformers appear to help --- a
+protocol variable of a different kind (input formatting) on the same benchmark.
+Biswas~\cite{biswas2026protocol} likewise argues the evaluation protocol is the
+hidden variable, reporting that models trained under random splits on
+CSE-CIC-IDS2018 collapse under a class-blind chronological split and that
+zero-shot cross-dataset transfer falls below chance. That work isolates
+\emph{unseen-attack coverage} from drift across \emph{different datasets} and
+does not, so far as we can establish, evaluate two protocols on an intersected
+held-out set; this work isolates \emph{composition} from
+\emph{history order} within a single fixed record multiset, and does so by
+restricting both arms to the records they both held out. The two are
+complementary rather than overlapping: theirs bounds what transfers between
+corpora, ours attributes an effect within one.
 
 \textbf{Streaming anomaly detection.} The baselines evaluated in this rebuild
 are Half-Space Trees~\cite{tan2011hst} and LODA~\cite{pevny2016loda}
@@ -233,6 +291,24 @@ appear more plausible to a diagnostic} applied to the assembled stream.
 Conformal methods that relax exchangeability already
 exist~\cite{barber2023beyond}.
 
+\textbf{Metric behaviour under class imbalance.} That precision-recall
+summaries move with the positive-class base rate is long-established and is not
+a finding of this paper. Davis and Goadrich~\cite{davis2006prroc} characterise
+the ROC/PR correspondence and show that the achievable PR region depends on the
+class ratio; Saito and Rehmsmeier~\cite{saito2015prplot} demonstrate that PR
+summaries are the informative choice precisely because they respond to
+imbalance while ROC summaries do not; and Axelsson~\cite{axelsson2000baserate}
+established the base-rate consequence for intrusion detection specifically. We
+use these results, we do not extend them: every AUC-PR this paper compares
+\emph{across} prevalence regimes is reported with its chance floor $p$ and with
+normalized lift $(AP-p)/(1-p)$ for that reason, and comparisons made within one
+slice, where the floor is shared, are reported at that fixed floor. What is ours is narrower and is about this benchmark's
+construction, not about the metric: the prevalence regime these evaluations
+operate in is \emph{doubly constructed} --- first by a retention budget whose
+per-day sampling is anti-correlated with attack density, and then by the
+assembly step, which redistributes the surviving attacks across the split.
+Neither construction step is visible in a reported operating point.
+
 \textbf{Cost-sensitive thresholds.} The threshold actually implemented is the
 prior-inclusive Bayes rule of Elkan~\cite{elkan2001cost}
 (Section~\ref{sec:detector}); SRE-style error budgets~\cite{beyer2016sre}
@@ -242,7 +318,8 @@ motivated the original framing.
 \label{sec:detector}
 
 We characterize the detector as implemented, from measurement. All values here
-are archived under run \texttt{s3\_score\_threshold\_verification}.
+are archived under run
+\texttt{s3\_score\_\allowbreak threshold\_\allowbreak verification}.
 
 \subsection{The score the evaluation consumes}
 The published description defines the anomaly score as the run-length-reset
@@ -255,10 +332,15 @@ under a global, slowly adapting diagonal Gaussian. Two facts follow directly.
 The evaluated score is not the described score; and it is a function of
 $P(r_t\le5)$, so results about $P(r_t{=}0)$ do not transfer to it without
 further argument. Because $0.25\cdot P(r\le5)\le0.25$, the auxiliary branch can
-set the score only where the tail term is below $0.25$; measured over
-\SThreeBindingRows{} post-warm-up records of the timestamp-ordered CICIDS2017
-stream it does so on \SThreeChangePointBindingPct\%\ of records, at a mean
-contributed value of \SThreeChangePointBindingMeanValue. A mean magnitude does
+set the score only where the tail term is below $0.25$. Measured over the
+\SThreeBindingRows{} post-warm-up records at the \emph{head} of the
+timestamp-ordered CICIDS2017 stream --- a prefix, not the whole stream, and one
+that carries no attacks at all --- it does so on
+\SThreeChangePointBindingPct\%\ of records, at a mean contributed value of
+\SThreeChangePointBindingMeanValue. The same share measured on the
+attack-bearing held-out slice is \RevBranchAuxBindsHeldoutPct\%\
+(Section~\ref{sec:branch}); the two are different populations and are not in
+tension. A mean magnitude does
 not establish which branch \emph{discriminates}, since ranking metrics are
 invariant to the scale of a branch that sets the ranking; we therefore make no
 claim about that here and measure it directly in
@@ -362,7 +444,7 @@ self-contained; the artifact reproduces it exactly.
 \caption{Experimental protocol. Every entry is taken from the code the archived
 manifests pin, not from intent.}
 \label{tab:protocol}
-\begin{tabular}{ll}
+\begin{tabular}{@{}lp{0.72\linewidth}@{}}
 \toprule
 element & setting \\
 \midrule
@@ -392,6 +474,20 @@ weighting; average precision is the step-wise sum
 $\sum_n (R_n-R_{n-1})P_n$, not trapezoidal interpolation \\
 chance floor & average precision of an uninformative ranking equals the
 positive-class prevalence $p$ \\
+reported precision & every \emph{dimensionless} metric on $[0,1]$ ---
+AUC-PR, AUC-ROC, chance floor, fractional prevalence, normalized and additive
+lift, and the margins, spreads and differences taken between them, including
+per-seed draws --- is reported to six decimal places, and any of those derived
+from other reported quantities is computed from their \emph{reported} values.
+Every such derived number therefore equals the arithmetic on the numbers
+printed beside it, exactly, and a reader can check any of them; the cost is
+that it may differ from its full-precision counterpart by a few units in the
+last reported place, below $10^{-5}$ throughout and orders of magnitude below
+any effect claimed here. Deliberately outside that rule, and reported at the
+precision each was emitted with: percentage- and percentage-point-scaled
+values (the same quantities at $100\times$, where six decimals would fabricate
+digits), integer counts, the protocol constants in this table, and values
+quoted from cited work \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -563,15 +659,16 @@ history each detector saw before scoring them differs.}
 \toprule
 arm & detector $AP$ & ECOD $AP$ & detector AUC-ROC & ECOD AUC-ROC \\
 \midrule
-timestamp order & \RevSharedDetectorNaturalAucpr & \RevSharedEcodNaturalAucpr & 0.869219 & 0.799910 \\
-day round robin & \RevSharedDetectorSyntheticAucpr & \RevSharedEcodSyntheticAucpr & 0.864159 & 0.805657 \\
+timestamp order & \RevSharedDetectorNaturalAucpr & \RevSharedEcodNaturalAucpr & \RevSharedDetectorNaturalAucroc & \RevSharedEcodNaturalAucroc \\
+day round robin & \RevSharedDetectorSyntheticAucpr & \RevSharedEcodSyntheticAucpr & \RevSharedDetectorSyntheticAucroc & \RevSharedEcodSyntheticAucroc \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \textbf{The ordering does not reverse on the shared records.} The detector
 leads ECOD in both arms (margins \RevSharedMarginNatural{} and
-\RevSharedMarginSynthetic), and its own score changes by only
+\RevSharedMarginSynthetic, both computed from the reported cells above), and
+its own score changes by only
 \RevSharedDetectorSpread{} $AP$ between the two histories. This is the
 round's most consequential result and it constrains the paper's central claim:
 the reversal reported in Section~\ref{sec:outcome} is produced by \emph{which
@@ -598,15 +695,131 @@ as of the assembly; the archived split is not adversarially chosen, but it is
 not neutral either, and no claim here is a stable property of CICIDS2017.
 Per-cut values are in the archived findings.
 
-\subsection{Which branch discriminates}
+\subsection{ECOD's scores depend on the batch they are scored in}
+\label{sec:ecodbatch}
+The sweep above evaluates the same \CicidsHeldoutSize{} held-out records that
+Section~\ref{sec:outcome} evaluates, under the same fitted model, and returns a
+different ECOD number. The discrepancy is not noise --- ECOD is deterministic
+and both figures reproduce exactly on re-execution --- and running it down
+exposes a property of the reference implementation that bears on every study
+that reports an ECOD number.
+
+PyOD's \texttt{ECOD.fit} stores the training matrix, and
+\texttt{decision\_function} then prepends it to whatever batch it is asked to
+score before recomputing the per-column empirical CDFs
+(PyOD~2.0.5, \texttt{pyod/models/ecod.py}):
+
+\begin{verbatim}
+if hasattr(self, 'X_train'):
+    original_size = X.shape[0]
+    X = np.concatenate((self.X_train, X), axis=0)
+self.U_l = -1 * np.log(column_ecdf(X))
+self.U_r = -1 * np.log(column_ecdf(-X))
+skewness = np.sign(skew(X, axis=0))
+...
+decision_scores_ = self.O.sum(axis=1)[-original_size:]
+\end{verbatim}
+
+The ECDF denominator is the height of the concatenated matrix and the skewness
+sign is taken over it, so a record's score is a function of which \emph{other}
+records shared its \texttt{decision\_function} call. ECOD is transductive over
+the scored batch, not a fitted function evaluated pointwise.
+
+We measured the size of the effect with everything else pinned. The evaluated
+index set is fixed at the same \RevEcodBatchEvalRecords{} records, the model is
+fitted once on the same benign training rows, and only the number of records
+accompanying them in the call varies. Scored alone, ECOD reaches
+$AP=\RevEcodBatchTwoFourZeroZeroZeroZeroAucpr$; scored in the
+\CicidsEcodScoringBatch-record validation-plus-test call this paper's contrast
+arms use, the same records give
+$AP=\RevEcodBatchFourEightZeroZeroZeroZeroAucpr$ --- a difference of
+\RevEcodBatchDelta{} $AP$ on identical records with an identical model. Across
+a four-point batch ladder the value spans \RevEcodBatchSpread{} $AP$, and it
+does not move monotonically with batch size, so the dependence cannot be
+corrected for by a simple adjustment.
+
+The second of those two figures is the diagnostic one:
+$\RevEcodBatchFourEightZeroZeroZeroZeroAucpr$ is exactly
+\SFourCicidsNaturalEcodAucpr, the value the timestamp-ordered arm of
+Section~\ref{sec:outcome} reports, recovered here from an independent pass. The
+batch composition therefore accounts for the discrepancy completely rather than
+approximately, which is what distinguishes this from an unexplained numerical
+difference. The threshold inherits the dependence too, because it is read off
+the validation portion of the same call.
+
+\textbf{What is and is not new here.} That ECOD mixes the training and scored
+sets is known: it was reported as a defect against the reference implementation
+in 2022~\cite{pyod401} and remains open, and ADBench~\cite{han2022adbench}
+evaluates PyOD detectors in a fixed harness that holds the scored batch
+constant, which sidesteps rather than measures the issue. The ECOD
+paper~\cite{li2023ecod} specifies an ECDF computed over the data at hand and
+gives no rule for scoring an out-of-sample record without recomputation, so the
+implementation is not contradicting its specification --- the specification is
+silent. It is not the only unresolved question about this reference: a separate
+open report~\cite{pyod561} argues that the aggregation the code applies is not
+the one either the ECOD or the COPOD paper describes. We take no position on
+that second report; we note only that a detector used as a fixed point of
+comparison across a literature has open, unresolved questions about what it
+computes. What we add is narrow and precise: a \emph{quantification} of the
+effect on a real benchmark with the evaluated records held identical, and the
+statement of its cross-study consequence. We searched for a published
+measurement of the effect's size and found none --- the behaviour is recorded
+in the implementation's issue tracker and, so far as we can establish, has been
+treated as a correctness question rather than measured as an evaluation
+hazard --- so we state this as a first quantification and a first statement of
+the cross-study consequence, in the ordinary sense that we are aware of no
+prior one. We would rather be corrected on priority than have the measurement
+go unreported, and the claim is about the measurement, not about the mechanism,
+which is not ours. That consequence is that published
+ECOD numbers are not comparable across studies that score different batch
+sizes, even on the same dataset, the same split and the same model, and that a
+reported ECOD number is therefore under-specified unless the scoring batch is
+reported with it.
+
+We hold ourselves to that standard. Every ECOD number in this paper states the
+batch it was scored in. The contrast, LITNET and sweep numbers come from a call
+of the form
+
+\begin{center}
+\texttt{run\_batch\_reference('ecod',\,Xfit,\,np.vstack([Xva,\,Xte]))}
+\end{center}
+
+\noindent so for those the scoring batch is validation-plus-test:
+\CicidsEcodScoringBatch{} records for both CICIDS arms
+(Section~\ref{sec:outcome}), \LitnetCaptureEcodScoringBatch{} for each
+per-capture LITNET stream and \LitnetPooledEcodScoringBatch{} for the pooled
+composite (Section~\ref{sec:contrast-litnet}), and between
+\SweepEcodScoringBatchMin{} and \SweepEcodScoringBatchMax{} across the levels
+of the prevalence sweep (Section~\ref{sec:sweep}), which resamples the stream
+and so changes the batch with the level. The shared-record analysis of
+Section~\ref{sec:shared} scores each arm's \CicidsHeldoutSize-record held-out
+slice and then restricts to the \RevSharedRecords{} shared records, so its ECOD
+values carry a \CicidsHeldoutSize-record batch; the split sweep above scores
+the tail of the stream at each cut, so its batch is the test slice itself and
+varies by cut. Cross-arm comparisons in this paper are made within a fixed
+batch size, which is why the batch dependence does not disturb them; the
+\CicidsHeldoutSize-versus-\CicidsEcodScoringBatch{} discrepancy is visible
+precisely because the split sweep and the contrast were the one pair of
+analyses that did not share one.
+
+\section{The Deployed Score Ranks Worse Than Its Own Tail Term}
 \label{sec:branch}
+
+The audit of Section~\ref{sec:detector} establishes what the two branches
+\emph{are}. This section measures what they \emph{do}, and the answer is a
+finding in its own right rather than a corollary: the way the two branches are
+combined destroys discriminative power that one of them already had.
+
 The score is $\max(\text{tail},\,0.25\cdot P(r\le5))$, and a branch's mean
 magnitude says nothing about which branch ranks. Scoring the timestamp-ordered
 held-out slice with each branch alone, using the components
 \texttt{update\_score} itself computed:
 
 \begin{table}
-\caption{Branch-wise discrimination on the timestamp-ordered held-out slice.}
+\caption{Branch-wise discrimination on the timestamp-ordered held-out slice.
+Values are recomputed from the archived per-record score dump and so differ
+from Table~\ref{tab:contrast} by \RevReproNaturalDelta{} $AP$ on the deployed
+composition (Section~\ref{sec:shared}).}
 \label{tab:branch}
 \begin{tabular}{lrr}
 \toprule
@@ -621,16 +834,35 @@ auxiliary term only & \RevBranchAuxOnlyAucpr & \RevBranchAuxOnlyAucroc \\
 
 The tail term alone \emph{outranks} the deployed composition, by
 \RevBranchTailMinusCombinedAucpr{} $AP$ and
-\RevBranchTailMinusCombinedAucroc{} AUC-ROC. The auxiliary term ranks below
-chance on this slice (AUC-ROC \RevBranchAuxOnlyAucroc), and because the
-deployed score is a maximum, that branch overrides the tail wherever the tail is
-small --- which Section~\ref{sec:detector} measured to be most records. The
-near-chance AUC-ROC of the deployed detector on this slice
-(\RevBranchCombinedAucroc) is therefore a property of the \emph{composition},
-not of either component: a defect in how two signals are combined, not in
-either signal. We state this as a measured property of one slice of one
-benchmark, and it supersedes any claim that the tail term simply performs the
-discriminative work.
+\RevBranchTailMinusCombinedAucroc{} AUC-ROC. Deleting the auxiliary branch
+would therefore improve the detector on this slice.
+
+The mechanism is identified and is not statistical. The auxiliary term ranks
+\emph{below} chance here (AUC-ROC \RevBranchAuxOnlyAucroc{} against $0.5$),
+which means it is not noise but an actively inverted signal: it scores attacks
+lower than benign records more often than not. Because the deployed score is a
+$\max$, the auxiliary value governs the record's rank whenever it exceeds the
+tail value --- which is \RevBranchAuxBindsHeldoutPct\%\ of this held-out
+slice, counted from the same archived components --- so an inverted ranking is
+imposed on top of a working one. That is why the
+deployed composition's AUC-ROC (\RevBranchCombinedAucroc) sits near chance
+while its tail component reaches \RevBranchTailOnlyAucroc.
+
+Three consequences follow, and we state them at their proper strength. First,
+the near-chance ranking of the deployed detector on this slice is a property of
+the \emph{composition}, not of either component: a defect in how two signals
+are combined, not in either signal, and it would not be found by any evaluation
+that scores only the assembled detector. Second, it generalises as a warning
+rather than as a measurement --- any detector that combines a calibrated signal
+with an uncalibrated one under a $\max$ (or any other order statistic that lets
+one branch dominate) can have the worse branch silently determine its ranking,
+and no downstream metric will attribute the loss. Third, it supersedes, in the
+opposite direction, any claim that the tail term simply performs the
+discriminative work of the deployed score: the tail term does not merely carry
+the score, it is held back by it. We state the measurement as a property of one
+slice of one benchmark; the branch-wise decomposition needed to find it costs
+nothing, because the components are values \texttt{update\_score} already
+computes.
 
 \section{Prevalence Within One Assembled Construction}
 \label{sec:sweep}
@@ -654,10 +886,12 @@ lift are in the archived findings.}
 \input{table_prevalence_sweep}
 \end{table}
 
-Two observations, both between the two deterministic cells at the unresampled
-level, where all draws see identical records. First, the batch
-label-privileged reference LOF attains $AP=\STwoLUnresampledLofMean$ against
-the detector's $AP=\STwoLUnresampledProposedMean$ on that identical slice.
+Two observations. The first is at the unresampled level, where all draws see
+identical records and the detector, ECOD and LOF are each deterministic, so a
+flat comparison is admissible here --- identical records, no seed variance to
+withhold: the batch label-privileged reference LOF
+attains $AP=\STwoLUnresampledLofMean$ against the detector's
+$AP=\STwoLUnresampledProposedMean$ on that identical slice.
 Second, the detector's normalized lift runs
 \STwoLFiveProposedNormLift{} at 5\%, \STwoLTenProposedNormLift{} at 10\%,
 \STwoLUnresampledProposedNormLift{} unresampled,
@@ -723,20 +957,41 @@ AUC-ROC on the prefix & \SSixOriginalAucroc & \SSixCorrectedAucroc \\
 \section{Provenance Discipline}
 \label{sec:provenance}
 
-Every number in this paper is a \LaTeX{} macro generated from archived run
-manifests recording git commit, configuration hash, input SHA-256, seed,
-environment hash, timestamps and output paths. A gate fails the build if a
-manuscript number lacks a manifest, if two manifests claim one macro with
-different values, or if the derived macro index disagrees with the manifests
-behind it. A claim ledger maps every sentence of the abstract and introduction
-to its generating run. We are explicit about what this does and does not
-establish: it provides traceability and integrity --- that a displayed number
-came from a recorded execution on recorded inputs --- and it does \emph{not}
-establish that the code, labels, preprocessing or interpretation are correct.
-The discipline exists because it caught real defects during this rebuild,
-including a smoke-test manifest shadowing a full run and a manuscript-bound
-table cell backed by no manifest; each is a numbered corrected incident in the
-released artifact.
+Every measured value in this paper is a \LaTeX{} macro generated from
+archived run manifests recording git commit, configuration hash, input
+SHA-256, seed, environment hash, timestamps and output paths. Protocol
+constants that define the experiment rather than result from it (the
+70/15/15 split, budget sizes, the auxiliary weight, library versions) and
+values quoted from cited third-party work are typed, and are identified as
+such where they appear. A claim ledger maps every sentence of the abstract and
+introduction to its generating run.
+
+\textbf{What the checks cover, stated as a scope rather than a name.} The
+build fails on: a measurement-shaped number with no manifested value, anywhere
+in the manuscript, in any file it includes, or in any file the claim ledger
+cites; a macro two runs claim with different values; drift between the derived
+macro index and the manifests behind it; a cited key with no bibliography
+entry; and a derived quantity that disagrees with the values printed beside it.
+Files whose purpose is to record withdrawn numbers are scanned and reported
+rather than failed, because forcing a withdrawn value through the macro layer
+would manifest an error as a measurement, and the few genuine non-measurements
+inside enforced files sit in a named allowlist with a stated reason each.
+
+The checks do \emph{not} cover: protocol constants and values quoted from
+cited work, which are typed and identified as such; prose; or --- the important
+one --- whether the code, labels, preprocessing or interpretation are correct.
+Provenance establishes that a displayed number came from a recorded execution
+on recorded inputs, and nothing beyond that.
+
+We state the covered set explicitly, rather than the mechanism's name, for a
+reason that generalises past this paper: a check is trusted according to what
+its name claims and enforces only what it inspects, and the gap between the two
+is invisible precisely because the name is reassuring --- a gate reported that
+every number in this manuscript traced to a manifest while reading only the
+file it had itself generated from those manifests, and a compile check reported
+zero undefined references in a document carrying citations that resolved to
+nothing. Both were true statements about a narrower scope than their names
+implied. A reader should ask of any such check what set it actually reads.
 
 \section{Relationship to Prior Versions of This Work}
 \label{sec:disclosure}
@@ -758,6 +1013,19 @@ timestamp-ordered CICIDS arm, the per-capture LITNET streams, the shared-record
 analysis, and the method-identity audit have no counterpart in any earlier
 version. Third, results on a third dataset that appeared in the earlier
 versions are withdrawn and are not relied upon anywhere in this paper.
+
+One result from those earlier versions is worth restating here as
+\emph{corroboration}, explicitly not as a contribution of this paper: applying
+conformal risk control to the uncalibrated scores at a nominal alert budget of
+$\alpha=0.01$ was infeasible on one of the evaluated datasets --- no threshold
+in $[0,1]$ yielded an upper-bounded false-positive rate at or below $\alpha$,
+so the guarantee could not be instantiated at all. That observation was
+published in the superseded versions, is not new here, and rests on a pipeline
+this paper does not otherwise retain. It is mentioned only because it points
+the same way as Section~\ref{sec:outcome}: an operating point manufactured by
+the assembly step is not merely an inflated number, it can be a regime in which
+a downstream bounded-error guarantee has no feasible setting. We draw no
+conclusion from it and no claim in this paper depends on it.
 
 The corrected-incident log in the artifact records each correction with its
 evidence and closure status. The count of incidents is not itself a quality
@@ -830,8 +1098,8 @@ were used, under continuous human direction, to write and refactor analysis
 scripts, to draft prose subsequently verified against the archived
 measurements, and to operate an adversarial review harness that audited the
 authors' own claims. No generative AI tool is an author of this work, and none
-produced any reported number: every number was generated by executed code that
-wrote an archived run manifest in the same execution, and the provenance gate
+produced any reported measurement: every measured value was generated by
+executed code that wrote an archived run manifest in the same execution, and the provenance gate
 and claim ledger exist in part to make that boundary externally auditable. The
 authors take full responsibility for the entire content of this work,
 including any portion drafted with such assistance.
@@ -839,10 +1107,13 @@ including any portion drafted with such assistance.
 \section*{Companion Manuscript Disclosure}
 A companion manuscript from the same research programme (arXiv:2510.09619) shares parts of the underlying codebase and
 predates the audit reported here. The method-identity findings of
-Section~\ref{sec:detector} apply to that shared lineage; a correction process
-for it is in progress and has been disclosed to the relevant editors. Its
-relationship to the results reported here, and the relationship to the earlier
-public versions of this manuscript, are stated in Section~\ref{sec:disclosure};
+Section~\ref{sec:detector} apply to that shared lineage, and correcting it is
+in hand. It is a public preprint and is not under review at any venue; its
+status was verified against the submission system of record on 27 August 2026,
+and there is accordingly no other editor to inform and no concurrent
+consideration to declare. Its relationship to the results reported here, and the
+relationship to the earlier public versions of this manuscript, are stated in
+Section~\ref{sec:disclosure};
 the earlier public versions are arXiv:2605.24696 v1 and v2.
 
 \bibliographystyle{ACM-Reference-Format}

@@ -37,7 +37,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from provenance import provenance_run, sha256_file  # noqa: E402
+from provenance import provenance_run, reported, sha256_file  # noqa: E402
 
 CSV = ROOT / "results/prevalence_sweep_cicids.csv"
 OUT = ROOT / "findings_prevalence.md"
@@ -166,14 +166,16 @@ def main() -> int:
                                desc=llabel + " " + mlabel + " AUC-PR sd over draws")
                 run.emit_macro("STwo" + lkey + mkey + "N", len(xs),
                                desc=llabel + " " + mlabel + " draws")
-                run.emit_macro("STwo" + lkey + mkey + "Lift", round(mean - floor, 6),
+                run.emit_macro("STwo" + lkey + mkey + "Lift",
+                               round(reported(mean) - reported(floor), 6),
                                desc=llabel + " " + mlabel + " AUC-PR above chance")
                 run.emit_macro("STwo" + lkey + mkey + "Deterministic", 1 if det else 0,
                                desc=llabel + " " + mlabel + " 1 if identical across draws")
                 # Amendment G: additive lift AP-p has a prevalence-dependent
                 # ceiling of 1-p, so it is not comparable across levels. The
                 # normalized form divides by the available headroom.
-                norm = (mean - floor) / (1.0 - floor) if floor < 1.0 else float("nan")
+                _m, _f = reported(mean), reported(floor)
+                norm = (_m - _f) / (1.0 - _f) if _f < 1.0 else float("nan")
                 run.emit_macro("STwo" + lkey + mkey + "NormLift", round(norm, 6),
                                desc=llabel + " " + mlabel +
                                     " normalized lift (AP-p)/(1-p)")
@@ -181,7 +183,8 @@ def main() -> int:
                 for si, xv in enumerate(xs):
                     run.emit_macro("STwo" + lkey + mkey + "Draw" + ORD[si],
                                    round(xv, 6),
-                                   desc=llabel + " " + mlabel + " draw " + str(si + 1))
+                                   desc=llabel + " " + mlabel + " AUC-PR draw "
+                                        + str(si + 1))
                 cells.append("%.4f ±%.4f%s<br><sub>%s</sub>"
                              % (mean, sd, "" if not det else " *det*",
                                 ", ".join("%.4f" % v for v in xs)))

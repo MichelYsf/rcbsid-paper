@@ -6,8 +6,9 @@ versions of this work (arXiv:2605.24696 v1/v2) reported results produced under
 a composite stream construction and described a scoring rule the code did not
 implement. An adversarial review and a line-by-line audit established both;
 this package is the rebuild from that audit. The correction history is not
-hidden: `SCOPE_DECISIONS.md` records the binding scope rules and **18 numbered
-corrected incidents**, `AUDIT_FINDINGS.md` records the audit (A1–A13), and
+hidden: `SCOPE_DECISIONS.md` records the binding scope rules and every
+**numbered corrected incident** (the count is a record of the process, not a
+quality claim, so none is quoted), `AUDIT_FINDINGS.md` records the audit (A1–A13), and
 `SUPERSEDED.md` lists every stale artifact class so nothing old can be
 mistaken for current.
 
@@ -57,7 +58,22 @@ timestamps, output paths). Enforcement:
 ```bash
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 python -m pytest -q                          # full test suite
-python scripts/check_provenance.py           # the gate
+python scripts/check_provenance.py           # the gate (repository only)
+
+# From an extracted ARTIFACT rather than the repository, run the checks that
+# do not need the build tree. Two of the eight are repository-only by
+# construction: the overfull-hbox check reads paper/main.log, and the
+# package-freshness check reads packages/ -- neither ships in an artifact, and
+# both fail loudly rather than pass vacuously if you run them anyway.
+python scripts/check_provenance.py --ledger  # claim ledger
+python scripts/check_provenance.py --literals   # typed-literal scan
+python scripts/check_provenance.py --decimals   # derived-value arithmetic
+python scripts/check_provenance.py --controlchars
+
+# ZENODO CODE ZIP ONLY: the run manifests are deposited separately, in
+# manifests_bundle.zip. Extract it to results/manifests/ before running any
+# check that resolves a macro, or every number reports as an orphan -- the
+# manifests are absent, not missing.
 ```
 
 Stream reconstruction from the original public captures:
@@ -75,8 +91,10 @@ Key experiment entry points, each writing manifests:
 
 ## Honest limitations, up front
 
-Two benchmarks, one split rule (70/15/15 chronological; no split-rule
-sensitivity analysis exists). ECOD is fitted benign-only and is
+Two benchmarks, one split rule for the headline contrast (70/15/15
+chronological); a seven-point split-rule sensitivity sweep is reported
+separately and finds the measured ordering changes with the cut. ECOD is
+fitted benign-only and is
 label-privileged. Stochastic baselines carry seed distributions or are
 withheld — the HST/ECOD ordering flips with the seed in 2 of 2 cells where
 extra seeds were bought. The CICIDS dataset is a 76.63% budgeted subsample

@@ -1,6 +1,6 @@
 # findings_bocpd_ablation — the corrected change-point statistic (Stage 6)
 
-Generating run: `s6_bocpd_corrected_ablation_20260824T092655_a47acf51`. Every number is a provenance macro.
+Generating run: `s6_bocpd_corrected_ablation_20260827T113456_f9869627`. Every number is a provenance macro.
 
 ## Scope reduction, stated up front
 
@@ -11,7 +11,7 @@ The operator capped Stage 6 at **30 minutes of local compute** (down from 90) wi
 - **blaster_worm and spam excluded** for an independent reason: their attacks sit at the end of the stream, so any prefix holds no test attacks.
 - **One seed**, permitted by binding rule 7 because both variants are deterministic (Stage 2 measured this detector at sd 0.0000 across three draws).
 
-Total local compute: **155.3 s** against a cap of 1800 s.
+Total local compute: **98.6 s** against a cap of 1800 s.
 
 ## Does the corrected statistic respond to a change point?
 
@@ -24,7 +24,7 @@ A 6-sigma mean shift in a 3-D Gaussian stream, hazard 0.001:
 
 **Yes.** The correction does what audit finding A2 said was missing: the reset branch is scored under a freshly started run rather than under the existing ones, the predictive term stops cancelling, and `P(r=0)` becomes a function of the data.
 
-The first attempt at this correction failed and the failure is worth recording. Using the *global* slowly-adapting Gaussian as the prior predictive changed nothing (`P(r=0)` peak 0.001001 against a hazard of 0.001000), because immediately after a change the global model is just as stale as the run-conditional ones and both branches take the same penalty. A reset branch is informative only if a surprising point is *better* explained by starting over — which requires a vague predictive. The implemented version is the Normal-Inverse-Gamma prior predictive, a Student-t with nu=2 and squared scale twice the global variance, at the standard weakly-informative hyperparameters. No value was chosen by looking at a result.
+The first attempt at this correction failed and the failure is worth recording. Using the *global* slowly-adapting Gaussian as the prior predictive changed nothing: the `P(r=0)` peak stayed at the hazard rate to the precision the probe reports. That attempt was discarded rather than archived, so no run manifest holds its peak value and none is quoted here — a number without a manifest is deleted, not drafted. It changed nothing because immediately after a change the global model is just as stale as the run-conditional ones and both branches take the same penalty. A reset branch is informative only if a surprising point is *better* explained by starting over — which requires a vague predictive. The implemented version is the Normal-Inverse-Gamma prior predictive, a Student-t with nu=2 and squared scale twice the global variance, at the standard weakly-informative hyperparameters. No value was chosen by looking at a result.
 
 ## Does it change detection?
 

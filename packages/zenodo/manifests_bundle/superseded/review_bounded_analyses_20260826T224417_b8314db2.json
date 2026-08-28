@@ -1,0 +1,195 @@
+{
+  "run_id": "review_bounded_analyses_20260826T224417_b8314db2",
+  "name": "review_bounded_analyses",
+  "git_commit": "4baf1021f45539c7cc2506b358bf802a4169748d-dirty",
+  "git_commit_at_write": "4baf1021f45539c7cc2506b358bf802a4169748d-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "8445fa870941cb3f8d846ab5f8542c22fa88fbbddc44d50c7b3dd75a535cd20c",
+  "config": {
+    "A1": "shared held-out records, both deterministic methods",
+    "A2": "chronological cut sensitivity, natural arm, 7 cuts",
+    "A3": "branch-wise discrimination from archived components",
+    "metric": "sklearn average_precision_score / roc_auc_score, positive class 1"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_natural_scores.npz",
+      "sha256": "be784bd7bc48cb6ba0f6aa9a6900be64705d9618cd8d62c6567698ec8a020c01"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_synthetic_scores.npz",
+      "sha256": "565858635b7a2836c94b31f0250104b1676d04573fd99e2bb071d9d67939d734"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv",
+      "sha256": "96d41208b789ae8a1f446e5db952ca9fa0c7cd564b86455a3cb813329009767a"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_review_analyses.md",
+      "exists": true,
+      "sha256": "0cc0fcadde1b9fad3a4b37286d17e4cf4d4fe8a463671f1bdeebdd0c746ace4c"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-26T22:44:17.617153+00:00",
+  "finished_utc": "2026-08-26T22:51:51.086930+00:00",
+  "wall_seconds": 453.469777,
+  "macros": {
+    "RevReproNaturalAucpr": {
+      "value": 0.728355,
+      "unit": "",
+      "desc": "detector AUC-PR on the natural held-out slice, recomputed from the score dump"
+    },
+    "RevReproSyntheticAucpr": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "detector AUC-PR on the synthetic held-out slice, recomputed from the score dump"
+    },
+    "RevReproNaturalDelta": {
+      "value": 1.793e-05,
+      "unit": "",
+      "desc": "natural arm reproduction delta against the archive"
+    },
+    "RevSharedRecords": {
+      "value": 78000,
+      "unit": "",
+      "desc": "records held out by BOTH arms"
+    },
+    "RevSharedPrevalence": {
+      "value": 0.776603,
+      "unit": "",
+      "desc": "attack prevalence of the shared held-out records"
+    },
+    "RevSharedAttacks": {
+      "value": 60575,
+      "unit": "",
+      "desc": "attacks among the shared held-out records"
+    },
+    "RevSharedDetectorNaturalAucpr": {
+      "value": 0.905613,
+      "unit": "",
+      "desc": "detector AUC-PR on shared records, natural arm"
+    },
+    "RevSharedEcodNaturalAucpr": {
+      "value": 0.844487,
+      "unit": "",
+      "desc": "ECOD AUC-PR on shared records, natural arm"
+    },
+    "RevSharedDetectorNaturalNormLift": {
+      "value": 0.577492,
+      "unit": "",
+      "desc": "detector normalized lift on shared records, natural"
+    },
+    "RevSharedEcodNaturalNormLift": {
+      "value": 0.303874,
+      "unit": "",
+      "desc": "ECOD normalized lift on shared records, natural"
+    },
+    "RevSharedDetectorSyntheticAucpr": {
+      "value": 0.900371,
+      "unit": "",
+      "desc": "detector AUC-PR on shared records, synthetic arm"
+    },
+    "RevSharedEcodSyntheticAucpr": {
+      "value": 0.849842,
+      "unit": "",
+      "desc": "ECOD AUC-PR on shared records, synthetic arm"
+    },
+    "RevSharedDetectorSyntheticNormLift": {
+      "value": 0.554029,
+      "unit": "",
+      "desc": "detector normalized lift on shared records, synthetic"
+    },
+    "RevSharedEcodSyntheticNormLift": {
+      "value": 0.327844,
+      "unit": "",
+      "desc": "ECOD normalized lift on shared records, synthetic"
+    },
+    "RevSharedMarginNatural": {
+      "value": 0.061125,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR on shared records, natural arm"
+    },
+    "RevSharedMarginSynthetic": {
+      "value": 0.050529,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR on shared records, synthetic arm"
+    },
+    "RevSharedDetectorSpread": {
+      "value": 0.005242,
+      "unit": "",
+      "desc": "detector AUC-PR difference between arms on the identical shared records"
+    },
+    "RevSharedInversionSurvives": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if ECOD>detector natural AND detector>ECOD synthetic on the SHARED records"
+    },
+    "RevSplitCuts": {
+      "value": 7,
+      "unit": "",
+      "desc": "chronological cut points evaluated"
+    },
+    "RevSplitEcodWins": {
+      "value": 3,
+      "unit": "",
+      "desc": "cut points where ECOD exceeds the detector (natural arm)"
+    },
+    "RevBranchCombinedAucpr": {
+      "value": 0.728355,
+      "unit": "",
+      "desc": "Combined AUC-PR on the natural held-out slice"
+    },
+    "RevBranchCombinedAucroc": {
+      "value": 0.526623,
+      "unit": "",
+      "desc": "Combined AUC-ROC on the natural held-out slice"
+    },
+    "RevBranchTailOnlyAucpr": {
+      "value": 0.831832,
+      "unit": "",
+      "desc": "TailOnly AUC-PR on the natural held-out slice"
+    },
+    "RevBranchTailOnlyAucroc": {
+      "value": 0.829281,
+      "unit": "",
+      "desc": "TailOnly AUC-ROC on the natural held-out slice"
+    },
+    "RevBranchAuxOnlyAucpr": {
+      "value": 0.60027,
+      "unit": "",
+      "desc": "AuxOnly AUC-PR on the natural held-out slice"
+    },
+    "RevBranchAuxOnlyAucroc": {
+      "value": 0.28189,
+      "unit": "",
+      "desc": "AuxOnly AUC-ROC on the natural held-out slice"
+    },
+    "RevBranchTailMinusCombinedAucpr": {
+      "value": 0.103477,
+      "unit": "",
+      "desc": "tail-only minus combined AUC-PR"
+    },
+    "RevBranchTailMinusCombinedAucroc": {
+      "value": 0.302658,
+      "unit": "",
+      "desc": "tail-only minus combined AUC-ROC"
+    },
+    "RevTailCarriesCombined": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if tail-only AUC-PR matches combined within 0.01"
+    }
+  },
+  "notes": "answers the fresh review's identification, split-sensitivity and branch-discrimination objections from archived per-record scores",
+  "extra": {}
+}

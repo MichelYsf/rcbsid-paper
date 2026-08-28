@@ -15,7 +15,20 @@ python -m pytest -q                       # full suite: must pass
 
 4. `paper/main.pdf` rebuilt from the current tree (three-pass pdflatex+bibtex,
    zero undefined references), and
-5. `git status` clean, branch `rebuild/honest-v1` pushed.
+5. `git status` clean, branch `rebuild/honest-v1` pushed. **Do not check this
+   by eye — run it:**
+
+   ```
+   python scripts/check_provenance.py --publish-ready
+   ```
+
+   It also fails when a live run manifest records a `-dirty` commit, which the
+   eye cannot catch at all: a `-dirty` sha is not resolvable from the public
+   repository, so a reader cannot reach the code that produced the number.
+   `zenodo_metadata.md` names the GitHub repo and branch as an *is derived
+   from* identifier on a deposit that cannot be withdrawn, so this invariant is
+   the one with no undo. **As of 2026-08-27 it does not hold** (CI-32): the
+   round is uncommitted and the branch has no upstream.
 
 ## The packages (`packages/`)
 
@@ -29,13 +42,15 @@ python -m pytest -q                       # full suite: must pass
 - **dtrap/** — the double-anonymous submission: anonymized PDF and source
   zip, cover letter, artifact-access strategy, and the ORCID clarification
   reply. Portal verified fresh 2026-08-24: https://mc.manuscriptcentral.com/dtrap.
-- **sibling/** — the TIFS withdrawal letter and the coexistence wording;
-  which one is used is the operator's decision (`SIBLING_DECISION.md`).
+- **sibling/** — the arXiv v3 correction-note wording. Use the **no venue
+  claim** variant. The withdrawal letter and both earlier note variants in this
+  directory are **retired and void**: verification in the IEEE Author Portal on
+  2026-08-27 established that no TIFS submission exists (see
+  `SIBLING_DECISION.md`, CI-25). They are kept as a record, not as options.
 
 ## Ordering constraint
 
-If the sibling decision is Branch W (recommended), the TIFS withdrawal is
-sent BEFORE the arXiv v3 replacement is announced, so the journal hears from
-the author first. Zenodo before DTRAP submission is preferred (the cover
-letter can then cite the minted DOI), but not required — DTRAP's anonymous
+There is no withdrawal step and no venue to notify first; that ordering
+constraint was void and is removed. Zenodo before DTRAP submission is preferred
+(the cover letter can then cite the minted DOI), but not required — DTRAP's anonymous
 artifact channel works without it.

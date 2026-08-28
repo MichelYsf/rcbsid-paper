@@ -1,0 +1,390 @@
+{
+  "run_id": "review_bounded_analyses_20260827T111130_ff5449e4",
+  "name": "review_bounded_analyses",
+  "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
+  "git_commit_at_write": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "8445fa870941cb3f8d846ab5f8542c22fa88fbbddc44d50c7b3dd75a535cd20c",
+  "config": {
+    "A1": "shared held-out records, both deterministic methods",
+    "A2": "chronological cut sensitivity, natural arm, 7 cuts",
+    "A3": "branch-wise discrimination from archived components",
+    "metric": "sklearn average_precision_score / roc_auc_score, positive class 1"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_natural_scores.npz",
+      "sha256": "be784bd7bc48cb6ba0f6aa9a6900be64705d9618cd8d62c6567698ec8a020c01"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_synthetic_scores.npz",
+      "sha256": "565858635b7a2836c94b31f0250104b1676d04573fd99e2bb071d9d67939d734"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv",
+      "sha256": "96d41208b789ae8a1f446e5db952ca9fa0c7cd564b86455a3cb813329009767a"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_review_analyses.md",
+      "exists": true,
+      "sha256": "39123876a56587cfeb127db4efd466d677436680a141f0862ada3a5257a42177"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-27T11:11:30.280661+00:00",
+  "finished_utc": "2026-08-27T11:29:15.404418+00:00",
+  "wall_seconds": 1065.123757,
+  "macros": {
+    "RevReproNaturalAucpr": {
+      "value": 0.728355,
+      "unit": "",
+      "desc": "detector AUC-PR on the natural held-out slice, recomputed from the score dump"
+    },
+    "RevReproSyntheticAucpr": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "detector AUC-PR on the synthetic held-out slice, recomputed from the score dump"
+    },
+    "RevReproNaturalDelta": {
+      "value": 1.793e-05,
+      "unit": "",
+      "desc": "natural arm reproduction delta against the archive"
+    },
+    "RevSharedRecords": {
+      "value": 78000,
+      "unit": "",
+      "desc": "records held out by BOTH arms"
+    },
+    "RevSharedPrevalence": {
+      "value": 0.776603,
+      "unit": "",
+      "desc": "attack prevalence of the shared held-out records"
+    },
+    "RevSharedAttacks": {
+      "value": 60575,
+      "unit": "",
+      "desc": "attacks among the shared held-out records"
+    },
+    "RevSharedDetectorNaturalAucpr": {
+      "value": 0.905613,
+      "unit": "",
+      "desc": "detector AUC-PR on shared records, natural arm"
+    },
+    "RevSharedEcodNaturalAucpr": {
+      "value": 0.844487,
+      "unit": "",
+      "desc": "ECOD AUC-PR on shared records, natural arm"
+    },
+    "RevSharedDetectorNaturalAucroc": {
+      "value": 0.869219,
+      "unit": "",
+      "desc": "detector AUC-ROC on shared records, natural arm"
+    },
+    "RevSharedEcodNaturalAucroc": {
+      "value": 0.79991,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on shared records, natural arm"
+    },
+    "RevSharedDetectorNaturalNormLift": {
+      "value": 0.577492,
+      "unit": "",
+      "desc": "detector normalized lift on shared records, natural"
+    },
+    "RevSharedEcodNaturalNormLift": {
+      "value": 0.303874,
+      "unit": "",
+      "desc": "ECOD normalized lift on shared records, natural"
+    },
+    "RevSharedDetectorSyntheticAucpr": {
+      "value": 0.900371,
+      "unit": "",
+      "desc": "detector AUC-PR on shared records, synthetic arm"
+    },
+    "RevSharedEcodSyntheticAucpr": {
+      "value": 0.849842,
+      "unit": "",
+      "desc": "ECOD AUC-PR on shared records, synthetic arm"
+    },
+    "RevSharedDetectorSyntheticAucroc": {
+      "value": 0.864159,
+      "unit": "",
+      "desc": "detector AUC-ROC on shared records, synthetic arm"
+    },
+    "RevSharedEcodSyntheticAucroc": {
+      "value": 0.805657,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on shared records, synthetic arm"
+    },
+    "RevSharedDetectorSyntheticNormLift": {
+      "value": 0.554029,
+      "unit": "",
+      "desc": "detector normalized lift on shared records, synthetic"
+    },
+    "RevSharedEcodSyntheticNormLift": {
+      "value": 0.327844,
+      "unit": "",
+      "desc": "ECOD normalized lift on shared records, synthetic"
+    },
+    "RevSharedMarginNatural": {
+      "value": 0.061125,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR on shared records, natural arm"
+    },
+    "RevSharedMarginSynthetic": {
+      "value": 0.050529,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR on shared records, synthetic arm"
+    },
+    "RevSharedDetectorSpread": {
+      "value": 0.005242,
+      "unit": "",
+      "desc": "detector AUC-PR difference between arms on the identical shared records"
+    },
+    "RevSharedInversionSurvives": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if ECOD>detector natural AND detector>ECOD synthetic on the SHARED records"
+    },
+    "RevSplitCut60Records": {
+      "value": 640000,
+      "unit": "",
+      "desc": "test records at the 60% chronological cut"
+    },
+    "RevSplitCut60Prevalence": {
+      "value": 0.350142,
+      "unit": "",
+      "desc": "test prevalence at the 60% cut"
+    },
+    "RevSplitCut60DetectorAucpr": {
+      "value": 0.483383,
+      "unit": "",
+      "desc": "detector AUC-PR at the 60% cut, natural arm"
+    },
+    "RevSplitCut60EcodAucpr": {
+      "value": 0.451502,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 60% cut, natural arm"
+    },
+    "RevSplitCut65Records": {
+      "value": 560000,
+      "unit": "",
+      "desc": "test records at the 65% chronological cut"
+    },
+    "RevSplitCut65Prevalence": {
+      "value": 0.40002,
+      "unit": "",
+      "desc": "test prevalence at the 65% cut"
+    },
+    "RevSplitCut65DetectorAucpr": {
+      "value": 0.528435,
+      "unit": "",
+      "desc": "detector AUC-PR at the 65% cut, natural arm"
+    },
+    "RevSplitCut65EcodAucpr": {
+      "value": 0.498989,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 65% cut, natural arm"
+    },
+    "RevSplitCut70Records": {
+      "value": 480000,
+      "unit": "",
+      "desc": "test records at the 70% chronological cut"
+    },
+    "RevSplitCut70Prevalence": {
+      "value": 0.461644,
+      "unit": "",
+      "desc": "test prevalence at the 70% cut"
+    },
+    "RevSplitCut70DetectorAucpr": {
+      "value": 0.578913,
+      "unit": "",
+      "desc": "detector AUC-PR at the 70% cut, natural arm"
+    },
+    "RevSplitCut70EcodAucpr": {
+      "value": 0.56123,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 70% cut, natural arm"
+    },
+    "RevSplitCut75Records": {
+      "value": 400000,
+      "unit": "",
+      "desc": "test records at the 75% chronological cut"
+    },
+    "RevSplitCut75Prevalence": {
+      "value": 0.429028,
+      "unit": "",
+      "desc": "test prevalence at the 75% cut"
+    },
+    "RevSplitCut75DetectorAucpr": {
+      "value": 0.508857,
+      "unit": "",
+      "desc": "detector AUC-PR at the 75% cut, natural arm"
+    },
+    "RevSplitCut75EcodAucpr": {
+      "value": 0.556352,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 75% cut, natural arm"
+    },
+    "RevSplitCut80Records": {
+      "value": 320000,
+      "unit": "",
+      "desc": "test records at the 80% chronological cut"
+    },
+    "RevSplitCut80Prevalence": {
+      "value": 0.513066,
+      "unit": "",
+      "desc": "test prevalence at the 80% cut"
+    },
+    "RevSplitCut80DetectorAucpr": {
+      "value": 0.585598,
+      "unit": "",
+      "desc": "detector AUC-PR at the 80% cut, natural arm"
+    },
+    "RevSplitCut80EcodAucpr": {
+      "value": 0.639969,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 80% cut, natural arm"
+    },
+    "RevSplitCut85Records": {
+      "value": 240000,
+      "unit": "",
+      "desc": "test records at the 85% chronological cut"
+    },
+    "RevSplitCut85Prevalence": {
+      "value": 0.68235,
+      "unit": "",
+      "desc": "test prevalence at the 85% cut"
+    },
+    "RevSplitCut85DetectorAucpr": {
+      "value": 0.728355,
+      "unit": "",
+      "desc": "detector AUC-PR at the 85% cut, natural arm"
+    },
+    "RevSplitCut85EcodAucpr": {
+      "value": 0.758205,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 85% cut, natural arm"
+    },
+    "RevSplitCut90Records": {
+      "value": 160000,
+      "unit": "",
+      "desc": "test records at the 90% chronological cut"
+    },
+    "RevSplitCut90Prevalence": {
+      "value": 0.71625,
+      "unit": "",
+      "desc": "test prevalence at the 90% cut"
+    },
+    "RevSplitCut90DetectorAucpr": {
+      "value": 0.799279,
+      "unit": "",
+      "desc": "detector AUC-PR at the 90% cut, natural arm"
+    },
+    "RevSplitCut90EcodAucpr": {
+      "value": 0.791671,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 90% cut, natural arm"
+    },
+    "RevSplitCuts": {
+      "value": 7,
+      "unit": "",
+      "desc": "chronological cut points evaluated"
+    },
+    "RevSplitEcodWins": {
+      "value": 3,
+      "unit": "",
+      "desc": "cut points where ECOD exceeds the detector (natural arm)"
+    },
+    "RevBranchCombinedAucpr": {
+      "value": 0.728355,
+      "unit": "",
+      "desc": "Combined AUC-PR on the natural held-out slice"
+    },
+    "RevBranchCombinedAucroc": {
+      "value": 0.526623,
+      "unit": "",
+      "desc": "Combined AUC-ROC on the natural held-out slice"
+    },
+    "RevBranchTailOnlyAucpr": {
+      "value": 0.831832,
+      "unit": "",
+      "desc": "TailOnly AUC-PR on the natural held-out slice"
+    },
+    "RevBranchTailOnlyAucroc": {
+      "value": 0.829281,
+      "unit": "",
+      "desc": "TailOnly AUC-ROC on the natural held-out slice"
+    },
+    "RevBranchAuxOnlyAucpr": {
+      "value": 0.60027,
+      "unit": "",
+      "desc": "AuxOnly AUC-PR on the natural held-out slice"
+    },
+    "RevBranchAuxOnlyAucroc": {
+      "value": 0.28189,
+      "unit": "",
+      "desc": "AuxOnly AUC-ROC on the natural held-out slice"
+    },
+    "RevBranchTailMinusCombinedAucpr": {
+      "value": 0.103477,
+      "unit": "",
+      "desc": "tail-only minus combined AUC-PR"
+    },
+    "RevBranchTailMinusCombinedAucroc": {
+      "value": 0.302658,
+      "unit": "",
+      "desc": "tail-only minus combined AUC-ROC"
+    },
+    "RevTailCarriesCombined": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if tail-only AUC-PR matches combined within 0.01"
+    },
+    "RevEcodBatchEvalRecords": {
+      "value": 240000,
+      "unit": "",
+      "desc": "records in the fixed evaluated index set (A4)"
+    },
+    "RevEcodBatch240000Aucpr": {
+      "value": 0.758205,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 240000"
+    },
+    "RevEcodBatch300000Aucpr": {
+      "value": 0.760029,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 300000"
+    },
+    "RevEcodBatch360000Aucpr": {
+      "value": 0.762108,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 360000"
+    },
+    "RevEcodBatch480000Aucpr": {
+      "value": 0.755142,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 480000"
+    },
+    "RevEcodBatchDelta": {
+      "value": 0.003063,
+      "unit": "",
+      "desc": "AUC-PR difference on identical records between the 240k-alone and 480k-paired scoring batches"
+    },
+    "RevEcodBatchSpread": {
+      "value": 0.006966,
+      "unit": "",
+      "desc": "AUC-PR spread across the batch-size ladder on identical evaluated records"
+    }
+  },
+  "notes": "answers the fresh review's identification, split-sensitivity and branch-discrimination objections from archived per-record scores",
+  "extra": {}
+}

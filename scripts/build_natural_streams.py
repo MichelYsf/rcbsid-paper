@@ -67,9 +67,9 @@ def emit(run, tag: str, df: pd.DataFrame, tcol: str, path: Path) -> None:
     span_min = (ts.max() - ts.min()).total_seconds() / 60.0
     T = tag.title().replace("_", "")
     run.emit_macro(f"Stream{T}Rows", sp["n"], desc=f"{tag} rows")
-    run.emit_macro(f"Stream{T}PrevalencePct", round(float(y.mean()) * 100, 4), unit=r"\%",
+    run.emit_macro(f"Stream{T}PrevalencePct", round(float(y.mean()) * 100, 4), unit="%",
                    desc=f"{tag} overall attack prevalence")
-    run.emit_macro(f"Stream{T}TestPrevalencePct", round(sp["test"] * 100, 4), unit=r"\%",
+    run.emit_macro(f"Stream{T}TestPrevalencePct", round(sp["test"] * 100, 4), unit="%",
                    desc=f"{tag} test-split prevalence")
     run.emit_macro(f"Stream{T}TestAttacks", sp["test_attacks"], desc=f"{tag} test attacks")
     run.emit_macro(f"Stream{T}RunMedian", rl["median"], desc=f"{tag} attack run-length median")

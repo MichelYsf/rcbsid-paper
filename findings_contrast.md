@@ -1,6 +1,6 @@
 # findings_contrast — construction, not prevalence (Stage 4)
 
-Generating run: `s4_contrast_deliverables_20260826T203706_083c4e0e`.
+Generating run: `s4_contrast_deliverables_20260827T124050_ec876714`.
 Every number below is emitted as a provenance macro by this run (the manifest named above), by the per-arm runs it aggregates, or by the `cicids_heldout_composition` audit where cited.
 
 > Adversarial review on 2026-08-19 refuted an earlier version of this sentence. Seven printed numbers had no `emit_macro` call, and one of them - the pooled attack count 14,621 - appeared in no manifest anywhere while being written into a manuscript-bound LaTeX table. That is exactly the orphan the governing rule forbids. Those macros are now emitted, and the sentence is asserted only because the generator emits a macro for every number it prints.
@@ -16,11 +16,11 @@ These come from an adversarial review of this document and are stated up front r
 3. **AUC-PR is not comparable ACROSS arms.** Its chance floor is the test prevalence, which is precisely what the construction moves. Lift above floor is reported beside every raw value, and the raw cross-arm difference is deliberately not reported at all.
 4. **Rankings rest on a single HST draw** unless a seed count above one is stated. The proposed detector and ECOD are deterministic here; HST is not, and its published standard deviation on the LITNET composite (`results/table4_litnet_tuned.tex`) is of the same order as some margins below. This is flagged where it bites.
 
-## Contrast 1 — CICIDS2017, order only (prevalence held constant)
+## Contrast 1 — CICIDS2017, one record multiset under two assemblies
 
-CICIDS2017 is a single capture week, so the same record multiset can be presented in true timestamp order and in day-of-week round robin. The reordering is verified mechanically to be an exact permutation, not asserted from reading the code: both arms hold `CicidsArmRows` records and `CicidsArmAttacks` attacks, a whole-stream prevalence of `CicidsArmPrevalencePct` in each (`cicids_heldout_composition` manifest). Order is the only manipulated variable.
+CICIDS2017 is a single capture week, so the same record multiset can be presented in true timestamp order and in day-of-week round robin. The reordering is verified mechanically to be an exact permutation, not asserted from reading the code: both arms hold `CicidsArmRows` records and `CicidsArmAttacks` attacks, a whole-stream prevalence of `CicidsArmPrevalencePct` in each (`cicids_heldout_composition` manifest). Ordering is the only thing the intervention *sets*; it is not the only thing that changes. Under a positional split, reordering also moves held-out membership and held-out prevalence, so the treatment is the assembly pipeline and not order in isolation.
 
-What follows is a change in the measured regime **under reordering with the 70/15/15 tail split held fixed**. No split-rule sensitivity check has been run, so the effect is not attributed to construction in isolation.
+What follows is a change in the measured regime **under reordering with the 70/15/15 tail split held fixed**. Two later analyses bound what may be concluded from it: the shared-record restriction (A1) shows the ordering reversal does not survive on the records both arms held out, locating the effect in sample membership rather than in history order; and the split-rule sensitivity sweep (A2) shows the measured ordering also depends on where the cut falls. Both are in `findings_review_analyses.md`.
 
 | quantity | natural (timestamp order) | synthetic (day round robin) |
 |---|---|---|

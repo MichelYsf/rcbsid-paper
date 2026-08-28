@@ -40,7 +40,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from provenance import provenance_run  # noqa: E402
+from provenance import provenance_run, reported  # noqa: E402
 from run_construction_contrast import TRAIN, VAL, interleave_by_day  # noqa: E402
 from src.baselines.batch import run_batch_reference  # noqa: E402
 from src.data.loaders import prepare_xy  # noqa: E402
@@ -59,6 +59,9 @@ def roc(y, s):
 
 
 def norm_lift(a, p):
+    # derived from REPORTED values so the printed lift matches the
+    # printed AP and floor a reader computes it from (REPORT_DP)
+    a, p = reported(a), reported(p)
     return (a - p) / (1.0 - p) if p < 1.0 else float("nan")
 
 
@@ -123,7 +126,8 @@ def main() -> int:
                             "recomputed from the score dump")
         A("## Reproduction check")
         A("")
-        run.emit_macro("RevReproNaturalDelta", round(abs(rep_nat - 0.728337), 8),
+        run.emit_macro("RevReproNaturalDelta",
+                       round(abs(reported(rep_nat) - 0.728337), 8),
                        desc="natural arm reproduction delta against the archive")
         A("Recomputing the archived arms from these dumps gives detector AUC-PR "
           "**%.6f** (natural) and **%.6f** (synthetic) against the archived "
@@ -183,6 +187,13 @@ def main() -> int:
                            desc="detector AUC-PR on shared records, " + name + " arm")
             run.emit_macro("RevSharedEcod" + key + "Aucpr", round(e_ap, 6),
                            desc="ECOD AUC-PR on shared records, " + name + " arm")
+            # The AUC-ROC columns of this same table were typed as literals into
+            # the manuscript in the previous round and no gate saw them, because
+            # the gate read only the generated numbers.tex. Manifested here.
+            run.emit_macro("RevSharedDetector" + key + "Aucroc", round(d_roc, 6),
+                           desc="detector AUC-ROC on shared records, " + name + " arm")
+            run.emit_macro("RevSharedEcod" + key + "Aucroc", round(e_roc, 6),
+                           desc="ECOD AUC-ROC on shared records, " + name + " arm")
             run.emit_macro("RevSharedDetector" + key + "NormLift",
                            round(norm_lift(d_ap, prev_shared), 6),
                            desc="detector normalized lift on shared records, " + name)
@@ -193,11 +204,11 @@ def main() -> int:
 
         for name, d_ap, e_ap, _dr, _er in rows:
             run.emit_macro("RevSharedMargin" + name.capitalize(),
-                           round(d_ap - e_ap, 6),
+                           round(reported(d_ap) - reported(e_ap), 6),
                            desc="detector minus ECOD AUC-PR on shared records, "
                                 + name + " arm")
         run.emit_macro("RevSharedDetectorSpread",
-                       round(abs(rows[0][1] - rows[1][1]), 6),
+                       round(abs(reported(rows[0][1]) - reported(rows[1][1])), 6),
                        desc="detector AUC-PR difference between arms on the "
                             "identical shared records")
         inv = (rows[0][2] > rows[0][1]) and (rows[1][1] > rows[1][2])
@@ -245,6 +256,17 @@ def main() -> int:
             e_ap = ap(y_t, np.asarray(ev))
             win = e_ap > d_ap
             holds += int(win)
+            # every cell of this table is manifested: the sweep is cited in the
+            # manuscript and a table of typed literals is not evidence.
+            tag = "RevSplitCut%d" % int(round(100 * c))
+            run.emit_macro(tag + "Records", int(len(y_t)),
+                           desc="test records at the %d%% chronological cut" % int(round(100 * c)))
+            run.emit_macro(tag + "Prevalence", round(float(np.mean(y_t)), 6),
+                           desc="test prevalence at the %d%% cut" % int(round(100 * c)))
+            run.emit_macro(tag + "DetectorAucpr", round(d_ap, 6),
+                           desc="detector AUC-PR at the %d%% cut, natural arm" % int(round(100 * c)))
+            run.emit_macro(tag + "EcodAucpr", round(e_ap, 6),
+                           desc="ECOD AUC-PR at the %d%% cut, natural arm" % int(round(100 * c)))
             A("| %.0f%% | %d | %.4f | %.6f | %.6f | %s |"
               % (100 * c, len(y_t), float(np.mean(y_t)), d_ap, e_ap,
                  "yes" if win else "no"))
@@ -276,10 +298,12 @@ def main() -> int:
             A("| %s | %.6f | %.6f |" % (nm, res[nm][0], res[nm][1]))
         A("")
         run.emit_macro("RevBranchTailMinusCombinedAucpr",
-                       round(res["TailOnly"][0] - res["Combined"][0], 6),
+                       round(reported(res["TailOnly"][0])
+                             - reported(res["Combined"][0]), 6),
                        desc="tail-only minus combined AUC-PR")
         run.emit_macro("RevBranchTailMinusCombinedAucroc",
-                       round(res["TailOnly"][1] - res["Combined"][1], 6),
+                       round(reported(res["TailOnly"][1])
+                             - reported(res["Combined"][1]), 6),
                        desc="tail-only minus combined AUC-ROC")
         tail_carries = abs(res["TailOnly"][0] - res["Combined"][0]) < 0.01
         run.emit_macro("RevTailCarriesCombined", 1 if tail_carries else 0,
@@ -300,6 +324,68 @@ def main() -> int:
           "deployed detector on this slice."
           % (res["TailOnly"][0] - res["Combined"][0],
              res["TailOnly"][1] - res["Combined"][1], res["AuxOnly"][1]))
+        A("")
+
+        # ---- A4: ECOD's dependence on the scored batch --------------------
+        # A2 and the archived contrast arm evaluate the SAME 240,000 records
+        # under the SAME fitted model and disagree. The cause is in PyOD's
+        # ECOD.decision_function: fit() stores X_train, and every later call
+        # concatenates it with the batch being scored before recomputing the
+        # column ECDFs, so a record's score depends on which OTHER records were
+        # handed to the same call. A2 scores the 240,000 test rows alone; the
+        # archived arm scores validation+test together (480,000) and slices.
+        # Here the evaluated index set is held identical and only the size of
+        # the accompanying batch is varied.
+        A("## A4 — ECOD scores depend on the batch they are scored in")
+        A("")
+        Xva_n, Xte_n = X_nat[i_tr:i_va], X_nat[i_va:]
+        y_te_n = y_nat[i_va:]
+        run.emit_macro("RevEcodBatchEvalRecords", int(len(Xte_n)),
+                       desc="records in the fixed evaluated index set (A4)")
+        ytr_n = y_nat[:i_tr]
+        Xfit_n = X_nat[:i_tr][ytr_n == 0] if np.any(ytr_n == 0) else X_nat[:i_tr]
+        pads = [0, 60000, 120000, len(Xva_n)]
+        ladder = []
+        for pad in pads:
+            t0 = time.time()
+            block = Xte_n if pad == 0 else np.vstack([Xva_n[len(Xva_n) - pad:], Xte_n])
+            ev = np.asarray(run_batch_reference("ecod", Xfit_n, block, seed=11,
+                                                allow_fallback=False))
+            v = ap(y_te_n, ev[len(block) - len(Xte_n):])
+            ladder.append((len(block), v))
+            tag = "RevEcodBatch%d" % len(block)
+            run.emit_macro(tag + "Aucpr", round(v, 6),
+                           desc="ECOD AUC-PR on the SAME %d evaluated records "
+                                "when scored in a batch of %d"
+                                % (len(Xte_n), len(block)))
+            print("  A4 batch %7d -> AP %.6f  (%.0f s)"
+                  % (len(block), v, time.time() - t0))
+        alone = dict(ladder)[len(Xte_n)]
+        paired = dict(ladder)[len(Xte_n) + len(Xva_n)]
+        run.emit_macro("RevEcodBatchDelta",
+                       round(abs(reported(paired) - reported(alone)), 6),
+                       desc="AUC-PR difference on identical records between the "
+                            "240k-alone and 480k-paired scoring batches")
+        run.emit_macro("RevEcodBatchSpread",
+                       round(max(reported(v) for _, v in ladder)
+                             - min(reported(v) for _, v in ladder), 6),
+                       desc="AUC-PR spread across the batch-size ladder on "
+                            "identical evaluated records")
+        A("Model fitted once on the same benign training rows; the evaluated "
+          "index set is the same **%d** records in every row below. Only the "
+          "number of records accompanying them in the `decision_function` call "
+          "changes." % len(Xte_n))
+        A("")
+        A("| scored batch | evaluated records | ECOD AUC-PR |")
+        A("|---|---|---|")
+        for nb, v in ladder:
+            A("| %d | %d | %.6f |" % (nb, len(Xte_n), v))
+        A("")
+        A("Scoring the identical records alone rather than alongside the "
+          "validation block moves ECOD's AUC-PR by **%.6f**; the full ladder "
+          "spans %.6f. This is not run-to-run noise — ECOD is deterministic "
+          "and the fitted model is byte-identical across these rows."
+          % (abs(paired - alone), max(v for _, v in ladder) - min(v for _, v in ladder)))
         A("")
         OUT.write_text("\n".join(L) + "\n", encoding="utf-8")
         run.declared_outputs.append(str(OUT))

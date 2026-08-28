@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{26}
+\begin{thebibliography}{40}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -46,6 +46,20 @@
 \newblock
 
 
+\bibitem[Apruzzese et~al\mbox{.}(2022)]%
+        {apruzzese2022crosseval}
+\bibfield{author}{\bibinfo{person}{Giovanni Apruzzese}, \bibinfo{person}{Luca
+  Pajola}, {and} \bibinfo{person}{Mauro Conti}.}
+  \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{The Cross-Evaluation of Machine Learning-Based
+  Network Intrusion Detection Systems}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Network and Service
+  Management}} \bibinfo{volume}{19}, \bibinfo{number}{4}
+  (\bibinfo{year}{2022}), \bibinfo{pages}{5152--5169}.
+\newblock
+\href{https://doi.org/10.1109/TNSM.2022.3157344}{doi:\nolinkurl{10.1109/TNSM.2022.3157344}}
+
+
 \bibitem[Arp et~al\mbox{.}(2022)]%
         {arp2022dosdonts}
 \bibfield{author}{\bibinfo{person}{Daniel Arp}, \bibinfo{person}{Erwin
@@ -57,6 +71,19 @@
   Security}. In \bibinfo{booktitle}{\emph{31st USENIX Security Symposium}}.
   \bibinfo{pages}{3971--3988}.
 \newblock
+
+
+\bibitem[Axelsson(2000)]%
+        {axelsson2000baserate}
+\bibfield{author}{\bibinfo{person}{Stefan Axelsson}.}
+  \bibinfo{year}{2000}\natexlab{}.
+\newblock \showarticletitle{The Base-Rate Fallacy and the Difficulty of
+  Intrusion Detection}.
+\newblock \bibinfo{journal}{\emph{ACM Transactions on Information and System
+  Security}} \bibinfo{volume}{3}, \bibinfo{number}{3} (\bibinfo{year}{2000}),
+  \bibinfo{pages}{186--205}.
+\newblock
+\href{https://doi.org/10.1145/357830.357849}{doi:\nolinkurl{10.1145/357830.357849}}
 
 
 \bibitem[Barber et~al\mbox{.}(2023)]%
@@ -72,17 +99,29 @@
 \href{https://doi.org/10.1214/23-AOS2276}{doi:\nolinkurl{10.1214/23-AOS2276}}
 
 
-\bibitem[Barrett et~al\mbox{.}(2026)]%
+\bibitem[Barrett et~al\mbox{.}(2026a)]%
         {barrett2026fades}
 \bibfield{author}{\bibinfo{person}{Seth Barrett}, \bibinfo{person}{Gokila
   Dorai}, \bibinfo{person}{Lin Li}, {and} \bibinfo{person}{Swarnamugi
-  Rajaganapathy}.} \bibinfo{year}{2026}\natexlab{}.
+  Rajaganapathy}.} \bibinfo{year}{2026}\natexlab{a}.
 \newblock \showarticletitle{{FADES}: Adaptive Drift Estimation via Conformal
   Signals for Streaming Intrusion Detection}.
 \newblock \bibinfo{journal}{\emph{Electronics}} \bibinfo{volume}{15},
   \bibinfo{number}{10} (\bibinfo{year}{2026}), \bibinfo{pages}{2114}.
 \newblock
 \href{https://doi.org/10.3390/electronics15102114}{doi:\nolinkurl{10.3390/electronics15102114}}
+
+
+\bibitem[Barrett et~al\mbox{.}(2026b)]%
+        {barrett2026firce}
+\bibfield{author}{\bibinfo{person}{Seth Barrett}, \bibinfo{person}{Lin Li},
+  \bibinfo{person}{Gokila Dorai}, {and} \bibinfo{person}{Swarnamugi
+  Rajaganapathy}.} \bibinfo{year}{2026}\natexlab{b}.
+\newblock \showarticletitle{{FIRCE}: A Framework for Intrusion Response and
+  Conformal Evaluation}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2605.01962}}
+  (\bibinfo{year}{2026}).
+\newblock
 
 
 \bibitem[Beyer et~al\mbox{.}(2016)]%
@@ -93,6 +132,19 @@
 \newblock \bibinfo{booktitle}{\emph{Site Reliability Engineering}}.
 \newblock \bibinfo{publisher}{O'Reilly Media}.
 \newblock
+
+
+\bibitem[Biswas(2026)]%
+        {biswas2026protocol}
+\bibfield{author}{\bibinfo{person}{Md~Anas Biswas}.}
+  \bibinfo{year}{2026}\natexlab{}.
+\newblock \showarticletitle{The Evaluation Protocol Is the Hidden Variable: A
+  Drift-Aware Re-Examination of Flow-Based Intrusion Detection Benchmarks}.
+\newblock \bibinfo{journal}{\emph{Preprints.org}} (\bibinfo{year}{2026}).
+\newblock
+\shownote{Preprint, posted 11 June 2026}.
+\newblock
+\href{https://doi.org/10.20944/preprints202606.0903.v1}{doi:\nolinkurl{10.20944/preprints202606.0903.v1}}
 
 
 \bibitem[Breunig et~al\mbox{.}(2000)]%
@@ -118,6 +170,19 @@
 \href{https://doi.org/10.1007/s10462-024-10995-w}{doi:\nolinkurl{10.1007/s10462-024-10995-w}}
 
 
+\bibitem[Catillo et~al\mbox{.}(2021)]%
+        {catillo2021critique}
+\bibfield{author}{\bibinfo{person}{Marta Catillo}, \bibinfo{person}{Andrea
+  Del~Vecchio}, \bibinfo{person}{Antonio Pecchia}, {and}
+  \bibinfo{person}{Umberto Villano}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{A Critique on the Use of Machine Learning on Public
+  Datasets for Intrusion Detection}. In \bibinfo{booktitle}{\emph{Quality of
+  Information and Communications Technology (QUATIC)}}.
+  \bibinfo{pages}{253--266}.
+\newblock
+\href{https://doi.org/10.1007/978-3-030-85347-1_19}{doi:\nolinkurl{10.1007/978-3-030-85347-1_19}}
+
+
 \bibitem[Catillo et~al\mbox{.}(2023)]%
         {catillo2023hype}
 \bibfield{author}{\bibinfo{person}{Marta Catillo}, \bibinfo{person}{Antonio
@@ -141,6 +206,17 @@
 \newblock \bibinfo{journal}{\emph{Electronics}} \bibinfo{volume}{9},
   \bibinfo{number}{5} (\bibinfo{year}{2020}), \bibinfo{pages}{800}.
 \newblock
+
+
+\bibitem[Davis and Goadrich(2006)]%
+        {davis2006prroc}
+\bibfield{author}{\bibinfo{person}{Jesse Davis} {and} \bibinfo{person}{Mark
+  Goadrich}.} \bibinfo{year}{2006}\natexlab{}.
+\newblock \showarticletitle{The Relationship Between Precision-Recall and {ROC}
+  Curves}. In \bibinfo{booktitle}{\emph{23rd International Conference on
+  Machine Learning (ICML)}}. \bibinfo{pages}{233--240}.
+\newblock
+\href{https://doi.org/10.1145/1143844.1143874}{doi:\nolinkurl{10.1145/1143844.1143874}}
 
 
 \bibitem[Ding and Fei(2013)]%
@@ -195,6 +271,42 @@
 \newblock
 
 
+\bibitem[Gurjar and Camp(2026)]%
+        {gurjar2026tailrisk}
+\bibfield{author}{\bibinfo{person}{Ambarish Gurjar} {and}
+  \bibinfo{person}{L.~Jean Camp}.} \bibinfo{year}{2026}\natexlab{}.
+\newblock \showarticletitle{Predicting Tail-Risk Escalation in {IDS} Alert Time
+  Series}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2601.14299}}
+  (\bibinfo{year}{2026}).
+\newblock
+
+
+\bibitem[Han et~al\mbox{.}(2022)]%
+        {han2022adbench}
+\bibfield{author}{\bibinfo{person}{Songqiao Han}, \bibinfo{person}{Xiyang Hu},
+  \bibinfo{person}{Hailiang Huang}, \bibinfo{person}{Mingqi Jiang}, {and}
+  \bibinfo{person}{Yue Zhao}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{{ADBench}: Anomaly Detection Benchmark}. In
+  \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}}.
+\newblock
+\shownote{arXiv:2206.09426}.
+\newblock
+
+
+\bibitem[{Hellsice}(2024)]%
+        {pyod561}
+\bibfield{author}{\bibinfo{person}{{Hellsice}}.}
+  \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{{ECOD} and {COPOD} decision functions switched}.
+\newblock \bibinfo{howpublished}{PyOD issue \#561,
+  \url{https://github.com/yzhao062/pyod/issues/561}}.
+\newblock
+\shownote{Opened 30 April 2024; open as of 27 August 2026}.
+\newblock
+
+
 \bibitem[Knoblauch and Damoulas(2018)]%
         {knoblauch2018bocpd}
 \bibfield{author}{\bibinfo{person}{Jeremias Knoblauch} {and}
@@ -231,12 +343,16 @@
 \bibitem[Li et~al\mbox{.}(2023)]%
         {li2023ecod}
 \bibfield{author}{\bibinfo{person}{Zheng Li}, \bibinfo{person}{Yue Zhao},
-  \bibinfo{person}{Xiyang Hu}, {et~al\mbox{.}}}
+  \bibinfo{person}{Xiyang Hu}, \bibinfo{person}{Nicola Botta},
+  \bibinfo{person}{Cezar Ionescu}, {and} \bibinfo{person}{George~H. Chen}.}
   \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{ECOD: Unsupervised Outlier Detection Using
+\newblock \showarticletitle{{ECOD}: Unsupervised Outlier Detection Using
   Empirical Cumulative Distribution Functions}.
-\newblock \bibinfo{journal}{\emph{IEEE TKDE}} (\bibinfo{year}{2023}).
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Knowledge and Data
+  Engineering}} \bibinfo{volume}{35}, \bibinfo{number}{12}
+  (\bibinfo{year}{2023}), \bibinfo{pages}{12181--12193}.
 \newblock
+\href{https://doi.org/10.1109/TKDE.2022.3159580}{doi:\nolinkurl{10.1109/TKDE.2022.3159580}}
 
 
 \bibitem[Manzoor et~al\mbox{.}(2018)]%
@@ -249,6 +365,18 @@
 \newblock
 
 
+\bibitem[{mbongaerts}(2022)]%
+        {pyod401}
+\bibfield{author}{\bibinfo{person}{{mbongaerts}}.}
+  \bibinfo{year}{2022}\natexlab{}.
+\newblock \bibinfo{title}{{ECOD} mixes train set and test set}.
+\newblock \bibinfo{howpublished}{PyOD issue \#401,
+  \url{https://github.com/yzhao062/pyod/issues/401}}.
+\newblock
+\shownote{Opened 28 April 2022; open as of 27 August 2026}.
+\newblock
+
+
 \bibitem[Mirsky et~al\mbox{.}(2018)]%
         {mirsky2018kitsune}
 \bibfield{author}{\bibinfo{person}{Yisroel Mirsky}, \bibinfo{person}{Tomer
@@ -256,6 +384,45 @@
   Shabtai}.} \bibinfo{year}{2018}\natexlab{}.
 \newblock \showarticletitle{Kitsune: An Ensemble of Autoencoders for Online
   Network Intrusion Detection}. In \bibinfo{booktitle}{\emph{NDSS}}.
+\newblock
+
+
+\bibitem[Moczkodan and Ragab(2026)]%
+        {moczkodan2026transformers}
+\bibfield{author}{\bibinfo{person}{Zach Moczkodan} {and} \bibinfo{person}{Hany
+  Ragab}.} \bibinfo{year}{2026}\natexlab{}.
+\newblock \showarticletitle{Do Transformers Actually Help Intrusion Detection?
+  A Temporal Sequence Evaluation on {CIC-IDS2017}}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2606.11098}}
+  (\bibinfo{year}{2026}).
+\newblock
+
+
+\bibitem[Olszewski et~al\mbox{.}(2023)]%
+        {olszewski2023reproducibility}
+\bibfield{author}{\bibinfo{person}{Daniel Olszewski}, \bibinfo{person}{Allison
+  Lu}, \bibinfo{person}{Carson Stillman}, \bibinfo{person}{Kevin Warren},
+  \bibinfo{person}{Cole Kitroser}, \bibinfo{person}{Alejandro Pascual},
+  \bibinfo{person}{Divyajyoti Ukirde}, \bibinfo{person}{Kevin Butler}, {and}
+  \bibinfo{person}{Patrick Traynor}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{``Get in Researchers; We're Measuring
+  Reproducibility'': A Reproducibility Study of Machine Learning Papers in Tier
+  1 Security Conferences}. In \bibinfo{booktitle}{\emph{ACM SIGSAC Conference
+  on Computer and Communications Security (CCS)}}. \bibinfo{pages}{3433--3459}.
+\newblock
+\href{https://doi.org/10.1145/3576915.3623130}{doi:\nolinkurl{10.1145/3576915.3623130}}
+
+
+\bibitem[Pendlebury et~al\mbox{.}(2019)]%
+        {pendlebury2019tesseract}
+\bibfield{author}{\bibinfo{person}{Feargus Pendlebury}, \bibinfo{person}{Fabio
+  Pierazzi}, \bibinfo{person}{Roberto Jordaney}, \bibinfo{person}{Johannes
+  Kinder}, {and} \bibinfo{person}{Lorenzo Cavallaro}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{{TESSERACT}: Eliminating Experimental Bias in
+  Malware Classification across Space and Time}. In
+  \bibinfo{booktitle}{\emph{28th USENIX Security Symposium}}.
+  \bibinfo{pages}{729--746}.
 \newblock
 
 
@@ -279,6 +446,18 @@
 \newblock \bibinfo{journal}{\emph{Computers \& Security}}
   (\bibinfo{year}{2019}).
 \newblock
+
+
+\bibitem[Saito and Rehmsmeier(2015)]%
+        {saito2015prplot}
+\bibfield{author}{\bibinfo{person}{Takaya Saito} {and} \bibinfo{person}{Marc
+  Rehmsmeier}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{The Precision-Recall Plot Is More Informative than
+  the {ROC} Plot When Evaluating Binary Classifiers on Imbalanced Datasets}.
+\newblock \bibinfo{journal}{\emph{PLOS ONE}} \bibinfo{volume}{10},
+  \bibinfo{number}{3} (\bibinfo{year}{2015}), \bibinfo{pages}{e0118432}.
+\newblock
+\href{https://doi.org/10.1371/journal.pone.0118432}{doi:\nolinkurl{10.1371/journal.pone.0118432}}
 
 
 \bibitem[Sharafaldin et~al\mbox{.}(2018)]%

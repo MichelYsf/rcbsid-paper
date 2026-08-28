@@ -58,12 +58,39 @@ degeneracy are supporting findings, not the headline.
    - **not a full ranking reversal** — it is a rotation, Kendall tau -0.333,
      with 1 of 3 pairwise orderings preserved (proposed > HST holds in both);
    - **not a causal claim about prevalence in deployment** — the effect is
-     measured under a fixed 70/15/15 tail split, no split-rule sensitivity
-     check exists, and the mechanism is dilution by attack-free days rather
-     than any redistribution of attacks;
+     measured under a fixed 70/15/15 tail split, and the mechanism is dilution
+     by attack-free days rather than any redistribution of attacks. *Amended
+     2026-08-27:* this bullet previously read "no split-rule sensitivity check
+     exists". One does now — A2 sweeps seven chronological cuts from 60% to
+     90% and finds the measured ordering changes with the cut, so the fixed
+     split is not neutral either. The bullet's conclusion is unchanged and
+     strengthened; only its stated reason was stale;
    - **not a performance claim** — read against a chance floor equal to test
      prevalence, no method clears floor by more than 0.073 on the natural arm
      and HST sits 0.093 below it.
+
+9. **Reported precision, and derivation from reported values.** Every metric is
+   reported at six decimal places (`provenance.REPORT_DP`). A quantity derived
+   from other reported quantities — a margin, a spread, a difference, a
+   normalized lift — is computed from their **reported** values, not from the
+   full-precision values behind them.
+
+   The alternative rule (derive at full precision, round only for display)
+   keeps each statistic exactly what the data says, and was rejected for two
+   reasons. It makes the printed page fail to add up: a margin derived at full
+   precision rounded to 0.061125 while the two AUC-PR values printed beside it
+   differ by 0.061126, so a reader checking the arithmetic in a paper that
+   invites exactly that check finds a mismatch. And it is not implementable
+   downstream: manifests store values already rounded to six places, so the
+   full-precision value is not recoverable by the display layer — the choice is
+   between deriving from reported values and storing more digits everywhere.
+
+   The cost is that a derived value may differ from its full-precision
+   counterpart by a few units in the last reported place — under 1e-05 across
+   this paper, orders of magnitude below any claimed effect. The benefit is an
+   exact guarantee: **every derived number on the page equals the arithmetic a
+   reader performs on the numbers printed beside it.**
+   `scripts/check_decimals.py` enforces it and fails the build otherwise.
 
 ## Corrected incidents created by this re-scope
 
@@ -637,3 +664,334 @@ on the default path before use. The dumps reproduce the archived arms exactly
 on the assembled arm and to 1.8e-05 AUC-PR on the timestamp-ordered arm, whose
 archived value was produced on Linux against this pass on Windows — the
 cross-platform class recorded in CI-16.
+
+### CI-22 — the provenance gate certified a file it generated itself
+`check_provenance.py` scans one target: `paper/numbers.tex`. That file is
+generated *from* the manifests, so it cannot contain an unmanifested number,
+and the gate has been printing "every number in the manuscript traces to a run
+manifest" while never opening the manuscript. Three defects of the same class
+shipped past a green gate: CI-11 (the pooled attack count in a manuscript-bound
+table), CI-19 (caught only by an independent auditor), and the four
+shared-record AUC-ROC values typed into Table 4 in the previous round. The
+pattern is stable — the gate certifies the generated file, the defect lives in
+the hand-written one.
+
+**Fix (structural, not four numbers).** `scripts/check_literals.py` now scans
+the manuscript, every `.tex` it `\input`s, and every file the claim ledger
+cites, for measurement-shaped numbers with no corresponding value in the macro
+index; `check_provenance.py` runs it and fails on it. Files whose purpose is to
+record numbers — this file, `AUDIT_FINDINGS.md`, `SUPERSEDED.md`, and the gate's
+own fake-number fixtures — are scanned and reported but not failed on, because
+forcing a withdrawn value through the macro layer would manifest an error as a
+measurement. Genuine non-measurements in enforced files (ACM CCS concept
+identifiers, the cited 60/360/4320-minute SRE window) sit in a named allowlist
+with a stated reason, so an exclusion is a recorded decision rather than a
+silent hole. The gate's success message no longer claims more than it checked.
+
+**First run over the repository: 88 findings.** Four were the known Table 4
+literals; 28 more were in `findings_review_analyses.md`, whose A2 sweep table
+and A1 AUC-ROC columns were printed without ever being emitted as macros —
+the same defect as CI-11, in the file the ledger cites as the evidence for the
+round's new claims. The rest were a sign-handling false-positive class (a
+`-0.3333` macro read as the literal `0.333`, now fixed), record-only files, and
+six derived values in generated findings files that were arithmetic
+consequences of archived macros and are now emitted as such. One value —
+the `P(r=0)` peak of a *discarded* first attempt at the BOCPD repair — had no
+manifest because that attempt was never archived; it was deleted from the
+findings generator rather than back-filled, per the project's own rule.
+
+### CI-23 — a background launch reported failure while its process kept running
+The first launch of the round-3 analysis was issued as a backgrounded shell
+command whose stdout redirect failed. The tool reported exit code 1, and that
+was read as "the run did not start". It had started. Fifty minutes later a
+process listing showed **two** concurrent copies of `run_review_analyses.py`,
+each holding several GB and each due to write the same manifest directory and
+overwrite the same findings file — the collision class that produced the OOM
+recorded in CI-8, plus a manifest race that could have archived one run's
+numbers under the other's inputs. The duplicate was identified by command line,
+killed by PID, and verified gone; no partial manifest was written, because
+manifests are committed at run completion and the kill left no handler to run.
+
+**Rule.** A nonzero exit from a launcher is evidence about the launcher, not
+about the process it launched. Before treating a background job as dead, list
+processes and match on the command line. Never infer liveness from the log
+file, which is exactly what failed here.
+
+### CI-24 — a document-only re-run claimed compute it did not perform
+Re-running the Stage 6 ablation to regenerate its findings document took the
+cached path, reusing arm metrics from the 24 Aug run as designed — and then
+emitted `SSixTotalWallS` for its own 128 s elapsed time, against the measuring
+run's 155.3 s. The gate refused to render `numbers.tex`: two runs claiming one
+macro with different values. Both numbers were true of their own run, which is
+what made the macro name wrong. Fixed by having the cached path emit no stage
+wall-time macro and record a note instead; the over-claiming manifest was
+deleted and the run repeated. **Rule:** a run may only claim a macro for work
+it actually did, and "reused from cache" is not "performed".
+
+### CI-25 — a withdrawal was prepared for a submission that never existed
+The previous round prepared, to the last click, an author-initiated withdrawal
+of the companion manuscript (`arXiv:2510.09619`) from IEEE TIFS: a finalized
+letter, an addressee, a portal-migration note, an execution order that put the
+withdrawal *first*, an arXiv correction note announcing the withdrawal
+publicly, a manuscript sentence and a confidential editor-note sentence both
+stating that the relevant editors had been informed.
+
+**There was no TIFS submission.** Verified by the author in the IEEE Author
+Portal on 2026-08-27: filters set to *All Publications* and *All Submission
+Statuses* return exactly one record, `TDSC-2025-10-1842`, rejected 22 October
+2025, and no TIFS record of any kind. The companion is a public preprint and is
+not under review anywhere.
+
+**How it happened.** The venue was researched and the submission was not. The
+round fetched the editor-in-chief, the ScholarOne-to-Author-Portal migration,
+and IEEE's non-self-service withdrawal procedure — all accurate about TIFS, and
+none of it capable of establishing that a manuscript had been submitted there.
+The one signal pointing at the truth was logged and misread: the manuscript ID
+was recorded as "not on this machine" after an exhaustive search, and treated
+as *the operator must retrieve it* when it was equally consistent with *there
+is nothing to retrieve*. A thorough search returning nothing is evidence about
+the thing, not only about the search.
+
+**What was false, and where.** Two of the statements had reached artifacts
+bound for publication: the manuscript's Companion Manuscript Disclosure
+("a correction process ... has been disclosed to the relevant editors") and the
+confidential editor note ("the relevant journal has been or is being
+informed" — whose "has been or is being" hedge concealed that nobody knew
+which). A third was queued for a public, permanent arXiv Comments field ("has
+been withdrawn from journal consideration by the author"). All three are
+corrected; the letter is retired in place with a notice; `SIBLING_DECISION.md`
+is replaced by the verified state; the withdrawal-first ordering is removed
+from `HUMAN_ACTIONS.md`; and a third arXiv comment variant that makes no venue
+claim at all is now the one to paste.
+
+**Rule.** Before preparing any artifact that asserts a venue relationship — a
+withdrawal, a disclosure, a correction note, a cover-letter sentence — verify
+that the relationship exists against the venue's own system, and record the
+verification with its date and source. Researching a venue's *procedures* is
+not verification of a submission's *existence*. A hedge like "has been or is
+being" in a factual disclosure is a signal that the fact was never checked.
+
+### CI-26 — two citations resolved to nothing under a "0 undefined" verdict
+The previous round added three concurrent-work citations to the manuscript and
+recorded the compile as "3-pass, exit 0, **0 undefined references**, 13 pp".
+Two of the three — `barrett2026firce` and `gurjar2026tailrisk` — were never
+added to `references.bib`, so both rendered as `[?]` in the shipped PDF. The
+verdict was not wrong, it was answering a different question: natbib reports a
+missing bibliography entry as a *citation* warning, not as a LaTeX *undefined
+reference*, so a document can carry dangling citations and report zero
+undefined references truthfully.
+
+This is the CI-22 pattern in a second mechanism: a check that reads as
+comprehensive because of what it is named, while the defect sits just outside
+what it actually inspects. Fixed by extending `check_manuscript_macros.py` to
+parse every `\\cite*` key out of the manuscript and its inputs and fail on any
+key with no entry in the bibliography — the citation analogue of the macro
+check it already performed. Both missing works were then verified against their
+arXiv listings before their entries were written: FIRCE (Barrett, Li, Dorai,
+Rajaganapathy, arXiv:2605.01962, 3 May 2026) and Gurjar and Camp
+(arXiv:2601.14299, 16 January 2026).
+
+### CI-27 — a generated artifact was fixed in its generator and never regenerated
+Two withdrawn claims were corrected in `scripts/make_contrast_deliverables.py`
+and the script was never re-run, so `findings_contrast.md` continued to ship
+the heading "Contrast 1 --- CICIDS2017, order only (prevalence held constant)",
+the sentence "Order is the only manipulated variable", and the assertion "No
+split-rule sensitivity check has been run" --- the first two withdrawn by CI-21
+(A1), the third falsified by A2's seven-cut sweep, which the manuscript carries
+as a live subsection. The file is cited by the claim ledger and ships inside
+both `artifact_anonymous.zip` and the Zenodo bundle, so a referee opening the
+artifact would have found it contradicting the paper it accompanies.
+
+Editing a generator is not a fix; running it is. The gates could not catch this
+because every number in the stale file still resolved to a manifest --- the
+defect was in prose, and prose is exactly what the provenance layer does not
+check. **Rule:** after editing any script that writes a tracked artifact,
+re-run it in the same change and diff the output; treat an artifact whose
+generator is newer than itself as stale by definition.
+
+The same sweep found the withdrawn split-rule claim surviving independently in
+`README.md`, `REBUILD_STATUS.md` and `REVIEWER_KIT/RESPONSE_SHELF.md`; a
+corrected-incident count of 18 in six places against a log of 26; stale gate
+statistics (356 and 362 macros against 564) and a stale page count (9 pp, then
+10 pp in the arXiv metadata, against 17); and five self-descriptive universals
+in the manuscript that its own tables falsify --- "every number in this paper
+is a macro" (protocol constants and cited third-party values are typed),
+"every AUC-PR is reported with normalized lift" (four tables print none),
+"every ECOD number is scored validation-plus-test" (two analyses score
+test-only), an unsourced comparison against "most of the differences this
+literature reports", and a binding share quoted from a 50,000-record prefix to
+characterise a 240,000-record slice. All are corrected; the binding share is
+now measured on the slice it describes (\RevBranchAuxBindsHeldoutPct,
+58.452%, emitted by `scripts/emit_branch_binding_macro.py` from the archived
+components).
+
+### CI-28 — the printed page did not add up, and nothing checked whether it did
+The three-auditor sweep found the natural-arm margin printed as 0.061125 beside
+two AUC-PR values whose difference is 0.061126. It was filed as a NIT and first
+answered with a caption clause explaining that margins are rounded
+independently of the cells — a hedge, and the wrong repair: it documented the
+inconsistency instead of removing it.
+
+Sweeping every derived quantity against its printed operands found **four**
+such disagreements out of 21 (the natural-arm margin and three normalized
+lifts), each one or two units in the sixth decimal. The seventeen that agreed
+are why the four were invisible: a background of agreement reads as a rule
+being followed.
+
+A second, independent defect surfaced in the same sweep: display width. Because
+the renderer used `repr()`, trailing zeros vanished, so an AUC-ROC of 0.799910
+printed as `0.79991` five wide beside six-wide neighbours in the same table,
+and unrounded floats reached `numbers.tex` at fifteen and sixteen decimals.
+Metric families now render at a fixed width.
+
+Both are closed by binding rule 9 and by `scripts/check_decimals.py`, which
+fails the build if any derived value disagrees with its printed operands or if
+a metric family renders at more than one width. Neither check can be satisfied
+by editing the manuscript: both read the generated macro file and the archived
+index, so the only way to pass is to fix the emitting run — which is why the
+four values were corrected by re-running the analysis under the new rule rather
+than by patching the file.
+
+### CI-29 — the heredoc ate a backslash again, and only a new check saw it
+The tab:branch caption added during the round-3 sweep was written through a
+shell heredoc. Its `\ref` became a carriage return plus `ef`, so the caption
+read "differ from Table~" / "ef{tab:contrast}" -- and the same damage was
+copied into both staged package trees. This is the CI-19 defect exactly,
+in a project that had already recorded the rule it violates ("backslash-bearing
+edits go through script files only"), which is worth stating plainly: the rule
+was written down, and written down was not enough.
+
+Nothing in the existing gate could see it. The compile reported **zero
+undefined references** and was right to: a `\ref` without its backslash is not
+a reference, so it is not an undefined one -- it is prose that typesets as the
+literal string `ef{tab:contrast}`. The provenance, literal and decimal checks
+all read numbers, and this is markup.
+
+`scripts/check_control_chars.py` now scans the manuscript and both package
+copies for raw control characters and for the orphaned macro fragments the
+common escapes leave behind (`ef{`, `abel{`, `egin{`, `pprox`, `ottomrule`,
+and the rest), and the gate runs it. Its first honest run found both sites in
+all three trees; it now passes. Note the check itself had to be corrected
+before it was trustworthy: its first version flagged every line of every file,
+because these sources are stored CRLF and it was treating the line terminator
+as damage.
+
+### CI-30 — half of the protocol table was off the page in three shipped PDFs
+`tab:protocol` used an unwrapped `ll` column spec, so its settings column ran
+past the measure by **1639pt**. Five rows were clipped mid-sentence in
+`paper/main.pdf`, `packages/arxiv_v3/src/main.pdf` and
+`packages/dtrap/manuscript_anonymous.pdf`. What was unreadable: the operative
+half of the reporting-precision rule adopted the same round (the exactness
+guarantee and the 1e-05 bound), the **bolded ECOD label-access disclosure** —
+a load-bearing honesty caveat about this paper's own comparisons — the
+average-precision definition with its scikit-learn version, the feature
+encoding note, and the update-timing rule.
+
+TeX reports an overfull \hbox and continues. The compile exited 0 with **zero
+undefined references** and the round's own report counted the protocol table
+among the material that strengthens the protocol description, while half of it
+could not be read. Every check in this repository reads sources — numbers,
+citations, markup — and none read the log.
+
+Fixed by a wrapping column spec; two further overfulls found in the same pass
+(78pt and 16pt, both long unbreakable `\texttt` runs) were fixed by giving
+them break opportunities and by setting the ECOD call on its own line.
+`scripts/check_overfull.py` now parses the LaTeX logs and fails the build on
+anything over 2pt; the gate runs it. Both builds are now clean.
+
+### CI-31 — the packages went stale, including the one with an immutable DOI
+Two staged artifacts had fallen behind the tree they claim to archive.
+
+The **Zenodo code zip** was three days and one full correction round old: 510
+macros against 564, a corrected-incident log stopping at CI-21, the sentence
+CI-21 withdrew ("Order is the only manipulated variable") still in
+`findings_contrast.md`, and the four full-precision derived values that binding
+rule 9 exists to remove. Its manifest bundle was 20 manifests short and carried
+two **retired** manifests at top level as though live, and its
+`superseded/README.md` documented 11 retirements against the repository's 18 —
+while the deposit description promises every retirement reason. This is the
+first artifact `HUMAN_ACTIONS.md` publishes, under a DOI that cannot be
+withdrawn. It was stale because it was the one package with no build script:
+every other package was rebuilt that round by running its builder.
+
+The **DTRAP artifact** was rebuilt 37 seconds before the last source edit, so
+it shipped a `check_provenance.py` that never called `check_control_chars` —
+a referee running the artifact's own gate would have run a weaker one than the
+repository's.
+
+Two content defects surfaced with them. `findings_review_analyses.md` was
+absent from the artifact's include list although the `CLAIM_LEDGER.md` inside
+the same zip cites it in five rows: extracting the zip and running the ledger
+check failed immediately, on the artifact's own missing evidence — and the
+missing file is the one carrying A1, the analysis that refutes this paper's
+own earlier headline, denied to the one audience that cannot ask for it. And
+`results/manifests/superseded/README.md` never shipped at all, because the
+manifest glob takes `*.json` and the retirement reasons live in a README.
+
+Fixed: `scripts/build_zenodo_package.py` rebuilds the deposit deterministically
+from the tree; the artifact builder now derives its findings set from the
+`file:` references in the claim ledger, so the two cannot disagree again, and
+includes the superseded README; `scripts/check_package_freshness.py` fails the
+build when any staged artifact predates its sources, and the gate runs it. It
+does not verify content — a package can be newer and still wrong — but it
+catches the failure that actually happened, twice.
+
+### CI-32 — the exclusion guard missed the escaped unit, and fabricated digits
+Binding rule 9 excludes percentage-scaled values from the six-decimal metric
+family precisely because six decimals on a value emitted with four would
+fabricate digits. The guard tested `unit in {"%", "pp", ...}` and, as a
+fallback, `"[%]" in desc`. Eight prevalence macros are emitted by
+`build_natural_streams.py` with `unit=r"\%"` -- LaTeX-escaped, unlike every
+other percent macro in the project -- and their generated comment tag is
+therefore `[\%]`. Neither guard matched. The desc keyword "prevalence" then
+matched, `is_metric` returned true, and the renderer forced `%.6f`.
+
+The result reached the compiled manuscript: Table 1 printed the CICIDS
+whole-stream prevalence as **22.060100%** and its held-out prevalence as
+**68.235000%**, both padded from four decimals, while the contributions list and
+Section 5 print **22.060125%** for the same quantity and the abstract prints
+**68.235%**. Two renderings of one number, one of them carrying two digits that
+are not measurements. `352962/1600000 = 22.060125` exactly, so the padded form
+was also the less accurate one.
+
+The width check could not see it: none of the eight ends in a listed suffix, so
+all eight landed in the catch-all family together, at a uniform six decimals,
+and read as compliant. **A uniform width is not evidence of a correct width.**
+
+Fixed by normalising escaped units and comment tags in `is_metric`, and by
+emitting a bare `%` from the stream builder. The eight now render at the four
+decimals they were measured to, and Table 1 agrees with the abstract.
+
+### CI-33 — an invariant written for a human to check, that nobody executed
+`PUBLISH_INSTRUCTIONS.md` lists five invariants that must hold "before any of
+them leaves this machine". Invariant 5 is "git status clean, branch pushed".
+At the close of the final content round it was false: 120 uncommitted paths,
+the branch with no upstream at all, and **61 of 65 live run manifests recording
+a `-dirty` commit** -- a sha that is not resolvable from the public repository,
+so a reader cannot reach the code behind those numbers. `zenodo_metadata.md`
+names the GitHub repository and branch as an *is derived from* identifier on a
+deposit that cannot be withdrawn.
+
+Every other invariant was green and the round was declared closed. The
+difference between invariant 5 and the rest is that the rest are commands and
+invariant 5 was a sentence. This is the project's own thesis turned on its own
+release procedure: an assertion nobody executes enforces nothing.
+
+`scripts/check_publish_ready.py` now executes it -- clean tree, published HEAD,
+and no live manifest citing a dirty commit -- exposed as
+`check_provenance.py --publish-ready`. It is deliberately **not** in the default
+gate: the build gate asks whether the tree is internally consistent, this asks
+whether it is publishable, and running the second on every build would make
+every working state red and train the operator to ignore it. It is named in
+`PUBLISH_INSTRUCTIONS.md` invariant 5 and as a step in `HUMAN_ACTIONS.md` before
+the Zenodo deposit. **It does not pass as of 2026-08-27, by design: the round is
+uncommitted.** Committing and pushing is the operator's decision, not the
+build's.
+
+**The pattern across CI-22, CI-24, CI-26 and CI-27 is one pattern:** a check or
+a claim that reads as universal while covering less than its wording implies.
+The provenance gate said "every number in the manuscript" and read one
+generated file; the compile check said "0 undefined references" and did not
+look at citations; the manuscript said "every number is a macro" while typing
+protocol constants. The discipline that catches these is not another gate --- it
+is reading the sentence and asking what it would take for it to be false.

@@ -14,8 +14,9 @@
 \newcommand{\CicidsArmPrevalencePct}{22.060125}  % whole-stream prevalence, identical in both arms [%] -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsArmRows}{1600000}  % rows in each CICIDS arm -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsAttacksMovedOutOfHeldout}{103189}  % attacks the interleaving moves out of the held-out slice -- cicids_heldout_composition_20260819T120420_ebb7c281
-\newcommand{\CicidsFridayHeldoutDensityPct}{77.66}  % attack density of the synthetic arm's Friday held-out sub-slice [%] -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\CicidsHeldoutAttackFreeRows}{162000}  % synthetic held-out rows from days contributing zero attacks (Mon-Thu) -- supplementary_macros_20260826T203256_e6d08f4a
+\newcommand{\CicidsEcodScoringBatch}{480000}  % records in the single decision_function call that produced every CICIDS arm's ECOD scores (validation+test, scored together) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\CicidsFridayHeldoutDensityPct}{77.66}  % attack density of the synthetic arm's Friday held-out sub-slice [%] -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\CicidsHeldoutAttackFreeRows}{162000}  % synthetic held-out rows from days contributing zero attacks (Mon-Thu) -- supplementary_macros_20260827T133305_6eed1c28
 \newcommand{\CicidsHeldoutOverlap}{78000}  % records held out by BOTH arms -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsHeldoutOverlapPct}{32.5}  % held-out slice overlap between the two arms [%] -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsHeldoutSize}{240000}  % held-out records per arm -- cicids_heldout_composition_20260819T120420_ebb7c281
@@ -44,11 +45,11 @@
 \newcommand{\ContrastCicidsTwoZeroOneSevenNaturalProposedDetectorAucpr}{0.728337}  % cicids2017/natural/proposed_detector AUC-PR -- s4_construction_contrast_20260819T090813_46e9bd32
 \newcommand{\ContrastCicidsDim}{84}  % CICIDS2017 feature dimensionality d -- s4_construction_contrast_20260819T120805_e039fe95
 \newcommand{\ContrastLitnetBlasterWormDim}{36}  % litnet blaster_worm feature dimensionality d -- s4_construction_contrast_20260819T120805_d7663935
-\newcommand{\ContrastLitnetBlasterWormNaturalEcodAucpr}{0.03571}  % litnet_blaster_worm/natural/ecod AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
+\newcommand{\ContrastLitnetBlasterWormNaturalEcodAucpr}{0.035710}  % litnet_blaster_worm/natural/ecod AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetBlasterWormNaturalHstAucpr}{0.147731}  % litnet_blaster_worm/natural/hst AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetBlasterWormNaturalProposedDetectorAucpr}{0.964091}  % litnet_blaster_worm/natural/proposed_detector AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetPooledCompositeSyntheticEcodAucpr}{0.229143}  % litnet_pooled/composite_synthetic/ecod AUC-PR -- s4_construction_contrast_20260819T064027_a3c43fc6
-\newcommand{\ContrastLitnetPooledCompositeSyntheticHstAucpr}{0.23884}  % litnet_pooled/composite_synthetic/hst AUC-PR -- s4_construction_contrast_20260819T064027_a3c43fc6
+\newcommand{\ContrastLitnetPooledCompositeSyntheticHstAucpr}{0.238840}  % litnet_pooled/composite_synthetic/hst AUC-PR -- s4_construction_contrast_20260819T064027_a3c43fc6
 \newcommand{\ContrastLitnetPooledCompositeSyntheticHstAucprSeedTwoThree}{0.177599}  % litnet_pooled/composite_synthetic/hst AUC-PR (seed 23) -- s4_construction_contrast_20260819T120805_d7663935
 \newcommand{\ContrastLitnetPooledCompositeSyntheticHstAucprSeedFourSeven}{0.367761}  % litnet_pooled/composite_synthetic/hst AUC-PR (seed 47) -- s4_construction_contrast_20260819T120805_785761c7
 \newcommand{\ContrastLitnetPooledCompositeSyntheticProposedDetectorAucpr}{0.943056}  % litnet_pooled/composite_synthetic/proposed_detector AUC-PR -- s4_construction_contrast_20260819T064027_a3c43fc6
@@ -60,47 +61,95 @@
 \newcommand{\ContrastLitnetUdpFloodNaturalEcodAucpr}{0.321185}  % litnet_udp_flood/natural/ecod AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetUdpFloodNaturalHstAucpr}{0.552675}  % litnet_udp_flood/natural/hst AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetUdpFloodNaturalProposedDetectorAucpr}{0.394428}  % litnet_udp_flood/natural/proposed_detector AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
-\newcommand{\ReproCicidsTwoZeroOneSevenCopodAucpr}{0.423156400711175}  % cicids2017 copod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\ReproCicidsTwoZeroOneSevenCopodAucroc}{0.8117111519918692}  % cicids2017 copod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
+\newcommand{\LitnetCaptureEcodScoringBatch}{150000}  % records per decision_function call for each per-capture LITNET ECOD score -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\LitnetCaptureHeldoutRows}{75000}  % held-out rows per LITNET capture; three of these tile the pooled held-out slice exactly -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\LitnetCaptureValBoundary}{425000}  % row index where each LITNET capture's held-out slice begins; three of these sum to the pooled boundary -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\LitnetPooledEcodScoringBatch}{450000}  % records in the decision_function call that produced the pooled LITNET ECOD score -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\LitnetPooledValBoundary}{1275000}  % row index where the pooled LITNET stream's held-out slice begins -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\ReproCicidsTwoZeroOneSevenCopodAucpr}{0.423156}  % cicids2017 copod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
+\newcommand{\ReproCicidsTwoZeroOneSevenCopodAucroc}{0.811711}  % cicids2017 copod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\ReproCicidsTwoZeroOneSevenCopodFOne}{0.6315339457576926}  % cicids2017 copod f1 reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\ReproCicidsTwoZeroOneSevenEcodAucpr}{0.418965884610567}  % cicids2017 ecod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\ReproCicidsTwoZeroOneSevenEcodAucroc}{0.8075728351061373}  % cicids2017 ecod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
+\newcommand{\ReproCicidsTwoZeroOneSevenEcodAucpr}{0.418966}  % cicids2017 ecod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
+\newcommand{\ReproCicidsTwoZeroOneSevenEcodAucroc}{0.807573}  % cicids2017 ecod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\ReproCicidsTwoZeroOneSevenEcodFOne}{0.6608455997494519}  % cicids2017 ecod f1 reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\ReproLitnetTwoZeroTwoZeroCopodAucpr}{0.2081268016942385}  % litnet2020 copod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\ReproLitnetTwoZeroTwoZeroCopodAucroc}{0.7799536395399809}  % litnet2020 copod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
+\newcommand{\ReproLitnetTwoZeroTwoZeroCopodAucpr}{0.208127}  % litnet2020 copod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
+\newcommand{\ReproLitnetTwoZeroTwoZeroCopodAucroc}{0.779954}  % litnet2020 copod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\ReproLitnetTwoZeroTwoZeroCopodFOne}{0.2731094221052184}  % litnet2020 copod f1 reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\ReproLitnetTwoZeroTwoZeroEcodAucpr}{0.229143068911574}  % litnet2020 ecod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\ReproLitnetTwoZeroTwoZeroEcodAucroc}{0.7367741472468452}  % litnet2020 ecod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
+\newcommand{\ReproLitnetTwoZeroTwoZeroEcodAucpr}{0.229143}  % litnet2020 ecod auc_pr reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
+\newcommand{\ReproLitnetTwoZeroTwoZeroEcodAucroc}{0.736774}  % litnet2020 ecod auc_roc reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\ReproLitnetTwoZeroTwoZeroEcodFOne}{0.3246141348497157}  % litnet2020 ecod f1 reproduced on the rebuilt stream -- stage0_reproduction_checks_20260817T221558_53c31fe7
-\newcommand{\RevBranchAuxOnlyAucpr}{0.60027}  % AuxOnly AUC-PR on the natural held-out slice -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevBranchAuxOnlyAucroc}{0.28189}  % AuxOnly AUC-ROC on the natural held-out slice -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevBranchCombinedAucpr}{0.728355}  % Combined AUC-PR on the natural held-out slice -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevBranchCombinedAucroc}{0.526623}  % Combined AUC-ROC on the natural held-out slice -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevBranchTailMinusCombinedAucpr}{0.103477}  % tail-only minus combined AUC-PR -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevBranchTailMinusCombinedAucroc}{0.302658}  % tail-only minus combined AUC-ROC -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevBranchTailOnlyAucpr}{0.831832}  % TailOnly AUC-PR on the natural held-out slice -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevBranchTailOnlyAucroc}{0.829281}  % TailOnly AUC-ROC on the natural held-out slice -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevReproNaturalAucpr}{0.728355}  % detector AUC-PR on the natural held-out slice, recomputed from the score dump -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevReproNaturalDelta}{1.793e-05}  % natural arm reproduction delta against the archive -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevReproSyntheticAucpr}{0.544998}  % detector AUC-PR on the synthetic held-out slice, recomputed from the score dump -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedAttacks}{60575}  % attacks among the shared held-out records -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedDetectorNaturalAucpr}{0.905613}  % detector AUC-PR on shared records, natural arm -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedDetectorNaturalNormLift}{0.577492}  % detector normalized lift on shared records, natural -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedDetectorSpread}{0.005242}  % detector AUC-PR difference between arms on the identical shared records -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedDetectorSyntheticAucpr}{0.900371}  % detector AUC-PR on shared records, synthetic arm -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedDetectorSyntheticNormLift}{0.554029}  % detector normalized lift on shared records, synthetic -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedEcodNaturalAucpr}{0.844487}  % ECOD AUC-PR on shared records, natural arm -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedEcodNaturalNormLift}{0.303874}  % ECOD normalized lift on shared records, natural -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedEcodSyntheticAucpr}{0.849842}  % ECOD AUC-PR on shared records, synthetic arm -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedEcodSyntheticNormLift}{0.327844}  % ECOD normalized lift on shared records, synthetic -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedInversionSurvives}{0}  % 1 if ECOD>detector natural AND detector>ECOD synthetic on the SHARED records -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedMarginNatural}{0.061125}  % detector minus ECOD AUC-PR on shared records, natural arm -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedMarginSynthetic}{0.050529}  % detector minus ECOD AUC-PR on shared records, synthetic arm -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedPrevalence}{0.776603}  % attack prevalence of the shared held-out records -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSharedRecords}{78000}  % records held out by BOTH arms -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSplitCuts}{7}  % chronological cut points evaluated -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevSplitEcodWins}{3}  % cut points where ECOD exceeds the detector (natural arm) -- review_bounded_analyses_20260826T224417_b8314db2
-\newcommand{\RevTailCarriesCombined}{0}  % 1 if tail-only AUC-PR matches combined within 0.01 -- review_bounded_analyses_20260826T224417_b8314db2
+\newcommand{\RevBranchAuxBindsHeldoutPct}{58.452}  % share of the natural held-out slice on which the auxiliary branch exceeds the tail branch and so determines the deployed score [%] -- branch_binding_share_20260827T124213_427eee94
+\newcommand{\RevBranchAuxOnlyAucpr}{0.600270}  % AuxOnly AUC-PR on the natural held-out slice -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevBranchAuxOnlyAucroc}{0.281890}  % AuxOnly AUC-ROC on the natural held-out slice -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevBranchCombinedAucpr}{0.728355}  % Combined AUC-PR on the natural held-out slice -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevBranchCombinedAucroc}{0.526623}  % Combined AUC-ROC on the natural held-out slice -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevBranchHeldoutRows}{240000}  % records in the natural held-out slice used for the branch-binding share -- branch_binding_share_20260827T124213_427eee94
+\newcommand{\RevBranchTailMinusCombinedAucpr}{0.103477}  % tail-only minus combined AUC-PR -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevBranchTailMinusCombinedAucroc}{0.302658}  % tail-only minus combined AUC-ROC -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevBranchTailOnlyAucpr}{0.831832}  % TailOnly AUC-PR on the natural held-out slice -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevBranchTailOnlyAucroc}{0.829281}  % TailOnly AUC-ROC on the natural held-out slice -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevEcodBatchTwoFourZeroZeroZeroZeroAucpr}{0.758205}  % ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 240000 -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevEcodBatchThreeZeroZeroZeroZeroZeroAucpr}{0.760029}  % ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 300000 -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevEcodBatchThreeSixZeroZeroZeroZeroAucpr}{0.762108}  % ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 360000 -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevEcodBatchFourEightZeroZeroZeroZeroAucpr}{0.755142}  % ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 480000 -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevEcodBatchDelta}{0.003063}  % AUC-PR difference on identical records between the 240k-alone and 480k-paired scoring batches -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevEcodBatchEvalRecords}{240000}  % records in the fixed evaluated index set (A4) -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevEcodBatchLadderOne}{300000}  % intermediate scoring batch 1 of the ECOD batch-size ladder -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\RevEcodBatchLadderTwo}{360000}  % intermediate scoring batch 2 of the ECOD batch-size ladder -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\RevEcodBatchSpread}{0.006966}  % AUC-PR spread across the batch-size ladder on identical evaluated records -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevReproNaturalAucpr}{0.728355}  % detector AUC-PR on the natural held-out slice, recomputed from the score dump -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevReproNaturalDelta}{0.000018}  % natural arm reproduction delta against the archive -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevReproSyntheticAucpr}{0.544998}  % detector AUC-PR on the synthetic held-out slice, recomputed from the score dump -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedAttacks}{60575}  % attacks among the shared held-out records -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedDetectorNaturalAucpr}{0.905613}  % detector AUC-PR on shared records, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedDetectorNaturalAucroc}{0.869219}  % detector AUC-ROC on shared records, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedDetectorNaturalNormLift}{0.577492}  % detector normalized lift on shared records, natural -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedDetectorSpread}{0.005242}  % detector AUC-PR difference between arms on the identical shared records -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedDetectorSyntheticAucpr}{0.900371}  % detector AUC-PR on shared records, synthetic arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedDetectorSyntheticAucroc}{0.864159}  % detector AUC-ROC on shared records, synthetic arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedDetectorSyntheticNormLift}{0.554027}  % detector normalized lift on shared records, synthetic -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedEcodNaturalAucpr}{0.844487}  % ECOD AUC-PR on shared records, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedEcodNaturalAucroc}{0.799910}  % ECOD AUC-ROC on shared records, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedEcodNaturalNormLift}{0.303872}  % ECOD normalized lift on shared records, natural -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedEcodSyntheticAucpr}{0.849842}  % ECOD AUC-PR on shared records, synthetic arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedEcodSyntheticAucroc}{0.805657}  % ECOD AUC-ROC on shared records, synthetic arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedEcodSyntheticNormLift}{0.327842}  % ECOD normalized lift on shared records, synthetic -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedInversionSurvives}{0}  % 1 if ECOD>detector natural AND detector>ECOD synthetic on the SHARED records -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedMarginNatural}{0.061126}  % detector minus ECOD AUC-PR on shared records, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedMarginSynthetic}{0.050529}  % detector minus ECOD AUC-PR on shared records, synthetic arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedPrevalence}{0.776603}  % attack prevalence of the shared held-out records -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSharedRecords}{78000}  % records held out by BOTH arms -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSixZeroDetectorAucpr}{0.483383}  % detector AUC-PR at the 60% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSixZeroEcodAucpr}{0.451502}  % ECOD AUC-PR at the 60% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSixZeroPrevalence}{0.350142}  % test prevalence at the 60% cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSixZeroRecords}{640000}  % test records at the 60% chronological cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSixFiveDetectorAucpr}{0.528435}  % detector AUC-PR at the 65% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSixFiveEcodAucpr}{0.498989}  % ECOD AUC-PR at the 65% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSixFivePrevalence}{0.400020}  % test prevalence at the 65% cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSixFiveRecords}{560000}  % test records at the 65% chronological cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSevenZeroDetectorAucpr}{0.578913}  % detector AUC-PR at the 70% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSevenZeroEcodAucpr}{0.561230}  % ECOD AUC-PR at the 70% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSevenZeroPrevalence}{0.461644}  % test prevalence at the 70% cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSevenZeroRecords}{480000}  % test records at the 70% chronological cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSevenFiveDetectorAucpr}{0.508857}  % detector AUC-PR at the 75% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSevenFiveEcodAucpr}{0.556352}  % ECOD AUC-PR at the 75% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSevenFivePrevalence}{0.429028}  % test prevalence at the 75% cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutSevenFiveRecords}{400000}  % test records at the 75% chronological cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutEightZeroDetectorAucpr}{0.585598}  % detector AUC-PR at the 80% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutEightZeroEcodAucpr}{0.639969}  % ECOD AUC-PR at the 80% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutEightZeroPrevalence}{0.513066}  % test prevalence at the 80% cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutEightZeroRecords}{320000}  % test records at the 80% chronological cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutEightFiveDetectorAucpr}{0.728355}  % detector AUC-PR at the 85% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutEightFiveEcodAucpr}{0.758205}  % ECOD AUC-PR at the 85% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutEightFivePrevalence}{0.682350}  % test prevalence at the 85% cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutEightFiveRecords}{240000}  % test records at the 85% chronological cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutNineZeroDetectorAucpr}{0.799279}  % detector AUC-PR at the 90% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutNineZeroEcodAucpr}{0.791671}  % ECOD AUC-PR at the 90% cut, natural arm -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutNineZeroPrevalence}{0.716250}  % test prevalence at the 90% cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCutNineZeroRecords}{160000}  % test records at the 90% chronological cut -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitCuts}{7}  % chronological cut points evaluated -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevSplitEcodWins}{3}  % cut points where ECOD exceeds the detector (natural arm) -- review_bounded_analyses_20260827T131839_87899899
+\newcommand{\RevTailCarriesCombined}{0}  % 1 if tail-only AUC-PR matches combined within 0.01 -- review_bounded_analyses_20260827T131839_87899899
 \newcommand{\SFiveClaimArtifactsSupported}{0}  % 1 if claim 'Artifacts' is fully supported by a manifested run -- s5_verified_contributions_20260820T101339_b4b27691
 \newcommand{\SFiveClaimBatchReferencesSupported}{0}  % 1 if claim 'BatchReferences' is fully supported by a manifested run -- s5_verified_contributions_20260820T101339_b4b27691
 \newcommand{\SFiveClaimBurnRateSupported}{0}  % 1 if claim 'BurnRate' is fully supported by a manifested run -- s5_verified_contributions_20260820T101339_b4b27691
@@ -117,112 +166,114 @@
 \newcommand{\SFiveClaimsTotal}{11}  % contribution claims assessed -- s5_verified_contributions_20260820T101339_b4b27691
 \newcommand{\SFiveClaimsUnsupported}{4}  % claims with verdict UNSUPPORTED -- s5_verified_contributions_20260820T101339_b4b27691
 \newcommand{\SFiveClaimsWithdrawn}{3}  % claims with verdict WITHDRAWN -- s5_verified_contributions_20260820T101339_b4b27691
-\newcommand{\SFourCicidsInterleavedTestAttacks}{60575}  % CICIDS2017 held-out attacks, interleaved -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsInterleavedTestPrev}{25.2396}  % CICIDS2017 held-out prevalence, day-of-week round robin [%] -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalBestLift}{0.072792}  % best lift above chance in the natural arm -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalChanceFloor}{0.68235}  % AUC-PR chance floor, CICIDS natural arm -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalEcodAucpr}{0.755142}  % CICIDS natural ecod AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalEcodLift}{0.072792}  % CICIDS natural ecod AUC-PR above chance -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalEcodNormLift}{0.229158}  % CICIDS Natural Ecod normalized lift (AP-p)/(1-p) -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SFourCicidsNaturalHstAucpr}{0.588902}  % CICIDS natural hst AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalHstLift}{-0.093448}  % CICIDS natural hst AUC-PR above chance -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalHstLiftAbs}{0.093448}  % magnitude of HST's below-chance lift, natural arm -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SFourCicidsNaturalHstNormLift}{-0.294185}  % CICIDS Natural Hst normalized lift (AP-p)/(1-p) -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SFourCicidsNaturalMethodsBelowChance}{1}  % methods below the chance floor in the natural arm -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalProposedDetectorAucpr}{0.728337}  % CICIDS natural proposed_detector AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalProposedDetectorLift}{0.045987}  % CICIDS natural proposed_detector AUC-PR above chance -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalProposedDetectorNormLift}{0.144773}  % CICIDS Natural ProposedDetector normalized lift (AP-p)/(1-p) -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SFourCicidsNaturalTestAttacks}{163764}  % CICIDS2017 held-out attacks, natural order -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsNaturalTestPrev}{68.235}  % CICIDS2017 held-out prevalence, true timestamp order [%] -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsPairwiseOrderingsPreserved}{1}  % pairwise method orderings preserved across arms -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsPairwiseOrderingsTotal}{3}  % pairwise method orderings compared across arms -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsPrevShiftAbsPp}{42.9954}  % magnitude of the held-out prevalence shift [pp] -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SFourCicidsPrevShiftPp}{-42.9954}  % held-out prevalence shift caused by construction alone [pp] -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsRankingKendallTau}{-0.3333}  % Kendall tau between the two arms' method rankings -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsRankingPreserved}{0}  % 1 if the method ranking is identical across arms -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsSyntheticChanceFloor}{0.252396}  % AUC-PR chance floor, CICIDS interleaved arm -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsSyntheticEcodAucpr}{0.418966}  % CICIDS interleaved ecod AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsSyntheticEcodLift}{0.16657}  % CICIDS interleaved ecod AUC-PR above chance -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsSyntheticEcodNormLift}{0.222805}  % CICIDS Synthetic Ecod normalized lift (AP-p)/(1-p) -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SFourCicidsSyntheticHstAucpr}{0.513623}  % CICIDS interleaved hst AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsSyntheticHstLift}{0.261227}  % CICIDS interleaved hst AUC-PR above chance -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsSyntheticHstNormLift}{0.349419}  % CICIDS Synthetic Hst normalized lift (AP-p)/(1-p) -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SFourCicidsSyntheticProposedDetectorAucpr}{0.544998}  % CICIDS interleaved proposed_detector AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsSyntheticProposedDetectorLift}{0.292602}  % CICIDS interleaved proposed_detector AUC-PR above chance -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourCicidsSyntheticProposedDetectorNormLift}{0.391386}  % CICIDS Synthetic ProposedDetector normalized lift (AP-p)/(1-p) -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SFourExcludedCells}{0}  % cells excluded with a recorded reason -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetBlasterWormEcodAucpr}{0.03571}  % LITNET blaster_worm ecod AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetBlasterWormHstAucpr}{0.147731}  % LITNET blaster_worm hst AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetBlasterWormProposedDetectorAucpr}{0.964091}  % LITNET blaster_worm proposed_detector AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetBlasterWormTestAttacks}{2658}  % LITNET blaster_worm held-out attacks -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetBlasterWormTestPrev}{3.544}  % LITNET blaster_worm held-out prevalence [%] -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetNaturalStreamsRanked}{3}  % natural per-type streams with a defined ranking -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetPooledEcodAucpr}{0.229143}  % LITNET pooled ecod AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetPooledHstAucpr}{0.23884}  % LITNET pooled hst AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetPooledInsideRange}{1}  % 1 if pooled prevalence lies inside the per-type range -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetPooledProposedDetectorAucpr}{0.943056}  % LITNET pooled proposed_detector AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetPooledTestAttacks}{14621}  % LITNET pooled composite held-out attacks -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetPooledTestPrev}{6.4982}  % LITNET pooled composite held-out prevalence [%] -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetSpamEcodAucpr}{0.106805}  % LITNET spam ecod AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetSpamHstAucpr}{0.008447}  % LITNET spam hst AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetSpamProposedDetectorAucpr}{0.846154}  % LITNET spam proposed_detector AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetSpamTestAttacks}{132}  % LITNET spam held-out attacks -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetSpamTestPrev}{0.176}  % LITNET spam held-out prevalence [%] -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetStreamsMatchingPooledRanking}{1}  % natural per-type streams whose method ranking matches the pooled composite -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetStreamsProposedNotBest}{1}  % natural streams where the proposed detector is not the best method -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetUdpFloodEcodAucpr}{0.321185}  % LITNET udp_flood ecod AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetUdpFloodHstAucpr}{0.552675}  % LITNET udp_flood hst AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetUdpFloodProposedDetectorAucpr}{0.394428}  % LITNET udp_flood proposed_detector AUC-PR -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetUdpFloodTestAttacks}{11831}  % LITNET udp_flood held-out attacks -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourLitnetUdpFloodTestPrev}{15.7747}  % LITNET udp_flood held-out prevalence [%] -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCellsCovered}{2}  % cells with more than one HST seed -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCellsWithFlippedRanking}{2}  % cells where the HST/ECOD ordering flips across seeds -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawOne}{0.513623}  % cicids2017/interleaved_synthetic HST AUC-PR at seed 11 -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawThree}{0.358504}  % cicids2017/interleaved_synthetic HST AUC-PR at seed 47 -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawTwo}{0.427004}  % cicids2017/interleaved_synthetic HST AUC-PR at seed 23 -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstMean}{0.433044}  % cicids2017/interleaved_synthetic HST AUC-PR mean over seeds -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstSd}{0.077736}  % cicids2017/interleaved_synthetic HST AUC-PR sd over seeds -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstSeeds}{3}  % cicids2017/interleaved_synthetic HST seed count -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticRankingFlips}{1}  % cicids2017/interleaved_synthetic 1 if the HST/ECOD ordering flips across seeds -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstDrawOne}{0.23884}  % litnet_pooled/composite_synthetic HST AUC-PR at seed 11 -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstDrawThree}{0.367761}  % litnet_pooled/composite_synthetic HST AUC-PR at seed 47 -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstDrawTwo}{0.177599}  % litnet_pooled/composite_synthetic HST AUC-PR at seed 23 -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstMean}{0.2614}  % litnet_pooled/composite_synthetic HST AUC-PR mean over seeds -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstSd}{0.097068}  % litnet_pooled/composite_synthetic HST AUC-PR sd over seeds -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstSeeds}{3}  % litnet_pooled/composite_synthetic HST seed count -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourSeedLitnetPooledCompositeSyntheticRankingFlips}{1}  % litnet_pooled/composite_synthetic 1 if the HST/ECOD ordering flips across seeds -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SFourTableUnmacroedCells}{0}  % table cells that had no macro to reference -- s4_contrast_deliverables_20260826T203706_083c4e0e
-\newcommand{\SSixArmsRecomputed}{0}  % 1 if the arm metrics were recomputed this run -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixAucprDelta}{-0.227574}  % corrected minus original AUC-PR on this prefix -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixChanceFloor}{0.161333}  % AUC-PR chance floor on this prefix (test prevalence) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixCorrectedAucpr}{0.169912}  % corrected variant AUC-PR (from cached run) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixCorrectedAucroc}{0.50962}  % corrected variant AUC-ROC (from cached run) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixCorrectedElapsedS}{586.3}  % corrected variant wall seconds (from cached run) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixCorrectedNormLift}{0.010229}  % Stage 6 corrected normalized lift (AP-p)/(1-p) -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SSixDiagCorrectedDistinctScores}{747}  % corrected distinct score values emitted -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixDiagCorrectedFracAtCap}{0.9274}  % corrected fraction of scores exactly at the 0.25 cap -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixDiagCorrectedMeanShortRunMass}{1}  % corrected mean posterior mass on runs <= 5 -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixDiagCorrectedScoreSd}{0.159341}  % corrected score standard deviation -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixDiagOriginalDistinctScores}{3899}  % original distinct score values emitted -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixDiagOriginalFracAtCap}{0.004733}  % original fraction of scores exactly at the 0.25 cap -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixDiagOriginalMeanShortRunMass}{0.006472}  % original mean posterior mass on runs <= 5 -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixDiagOriginalScoreSd}{0.218999}  % original score standard deviation -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixDiagWindowRows}{15000}  % records covered by the Stage-6 score-distribution diagnostic -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SSixExcluded}{0}  % 1 if the ablation was excluded -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixOriginalAucpr}{0.397486}  % original variant AUC-PR (from cached run) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixOriginalAucroc}{0.848216}  % original variant AUC-ROC (from cached run) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixOriginalElapsedS}{743.2}  % original variant wall seconds (from cached run) -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixOriginalNormLift}{0.281581}  % Stage 6 original normalized lift (AP-p)/(1-p) -- supplementary_macros_20260826T203256_e6d08f4a
-\newcommand{\SSixPrefixRows}{200000}  % prefix records evaluated -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixProbeCorrectedPeak}{1}  % peak P(r=0) after a 6-sigma shift, corrected statistic -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixProbeCorrectedRatio}{1000}  % corrected peak P(r=0) as a multiple of the hazard -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixProbeHazard}{0.001}  % hazard used in the probe -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixProbeOriginalPeak}{0.001}  % peak P(r=0) after a 6-sigma shift, evaluated detector -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixProbeOriginalRatio}{1}  % original peak P(r=0) as a multiple of the hazard -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixTestAttacks}{4840}  % held-out attacks -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixTestRows}{30000}  % held-out records -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
+\newcommand{\SFourCicidsInterleavedTestAttacks}{60575}  % CICIDS2017 held-out attacks, interleaved -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsInterleavedTestPrev}{25.2396}  % CICIDS2017 held-out prevalence, day-of-week round robin [%] -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalBestLift}{0.072792}  % best lift above chance in the natural arm -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalChanceFloor}{0.682350}  % AUC-PR chance floor, CICIDS natural arm -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalEcodAucpr}{0.755142}  % CICIDS natural ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalEcodLift}{0.072792}  % CICIDS natural ecod AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalEcodNormLift}{0.229158}  % CICIDS Natural Ecod normalized lift (AP-p)/(1-p) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SFourCicidsNaturalHstAucpr}{0.588902}  % CICIDS natural hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalHstLift}{-0.093448}  % CICIDS natural hst AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalHstLiftAbs}{0.093448}  % magnitude of HST's below-chance lift, natural arm -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SFourCicidsNaturalHstNormLift}{-0.294185}  % CICIDS Natural Hst normalized lift (AP-p)/(1-p) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SFourCicidsNaturalMethodsBelowChance}{1}  % methods below the chance floor in the natural arm -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalProposedDetectorAucpr}{0.728337}  % CICIDS natural proposed_detector AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalProposedDetectorLift}{0.045987}  % CICIDS natural proposed_detector AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalProposedDetectorNormLift}{0.144773}  % CICIDS Natural ProposedDetector normalized lift (AP-p)/(1-p) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SFourCicidsNaturalTestAttacks}{163764}  % CICIDS2017 held-out attacks, natural order -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsNaturalTestPrev}{68.235}  % CICIDS2017 held-out prevalence, true timestamp order [%] -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsPairwiseOrderingsPreserved}{1}  % pairwise method orderings preserved across arms -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsPairwiseOrderingsTotal}{3}  % pairwise method orderings compared across arms -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsPrevShiftAbsPp}{42.9954}  % magnitude of the held-out prevalence shift [pp] -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SFourCicidsPrevShiftPp}{-42.9954}  % held-out prevalence shift caused by construction alone [pp] -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsRankingKendallTau}{-0.3333}  % Kendall tau between the two arms' method rankings -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsRankingPreserved}{0}  % 1 if the method ranking is identical across arms -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsSyntheticChanceFloor}{0.252396}  % AUC-PR chance floor, CICIDS interleaved arm -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsSyntheticEcodAucpr}{0.418966}  % CICIDS interleaved ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsSyntheticEcodLift}{0.166570}  % CICIDS interleaved ecod AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsSyntheticEcodNormLift}{0.222805}  % CICIDS Synthetic Ecod normalized lift (AP-p)/(1-p) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SFourCicidsSyntheticHstAucpr}{0.513623}  % CICIDS interleaved hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsSyntheticHstLift}{0.261227}  % CICIDS interleaved hst AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsSyntheticHstNormLift}{0.349419}  % CICIDS Synthetic Hst normalized lift (AP-p)/(1-p) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SFourCicidsSyntheticProposedDetectorAucpr}{0.544998}  % CICIDS interleaved proposed_detector AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsSyntheticProposedDetectorLift}{0.292602}  % CICIDS interleaved proposed_detector AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourCicidsSyntheticProposedDetectorNormLift}{0.391386}  % CICIDS Synthetic ProposedDetector normalized lift (AP-p)/(1-p) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SFourExcludedCells}{0}  % cells excluded with a recorded reason -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetBlasterWormEcodAucpr}{0.035710}  % LITNET blaster_worm ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetBlasterWormHstAucpr}{0.147731}  % LITNET blaster_worm hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetBlasterWormProposedDetectorAucpr}{0.964091}  % LITNET blaster_worm proposed_detector AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetBlasterWormTestAttacks}{2658}  % LITNET blaster_worm held-out attacks -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetBlasterWormTestPrev}{3.544}  % LITNET blaster_worm held-out prevalence [%] -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetNaturalStreamsRanked}{3}  % natural per-type streams with a defined ranking -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetPooledEcodAucpr}{0.229143}  % LITNET pooled ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetPooledHstAucpr}{0.238840}  % LITNET pooled hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetPooledInsideRange}{1}  % 1 if pooled prevalence lies inside the per-type range -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetPooledProposedDetectorAucpr}{0.943056}  % LITNET pooled proposed_detector AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetPooledTestAttacks}{14621}  % LITNET pooled composite held-out attacks -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetPooledTestPrev}{6.4982}  % LITNET pooled composite held-out prevalence [%] -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetSpamEcodAucpr}{0.106805}  % LITNET spam ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetSpamHstAucpr}{0.008447}  % LITNET spam hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetSpamProposedDetectorAucpr}{0.846154}  % LITNET spam proposed_detector AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetSpamTestAttacks}{132}  % LITNET spam held-out attacks -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetSpamTestPrev}{0.176}  % LITNET spam held-out prevalence [%] -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetStreamsMatchingPooledRanking}{1}  % natural per-type streams whose method ranking matches the pooled composite -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetStreamsProposedNotBest}{1}  % natural streams where the proposed detector is not the best method -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetUdpFloodEcodAucpr}{0.321185}  % LITNET udp_flood ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetUdpFloodHstAucpr}{0.552675}  % LITNET udp_flood hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetUdpFloodProposedDetectorAucpr}{0.394428}  % LITNET udp_flood proposed_detector AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetUdpFloodTestAttacks}{11831}  % LITNET udp_flood held-out attacks -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourLitnetUdpFloodTestPrev}{15.7747}  % LITNET udp_flood held-out prevalence [%] -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCellsCovered}{2}  % cells with more than one HST seed -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCellsWithFlippedRanking}{2}  % cells where the HST/ECOD ordering flips across seeds -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawOne}{0.513623}  % cicids2017/interleaved_synthetic HST AUC-PR at seed 11 -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawThree}{0.358504}  % cicids2017/interleaved_synthetic HST AUC-PR at seed 47 -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstDrawTwo}{0.427004}  % cicids2017/interleaved_synthetic HST AUC-PR at seed 23 -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstMean}{0.433044}  % cicids2017/interleaved_synthetic HST AUC-PR mean over seeds -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstSd}{0.077736}  % cicids2017/interleaved_synthetic HST AUC-PR sd over seeds -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticHstSeeds}{3}  % cicids2017/interleaved_synthetic HST seed count -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedCicidsTwoZeroOneSevenInterleavedSyntheticRankingFlips}{1}  % cicids2017/interleaved_synthetic 1 if the HST/ECOD ordering flips across seeds -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstDrawOne}{0.238840}  % litnet_pooled/composite_synthetic HST AUC-PR at seed 11 -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstDrawThree}{0.367761}  % litnet_pooled/composite_synthetic HST AUC-PR at seed 47 -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstDrawTwo}{0.177599}  % litnet_pooled/composite_synthetic HST AUC-PR at seed 23 -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstMean}{0.261400}  % litnet_pooled/composite_synthetic HST AUC-PR mean over seeds -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstSd}{0.097068}  % litnet_pooled/composite_synthetic HST AUC-PR sd over seeds -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedLitnetPooledCompositeSyntheticHstSeeds}{3}  % litnet_pooled/composite_synthetic HST seed count -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourSeedLitnetPooledCompositeSyntheticRankingFlips}{1}  % litnet_pooled/composite_synthetic 1 if the HST/ECOD ordering flips across seeds -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SFourTableUnmacroedCells}{0}  % table cells that had no macro to reference -- s4_contrast_deliverables_20260827T124050_ec876714
+\newcommand{\SSixArmsRecomputed}{0}  % 1 if the arm metrics were recomputed this run -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixAucprDelta}{-0.227574}  % corrected minus original AUC-PR on this prefix -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixChanceFloor}{0.161333}  % AUC-PR chance floor on this prefix (test prevalence) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixCorrectedAucpr}{0.169912}  % corrected variant AUC-PR (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixCorrectedAucroc}{0.509620}  % corrected variant AUC-ROC (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixCorrectedElapsedS}{586.3}  % corrected variant wall seconds (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixCorrectedLift}{0.008579}  % Stage 6 corrected additive lift above the chance floor -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SSixCorrectedNormLift}{0.010229}  % Stage 6 corrected normalized lift (AP-p)/(1-p) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SSixDiagCorrectedDistinctScores}{747}  % corrected distinct score values emitted -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixDiagCorrectedFracAtCap}{0.9274}  % corrected fraction of scores exactly at the 0.25 cap -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixDiagCorrectedMeanShortRunMass}{1}  % corrected mean posterior mass on runs <= 5 -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixDiagCorrectedScoreSd}{0.159341}  % corrected score standard deviation -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixDiagOriginalDistinctScores}{3899}  % original distinct score values emitted -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixDiagOriginalFracAtCap}{0.004733}  % original fraction of scores exactly at the 0.25 cap -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixDiagOriginalMeanShortRunMass}{0.006472}  % original mean posterior mass on runs <= 5 -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixDiagOriginalScoreSd}{0.218999}  % original score standard deviation -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixDiagWindowRows}{15000}  % records covered by the Stage-6 score-distribution diagnostic -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SSixExcluded}{0}  % 1 if the ablation was excluded -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixOriginalAucpr}{0.397486}  % original variant AUC-PR (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixOriginalAucroc}{0.848216}  % original variant AUC-ROC (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixOriginalElapsedS}{743.2}  % original variant wall seconds (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixOriginalLift}{0.236153}  % Stage 6 original additive lift above the chance floor -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SSixOriginalNormLift}{0.281581}  % Stage 6 original normalized lift (AP-p)/(1-p) -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SSixPrefixRows}{200000}  % prefix records evaluated -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixProbeCorrectedPeak}{1}  % peak P(r=0) after a 6-sigma shift, corrected statistic -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixProbeCorrectedRatio}{1000}  % corrected peak P(r=0) as a multiple of the hazard -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixProbeHazard}{0.001}  % hazard used in the probe -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixProbeOriginalPeak}{0.001}  % peak P(r=0) after a 6-sigma shift, evaluated detector -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixProbeOriginalRatio}{1}  % original peak P(r=0) as a multiple of the hazard -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixTestAttacks}{4840}  % held-out attacks -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
+\newcommand{\SSixTestRows}{30000}  % held-out records -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixTotalWallS}{155.3}  % total Stage 6 local compute, seconds -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
-\newcommand{\SSixWallCapS}{1800}  % the operator's wall cap -- s6_bocpd_corrected_ablation_20260824T092655_a47acf51
+\newcommand{\SSixWallCapS}{1800}  % the operator's wall cap -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SThreeBindingRows}{49970}  % records examined for which term sets the score -- s3_score_threshold_verification_20260820T084659_1e2b01b8
 \newcommand{\SThreeChangePointBindingMeanValue}{0.002531}  % mean score contributed where the change-point branch sets the score -- s3_score_threshold_verification_20260820T084659_1e2b01b8
 \newcommand{\SThreeChangePointBindingPct}{75.039}  % share of records where the change-point branch binds [%] -- s3_score_threshold_verification_20260820T084659_1e2b01b8
@@ -243,240 +294,240 @@
 \newcommand{\SThreeThresholdCostOnly}{0.090909}  % the paper's Eq. (12) cost-only threshold C_FP/(C_FP+C_FN) -- s3_score_threshold_verification_20260820T084659_1e2b01b8
 \newcommand{\SThreeThresholdLitnet}{0.655172}  % threshold at incident prior 0.05 (LITNET config) -- s3_score_threshold_verification_20260820T084659_1e2b01b8
 \newcommand{\SThreeThresholdMatchesPaper}{0}  % 1 if the implemented threshold equals the paper's Eq. (12) -- s3_score_threshold_verification_20260820T084659_1e2b01b8
-\newcommand{\STwoLFiveEcodDeterministic}{0}  % 5% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveEcodDrawOne}{0.167066}  % 5% ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveEcodDrawThree}{0.165585}  % 5% ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveEcodDrawTwo}{0.166066}  % 5% ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveEcodLift}{0.116715}  % 5% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveEcodMean}{0.166239}  % 5% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveEcodN}{3}  % 5% ECOD (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveEcodNormLift}{0.122796}  % 5% ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveEcodSd}{0.000755}  % 5% ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveFloor}{0.049524}  % achieved held-out prevalence (AUC-PR chance floor) at the 5% level -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstDeterministic}{0}  % 5% HST 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstDrawOne}{0.280596}  % 5% HST draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstDrawThree}{0.118565}  % 5% HST draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstDrawTwo}{0.198622}  % 5% HST draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstLift}{0.149737}  % 5% HST AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstMean}{0.199261}  % 5% HST AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstN}{3}  % 5% HST draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstNormLift}{0.157539}  % 5% HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveHstSd}{0.081017}  % 5% HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaDeterministic}{0}  % 5% LODA 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaDrawOne}{0.200772}  % 5% LODA draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaDrawThree}{0.207384}  % 5% LODA draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaDrawTwo}{0.214587}  % 5% LODA draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaLift}{0.158057}  % 5% LODA AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaMean}{0.207581}  % 5% LODA AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaN}{3}  % 5% LODA draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaNormLift}{0.166292}  % 5% LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLodaSd}{0.006909}  % 5% LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofDeterministic}{0}  % 5% LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofDrawOne}{0.538135}  % 5% LOF (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofDrawThree}{0.536689}  % 5% LOF (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofDrawTwo}{0.537965}  % 5% LOF (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofLift}{0.488072}  % 5% LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofMean}{0.537596}  % 5% LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofN}{3}  % 5% LOF (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofNormLift}{0.513503}  % 5% LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveLofSd}{0.000791}  % 5% LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedDeterministic}{0}  % 5% proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedDrawOne}{0.367004}  % 5% proposed detector draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedDrawThree}{0.367726}  % 5% proposed detector draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedDrawTwo}{0.366761}  % 5% proposed detector draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedLift}{0.31764}  % 5% proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedMean}{0.367164}  % 5% proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedN}{3}  % 5% proposed detector draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedNormLift}{0.33419}  % 5% proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFiveProposedSd}{0.000502}  % 5% proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodDeterministic}{0}  % 40% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodDrawOne}{0.52813}  % 40% ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodDrawThree}{0.52684}  % 40% ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodDrawTwo}{0.527121}  % 40% ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodLift}{0.127368}  % 40% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodMean}{0.527364}  % 40% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodN}{3}  % 40% ECOD (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodNormLift}{0.212279}  % 40% ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyEcodSd}{0.000678}  % 40% ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyFloor}{0.399995}  % achieved held-out prevalence (AUC-PR chance floor) at the 40% level -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstDeterministic}{0}  % 40% HST 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstDrawOne}{0.540747}  % 40% HST draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstDrawThree}{0.441718}  % 40% HST draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstDrawTwo}{0.445629}  % 40% HST draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstLift}{0.076036}  % 40% HST AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstMean}{0.476031}  % 40% HST AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstN}{3}  % 40% HST draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstNormLift}{0.126726}  % 40% HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyHstSd}{0.056079}  % 40% HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaDeterministic}{0}  % 40% LODA 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaDrawOne}{0.402505}  % 40% LODA draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaDrawThree}{0.402079}  % 40% LODA draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaDrawTwo}{0.393683}  % 40% LODA draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaLift}{-0.000573}  % 40% LODA AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaMean}{0.399422}  % 40% LODA AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaN}{3}  % 40% LODA draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaNormLift}{-0.000955}  % 40% LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLodaSd}{0.004975}  % 40% LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofDeterministic}{0}  % 40% LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofDrawOne}{0.893394}  % 40% LOF (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofDrawThree}{0.90393}  % 40% LOF (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofDrawTwo}{0.893581}  % 40% LOF (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofLift}{0.496973}  % 40% LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofMean}{0.896968}  % 40% LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofN}{3}  % 40% LOF (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofNormLift}{0.828282}  % 40% LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyLofSd}{0.00603}  % 40% LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedDeterministic}{0}  % 40% proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedDrawOne}{0.496165}  % 40% proposed detector draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedDrawThree}{0.493315}  % 40% proposed detector draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedDrawTwo}{0.493171}  % 40% proposed detector draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedLift}{0.094221}  % 40% proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedMean}{0.494217}  % 40% proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedN}{3}  % 40% proposed detector draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedNormLift}{0.157034}  % 40% proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLFortyProposedSd}{0.001688}  % 40% proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodDeterministic}{0}  % 64% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodDrawOne}{0.678407}  % 64% ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodDrawThree}{0.677897}  % 64% ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodDrawTwo}{0.678907}  % 64% ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodLift}{0.038413}  % 64% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodMean}{0.678404}  % 64% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodN}{3}  % 64% ECOD (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodNormLift}{0.1067}  % 64% ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourEcodSd}{0.000505}  % 64% ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourFloor}{0.639991}  % achieved held-out prevalence (AUC-PR chance floor) at the 64% level -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstDeterministic}{0}  % 64% HST 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstDrawOne}{0.518017}  % 64% HST draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstDrawThree}{0.51712}  % 64% HST draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstDrawTwo}{0.462886}  % 64% HST draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstLift}{-0.14065}  % 64% HST AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstMean}{0.499341}  % 64% HST AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstN}{3}  % 64% HST draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstNormLift}{-0.390683}  % 64% HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourHstSd}{0.031574}  % 64% HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaDeterministic}{0}  % 64% LODA 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaDrawOne}{0.529653}  % 64% LODA draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaDrawThree}{0.524635}  % 64% LODA draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaDrawTwo}{0.519783}  % 64% LODA draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaLift}{-0.1153}  % 64% LODA AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaMean}{0.524691}  % 64% LODA AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaN}{3}  % 64% LODA draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaNormLift}{-0.320269}  % 64% LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLodaSd}{0.004935}  % 64% LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofDeterministic}{0}  % 64% LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofDrawOne}{0.914119}  % 64% LOF (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofDrawThree}{0.894332}  % 64% LOF (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofDrawTwo}{0.906115}  % 64% LOF (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofLift}{0.264865}  % 64% LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofMean}{0.904855}  % 64% LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofN}{3}  % 64% LOF (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofNormLift}{0.735716}  % 64% LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourLofSd}{0.009953}  % 64% LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedDeterministic}{0}  % 64% proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedDrawOne}{0.618354}  % 64% proposed detector draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedDrawThree}{0.620615}  % 64% proposed detector draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedDrawTwo}{0.619668}  % 64% proposed detector draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedLift}{-0.020445}  % 64% proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedMean}{0.619546}  % 64% proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedN}{3}  % 64% proposed detector draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedNormLift}{-0.056789}  % 64% proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLSixtyFourProposedSd}{0.001135}  % 64% proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodDeterministic}{0}  % 10% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodDrawOne}{0.252016}  % 10% ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodDrawThree}{0.252585}  % 10% ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodDrawTwo}{0.251993}  % 10% ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodLift}{0.153194}  % 10% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodMean}{0.252198}  % 10% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodN}{3}  % 10% ECOD (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodNormLift}{0.170028}  % 10% ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenEcodSd}{0.000335}  % 10% ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenFloor}{0.099004}  % achieved held-out prevalence (AUC-PR chance floor) at the 10% level -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstDeterministic}{0}  % 10% HST 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstDrawOne}{0.400185}  % 10% HST draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstDrawThree}{0.202526}  % 10% HST draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstDrawTwo}{0.296397}  % 10% HST draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstLift}{0.200699}  % 10% HST AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstMean}{0.299702}  % 10% HST AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstN}{3}  % 10% HST draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstNormLift}{0.222752}  % 10% HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenHstSd}{0.098871}  % 10% HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaDeterministic}{0}  % 10% LODA 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaDrawOne}{0.241134}  % 10% LODA draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaDrawThree}{0.25108}  % 10% LODA draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaDrawTwo}{0.250065}  % 10% LODA draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaLift}{0.148423}  % 10% LODA AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaMean}{0.247426}  % 10% LODA AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaN}{3}  % 10% LODA draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaNormLift}{0.164732}  % 10% LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLodaSd}{0.005473}  % 10% LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofDeterministic}{0}  % 10% LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofDrawOne}{0.698107}  % 10% LOF (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofDrawThree}{0.69686}  % 10% LOF (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofDrawTwo}{0.696041}  % 10% LOF (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofLift}{0.597999}  % 10% LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofMean}{0.697003}  % 10% LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofN}{3}  % 10% LOF (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofNormLift}{0.663709}  % 10% LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenLofSd}{0.00104}  % 10% LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedDeterministic}{0}  % 10% proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedDrawOne}{0.449937}  % 10% proposed detector draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedDrawThree}{0.445199}  % 10% proposed detector draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedDrawTwo}{0.446504}  % 10% proposed detector draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedLift}{0.34821}  % 10% proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedMean}{0.447213}  % 10% proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedN}{3}  % 10% proposed detector draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedNormLift}{0.386472}  % 10% proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLTenProposedSd}{0.002447}  % 10% proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodDeterministic}{1}  % unresampled ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodDrawOne}{0.418966}  % unresampled ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodDrawThree}{0.418966}  % unresampled ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodDrawTwo}{0.418966}  % unresampled ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodLift}{0.16657}  % unresampled ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodMean}{0.418966}  % unresampled ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodN}{3}  % unresampled ECOD (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodNormLift}{0.222805}  % unresampled ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledEcodSd}{0}  % unresampled ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledFloor}{0.252396}  % achieved held-out prevalence (AUC-PR chance floor) at the unresampled level -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstDeterministic}{0}  % unresampled HST 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstDrawOne}{0.513623}  % unresampled HST draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstDrawThree}{0.358504}  % unresampled HST draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstDrawTwo}{0.427004}  % unresampled HST draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstLift}{0.180648}  % unresampled HST AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstMean}{0.433044}  % unresampled HST AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstN}{3}  % unresampled HST draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstNormLift}{0.241636}  % unresampled HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledHstSd}{0.077736}  % unresampled HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaDeterministic}{0}  % unresampled LODA 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaDrawOne}{0.338897}  % unresampled LODA draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaDrawThree}{0.347181}  % unresampled LODA draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaDrawTwo}{0.339068}  % unresampled LODA draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaLift}{0.08932}  % unresampled LODA AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaMean}{0.341715}  % unresampled LODA AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaN}{3}  % unresampled LODA draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaNormLift}{0.119474}  % unresampled LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLodaSd}{0.004734}  % unresampled LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofDeterministic}{1}  % unresampled LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofDrawOne}{0.863194}  % unresampled LOF (batch) draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofDrawThree}{0.863194}  % unresampled LOF (batch) draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofDrawTwo}{0.863194}  % unresampled LOF (batch) draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofLift}{0.610798}  % unresampled LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofMean}{0.863194}  % unresampled LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofN}{3}  % unresampled LOF (batch) draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofNormLift}{0.817008}  % unresampled LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledLofSd}{0}  % unresampled LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedDeterministic}{1}  % unresampled proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedDrawOne}{0.544998}  % unresampled proposed detector draw 1 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedDrawThree}{0.544998}  % unresampled proposed detector draw 3 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedDrawTwo}{0.544998}  % unresampled proposed detector draw 2 -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedLift}{0.292602}  % unresampled proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedMean}{0.544998}  % unresampled proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedN}{3}  % unresampled proposed detector draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedNormLift}{0.391386}  % unresampled proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLUnresampledProposedSd}{0}  % unresampled proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLevelsCovered}{5}  % prevalence levels covered -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoLofBeatsProposedLevels}{5}  % levels where LOF's mean AUC-PR exceeds the proposed detector's -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\STwoProposedLevelsBelowFloor}{1}  % levels where the proposed detector's mean AUC-PR is below its chance floor -- s2_prevalence_relabelled_20260826T203109_0d596e73
-\newcommand{\SelfTestManifested}{0.4242}  % gate acceptance -- selftest_provenance_gate_20260826T202143_e3e15da9
+\newcommand{\STwoLFiveEcodDeterministic}{0}  % 5% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveEcodDrawOne}{0.167066}  % 5% ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveEcodDrawThree}{0.165585}  % 5% ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveEcodDrawTwo}{0.166066}  % 5% ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveEcodLift}{0.116715}  % 5% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveEcodMean}{0.166239}  % 5% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveEcodN}{3}  % 5% ECOD (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveEcodNormLift}{0.122796}  % 5% ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveEcodSd}{0.000755}  % 5% ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveFloor}{0.049524}  % achieved held-out prevalence (AUC-PR chance floor) at the 5% level -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstDeterministic}{0}  % 5% HST 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstDrawOne}{0.280596}  % 5% HST draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstDrawThree}{0.118565}  % 5% HST draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstDrawTwo}{0.198622}  % 5% HST draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstLift}{0.149737}  % 5% HST AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstMean}{0.199261}  % 5% HST AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstN}{3}  % 5% HST draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstNormLift}{0.157539}  % 5% HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveHstSd}{0.081017}  % 5% HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaDeterministic}{0}  % 5% LODA 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaDrawOne}{0.200772}  % 5% LODA draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaDrawThree}{0.207384}  % 5% LODA draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaDrawTwo}{0.214587}  % 5% LODA draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaLift}{0.158057}  % 5% LODA AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaMean}{0.207581}  % 5% LODA AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaN}{3}  % 5% LODA draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaNormLift}{0.166292}  % 5% LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLodaSd}{0.006909}  % 5% LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofDeterministic}{0}  % 5% LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofDrawOne}{0.538135}  % 5% LOF (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofDrawThree}{0.536689}  % 5% LOF (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofDrawTwo}{0.537965}  % 5% LOF (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofLift}{0.488072}  % 5% LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofMean}{0.537596}  % 5% LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofN}{3}  % 5% LOF (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofNormLift}{0.513503}  % 5% LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveLofSd}{0.000791}  % 5% LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedDeterministic}{0}  % 5% proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedDrawOne}{0.367004}  % 5% proposed detector draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedDrawThree}{0.367726}  % 5% proposed detector draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedDrawTwo}{0.366761}  % 5% proposed detector draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedLift}{0.317640}  % 5% proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedMean}{0.367164}  % 5% proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedN}{3}  % 5% proposed detector draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedNormLift}{0.334190}  % 5% proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFiveProposedSd}{0.000502}  % 5% proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodDeterministic}{0}  % 40% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodDrawOne}{0.528130}  % 40% ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodDrawThree}{0.526840}  % 40% ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodDrawTwo}{0.527121}  % 40% ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodLift}{0.127369}  % 40% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodMean}{0.527364}  % 40% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodN}{3}  % 40% ECOD (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodNormLift}{0.212280}  % 40% ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyEcodSd}{0.000678}  % 40% ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyFloor}{0.399995}  % achieved held-out prevalence (AUC-PR chance floor) at the 40% level -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstDeterministic}{0}  % 40% HST 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstDrawOne}{0.540747}  % 40% HST draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstDrawThree}{0.441718}  % 40% HST draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstDrawTwo}{0.445629}  % 40% HST draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstLift}{0.076036}  % 40% HST AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstMean}{0.476031}  % 40% HST AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstN}{3}  % 40% HST draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstNormLift}{0.126726}  % 40% HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyHstSd}{0.056079}  % 40% HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaDeterministic}{0}  % 40% LODA 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaDrawOne}{0.402505}  % 40% LODA draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaDrawThree}{0.402079}  % 40% LODA draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaDrawTwo}{0.393683}  % 40% LODA draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaLift}{-0.000573}  % 40% LODA AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaMean}{0.399422}  % 40% LODA AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaN}{3}  % 40% LODA draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaNormLift}{-0.000955}  % 40% LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLodaSd}{0.004975}  % 40% LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofDeterministic}{0}  % 40% LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofDrawOne}{0.893394}  % 40% LOF (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofDrawThree}{0.903930}  % 40% LOF (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofDrawTwo}{0.893581}  % 40% LOF (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofLift}{0.496973}  % 40% LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofMean}{0.896968}  % 40% LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofN}{3}  % 40% LOF (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofNormLift}{0.828281}  % 40% LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyLofSd}{0.006030}  % 40% LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedDeterministic}{0}  % 40% proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedDrawOne}{0.496165}  % 40% proposed detector draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedDrawThree}{0.493315}  % 40% proposed detector draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedDrawTwo}{0.493171}  % 40% proposed detector draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedLift}{0.094222}  % 40% proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedMean}{0.494217}  % 40% proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedN}{3}  % 40% proposed detector draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedNormLift}{0.157035}  % 40% proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLFortyProposedSd}{0.001688}  % 40% proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodDeterministic}{0}  % 64% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodDrawOne}{0.678407}  % 64% ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodDrawThree}{0.677897}  % 64% ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodDrawTwo}{0.678907}  % 64% ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodLift}{0.038413}  % 64% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodMean}{0.678404}  % 64% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodN}{3}  % 64% ECOD (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodNormLift}{0.106700}  % 64% ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourEcodSd}{0.000505}  % 64% ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourFloor}{0.639991}  % achieved held-out prevalence (AUC-PR chance floor) at the 64% level -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstDeterministic}{0}  % 64% HST 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstDrawOne}{0.518017}  % 64% HST draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstDrawThree}{0.517120}  % 64% HST draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstDrawTwo}{0.462886}  % 64% HST draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstLift}{-0.140650}  % 64% HST AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstMean}{0.499341}  % 64% HST AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstN}{3}  % 64% HST draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstNormLift}{-0.390685}  % 64% HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourHstSd}{0.031574}  % 64% HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaDeterministic}{0}  % 64% LODA 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaDrawOne}{0.529653}  % 64% LODA draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaDrawThree}{0.524635}  % 64% LODA draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaDrawTwo}{0.519783}  % 64% LODA draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaLift}{-0.115300}  % 64% LODA AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaMean}{0.524691}  % 64% LODA AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaN}{3}  % 64% LODA draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaNormLift}{-0.320270}  % 64% LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLodaSd}{0.004935}  % 64% LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofDeterministic}{0}  % 64% LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofDrawOne}{0.914119}  % 64% LOF (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofDrawThree}{0.894332}  % 64% LOF (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofDrawTwo}{0.906115}  % 64% LOF (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofLift}{0.264864}  % 64% LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofMean}{0.904855}  % 64% LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofN}{3}  % 64% LOF (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofNormLift}{0.735715}  % 64% LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourLofSd}{0.009953}  % 64% LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedDeterministic}{0}  % 64% proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedDrawOne}{0.618354}  % 64% proposed detector draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedDrawThree}{0.620615}  % 64% proposed detector draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedDrawTwo}{0.619668}  % 64% proposed detector draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedLift}{-0.020445}  % 64% proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedMean}{0.619546}  % 64% proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedN}{3}  % 64% proposed detector draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedNormLift}{-0.056790}  % 64% proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLSixtyFourProposedSd}{0.001135}  % 64% proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodDeterministic}{0}  % 10% ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodDrawOne}{0.252016}  % 10% ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodDrawThree}{0.252585}  % 10% ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodDrawTwo}{0.251993}  % 10% ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodLift}{0.153194}  % 10% ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodMean}{0.252198}  % 10% ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodN}{3}  % 10% ECOD (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodNormLift}{0.170027}  % 10% ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenEcodSd}{0.000335}  % 10% ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenFloor}{0.099004}  % achieved held-out prevalence (AUC-PR chance floor) at the 10% level -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstDeterministic}{0}  % 10% HST 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstDrawOne}{0.400185}  % 10% HST draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstDrawThree}{0.202526}  % 10% HST draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstDrawTwo}{0.296397}  % 10% HST draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstLift}{0.200698}  % 10% HST AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstMean}{0.299702}  % 10% HST AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstN}{3}  % 10% HST draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstNormLift}{0.222751}  % 10% HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenHstSd}{0.098871}  % 10% HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaDeterministic}{0}  % 10% LODA 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaDrawOne}{0.241134}  % 10% LODA draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaDrawThree}{0.251080}  % 10% LODA draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaDrawTwo}{0.250065}  % 10% LODA draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaLift}{0.148422}  % 10% LODA AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaMean}{0.247426}  % 10% LODA AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaN}{3}  % 10% LODA draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaNormLift}{0.164731}  % 10% LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLodaSd}{0.005473}  % 10% LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofDeterministic}{0}  % 10% LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofDrawOne}{0.698107}  % 10% LOF (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofDrawThree}{0.696860}  % 10% LOF (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofDrawTwo}{0.696041}  % 10% LOF (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofLift}{0.597999}  % 10% LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofMean}{0.697003}  % 10% LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofN}{3}  % 10% LOF (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofNormLift}{0.663709}  % 10% LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenLofSd}{0.001040}  % 10% LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedDeterministic}{0}  % 10% proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedDrawOne}{0.449937}  % 10% proposed detector draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedDrawThree}{0.445199}  % 10% proposed detector draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedDrawTwo}{0.446504}  % 10% proposed detector draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedLift}{0.348209}  % 10% proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedMean}{0.447213}  % 10% proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedN}{3}  % 10% proposed detector draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedNormLift}{0.386471}  % 10% proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLTenProposedSd}{0.002447}  % 10% proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodDeterministic}{1}  % unresampled ECOD (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodDrawOne}{0.418966}  % unresampled ECOD (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodDrawThree}{0.418966}  % unresampled ECOD (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodDrawTwo}{0.418966}  % unresampled ECOD (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodLift}{0.166570}  % unresampled ECOD (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodMean}{0.418966}  % unresampled ECOD (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodN}{3}  % unresampled ECOD (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodNormLift}{0.222805}  % unresampled ECOD (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledEcodSd}{0}  % unresampled ECOD (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledFloor}{0.252396}  % achieved held-out prevalence (AUC-PR chance floor) at the unresampled level -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstDeterministic}{0}  % unresampled HST 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstDrawOne}{0.513623}  % unresampled HST draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstDrawThree}{0.358504}  % unresampled HST draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstDrawTwo}{0.427004}  % unresampled HST draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstLift}{0.180648}  % unresampled HST AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstMean}{0.433044}  % unresampled HST AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstN}{3}  % unresampled HST draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstNormLift}{0.241636}  % unresampled HST normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledHstSd}{0.077736}  % unresampled HST AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaDeterministic}{0}  % unresampled LODA 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaDrawOne}{0.338897}  % unresampled LODA draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaDrawThree}{0.347181}  % unresampled LODA draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaDrawTwo}{0.339068}  % unresampled LODA draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaLift}{0.089319}  % unresampled LODA AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaMean}{0.341715}  % unresampled LODA AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaN}{3}  % unresampled LODA draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaNormLift}{0.119474}  % unresampled LODA normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLodaSd}{0.004734}  % unresampled LODA AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofDeterministic}{1}  % unresampled LOF (batch) 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofDrawOne}{0.863194}  % unresampled LOF (batch) draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofDrawThree}{0.863194}  % unresampled LOF (batch) draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofDrawTwo}{0.863194}  % unresampled LOF (batch) draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofLift}{0.610798}  % unresampled LOF (batch) AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofMean}{0.863194}  % unresampled LOF (batch) AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofN}{3}  % unresampled LOF (batch) draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofNormLift}{0.817007}  % unresampled LOF (batch) normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledLofSd}{0}  % unresampled LOF (batch) AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedDeterministic}{1}  % unresampled proposed detector 1 if identical across draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedDrawOne}{0.544998}  % unresampled proposed detector draw 1 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedDrawThree}{0.544998}  % unresampled proposed detector draw 3 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedDrawTwo}{0.544998}  % unresampled proposed detector draw 2 -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedLift}{0.292602}  % unresampled proposed detector AUC-PR above chance -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedMean}{0.544998}  % unresampled proposed detector AUC-PR mean -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedN}{3}  % unresampled proposed detector draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedNormLift}{0.391386}  % unresampled proposed detector normalized lift (AP-p)/(1-p) -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLUnresampledProposedSd}{0}  % unresampled proposed detector AUC-PR sd over draws -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLevelsCovered}{5}  % prevalence levels covered -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoLofBeatsProposedLevels}{5}  % levels where LOF's mean AUC-PR exceeds the proposed detector's -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\STwoProposedLevelsBelowFloor}{1}  % levels where the proposed detector's mean AUC-PR is below its chance floor -- s2_prevalence_relabelled_20260827T140708_90bc36cd
+\newcommand{\SelfTestManifested}{0.4242}  % gate acceptance -- selftest_provenance_gate_20260827T143533_f3588b7b
 \newcommand{\StageZeroDeterministicChecksFailed}{0}  % count of deterministic reproduction failures at Stage 0 -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\StageOneBocpdsloAucprDiff}{2.846684505897201e-07}  % Stage1 repro |new-published| for bocpd_slo/auc_pr -- stage0_reproduction_checks_20260817T221558_53c31fe7
 \newcommand{\StageOneBocpdsloAucrocDiff}{7.499538092758939e-07}  % Stage1 repro |new-published| for bocpd_slo/auc_roc -- stage0_reproduction_checks_20260817T221558_53c31fe7
@@ -520,3 +571,6 @@
 \newcommand{\StreamLitnetUdpFloodSpanMinutes}{3.97}  % litnet_udp_flood capture span [min] -- stage1_natural_streams_20260819T062728_87db5780
 \newcommand{\StreamLitnetUdpFloodTestAttacks}{11831}  % litnet_udp_flood test attacks -- stage1_natural_streams_20260819T062728_87db5780
 \newcommand{\StreamLitnetUdpFloodTestPrevalencePct}{15.7747}  % litnet_udp_flood test-split prevalence [\%] -- stage1_natural_streams_20260819T062728_87db5780
+\newcommand{\SweepEcodScoringBatchMax}{480000}  % largest ECOD scoring batch across the prevalence sweep levels -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SweepEcodScoringBatchMin}{160917}  % smallest ECOD scoring batch across the prevalence sweep levels -- supplementary_macros_20260827T133305_6eed1c28
+\newcommand{\SweepUnresampledLofMinusDetector}{0.318196}  % LOF minus proposed-detector AUC-PR at the unresampled sweep level (both deterministic there) -- supplementary_macros_20260827T133305_6eed1c28

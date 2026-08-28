@@ -12,10 +12,12 @@ change is part of the correction: the prior title names capabilities
 (operational calibration, regime-dependent conformal risk control) that the
 audit found unimplemented or withdrawn.
 
-**Comments field:** use ONE of the two variants in
-`../sibling/ARXIV_V3_COMMENT_COEXIST.txt` according to the sibling decision
-(`../../SIBLING_DECISION.md`). Update the page count in the chosen variant to
-**10 pages** (the compiled count of this package) before pasting.
+**Comments field:** use the **NO VENUE CLAIM VARIANT** at the top of
+`../sibling/ARXIV_V3_COMMENT_COEXIST.txt`. The two variants below it are
+retired and false — both asserted a journal status for the companion preprint
+that does not exist (see `../../SIBLING_DECISION.md`, CI-25) — so do not paste
+either. The variant already carries the page count, **17 pages**; confirm it
+still matches the compiled PDF before pasting.
 
 **Categories:** cs.CR (primary); cross-list cs.LG unchanged from v2.
 
@@ -24,4 +26,4 @@ pdflatex, `.bbl` included because arXiv does not run BibTeX):
 main.tex, numbers.tex, references.bib, main.bbl,
 table_construction_contrast.tex, table_prevalence_sweep.tex.
 Verified locally: 3-pass compile, exit 0, zero undefined references,
-10 pages, author-named (arXiv postings are not anonymous).
+17 pages, author-named (arXiv postings are not anonymous).

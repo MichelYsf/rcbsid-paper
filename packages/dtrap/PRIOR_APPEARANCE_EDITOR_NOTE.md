@@ -71,16 +71,61 @@ and that this note supplies the detail.
 
 A public correction note accompanies the v3 replacement, stating the same
 defects in the arXiv Comments field. The corrected-incident log in the artifact
-records twenty-one numbered incidents with evidence and closure status; the
-count is a record of the process, not a quality claim.
+records each numbered incident with its evidence and closure status; the count
+is a record of the process, not a quality claim, so none is quoted here.
 
 **Companion manuscript.** A companion preprint, **arXiv:2510.09619**
 ("Risk-Calibrated Bayesian Streaming Intrusion Detection with SRE-Aligned
 Decisions"), shares part of the same codebase and predates the audit. The
 method-identity findings apply to its shared lineage. It reports no
-quantitative result tables, so it has no numeric overlap with this submission;
-its correction is being handled separately and the relevant journal has been
-or is being informed.
+quantitative result tables, so it has no numeric overlap with this submission,
+and its correction is being handled separately.
+
+**It is a public preprint and is not under review at any journal.** I state
+this plainly because an earlier draft of this note told you that "the relevant
+journal has been or is being informed", and that was false — as was the same
+implication in the manuscript's Companion Manuscript Disclosure, now corrected.
+No submission of the companion existed. I verified this in the IEEE Author
+Portal on 2026-08-27 (filters: All Publications, All Submission Statuses; the
+account returns one closed record, `TDSC-2025-10-1842`, rejected 22 October
+2025, and no other). The error was mine and was caught before submission
+rather than by you; it is recorded as corrected incident CI-25, together with
+the rule it produced — that a venue relationship asserted in any artifact must
+be verified against the venue's own system before the artifact is prepared, and
+that researching a venue's procedures is not verification of a submission's
+existence. There is consequently no concurrent-submission or dual-consideration
+question for you to weigh: this manuscript is under consideration at DTRAP and
+nowhere else, and so is nothing else of mine.
+
+**On the provenance mechanism, and two failures of it.** The manuscript's
+Provenance Discipline section states what the checks cover as a scope rather
+than by name. The reason it is written that way belongs with you rather than
+with the referees, so I set it out here.
+
+The gate was written to enforce a rule -- no number in the manuscript without
+an archived generating run -- and for several months it reported that the rule
+held. It was reading one file: the generated macro file, which is produced
+*from* the manifests and therefore cannot contain an unmanifested number. It
+never opened the manuscript. Three numbers typed directly into manuscript-bound
+tables passed a green gate and were found by human auditors instead (corrected
+incidents CI-11, CI-19, and four AUC-ROC values in the shared-record table).
+The scan now covers the manuscript, everything it includes, and every file the
+claim ledger cites; widening it surfaced 88 further findings on its first run,
+including unmanifested values in the findings file backing this round's new
+analyses, all now emitted as macros or deleted.
+
+A second check failed the same way: a three-pass compile reported zero
+undefined references while two citations resolved to nothing, because the
+bibliography entries were absent and that condition is reported by natbib as a
+citation warning rather than an undefined reference (CI-26). A citation check
+now runs beside the macro check.
+
+I record these because the alternative -- presenting the mechanism at the
+strength its name implies -- is the failure this paper is about. The corrected
+incident log in the artifact carries both in full, with the reasoning and the
+closure state. My judgement is that a referee needs the scope statement and not
+the history; if you would prefer the history in the body as well, I will add
+it.
 
 **Anonymity.** The manuscript suppresses these identifiers for double-anonymous
 review and points to this note. If you judge that the correction history makes

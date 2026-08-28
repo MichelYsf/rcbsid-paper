@@ -1,0 +1,182 @@
+{
+  "run_id": "supplementary_macros_20260827T113344_220658e5",
+  "name": "supplementary_macros",
+  "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
+  "git_commit_at_write": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "48f0e407c75e5e59e3aa78701cb423c393f672b777f97c80934b21caed6546eb",
+  "config": {
+    "reason": "F8 sweep item B6: replace typed literals with manifested macros; derivations only, no new compute"
+  },
+  "seed": 0,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\cicids_heldout_composition_20260819T120420_ebb7c281.json",
+      "sha256": "740f38ddfb5899ea36b11fb7237ea29e90dff72ad366ccc1f045790032615bba"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\s4_contrast_deliverables_20260826T203706_083c4e0e.json",
+      "sha256": "0e513524781bc07a7dd51234550bef572bb0725f3bd8c54be0dcc90e15ac407b"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\s6_bocpd_corrected_ablation_20260824T092655_a47acf51.json",
+      "sha256": "05998188aae0be59dbb9421fa4b92362da8eca1c0299a9216f052c700f72973d"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\stage1_natural_streams_20260819T062728_87db5780.json",
+      "sha256": "0c0bbc6081886d488277411280e8f3e6abedf43d04b4f52dfb420fccab13e7ae"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\prevalence_sweep_cicids.csv",
+      "sha256": "ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759"
+    }
+  ],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-08-27T11:33:44.979972+00:00",
+  "finished_utc": "2026-08-27T11:33:45.062478+00:00",
+  "wall_seconds": 0.082506,
+  "macros": {
+    "CicidsHeldoutAttackFreeRows": {
+      "value": 162000,
+      "unit": "",
+      "desc": "synthetic held-out rows from days contributing zero attacks (Mon-Thu)"
+    },
+    "CicidsFridayHeldoutDensityPct": {
+      "value": 77.66,
+      "unit": "%",
+      "desc": "attack density of the synthetic arm's Friday held-out sub-slice"
+    },
+    "SFourCicidsNaturalHstLiftAbs": {
+      "value": 0.093448,
+      "unit": "",
+      "desc": "magnitude of HST's below-chance lift, natural arm"
+    },
+    "SFourCicidsPrevShiftAbsPp": {
+      "value": 42.9954,
+      "unit": "pp",
+      "desc": "magnitude of the held-out prevalence shift"
+    },
+    "SSixDiagWindowRows": {
+      "value": 15000,
+      "unit": "",
+      "desc": "records covered by the Stage-6 score-distribution diagnostic"
+    },
+    "SFourCicidsNaturalProposedDetectorNormLift": {
+      "value": 0.144773,
+      "unit": "",
+      "desc": "CICIDS Natural ProposedDetector normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsNaturalEcodNormLift": {
+      "value": 0.229158,
+      "unit": "",
+      "desc": "CICIDS Natural Ecod normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsNaturalHstNormLift": {
+      "value": -0.294185,
+      "unit": "",
+      "desc": "CICIDS Natural Hst normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsSyntheticProposedDetectorNormLift": {
+      "value": 0.391386,
+      "unit": "",
+      "desc": "CICIDS Synthetic ProposedDetector normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsSyntheticEcodNormLift": {
+      "value": 0.222805,
+      "unit": "",
+      "desc": "CICIDS Synthetic Ecod normalized lift (AP-p)/(1-p)"
+    },
+    "SFourCicidsSyntheticHstNormLift": {
+      "value": 0.349419,
+      "unit": "",
+      "desc": "CICIDS Synthetic Hst normalized lift (AP-p)/(1-p)"
+    },
+    "SSixOriginalNormLift": {
+      "value": 0.281581,
+      "unit": "",
+      "desc": "Stage 6 original normalized lift (AP-p)/(1-p)"
+    },
+    "SSixCorrectedNormLift": {
+      "value": 0.010229,
+      "unit": "",
+      "desc": "Stage 6 corrected normalized lift (AP-p)/(1-p)"
+    },
+    "CicidsEcodScoringBatch": {
+      "value": 480000,
+      "unit": "",
+      "desc": "records in the single decision_function call that produced every CICIDS arm's ECOD scores (validation+test, scored together)"
+    },
+    "LitnetCaptureEcodScoringBatch": {
+      "value": 150000,
+      "unit": "",
+      "desc": "records per decision_function call for each per-capture LITNET ECOD score"
+    },
+    "LitnetPooledEcodScoringBatch": {
+      "value": 450000,
+      "unit": "",
+      "desc": "records in the decision_function call that produced the pooled LITNET ECOD score"
+    },
+    "SweepEcodScoringBatchMin": {
+      "value": 160917,
+      "unit": "",
+      "desc": "smallest ECOD scoring batch across the prevalence sweep levels"
+    },
+    "SweepEcodScoringBatchMax": {
+      "value": 480000,
+      "unit": "",
+      "desc": "largest ECOD scoring batch across the prevalence sweep levels"
+    },
+    "SSixOriginalLift": {
+      "value": 0.236153,
+      "unit": "",
+      "desc": "Stage 6 original additive lift above the chance floor"
+    },
+    "SSixCorrectedLift": {
+      "value": 0.008579,
+      "unit": "",
+      "desc": "Stage 6 corrected additive lift above the chance floor"
+    },
+    "LitnetPooledValBoundary": {
+      "value": 1275000,
+      "unit": "",
+      "desc": "row index where the pooled LITNET stream's held-out slice begins"
+    },
+    "LitnetCaptureHeldoutRows": {
+      "value": 75000,
+      "unit": "",
+      "desc": "held-out rows per LITNET capture; three of these tile the pooled held-out slice exactly"
+    },
+    "LitnetCaptureValBoundary": {
+      "value": 425000,
+      "unit": "",
+      "desc": "row index where each LITNET capture's held-out slice begins; three of these sum to the pooled boundary"
+    },
+    "RevEcodBatchLadder1": {
+      "value": 300000,
+      "unit": "",
+      "desc": "intermediate scoring batch 1 of the ECOD batch-size ladder"
+    },
+    "RevEcodBatchLadder2": {
+      "value": 360000,
+      "unit": "",
+      "desc": "intermediate scoring batch 2 of the ECOD batch-size ladder"
+    },
+    "SweepUnresampledLofMinusDetector": {
+      "value": 0.318196,
+      "unit": "",
+      "desc": "LOF minus proposed-detector AUC-PR at the unresampled sweep level (both deterministic there)"
+    }
+  },
+  "notes": "each value re-derived from the archived manifest named in inputs",
+  "extra": {
+    "window_source": "saturation_diagnostic() default in scripts/run_bocpd_ablation.py at the commit pinned by s6_bocpd_corrected_ablation_20260824T092655_a47acf51; the ablation manifest did not record it (noted, not hidden)",
+    "ecod_batch_paths": "every ECOD number in the paper is produced by a call of the form run_batch_reference('ecod', Xfit, np.vstack([Xva, Xte])) except the review analyses, which state their own batch"
+  }
+}
