@@ -39,7 +39,7 @@ python scripts/check_provenance.py --publish-ready
 
 **Status 2026-08-27: the round is committed and pushed, the tree is clean, and
 every base commit any manifest records resolves in the pushed history.** The
-check still exits 1, on one point only: 17 live manifests ran while the tree
+check still exits 1, on one point only: 19 of 25 live run manifests ran while the tree
 carried uncommitted edits, so their exact source state is not recoverable (the
 base commit is). Two of those cannot be regenerated at all --- the CICIDS
 contrast arms ran 4.8 hours on an AWS Linux instance that no longer exists, and

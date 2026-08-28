@@ -29,7 +29,7 @@ python -m pytest -q                       # full suite: must pass
    lost is the uncommitted delta at run time. `zenodo_metadata.md` names the
    GitHub repo as an *is derived from* identifier on a deposit that cannot be
    withdrawn, so this is the invariant with no undo.
-   **As of 2026-08-27 the tree is clean and pushed; 17 manifests still carry
+   **As of 2026-08-27 the tree is clean and pushed; 19 of 25 run manifests still carry
    the uncommitted-tree marker, two of them irreducibly** (see
    `PUBLISH_PREP_REPORT.md`).
 

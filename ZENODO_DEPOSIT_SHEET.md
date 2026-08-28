@@ -27,7 +27,8 @@ marked **[decide]**.
 
 - tree clean ✓, HEAD pushed ✓, every manifest's base commit resolves in the
   pushed history ✓
-- **17 live manifests ran while the working tree carried uncommitted edits.**
+- **19 of 25 live run manifests ran while the working tree carried
+  uncommitted edits.**
   Their base commit resolves; the exact source state at run time does not.
 - **Two of those cannot be regenerated at all**: the CICIDS construction-contrast
   arms (`s4_construction_contrast_20260819T064027_20f44694`,
@@ -101,12 +102,13 @@ the manuscript, its inputs, or any file the claim ledger cites; a derived value
 that disagrees with the values printed beside it; inconsistent display width;
 shell-escape damage in the LaTeX sources; and text typeset past the page measure.
 
-Provenance limitation, stated plainly. Seventeen of the run manifests in this
-deposit were produced while the working tree carried uncommitted edits. The
+Provenance limitation, stated plainly. Nineteen of the twenty-five run
+manifests in this deposit were produced while the working tree carried
+uncommitted edits. The
 commit each names resolves in the public repository and is an ancestor of the
 published branch, so the generating code is reachable at commit granularity;
 what is not recoverable is the exact uncommitted state at run time. Two of the
-seventeen -- the two CICIDS construction-contrast arms -- were produced on an AWS
+nineteen -- the two CICIDS construction-contrast arms -- were produced on an AWS
 Linux instance that has since been decommissioned and cannot be regenerated
 without changing the published numbers, a cross-platform effect this project
 records as corrected incident CI-16. The corrected-incident log in the deposit
