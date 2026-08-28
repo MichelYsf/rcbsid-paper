@@ -32,3 +32,6 @@ packages/dtrap/src/main.aux
 packages/dtrap/src/main.blg
 packages/dtrap/src/main.log
 packages/dtrap/src/main.out
+
+# working scratch files: never part of the record
+scratch_*
