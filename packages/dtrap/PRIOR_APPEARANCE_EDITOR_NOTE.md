@@ -127,6 +127,25 @@ closure state. My judgement is that a referee needs the scope statement and not
 the history; if you would prefer the history in the body as well, I will add
 it.
 
+**Provenance limitation.** The artifact accompanying this submission carries a
+limitation I would rather you hear from me. It is stated in the same words in
+the Zenodo deposit description and the arXiv v3 correction note.
+
+Provenance limitation, stated precisely. Nineteen of the twenty-five live run
+manifests in this record executed on a working tree that carried uncommitted
+edits, so the exact source state for those runs is not recoverable. Every base
+commit they name resolves and is an ancestor of the published branch, so the
+generating code is reachable at commit granularity; what is missing is the
+uncommitted delta at run time. Two of the nineteen are irreducible: the CICIDS
+construction-contrast arms, run ids
+s4_construction_contrast_20260819T064027_20f44694 and
+s4_construction_contrast_20260819T090813_46e9bd32, ran on an EC2 Linux instance
+that has since been decommissioned, and re-running them on the author's Windows
+machine would change published numbers -- the cross-platform difference this
+project records as corrected incident CI-16. They were therefore not re-run, and
+the other seventeen were deliberately left as they are rather than regenerate a
+subset that would not change this disclosure.
+
 **Anonymity.** The manuscript suppresses these identifiers for double-anonymous
 review and points to this note. If you judge that the correction history makes
 effective anonymity impossible and would prefer a different handling, I will

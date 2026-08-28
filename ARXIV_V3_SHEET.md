@@ -104,11 +104,16 @@ accordingly (previously "CALIBURN: Operationally Calibrated Streaming Intrusion
 Detection with Regime-Dependent Conformal Risk Control"). A companion preprint
 sharing parts of the same codebase (arXiv:2510.09619) predates this audit; the
 method-identity findings reported here apply to that shared lineage, and it is
-being corrected separately. 17 pages.
+being corrected separately. Provenance limitation, stated precisely. Nineteen of the twenty-five live run manifests in this record executed on a working tree that carried uncommitted edits, so the exact source state for those runs is not recoverable. Every base commit they name resolves and is an ancestor of the published branch, so the generating code is reachable at commit granularity; what is missing is the uncommitted delta at run time. Two of the nineteen are irreducible: the CICIDS construction-contrast arms, run ids s4_construction_contrast_20260819T064027_20f44694 and s4_construction_contrast_20260819T090813_46e9bd32, ran on an EC2 Linux instance that has since been decommissioned, and re-running them on the author's Windows machine would change published numbers -- the cross-platform difference this project records as corrected incident CI-16. They were therefore not re-run, and the other seventeen were deliberately left as they are rather than regenerate a subset that would not change this disclosure. 17 pages.
 ```
 
 **[decide]** If the Zenodo deposit is published first, append one sentence:
 `Artifact deposited at doi:10.5281/zenodo.XXXXXXX.` — using the **version DOI**.
+
+**The Comments text now carries the provenance disclosure** in the same words
+as the Zenodo description and the DTRAP editor note — 19 of 25 live run
+manifests ran on an uncommitted tree, two irreducibly. Decided 2026-08-27:
+accepted, not re-run.
 
 **Page count is 17.** Verify against the arXiv build preview before submitting;
 a stale count in this permanent field is the class of error this version exists

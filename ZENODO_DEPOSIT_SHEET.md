@@ -28,17 +28,19 @@ marked **[decide]**.
 - tree clean ✓, HEAD pushed ✓, every manifest's base commit resolves in the
   pushed history ✓
 - **19 of 25 live run manifests ran while the working tree carried
-  uncommitted edits.**
-  Their base commit resolves; the exact source state at run time does not.
+  uncommitted edits.** Their base commit resolves and is an ancestor of the
+  published branch; the exact source state at run time does not.
 - **Two of those cannot be regenerated at all**: the CICIDS construction-contrast
   arms (`s4_construction_contrast_20260819T064027_20f44694`,
-  `..._20260819T090813_46e9bd32`) ran 8,702 s and 8,644 s on an **AWS Linux**
-  instance that has been torn down. Re-running on this Windows machine would
-  change published numbers — the cross-platform effect already recorded as CI-16.
+  `s4_construction_contrast_20260819T090813_46e9bd32`) ran 8,702 s and 8,644 s
+  on an **EC2 Linux** instance that has been decommissioned. Re-running on this
+  Windows machine would change published numbers — the cross-platform effect
+  recorded as CI-16.
 
-**[decide]** Either (a) accept it and keep the disclosure paragraph in the
-description below, or (b) do not deposit yet. There is no third option that is
-honest. Nothing else blocks the sequence.
+**DECIDED 2026-08-27: accept the nineteen. The seventeen are not re-run.** The
+disclosure paragraph in Step 5 states this, and the identical wording is in the
+DTRAP confidential editor note and the arXiv v3 correction note. Nothing else
+blocks the sequence.
 
 ---
 
@@ -102,17 +104,20 @@ the manuscript, its inputs, or any file the claim ledger cites; a derived value
 that disagrees with the values printed beside it; inconsistent display width;
 shell-escape damage in the LaTeX sources; and text typeset past the page measure.
 
-Provenance limitation, stated plainly. Nineteen of the twenty-five run
-manifests in this deposit were produced while the working tree carried
-uncommitted edits. The
-commit each names resolves in the public repository and is an ancestor of the
-published branch, so the generating code is reachable at commit granularity;
-what is not recoverable is the exact uncommitted state at run time. Two of the
-nineteen -- the two CICIDS construction-contrast arms -- were produced on an AWS
-Linux instance that has since been decommissioned and cannot be regenerated
-without changing the published numbers, a cross-platform effect this project
-records as corrected incident CI-16. The corrected-incident log in the deposit
-records this as CI-33 and CI-35.
+Provenance limitation, stated precisely. Nineteen of the twenty-five live run
+manifests in this record executed on a working tree that carried uncommitted
+edits, so the exact source state for those runs is not recoverable. Every base
+commit they name resolves and is an ancestor of the published branch, so the
+generating code is reachable at commit granularity; what is missing is the
+uncommitted delta at run time. Two of the nineteen are irreducible: the CICIDS
+construction-contrast arms, run ids
+s4_construction_contrast_20260819T064027_20f44694 and
+s4_construction_contrast_20260819T090813_46e9bd32, ran on an EC2 Linux instance
+that has since been decommissioned, and re-running them on the author's Windows
+machine would change published numbers -- the cross-platform difference this
+project records as corrected incident CI-16. They were therefore not re-run, and
+the other seventeen were deliberately left as they are rather than regenerate a
+subset that would not change this disclosure.
 
 Earlier versions of the associated manuscript (arXiv:2605.24696 v1 and v2)
 reported results produced under a composite benchmark construction and described
