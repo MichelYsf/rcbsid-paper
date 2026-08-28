@@ -35,3 +35,10 @@ packages/dtrap/src/main.out
 
 # working scratch files: never part of the record
 scratch_*
+
+# Upload artifact, byte-for-byte derived from the tracked
+# packages/zenodo/manifests_bundle/ tree. Committing it would duplicate
+# ~700 KB of content git already has, and leaving it untracked would make
+# --publish-ready report a dirty tree at the exact moment the operator
+# runs it. Rebuild with scripts/build_zenodo_package.py.
+packages/zenodo/manifests_bundle.zip

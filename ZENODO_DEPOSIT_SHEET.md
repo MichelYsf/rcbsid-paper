@@ -55,13 +55,18 @@ blocks the sequence.
 
 ## Step 2 — Files (upload in this order)
 
-Zip `packages/zenodo/manifests_bundle/` to `manifests_bundle.zip` **before**
-uploading; the others upload as they are.
+**`manifests_bundle.zip` is already built**, at
+`packages/zenodo/manifests_bundle.zip`. Do **not** re-zip it by hand: its
+entries are relative to the bundle root with no wrapping directory, because
+`README.md` tells a downloader to extract it *into* `results/manifests/`. A
+right-click "compress" on Windows wraps the folder and silently breaks that
+step. If you need to rebuild it, run `python scripts/build_zenodo_package.py`,
+which writes it. All five files upload as they are.
 
 | # | file | size | sha256 |
 |---|---|---|---|
 | 1 | `rcbsid_rebuild_code.zip` | 361,325 B | `f36d7945b0aba1c21b393d4da9b1ae12664128f6b125dfa428fa1df3001cc114` |
-| 2 | `manifests_bundle.zip` (zip of `manifests_bundle/`, 86 files, 718,048 B unzipped) | — | compute after zipping |
+| 2 | `manifests_bundle.zip` (86 entries, 718,048 B unzipped) | 143,621 B | `cb021540cc85f061f64091a04a0c775360049402773409042ff973f023c9ce0a` |
 | 3 | `EXPECTED_SHA256.txt` | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
 | 5 | `prevalence_sweep_cicids.csv` | 48,587 B | `ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759` |

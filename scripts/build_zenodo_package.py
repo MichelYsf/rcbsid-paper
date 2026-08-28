@@ -29,6 +29,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 OUT = ROOT / "packages" / "zenodo"
 BUNDLE = OUT / "manifests_bundle"
 CODE_ZIP = OUT / "rcbsid_rebuild_code.zip"
+BUNDLE_ZIP = OUT / "manifests_bundle.zip"
 
 CODE_DIRS = ["src", "scripts", "tests", "paper"]
 CODE_FILES = [
@@ -88,10 +89,28 @@ def build_bundle() -> tuple[int, int]:
     return len(live), len(sup)
 
 
+def zip_bundle() -> tuple[int, int]:
+    """Write the upload zip the deposit sheet names.
+
+    Entries are relative to the bundle root with NO wrapping directory,
+    because README.md tells a downloader to extract this zip *into*
+    results/manifests/. Zipping the folder itself -- which is what a
+    right-click "compress" does on Windows -- produces
+    results/manifests/manifests_bundle/... and silently breaks the documented
+    reproduction step. Doing it here removes that choice from the operator.
+    """
+    files = sorted(p for p in BUNDLE.rglob("*") if p.is_file())
+    with zipfile.ZipFile(BUNDLE_ZIP, "w", zipfile.ZIP_DEFLATED) as z:
+        for f in files:
+            z.write(f, f.relative_to(BUNDLE).as_posix())
+    return len(files), BUNDLE_ZIP.stat().st_size
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     n_code = build_code_zip()
     n_live, n_sup = build_bundle()
+    n_zip, z_size = zip_bundle()
     for src, dst in COPY_FILES:
         s = ROOT / src
         if s.exists():
@@ -100,6 +119,7 @@ def main() -> int:
     print("  rcbsid_rebuild_code.zip : %d files" % n_code)
     print("  manifests_bundle/       : %d live + %d superseded (+ README)"
           % (n_live, n_sup))
+    print("  manifests_bundle.zip    : %d entries, %d B" % (n_zip, z_size))
     print("  copied                  : %d result/expectation file(s)"
           % len(COPY_FILES))
     return 0
