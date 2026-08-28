@@ -8,8 +8,8 @@ and this version's DOI. Paste the version DOI into `CITATION.cff` afterwards
 (HUMAN_ACTIONS step 2.5).
 
 - **Upload type:** Software
-- **Title:** Benchmark Stream Construction, Not Attack Prevalence —
-  reproducibility package (honest rebuild v2.0.0)
+- **Title:** Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks: Reproducibility Package
+  (honest rebuild v2.0.0)
 - **Authors:** Youssef, Michel (ORCID 0009-0000-0664-8228)
 - **License:** Apache-2.0
 - **Version:** 2.0.0-honest-rebuild
@@ -22,9 +22,8 @@ and this version's DOI. Paste the version DOI into `CITATION.cff` afterwards
 
 **Description (paste as-is):**
 
-> Reproducibility package for the rebuilt manuscript "Benchmark Stream
-> Construction, Not Attack Prevalence, Produces the Regime Structure of
-> Streaming Intrusion Detection" (a corrected replacement of
+> Reproducibility package for the rebuilt manuscript "Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks"
+> (a corrected replacement of
 > arXiv:2605.24696 v1/v2). Contains the analysis code, stream-construction
 > scripts with line-ending-normalised SHA-256 verification, every archived
 > run manifest (including retired manifests with their retirement reasons),

@@ -2,22 +2,31 @@
 
 To the Co-Editors-in-Chief, ACM Digital Threats: Research and Practice,
 
-Please consider the attached manuscript, "Benchmark Stream Construction, Not
-Attack Prevalence, Produces the Regime Structure of Streaming Intrusion
-Detection," for publication in DTRAP.
+Please consider the attached manuscript, "Stream Assembly Is an Uncontrolled
+Treatment in Streaming Intrusion-Detection Benchmarks," for publication in
+DTRAP.
 
 **What the paper contributes.** The paper shows, with mechanically verified
 experiments, that the step assembling public capture files into evaluation
-streams — day interleaving, capture pooling — produces the operating
-conditions that streaming intrusion-detection results are reported under: on
-identical records, reordering alone moves held-out prevalence by 43
-percentage points and inverts which of the two deterministic methods under
-test wins, and pooling disjoint captures reports a prevalence no capture
-exhibits. It further characterizes the evaluated detector as implemented
-(its change-point posterior is provably data-independent) and shows the
-textbook repair is degenerate in the opposite direction. We believe this
-sits squarely in DTRAP's remit: it is about what operational detection
-evaluations measure.
+streams — day interleaving, capture pooling — is not neutral plumbing but an
+uncontrolled experimental treatment. On CICIDS2017, holding the record multiset
+identical and changing only the ordering, a fixed positional split produces
+held-out samples sharing 32.5% of their records, at held-out prevalences 43
+percentage points apart, and the measured ordering of the two deterministic
+scorers reverses. Restricting both arms to the records they both held out
+removes that reversal, which locates the effect in *which records the assembly
+places in the test set* rather than in the order the detector processed them —
+a result that refuted our own earlier headline and reshaped the paper around the
+smaller supported claim. Pooling disjoint LITNET captures reports a prevalence
+no capture exhibits, offered as an audit check rather than a discovery. The
+paper also characterizes the evaluated detector as implemented: its reset and
+growth branches share a predictive term that cancels, so the run-length
+posterior equals the hazard rate exactly *below* the run-length cap, while the
+evaluations spend nearly all their length at or beyond it, where the posterior
+wanders — three facts we state separately because only the first is exact. And
+scored one branch at a time, the detector's deployed maximum composition ranks
+worse than its own tail term alone. We believe this sits squarely in DTRAP's
+remit: it is about what operational detection evaluations measure.
 
 **Correction transparency.** This manuscript is a corrected rebuild of work
 previously posted as arXiv:2605.24696 (v1/v2). Earlier versions reported

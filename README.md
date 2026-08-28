@@ -1,4 +1,4 @@
-# Benchmark Stream Construction, Not Attack Prevalence — reproducibility package
+# Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks — reproducibility package
 
 This repository is the artifact for the rebuilt manuscript in `paper/main.tex`
 (branch `rebuild/honest-v1`). It exists in its present form because earlier

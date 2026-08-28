@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "Benchmark Stream Construction, Not Attack Prevalence: Reproducibility Package"
+title: "Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks: Reproducibility Package"
 message: >-
   If you use this software, please cite it using this metadata. Note on the
   DOI: no Zenodo deposit has been published for this repository yet - the
@@ -14,13 +14,13 @@ authors:
     email: "michelyoussef@hotmail.com"
     orcid: "https://orcid.org/0009-0000-0664-8228"
 version: "2.0.0-honest-rebuild"
-date-released: "2026-08-20"
+date-released: "2026-08-27"
 license: "Apache-2.0"
 repository-code: "https://github.com/MichelYsf/rcbsid-paper"
 keywords:
   - intrusion detection
   - streaming evaluation
-  - benchmark construction
-  - attack prevalence
+  - benchmark stream construction
+  - evaluation methodology
   - reproducibility
   - provenance

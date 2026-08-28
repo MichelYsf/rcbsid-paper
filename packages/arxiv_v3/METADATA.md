@@ -3,8 +3,12 @@
 **Replaces:** arXiv:2605.24696 v2.
 
 **New title** (title-change note for the replacement form):
-> Benchmark Stream Construction, Not Attack Prevalence, Produces the Regime
-> Structure of Streaming Intrusion Detection
+> Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks
+>
+> *Corrected 2026-08-27:* this field previously carried "Benchmark Stream
+> Construction, Not Attack Prevalence, Produces the Regime Structure of
+> Streaming Intrusion Detection" — a title analysis A1 refuted and CI-21
+> withdrew. Following it would have put the withdrawn claim on arXiv.
 
 Previous title, for the record: "CALIBURN: Operationally Calibrated Streaming
 Intrusion Detection with Regime-Dependent Conformal Risk Control". The title
