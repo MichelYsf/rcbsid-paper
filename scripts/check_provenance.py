@@ -256,6 +256,12 @@ def selftest() -> int:
     with provenance_run("selftest_provenance_gate", config={"selftest": True}, seed=0,
                         notes="Stage 0 gate acceptance test") as run:
         run.emit_macro("SelfTestManifested", 0.4242, desc="gate acceptance")
+    # The fixture has to enter the store for the gate to resolve it below, but
+    # it must not STAY there. Forty of these accumulated -- 61% of the live
+    # provenance store, all recording a dirty commit, and one of them leaking
+    # a fake number into the generated macro file the manuscript reads from.
+    # A self-test that pollutes the thing it tests is not a self-test (CI-34).
+    _fixture = MANIFEST_DIR / (run.run_id + ".json")
 
     # Ambiguous sourcing (CI-5) is covered hermetically in
     # tests/test_provenance.py with an injected index. It is deliberately NOT
@@ -289,6 +295,15 @@ def selftest() -> int:
         for f in failures:
             print(f"  FAIL: {f}")
         return 1
+    # remove the fixture and reindex, so the store is exactly as it was
+    try:
+        _fixture.unlink(missing_ok=True)
+        (MANIFEST_DIR / (run.run_id + ".json.sha256")).unlink(missing_ok=True)
+        from provenance import _reindex_macros
+        _reindex_macros()
+    except Exception as exc:
+        print("  WARNING: could not remove the selftest fixture: " + repr(exc))
+
     print("  PASS: fails on orphan and drift, passes on a manifested number "
           "(ambiguous sourcing covered in tests/test_provenance.py)")
     return 0

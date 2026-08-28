@@ -22,13 +22,16 @@ python -m pytest -q                       # full suite: must pass
    python scripts/check_provenance.py --publish-ready
    ```
 
-   It also fails when a live run manifest records a `-dirty` commit, which the
-   eye cannot catch at all: a `-dirty` sha is not resolvable from the public
-   repository, so a reader cannot reach the code that produced the number.
-   `zenodo_metadata.md` names the GitHub repo and branch as an *is derived
-   from* identifier on a deposit that cannot be withdrawn, so this invariant is
-   the one with no undo. **As of 2026-08-27 it does not hold** (CI-32): the
-   round is uncommitted and the branch has no upstream.
+   It also fails when a live run manifest ran on an uncommitted tree, which the
+   eye cannot catch at all. Stated precisely (CI-35): the base commit in such a
+   stamp *does* resolve, and every one recorded here is an ancestor of the
+   pushed branch, so a reader reaches the code to commit granularity; what is
+   lost is the uncommitted delta at run time. `zenodo_metadata.md` names the
+   GitHub repo as an *is derived from* identifier on a deposit that cannot be
+   withdrawn, so this is the invariant with no undo.
+   **As of 2026-08-27 the tree is clean and pushed; 17 manifests still carry
+   the uncommitted-tree marker, two of them irreducibly** (see
+   `PUBLISH_PREP_REPORT.md`).
 
 ## The packages (`packages/`)
 

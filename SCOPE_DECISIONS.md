@@ -988,6 +988,42 @@ the Zenodo deposit. **It does not pass as of 2026-08-27, by design: the round is
 uncommitted.** Committing and pushing is the operator's decision, not the
 build's.
 
+### CI-34 — the gate's self-test was polluting the store it tests
+`check_provenance.py --selftest` proves the gate resolves a manifested number
+by writing a manifest holding a deliberately fake value
+(`SelfTestManifested = 0.4242`) and then checking that the gate finds it. It
+never removed the fixture. Forty accumulated: **61% of the live provenance
+store**, every one recording an uncommitted tree, and one of them putting a
+fake number into `paper/numbers.tex` — the generated file the manuscript reads
+from. Nothing ever cited them, and no manuscript sentence used the macro, so
+nothing published was wrong; but a self-test that contaminates the thing it
+tests is not a self-test, and the store's own comment already identified this
+risk for a neighbouring case while leaving this one open.
+
+Fixed: the selftest deletes its fixture and reindexes before returning, so the
+store is exactly as it was. The forty are retired to `superseded/`, and
+`numbers.tex` dropped from 564 macros to 563 with the fixture gone.
+
+### CI-35 — I overstated the "-dirty" problem, and the overstatement drove a decision
+The previous round's `check_publish_ready` said a `-dirty` stamp is "not
+resolvable from the public repository", and that wording propagated into
+`HUMAN_ACTIONS.md`, `PUBLISH_INSTRUCTIONS.md` and the operator's next action.
+**It is false.** A `-dirty` stamp is `<sha>-dirty`: the base sha resolves
+normally. Checked explicitly after the push — all twelve distinct base commits
+recorded across every live manifest resolve **and are ancestors of the pushed
+branch**. A reader reaches the generating code to commit granularity.
+
+What `-dirty` actually records is narrower: the working tree carried
+uncommitted edits when the run executed, so the *exact* source state is not
+recoverable. That is a real limitation, and for a deposit that cannot be
+withdrawn it is worth failing on — but it is not the thing I said it was, and
+the operator was being asked to make a publication decision on the strength of
+the stronger claim.
+
+Corrected in all four places. **The check's verdict is unchanged** — it still
+exits 1 — because correcting a false rationale is not the same as relaxing a
+threshold, and relaxing it to reach green is exactly what this project forbids.
+
 **The pattern across CI-22, CI-24, CI-26 and CI-27 is one pattern:** a check or
 a claim that reads as universal while covering less than its wording implies.
 The provenance gate said "every number in the manuscript" and read one

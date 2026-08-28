@@ -30,18 +30,25 @@ in the current packages.
 
 ## 0b. Commit and push this round — BEFORE the deposit
 
-The Zenodo record names the GitHub repository and branch `rebuild/honest-v1` as
-the source it derives from, and a Zenodo DOI cannot be withdrawn. Right now that
-branch does not contain this work: the whole correction round is uncommitted and
-the branch has no upstream, so 61 of 65 live run manifests record a `-dirty`
-commit that no reader can resolve.
+The Zenodo record names the GitHub repository as the source it derives from, and
+a Zenodo DOI cannot be withdrawn.
 
 ```
 python scripts/check_provenance.py --publish-ready
 ```
 
-Run it until it passes. If you deposit before it does, the deposit will point at
-a public commit that does not contain the results it archives.
+**Status 2026-08-27: the round is committed and pushed, the tree is clean, and
+every base commit any manifest records resolves in the pushed history.** The
+check still exits 1, on one point only: 17 live manifests ran while the tree
+carried uncommitted edits, so their exact source state is not recoverable (the
+base commit is). Two of those cannot be regenerated at all --- the CICIDS
+contrast arms ran 4.8 hours on an AWS Linux instance that no longer exists, and
+re-running them on this Windows machine would change the published numbers, the
+cross-platform effect this project already recorded as CI-16.
+
+**This is a judgement for you, not a bug to fix.** Either accept it and say so
+in the deposit description (`ZENODO_DEPOSIT_SHEET.md` carries the wording), or
+do not deposit. Nothing else blocks the sequence.
 
 ## 1. Zenodo deposit (login wall)
 

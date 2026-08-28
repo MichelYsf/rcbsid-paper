@@ -154,3 +154,16 @@ list, so a level or method added later is covered when it is emitted rather
 than when someone remembers. Base measurements are unchanged in both runs --
 this is a derivation change, not a re-measurement. Retired 2026-08-27.
 
+## selftest_provenance_gate_*.json  (40 files)
+Fixtures written by `check_provenance.py --selftest`, which creates a manifest
+holding a deliberately fake number (`SelfTestManifested = 0.4242`) so the gate
+can prove it resolves a manifested value, and previously left it behind. Forty
+accumulated: **61% of the live provenance store**, every one recording a dirty
+commit, and one of them putting a fake number into `paper/numbers.tex` -- the
+generated file the manuscript reads from. No claim, ledger row or manuscript
+sentence has ever cited one.
+
+The selftest now deletes its fixture and reindexes before returning, so the
+store is exactly as it was. These are retired rather than deleted, per this
+project's rule that history is never deleted. Retired 2026-08-27 (CI-34).
+

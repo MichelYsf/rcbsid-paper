@@ -18,9 +18,15 @@ What it enforces, and why each matters for an IMMUTABLE deposit:
   * HEAD published on the remote -- `zenodo_metadata.md` names the GitHub repo
     and branch as an "is derived from" identifier, so a downloader must be able
     to resolve it
-  * no manifest recording a "-dirty" commit -- a "-dirty" sha is not
-    recoverable from the public repository, so a number that cites one cannot
-    be traced by anyone but the author
+  * no manifest recording a "-dirty" commit. Stated precisely, because the
+    first version of this docstring overstated it (CI-35): the BASE commit in
+    a "-dirty" stamp does resolve, and every one recorded here is an ancestor
+    of the pushed branch, so a reader can reach the code to commit
+    granularity. What "-dirty" records is that the working tree carried
+    uncommitted edits when the run executed, so the exact source state is not
+    recoverable. That is a real gap and worth failing on for a deposit that
+    cannot be withdrawn -- but it is not "unresolvable", and the operator
+    deciding whether to accept it deserves the accurate version.
 """
 from __future__ import annotations
 
@@ -82,7 +88,8 @@ def main() -> int:
                 dirty.append(m.name)
     total = len(list(MANIFESTS.glob("*.json"))) if MANIFESTS.exists() else 0
     if dirty:
-        print("  DIRTY PROVENANCE %d of %d live manifest(s) record a '-dirty' commit"
+        print("  DIRTY PROVENANCE %d of %d live manifest(s) ran on an "
+              "uncommitted tree (base commit resolves; exact source does not)"
               % (len(dirty), total))
         print("                   e.g. %s" % ", ".join(dirty[:3]))
         rc = 1
@@ -91,11 +98,13 @@ def main() -> int:
 
     print("")
     if rc:
-        print("NOT PUBLISH-READY. Commit and push this branch, then re-run the "
-              "generating scripts whose manifests record a dirty commit, or "
-              "state plainly in the deposit metadata that the archived state is "
-              "not resolvable from the public repository. An uploaded Zenodo "
-              "deposit cannot be withdrawn.")
+        print("NOT PUBLISH-READY. Every base commit above resolves in the "
+              "pushed history; what a '-dirty' stamp records is that the tree "
+              "carried uncommitted edits at run time, so the exact source "
+              "state is not recoverable. Re-run the generating script on a "
+              "clean tree where that is possible, or state the limitation in "
+              "the deposit metadata. An uploaded Zenodo deposit cannot be "
+              "withdrawn.")
     else:
         print("PUBLISH-READY - tree clean, HEAD published, provenance traceable.")
     return rc
