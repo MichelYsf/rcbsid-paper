@@ -1,6 +1,6 @@
 # ZENODO_DEPOSIT_SHEET — fill-in order, nothing deposited
 
-Assembled 2026-08-27 against commit **`afbb2c92dd4fa6f951b4c863c82fc171161b4326`**.
+Assembled 2026-08-27 against commit **`df1e40b9c58055b8bbf159815f5fc5f06f4df2fa`**.
 Nothing here has been uploaded. Work top to bottom; every value is final unless
 marked **[decide]**.
 
@@ -12,6 +12,12 @@ marked **[decide]**.
 > Zenodo support only in exceptional cases. Confirm both behaviours in the UI
 > before you press Publish — this sheet was written offline and no Zenodo page
 > was fetched.
+
+> **The commit to name is the one containing the sheet you are reading.**
+> Run `git rev-parse HEAD` on a clean tree and use that value; as written it
+> is `df1e40b9c58055b8bbf159815f5fc5f06f4df2fa`. Every commit from `e7aea84`
+> onward contains the deposited artifacts, so any of them resolves — but the
+> tip is the one that also contains this instruction.
 
 ---
 
@@ -124,7 +130,7 @@ is the first deposit of this artifact.
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/afbb2c92dd4fa6f951b4c863c82fc171161b4326` | **the commit, not the branch** — a branch name moves, and the deposit must name a state that cannot change |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/df1e40b9c58055b8bbf159815f5fc5f06f4df2fa` | **the commit, not the branch** — a branch name moves, and the deposit must name a state that cannot change |
 | is supplement to | `arXiv:2605.24696` | the manuscript this package supports; v3 replacement is a later step |
 
 ## Step 8 — Version and keywords

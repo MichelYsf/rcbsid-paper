@@ -1,6 +1,6 @@
 # ARXIV_V3_SHEET — replacement of arXiv:2605.24696, nothing submitted
 
-Assembled 2026-08-27 against commit **`afbb2c92dd4fa6f951b4c863c82fc171161b4326`**.
+Assembled 2026-08-27 against commit **`df1e40b9c58055b8bbf159815f5fc5f06f4df2fa`**.
 Do this **after** the Zenodo deposit, so the DOI can go in.
 
 > **Immutable on submission:** an arXiv version is permanent. v3 will sit
