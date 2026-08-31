@@ -92,6 +92,18 @@ degeneracy are supporting findings, not the headline.
    reader performs on the numbers printed beside it.**
    `scripts/check_decimals.py` enforces it and fails the build otherwise.
 
+10. **Registrar-backed identifiers are verified against the registrar.** A DOI,
+    arXiv ID, or ORCID is checked against the registrar's API (DataCite,
+    Crossref, arXiv, ORCID) or the owning account --- never by whether a page
+    fetch succeeds, and never by searching this repository's own files or
+    history for the identifier. A failed or refused automated fetch is
+    evidence about the fetch; an identifier absent from the repository is
+    evidence about the repository. Both registrars this project has touched
+    refuse automated page fetches while answering their APIs --- preprints.org
+    was correctly handled through the Crossref API in the round-3 citation
+    work, and Zenodo was not handled at all when the project's own DOI was
+    declared unminted (CI-36).
+
 ## Corrected incidents created by this re-scope
 
 Recorded here rather than silently changing prior text.
@@ -1023,6 +1035,54 @@ the stronger claim.
 Corrected in all four places. **The check's verdict is unchanged** — it still
 exits 1 — because correcting a false rationale is not the same as relaxing a
 threshold, and relaxing it to reach green is exactly what this project forbids.
+
+### CI-36 — a published DOI was declared "never minted", on a repo-history search
+The belief, carried into three publication-bound texts: the Zenodo DOI cited
+by the v1/v2 manuscripts was never minted, no deposit existed, and the rebuild
+would be "the first deposit of this artifact."
+
+**Verified false on 2026-08-31, in the owning Zenodo account.** DOI
+**10.5281/zenodo.20074590** exists, is published and public: created
+2026-05-07T19:11Z; title "SLO-Aware Streaming Intrusion Detection:
+Reproducibility Package"; version 1.0.0; type Software; licence Apache-2.0;
+one file, a source archive of this repository at tag `v1.0.0` (2,028,268 B,
+md5 f67dfa9c0203490a4de1648f6d6ce8c6); description "Initial release for
+CALIBURN paper submission to KeAi Cyber Security and Applications"; concept
+DOI 10.5281/zenodo.20074589; related identifier *is-supplement-to* the
+repository tree at tag `v1.0.0` (the tag exists on the remote and resolves);
+35 views and 7 downloads at verification. The v1/v2 citation therefore
+resolves --- to the pre-audit codebase this rebuild corrects.
+
+**Where the belief entered, and what check produced it.** `SUPERSEDED.md`
+(2026-08-20) records the actual check verbatim: the only DOI ever recorded was
+the placeholder `10.5281/zenodo.XXXXXXX` --- *verified with `git log --all`*.
+A search of the repository's own history was substituted for a registrar
+query. The repository's CITATION.cff had always carried a literal placeholder,
+and the leap from "no real DOI anywhere in the repo history" to "the DOI cited
+by the published manuscripts was never minted" was made without asking
+DataCite, Zenodo's API, or the owning account. The FINALIZE round (2026-08-24)
+then propagated the conclusion into `CITATION.cff`, the arXiv v3 Comments
+text, the deposit metadata, and `README.md` --- and the deposit metadata file
+shows the round explicitly **overriding the operator's own "new version"
+wording** on the strength of the wrong check ("despite F-scope wording 'new
+version', this is the FIRST deposit"). Whether an automated fetch of the DOI
+was also attempted and refused is not recorded; the recorded evidence chain is
+repo-history-only.
+
+This is CI-25's failure shape, third occurrence: a thorough search returning
+nothing, read as evidence about the thing rather than about the search. Worse,
+the correct instrument was already in this project's toolkit --- when
+preprints.org refused automated fetches during the round-3 citation work, the
+Crossref API was used instead, and that handling was recorded as the pattern
+to follow. The rule existed and was not applied to the project's own
+identifier. Binding rule 10 now states it.
+
+**Consequence.** The rebuild is not a first deposit. It publishes as **version
+2.0.0** of the existing record lineage via Zenodo's New-version flow,
+superseding v1.0.0, which stays public with a newer-version notice. All three
+publication-bound texts were corrected before anything was published, and the
+canonical DOI-correction sentence is byte-identical across the deposit
+description, the DTRAP editor note, and the arXiv v3 note.
 
 **The pattern across CI-22, CI-24, CI-26 and CI-27 is one pattern:** a check or
 a claim that reads as universal while covering less than its wording implies.

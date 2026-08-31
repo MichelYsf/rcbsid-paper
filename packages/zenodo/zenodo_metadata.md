@@ -1,11 +1,13 @@
 # Zenodo new-version metadata — ready to paste
 
-**Note:** despite F-scope wording "new version", this is the FIRST deposit:
-no prior Zenodo record exists (the old CITATION.cff carried only the
-placeholder `10.5281/zenodo.XXXXXXX`; verified 2026-08-24, and recorded in
-`SUPERSEDED.md`). Create a NEW upload; Zenodo will mint both the concept DOI
-and this version's DOI. Paste the version DOI into `CITATION.cff` afterwards
-(HUMAN_ACTIONS step 2.5).
+**Corrected 2026-08-31 (CI-36): this is a NEW VERSION of the existing record
+doi:10.5281/zenodo.20074590** (v1.0.0, deposited 2026-05-07, the pre-audit
+codebase; concept DOI 10.5281/zenodo.20074589). The note that stood here
+declared it "the FIRST deposit" — overriding the F-scope's own "new
+version" wording — after finding only a placeholder DOI in the repository's
+history; a repo search is not a registrar query. **The operative checklist is
+`../../ZENODO_DEPOSIT_SHEET.md`; use it.** This file is retained as a
+historical staging note only.
 
 - **Upload type:** Software
 - **Title:** Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks: Reproducibility Package

@@ -1,12 +1,15 @@
 cff-version: 1.2.0
 title: "Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks: Reproducibility Package"
 message: >-
-  If you use this software, please cite it using this metadata. Note on the
-  DOI: no Zenodo deposit has been published for this repository yet - the
-  previous CITATION.cff carried a placeholder (10.5281/zenodo.XXXXXXX), never
-  a real identifier. The first Zenodo publication of the rebuilt artifact will
-  mint a concept DOI and a version DOI; the version DOI recorded here should
-  then be superseded by each subsequent release's own DOI.
+  If you use this software, please cite it using this metadata. Version 1.0.0
+  of this record lineage (doi:10.5281/zenodo.20074590, deposited 2026-05-07)
+  archives the pre-audit codebase cited by arXiv:2605.24696 v1/v2. The
+  corrected rebuild publishes as version 2.0.0 under the same concept DOI
+  (10.5281/zenodo.20074589); once its version DOI is minted it belongs in a
+  doi field here, superseded in turn by each later release's own DOI. An
+  earlier revision of this message said no deposit had been published and that
+  the cited DOI was never minted; both claims were false (corrected incident
+  CI-36).
 type: software
 authors:
   - family-names: "Youssef"

@@ -36,5 +36,11 @@ state of every claim is `SCOPE_DECISIONS.md` (the corrected-incident log),
   from the working tree and from the full history of every branch (verified
   with `git log --all` on 2026-08-20). Its claims predate the method-identity
   findings and are void wherever a copy survives outside the repository.
-- A Zenodo deposit — the only DOI ever recorded was the placeholder
-  `10.5281/zenodo.XXXXXXX`. No deposit exists to supersede.
+- A Zenodo deposit — the repository's own files only ever recorded the
+  placeholder `10.5281/zenodo.XXXXXXX` (checked with `git log --all` on
+  2026-08-20). *Corrected 2026-08-31 (CI-36):* the conclusion drawn from
+  that check — "no deposit exists to supersede" — was false. The v1/v2
+  manuscripts cite doi:10.5281/zenodo.20074590, which exists: version 1.0.0,
+  deposited 2026-05-07, the pre-audit codebase at tag `v1.0.0`. A search of
+  this repository is not a registrar query. The rebuild supersedes it as
+  version 2.0.0 in the same record lineage.

@@ -104,5 +104,8 @@ in this rebuild** and therefore carry no numbers anywhere.
 
 ## Citation
 
-See `CITATION.cff`. No Zenodo deposit exists yet; the first publication of
-this artifact will mint the DOI.
+See `CITATION.cff`. Version 1.0.0 of the Zenodo record
+(doi:10.5281/zenodo.20074590, deposited 2026-05-07) archives the pre-audit
+codebase at tag `v1.0.0`; the corrected rebuild publishes as version 2.0.0 in
+the same record lineage, and its version DOI, once minted, is the one to
+cite (CI-36 in `SCOPE_DECISIONS.md` records the correction).

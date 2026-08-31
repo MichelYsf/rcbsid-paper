@@ -39,7 +39,10 @@ python -m pytest -q                       # full suite: must pass
   (`arxiv_v3_source.tar.gz`, compiles standalone: main.tex + numbers.tex +
   references.bib + the two generated tables copied in), the Comments-field
   text in both sibling-decision variants, and the title-change note.
-- **zenodo/** — the first (v2.0.0) deposit bundle: code + scripts + manifests
+- **zenodo/** — the v2.0.0 deposit bundle, a **new version** of Zenodo record
+  10.5281/zenodo.20074590 (v1.0.0 of 2026-05-07 is the pre-audit artifact;
+  the "first deposit" description that stood here was false, CI-36):
+  code + scripts + manifests
   + logs + stream hashes, with `zenodo_metadata.md` ready to paste. Minting
   this DOI, then writing it into CITATION.cff, is a HUMAN_ACTIONS step.
 - **dtrap/** — the double-anonymous submission: anonymized PDF and source

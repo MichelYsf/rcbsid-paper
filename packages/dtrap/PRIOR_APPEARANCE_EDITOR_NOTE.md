@@ -74,6 +74,8 @@ defects in the arXiv Comments field. The corrected-incident log in the artifact
 records each numbered incident with its evidence and closure status; the count
 is a record of the process, not a quality claim, so none is quoted here.
 
+**The artifact DOI.** Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage and supersedes it, and Zenodo displays a newer-version notice on the superseded record. An earlier draft of the correction texts accompanying this submission said that DOI was never minted; that was false --- the check behind it searched the repository's own history instead of the registrar --- and it is recorded as corrected incident CI-36 in the log that ships with the artifact.
+
 **Companion manuscript.** A companion preprint, **arXiv:2510.09619**
 ("Risk-Calibrated Bayesian Streaming Intrusion Detection with SRE-Aligned
 Decisions"), shares part of the same codebase and predates the audit. The

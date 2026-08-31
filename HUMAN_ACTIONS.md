@@ -50,15 +50,17 @@ cross-platform effect this project already recorded as CI-16.
 in the deposit description (`ZENODO_DEPOSIT_SHEET.md` carries the wording), or
 do not deposit. Nothing else blocks the sequence.
 
-## 1. Zenodo deposit (login wall)
+## 1. Zenodo — NEW VERSION of the existing record (login wall)
 
-1. Sign in at https://zenodo.org (GitHub or ORCID login).
-2. "New upload".
-3. Zip `packages/zenodo/manifests_bundle/` to `manifests_bundle.zip`, then
-   upload the files listed at the bottom of
-   `packages/zenodo/zenodo_metadata.md`.
-4. Fill the form by copy-paste from `zenodo_metadata.md`.
-5. Publish. Copy the **version DOI**.
+1. Sign in at https://zenodo.org as the owner of record
+   doi:10.5281/zenodo.20074590 (v1.0.0, deposited 2026-05-07 — it exists; the
+   "first deposit" wording that stood here was false, CI-36).
+2. Follow `ZENODO_DEPOSIT_SHEET.md` top to bottom: **New version** on that
+   record, do **not** import the old file, upload the five staged files
+   (`manifests_bundle.zip` is already built), and change every inherited field
+   the sheet lists.
+3. Publish. Copy the **new version's DOI** — not 10.5281/zenodo.20074590 and
+   not the concept DOI 10.5281/zenodo.20074589.
 
 ## 2. Propagate the DOI (2 minutes, local)
 

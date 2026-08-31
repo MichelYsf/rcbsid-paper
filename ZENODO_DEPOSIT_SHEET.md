@@ -10,8 +10,9 @@ marked **[decide]**.
 > keywords, related identifiers) remains editable after publication.** The DOI
 > itself is permanent and cannot be withdrawn; a record can be hidden by
 > Zenodo support only in exceptional cases. Confirm both behaviours in the UI
-> before you press Publish — this sheet was written offline and no Zenodo page
-> was fetched.
+> before you press Publish — the field behaviours were written offline, while
+> the record facts below (v1.0.0, both DOIs, file, dates) are account-verified
+> as of 2026-08-31.
 
 > **Which commit to name.** Use **`45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1`**.
 > That commit contains the five deposit files byte-for-byte as they are on
@@ -46,12 +47,38 @@ blocks the sequence.
 
 ---
 
-## Step 1 — Upload type
+## Step 1 — New version, not New upload
 
-| field | value |
+**This is a new version of an existing record, not a first deposit.** Record
+**doi:10.5281/zenodo.20074590** — version 1.0.0, "SLO-Aware Streaming Intrusion
+Detection: Reproducibility Package", deposited 2026-05-07 — is published and
+public. It holds the pre-audit codebase (one file,
+`MichelYsf/rcbsid-paper-v1.0.0.zip`, 2,028,268 B, md5
+f67dfa9c0203490a4de1648f6d6ce8c6) and is what arXiv:2605.24696 v1/v2 cite. The
+concept DOI **10.5281/zenodo.20074589** groups every version of the record. (An
+earlier revision of this sheet called the rebuild "the first deposit"; that was
+false — CI-36.)
+
+1. Open doi:10.5281/zenodo.20074590 signed in as the record's owner.
+2. Click **New version**.
+3. **Do NOT import the old file.** If the form carries
+   `MichelYsf/rcbsid-paper-v1.0.0.zip` over from v1.0.0, remove it — the new
+   version contains exactly the five files of Step 2 and nothing else.
+
+A new version pre-fills its metadata from v1.0.0. **Inherited fields that MUST
+be changed:**
+
+| inherited from v1.0.0 | change to |
 |---|---|
-| Resource type | **Software** |
-| (Zenodo may ask "Software" vs "Dataset") | Software — the deposit is code, manifests and result tables, not a dataset |
+| title "SLO-Aware Streaming Intrusion Detection: Reproducibility Package" | the Step 3 title |
+| description ("Initial release for CALIBURN paper submission to KeAi Cyber Security and Applications") | the Step 5 text |
+| version `1.0.0` | `2.0.0-honest-rebuild` |
+| keywords | the six in Step 8 |
+| related identifier *is-supplement-to* `…/rcbsid-paper/tree/v1.0.0` | **replace** with the two rows in Step 7 |
+
+**Inherited and kept:** resource type Software; creator Youssef, Michel —
+confirm ORCID 0009-0000-0664-8228 is attached; licence Apache-2.0; access
+Open.
 
 ## Step 2 — Files (upload in this order)
 
@@ -65,7 +92,7 @@ which writes it. All five files upload as they are.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` | 361,325 B | `f36d7945b0aba1c21b393d4da9b1ae12664128f6b125dfa428fa1df3001cc114` |
+| 1 | `rcbsid_rebuild_code.zip` | 363,694 B | `41dd667d57acd5dac9295a1510f6e66bf36c54b0eac5082c42d928f7c7c641fe` |
 | 2 | `manifests_bundle.zip` (86 entries, 718,048 B unzipped) | 143,621 B | `cb021540cc85f061f64091a04a0c775360049402773409042ff973f023c9ce0a` |
 | 3 | `EXPECTED_SHA256.txt` | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
@@ -129,8 +156,7 @@ subset that would not change this disclosure.
 Earlier versions of the associated manuscript (arXiv:2605.24696 v1 and v2)
 reported results produced under a composite benchmark construction and described
 a scoring rule the released code did not implement. This package is the rebuild
-from that audit. v1 and v2 also cited a Zenodo DOI that was never minted; this
-is the first deposit of this artifact.
+from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage and supersedes it, and Zenodo displays a newer-version notice on the superseded record.
 ```
 
 ## Step 6 — License
@@ -147,6 +173,10 @@ is the first deposit of this artifact.
 | **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1` | **the commit, not the branch** — a branch name moves, and the deposit must name a state that cannot change |
 | is supplement to | `arXiv:2605.24696` | the manuscript this package supports; v3 replacement is a later step |
 
+These two rows **replace** the inherited *is-supplement-to*
+`…/rcbsid-paper/tree/v1.0.0` row, which belongs to v1.0.0 (that git tag exists
+on the remote, so the old record's link keeps resolving).
+
 ## Step 8 — Version and keywords
 
 | field | value |
@@ -156,10 +186,18 @@ is the first deposit of this artifact.
 
 ## Step 9 — Publish, then
 
-1. Copy the **version DOI** (not the concept DOI).
+1. Copy the **new version's DOI, minted at publish** — not
+   10.5281/zenodo.20074590 (that is v1.0.0) and not the concept DOI
+   10.5281/zenodo.20074589 (that groups all versions).
 2. `CITATION.cff`: replace the explanatory `message:` block with a `doi:` field
-   carrying the version DOI.
+   carrying that new version DOI.
 3. Commit and push. Then, and only then, HUMAN_ACTIONS step 3 (arXiv).
+4. **Optional, after publish — annotate the superseded record.** Metadata on
+   v1.0.0 stays editable: open doi:10.5281/zenodo.20074590, choose Edit, and
+   append one factual sentence to its description: "Version 1.0.0 is the
+   pre-audit artifact evaluated in arXiv:2605.24696 v1/v2; it is superseded by
+   version 2.0.0, the corrected rebuild." Its files stay frozen and public,
+   and Zenodo shows the newer-version notice regardless.
 
 ---
 

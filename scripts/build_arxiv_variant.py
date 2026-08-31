@@ -60,8 +60,9 @@ def main() -> int:
          "submission system's anonymous artifact channel.",
          "The repository is public at\n"
          "\\url{https://github.com/MichelYsf/rcbsid-paper} (branch "
-         "\\texttt{rebuild/honest-v1}); the Zenodo deposit DOI will be added "
-         "when minted."),
+         "\\texttt{rebuild/honest-v1}); the artifact publishes as version 2.0.0 of the "
+         "Zenodo record at doi:10.5281/zenodo.20074590, and the version DOI "
+         "will be added when minted."),
     ]
     for old, new in edits:
         if old not in s:
