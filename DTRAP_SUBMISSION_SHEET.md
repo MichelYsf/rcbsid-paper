@@ -1,5 +1,10 @@
 # DTRAP_SUBMISSION_SHEET — nothing submitted
 
+> **The operative document is now `SUBMISSION_CONSOLE.md`** (2026-08-31).
+> Work through the console on submission morning. It carries every field in
+> paste order, the verified reviewer block, the plain-text renders, and the
+> corrected waiver row. This sheet stays as the fuller reference record.
+
 Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
 Portal: **https://mc.manuscriptcentral.com/dtrap** (ScholarOne, verified
 2026-08-24). **This is the FIRST outward submission action** — Zenodo is
@@ -51,7 +56,7 @@ reproducibility; provenance
 | # | file | size | role |
 |---|---|---|---|
 | 1 | `packages/dtrap/manuscript_anonymous.pdf` | 570,998 B | **main document** |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 478,167 B | supplementary, **not for publication** |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 478,563 B | supplementary, **not for publication** |
 | 3 | `packages/dtrap/source_anonymous.tar.gz` | 43,663 B | supplementary, **not for publication** |
 
 The artifact contains 205 files and passes its own documented reproduction
@@ -59,14 +64,16 @@ instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).
 
 ## Step 7 — Cover letter
 
-Paste `packages/dtrap/COVER_LETTER.md`. **Corrected 2026-08-27**: it previously
+Paste `packages/dtrap/COVER_LETTER.txt` (the plain-text render of
+`COVER_LETTER.md`). **Corrected 2026-08-27**: it previously
 named the withdrawn title and claimed "reordering alone … inverts which of the
 two deterministic methods under test wins" — the claim analysis A1 refuted. Both
 now match the manuscript.
 
 ## Step 8 — Confidential Comments to the Editor
 
-Paste **`packages/dtrap/PRIOR_APPEARANCE_EDITOR_NOTE.md` in full** (163 lines).
+Paste **`packages/dtrap/EDITOR_NOTE.txt` in full** (the plain-text render of
+`PRIOR_APPEARANCE_EDITOR_NOTE.md`, 164 lines in the markdown source).
 It contains, and the manuscript deliberately does not:
 
 - the prior appearance: arXiv:2605.24696 v1 (23 May 2026) and v2 (25 June 2026),
@@ -96,8 +103,8 @@ so and offers to move it if the editors prefer.
 | **Data availability** | The benchmarks are public third-party datasets (CICIDS2017, Engelen-corrected release; LITNET-2020). They are **not** redistributed. The artifact ships `EXPECTED_SHA256.txt`, line-ending-normalized hashes that let a reader verify their own reconstruction of each stream |
 | Generative AI disclosure | **Required and already in the manuscript**, in *Acknowledgements: Generative AI Usage*: use is disclosed, no AI tool is an author, no reported number was produced by one, and the authors take full responsibility |
 | ORCID | 0009-0000-0664-8228 — link if prompted |
-| Open-access fee / waiver | A waiver was confirmed 2026-08-07. **`ACM_waiver_confirmation_2026-08-07.pdf` is not on this machine** — retrieve it from email ("ACM waiver", around 2026-08-07), or cite the waiver ticket number in the fee section |
-| Suggested reviewers | your judgment — candidates with affiliations and reasons in `SUGGESTED_REVIEWERS.md` (not auto-submitted) |
+| Open-access fee / waiver | A waiver was confirmed 2026-08-07. The confirmation PDF is at `C:\Users\CYBERWIZARD\Downloads\ACM_Waiver.pdf` (verified present 2026-08-31). Attach it in the fee section |
+| Suggested reviewers | your judgment — four candidates verified against official pages 2026-08-31, with two drops explained, in `SUGGESTED_REVIEWERS.md` (not auto-submitted) |
 
 ## Step 10 — Before submitting
 

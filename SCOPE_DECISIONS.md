@@ -104,7 +104,21 @@ degeneracy are supporting findings, not the headline.
     work, and Zenodo was not handled at all when the project's own DOI was
     declared unminted (CI-36).
 
-## Corrected incidents created by this re-scope
+11. **Plain register for outward and operator-facing prose.** Adopted
+    2026-08-31. Any operator-facing or outward prose written or revised from
+    that date on uses plain human register. No em dashes. No en dashes. No
+    semicolons. No walls of bullet points. Short direct sentences. Facts and
+    meaning never change under this rule. Wording changes only. Two texts are
+    exempt: the canonical provenance limitation and the canonical DOI lineage
+    sentence. The provenance limitation is stated word for word in the
+    published Zenodo deposit description, and the editor note asserts that
+    same-words fact to the DTRAP editors. Both canons are held byte-identical
+    across all four venue texts by this repository's verification. Rewording
+    them locally in a round that may not touch the published record would
+    either falsify the same-words assertion or break the byte-identity that
+    anchors it, so the canons keep their existing wording until a round is
+    authorized to edit the published record. Historical records and retired
+    texts are never rewritten.
 
 Recorded here rather than silently changing prior text.
 

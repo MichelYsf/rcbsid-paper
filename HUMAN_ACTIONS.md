@@ -70,15 +70,15 @@ texts carries the DOI; committed and pushed.
 
 1. Sign in at **https://mc.manuscriptcentral.com/dtrap** (verified 2026-08-24);
    link ORCID 0009-0000-0664-8228 if prompted.
-2. Follow `DTRAP_SUBMISSION_SHEET.md` top to bottom: full research paper,
-   anonymized PDF + artifact zip + source tarball, cover letter
-   (`packages/dtrap/COVER_LETTER.md`, rubric-mapped), confidential editor note
-   (`packages/dtrap/PRIOR_APPEARANCE_EDITOR_NOTE.md` in full).
+2. Work through `SUBMISSION_CONSOLE.md` top to bottom. It carries every
+   field in paste order: article type, title, verified abstract, keywords,
+   CCS concepts, author block, the verified reviewer block, the plain-text
+   cover letter and editor note, the questionnaire, and the upload table.
 3. Suggested reviewers: your call — candidates with reasons are in
    `SUGGESTED_REVIEWERS.md` (not auto-submitted).
-4. **Attach the ACM waiver confirmation**: `ACM_waiver_confirmation_2026-08-07.pdf`
-   is **not on this machine** — retrieve it from email ("ACM waiver", around
-   2026-08-07), or cite the waiver ticket number in the fee section.
+4. **Attach the ACM waiver confirmation.** The PDF is at
+   `C:\Users\CYBERWIZARD\Downloads\ACM_Waiver.pdf` (verified present
+   2026-08-31). Attach it in the fee section.
 5. If the editorial thread with Delman about your ORCID is still open, reply
    with `packages/dtrap/DELMAN_CLARIFICATION_REPLY.md`.
 6. Submit. Note the submission date: step 4 is promised within 48 hours of it.
@@ -100,13 +100,23 @@ exists locally) — the sheet's first step retrieves your own source from your
 arXiv account, then pastes the prepared correction note
 (`packages/sibling/V2_CORRECTION_NOTE.tex`).
 
-## 6. Optional — retire the AWS IAM access key
+## 6. AWS closeout — verified 2026-08-31, one console click remains
 
-eu-central-1 holds nothing; the cloud phase is over.
+Checked from the local CLI on 2026-08-31, account confirmed by
+`aws sts get-caller-identity`: account 753493992639, user `michel-cli`.
+Region eu-central-1 is empty. Zero EC2 instances in any state. Zero EBS
+snapshots owned by the account. Zero AMIs owned by the account. Zero EBS
+volumes. Estimated ongoing monthly EC2 and EBS cost: $0.00. There are no
+snapshots, so no snapshot-deletion decision remains.
 
-1. AWS console → IAM → Users → `michel-cli` → Security credentials.
-2. Deactivate, then delete, the key in `C:\Users\CYBERWIZARD\.aws\credentials`.
-3. Delete the local credentials entry.
+The key deactivation could NOT be done from the CLI. The call
+`aws iam list-access-keys --user-name michel-cli` returns AccessDenied
+because the michel-cli identity has no IAM permissions on itself. That is
+good hygiene and it means this step stays yours, in the console:
+
+1. AWS console, IAM, Users, `michel-cli`, Security credentials.
+2. Deactivate the access key. Delete it once you are sure nothing needs it.
+3. Delete the local entry in `C:\Users\CYBERWIZARD\.aws\credentials`.
 
 ---
 

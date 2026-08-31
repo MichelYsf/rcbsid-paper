@@ -1,90 +1,91 @@
-# Cover letter — DTRAP submission
+# Cover letter for the DTRAP submission
 
 To the Co-Editors-in-Chief, ACM Digital Threats: Research and Practice,
 
 Please consider the attached manuscript, "Stream Assembly Is an Uncontrolled
 Treatment in Streaming Intrusion-Detection Benchmarks," for publication in
-DTRAP. We map the contribution to the journal's review axes directly.
+DTRAP. I map the contribution to the journal's review axes directly.
 
 **Relevance.** The paper is about what operational detection evaluations
-measure. Streaming intrusion-detection results across the field are reported on
-evaluation streams assembled from public capture files — day interleaving,
-capture pooling, round-robin replay — and the paper shows, with mechanically
-verified experiments, that this assembly step is an uncontrolled experimental
-treatment rather than neutral plumbing. That sits squarely in DTRAP's remit of
-evaluation practice for operational detection.
+measure. Streaming intrusion-detection results across the field are reported
+on evaluation streams assembled from public capture files. Day interleaving,
+capture pooling, and round-robin replay are typical assembly steps. The paper
+shows, with mechanically verified experiments, that this assembly step is an
+uncontrolled experimental treatment rather than neutral plumbing. That sits
+squarely in DTRAP's remit of evaluation practice for operational detection.
 
 **Novelty and utility.** The conceptual warning that arbitrary ordering and
-sampling distort security-ML evaluation is established prior art, and we say
-so. What is new is the exact same-multiset measurement: on CICIDS2017, holding
-the full record multiset identical and changing only the ordering, a fixed
-positional split produces held-out samples sharing 32.5% of their records at
-prevalences 43 percentage points apart, and the measured ordering of the two
-deterministic scorers reverses — with overlap, attack relocation, prevalence
-and outcome reported together. Two further quantifications are, to our
-knowledge, firsts: the deployed detector's maximum composition ranks worse than
-its own tail term alone (the auxiliary branch is inverted, not merely
-uninformative), and the ECOD reference implementation's scores move with the
-batch they are scored in, so published ECOD numbers are not comparable across
-studies scoring different batch sizes. The utility is practical: hash-verified
-stream reconstruction, run manifests, and checks a practitioner can rerun.
+sampling distort security-ML evaluation is established prior art, and the
+paper says so. What is new is the exact same-multiset measurement. On
+CICIDS2017 the paper holds the full record multiset identical and changes only
+the ordering. A fixed positional split then produces held-out samples that
+share 32.5% of their records and sit 43 percentage points apart in prevalence,
+and the measured ordering of the two deterministic scorers reverses. Overlap,
+attack relocation, prevalence, and outcome are reported together. Two further
+quantifications are, to my knowledge, firsts. The deployed detector's maximum
+composition ranks worse than its own tail term alone, so the auxiliary branch
+is inverted rather than merely uninformative. The ECOD reference
+implementation's scores move with the batch they are scored in, so published
+ECOD numbers are not comparable across studies that score different batch
+sizes. The utility is practical: hash-verified stream reconstruction, run
+manifests, and checks a practitioner can rerun.
 
 **Internal validity.** Flat comparisons are made only between deterministic
-scorers; every stochastic result carries its seed distribution or is withheld.
+scorers. Every stochastic result carries its seed distribution or is withheld.
 The central reversal was then tested against its own strongest alternative
-explanation: restricting both arms to the records they both held out removes
+explanation. Restricting both arms to the records they both held out removes
 the reversal, which locates the effect in sample membership rather than
-processing order — a result that refuted our own earlier headline, and the
-paper is rewritten around the smaller supported claim. Every derived number on
-the page equals the arithmetic a reader performs on the numbers printed beside
-it, by construction and by an automated check.
+processing order. That result refuted my own earlier headline, and the paper
+is rewritten around the smaller supported claim. Every derived number on the
+page equals the arithmetic a reader performs on the numbers printed beside it,
+by construction and by an automated check.
 
-**External validity.** Two benchmarks, one split rule, one corpus per
-benchmark — stated, not hidden. A seven-point split sweep shows the measured
-ordering also depends on where the cut falls, so no ordering claim is presented
-as a stable property of CICIDS2017, and the paper claims no direction or
-magnitude for assembly effects elsewhere. The LITNET pooling identity is
-offered as an audit check, not a discovery.
+**External validity.** The paper states its limits rather than hiding them:
+two benchmarks, one split rule, one corpus per benchmark. A seven-point split
+sweep shows the measured ordering also depends on where the cut falls. No
+ordering claim is therefore presented as a stable property of CICIDS2017, and
+the paper claims no direction or magnitude for assembly effects elsewhere. The
+LITNET pooling identity is offered as an audit check, not a discovery.
 
-**Containment.** This is offline benchmark analysis of public datasets
-(the Engelen-corrected CICIDS2017 release and LITNET-2020). No live threats,
-no malware samples, no operational systems, and no human subjects are involved
-at any point; the datasets are not redistributed — the artifact ships
+**Containment.** This is offline benchmark analysis of public datasets, namely
+the Engelen-corrected CICIDS2017 release and LITNET-2020. No live threats, no
+malware samples, no operational systems, and no human subjects are involved at
+any point. The datasets are not redistributed. The artifact ships
 line-ending-normalized hashes so a reader verifies their own reconstruction.
 
 **Transparency.** Every measured value is generated by a script that writes an
-archived run manifest in the same execution; an eight-check build gate fails on
-any number without one, on inconsistent derived arithmetic, and on text typeset
-past the page measure; a sentence-level claim ledger maps the abstract and
-introduction to generating runs; and a numbered corrected-incident log ships
-with the artifact. The artifact passes its own documented reproduction
+archived run manifest in the same execution. An eight-check build gate fails
+on any number without one, on inconsistent derived arithmetic, and on text
+typeset past the page measure. A sentence-level claim ledger maps the abstract
+and introduction to generating runs. A numbered corrected-incident log ships
+with the artifact, and the artifact passes its own documented reproduction
 instructions inside a fresh extraction. This manuscript is a corrected rebuild
-of work previously posted as arXiv:2605.24696 (v1/v2), whose defects — a
-scoring rule the released code did not implement, and results produced under
-the composite construction the paper now studies as its labeled synthetic
-arm — were established by an adversarial audit of the archived artifacts. We
-prefer the editors to have this history from us directly; the confidential
-comments carry it in full.
+of work previously posted as arXiv:2605.24696 (v1 and v2). An adversarial
+audit of the archived artifacts established the defects. The prior versions
+described a scoring rule the released code did not implement, and their
+results were produced under the composite construction the paper now studies
+as its labeled synthetic arm. I would rather you have this history from me
+directly. The confidential comments carry it in full.
 
-**Open-access fee.** An ACM publication-fee waiver was confirmed for this
-work on 2026-08-07 (reference: ACM waiver confirmation of 2026-08-07,
-attached to the submission). [NOTE TO OPERATOR: the confirmation PDF
-(ACM_waiver_confirmation_2026-08-07.pdf) is not on this machine — attach it
-from the email record; HUMAN_ACTIONS step 3.4.]
+**Open-access fee.** An ACM publication-fee waiver was confirmed for this work
+on 2026-08-07. The waiver confirmation is attached to the submission.
+[NOTE TO OPERATOR, not part of the pasted letter: the confirmation PDF is at
+C:\Users\CYBERWIZARD\Downloads\ACM_Waiver.pdf. Attach it in the fee section.]
 
-**Artifact access under double-anonymous review.** The full artifact (code,
-manifests, claim ledger, stream-reconstruction scripts with hash verification)
-is provided as an anonymized zip through the submission system's
-supplementary-material channel; it contains no author-identifying strings
-(verified mechanically). An author-named release of the same artifact is
-already archived with a persistent identifier, which will be supplied at
-camera-ready.
+**Artifact access under double-anonymous review.** The full artifact is
+provided as an anonymized zip through the submission system's
+supplementary-material channel. It holds the code, the run manifests, the
+claim ledger, and the stream-reconstruction scripts with hash verification,
+and it contains no author-identifying strings (verified mechanically). An
+author-named release of the same artifact is already archived with a
+persistent identifier, which will be supplied at camera-ready.
 
 **Companion manuscript.** A related manuscript sharing parts of the audited
-codebase (arXiv:2510.09619) is a public preprint, is not under review at any
-venue, and is being corrected separately; the manuscript's Companion Manuscript
-Disclosure section states this, and the confidential editor note records how it
-was verified. This submission is under consideration at DTRAP and nowhere else.
+codebase (arXiv:2510.09619) is a public preprint. It is not under review at
+any venue, and it is being corrected separately. The manuscript's Companion
+Manuscript Disclosure section states this, and the confidential editor note
+records how it was verified. This submission is under consideration at DTRAP
+and nowhere else.
 
 Thank you for your consideration.
 

@@ -47,7 +47,7 @@ sibling source. Step 3 below is therefore mandatory, not a formality.
    > v2: correction note added (title page and abstract). An audit of the
    > shared codebase found the score, threshold, and latency descriptions
    > unsupported by the implementation, and the evaluation streams to be
-   > assembled constructions; no quantitative result tables are affected.
+   > assembled constructions. No quantitative result tables are affected.
    > See arXiv:2605.24696 (corrected v3) and doi:10.5281/zenodo.22213264.
 
 6. **License:** keep the license chosen for v1 — arXiv applies the license per
