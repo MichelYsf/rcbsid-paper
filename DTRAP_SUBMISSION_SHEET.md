@@ -2,7 +2,10 @@
 
 Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
 Portal: **https://mc.manuscriptcentral.com/dtrap** (ScholarOne, verified
-2026-08-24). Do this **last**, after Zenodo and arXiv.
+2026-08-24). **This is the FIRST outward submission action** — Zenodo is
+already live (doi:10.5281/zenodo.22213264), and the arXiv v3 replacement
+follows within 48 hours of this submission (the editor note promises that
+window).
 
 > **Double-anonymous.** The main document must stay anonymous. The identifying
 > material — prior appearance, the overlap matrix, the correction history — goes
@@ -48,8 +51,8 @@ reproducibility; provenance
 | # | file | size | role |
 |---|---|---|---|
 | 1 | `packages/dtrap/manuscript_anonymous.pdf` | 570,998 B | **main document** |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 475,753 B | supplementary, **not for publication** |
-| 3 | `packages/dtrap/source_anonymous.tar.gz` | 43,665 B | supplementary, **not for publication** |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 478,167 B | supplementary, **not for publication** |
+| 3 | `packages/dtrap/source_anonymous.tar.gz` | 43,663 B | supplementary, **not for publication** |
 
 The artifact contains 205 files and passes its own documented reproduction
 instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).
@@ -63,7 +66,7 @@ now match the manuscript.
 
 ## Step 8 — Confidential Comments to the Editor
 
-Paste **`packages/dtrap/PRIOR_APPEARANCE_EDITOR_NOTE.md` in full** (140 lines).
+Paste **`packages/dtrap/PRIOR_APPEARANCE_EDITOR_NOTE.md` in full** (163 lines).
 It contains, and the manuscript deliberately does not:
 
 - the prior appearance: arXiv:2605.24696 v1 (23 May 2026) and v2 (25 June 2026),
@@ -94,7 +97,7 @@ so and offers to move it if the editors prefer.
 | Generative AI disclosure | **Required and already in the manuscript**, in *Acknowledgements: Generative AI Usage*: use is disclosed, no AI tool is an author, no reported number was produced by one, and the authors take full responsibility |
 | ORCID | 0009-0000-0664-8228 — link if prompted |
 | Open-access fee / waiver | A waiver was confirmed 2026-08-07. **`ACM_waiver_confirmation_2026-08-07.pdf` is not on this machine** — retrieve it from email ("ACM waiver", around 2026-08-07), or cite the waiver ticket number in the fee section |
-| Suggested reviewers | **[decide]** — none prepared |
+| Suggested reviewers | your judgment — candidates with affiliations and reasons in `SUGGESTED_REVIEWERS.md` (not auto-submitted) |
 
 ## Step 10 — Before submitting
 

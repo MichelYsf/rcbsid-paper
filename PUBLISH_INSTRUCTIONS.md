@@ -43,8 +43,8 @@ python -m pytest -q                       # full suite: must pass
   10.5281/zenodo.20074590 (v1.0.0 of 2026-05-07 is the pre-audit artifact;
   the "first deposit" description that stood here was false, CI-36):
   code + scripts + manifests
-  + logs + stream hashes, with `zenodo_metadata.md` ready to paste. Minting
-  this DOI, then writing it into CITATION.cff, is a HUMAN_ACTIONS step.
+  + logs + stream hashes. **Published 2026-08-31 as version 2.0.0,
+  doi:10.5281/zenodo.22213264; CITATION.cff carries the DOI.**
 - **dtrap/** — the double-anonymous submission: anonymized PDF and source
   zip, cover letter, artifact-access strategy, and the ORCID clarification
   reply. Portal verified fresh 2026-08-24: https://mc.manuscriptcentral.com/dtrap.

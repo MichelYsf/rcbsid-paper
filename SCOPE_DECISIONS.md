@@ -1084,6 +1084,16 @@ publication-bound texts were corrected before anything was published, and the
 canonical DOI-correction sentence is byte-identical across the deposit
 description, the DTRAP editor note, and the arXiv v3 note.
 
+### Dated fact — the corrected artifact is published (2026-08-31)
+The rebuild is live on Zenodo as **version 2.0.0** of the existing record
+lineage. Version DOI **10.5281/zenodo.22213264**; concept DOI
+10.5281/zenodo.20074589; superseded v1.0.0 at 10.5281/zenodo.20074590.
+Published version string: "2.0.0". Verified against the Zenodo API on
+2026-08-31 (title, creator with ORCID, and all five files at their staged
+byte sizes). This closes the deposit step of the publish sequence; the
+remaining outward actions are the DTRAP submission, the arXiv v3 replacement
+within 48 hours of it, and the companion's v2 replacement.
+
 **The pattern across CI-22, CI-24, CI-26 and CI-27 is one pattern:** a check or
 a claim that reads as universal while covering less than its wording implies.
 The provenance gate said "every number in the manuscript" and read one

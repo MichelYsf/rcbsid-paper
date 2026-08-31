@@ -7,14 +7,15 @@ declared it "the FIRST deposit" — overriding the F-scope's own "new
 version" wording — after finding only a placeholder DOI in the repository's
 history; a repo search is not a registrar query. **The operative checklist is
 `../../ZENODO_DEPOSIT_SHEET.md`; use it.** This file is retained as a
-historical staging note only.
+historical staging note only. **Executed 2026-08-31: published as version
+2.0.0, doi:10.5281/zenodo.22213264.**
 
 - **Upload type:** Software
 - **Title:** Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks: Reproducibility Package
   (honest rebuild v2.0.0)
 - **Authors:** Youssef, Michel (ORCID 0009-0000-0664-8228)
 - **License:** Apache-2.0
-- **Version:** 2.0.0-honest-rebuild
+- **Version:** 2.0.0 (as published; this note had said 2.0.0-honest-rebuild)
 - **Related identifiers:**
   - `arXiv:2605.24696` — "is supplement to"
   - `https://github.com/MichelYsf/rcbsid-paper` — "is derived from",

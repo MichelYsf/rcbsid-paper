@@ -22,7 +22,9 @@ OUT = ROOT / "packages/dtrap/artifact_anonymous.zip"
 
 IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                b"hotmail", b"0664-8228", b"0664-8224", b"CYBERWIZARD",
-               b"camich289"]
+               b"camich289",
+               # Zenodo record ids: each resolves to a page naming the author
+               b"22213264", b"20074590", b"20074589", b"zenodo.org"]
 
 INCLUDE_DIRS = ["src", "scripts", "tests"]
 INCLUDE_FILES = [
@@ -59,6 +61,14 @@ def scrub(rel: str, data: bytes) -> bytes:
     # machine username inside archived absolute paths
     data = data.replace(b"CYBERWIZARD", b"ANON")
     data = data.replace(b"camich289", b"ANON")
+    # Zenodo record identifiers resolve to a page naming the author, so the
+    # double-anonymous artifact redacts them wherever the correction log or
+    # README carries them; the scan below then proves none survive.
+    for doi in (b"10.5281/zenodo.22213264", b"10.5281/zenodo.20074590",
+                b"10.5281/zenodo.20074589"):
+        data = data.replace(doi, b"[doi-redacted-for-review]")
+    data = re.sub(rb"https?://(?:www\.)?zenodo\.org/\S*",
+                  b"[zenodo-url-redacted-for-review]", data)
     if rel == "README.md":
         data = re.sub(rb"https://github\.com/\S+", b"[public-repo-redacted-for-review]", data)
         data = data.replace(b"MichelYsf", b"[redacted]")

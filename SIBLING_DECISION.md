@@ -1,7 +1,21 @@
-# Companion manuscript (arXiv:2510.09619) — verified status
+# Companion manuscript (arXiv:2510.09619) — verified status and FINAL disposition
 
-**There is no decision to make here, because the premise of the earlier version
-of this document was false.**
+**Decision (FINAL, 2026-08-31): the companion preprint gets a corrected
+replacement (v2), not a withdrawal.** arXiv updates are replacements by design,
+and a withdrawal notice reads as a retraction of the whole line of work, which
+overstates the case: the manuscript's method descriptions are unsupported by
+the shared codebase, but the manuscript reports no quantitative result tables,
+so there are no numbers to retract. The v2 replacement is the existing paper
+plus a prominent correction note (title page and abstract) stating concretely
+what is unsupported — no science rebuild. The note is prepared at
+`packages/sibling/V2_CORRECTION_NOTE.tex`; the click-by-click replacement
+procedure is `SIBLING_V2_SHEET.md`. **The sibling's LaTeX source is not on this
+machine** (verified 2026-08-31: local search found only two PDFs of the
+companion, and both candidate zips in Downloads contain the main CALIBURN
+paper per their `\title`) — the sheet's first step retrieves the source from
+the author's own arXiv account.
+
+**The venue question underneath was already closed:**
 
 ## What was verified, when, and how
 
@@ -60,7 +74,9 @@ research is not verification of venue *status*. Recorded as **CI-25**.
 
 The companion's *technical* problem is unchanged and is not a venue question:
 it shares part of the audited codebase, and the method-identity findings of the
-audit apply to that shared lineage. Correcting or replacing the preprint is a
-separate piece of work on a separate manuscript. Nothing in this repository's
-submission path depends on it, and no artifact here may assert that a
-correction has been disclosed to anyone, because it has not.
+audit apply to that shared lineage. The FINAL disposition at the top of this
+file resolves it: a v2 replacement carrying the prepared correction note.
+Nothing in this repository's submission path depends on it — the DTRAP
+submission and the arXiv v3 replacement of the main paper proceed first
+(`HUMAN_ACTIONS.md` steps 3–4), and the companion replacement is step 5. No
+artifact here may assert that the replacement has been posted until it has.

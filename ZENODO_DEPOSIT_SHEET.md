@@ -1,4 +1,16 @@
-# ZENODO_DEPOSIT_SHEET — fill-in order, nothing deposited
+# ZENODO_DEPOSIT_SHEET — EXECUTED 2026-08-31
+
+> **The deposit is LIVE.** Published 2026-08-31 as **version 2.0.0** of the
+> record lineage: version DOI **10.5281/zenodo.22213264**, concept DOI
+> 10.5281/zenodo.20074589, superseding v1.0.0 (10.5281/zenodo.20074590).
+> Verified against the Zenodo API on 2026-08-31: title, creator with ORCID
+> 0009-0000-0664-8228, and all five files at their staged byte sizes
+> (rcbsid_rebuild_code.zip 363,694 B; manifests_bundle.zip 143,621 B;
+> EXPECTED_SHA256.txt 932 B; construction_contrast.csv 4,755 B;
+> prevalence_sweep_cicids.csv 48,587 B). The published version string is
+> **"2.0.0"** — the operator entered the plain string, not this sheet's
+> "2.0.0-honest-rebuild"; every project reference is reconciled to "2.0.0".
+> This sheet is retained below as the record of what was entered.
 
 Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
 Nothing here has been uploaded. Work top to bottom; every value is final unless
@@ -72,7 +84,7 @@ be changed:**
 |---|---|
 | title "SLO-Aware Streaming Intrusion Detection: Reproducibility Package" | the Step 3 title |
 | description ("Initial release for CALIBURN paper submission to KeAi Cyber Security and Applications") | the Step 5 text |
-| version `1.0.0` | `2.0.0-honest-rebuild` |
+| version `1.0.0` | `2.0.0` (published string; the sheet had said `2.0.0-honest-rebuild`) |
 | keywords | the six in Step 8 |
 | related identifier *is-supplement-to* `…/rcbsid-paper/tree/v1.0.0` | **replace** with the two rows in Step 7 |
 
@@ -156,7 +168,7 @@ subset that would not change this disclosure.
 Earlier versions of the associated manuscript (arXiv:2605.24696 v1 and v2)
 reported results produced under a composite benchmark construction and described
 a scoring rule the released code did not implement. This package is the rebuild
-from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage and supersedes it, and Zenodo displays a newer-version notice on the superseded record.
+from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage (doi:10.5281/zenodo.22213264) and supersedes it, and Zenodo displays a newer-version notice on the superseded record.
 ```
 
 ## Step 6 — License
@@ -181,14 +193,14 @@ on the remote, so the old record's link keeps resolving).
 
 | field | value |
 |---|---|
-| Version | `2.0.0-honest-rebuild` |
+| Version | `2.0.0` (as published) |
 | Keywords | intrusion detection; streaming evaluation; benchmark stream construction; evaluation methodology; reproducibility; provenance |
 
 ## Step 9 — Publish, then
 
-1. Copy the **new version's DOI, minted at publish** — not
-   10.5281/zenodo.20074590 (that is v1.0.0) and not the concept DOI
-   10.5281/zenodo.20074589 (that groups all versions).
+1. **DONE** — the new version's DOI is **10.5281/zenodo.22213264**
+   (not 10.5281/zenodo.20074590, which is v1.0.0, and not the concept DOI
+   10.5281/zenodo.20074589, which groups all versions).
 2. `CITATION.cff`: replace the explanatory `message:` block with a `doi:` field
    carrying that new version DOI.
 3. Commit and push. Then, and only then, HUMAN_ACTIONS step 3 (arXiv).

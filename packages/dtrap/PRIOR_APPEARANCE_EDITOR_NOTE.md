@@ -23,8 +23,9 @@ Detection with Regime-Dependent Conformal Risk Control":
 | v2 | 25 June 2026 | public preprint, never submitted to a journal |
 
 Neither version was accepted anywhere. A corrected v3, matching this
-submission, will be posted; I will hold it until the editors advise if you
-prefer.
+submission, will be posted to arXiv within 48 hours of this submission; the
+corrected artifact is already live on Zenodo as version 2.0.0
+(doi:10.5281/zenodo.22213264).
 
 **What was wrong, and what the correction covers.** An adversarial review and a
 line-by-line audit of the archived artifacts established two defects that
@@ -67,14 +68,15 @@ and that this note supplies the detail.
 |---|---|---|---|
 | v1 | 23 May 2026 | public preprint, never submitted to a journal | Scoring-rule description (code computes a different score); threshold derivation (prior-inclusive, not cost-only); the "regime" taxonomy resting on assembled constructions; detection latency reported in milliseconds when the quantity is a count of records; tables for which no archived computational origin exists; label-aware round-robin interleaved streams described as chronological. |
 | v2 | 25 June 2026 | public preprint, never submitted to a journal | All of v1's, plus the reframed contribution statement, which retained the regime framing. |
-| v3 / this submission | pending | not yet posted | Supersedes both. Retains the measurements marked "reused" above with corrected interpretation, withdraws the UNSW-NB15 results and the regime taxonomy, and adds the timestamp-ordered arm, the per-capture streams, the shared-record analysis and the method-identity audit. Every number carries an archived generating-run manifest, enforced by a build gate. |
+| v3 / this submission | pending | to be posted to arXiv within 48 hours of this submission | Supersedes both. Retains the measurements marked "reused" above with corrected interpretation, withdraws the UNSW-NB15 results and the regime taxonomy, and adds the timestamp-ordered arm, the per-capture streams, the shared-record analysis and the method-identity audit. Every number carries an archived generating-run manifest, enforced by a build gate. |
 
-A public correction note accompanies the v3 replacement, stating the same
-defects in the arXiv Comments field. The corrected-incident log in the artifact
+A public correction note will accompany the v3 replacement, stating the same
+defects in the arXiv Comments field; the replacement will be posted within 48
+hours of this submission. The corrected-incident log in the artifact
 records each numbered incident with its evidence and closure status; the count
 is a record of the process, not a quality claim, so none is quoted here.
 
-**The artifact DOI.** Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage and supersedes it, and Zenodo displays a newer-version notice on the superseded record. An earlier draft of the correction texts accompanying this submission said that DOI was never minted; that was false --- the check behind it searched the repository's own history instead of the registrar --- and it is recorded as corrected incident CI-36 in the log that ships with the artifact.
+**The artifact DOI.** Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage (doi:10.5281/zenodo.22213264) and supersedes it, and Zenodo displays a newer-version notice on the superseded record. An earlier draft of the correction texts accompanying this submission said that DOI was never minted; that was false --- the check behind it searched the repository's own history instead of the registrar --- and it is recorded as corrected incident CI-36 in the log that ships with the artifact.
 
 **Companion manuscript.** A companion preprint, **arXiv:2510.09619**
 ("Risk-Calibrated Bayesian Streaming Intrusion Detection with SRE-Aligned

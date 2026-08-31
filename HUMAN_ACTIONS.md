@@ -3,8 +3,10 @@
 Nothing here needs judgment, and nothing here is blocked on a missing
 identifier. Every file referenced is in this repository.
 
-**Order matters.** Zenodo first, so its DOI can be carried into the arXiv
-replacement and the DTRAP submission.
+**Order matters.** Zenodo is done. The submission order is now: **DTRAP
+first**, then the arXiv v3 replacement **within 48 hours** (the editor note
+promises that window), then the companion's v2 replacement, then the optional
+AWS cleanup.
 
 > **Removed 2026-08-27: the TIFS withdrawal steps.** This file previously
 > opened with two steps — retrieve the TIFS manuscript ID from email, then send
@@ -50,62 +52,55 @@ cross-platform effect this project already recorded as CI-16.
 in the deposit description (`ZENODO_DEPOSIT_SHEET.md` carries the wording), or
 do not deposit. Nothing else blocks the sequence.
 
-## 1. Zenodo — NEW VERSION of the existing record (login wall)
+## 1. Zenodo deposit — EXECUTED 2026-08-31
 
-1. Sign in at https://zenodo.org as the owner of record
-   doi:10.5281/zenodo.20074590 (v1.0.0, deposited 2026-05-07 — it exists; the
-   "first deposit" wording that stood here was false, CI-36).
-2. Follow `ZENODO_DEPOSIT_SHEET.md` top to bottom: **New version** on that
-   record, do **not** import the old file, upload the five staged files
-   (`manifests_bundle.zip` is already built), and change every inherited field
-   the sheet lists.
-3. Publish. Copy the **new version's DOI** — not 10.5281/zenodo.20074590 and
-   not the concept DOI 10.5281/zenodo.20074589.
+Published as **version 2.0.0** of the existing lineage: version DOI
+**10.5281/zenodo.22213264**, concept DOI 10.5281/zenodo.20074589, superseding
+v1.0.0 (10.5281/zenodo.20074590). Verified against the Zenodo API 2026-08-31;
+all five files at their staged sizes. Record of what was entered:
+`ZENODO_DEPOSIT_SHEET.md`.
 
-## 2. Propagate the DOI (2 minutes, local)
+## 2. DOI propagation — EXECUTED 2026-08-31
 
-1. In `CITATION.cff`, replace the explanatory sentence in `message:` with a
-   `doi:` field carrying the version DOI.
-2. Commit and push.
+`CITATION.cff` carries `doi: 10.5281/zenodo.22213264`, version `2.0.0`,
+date-released 2026-08-31; the canonical lineage sentence in all four venue
+texts carries the DOI; committed and pushed.
 
-## 3. arXiv v3 replacement (login wall)
-
-1. Sign in at https://arxiv.org → paper 2605.24696 → **Replace**.
-2. Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz`.
-3. **Title:** the new title in `packages/arxiv_v3/METADATA.md`.
-4. **Comments:** the **NO VENUE CLAIM VARIANT** at the top of
-   `packages/sibling/ARXIV_V3_COMMENT.txt`. The withdrawal and
-   coexistence variants below it are **retired and false** — both asserted a
-   journal status for the companion preprint that does not exist — and are kept
-   only as a record of what was rejected. The variant already carries the page
-   count (**17**) and the provenance disclosure; confirm 17 against arXiv's own
-   build preview before pasting. This field is public and permanent.
-5. Preview arXiv's build; confirm the page count and your name on page 1.
-6. Submit the replacement.
-
-## 4. DTRAP submission (login wall)
+## 3. DTRAP submission (login wall) — FIRST outward action
 
 1. Sign in at **https://mc.manuscriptcentral.com/dtrap** (verified 2026-08-24);
    link ORCID 0009-0000-0664-8228 if prompted.
-2. Submission type: **full research paper** (not Field Note).
-3. Upload `packages/dtrap/manuscript_anonymous.pdf` as the main document.
-4. Upload `packages/dtrap/artifact_anonymous.zip` and
-   `packages/dtrap/source_anonymous.tar.gz` as supplementary material **not for
-   publication**.
-5. Cover letter: paste `packages/dtrap/COVER_LETTER.md`.
-6. **Confidential Comments to the Editor**: paste
-   `packages/dtrap/PRIOR_APPEARANCE_EDITOR_NOTE.md`. This is where the prior
-   appearance, the overlap matrix and the correction history live — they are
-   deliberately **not** in the manuscript, because printing them would
-   deanonymize the submission.
-7. **Attach the ACM waiver confirmation**: `ACM_waiver_confirmation_2026-08-07.pdf`
-   is **not on this machine** — retrieve it from email (search "ACM waiver"
-   around 2026-08-07), or reference the waiver ticket number in the fee section.
-8. If the editorial thread with Delman about your ORCID is still open, reply
+2. Follow `DTRAP_SUBMISSION_SHEET.md` top to bottom: full research paper,
+   anonymized PDF + artifact zip + source tarball, cover letter
+   (`packages/dtrap/COVER_LETTER.md`, rubric-mapped), confidential editor note
+   (`packages/dtrap/PRIOR_APPEARANCE_EDITOR_NOTE.md` in full).
+3. Suggested reviewers: your call — candidates with reasons are in
+   `SUGGESTED_REVIEWERS.md` (not auto-submitted).
+4. **Attach the ACM waiver confirmation**: `ACM_waiver_confirmation_2026-08-07.pdf`
+   is **not on this machine** — retrieve it from email ("ACM waiver", around
+   2026-08-07), or cite the waiver ticket number in the fee section.
+5. If the editorial thread with Delman about your ORCID is still open, reply
    with `packages/dtrap/DELMAN_CLARIFICATION_REPLY.md`.
-9. Submit.
+6. Submit. Note the submission date: step 4 is promised within 48 hours of it.
 
-## 5. Optional — retire the AWS IAM access key
+## 4. arXiv v3 replacement — within 48 hours of step 3
+
+Follow `ARXIV_V3_SHEET.md`: paper 2605.24696 → Replace → upload
+`packages/arxiv_v3/arxiv_v3_source.tar.gz`; new title; Comments = the NO VENUE
+CLAIM variant (it already carries doi:10.5281/zenodo.22213264 and the
+provenance disclosure); confirm 17 pages in arXiv's preview and your name on
+page 1.
+
+## 5. Companion v2 replacement (arXiv:2510.09619)
+
+Decision is FINAL: corrected **replacement**, not withdrawal (arXiv updates are
+replacements; withdrawal reads as retraction). Follow `SIBLING_V2_SHEET.md`.
+The sibling's LaTeX source is **not on this machine** (verified: only the PDF
+exists locally) — the sheet's first step retrieves your own source from your
+arXiv account, then pastes the prepared correction note
+(`packages/sibling/V2_CORRECTION_NOTE.tex`).
+
+## 6. Optional — retire the AWS IAM access key
 
 eu-central-1 holds nothing; the cloud phase is over.
 
@@ -115,6 +110,8 @@ eu-central-1 holds nothing; the cloud phase is over.
 
 ---
 
-Everything else — compiles, gates, ledger, tests, packages, anonymity scans — is
-done and verified. See `TRIAGE_REPORT.md` for this round and
-`FINALIZE_REPORT.md` for the previous one.
+**Fallback ladder if DTRAP declines:** **TMLR first, DMLR second.** TNSM is
+removed from the ladder — it is not free to publish at this paper's 17 pages.
+
+Everything else — compiles, gates, ledger, tests, packages, anonymity scans —
+is done and verified. See `PUBLISH_PREP_REPORT.md` and `TRIAGE_REPORT.md`.

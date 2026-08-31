@@ -1,0 +1,48 @@
+% V2_CORRECTION_NOTE.tex — correction note for the v2 replacement of
+% arXiv:2510.09619 ("Risk-Calibrated Bayesian Streaming Intrusion Detection
+% with SRE-Aligned Decisions").
+%
+% The sibling's LaTeX source is NOT in this repository; retrieve it from the
+% arXiv account (SIBLING_V2_SHEET.md, step 1) and paste these two blocks in.
+% Both blocks are self-contained: no packages beyond the LaTeX kernel, no
+% macros defined, nothing that can collide with the host preamble.
+%
+% BLOCK 1 goes immediately after \maketitle (title page, before the abstract).
+% BLOCK 2 is prepended INSIDE the abstract environment, before its first
+% sentence. Do not remove or reword the original abstract text.
+
+% ---------------------------------------------------------------------------
+% BLOCK 1 — title-page correction note (paste immediately after \maketitle)
+% ---------------------------------------------------------------------------
+\begin{center}
+\fbox{\begin{minipage}{0.92\linewidth}
+\textbf{Correction note (v2, August 2026).}
+An audit of the codebase shared with the companion work established that
+four descriptions in this manuscript are not supported by the released code
+and are hereby corrected:
+(1)~the anomaly score the code implements is a maximum of a chi-square tail
+statistic and a weighted short-run posterior mass, not the run-length-reset
+posterior this text describes;
+(2)~the decision threshold is derived from the prior-inclusive Bayes rule,
+not the cost-only rule described;
+(3)~the quantities reported as detection latency in milliseconds are counts
+of records, not times;
+(4)~the evaluation streams are assembled constructions (pooled captures,
+interleaved records), so the reported operating points are properties of the
+stream assembly, not of the underlying datasets.
+This manuscript reports no quantitative result tables, so no numeric result
+is affected; the corrections concern the method description.
+The audited, corrected treatment of the shared lineage is the companion
+paper, arXiv:2605.24696 (corrected version v3 forthcoming), with its
+reproducibility artifact archived at doi:10.5281/zenodo.22213264.
+\end{minipage}}
+\end{center}
+
+% ---------------------------------------------------------------------------
+% BLOCK 2 — abstract prefix (paste as the first sentence inside the abstract)
+% ---------------------------------------------------------------------------
+% \emph{[Corrected v2: an audit found that the score, threshold, and latency
+% descriptions below are not what the shared codebase implements, and that the
+% evaluation streams are assembled constructions; see the correction note on
+% the title page and the corrected companion work, arXiv:2605.24696 (v3
+% forthcoming), artifact doi:10.5281/zenodo.22213264.]}
