@@ -1,6 +1,6 @@
 # ZENODO_DEPOSIT_SHEET — fill-in order, nothing deposited
 
-Assembled 2026-08-27 against commit **`45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1`**.
+Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
 Nothing here has been uploaded. Work top to bottom; every value is final unless
 marked **[decide]**.
 
@@ -14,7 +14,7 @@ marked **[decide]**.
 > the record facts below (v1.0.0, both DOIs, file, dates) are account-verified
 > as of 2026-08-31.
 
-> **Which commit to name.** Use **`45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1`**.
+> **Which commit to name.** Use **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
 > That commit contains the five deposit files byte-for-byte as they are on
 > disk now — the sheets were updated afterwards, and updating a sheet cannot
 > change what it names without moving the target again, so the tip may be one
@@ -170,7 +170,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1` | **the commit, not the branch** — a branch name moves, and the deposit must name a state that cannot change |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/083df8acb6e48c2f403218ae765260584c3a2fdb` | **the commit, not the branch** — a branch name moves, and the deposit must name a state that cannot change |
 | is supplement to | `arXiv:2605.24696` | the manuscript this package supports; v3 replacement is a later step |
 
 These two rows **replace** the inherited *is-supplement-to*

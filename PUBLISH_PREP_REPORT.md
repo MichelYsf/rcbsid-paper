@@ -54,7 +54,7 @@ scratch file committed by mistake).
 
 | item | value |
 |---|---|
-| **Final commit** | **`45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1`** |
+| **Final commit** | **`083df8acb6e48c2f403218ae765260584c3a2fdb`** |
 | **Remote** | **`https://github.com/MichelYsf/rcbsid-paper.git`** |
 | Branch | `rebuild/honest-v1`, upstream set |
 | Push | **succeeded**; `origin/rebuild/honest-v1` == local HEAD |
@@ -159,7 +159,7 @@ tighter for a deposit description.
 
 | check | result |
 |---|---|
-| Pushed HEAD | `45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1`, == local |
+| Pushed HEAD | `083df8acb6e48c2f403218ae765260584c3a2fdb`, == local |
 | Files in the pushed tree | **577** |
 | Manuscript source | `paper/main.tex`, `paper/numbers.tex`, `paper/references.bib` ✓ |
 | Manuscript PDF | `paper/main.pdf` ✓ |
@@ -276,7 +276,7 @@ qualifier the manuscript now insists on. Rewritten to match the paper.
 
 | item | value |
 |---|---|
-| Commit | `45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1` |
+| Commit | `083df8acb6e48c2f403218ae765260584c3a2fdb` |
 | Remote | `https://github.com/MichelYsf/rcbsid-paper.git`, branch `rebuild/honest-v1` |
 | Build gate | **8/8, exit 0** |
 | Macros | 563, 0 orphans, 0 ambiguous |

@@ -1,6 +1,6 @@
 # DTRAP_SUBMISSION_SHEET — nothing submitted
 
-Assembled 2026-08-27 against commit **`45229a57fbf3cef9ce7f2dbe66b9e34263c96ff1`**.
+Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
 Portal: **https://mc.manuscriptcentral.com/dtrap** (ScholarOne, verified
 2026-08-24). Do this **last**, after Zenodo and arXiv.
 
