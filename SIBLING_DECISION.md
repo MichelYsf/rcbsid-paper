@@ -13,7 +13,11 @@ procedure is `SIBLING_V2_SHEET.md`. **The sibling's LaTeX source is not on this
 machine** (verified 2026-08-31: local search found only two PDFs of the
 companion, and both candidate zips in Downloads contain the main CALIBURN
 paper per their `\title`) — the sheet's first step retrieves the source from
-the author's own arXiv account.
+the author's own arXiv account. *Update 2026-09-01:* retrieval is done. arXiv
+serves any LaTeX submission's source publicly at its e-print endpoint, so the
+v1 source was fetched in one request, verified against the public v1 PDF,
+and the correction note is inserted. The staged upload is
+`packages/sibling/arxiv_2510_09619_v2_source.tar.gz`.
 
 **The venue question underneath was already closed:**
 

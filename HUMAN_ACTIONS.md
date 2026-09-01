@@ -93,12 +93,13 @@ page 1.
 
 ## 5. Companion v2 replacement (arXiv:2510.09619)
 
-Decision is FINAL: corrected **replacement**, not withdrawal (arXiv updates are
-replacements; withdrawal reads as retraction). Follow `SIBLING_V2_SHEET.md`.
-The sibling's LaTeX source is **not on this machine** (verified: only the PDF
-exists locally) — the sheet's first step retrieves your own source from your
-arXiv account, then pastes the prepared correction note
-(`packages/sibling/V2_CORRECTION_NOTE.tex`).
+Decision is FINAL: corrected **replacement**, not withdrawal. arXiv updates
+are replacements. A withdrawal reads as retraction. Follow
+`SIBLING_V2_SHEET.md`. As of 2026-09-01 the upload package is built and
+verified: the v1 source was fetched from arXiv's public e-print endpoint,
+confirmed against the public v1 PDF, and the correction note is inserted.
+You upload `packages/sibling/arxiv_2510_09619_v2_source.tar.gz` as-is and
+fill three fields from the sheet.
 
 ## 6. AWS closeout — verified 2026-08-31, one console click remains
 

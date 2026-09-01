@@ -1,0 +1,38 @@
+\begin{thebibliography}{7}
+
+\bibitem{breunig2000lof}
+M.~M. Breunig, H.-P. Kriegel, R.~T. Ng, and J.~Sander.
+\newblock {LOF}: identifying density-based local outliers.
+\newblock In \emph{Proceedings of the 2000 ACM SIGMOD International Conference on Management of Data}, pages 93--104, Dallas, TX, 2000.
+
+\bibitem{li2022ecod}
+Z.~Li, Y.~Zhao, X.~Hu, N.~Botta, C.~Ionescu, and G.~H. Chen.
+\newblock {ECOD}: unsupervised outlier detection using empirical cumulative distribution functions.
+\newblock \emph{IEEE Transactions on Knowledge and Data Engineering}, 35(12):12181--12193, 2023.
+
+\bibitem{li2020copod}
+Y.~Li, Y.~Zhao, N.~Botta, C.~Ionescu, and X.~Hu.
+\newblock {COPOD}: copula-based outlier detection.
+\newblock In \emph{Proceedings of the 2020 IEEE International Conference on Data Mining (ICDM)}, pages 1118--1123, 2020.
+
+\bibitem{moustafa2015unsw}
+N.~Moustafa and J.~Slay.
+\newblock {UNSW-NB15}: a comprehensive data set for network intrusion detection systems (UNSW-NB15 network data set).
+\newblock In \emph{2015 Military Communications and Information Systems Conference (MilCIS)}, pages 1--6, 2015.
+
+\bibitem{sharafaldin2018cicids}
+I.~Sharafaldin, A.~H. Lashkari, and A.~A. Ghorbani.
+\newblock Toward generating a new intrusion detection dataset and intrusion traffic characterization.
+\newblock In \emph{Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP)}, pages 108--116, Madeira, Portugal, 2018.
+
+\bibitem{moustafa2016unswEval}
+N.~Moustafa and J.~Slay.
+\newblock The evaluation of network anomaly detection systems: statistical analysis of the UNSW-NB15 data set and the comparison with the KDD99 data set.
+\newblock \emph{Information Security Journal: A Global Perspective}, 25(1--3):18--31, 2016.
+
+\bibitem{adams2007bocpd}
+R.~P. Adams and D.~J.~C. MacKay.
+\newblock Bayesian online changepoint detection.
+\newblock \emph{arXiv preprint arXiv:0710.3742}, 2007.
+
+\end{thebibliography}
