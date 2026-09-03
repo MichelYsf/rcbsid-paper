@@ -524,7 +524,24 @@ positional split, reordering changes split membership, so the two arms differ
 in held-out records, held-out prevalence, training composition and within-split
 order at once. The estimand is therefore the effect of the complete assembly
 pipeline under a fixed split rule, and nothing finer. We report the joint change
-and decline to decompose it.
+and decline to decompose it. Figure~\ref{fig:assembly} shows why the held-out
+membership differs.
+
+\begin{figure}
+\centering
+\includegraphics[width=3.33in]{figures/fig_assembly}
+\caption{The two assemblies of the same CICIDS2017 records under one fixed
+positional split. In timestamp order the capture days follow one another, so
+the held-out slice is the tail of the last day. In day round robin every day
+still supplying records contributes to every position, so the held-out slice
+draws from the tail of each day. Block widths follow the per-day record
+budgets of Table~\ref{tab:protocol}. The figure is a schematic of the
+protocol and carries no measured value.}
+\Description{Two horizontal bars representing the same record stream, one
+with the days concatenated and one with the days interleaved, with the same
+split lines drawn on both.}
+\label{fig:assembly}
+\end{figure}
 
 \subsection{What assembly does to the evaluated sample}
 Held-out prevalence differs by \SFourCicidsPrevShiftAbsPp{} points. The two
@@ -590,11 +607,29 @@ the streaming methods do not; we treat it throughout as a \emph{label-privileged
 diagnostic reference}, and no superiority is claimed for or against it.
 (ii)~The two arms score different held-out samples, so the reversal is not
 measured on a common sample. Section~\ref{sec:shared} measures what happens
-when that difference is removed, and the reversal does not survive it.
+when that difference is removed, and the reversal does not survive it
+(Figure~\ref{fig:decomposition}).
 (iii)~Determinism removes seed variance but not sampling uncertainty from the
 selected window, correlated attack runs, or the subsample; we report no
 confidence interval and therefore claim no stable ordering, only a measured one
 under this protocol.
+
+\begin{figure}
+\centering
+\includegraphics[width=3.33in]{figures/fig_decomposition}
+\caption{Detector and ECOD AUC-PR in the two arms. Left: the full held-out
+slice of each arm, where the measured ordering reverses. Right: the
+\RevSharedRecords{} records both arms held out, where the detector leads in
+both arms. Dotted marks are each group's chance floor, the held-out
+prevalence: \SFourCicidsNaturalChanceFloor{} and
+\SFourCicidsSyntheticChanceFloor{} for the full slices and
+\RevSharedPrevalence{} for the shared records. Values are those of
+Section~\ref{sec:outcome} and Table~\ref{tab:shared}.}
+\Description{Two panels of grouped bars. In the left panel ECOD is above the
+detector in timestamp order and below it in day round robin. In the right
+panel the detector is above ECOD in both arms.}
+\label{fig:decomposition}
+\end{figure}
 
 \subsection{LITNET-2020: pooling as an audit check}
 \label{sec:contrast-litnet}
@@ -691,7 +726,20 @@ the 85\%\ cut this paper's fixed split uses, and the detector leads at the
 others. The measured ordering is therefore a property of the split point as well
 as of the assembly; the archived split is not adversarially chosen, but it is
 not neutral either, and no claim here is a stable property of CICIDS2017.
-Per-cut values are in the archived findings.
+Per-cut values are in the archived findings and in Figure~\ref{fig:split}.
+
+\begin{figure}
+\centering
+\includegraphics[width=3.33in]{figures/fig_split}
+\caption{AUC-PR of the two deterministic scorers at each of the
+\RevSplitCuts{} chronological cuts of the timestamp-ordered CICIDS2017 stream,
+with the held-out prevalence at each cut on the same axis as the AUC-PR chance
+floor. Shaded cuts are the \RevSplitEcodWins{} at which ECOD leads. The dashed
+line marks the cut this paper's fixed split uses.}
+\Description{Two lines with markers rising with the cut position, crossing
+each other several times, above a dotted prevalence line that also rises.}
+\label{fig:split}
+\end{figure}
 
 \subsection{ECOD's scores depend on the batch they are scored in}
 \label{sec:ecodbatch}
@@ -833,7 +881,24 @@ auxiliary term only & \RevBranchAuxOnlyAucpr & \RevBranchAuxOnlyAucroc \\
 The tail term alone \emph{outranks} the deployed composition, by
 \RevBranchTailMinusCombinedAucpr{} $AP$ and
 \RevBranchTailMinusCombinedAucroc{} AUC-ROC. Deleting the auxiliary branch
-would therefore improve the detector on this slice.
+would therefore improve the detector on this slice. Figure~\ref{fig:branch}
+draws the three branches against chance.
+
+\begin{figure}
+\centering
+\includegraphics[width=3.33in]{figures/fig_branch}
+\caption{Branch-wise discrimination on the timestamp-ordered held-out slice,
+the values of Table~\ref{tab:branch}. Left: AUC-PR with the chance floor at
+the slice prevalence, \SFourCicidsNaturalChanceFloor. Right: AUC-ROC with the
+chance level of an uninformative ranking. The tail term alone ranks above the
+deployed composition on both metrics, and the auxiliary term ranks below
+chance on AUC-ROC.}
+\Description{Two panels of three bars each, deployed, tail only and auxiliary
+only, with a dotted chance line. The tail-only bar is the tallest in both
+panels and the auxiliary-only bar is below the chance line in the right
+panel.}
+\label{fig:branch}
+\end{figure}
 
 The mechanism is identified and is not statistical. The auxiliary term ranks
 \emph{below} chance here (AUC-ROC \RevBranchAuxOnlyAucroc{} against $0.5$),

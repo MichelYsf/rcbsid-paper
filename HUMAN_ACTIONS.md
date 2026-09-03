@@ -88,7 +88,7 @@ texts carries the DOI; committed and pushed.
 Follow `ARXIV_V3_SHEET.md`: paper 2605.24696 → Replace → upload
 `packages/arxiv_v3/arxiv_v3_source.tar.gz`; new title; Comments = the NO VENUE
 CLAIM variant (it already carries doi:10.5281/zenodo.22213264 and the
-provenance disclosure); confirm 17 pages in arXiv's preview and your name on
+provenance disclosure); confirm 19 pages in arXiv's preview and your name on
 page 1.
 
 ## 5. Companion v2 replacement (arXiv:2510.09619)
@@ -122,7 +122,7 @@ good hygiene and it means this step stays yours, in the console:
 ---
 
 **Fallback ladder if DTRAP declines:** **TMLR first, DMLR second.** TNSM is
-removed from the ladder — it is not free to publish at this paper's 17 pages.
+removed from the ladder — it is not free to publish at this paper's 19 pages.
 
 Everything else — compiles, gates, ledger, tests, packages, anonymity scans —
 is done and verified. See `PUBLISH_PREP_REPORT.md` and `TRIAGE_REPORT.md`.

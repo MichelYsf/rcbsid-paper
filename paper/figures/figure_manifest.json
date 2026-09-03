@@ -1,0 +1,86 @@
+{
+  "constants": {
+    "auc_roc_chance": 0.5,
+    "note": "AUC-ROC of an uninformative ranking, by definition"
+  },
+  "environment": {
+    "matplotlib": "3.9.2",
+    "numpy": "1.26.4",
+    "python": "3.11.9"
+  },
+  "figures": {
+    "paper/figures/fig_assembly.pdf": "affb665aab97b3910402cedf4c3b4fb46eb03ef1e415e3f74215844cba8eca1f",
+    "paper/figures/fig_branch.pdf": "0d6dae62398d60b2b7e63730a468a66b4f9ea11743efc72eac4751d6f8bc845a",
+    "paper/figures/fig_decomposition.pdf": "1214c9a7753850117261b5c8cacff1fa0e4bed8aadfc22168bd7c14f6ab6ad92",
+    "paper/figures/fig_split.pdf": "c15b298f19e0331db2c0d3a4d8261a4fe96d571780d695523425248ace1b1ae9"
+  },
+  "generator": "scripts/make_figures.py",
+  "generator_sha256": "014e9e3ddd9b4e448ffdfce658314d5e6732a2bc15e87b1d925c36642ffb6e4b",
+  "inputs": {
+    "results/manifests/cicids_heldout_composition_20260819T120420_ebb7c281.json": "740f38ddfb5899ea36b11fb7237ea29e90dff72ad366ccc1f045790032615bba",
+    "results/manifests/cicids_subsample_audit_20260819T085704_3ed9b901.json": "e01198cbf94aafb2a2f226d38fccd15b6778cc9718044a1359e8ef7a3ace6795",
+    "results/manifests/review_bounded_analyses_20260827T131839_87899899.json": "f5a0d2033f3e65e7d10270ca82f5a39a882348ff5b368ab6dd43bb18ca080a77",
+    "results/manifests/s4_construction_contrast_20260819T064027_20f44694.json": "915eb1acbc26c171d65b0cc90c7a6ead670b9304df1847022c9dca94945379f0",
+    "results/manifests/s4_construction_contrast_20260819T090813_46e9bd32.json": "f00a938133d406faf8ce3b4021e366f34ad6c11242e415c5721454f5dfe00364",
+    "results/manifests/s4_contrast_deliverables_20260827T124050_ec876714.json": "d88c45cb6cdcbb800d9c8e9d0843df7ec53eba5b3453fc40a1c40e1ae3f2ab53"
+  },
+  "paper_title": "Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks",
+  "protocol": {
+    "fixed_cut": 0.85,
+    "per_day_budgets": {
+      "friday": 350000,
+      "monday": 300000,
+      "thursday": 300000,
+      "tuesday": 300000,
+      "wednesday": 350000
+    },
+    "source": [
+      "cicids_subsample_audit_20260819T085704_3ed9b901.json",
+      "cicids_heldout_composition_20260819T120420_ebb7c281.json"
+    ],
+    "train": 0.7,
+    "val": 0.15
+  },
+  "values": {
+    "ContrastCicids2017InterleavedSyntheticEcodAucpr": 0.418966,
+    "ContrastCicids2017InterleavedSyntheticProposedDetectorAucpr": 0.544998,
+    "ContrastCicids2017NaturalEcodAucpr": 0.755142,
+    "ContrastCicids2017NaturalProposedDetectorAucpr": 0.728337,
+    "RevBranchAuxOnlyAucpr": 0.60027,
+    "RevBranchAuxOnlyAucroc": 0.28189,
+    "RevBranchCombinedAucpr": 0.728355,
+    "RevBranchCombinedAucroc": 0.526623,
+    "RevBranchTailOnlyAucpr": 0.831832,
+    "RevBranchTailOnlyAucroc": 0.829281,
+    "RevSharedDetectorNaturalAucpr": 0.905613,
+    "RevSharedDetectorSyntheticAucpr": 0.900371,
+    "RevSharedEcodNaturalAucpr": 0.844487,
+    "RevSharedEcodSyntheticAucpr": 0.849842,
+    "RevSharedPrevalence": 0.776603,
+    "RevSplitCut60DetectorAucpr": 0.483383,
+    "RevSplitCut60EcodAucpr": 0.451502,
+    "RevSplitCut60Prevalence": 0.350142,
+    "RevSplitCut65DetectorAucpr": 0.528435,
+    "RevSplitCut65EcodAucpr": 0.498989,
+    "RevSplitCut65Prevalence": 0.40002,
+    "RevSplitCut70DetectorAucpr": 0.578913,
+    "RevSplitCut70EcodAucpr": 0.56123,
+    "RevSplitCut70Prevalence": 0.461644,
+    "RevSplitCut75DetectorAucpr": 0.508857,
+    "RevSplitCut75EcodAucpr": 0.556352,
+    "RevSplitCut75Prevalence": 0.429028,
+    "RevSplitCut80DetectorAucpr": 0.585598,
+    "RevSplitCut80EcodAucpr": 0.639969,
+    "RevSplitCut80Prevalence": 0.513066,
+    "RevSplitCut85DetectorAucpr": 0.728355,
+    "RevSplitCut85EcodAucpr": 0.758205,
+    "RevSplitCut85Prevalence": 0.68235,
+    "RevSplitCut90DetectorAucpr": 0.799279,
+    "RevSplitCut90EcodAucpr": 0.791671,
+    "RevSplitCut90Prevalence": 0.71625,
+    "RevSplitCuts": 7,
+    "RevSplitEcodWins": 3,
+    "SFourCicidsNaturalChanceFloor": 0.68235,
+    "SFourCicidsSyntheticChanceFloor": 0.252396
+  }
+}

@@ -42,3 +42,6 @@ scratch_*
 # --publish-ready report a dirty tree at the exact moment the operator
 # runs it. Rebuild with scripts/build_zenodo_package.py.
 packages/zenodo/manifests_bundle.zip
+
+# personal identity tokens for scripts/check_figures.py: local only, never shipped
+.identity_tokens.local

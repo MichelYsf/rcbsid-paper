@@ -40,6 +40,7 @@ import check_overfull  # noqa: E402
 import check_package_freshness  # noqa: E402
 import check_publish_ready  # noqa: E402
 import check_decimals  # noqa: E402
+import check_figures  # noqa: E402
 import check_literals  # noqa: E402
 
 DEFAULT_TARGETS = [ROOT / "paper" / "numbers.tex"]
@@ -337,6 +338,10 @@ def main() -> int:
                     help="skip the staged-package freshness check")
     ap.add_argument("--packages", action="store_true",
                     help="run the staged-package freshness check only")
+    ap.add_argument("--no-figures", action="store_true",
+                    help="skip the figure check")
+    ap.add_argument("--figures", action="store_true",
+                    help="run the figure check only")
     ap.add_argument("--publish-ready", action="store_true",
                     dest="publish_ready",
                     help="pre-upload invariants: clean tree, pushed HEAD, "
@@ -357,6 +362,8 @@ def main() -> int:
         return check_overfull.main()
     if a.packages:
         return check_package_freshness.main()
+    if a.figures:
+        return check_figures.main()
     if a.publish_ready:
         return check_publish_ready.main()
     targets = a.targets or DEFAULT_TARGETS
@@ -400,6 +407,14 @@ def main() -> int:
     if not a.no_packages:
         print("")
         rc = max(rc, check_package_freshness.main())
+    # Every check above reads numbers, markup, the typeset text and the
+    # staged packages. None of it reads a FIGURE, and a figure is a
+    # rendering of numbers that can go stale, be typed, or carry the
+    # author's name in PDF metadata without any of the checks above
+    # noticing (SCOPE_DECISIONS rule 12).
+    if not a.no_figures:
+        print("")
+        rc = max(rc, check_figures.main())
     return rc
 
 

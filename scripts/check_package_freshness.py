@@ -33,22 +33,28 @@ PACKAGES = [
       "SCOPE_DECISIONS.md", "CLAIM_LEDGER.md", "results/manifests",
       "findings_contrast.md", "findings_review_analyses.md"]),
     (ROOT / "packages/dtrap/source_anonymous.tar.gz",
-     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib"]),
+     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib",
+      "paper/figures"]),
     (ROOT / "packages/dtrap/manuscript_anonymous.pdf",
-     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib"]),
+     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib",
+      "paper/figures"]),
     (ROOT / "packages/arxiv_v3/arxiv_v3_source.tar.gz",
-     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib"]),
+     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib",
+      "paper/figures"]),
     # Built PDFs. paper/main.pdf is the source of every shipped copy, so a
     # stale one silently makes all of them stale; packages/arxiv_v3/src/main.pdf
     # is what the arXiv page count is read from; and the reviewer-kit copy was
     # found four pages and a whole correction round behind (CI-31), pointed at
     # by a step no longer in the operator's sequence.
     (ROOT / "paper/main.pdf",
-     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib"]),
+     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib",
+      "paper/figures"]),
     (ROOT / "packages/arxiv_v3/src/main.pdf",
-     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib"]),
+     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib",
+      "paper/figures"]),
     (ROOT / "REVIEWER_KIT/manuscript_review.pdf",
-     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib"]),
+     ["paper/main.tex", "paper/numbers.tex", "paper/references.bib",
+      "paper/figures"]),
 ]
 
 SKIP_SUFFIX = {".pyc", ".aux", ".log", ".out", ".bbl", ".blg", ".pdf",

@@ -50,6 +50,11 @@ timestamps, output paths). Enforcement:
   index and the manifests behind it.
 - `scripts/check_manuscript_macros.py` — every macro the manuscript uses must
   be defined.
+- `scripts/make_figures.py`: renders every figure deterministically from
+  archived manifests and writes `paper/figures/figure_manifest.json` (input
+  hashes, output hashes, every plotted value by macro name).
+  `scripts/check_figures.py` fails the build on a figure that is stale,
+  unmanifested, off the macro layer, or carries identifying PDF metadata.
 - `CLAIM_LEDGER.md` — every abstract/introduction sentence mapped to its
   generating run; ledger entries are gate-checked.
 
@@ -58,10 +63,11 @@ timestamps, output paths). Enforcement:
 ```bash
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 python -m pytest -q                          # full test suite
+python scripts/make_figures.py               # figures, from the manifests
 python scripts/check_provenance.py           # the gate (repository only)
 
 # From an extracted ARTIFACT rather than the repository, run the checks that
-# do not need the build tree. Two of the eight are repository-only by
+# do not need the build tree. Two of the nine are repository-only by
 # construction: the overfull-hbox check reads paper/main.log, and the
 # package-freshness check reads packages/ -- neither ships in an artifact, and
 # both fail loudly rather than pass vacuously if you run them anyway.
@@ -69,6 +75,13 @@ python scripts/check_provenance.py --ledger  # claim ledger
 python scripts/check_provenance.py --literals   # typed-literal scan
 python scripts/check_provenance.py --decimals   # derived-value arithmetic
 python scripts/check_provenance.py --controlchars
+# Figures: re-render first. The render is deterministic and byte-identical to
+# the shipped PDFs; re-rendering refreshes the figure manifest against THIS
+# copy's files (the artifact's manifests are anonymized copies whose bytes,
+# and so whose hashes, differ from the repository originals recorded in the
+# shipped figure manifest) and resets the timestamps extraction may reorder.
+python scripts/make_figures.py
+python scripts/check_provenance.py --figures    # figures vs manifests and macro index
 
 # ZENODO CODE ZIP ONLY: the run manifests are deposited separately, in
 # manifests_bundle.zip. Extract it to results/manifests/ before running any
@@ -88,6 +101,15 @@ Key experiment entry points, each writing manifests:
 `scripts/verify_score_threshold.py` (Stage 3),
 `scripts/run_bocpd_ablation.py` (Stage 6),
 `scripts/verify_contributions.py` (Stage 5).
+
+## Figures and the archived deposit
+
+The figure renderer (`scripts/make_figures.py`) postdates the Zenodo 2.0.0
+deposit. That record is frozen and is not touched. The renderer draws only
+measured values already archived in that deposit's manifests and adds no
+measured number. Its one typed constant is the chance level of AUC-ROC, the
+value an uninformative ranking scores, recorded in the figure manifest under
+`constants`. It will be included in the next archived version at camera-ready.
 
 ## Honest limitations, up front
 

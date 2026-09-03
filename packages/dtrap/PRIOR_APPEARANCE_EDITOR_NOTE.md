@@ -158,7 +158,10 @@ follow your instruction.
 
 The full artifact accompanies the submission as anonymized supplementary
 material. It holds the code, every run manifest, the claim ledger, and the
-numbered corrected-incident log.
+numbered corrected-incident log. The figure renderer postdates the Zenodo
+2.0.0 deposit, draws only measured values already archived in that deposit
+(its one typed constant is the chance level of AUC-ROC), and will be included
+in the next archived version at camera-ready.
 
 Sincerely,
 [Author, identified to the editorial system]

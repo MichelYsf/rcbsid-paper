@@ -120,6 +120,27 @@ degeneracy are supporting findings, not the headline.
     authorized to edit the published record. Historical records and retired
     texts are never rewritten.
 
+12. **Figures render the macro layer.** Adopted 2026-09-01. Every figure
+    renders values that already exist in an archived manifest or a shipped
+    result CSV. Any number printed inside a figure or its caption comes from
+    the macro layer, never typed. One definitional constant is the exception:
+    the chance level of AUC-ROC, the value an uninformative ranking scores. It
+    is typed in the generator, recorded in the figure manifest under
+    `constants`, and the check fails on any constant not on its allow list.
+    Axis ticks are library defaults. A figure
+    manifest (`paper/figures/figure_manifest.json`) records the generator's
+    hash, every input file with its hash, every output figure with its hash,
+    and every plotted value by macro name. The generator
+    (`scripts/make_figures.py`) is deterministic: fixed style, fixed random
+    state, no timestamps, and PDF metadata that carries the paper title only.
+    No file path, username or handle appears in any figure file.
+    `scripts/check_figures.py` enforces all of it and is the gate's ninth
+    check. The renderer postdates the Zenodo 2.0.0 deposit. That record is
+    not touched. The renderer draws only values already archived in it and
+    ships in the next archived version at camera-ready.
+
+## Corrected incidents created by this re-scope
+
 Recorded here rather than silently changing prior text.
 
 ### CI-1 — "moderate prevalence regime (22.06%)" withdrawn
@@ -1107,6 +1128,22 @@ Published version string: "2.0.0". Verified against the Zenodo API on
 byte sizes). This closes the deposit step of the publish sequence; the
 remaining outward actions are the DTRAP submission, the arXiv v3 replacement
 within 48 hours of it, and the companion's v2 replacement.
+
+### CI-37: the incident log lost its heading to a rule edit, and no check noticed
+The 2026-08-31 edit that added binding rule 11 replaced a block that ended
+at the heading "## Corrected incidents created by this re-scope" and did
+not put the heading back. The whole incident log then sat under the
+binding-rules section with no heading of its own, through three pushed
+commits (4519655, fe64672, 49d5d0e) and the staged artifact and Zenodo code
+zips built from them. Its lead sentence survived. Found on 2026-09-01 when
+the rule-12 edit anchored on the heading and could not find it. The heading
+is restored verbatim above, and the log from its lead sentence to CI-36 was
+verified byte-identical to the pre-edit version before this entry was
+written, so no incident text, rule, or number was lost. The lesson is
+CI-29's in a second form. A structural edit that deletes markup is
+invisible to every check that reads numbers, and the literal, decimal,
+control-character and overfull checks all passed over it. The published
+Zenodo 2.0.0 record predates the edit and is unaffected.
 
 **The pattern across CI-22, CI-24, CI-26 and CI-27 is one pattern:** a check or
 a claim that reads as universal while covering less than its wording implies.

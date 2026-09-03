@@ -27,6 +27,9 @@ def main() -> int:
               "results/table_construction_contrast.tex",
               "results/table_prevalence_sweep.tex"):
         shutil.copy(ROOT / f, SRC / Path(f).name)
+    (SRC / "figures").mkdir(exist_ok=True)
+    for f in sorted((ROOT / "paper/figures").glob("*.pdf")):
+        shutil.copy(f, SRC / "figures" / f.name)
 
     s = (ROOT / "paper/main.tex").read_text(encoding="utf-8")
     edits = [

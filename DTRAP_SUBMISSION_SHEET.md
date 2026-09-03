@@ -21,7 +21,7 @@ window).
 
 ## Step 1 — Article type
 
-**Full research paper.** Not a Field Note. 17 pages, inside DTRAP's 10–25.
+**Full research paper.** Not a Field Note. 19 pages, inside DTRAP's 10–25.
 
 ## Step 2 — Title
 
@@ -55,11 +55,11 @@ reproducibility; provenance
 
 | # | file | size | role |
 |---|---|---|---|
-| 1 | `packages/dtrap/manuscript_anonymous.pdf` | 570,998 B | **main document** |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 478,563 B | supplementary, **not for publication** |
-| 3 | `packages/dtrap/source_anonymous.tar.gz` | 43,663 B | supplementary, **not for publication** |
+| 1 | `packages/dtrap/manuscript_anonymous.pdf` | 624,240 B | **main document** |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 538,029 B | supplementary, **not for publication** |
+| 3 | `packages/dtrap/source_anonymous.tar.gz` | 88,155 B | supplementary, **not for publication** |
 
-The artifact contains 205 files and passes its own documented reproduction
+The artifact contains 213 files and passes its own documented reproduction
 instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).
 
 ## Step 7 — Cover letter
@@ -73,7 +73,7 @@ now match the manuscript.
 ## Step 8 — Confidential Comments to the Editor
 
 Paste **`packages/dtrap/EDITOR_NOTE.txt` in full** (the plain-text render of
-`PRIOR_APPEARANCE_EDITOR_NOTE.md`, 164 lines in the markdown source).
+`PRIOR_APPEARANCE_EDITOR_NOTE.md`, 167 lines in the markdown source).
 It contains, and the manuscript deliberately does not:
 
 - the prior appearance: arXiv:2605.24696 v1 (23 May 2026) and v2 (25 June 2026),

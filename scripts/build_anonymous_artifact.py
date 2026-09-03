@@ -14,6 +14,7 @@ from __future__ import annotations
 import io
 import re
 import sys
+import time
 import zipfile
 from pathlib import Path
 
@@ -35,6 +36,7 @@ INCLUDE_FILES = [
     "findings_contributions.md", "findings_streams.md",
     "findings_review_analyses.md",
     "paper/main.tex", "paper/numbers.tex", "paper/references.bib",
+    "paper/figures/figure_manifest.json",
     "results/construction_contrast.csv", "results/prevalence_sweep_cicids.csv",
     "results/table_construction_contrast.tex",
     "results/table_prevalence_sweep.tex",
@@ -83,6 +85,10 @@ def main() -> int:
         files += [p for p in (ROOT / d).rglob("*") if p.is_file()]
     files += [ROOT / f for f in INCLUDE_FILES if (ROOT / f).exists()]
     files += [p for p in (ROOT / "results/manifests").rglob("*.json")]
+    # Figures are the one PDF class that ships: deterministic renders of
+    # archived values, metadata-stripped, so that check_figures.py can run
+    # inside the extracted artifact (SCOPE_DECISIONS rule 12).
+    files += [p for p in (ROOT / "paper/figures").glob("*.pdf")]
     # The retirement reasons live in a README beside the retired manifests, not
     # in a manifest, so a *.json glob silently drops them (B8/CI-31).
     _sup = ROOT / "results/manifests/superseded/README.md"
@@ -113,7 +119,8 @@ def main() -> int:
     with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(set(files)):
             rel = p.relative_to(ROOT).as_posix()
-            if p.name in EXCLUDE_NAMES or p.suffix in EXCLUDE_SUFFIX:
+            if p.name in EXCLUDE_NAMES or (p.suffix in EXCLUDE_SUFFIX
+                                           and not rel.startswith("paper/figures/")):
                 continue
             if "__pycache__" in rel or "/_dryrun/" in rel:
                 continue
@@ -121,7 +128,15 @@ def main() -> int:
             for tok in IDENTIFYING:
                 if tok in data:
                     leaks.append(rel + " contains " + tok.decode(errors="replace"))
-            z.writestr("artifact/" + rel, data)
+            # Preserve each file's modification time. writestr() with a bare
+            # name stamps every entry with the build clock, which made the
+            # extracted artifact's manifests look newer than the figures they
+            # produced and failed check_figures.py there (rule 12).
+            info = zipfile.ZipInfo("artifact/" + rel,
+                                   date_time=time.localtime(p.stat().st_mtime)[:6])
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o644 << 16
+            z.writestr(info, data)
 
     n = len(zipfile.ZipFile(OUT).namelist())
     print("wrote %s (%d files, %d bytes)" % (OUT.name, n, OUT.stat().st_size))

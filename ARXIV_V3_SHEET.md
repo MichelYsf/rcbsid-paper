@@ -14,8 +14,8 @@ The Zenodo deposit is live (doi:10.5281/zenodo.22213264). Order per
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (43,875 B). It contains
-exactly six files and compiles standalone:
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (88,342 B). It contains
+the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
 |---|---|
@@ -25,9 +25,10 @@ exactly six files and compiles standalone:
 | `main.bbl` | **required** — arXiv does not run BibTeX |
 | `table_construction_contrast.tex` | `\input` by main.tex |
 | `table_prevalence_sweep.tex` | `\input` by main.tex |
+| `figures/*.pdf` | the four manuscript figures, rendered from archived manifests |
 
 Verified locally: 3-pass pdflatex+bibtex, **exit 0, 0 undefined references, 0
-overfull boxes, 17 pages**, author named on page 1.
+overfull boxes, 19 pages**, author named on page 1.
 
 ## Step 2 — Title (replaces the v1/v2 title)
 
@@ -123,7 +124,7 @@ author's Windows machine would change published numbers -- the cross-platform
 difference this project records as corrected incident CI-16. They were
 therefore not re-run, and the other seventeen were deliberately left as they
 are rather than regenerate a subset that would not change this disclosure.
-17 pages.
+19 pages.
 ```
 
 **Resolved 2026-08-31:** the v2.0.0 version DOI is
@@ -136,7 +137,7 @@ as the Zenodo description and the DTRAP editor note — 19 of 25 live run
 manifests ran on an uncommitted tree, two irreducibly. Decided 2026-08-27:
 accepted, not re-run.
 
-**Page count is 17.** Verify against the arXiv build preview before submitting;
+**Page count is 19.** Verify against the arXiv build preview before submitting;
 a stale count in this permanent field is the class of error this version exists
 to correct.
 
@@ -150,7 +151,7 @@ to correct.
 
 ## Step 6 — Before pressing submit
 
-1. Preview arXiv's own build. Confirm **17 pages** and **your name on page 1**
+1. Preview arXiv's own build. Confirm **19 pages** and **your name on page 1**
    (this is the named variant; the anonymous build is for DTRAP only).
 2. Confirm the Comments field is the NO VENUE CLAIM variant.
 3. Confirm the abstract has no LaTeX macros left in it (the text above is
