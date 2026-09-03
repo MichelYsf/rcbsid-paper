@@ -214,9 +214,17 @@ whether results on public intrusion datasets represent concrete advances and
 warn specifically that partitioning timestamped records in arbitrary order can
 alter split representativeness. Arp et al.~\cite{arp2022dosdonts} catalogue
 sampling bias, mixing incompatible sources and temporal snooping as recurring
-security-ML pitfalls. Ring et al.~\cite{ring2019datasets} survey dataset
+security-ML pitfalls. Sommer and Paxson~\cite{sommer2010outside} set out
+earlier why machine learning is harder to apply to intrusion detection than to
+other domains, pointing to the high cost of errors, the semantic gap between
+results and operational meaning, and the difficulty of sound evaluation. Ring
+et al.~\cite{ring2019datasets} survey dataset
 limitations, and Engelen et al.~\cite{engelen2021cicids} correct label and
 flow-construction defects in CICIDS2017; we build on their corrected release.
+Liu et al.~\cite{liu2022errorprevalence} quantify how prevalent such labelling
+errors are in CIC-IDS-2017 and CSE-CIC-IDS-2018, and Lanvin et
+al.~\cite{lanvin2022errors} show that correcting the CICIDS2017 errors changes
+measured detection performance.
 Catillo et al.~\cite{catillo2021critique} earlier showed that a detector
 learned on a public IDS dataset degrades against emulated attacks in a
 controlled network, which is the transfer-side counterpart of the question we
@@ -234,6 +242,9 @@ Apruzzese et al.~\cite{apruzzese2022crosseval} formalise cross-evaluation and
 show how much a reported NIDS result depends on which corpora are combined;
 Olszewski et al.~\cite{olszewski2023reproducibility} find that a large fraction
 of tier-1 security ML papers cannot be reproduced from what they report.
+Apruzzese, Laskov and Schneider~\cite{apruzzese2023sok} survey how
+machine-learning NIDS are assessed and set out pragmatic criteria for
+evaluations that practitioners can act on.
 Concurrent with this work, Moczkodan and Ragab~\cite{moczkodan2026transformers}
 reformulate CICIDS2017 as a temporal task and find that a padding convention,
 not the architecture, determines whether Transformers appear to help --- a
@@ -260,7 +271,9 @@ implementations in the artifact but no archived evaluation runs in this
 rebuild, and carry no numbers here. Cao et al.~\cite{cao2024revisiting}
 benchmark streaming detectors under controlled anomaly types and drifts and
 report strong sensitivity to assessment design; our results give one such
-sensitivity a measured mechanism on an IDS benchmark.
+sensitivity a measured mechanism on an IDS benchmark. Wu and
+Keogh~\cite{wu2023flawed} argue that the standard time-series anomaly
+benchmarks are themselves flawed in ways that create an illusion of progress.
 
 \textbf{Change-point detection.} The evaluated detector descends from Bayesian
 online change-point detection~\cite{adams2007bocpd} with a truncated run-length
@@ -298,7 +311,10 @@ the ROC/PR correspondence and show that the achievable PR region depends on the
 class ratio; Saito and Rehmsmeier~\cite{saito2015prplot} demonstrate that PR
 summaries are the informative choice precisely because they respond to
 imbalance while ROC summaries do not; and Axelsson~\cite{axelsson2000baserate}
-established the base-rate consequence for intrusion detection specifically. We
+established the base-rate consequence for intrusion detection specifically.
+McDermott et al.~\cite{mcdermott2024closerlook} caution that AUC-PR is not
+automatically the better summary under class imbalance and that the choice
+should follow how the scores will be used. We
 use these results, we do not extend them: every AUC-PR this paper compares
 \emph{across} prevalence regimes is reported with its chance floor $p$ and with
 normalized lift $(AP-p)/(1-p)$ for that reason, and comparisons made within one
@@ -826,7 +842,9 @@ which is not ours. That consequence is that published
 ECOD numbers are not comparable across studies that score different batch
 sizes, even on the same dataset, the same split and the same model, and that a
 reported ECOD number is therefore under-specified unless the scoring batch is
-reported with it.
+reported with it. Campos et al.~\cite{campos2016evaluation} showed for
+unsupervised outlier detection generally that reported comparisons depend on
+evaluation choices that papers rarely state.
 
 We hold ourselves to that standard. Every ECOD number in this paper states the
 batch it was scored in. The contrast, LITNET and sweep numbers come from a call
@@ -1087,7 +1105,9 @@ One result from those earlier versions is worth restating here as
 \emph{corroboration}, explicitly not as a contribution of this paper. Conformal
 risk control~\cite{angelopoulos2024crc} extends conformal prediction from
 coverage to any monotone risk, such as a false-positive rate, and holds that
-risk at or below a chosen level under exchangeability. Applying
+risk at or below a chosen level under exchangeability. It builds on the
+distribution-free risk-controlling prediction sets of Bates et
+al.~\cite{bates2021rcps}. Applying
 conformal risk control to the uncalibrated scores at a nominal alert budget of
 $\alpha=0.01$ was infeasible on one of the evaluated datasets --- no threshold
 in $[0,1]$ yielded an upper-bounded false-positive rate at or below $\alpha$,

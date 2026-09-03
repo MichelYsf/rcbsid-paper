@@ -14,7 +14,7 @@ michelyoussef@hotmail.com. ScholarOne will ask to link your ORCID. Link
 
 ## 2. Article type
 
-Select: **full research paper**. The paper is 19 pages, inside DTRAP's 10 to
+Select: **full research paper**. The paper is 20 pages, inside DTRAP's 10 to
 25 page range. If the type list does not offer a clearly matching option,
 stop and report the list. Choose nothing.
 
@@ -182,9 +182,9 @@ Three files, with designations:
 
 | # | full path | bytes | designation |
 |---|---|---|---|
-| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 632,635 | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 540,374 | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 89,589 | supplementary for review, not for publication |
+| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 641,538 | main document |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 542,095 | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 92,399 | supplementary for review, not for publication |
 
 Upload the anonymized PDF, never `paper\main.pdf`. The anonymous build is the
 one that says "Anonymous Author(s)" on page 1.
@@ -192,7 +192,7 @@ one that says "Anonymous Author(s)" on page 1.
 ## 13. Proof check and submit
 
 ScholarOne renders a proof PDF of your entries before submission. Open it.
-Confirm the title, the abstract, one anonymous main document of 19 pages, and
+Confirm the title, the abstract, one anonymous main document of 20 pages, and
 both supplementary files. Confirm the manuscript PDF shows no author name.
 Then press submit.
 

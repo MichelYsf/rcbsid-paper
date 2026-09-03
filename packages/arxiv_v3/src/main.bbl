@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{41}
+\begin{thebibliography}{49}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -63,6 +63,19 @@
 \url{https://openreview.net/forum?id=33XGfHLtZg}
 \showURL{%
 \tempurl}
+
+
+\bibitem[Apruzzese et~al\mbox{.}(2023)]%
+        {apruzzese2023sok}
+\bibfield{author}{\bibinfo{person}{Giovanni Apruzzese}, \bibinfo{person}{Pavel
+  Laskov}, {and} \bibinfo{person}{Johannes Schneider}.}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{{SoK}: Pragmatic Assessment of Machine Learning for
+  Network Intrusion Detection}. In \bibinfo{booktitle}{\emph{2023 {IEEE} 8th
+  European Symposium on Security and Privacy ({EuroS\&P})}}.
+  \bibinfo{publisher}{{IEEE}}, \bibinfo{pages}{592--614}.
+\newblock
+\href{https://doi.org/10.1109/EuroSP57164.2023.00042}{doi:\nolinkurl{10.1109/EuroSP57164.2023.00042}}
 
 
 \bibitem[Apruzzese et~al\mbox{.}(2022)]%
@@ -147,6 +160,19 @@
 \href{https://doi.org/10.1109/SMARTNETS69662.2026.11604738}{doi:\nolinkurl{10.1109/SMARTNETS69662.2026.11604738}}
 
 
+\bibitem[Bates et~al\mbox{.}(2021)]%
+        {bates2021rcps}
+\bibfield{author}{\bibinfo{person}{Stephen Bates}, \bibinfo{person}{Anastasios
+  Angelopoulos}, \bibinfo{person}{Lihua Lei}, \bibinfo{person}{Jitendra Malik},
+  {and} \bibinfo{person}{Michael~I. Jordan}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Distribution-Free, Risk-Controlling Prediction
+  Sets}.
+\newblock \bibinfo{journal}{\emph{Journal of the {ACM}}} \bibinfo{volume}{68},
+  \bibinfo{number}{6} (\bibinfo{year}{2021}), \bibinfo{pages}{43:1--43:34}.
+\newblock
+\href{https://doi.org/10.1145/3478535}{doi:\nolinkurl{10.1145/3478535}}
+
+
 \bibitem[Beyer et~al\mbox{.}(2016)]%
         {beyer2016sre}
 \bibfield{editor}{\bibinfo{person}{Betsy Beyer}, \bibinfo{person}{Chris Jones},
@@ -181,6 +207,23 @@
   International Conference on Management of Data}}. \bibinfo{pages}{93--104}.
 \newblock
 \href{https://doi.org/10.1145/342009.335388}{doi:\nolinkurl{10.1145/342009.335388}}
+
+
+\bibitem[Campos et~al\mbox{.}(2016)]%
+        {campos2016evaluation}
+\bibfield{author}{\bibinfo{person}{Guilherme~O. Campos},
+  \bibinfo{person}{Arthur Zimek}, \bibinfo{person}{J{\"o}rg Sander},
+  \bibinfo{person}{Ricardo J. G.~B. Campello}, \bibinfo{person}{Barbora
+  Micenkov{\'a}}, \bibinfo{person}{Erich Schubert}, \bibinfo{person}{Ira
+  Assent}, {and} \bibinfo{person}{Michael~E. Houle}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{On the Evaluation of Unsupervised Outlier
+  Detection: Measures, Datasets, and an Empirical Study}.
+\newblock \bibinfo{journal}{\emph{Data Mining and Knowledge Discovery}}
+  \bibinfo{volume}{30}, \bibinfo{number}{4} (\bibinfo{year}{2016}),
+  \bibinfo{pages}{891--927}.
+\newblock
+\href{https://doi.org/10.1007/s10618-015-0444-8}{doi:\nolinkurl{10.1007/s10618-015-0444-8}}
 
 
 \bibitem[Cao et~al\mbox{.}(2025)]%
@@ -367,6 +410,23 @@
 \newblock
 
 
+\bibitem[Lanvin et~al\mbox{.}(2023)]%
+        {lanvin2022errors}
+\bibfield{author}{\bibinfo{person}{Maxime Lanvin},
+  \bibinfo{person}{Pierre-Fran{\c{c}}ois Gimenez}, \bibinfo{person}{Yufei Han},
+  \bibinfo{person}{Fr{\'e}d{\'e}ric Majorczyk}, \bibinfo{person}{Ludovic
+  M{\'e}}, {and} \bibinfo{person}{{\'E}ric Totel}.}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Errors in the {CICIDS2017} Dataset and the
+  Significant Differences in Detection Performances It Makes}. In
+  \bibinfo{booktitle}{\emph{Risks and Security of Internet and Systems
+  ({CRiSIS} 2022)}} \emph{(\bibinfo{series}{Lecture Notes in Computer Science},
+  Vol.~\bibinfo{volume}{13857})}. \bibinfo{publisher}{Springer},
+  \bibinfo{pages}{18--33}.
+\newblock
+\href{https://doi.org/10.1007/978-3-031-31108-6_2}{doi:\nolinkurl{10.1007/978-3-031-31108-6_2}}
+
+
 \bibitem[Laxhammar and Falkman(2014)]%
         {laxhammar2014conformal}
 \bibfield{author}{\bibinfo{person}{Rikard Laxhammar} {and}
@@ -407,6 +467,19 @@
 \href{https://doi.org/10.1109/TKDE.2022.3159580}{doi:\nolinkurl{10.1109/TKDE.2022.3159580}}
 
 
+\bibitem[Liu et~al\mbox{.}(2022)]%
+        {liu2022errorprevalence}
+\bibfield{author}{\bibinfo{person}{Lisa Liu}, \bibinfo{person}{Gints Engelen},
+  \bibinfo{person}{Timothy Lynar}, \bibinfo{person}{Daryl Essam}, {and}
+  \bibinfo{person}{Wouter Joosen}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Error Prevalence in {NIDS} Datasets: A Case Study
+  on {CIC-IDS-2017} and {CSE-CIC-IDS-2018}}. In \bibinfo{booktitle}{\emph{2022
+  {IEEE} Conference on Communications and Network Security ({CNS})}}.
+  \bibinfo{publisher}{{IEEE}}, \bibinfo{pages}{254--262}.
+\newblock
+\href{https://doi.org/10.1109/CNS56114.2022.9947235}{doi:\nolinkurl{10.1109/CNS56114.2022.9947235}}
+
+
 \bibitem[Manzoor et~al\mbox{.}(2018)]%
         {manzoor2018xstream}
 \bibfield{author}{\bibinfo{person}{Emaad Manzoor}, \bibinfo{person}{Hemank
@@ -430,6 +503,21 @@
 \newblock
 \shownote{Opened 28 April 2022; open as of 3 September 2026}.
 \newblock
+
+
+\bibitem[McDermott et~al\mbox{.}(2024)]%
+        {mcdermott2024closerlook}
+\bibfield{author}{\bibinfo{person}{Matthew~B. McDermott},
+  \bibinfo{person}{Haoran Zhang}, \bibinfo{person}{Lasse~Hyldig Hansen},
+  \bibinfo{person}{Giovanni Angelotti}, {and} \bibinfo{person}{Jack
+  Gallifant}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{A Closer Look at {AUROC} and {AUPRC} under Class
+  Imbalance}. In \bibinfo{booktitle}{\emph{Advances in Neural Information
+  Processing Systems 37 ({NeurIPS} 2024)}}. \bibinfo{pages}{44102--44163}.
+\newblock
+\shownote{arXiv:2401.06091}.
+\newblock
+\href{https://doi.org/10.52202/079017-1400}{doi:\nolinkurl{10.52202/079017-1400}}
 
 
 \bibitem[Mirsky et~al\mbox{.}(2018)]%
@@ -538,6 +626,18 @@
 \href{https://doi.org/10.5220/0006639801080116}{doi:\nolinkurl{10.5220/0006639801080116}}
 
 
+\bibitem[Sommer and Paxson(2010)]%
+        {sommer2010outside}
+\bibfield{author}{\bibinfo{person}{Robin Sommer} {and} \bibinfo{person}{Vern
+  Paxson}.} \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{Outside the Closed World: On Using Machine Learning
+  for Network Intrusion Detection}. In \bibinfo{booktitle}{\emph{2010 {IEEE}
+  Symposium on Security and Privacy}}. \bibinfo{publisher}{{IEEE}},
+  \bibinfo{pages}{305--316}.
+\newblock
+\href{https://doi.org/10.1109/SP.2010.25}{doi:\nolinkurl{10.1109/SP.2010.25}}
+
+
 \bibitem[Tan et~al\mbox{.}(2011)]%
         {tan2011hst}
 \bibfield{author}{\bibinfo{person}{Swee~Chuan Tan}, \bibinfo{person}{Kai~Ming
@@ -572,6 +672,19 @@
 \newblock \bibinfo{publisher}{Springer}, \bibinfo{address}{New York}.
 \newblock
 \href{https://doi.org/10.1007/b106715}{doi:\nolinkurl{10.1007/b106715}}
+
+
+\bibitem[Wu and Keogh(2023)]%
+        {wu2023flawed}
+\bibfield{author}{\bibinfo{person}{Renjie Wu} {and} \bibinfo{person}{Eamonn~J.
+  Keogh}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Current Time Series Anomaly Detection Benchmarks
+  Are Flawed and Are Creating the Illusion of Progress}.
+\newblock \bibinfo{journal}{\emph{{IEEE} Transactions on Knowledge and Data
+  Engineering}} \bibinfo{volume}{35}, \bibinfo{number}{3}
+  (\bibinfo{year}{2023}), \bibinfo{pages}{2421--2429}.
+\newblock
+\href{https://doi.org/10.1109/TKDE.2021.3112126}{doi:\nolinkurl{10.1109/TKDE.2021.3112126}}
 
 
 \end{thebibliography}

@@ -147,6 +147,32 @@ unverified status word.
 | `moustafa2015unsw` | not cited; the UNSW-NB15 results are withdrawn and the dataset is not named in the body |
 | `moustafa2016evaluation` | not cited; same reason |
 
+## Additions (2026-09-03), each verified before entry
+
+| entry | verified record | hook in the manuscript |
+|---|---|---|
+| `sommer2010outside` | IEEE S&P 2010, pp. 305--316, DOI 10.1109/SP.2010.25 (Crossref + DBLP conf/sp/SommerP10) | Related Work, evaluation-pitfalls paragraph, after Arp et al. |
+| `liu2022errorprevalence` | IEEE CNS 2022, pp. 254--262, DOI 10.1109/CNS56114.2022.9947235 (Crossref + DBLP conf/cns/LiuELEJ22); no preprint exists | Related Work, the Engelen corrected-release sentence |
+| `lanvin2022errors` | CRiSIS 2022, LNCS 13857, pp. 18--33, published 2023, DOI 10.1007/978-3-031-31108-6_2 (Crossref + DBLP conf/crisis/LanvinGHMMT22); the year field is the proceedings year | same hook |
+| `apruzzese2023sok` | IEEE EuroS&P 2023, pp. 592--614, DOI 10.1109/EuroSP57164.2023.00042 (Crossref); version of record of arXiv:2305.00550 | Related Work, after the Apruzzese, Pajola and Conti cross-evaluation sentence |
+| `mcdermott2024closerlook` | NeurIPS 2024 version of record confirmed: Advances in NeurIPS 37, pp. 44102--44163, DOI 10.52202/079017-1400 (Crossref, proceedings.neurips.cc); arXiv:2401.06091 kept as note | Related Work, metrics paragraph after Axelsson |
+| `wu2023flawed` | IEEE TKDE 35(3), pp. 2421--2429, 2023, DOI 10.1109/TKDE.2021.3112126 (Crossref, IEEE Xplore) | Related Work, after the Cao et al. benchmark sentence |
+| `campos2016evaluation` | DMKD 30(4), pp. 891--927, 2016, DOI 10.1007/s10618-015-0444-8 (Crossref); no preprint exists | ECOD section, after the cross-study comparability sentence |
+| `bates2021rcps` | JACM 68(6), Article 43, 2021, DOI 10.1145/3478535 (Crossref + DBLP journals/jacm/BatesALMJ21); arXiv:2101.02703 is the preprint | the Conformal Risk Control sentence |
+
+Title casing follows this file's convention (title case, acronyms braced), so
+the published lowercase forms "NIDS datasets", "Benchmarks are Flawed and are
+Creating", "Distribution-free, Risk-controlling" and "under Class Imbalance"
+appear here in title case. DOIs and all other fields are as registered.
+
+## Considered and excluded (2026-09-03)
+
+| work | reason |
+|---|---|
+| D'hooge et al., the two feature-leakage papers on CICIDS-family datasets | feature leakage is a different mechanism from stream assembly and this paper makes no leakage claim, so there is no sentence for them to support |
+| the ACM REP 2025 paper on provenance for reproducible IDS experiments | reproducibility tooling rather than an evaluation-protocol finding; the reproducibility point this paper makes is carried by Olszewski et al. and by its own artifact |
+| the nonconform tooling preprint | a software preprint for conformal tooling; this paper proposes no conformal method and relies on no result from it |
+
 ## Preprints kept as preprints (no version of record found on 2026-09-03)
 
 `adams2007bocpd` (arXiv only; DataCite DOI added), `vandeburg2020evaluation`

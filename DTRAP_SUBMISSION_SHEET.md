@@ -21,7 +21,7 @@ window).
 
 ## Step 1 — Article type
 
-**Full research paper.** Not a Field Note. 19 pages, inside DTRAP's 10–25.
+**Full research paper.** Not a Field Note. 20 pages, inside DTRAP's 10–25.
 
 ## Step 2 — Title
 
@@ -55,9 +55,9 @@ reproducibility; provenance
 
 | # | file | size | role |
 |---|---|---|---|
-| 1 | `packages/dtrap/manuscript_anonymous.pdf` | 632,635 B | **main document** |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 540,374 B | supplementary, **not for publication** |
-| 3 | `packages/dtrap/source_anonymous.tar.gz` | 89,589 B | supplementary, **not for publication** |
+| 1 | `packages/dtrap/manuscript_anonymous.pdf` | 641,538 B | **main document** |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 542,095 B | supplementary, **not for publication** |
+| 3 | `packages/dtrap/source_anonymous.tar.gz` | 92,399 B | supplementary, **not for publication** |
 
 The artifact contains 213 files and passes its own documented reproduction
 instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).
