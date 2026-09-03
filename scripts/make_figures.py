@@ -56,7 +56,9 @@ INPUTS = {
 C = {"orange": "#E69F00", "sky": "#56B4E9", "green": "#009E73",
      "yellow": "#F0E442", "blue": "#0072B2", "vermillion": "#D55E00",
      "purple": "#CC79A7", "black": "#000000", "grey": "#7F7F7F"}
-DAY_COLOURS = [C["blue"], C["sky"], C["green"], C["yellow"], C["orange"]]
+# Day colours avoid the detector blue and the ECOD vermillion, and avoid the
+# palette yellow, which is too faint for a thin lane on white.
+DAY_COLOURS = [C["sky"], C["green"], C["orange"], C["purple"], C["grey"]]
 
 WIDTH_IN = 3.33          # ACM column width
 META = {"Title": PAPER_TITLE, "Author": None, "Creator": None,
@@ -120,13 +122,15 @@ def fig_assembly(used: dict, protocol: dict) -> Path:
                      "source": [INPUTS["subsample"].name,
                                 INPUTS["composition"].name]})
 
-    fig, ax = plt.subplots(figsize=(WIDTH_IN, 1.9))
-    bar_h = 0.32
+    fig, ax = plt.subplots(figsize=(WIDTH_IN, 2.0))
+    bar_h = 0.5
+    top_y = 1.0
+    label_y = top_y + bar_h + 0.1
     # top bar: timestamp order is the days concatenated
     x = 0.0
     for i, d in enumerate(days):
         w = sizes[i] / n
-        ax.add_patch(plt.Rectangle((x, 1.0), w, bar_h, color=DAY_COLOURS[i],
+        ax.add_patch(plt.Rectangle((x, top_y), w, bar_h, color=DAY_COLOURS[i],
                                    linewidth=0))
         x += w
     # bottom bar: round robin is lanes of every day still supplying records
@@ -140,28 +144,34 @@ def fig_assembly(used: dict, protocol: dict) -> Path:
                                        color=DAY_COLOURS[i], linewidth=0))
         pos += seg
         k = b
-    # the fixed positional split, identical for both arms
+    # the fixed positional split, identical for both arms; the lines stop
+    # below the label band so no label is crossed
+    line_top = label_y - 0.04
     for xc in (train, train + val):
-        ax.axvline(xc, color=C["black"], linewidth=0.8, linestyle="--")
-    ax.axvspan(train + val, 1.0, color=C["grey"], alpha=0.18, linewidth=0)
-    ax.text(train / 2, 1.42, "train", ha="center", va="bottom", fontsize=7)
-    ax.text(train + val / 2, 1.42, "val", ha="center", va="bottom", fontsize=7)
-    ax.text(1.0, 1.42, "held-out", ha="right", va="bottom", fontsize=7)
-    ax.text(-0.01, 1.0 + bar_h / 2, "timestamp\norder", ha="right",
+        ax.plot([xc, xc], [-0.1, line_top], color=C["black"], linewidth=0.8,
+                linestyle="--")
+    ax.add_patch(plt.Rectangle((train + val, -0.1), 1.0 - train - val,
+                               line_top + 0.1, color=C["black"], alpha=0.10,
+                               linewidth=0))
+    ax.text(train / 2, label_y, "train", ha="center", va="bottom", fontsize=7)
+    ax.text(train + val / 2, label_y, "val", ha="center", va="bottom",
+            fontsize=7)
+    ax.text(1.0, label_y, "held-out", ha="right", va="bottom", fontsize=7)
+    ax.text(-0.01, top_y + bar_h / 2, "timestamp\norder", ha="right",
             va="center", fontsize=7)
     ax.text(-0.01, bar_h / 2, "day\nround robin", ha="right", va="center",
             fontsize=7)
     ax.set_xlim(0, 1)
-    ax.set_ylim(-0.1, 1.75)
+    ax.set_ylim(-0.1, label_y + 0.32)
     ax.set_xlabel("position in the assembled stream (fraction)")
     ax.get_yaxis().set_visible(False)
     ax.spines["left"].set_visible(False)
     handles = [plt.Rectangle((0, 0), 1, 1, color=DAY_COLOURS[i])
                for i in range(len(days))]
     ax.legend(handles, [d.capitalize()[:3] for d in days], ncol=5,
-              loc="lower center", bbox_to_anchor=(0.5, -0.66),
+              loc="lower center", bbox_to_anchor=(0.5, -0.62),
               handlelength=1.0, columnspacing=1.2, fontsize=7)
-    fig.subplots_adjust(left=0.21, right=0.97, top=0.97, bottom=0.44)
+    fig.subplots_adjust(left=0.21, right=0.97, top=0.98, bottom=0.42)
     return save(fig, "fig_assembly.pdf")
 
 
@@ -234,15 +244,18 @@ def fig_split(used: dict, protocol: dict) -> Path:
     for j, xi in enumerate(x[lead]):
         ax.axvspan(xi - 0.012, xi + 0.012, color=C["vermillion"], alpha=0.15,
                    linewidth=0, label="ECOD leads" if j == 0 else None)
-    ax.axvline(fixed_cut, color=C["black"], linewidth=0.7, linestyle="--",
+    ax.axvline(fixed_cut, color=C["grey"], linewidth=0.8, linestyle="--",
                label="this paper's split")
-    ax.plot(x, prev, color=C["grey"], linestyle=":", marker="^",
-            label="held-out prevalence (chance floor)")
+    # the chance floor is black dotted in every figure that draws one
+    ax.plot(x, prev, color=C["black"], linestyle=":", marker="^",
+            label="prevalence (chance floor)")
     ax.plot(x, det, color=C["blue"], marker="o", label="detector")
     ax.plot(x, eco, color=C["vermillion"], marker="s", label="ECOD")
     ax.set_xlabel("chronological cut\n(fraction of the stream before the held-out slice)")
     ax.set_ylabel("AUC-PR")
-    ax.legend(loc="upper left", handlelength=1.6, fontsize=6.5)
+    # opaque legend so the shaded band behind it does not show through the text
+    ax.legend(loc="upper left", handlelength=1.6, frameon=True, framealpha=1.0,
+              edgecolor="none", facecolor="white")
     fig.subplots_adjust(left=0.15, right=0.98, top=0.97, bottom=0.27)
     return save(fig, "fig_split.pdf")
 
@@ -259,7 +272,10 @@ def fig_branch(used: dict) -> Path:
            macro(rv, "RevBranchTailOnlyAucroc", used),
            macro(rv, "RevBranchAuxOnlyAucroc", used)]
     p_nat = macro(dl, "SFourCicidsNaturalChanceFloor", used)
-    cols = [C["purple"], C["green"], C["orange"]]
+    # the deployed composition is the detector of the other figures, so it
+    # keeps the detector blue; the two branches take colours no other figure
+    # assigns to a method
+    cols = [C["blue"], C["sky"], C["purple"]]
 
     fig, axes = plt.subplots(1, 2, figsize=(WIDTH_IN, 2.2))
     for ax, vals, chance, lab in zip(axes, (pr, roc), (p_nat, AUC_ROC_CHANCE),

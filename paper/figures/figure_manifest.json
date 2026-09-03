@@ -9,13 +9,13 @@
     "python": "3.11.9"
   },
   "figures": {
-    "paper/figures/fig_assembly.pdf": "affb665aab97b3910402cedf4c3b4fb46eb03ef1e415e3f74215844cba8eca1f",
-    "paper/figures/fig_branch.pdf": "0d6dae62398d60b2b7e63730a468a66b4f9ea11743efc72eac4751d6f8bc845a",
+    "paper/figures/fig_assembly.pdf": "aa4641ba53e36fc61491486064db0bef8a1f064527cbbe957d3a681b6a594fc3",
+    "paper/figures/fig_branch.pdf": "72689f80e80263c38ad7bd590be4e3b0f4caa3be69dfdc86dac3b085fbc501c9",
     "paper/figures/fig_decomposition.pdf": "1214c9a7753850117261b5c8cacff1fa0e4bed8aadfc22168bd7c14f6ab6ad92",
-    "paper/figures/fig_split.pdf": "c15b298f19e0331db2c0d3a4d8261a4fe96d571780d695523425248ace1b1ae9"
+    "paper/figures/fig_split.pdf": "ae360857b1f96efbb08ededf6107133d43f7140ddbcc2514728bba1b624bdc52"
   },
   "generator": "scripts/make_figures.py",
-  "generator_sha256": "014e9e3ddd9b4e448ffdfce658314d5e6732a2bc15e87b1d925c36642ffb6e4b",
+  "generator_sha256": "a982dacc6686a48cb9db68ab14b93f529c2cb6a9706f50e68aa60d144a51f802",
   "inputs": {
     "results/manifests/cicids_heldout_composition_20260819T120420_ebb7c281.json": "740f38ddfb5899ea36b11fb7237ea29e90dff72ad366ccc1f045790032615bba",
     "results/manifests/cicids_subsample_audit_20260819T085704_3ed9b901.json": "e01198cbf94aafb2a2f226d38fccd15b6778cc9718044a1359e8ef7a3ace6795",

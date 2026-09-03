@@ -134,8 +134,21 @@ degeneracy are supporting findings, not the headline.
     (`scripts/make_figures.py`) is deterministic: fixed style, fixed random
     state, no timestamps, and PDF metadata that carries the paper title only.
     No file path, username or handle appears in any figure file.
-    `scripts/check_figures.py` enforces all of it and is the gate's ninth
-    check. The renderer postdates the Zenodo 2.0.0 deposit. That record is
+    `scripts/check_figures.py` is the gate's ninth check. What it enforces:
+    the manifest names the generator, its hash, at least one input, at least
+    four figures and at least one plotted value, and never passes vacuously.
+    Every input and the generator hash as recorded and are no newer than any
+    figure. Every figure hashes as recorded. Every figure the manuscript
+    includes has a manifest entry. Every plotted value equals the macro index.
+    Any typed constant is on the allow list. Every figure PDF carries no
+    Author, Creator, Producer, Subject, Keywords, CreationDate or ModDate, a
+    Title that is empty or the paper title, and no identity token in its
+    uncompressed bytes. What it does not enforce: determinism, fixed style,
+    fixed random state and the absence of timestamps rest on the generator's
+    code and on the audit sweep, because the check does not re-render. It does
+    not read caption text or tick locators, and its identity scan does not
+    decompress content streams. The renderer postdates the Zenodo 2.0.0
+    deposit. That record is
     not touched. The renderer draws only values already archived in it and
     ships in the next archived version at camera-ready.
 

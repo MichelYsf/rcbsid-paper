@@ -14,7 +14,7 @@ The Zenodo deposit is live (doi:10.5281/zenodo.22213264). Order per
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (88,342 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (88,509 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |

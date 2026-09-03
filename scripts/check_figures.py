@@ -17,7 +17,20 @@ What it checks, and why each check exists:
     CreationDate or ModDate, its Title is empty or the paper title, and no
     identifying token appears in its bytes.
 
-Repository-only: it reads paper/main.tex, paper/figures/ and the macro index.
+It never passes vacuously: the manifest must name a generator with its hash,
+at least one input, at least MIN_FIGURES figures, and at least one plotted
+value, and every figure the manuscript references must be among them.
+
+What it does NOT check, so that nobody reads it as more than it is: it does
+not re-render, so determinism, fixed style, fixed random state and the
+absence of timestamps in the generator rest on scripts/make_figures.py and
+on the audit sweep, not on this script; it does not parse caption text or
+tick locators; and its identity scan reads the PDF's uncompressed bytes,
+which cover the Info dictionary but not Flate-compressed content streams.
+
+Runs in the repository, or in an extracted artifact after
+scripts/make_figures.py has been re-run there (the artifact's manifests are
+anonymized copies whose bytes differ from the repository originals).
 """
 from __future__ import annotations
 
@@ -49,6 +62,9 @@ if _LOCAL_TOKENS.exists():
                  for line in _LOCAL_TOKENS.read_text(encoding="utf-8").splitlines()
                  if line.strip() and not line.startswith("#")]
 SLACK_S = 2.0
+# The manuscript carries four figures. A manifest naming fewer is not the
+# manifest of this manuscript, however internally consistent it is.
+MIN_FIGURES = 4
 # The one definitional constant a figure may carry (rule 12): the AUC-ROC of
 # an uninformative ranking. Everything else must come from a manifest.
 ALLOWED_CONSTANTS = {"auc_roc_chance": 0.5}
@@ -87,7 +103,8 @@ def pdf_metadata_problems(data: bytes, title: str) -> list[str]:
 
 
 def check(root: Path = ROOT, manifest: Path = MANIFEST, manuscript: Path = MANUSCRIPT,
-          macro_index: Path = MACRO_INDEX, title: str = PAPER_TITLE) -> int:
+          macro_index: Path = MACRO_INDEX, title: str = PAPER_TITLE,
+          min_figures: int = MIN_FIGURES) -> int:
     fails: list[str] = []
     notes: list[str] = []
     if not manifest.exists():
@@ -97,6 +114,13 @@ def check(root: Path = ROOT, manifest: Path = MANIFEST, manuscript: Path = MANUS
     fm = json.loads(manifest.read_text(encoding="utf-8"))
     figures = fm.get("figures", {})
     inputs = fm.get("inputs", {})
+    # A manifest that lists nothing would pass every loop below. It must not.
+    for key in ("generator", "generator_sha256", "inputs", "figures", "values"):
+        if not fm.get(key):
+            fails.append("figure manifest lacks %s; the check must never pass vacuously" % key)
+    if len(figures) < min_figures:
+        fails.append("figure manifest names %d figure(s); the manuscript carries at least %d"
+                     % (len(figures), min_figures))
 
     fig_paths = {rel: root / rel for rel in figures}
     newest_fig = 0.0
@@ -128,7 +152,7 @@ def check(root: Path = ROOT, manifest: Path = MANIFEST, manuscript: Path = MANUS
     gen_rel = fm.get("generator")
     gen = root / gen_rel if gen_rel else None
     if gen and gen.exists():
-        if fm.get("generator_sha256") and sha256(gen) != fm["generator_sha256"]:
+        if sha256(gen) != fm.get("generator_sha256"):
             fails.append("generator changed since the render: " + gen_rel)
         if gen.stat().st_mtime - oldest_fig > SLACK_S:
             fails.append("generator is newer than a figure: " + gen_rel)

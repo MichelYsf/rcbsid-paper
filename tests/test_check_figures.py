@@ -53,11 +53,30 @@ def _fixture(tmp_path: Path, *, pdf_bytes=None, value=0.5, include="figures/fig_
                   % include, encoding="utf-8")
     idx = tmp_path / "results" / "manifests" / "macro_index.json"
     idx.write_text(json.dumps({"M": [{"value": 0.5}]}), encoding="utf-8")
-    return dict(root=tmp_path, manifest=man, manuscript=ms, macro_index=idx)
+    # the fixture carries one figure; the four-figure floor is tested separately
+    return dict(root=tmp_path, manifest=man, manuscript=ms, macro_index=idx,
+                min_figures=1)
 
 
 def test_consistent_fixture_passes(tmp_path):
     assert cf.check(**_fixture(tmp_path)) == 0
+
+
+def test_default_floor_is_four_figures(tmp_path):
+    kw = _fixture(tmp_path)
+    kw.pop("min_figures")          # default MIN_FIGURES applies
+    assert cf.MIN_FIGURES == 4
+    assert cf.check(**kw) == 1     # one figure is not the manuscript's manifest
+
+
+def test_empty_manifest_sections_fail(tmp_path):
+    for key in ("inputs", "values", "generator_sha256", "generator"):
+        kw = _fixture(tmp_path / key)
+        man = kw["manifest"]
+        d = json.loads(man.read_text(encoding="utf-8"))
+        d[key] = {} if isinstance(d[key], dict) else ""
+        man.write_text(json.dumps(d), encoding="utf-8")
+        assert cf.check(**kw) == 1, key
 
 
 def test_input_newer_than_figure_fails(tmp_path):

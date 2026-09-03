@@ -732,12 +732,16 @@ Per-cut values are in the archived findings and in Figure~\ref{fig:split}.
 \centering
 \includegraphics[width=3.33in]{figures/fig_split}
 \caption{AUC-PR of the two deterministic scorers at each of the
-\RevSplitCuts{} chronological cuts of the timestamp-ordered CICIDS2017 stream,
-with the held-out prevalence at each cut on the same axis as the AUC-PR chance
-floor. Shaded cuts are the \RevSplitEcodWins{} at which ECOD leads. The dashed
-line marks the cut this paper's fixed split uses.}
-\Description{Two lines with markers rising with the cut position, crossing
-each other several times, above a dotted prevalence line that also rises.}
+\RevSplitCuts{} chronological cuts of the timestamp-ordered CICIDS2017 stream.
+The held-out prevalence at each cut is drawn on the same axis. It is the
+AUC-PR chance floor. Shaded cuts are the \RevSplitEcodWins{} at which ECOD
+leads. The dashed line marks the cut this paper's fixed split uses. Values are
+recomputed from the archived per-record scores with ECOD refit at each cut, as
+in Table~\ref{tab:branch}, and so differ slightly from Table~\ref{tab:contrast}
+at the cut this paper uses.}
+\Description{Two lines with markers that broadly rise with the cut position,
+with a dip at one intermediate cut, crossing each other twice, above a dotted
+prevalence line that follows the same shape.}
 \label{fig:split}
 \end{figure}
 
@@ -890,13 +894,13 @@ draws the three branches against chance.
 \caption{Branch-wise discrimination on the timestamp-ordered held-out slice,
 the values of Table~\ref{tab:branch}. Left: AUC-PR with the chance floor at
 the slice prevalence, \SFourCicidsNaturalChanceFloor. Right: AUC-ROC with the
-chance level of an uninformative ranking. The tail term alone ranks above the
-deployed composition on both metrics, and the auxiliary term ranks below
-chance on AUC-ROC.}
+chance level of an uninformative ranking. The deployed composition is the
+detector of the other figures. The tail term alone ranks above the deployed
+composition on both metrics, and the auxiliary term ranks below chance on
+AUC-ROC.}
 \Description{Two panels of three bars each, deployed, tail only and auxiliary
 only, with a dotted chance line. The tail-only bar is the tallest in both
-panels and the auxiliary-only bar is below the chance line in the right
-panel.}
+panels and the auxiliary-only bar is below the chance line in both panels.}
 \label{fig:branch}
 \end{figure}
 
