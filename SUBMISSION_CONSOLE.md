@@ -142,7 +142,7 @@ Excluded and confirmed clean: Seth Barrett and every FIRCE and FADES author
 
 ## 9. Cover letter
 
-Paste the whole of `packages/dtrap/COVER_LETTER.txt` (797 words). It is plain
+Paste the whole of `packages/dtrap/COVER_LETTER.txt` (836 words). It is plain
 text with no markdown residue.
 
 Contingency: if the portal offers no separate confidential-comments box, use

@@ -6,6 +6,11 @@ Please consider the attached manuscript, "Stream Assembly Is an Uncontrolled
 Treatment in Streaming Intrusion-Detection Benchmarks," for publication in
 DTRAP. I map the contribution to the journal's review axes directly.
 
+This submission follows a presubmission scope inquiry to the
+co-editors-in-chief. Prof. Thomas Schreck answered it on 1 September 2026. He
+wrote that, from the framing provided, he thinks the work fits, and that
+certainty is possible only after submission.
+
 **Relevance.** The paper is about what operational detection evaluations
 measure. Streaming intrusion-detection results across the field are reported
 on evaluation streams assembled from public capture files. Day interleaving,
