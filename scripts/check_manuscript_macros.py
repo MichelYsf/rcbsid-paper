@@ -25,6 +25,9 @@ TEX_INPUTS = [
 ]
 
 
+LATEX_COMMANDS = {"Description"}
+
+
 def main() -> int:
     defined = set(re.findall(r"\\newcommand\{\\([A-Za-z]+)\}",
                              (ROOT / "paper/numbers.tex").read_text(encoding="utf-8")))
@@ -33,6 +36,10 @@ def main() -> int:
         if t.exists():
             used |= set(re.findall(r"\\([A-Z][A-Za-z]+)", t.read_text(encoding="utf-8")))
     missing = sorted(u for u in used if u not in defined and u not in BUILTIN)
+    # Capitalised LaTeX commands that are not numbers macros. acmart's
+    # accessibility command entered with the figure round; without this
+    # allow list the check reported it as an undefined macro.
+    missing = sorted(set(missing) - LATEX_COMMANDS)
     print("manuscript macro check: %d used, %d defined in numbers.tex"
           % (len(used), len(defined)))
     rc = 0

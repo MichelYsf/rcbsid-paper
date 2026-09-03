@@ -14,14 +14,14 @@ The Zenodo deposit is live (doi:10.5281/zenodo.22213264). Order per
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (88,509 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (89,756 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
 |---|---|
 | `main.tex` | named-author variant (not the anonymous DTRAP build) |
 | `numbers.tex` | the generated macro layer every number resolves through |
-| `references.bib` | 51 entries |
+| `references.bib` | 41 entries |
 | `main.bbl` | **required** — arXiv does not run BibTeX |
 | `table_construction_contrast.tex` | `\input` by main.tex |
 | `table_prevalence_sweep.tex` | `\input` by main.tex |
