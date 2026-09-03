@@ -14,7 +14,7 @@ The Zenodo deposit is live (doi:10.5281/zenodo.22213264). Order per
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (92,572 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (92,643 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
@@ -28,7 +28,7 @@ the six source files plus the `figures/` directory and compiles standalone:
 | `figures/*.pdf` | the four manuscript figures, rendered from archived manifests |
 
 Verified locally: 3-pass pdflatex+bibtex, **exit 0, 0 undefined references, 0
-overfull boxes, 20 pages**, author named on page 1.
+overfull boxes, 19 pages**, author named on page 1.
 
 ## Step 2 — Title (replaces the v1/v2 title)
 
@@ -49,7 +49,7 @@ days, pooling temporally disjoint captures, or replaying records round robin. We
 show on two benchmarks that this assembly step is not neutral plumbing but an
 uncontrolled experimental treatment. On CICIDS2017, holding the full record
 multiset identical and changing only the ordering, a fixed positional 70/15/15
-chronological split then produces held-out samples that share only 32.5% of
+split then produces held-out samples that share only 32.5% of
 their records, at held-out prevalences of 68.235% and 25.2396% -- a
 42.9954-point difference -- and the measured ordering of the two deterministic
 scorers reverses. Restricting both arms to the 78000 records they both held out
@@ -124,7 +124,7 @@ author's Windows machine would change published numbers -- the cross-platform
 difference this project records as corrected incident CI-16. They were
 therefore not re-run, and the other seventeen were deliberately left as they
 are rather than regenerate a subset that would not change this disclosure.
-20 pages.
+19 pages.
 ```
 
 **Resolved 2026-08-31:** the v2.0.0 version DOI is
@@ -151,7 +151,7 @@ to correct.
 
 ## Step 6 — Before pressing submit
 
-1. Preview arXiv's own build. Confirm **20 pages** and **your name on page 1**
+1. Preview arXiv's own build. Confirm **19 pages** and **your name on page 1**
    (this is the named variant; the anonymous build is for DTRAP only).
 2. Confirm the Comments field is the NO VENUE CLAIM variant.
 3. Confirm the abstract has no LaTeX macros left in it (the text above is

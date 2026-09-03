@@ -73,9 +73,9 @@ author's Windows machine would change published numbers -- the cross-platform
 difference this project records as corrected incident CI-16. They were
 therefore not re-run, and the other seventeen were deliberately left as they
 are rather than regenerate a subset that would not change this disclosure.
-20 pages.
+19 pages.
 -----------------------------------------------------------------------------
-PAGE COUNT: 20, the compiled length of packages/arxiv_v3/arxiv_v3_source.tar.gz
+PAGE COUNT: 19, the compiled length of packages/arxiv_v3/arxiv_v3_source.tar.gz
 as rebuilt 2026-09-01 (17 before the figure round, 13 before the round-3 additions, 16 before the
 three-auditor sweep's qualifying clauses). Re-check after
 any further edit before pasting; a stale figure in a public Comments field is

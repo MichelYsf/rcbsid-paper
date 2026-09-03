@@ -34,7 +34,7 @@ days, pooling temporally disjoint captures, or replaying records round robin.
 We show on two benchmarks that this assembly step is not neutral plumbing but
 an \emph{uncontrolled experimental treatment}. On CICIDS2017, holding the full
 record multiset identical and changing only the ordering, a fixed positional
-70/15/15 chronological split then produces held-out samples that share only
+70/15/15 split then produces held-out samples that share only
 \CicidsHeldoutOverlapPct\%\ of their records, at held-out prevalences of
 \SFourCicidsNaturalTestPrev\%\ and \SFourCicidsInterleavedTestPrev\%\ --- a
 \SFourCicidsPrevShiftAbsPp-point difference --- and the measured ordering of
@@ -480,8 +480,8 @@ detector: short-run mass & $P(r\le5)$, weight $0.25$ \\
 update timing & score computed from the pre-update predictive; sufficient
 statistics updated after scoring, on every record including held-out ones \\
 label access & the detector and HST see no labels at any point; baselines
-receive a validation-derived threshold; \textbf{ECOD is fitted on benign-only
-training rows and therefore has label access} \\
+receive a validation-derived threshold; \textbf{ECOD and LOF are fitted on benign-only
+training rows and therefore have label access} \\
 metric & \texttt{sklearn.metrics.average\_precision\_score} (AUC-PR) and
 \texttt{roc\_auc\_score}, scikit-learn 1.8.0, positive class $1$, no sample
 weighting; average precision is the step-wise sum
@@ -506,8 +506,9 @@ quoted from cited work \\
 \end{tabular}
 \end{table}
 
+\noindent\begin{minipage}{\linewidth}
 Stream assembly, stated as an algorithm:
-
+{\footnotesize
 \begin{verbatim}
 timestamp-order arm:
   rows <- corpus sorted by Timestamp (stable mergesort)
@@ -521,6 +522,8 @@ pooled-composite arm (LITNET):
   emit round robin over sorted(attack_type) as above
 split (both arms): i_tr = floor(0.70 n); i_va = i_tr + floor(0.15 n)
 \end{verbatim}
+}
+\end{minipage}
 
 \section{Assembly as a Treatment}
 \label{sec:contrast}
@@ -752,9 +755,9 @@ Per-cut values are in the archived findings and in Figure~\ref{fig:split}.
 The held-out prevalence at each cut is drawn on the same axis. It is the
 AUC-PR chance floor. Shaded cuts are the \RevSplitEcodWins{} at which ECOD
 leads. The dashed line marks the cut this paper's fixed split uses. Values are
-recomputed from the archived per-record scores with ECOD refit at each cut, as
-in Table~\ref{tab:branch}, and so differ slightly from Table~\ref{tab:contrast}
-at the cut this paper uses.}
+recomputed from the archived per-record scores, as those of
+Table~\ref{tab:branch} are, with ECOD refit at each cut, and so differ slightly
+from Table~\ref{tab:contrast} at the cut this paper uses.}
 \Description{Two lines with markers that broadly rise with the cut position,
 with a dip at one intermediate cut, crossing each other twice, above a dotted
 prevalence line that follows the same shape.}
@@ -1135,7 +1138,8 @@ confidence interval, and with attack runs of median/p90/max
 \StreamCicidsTwoZeroOneSevenRunMedian/\StreamCicidsTwoZeroOneSevenRunPninety/\StreamCicidsTwoZeroOneSevenRunMax{}
 an IID row bootstrap would be inappropriate, so an event-block or
 rolling-origin procedure is the right instrument and is not yet applied.
-Stochastic baselines appear only with their per-seed values.
+Stochastic baselines appear either as single draws marked as such or as means
+over draws with the draw spread stated, and the per-draw values are archived.
 
 \textbf{External.} Two benchmarks, one split rule, one corpus per benchmark.
 The CICIDS mechanism depends on that dataset's scripted per-day schedule

@@ -14,7 +14,7 @@ michelyoussef@hotmail.com. ScholarOne will ask to link your ORCID. Link
 
 ## 2. Article type
 
-Select: **full research paper**. The paper is 20 pages, inside DTRAP's 10 to
+Select: **full research paper**. The paper is 19 pages, inside DTRAP's 10 to
 25 page range. If the type list does not offer a clearly matching option,
 stop and report the list. Choose nothing.
 
@@ -40,7 +40,7 @@ days, pooling temporally disjoint captures, or replaying records round robin. We
 show on two benchmarks that this assembly step is not neutral plumbing but an
 uncontrolled experimental treatment. On CICIDS2017, holding the full record
 multiset identical and changing only the ordering, a fixed positional 70/15/15
-chronological split then produces held-out samples that share only 32.5% of
+split then produces held-out samples that share only 32.5% of
 their records, at held-out prevalences of 68.235% and 25.2396% -- a
 42.9954-point difference -- and the measured ordering of the two deterministic
 scorers reverses. Restricting both arms to the 78000 records they both held out
@@ -182,9 +182,9 @@ Three files, with designations:
 
 | # | full path | bytes | designation |
 |---|---|---|---|
-| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 641,538 | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 542,095 | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 92,399 | supplementary for review, not for publication |
+| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 641,135 | main document |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 542,171 | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 92,480 | supplementary for review, not for publication |
 
 Upload the anonymized PDF, never `paper\main.pdf`. The anonymous build is the
 one that says "Anonymous Author(s)" on page 1.
@@ -192,7 +192,7 @@ one that says "Anonymous Author(s)" on page 1.
 ## 13. Proof check and submit
 
 ScholarOne renders a proof PDF of your entries before submission. Open it.
-Confirm the title, the abstract, one anonymous main document of 20 pages, and
+Confirm the title, the abstract, one anonymous main document of 19 pages, and
 both supplementary files. Confirm the manuscript PDF shows no author name.
 Then press submit.
 
