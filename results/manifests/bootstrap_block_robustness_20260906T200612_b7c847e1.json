@@ -1,0 +1,406 @@
+{
+  "run_id": "bootstrap_block_robustness_20260906T200612_b7c847e1",
+  "name": "bootstrap_block_robustness",
+  "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
+  "git_commit_at_write": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "bf29f50e3bf9a012818bc1d6be390efbc0e22037d9916222d30e3e5c74159f91",
+  "config": {
+    "blocks": [
+      100,
+      250,
+      2600
+    ],
+    "resamples": 1000,
+    "seed": 11,
+    "archived_run": "referee_bounded_analyses_20260906T182158_de69afab",
+    "archived_block": 100,
+    "metric": "sklearn average_precision_score / roc_auc_score, positive class 1",
+    "train": 0.7,
+    "val": 0.15
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_natural_scores.npz",
+      "sha256": "be784bd7bc48cb6ba0f6aa9a6900be64705d9618cd8d62c6567698ec8a020c01"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_synthetic_scores.npz",
+      "sha256": "565858635b7a2836c94b31f0250104b1676d04573fd99e2bb071d9d67939d734"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv",
+      "sha256": "96d41208b789ae8a1f446e5db952ca9fa0c7cd564b86455a3cb813329009767a"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\referee_bounded_analyses_20260906T182158_de69afab.json",
+      "sha256": "7a8442dfc271e0b6af82f8b075e82db399585d57455ccd8df7322c026cb6db0b"
+    }
+  ],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-09-06T20:06:12.802503+00:00",
+  "finished_utc": "2026-09-06T20:34:21.431548+00:00",
+  "wall_seconds": 1688.629045,
+  "macros": {
+    "RefBootRobustBlockHundredReproduced": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if rerunning block 100 with the archived seed reproduces every archived interval bound to six decimals"
+    },
+    "RefBootRobustBlockHundredMaxAbsDelta": {
+      "value": 0.0,
+      "unit": "",
+      "desc": "largest absolute difference between a rerun block-100 interval bound and the archived one"
+    },
+    "RefBootB250FullNaturalMarginLo": {
+      "value": 0.018042,
+      "unit": "",
+      "desc": "2.5th percentile of FullNaturalMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250FullNaturalMarginHi": {
+      "value": 0.035454,
+      "unit": "",
+      "desc": "97.5th percentile of FullNaturalMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250FullSyntheticMarginLo": {
+      "value": 0.121204,
+      "unit": "",
+      "desc": "2.5th percentile of FullSyntheticMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250FullSyntheticMarginHi": {
+      "value": 0.13141,
+      "unit": "",
+      "desc": "97.5th percentile of FullSyntheticMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250Shared240NaturalMarginLo": {
+      "value": 0.051113,
+      "unit": "",
+      "desc": "2.5th percentile of Shared240NaturalMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250Shared240NaturalMarginHi": {
+      "value": 0.070588,
+      "unit": "",
+      "desc": "97.5th percentile of Shared240NaturalMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250Shared78NaturalMarginLo": {
+      "value": 0.048228,
+      "unit": "",
+      "desc": "2.5th percentile of Shared78NaturalMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250Shared78NaturalMarginHi": {
+      "value": 0.06749,
+      "unit": "",
+      "desc": "97.5th percentile of Shared78NaturalMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250Shared240SyntheticMarginLo": {
+      "value": 0.042866,
+      "unit": "",
+      "desc": "2.5th percentile of Shared240SyntheticMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250Shared240SyntheticMarginHi": {
+      "value": 0.058594,
+      "unit": "",
+      "desc": "97.5th percentile of Shared240SyntheticMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250Shared78SyntheticMarginLo": {
+      "value": 0.046375,
+      "unit": "",
+      "desc": "2.5th percentile of Shared78SyntheticMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250Shared78SyntheticMarginHi": {
+      "value": 0.064365,
+      "unit": "",
+      "desc": "97.5th percentile of Shared78SyntheticMargin (AUC-PR), block length 250"
+    },
+    "RefBootB250BranchCombinedAucprLo": {
+      "value": 0.704283,
+      "unit": "",
+      "desc": "2.5th percentile of BranchCombinedAucpr (AUC-PR), block length 250"
+    },
+    "RefBootB250BranchCombinedAucprHi": {
+      "value": 0.752667,
+      "unit": "",
+      "desc": "97.5th percentile of BranchCombinedAucpr (AUC-PR), block length 250"
+    },
+    "RefBootB250BranchCombinedAucrocLo": {
+      "value": 0.50201,
+      "unit": "",
+      "desc": "2.5th percentile of BranchCombinedAucroc (AUC-ROC), block length 250"
+    },
+    "RefBootB250BranchCombinedAucrocHi": {
+      "value": 0.552808,
+      "unit": "",
+      "desc": "97.5th percentile of BranchCombinedAucroc (AUC-ROC), block length 250"
+    },
+    "RefBootB250BranchTailOnlyAucprLo": {
+      "value": 0.815425,
+      "unit": "",
+      "desc": "2.5th percentile of BranchTailOnlyAucpr (AUC-PR), block length 250"
+    },
+    "RefBootB250BranchTailOnlyAucprHi": {
+      "value": 0.848083,
+      "unit": "",
+      "desc": "97.5th percentile of BranchTailOnlyAucpr (AUC-PR), block length 250"
+    },
+    "RefBootB250BranchTailOnlyAucrocLo": {
+      "value": 0.822881,
+      "unit": "",
+      "desc": "2.5th percentile of BranchTailOnlyAucroc (AUC-ROC), block length 250"
+    },
+    "RefBootB250BranchTailOnlyAucrocHi": {
+      "value": 0.83637,
+      "unit": "",
+      "desc": "97.5th percentile of BranchTailOnlyAucroc (AUC-ROC), block length 250"
+    },
+    "RefBootB250BranchAuxOnlyAucprLo": {
+      "value": 0.571799,
+      "unit": "",
+      "desc": "2.5th percentile of BranchAuxOnlyAucpr (AUC-PR), block length 250"
+    },
+    "RefBootB250BranchAuxOnlyAucprHi": {
+      "value": 0.63017,
+      "unit": "",
+      "desc": "97.5th percentile of BranchAuxOnlyAucpr (AUC-PR), block length 250"
+    },
+    "RefBootB250BranchAuxOnlyAucrocLo": {
+      "value": 0.268107,
+      "unit": "",
+      "desc": "2.5th percentile of BranchAuxOnlyAucroc (AUC-ROC), block length 250"
+    },
+    "RefBootB250BranchAuxOnlyAucrocHi": {
+      "value": 0.29622,
+      "unit": "",
+      "desc": "97.5th percentile of BranchAuxOnlyAucroc (AUC-ROC), block length 250"
+    },
+    "RefBootB250AuxAucrocMinusHalfLo": {
+      "value": -0.231893,
+      "unit": "",
+      "desc": "2.5th percentile of AuxAucrocMinusHalf (AUC-ROC), block length 250"
+    },
+    "RefBootB250AuxAucrocMinusHalfHi": {
+      "value": -0.20378,
+      "unit": "",
+      "desc": "97.5th percentile of AuxAucrocMinusHalf (AUC-ROC), block length 250"
+    },
+    "RefBootB250ConclusionChanges": {
+      "value": 0,
+      "unit": "",
+      "desc": "of the nine interval-based checks, how many differ from the archived block-100 run at block length 250"
+    },
+    "RefBootB250AllMarginsAboveZero": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if all six margin intervals lie above zero at block length 250"
+    },
+    "RefBootB250AuxBelowChanceEntireInterval": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the auxiliary-only AUC-ROC interval lies entirely below 0.5 at block length 250"
+    },
+    "RefBootB250TailAboveDeployedAucpr": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the tail-only AUC-PR interval lies entirely above the deployed composition's at block length 250"
+    },
+    "RefBootB250TailAboveDeployedAucroc": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the tail-only AUC-ROC interval lies entirely above the deployed composition's at block length 250"
+    },
+    "RefBootB2600FullNaturalMarginLo": {
+      "value": 0.001937,
+      "unit": "",
+      "desc": "2.5th percentile of FullNaturalMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600FullNaturalMarginHi": {
+      "value": 0.05061,
+      "unit": "",
+      "desc": "97.5th percentile of FullNaturalMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600FullSyntheticMarginLo": {
+      "value": 0.117304,
+      "unit": "",
+      "desc": "2.5th percentile of FullSyntheticMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600FullSyntheticMarginHi": {
+      "value": 0.13471,
+      "unit": "",
+      "desc": "97.5th percentile of FullSyntheticMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600Shared240NaturalMarginLo": {
+      "value": 0.031124,
+      "unit": "",
+      "desc": "2.5th percentile of Shared240NaturalMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600Shared240NaturalMarginHi": {
+      "value": 0.084248,
+      "unit": "",
+      "desc": "97.5th percentile of Shared240NaturalMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600Shared78NaturalMarginLo": {
+      "value": 0.030989,
+      "unit": "",
+      "desc": "2.5th percentile of Shared78NaturalMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600Shared78NaturalMarginHi": {
+      "value": 0.077495,
+      "unit": "",
+      "desc": "97.5th percentile of Shared78NaturalMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600Shared240SyntheticMarginLo": {
+      "value": 0.026784,
+      "unit": "",
+      "desc": "2.5th percentile of Shared240SyntheticMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600Shared240SyntheticMarginHi": {
+      "value": 0.069844,
+      "unit": "",
+      "desc": "97.5th percentile of Shared240SyntheticMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600Shared78SyntheticMarginLo": {
+      "value": 0.027819,
+      "unit": "",
+      "desc": "2.5th percentile of Shared78SyntheticMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600Shared78SyntheticMarginHi": {
+      "value": 0.075492,
+      "unit": "",
+      "desc": "97.5th percentile of Shared78SyntheticMargin (AUC-PR), block length 2600"
+    },
+    "RefBootB2600BranchCombinedAucprLo": {
+      "value": 0.653543,
+      "unit": "",
+      "desc": "2.5th percentile of BranchCombinedAucpr (AUC-PR), block length 2600"
+    },
+    "RefBootB2600BranchCombinedAucprHi": {
+      "value": 0.807028,
+      "unit": "",
+      "desc": "97.5th percentile of BranchCombinedAucpr (AUC-PR), block length 2600"
+    },
+    "RefBootB2600BranchCombinedAucrocLo": {
+      "value": 0.450625,
+      "unit": "",
+      "desc": "2.5th percentile of BranchCombinedAucroc (AUC-ROC), block length 2600"
+    },
+    "RefBootB2600BranchCombinedAucrocHi": {
+      "value": 0.604844,
+      "unit": "",
+      "desc": "97.5th percentile of BranchCombinedAucroc (AUC-ROC), block length 2600"
+    },
+    "RefBootB2600BranchTailOnlyAucprLo": {
+      "value": 0.781947,
+      "unit": "",
+      "desc": "2.5th percentile of BranchTailOnlyAucpr (AUC-PR), block length 2600"
+    },
+    "RefBootB2600BranchTailOnlyAucprHi": {
+      "value": 0.880632,
+      "unit": "",
+      "desc": "97.5th percentile of BranchTailOnlyAucpr (AUC-PR), block length 2600"
+    },
+    "RefBootB2600BranchTailOnlyAucrocLo": {
+      "value": 0.811981,
+      "unit": "",
+      "desc": "2.5th percentile of BranchTailOnlyAucroc (AUC-ROC), block length 2600"
+    },
+    "RefBootB2600BranchTailOnlyAucrocHi": {
+      "value": 0.845811,
+      "unit": "",
+      "desc": "97.5th percentile of BranchTailOnlyAucroc (AUC-ROC), block length 2600"
+    },
+    "RefBootB2600BranchAuxOnlyAucprLo": {
+      "value": 0.519763,
+      "unit": "",
+      "desc": "2.5th percentile of BranchAuxOnlyAucpr (AUC-PR), block length 2600"
+    },
+    "RefBootB2600BranchAuxOnlyAucprHi": {
+      "value": 0.700544,
+      "unit": "",
+      "desc": "97.5th percentile of BranchAuxOnlyAucpr (AUC-PR), block length 2600"
+    },
+    "RefBootB2600BranchAuxOnlyAucrocLo": {
+      "value": 0.24703,
+      "unit": "",
+      "desc": "2.5th percentile of BranchAuxOnlyAucroc (AUC-ROC), block length 2600"
+    },
+    "RefBootB2600BranchAuxOnlyAucrocHi": {
+      "value": 0.317353,
+      "unit": "",
+      "desc": "97.5th percentile of BranchAuxOnlyAucroc (AUC-ROC), block length 2600"
+    },
+    "RefBootB2600AuxAucrocMinusHalfLo": {
+      "value": -0.25297,
+      "unit": "",
+      "desc": "2.5th percentile of AuxAucrocMinusHalf (AUC-ROC), block length 2600"
+    },
+    "RefBootB2600AuxAucrocMinusHalfHi": {
+      "value": -0.182647,
+      "unit": "",
+      "desc": "97.5th percentile of AuxAucrocMinusHalf (AUC-ROC), block length 2600"
+    },
+    "RefBootB2600ConclusionChanges": {
+      "value": 1,
+      "unit": "",
+      "desc": "of the nine interval-based checks, how many differ from the archived block-100 run at block length 2600"
+    },
+    "RefBootB2600AllMarginsAboveZero": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if all six margin intervals lie above zero at block length 2600"
+    },
+    "RefBootB2600AuxBelowChanceEntireInterval": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the auxiliary-only AUC-ROC interval lies entirely below 0.5 at block length 2600"
+    },
+    "RefBootB2600TailAboveDeployedAucpr": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the tail-only AUC-PR interval lies entirely above the deployed composition's at block length 2600"
+    },
+    "RefBootB2600TailAboveDeployedAucroc": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the tail-only AUC-ROC interval lies entirely above the deployed composition's at block length 2600"
+    },
+    "RefBootRobustBlockLengthA": {
+      "value": 250,
+      "unit": "",
+      "desc": "first robustness block length, records"
+    },
+    "RefBootRobustBlockLengthB": {
+      "value": 2600,
+      "unit": "",
+      "desc": "second robustness block length, records"
+    },
+    "RefBootRobustIntervals": {
+      "value": 13,
+      "unit": "",
+      "desc": "intervals recomputed per block length"
+    },
+    "RefBootRobustConclusionChanges": {
+      "value": 1,
+      "unit": "",
+      "desc": "conclusion changes summed over the robustness block lengths"
+    },
+    "RefBootRobustLongestBlockExceedsMaxRun": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the longest robustness block exceeds the longest attack run (2522 records)"
+    },
+    "RefBootRobustWallSeconds": {
+      "value": 2081,
+      "unit": "s",
+      "desc": "wall time of this run"
+    }
+  },
+  "notes": "final-read item 4: every reported interval recomputed at block lengths 250, 2600; block 100 rerun as reproduction check; ECOD refit as in the referee run; no detector rerun",
+  "extra": {}
+}

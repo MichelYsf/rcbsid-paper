@@ -145,6 +145,10 @@ RELATIONS += [
      ["RevSharedDetectorSyntheticAucpr", "RefEcodSharedSevenEightSyntheticAucpr"]),
     ("RefEcodSharedSevenEightCrossArmSpread", "absub",
      ["RefEcodSharedSevenEightNaturalAucpr", "RefEcodSharedSevenEightSyntheticAucpr"]),
+    # final read: ECOD's margin over the detector on the timestamp-order slice
+    # when scored in its own 240000-record batch (Section 6.3)
+    ("SFourCicidsNaturalEcodOwnBatchMinusDetectorAucpr", "sub",
+     ["RevEcodBatchTwoFourZeroZeroZeroZeroAucpr", "SFourCicidsNaturalProposedDetectorAucpr"]),
 ]
 
 

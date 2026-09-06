@@ -183,9 +183,9 @@ Three files, with designations:
 
 | # | full path | bytes | designation |
 |---|---|---|---|
-| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 654,854 | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 570,949 | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 98,196 | supplementary for review, not for publication |
+| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 658,735 | main document |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 586,632 | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 99,989 | supplementary for review, not for publication |
 
 Upload the anonymized PDF, never `paper\main.pdf`. The anonymous build is the
 one that says "Anonymous Author(s)" on page 1.

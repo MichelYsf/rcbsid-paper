@@ -517,8 +517,8 @@ values (the same quantities at $100\times$, where six decimals would fabricate
 digits), integer counts, the protocol constants in this table and in
 Table~\ref{tab:protocol-baselines}, the posterior
 probabilities of Section~\ref{sec:detector} and the diagnostic fractions of
-Table~\ref{tab:ablation}, which are not metrics and are reported at the
-precision each was emitted with, and values quoted from cited work \\
+Table~\ref{tab:ablation}, which are not metrics, and values quoted from cited
+work \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -865,11 +865,11 @@ and both figures reproduce exactly on re-execution --- and running it down
 exposes a property of the reference implementation that bears on every study
 that reports an ECOD number.
 
+\noindent\begin{minipage}{\linewidth}
 PyOD's \texttt{ECOD.fit} stores the training matrix, and
 \texttt{decision\_function} then prepends it to whatever batch it is asked to
 score before recomputing the per-column empirical CDFs
 (PyOD~2.0.5, \texttt{pyod/models/ecod.py}):
-
 \begin{verbatim}
 if hasattr(self, 'X_train'):
     original_size = X.shape[0]
@@ -880,6 +880,7 @@ skewness = np.sign(skew(X, axis=0))
 ...
 decision_scores_ = self.O.sum(axis=1)[-original_size:]
 \end{verbatim}
+\end{minipage}\par\medskip
 
 The ECDF denominator is the height of the concatenated matrix and the skewness
 sign is taken over it, so a record's score is a function of which \emph{other}
@@ -964,7 +965,15 @@ Cross-arm comparisons in this paper hold the batch fixed in size but not in
 composition: the two arms' validation-plus-test batches have the same
 \CicidsEcodScoringBatch{} records in count and different records in content,
 so equal size alone does not remove the batch dependence from the contrast of
-Section~\ref{sec:outcome}. Cross-arm ECOD comparisons are batch-controlled
+Section~\ref{sec:outcome}. The batch effect measured on identical records,
+\RevEcodBatchDelta{} $AP$ and at most \RevEcodBatchSpread{} $AP$ across the
+ladder, is below the smallest reversal margin of that contrast,
+\SFourCicidsNaturalEcodMinusDetectorAucpr{} $AP$ with interval lower bound
+\RefBootFullNaturalMarginLo. Under its own \RevEcodBatchEvalRecords-record
+batch the timestamp-order ECOD scores \RevEcodBatchTwoFourZeroZeroZeroZeroAucpr,
+a margin of \SFourCicidsNaturalEcodOwnBatchMinusDetectorAucpr{} $AP$ over the
+detector, so ECOD leads that arm under both batches. Cross-arm ECOD
+comparisons are batch-controlled
 only where the rescoring of Table~\ref{tab:shared} makes them so, by scoring
 identical records as an identical batch under each arm's fitted model. The
 \CicidsHeldoutSize-versus-\CicidsEcodScoringBatch{} discrepancy is visible
@@ -1252,13 +1261,26 @@ design still would. ECOD is a label-privileged diagnostic reference, not a compe
 under equal information. Determinism removes seed variance only. With attack runs of median/p90/max
 \StreamCicidsTwoZeroOneSevenRunMedian/\StreamCicidsTwoZeroOneSevenRunPninety/\StreamCicidsTwoZeroOneSevenRunMax{}
 records an IID row bootstrap would be inappropriate, so every interval this
-paper reports comes from a moving-block bootstrap over the archived per-record
-scores of the evaluated slice, in stream order: block length
+paper reports comes from a moving-block bootstrap~\cite{kunsch1989jackknife}
+over the archived per-record scores of the evaluated slice, in stream order:
+block length
 \RefBootBlockLength{} records, longer than the p90 run, \RefBootResamples{}
 resamples, and the 2.5th and 97.5th percentiles of the resampled statistic.
 Those intervals quantify sampling uncertainty over the evaluated slice only,
 not over the window selection or the subsample, and a rolling-origin procedure
-is not applied.
+is not applied. Rerunning that bootstrap at block lengths
+\RefBootRobustBlockLengthA{} and \RefBootRobustBlockLengthB{} records, the
+second longer than the longest attack run, changes exactly one conclusion:
+every margin interval stays above zero and the auxiliary-only AUC-ROC interval
+stays below $0.5$ at both lengths, but at \RefBootRobustBlockLengthB{} records
+the tail-only and deployed AUC-PR intervals,
+$[\RefBootBTwoSixZeroZeroBranchTailOnlyAucprLo,\,\RefBootBTwoSixZeroZeroBranchTailOnlyAucprHi]$
+and
+$[\RefBootBTwoSixZeroZeroBranchCombinedAucprLo,\,\RefBootBTwoSixZeroZeroBranchCombinedAucprHi]$,
+overlap while the AUC-ROC intervals stay disjoint
+(\RefBootBTwoFiveZeroConclusionChanges{} of nine checks change at the shorter
+length and \RefBootBTwoSixZeroZeroConclusionChanges{} at the longer; manifest
+\texttt{bootstrap\_block\_robustness\_20260906T200612\_b7c847e1}).
 Stochastic baselines appear either as single draws marked as such or as means
 over draws with the three draws stated, and the per-draw values are archived.
 

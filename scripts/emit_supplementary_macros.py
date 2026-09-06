@@ -224,6 +224,18 @@ def main() -> int:
                              - reported(dm["SFourCicidsSyntheticEcodAucpr"]["value"]), 6),
                        desc="day-round-robin arm: detector AUC-PR minus ECOD "
                             "AUC-PR, from the reported values")
+        # 8) Final read (2026-09-06): ECOD's margin over the detector on the
+        #    timestamp-order held-out slice when ECOD is scored in its own
+        #    240000-record batch (the A4 ladder's first rung), from the
+        #    reported values, so Section 6.3 can state that ECOD leads that
+        #    arm under both batches with a number the reader can subtract.
+        rev_path, rev = load("review_bounded_analyses_20260827T131839_")
+        run.declared_inputs.append(str(rev_path))
+        run.emit_macro("SFourCicidsNaturalEcodOwnBatchMinusDetectorAucpr",
+                       round(reported(rev["macros"]["RevEcodBatch240000Aucpr"]["value"])
+                             - reported(dm["SFourCicidsNaturalProposedDetectorAucpr"]["value"]), 6),
+                       desc="timestamp-order arm: ECOD AUC-PR in its own 240000-record "
+                            "batch minus detector AUC-PR, from the reported values")
         # LITNET pooling identity: the validation boundary of the pooled stream
         # and the per-capture held-out size whose triple it equals.
         pooled_rows = 3 * lit_n

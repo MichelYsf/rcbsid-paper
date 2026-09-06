@@ -14,9 +14,9 @@
 \newcommand{\CicidsArmPrevalencePct}{22.060125}  % whole-stream prevalence, identical in both arms [%] -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsArmRows}{1600000}  % rows in each CICIDS arm -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsAttacksMovedOutOfHeldout}{103189}  % attacks the interleaving moves out of the held-out slice -- cicids_heldout_composition_20260819T120420_ebb7c281
-\newcommand{\CicidsEcodScoringBatch}{480000}  % records in the single decision_function call that produced every CICIDS arm's ECOD scores (validation+test, scored together) -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\CicidsFridayHeldoutDensityPct}{77.66}  % attack density of the synthetic arm's Friday held-out sub-slice [%] -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\CicidsHeldoutAttackFreeRows}{162000}  % synthetic held-out rows from days contributing zero attacks (Mon-Thu) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\CicidsEcodScoringBatch}{480000}  % records in the single decision_function call that produced every CICIDS arm's ECOD scores (validation+test, scored together) -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\CicidsFridayHeldoutDensityPct}{77.66}  % attack density of the synthetic arm's Friday held-out sub-slice [%] -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\CicidsHeldoutAttackFreeRows}{162000}  % synthetic held-out rows from days contributing zero attacks (Mon-Thu) -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\CicidsHeldoutOverlap}{78000}  % records held out by BOTH arms -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsHeldoutOverlapPct}{32.5}  % held-out slice overlap between the two arms [%] -- cicids_heldout_composition_20260819T120420_ebb7c281
 \newcommand{\CicidsHeldoutSize}{240000}  % held-out records per arm -- cicids_heldout_composition_20260819T120420_ebb7c281
@@ -61,14 +61,76 @@
 \newcommand{\ContrastLitnetUdpFloodNaturalEcodAucpr}{0.321185}  % litnet_udp_flood/natural/ecod AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetUdpFloodNaturalHstAucpr}{0.552675}  % litnet_udp_flood/natural/hst AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
 \newcommand{\ContrastLitnetUdpFloodNaturalProposedDetectorAucpr}{0.394428}  % litnet_udp_flood/natural/proposed_detector AUC-PR -- s4_construction_contrast_20260818T124510_2b2d27b1
-\newcommand{\LitnetCaptureEcodScoringBatch}{150000}  % records per decision_function call for each per-capture LITNET ECOD score -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\LitnetCaptureHeldoutRows}{75000}  % held-out rows per LITNET capture; three of these tile the pooled held-out slice exactly -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\LitnetCaptureValBoundary}{425000}  % row index where each LITNET capture's held-out slice begins; three of these sum to the pooled boundary -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\LitnetPooledEcodScoringBatch}{450000}  % records in the decision_function call that produced the pooled LITNET ECOD score -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\LitnetPooledValBoundary}{1275000}  % row index where the pooled LITNET stream's held-out slice begins -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\LitnetCaptureEcodScoringBatch}{150000}  % records per decision_function call for each per-capture LITNET ECOD score -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\LitnetCaptureHeldoutRows}{75000}  % held-out rows per LITNET capture; three of these tile the pooled held-out slice exactly -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\LitnetCaptureValBoundary}{425000}  % row index where each LITNET capture's held-out slice begins; three of these sum to the pooled boundary -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\LitnetPooledEcodScoringBatch}{450000}  % records in the decision_function call that produced the pooled LITNET ECOD score -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\LitnetPooledValBoundary}{1275000}  % row index where the pooled LITNET stream's held-out slice begins -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\RefBootAuxAucrocMinusHalfHi}{-0.208469}  % 97.5th percentile of auxiliary-only AUC-ROC minus 0.5 -- referee_bounded_analyses_20260906T182158_de69afab
 \newcommand{\RefBootAuxAucrocMinusHalfLo}{-0.227712}  % 2.5th percentile of auxiliary-only AUC-ROC minus 0.5 -- referee_bounded_analyses_20260906T182158_de69afab
 \newcommand{\RefBootAuxBelowChanceEntireInterval}{1}  % 1 if the whole auxiliary-only AUC-ROC interval lies below 0.5 -- referee_bounded_analyses_20260906T182158_de69afab
+\newcommand{\RefBootBTwoFiveZeroAllMarginsAboveZero}{1}  % 1 if all six margin intervals lie above zero at block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroAuxAucrocMinusHalfHi}{-0.203780}  % 97.5th percentile of AuxAucrocMinusHalf (AUC-ROC), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroAuxAucrocMinusHalfLo}{-0.231893}  % 2.5th percentile of AuxAucrocMinusHalf (AUC-ROC), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroAuxBelowChanceEntireInterval}{1}  % 1 if the auxiliary-only AUC-ROC interval lies entirely below 0.5 at block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchAuxOnlyAucprHi}{0.630170}  % 97.5th percentile of BranchAuxOnlyAucpr (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchAuxOnlyAucprLo}{0.571799}  % 2.5th percentile of BranchAuxOnlyAucpr (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchAuxOnlyAucrocHi}{0.296220}  % 97.5th percentile of BranchAuxOnlyAucroc (AUC-ROC), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchAuxOnlyAucrocLo}{0.268107}  % 2.5th percentile of BranchAuxOnlyAucroc (AUC-ROC), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchCombinedAucprHi}{0.752667}  % 97.5th percentile of BranchCombinedAucpr (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchCombinedAucprLo}{0.704283}  % 2.5th percentile of BranchCombinedAucpr (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchCombinedAucrocHi}{0.552808}  % 97.5th percentile of BranchCombinedAucroc (AUC-ROC), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchCombinedAucrocLo}{0.502010}  % 2.5th percentile of BranchCombinedAucroc (AUC-ROC), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchTailOnlyAucprHi}{0.848083}  % 97.5th percentile of BranchTailOnlyAucpr (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchTailOnlyAucprLo}{0.815425}  % 2.5th percentile of BranchTailOnlyAucpr (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchTailOnlyAucrocHi}{0.836370}  % 97.5th percentile of BranchTailOnlyAucroc (AUC-ROC), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroBranchTailOnlyAucrocLo}{0.822881}  % 2.5th percentile of BranchTailOnlyAucroc (AUC-ROC), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroConclusionChanges}{0}  % of the nine interval-based checks, how many differ from the archived block-100 run at block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroFullNaturalMarginHi}{0.035454}  % 97.5th percentile of FullNaturalMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroFullNaturalMarginLo}{0.018042}  % 2.5th percentile of FullNaturalMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroFullSyntheticMarginHi}{0.131410}  % 97.5th percentile of FullSyntheticMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroFullSyntheticMarginLo}{0.121204}  % 2.5th percentile of FullSyntheticMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroSharedTwoFourZeroNaturalMarginHi}{0.070588}  % 97.5th percentile of Shared240NaturalMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroSharedTwoFourZeroNaturalMarginLo}{0.051113}  % 2.5th percentile of Shared240NaturalMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroSharedTwoFourZeroSyntheticMarginHi}{0.058594}  % 97.5th percentile of Shared240SyntheticMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroSharedTwoFourZeroSyntheticMarginLo}{0.042866}  % 2.5th percentile of Shared240SyntheticMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroSharedSevenEightNaturalMarginHi}{0.067490}  % 97.5th percentile of Shared78NaturalMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroSharedSevenEightNaturalMarginLo}{0.048228}  % 2.5th percentile of Shared78NaturalMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroSharedSevenEightSyntheticMarginHi}{0.064365}  % 97.5th percentile of Shared78SyntheticMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroSharedSevenEightSyntheticMarginLo}{0.046375}  % 2.5th percentile of Shared78SyntheticMargin (AUC-PR), block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroTailAboveDeployedAucpr}{1}  % 1 if the tail-only AUC-PR interval lies entirely above the deployed composition's at block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoFiveZeroTailAboveDeployedAucroc}{1}  % 1 if the tail-only AUC-ROC interval lies entirely above the deployed composition's at block length 250 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroAllMarginsAboveZero}{1}  % 1 if all six margin intervals lie above zero at block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroAuxAucrocMinusHalfHi}{-0.182647}  % 97.5th percentile of AuxAucrocMinusHalf (AUC-ROC), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroAuxAucrocMinusHalfLo}{-0.252970}  % 2.5th percentile of AuxAucrocMinusHalf (AUC-ROC), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroAuxBelowChanceEntireInterval}{1}  % 1 if the auxiliary-only AUC-ROC interval lies entirely below 0.5 at block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchAuxOnlyAucprHi}{0.700544}  % 97.5th percentile of BranchAuxOnlyAucpr (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchAuxOnlyAucprLo}{0.519763}  % 2.5th percentile of BranchAuxOnlyAucpr (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchAuxOnlyAucrocHi}{0.317353}  % 97.5th percentile of BranchAuxOnlyAucroc (AUC-ROC), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchAuxOnlyAucrocLo}{0.247030}  % 2.5th percentile of BranchAuxOnlyAucroc (AUC-ROC), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchCombinedAucprHi}{0.807028}  % 97.5th percentile of BranchCombinedAucpr (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchCombinedAucprLo}{0.653543}  % 2.5th percentile of BranchCombinedAucpr (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchCombinedAucrocHi}{0.604844}  % 97.5th percentile of BranchCombinedAucroc (AUC-ROC), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchCombinedAucrocLo}{0.450625}  % 2.5th percentile of BranchCombinedAucroc (AUC-ROC), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchTailOnlyAucprHi}{0.880632}  % 97.5th percentile of BranchTailOnlyAucpr (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchTailOnlyAucprLo}{0.781947}  % 2.5th percentile of BranchTailOnlyAucpr (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchTailOnlyAucrocHi}{0.845811}  % 97.5th percentile of BranchTailOnlyAucroc (AUC-ROC), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroBranchTailOnlyAucrocLo}{0.811981}  % 2.5th percentile of BranchTailOnlyAucroc (AUC-ROC), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroConclusionChanges}{1}  % of the nine interval-based checks, how many differ from the archived block-100 run at block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroFullNaturalMarginHi}{0.050610}  % 97.5th percentile of FullNaturalMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroFullNaturalMarginLo}{0.001937}  % 2.5th percentile of FullNaturalMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroFullSyntheticMarginHi}{0.134710}  % 97.5th percentile of FullSyntheticMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroFullSyntheticMarginLo}{0.117304}  % 2.5th percentile of FullSyntheticMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroSharedTwoFourZeroNaturalMarginHi}{0.084248}  % 97.5th percentile of Shared240NaturalMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroSharedTwoFourZeroNaturalMarginLo}{0.031124}  % 2.5th percentile of Shared240NaturalMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroSharedTwoFourZeroSyntheticMarginHi}{0.069844}  % 97.5th percentile of Shared240SyntheticMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroSharedTwoFourZeroSyntheticMarginLo}{0.026784}  % 2.5th percentile of Shared240SyntheticMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroSharedSevenEightNaturalMarginHi}{0.077495}  % 97.5th percentile of Shared78NaturalMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroSharedSevenEightNaturalMarginLo}{0.030989}  % 2.5th percentile of Shared78NaturalMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroSharedSevenEightSyntheticMarginHi}{0.075492}  % 97.5th percentile of Shared78SyntheticMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroSharedSevenEightSyntheticMarginLo}{0.027819}  % 2.5th percentile of Shared78SyntheticMargin (AUC-PR), block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroTailAboveDeployedAucpr}{0}  % 1 if the tail-only AUC-PR interval lies entirely above the deployed composition's at block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootBTwoSixZeroZeroTailAboveDeployedAucroc}{1}  % 1 if the tail-only AUC-ROC interval lies entirely above the deployed composition's at block length 2600 -- bootstrap_block_robustness_20260906T200612_b7c847e1
 \newcommand{\RefBootBlockLength}{100}  % moving-block length in records; exceeds the p90 attack run of 70 -- referee_bounded_analyses_20260906T182158_de69afab
 \newcommand{\RefBootBranchAuxOnlyAucprHi}{0.619628}  % 97.5th percentile of AuxOnly Aucpr on the natural held-out slice -- referee_bounded_analyses_20260906T182158_de69afab
 \newcommand{\RefBootBranchAuxOnlyAucprLo}{0.583380}  % 2.5th percentile of AuxOnly Aucpr on the natural held-out slice -- referee_bounded_analyses_20260906T182158_de69afab
@@ -91,6 +153,14 @@
 \newcommand{\RefBootFullSyntheticMarginLo}{0.122046}  % 2.5th percentile of that margin, block bootstrap -- referee_bounded_analyses_20260906T182158_de69afab
 \newcommand{\RefBootFullSyntheticMarginPoint}{0.126032}  % detector minus ECOD AUC-PR margin on the synthetic held-out slice, from reported values -- referee_bounded_analyses_20260906T182158_de69afab
 \newcommand{\RefBootResamples}{1000}  % bootstrap resamples -- referee_bounded_analyses_20260906T182158_de69afab
+\newcommand{\RefBootRobustBlockHundredMaxAbsDelta}{0}  % largest absolute difference between a rerun block-100 interval bound and the archived one -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootRobustBlockHundredReproduced}{1}  % 1 if rerunning block 100 with the archived seed reproduces every archived interval bound to six decimals -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootRobustBlockLengthA}{250}  % first robustness block length, records -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootRobustBlockLengthB}{2600}  % second robustness block length, records -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootRobustConclusionChanges}{1}  % conclusion changes summed over the robustness block lengths -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootRobustIntervals}{13}  % intervals recomputed per block length -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootRobustLongestBlockExceedsMaxRun}{1}  % 1 if the longest robustness block exceeds the longest attack run (2522 records) -- bootstrap_block_robustness_20260906T200612_b7c847e1
+\newcommand{\RefBootRobustWallSeconds}{2081}  % wall time of this run [s] -- bootstrap_block_robustness_20260906T200612_b7c847e1
 \newcommand{\RefBootSharedTwoFourZeroNaturalMarginCrossesZero}{0}  % 1 if that interval includes zero -- referee_bounded_analyses_20260906T182158_de69afab
 \newcommand{\RefBootSharedTwoFourZeroNaturalMarginHi}{0.067720}  % 97.5th percentile of the same margin -- referee_bounded_analyses_20260906T182158_de69afab
 \newcommand{\RefBootSharedTwoFourZeroNaturalMarginLo}{0.053856}  % 2.5th percentile, detector minus ECOD on the shared records, natural arm, ECOD 240000-batch -- referee_bounded_analyses_20260906T182158_de69afab
@@ -244,8 +314,8 @@
 \newcommand{\RevEcodBatchFourEightZeroZeroZeroZeroAucpr}{0.755142}  % ECOD AUC-PR on the SAME 240000 evaluated records when scored in a batch of 480000 -- review_bounded_analyses_20260827T131839_87899899
 \newcommand{\RevEcodBatchDelta}{0.003063}  % AUC-PR difference on identical records between the 240k-alone and 480k-paired scoring batches -- review_bounded_analyses_20260827T131839_87899899
 \newcommand{\RevEcodBatchEvalRecords}{240000}  % records in the fixed evaluated index set (A4) -- review_bounded_analyses_20260827T131839_87899899
-\newcommand{\RevEcodBatchLadderOne}{300000}  % intermediate scoring batch 1 of the ECOD batch-size ladder -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\RevEcodBatchLadderTwo}{360000}  % intermediate scoring batch 2 of the ECOD batch-size ladder -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\RevEcodBatchLadderOne}{300000}  % intermediate scoring batch 1 of the ECOD batch-size ladder -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\RevEcodBatchLadderTwo}{360000}  % intermediate scoring batch 2 of the ECOD batch-size ladder -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\RevEcodBatchSpread}{0.006966}  % AUC-PR spread across the batch-size ladder on identical evaluated records -- review_bounded_analyses_20260827T131839_87899899
 \newcommand{\RevReproNaturalAucpr}{0.728355}  % detector AUC-PR on the natural held-out slice, recomputed from the score dump -- review_bounded_analyses_20260827T131839_87899899
 \newcommand{\RevReproNaturalDelta}{0.000018}  % natural arm reproduction delta against the archive -- review_bounded_analyses_20260827T131839_87899899
@@ -322,35 +392,36 @@
 \newcommand{\SFourCicidsNaturalChanceFloor}{0.682350}  % AUC-PR chance floor, CICIDS natural arm -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsNaturalEcodAucpr}{0.755142}  % CICIDS natural ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsNaturalEcodLift}{0.072792}  % CICIDS natural ecod AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
-\newcommand{\SFourCicidsNaturalEcodMinusDetectorAucpr}{0.026805}  % timestamp-order arm: ECOD AUC-PR minus detector AUC-PR, from the reported values -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\SFourCicidsNaturalEcodNormLift}{0.229158}  % CICIDS Natural Ecod normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SFourCicidsNaturalEcodMinusDetectorAucpr}{0.026805}  % timestamp-order arm: ECOD AUC-PR minus detector AUC-PR, from the reported values -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\SFourCicidsNaturalEcodNormLift}{0.229158}  % CICIDS Natural Ecod normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\SFourCicidsNaturalEcodOwnBatchMinusDetectorAucpr}{0.029868}  % timestamp-order arm: ECOD AUC-PR in its own 240000-record batch minus detector AUC-PR, from the reported values -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SFourCicidsNaturalHstAucpr}{0.588902}  % CICIDS natural hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsNaturalHstLift}{-0.093448}  % CICIDS natural hst AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
-\newcommand{\SFourCicidsNaturalHstLiftAbs}{0.093448}  % magnitude of HST's below-chance lift, natural arm -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\SFourCicidsNaturalHstNormLift}{-0.294185}  % CICIDS Natural Hst normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SFourCicidsNaturalHstLiftAbs}{0.093448}  % magnitude of HST's below-chance lift, natural arm -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\SFourCicidsNaturalHstNormLift}{-0.294185}  % CICIDS Natural Hst normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SFourCicidsNaturalMethodsBelowChance}{1}  % methods below the chance floor in the natural arm -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsNaturalProposedDetectorAucpr}{0.728337}  % CICIDS natural proposed_detector AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsNaturalProposedDetectorLift}{0.045987}  % CICIDS natural proposed_detector AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
-\newcommand{\SFourCicidsNaturalProposedDetectorNormLift}{0.144773}  % CICIDS Natural ProposedDetector normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SFourCicidsNaturalProposedDetectorNormLift}{0.144773}  % CICIDS Natural ProposedDetector normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SFourCicidsNaturalTestAttacks}{163764}  % CICIDS2017 held-out attacks, natural order -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsNaturalTestPrev}{68.235}  % CICIDS2017 held-out prevalence, true timestamp order [%] -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsPairwiseOrderingsPreserved}{1}  % pairwise method orderings preserved across arms -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsPairwiseOrderingsTotal}{3}  % pairwise method orderings compared across arms -- s4_contrast_deliverables_20260827T124050_ec876714
-\newcommand{\SFourCicidsPrevShiftAbsPp}{42.9954}  % magnitude of the held-out prevalence shift [pp] -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SFourCicidsPrevShiftAbsPp}{42.9954}  % magnitude of the held-out prevalence shift [pp] -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SFourCicidsPrevShiftPp}{-42.9954}  % held-out prevalence shift caused by construction alone [pp] -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsRankingKendallTau}{-0.3333}  % Kendall tau between the two arms' method rankings -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsRankingPreserved}{0}  % 1 if the method ranking is identical across arms -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsSyntheticChanceFloor}{0.252396}  % AUC-PR chance floor, CICIDS interleaved arm -- s4_contrast_deliverables_20260827T124050_ec876714
-\newcommand{\SFourCicidsSyntheticDetectorMinusEcodAucpr}{0.126032}  % day-round-robin arm: detector AUC-PR minus ECOD AUC-PR, from the reported values -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SFourCicidsSyntheticDetectorMinusEcodAucpr}{0.126032}  % day-round-robin arm: detector AUC-PR minus ECOD AUC-PR, from the reported values -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SFourCicidsSyntheticEcodAucpr}{0.418966}  % CICIDS interleaved ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsSyntheticEcodLift}{0.166570}  % CICIDS interleaved ecod AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
-\newcommand{\SFourCicidsSyntheticEcodNormLift}{0.222805}  % CICIDS Synthetic Ecod normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SFourCicidsSyntheticEcodNormLift}{0.222805}  % CICIDS Synthetic Ecod normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SFourCicidsSyntheticHstAucpr}{0.513623}  % CICIDS interleaved hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsSyntheticHstLift}{0.261227}  % CICIDS interleaved hst AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
-\newcommand{\SFourCicidsSyntheticHstNormLift}{0.349419}  % CICIDS Synthetic Hst normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SFourCicidsSyntheticHstNormLift}{0.349419}  % CICIDS Synthetic Hst normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SFourCicidsSyntheticProposedDetectorAucpr}{0.544998}  % CICIDS interleaved proposed_detector AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourCicidsSyntheticProposedDetectorLift}{0.292602}  % CICIDS interleaved proposed_detector AUC-PR above chance -- s4_contrast_deliverables_20260827T124050_ec876714
-\newcommand{\SFourCicidsSyntheticProposedDetectorNormLift}{0.391386}  % CICIDS Synthetic ProposedDetector normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SFourCicidsSyntheticProposedDetectorNormLift}{0.391386}  % CICIDS Synthetic ProposedDetector normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SFourExcludedCells}{0}  % cells excluded with a recorded reason -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourLitnetBlasterWormEcodAucpr}{0.035710}  % LITNET blaster_worm ecod AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
 \newcommand{\SFourLitnetBlasterWormHstAucpr}{0.147731}  % LITNET blaster_worm hst AUC-PR -- s4_contrast_deliverables_20260827T124050_ec876714
@@ -399,8 +470,8 @@
 \newcommand{\SSixCorrectedAucpr}{0.169912}  % corrected variant AUC-PR (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixCorrectedAucroc}{0.509620}  % corrected variant AUC-ROC (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixCorrectedElapsedS}{586.3}  % corrected variant wall seconds (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
-\newcommand{\SSixCorrectedLift}{0.008579}  % Stage 6 corrected additive lift above the chance floor -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\SSixCorrectedNormLift}{0.010229}  % Stage 6 corrected normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SSixCorrectedLift}{0.008579}  % Stage 6 corrected additive lift above the chance floor -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\SSixCorrectedNormLift}{0.010229}  % Stage 6 corrected normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SSixDiagCorrectedDistinctScores}{747}  % corrected distinct score values emitted -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixDiagCorrectedFracAtCap}{0.9274}  % corrected fraction of scores exactly at the 0.25 cap -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixDiagCorrectedMeanShortRunMass}{1}  % corrected mean posterior mass on runs <= 5 -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
@@ -409,13 +480,13 @@
 \newcommand{\SSixDiagOriginalFracAtCap}{0.004733}  % original fraction of scores exactly at the 0.25 cap -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixDiagOriginalMeanShortRunMass}{0.006472}  % original mean posterior mass on runs <= 5 -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixDiagOriginalScoreSd}{0.218999}  % original score standard deviation -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
-\newcommand{\SSixDiagWindowRows}{15000}  % records covered by the Stage-6 score-distribution diagnostic -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SSixDiagWindowRows}{15000}  % records covered by the Stage-6 score-distribution diagnostic -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SSixExcluded}{0}  % 1 if the ablation was excluded -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixOriginalAucpr}{0.397486}  % original variant AUC-PR (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixOriginalAucroc}{0.848216}  % original variant AUC-ROC (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixOriginalElapsedS}{743.2}  % original variant wall seconds (from cached run) -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
-\newcommand{\SSixOriginalLift}{0.236153}  % Stage 6 original additive lift above the chance floor -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\SSixOriginalNormLift}{0.281581}  % Stage 6 original normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SSixOriginalLift}{0.236153}  % Stage 6 original additive lift above the chance floor -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\SSixOriginalNormLift}{0.281581}  % Stage 6 original normalized lift (AP-p)/(1-p) -- supplementary_macros_20260906T195945_633a8c6f
 \newcommand{\SSixPrefixRows}{200000}  % prefix records evaluated -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixProbeCorrectedPeak}{1}  % peak P(r=0) after a 6-sigma shift, corrected statistic -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
 \newcommand{\SSixProbeCorrectedRatio}{1000}  % corrected peak P(r=0) as a multiple of the hazard -- s6_bocpd_corrected_ablation_20260827T113456_f9869627
@@ -722,6 +793,6 @@
 \newcommand{\StreamLitnetUdpFloodSpanMinutes}{3.97}  % litnet_udp_flood capture span [min] -- stage1_natural_streams_20260819T062728_87db5780
 \newcommand{\StreamLitnetUdpFloodTestAttacks}{11831}  % litnet_udp_flood test attacks -- stage1_natural_streams_20260819T062728_87db5780
 \newcommand{\StreamLitnetUdpFloodTestPrevalencePct}{15.7747}  % litnet_udp_flood test-split prevalence [\%] -- stage1_natural_streams_20260819T062728_87db5780
-\newcommand{\SweepEcodScoringBatchMax}{480000}  % largest ECOD scoring batch across the prevalence sweep levels -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\SweepEcodScoringBatchMin}{160917}  % smallest ECOD scoring batch across the prevalence sweep levels -- supplementary_macros_20260906T184624_66e72db0
-\newcommand{\SweepUnresampledLofMinusDetector}{0.318196}  % LOF minus proposed-detector AUC-PR at the unresampled sweep level (both deterministic there) -- supplementary_macros_20260906T184624_66e72db0
+\newcommand{\SweepEcodScoringBatchMax}{480000}  % largest ECOD scoring batch across the prevalence sweep levels -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\SweepEcodScoringBatchMin}{160917}  % smallest ECOD scoring batch across the prevalence sweep levels -- supplementary_macros_20260906T195945_633a8c6f
+\newcommand{\SweepUnresampledLofMinusDetector}{0.318196}  % LOF minus proposed-detector AUC-PR at the unresampled sweep level (both deterministic there) -- supplementary_macros_20260906T195945_633a8c6f

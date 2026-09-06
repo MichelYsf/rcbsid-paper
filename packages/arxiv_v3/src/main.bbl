@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{51}
+\begin{thebibliography}{52}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -420,6 +420,19 @@
 \newblock
 \shownote{arXiv:1805.05383}.
 \newblock
+
+
+\bibitem[K{\"u}nsch(1989)]%
+        {kunsch1989jackknife}
+\bibfield{author}{\bibinfo{person}{Hans~R. K{\"u}nsch}.}
+  \bibinfo{year}{1989}\natexlab{}.
+\newblock \showarticletitle{The Jackknife and the Bootstrap for General
+  Stationary Observations}.
+\newblock \bibinfo{journal}{\emph{The Annals of Statistics}}
+  \bibinfo{volume}{17}, \bibinfo{number}{3} (\bibinfo{year}{1989}),
+  \bibinfo{pages}{1217--1241}.
+\newblock
+\href{https://doi.org/10.1214/aos/1176347265}{doi:\nolinkurl{10.1214/aos/1176347265}}
 
 
 \bibitem[Lanvin et~al\mbox{.}(2023)]%

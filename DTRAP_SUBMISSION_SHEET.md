@@ -55,11 +55,11 @@ reproducibility; provenance
 
 | # | file | size | role |
 |---|---|---|---|
-| 1 | `packages/dtrap/manuscript_anonymous.pdf` | 654,854 B | **main document** |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 570,949 B | supplementary, **not for publication** |
-| 3 | `packages/dtrap/source_anonymous.tar.gz` | 98,196 B | supplementary, **not for publication** |
+| 1 | `packages/dtrap/manuscript_anonymous.pdf` | 658,735 B | **main document** |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 586,632 B | supplementary, **not for publication** |
+| 3 | `packages/dtrap/source_anonymous.tar.gz` | 99,989 B | supplementary, **not for publication** |
 
-The artifact contains 213 files and passes its own documented reproduction
+The artifact contains 223 files and passes its own documented reproduction
 instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).
 
 ## Step 7 — Cover letter

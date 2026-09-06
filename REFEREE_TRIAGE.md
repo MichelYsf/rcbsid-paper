@@ -117,6 +117,17 @@ archived dump reproduces that arm's detector AUC-PR to 1.8e-05 (a known
 cross-platform delta, `RevReproNaturalDelta`). The tail-only and deployed
 intervals do not overlap on either metric.
 
+**Block-length robustness (final read, 2026-09-06).** Every interval above
+was recomputed from the same archived scores at block lengths 250 and 2600
+records (the second longer than the longest attack run, 2,522), with block 100
+rerun first as a reproduction check: exact to six decimals on all 13 intervals
+(manifest `bootstrap_block_robustness_20260906T200612_b7c847e1`,
+`findings_bootstrap_robustness.md`). Every margin interval stays above zero
+and the auxiliary-only AUC-ROC interval stays below 0.5 at both lengths. One
+of the eighteen checks changes: at block 2600 the tail-only AUC-PR interval
+[0.781947, 0.880632] overlaps the deployed composition's [0.653543, 0.807028];
+the AUC-ROC intervals stay disjoint. Section 12 states this in one sentence.
+
 ## Analysis C — relocation destinations (referee M7)
 
 Of the 103,189 attacks that leave the held-out slice under day round robin,
