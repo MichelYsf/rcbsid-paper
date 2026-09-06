@@ -1,0 +1,816 @@
+{
+  "run_id": "referee_bounded_analyses_20260906T182158_de69afab",
+  "name": "referee_bounded_analyses",
+  "git_commit": "ad01b8b23b7561e159f2a9cfd62bdb73d57efcf5-dirty",
+  "git_commit_at_write": "ad01b8b23b7561e159f2a9cfd62bdb73d57efcf5-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "a8ad5cd921042e381b7c54fabc689478ddff70868bf32a34ae19d82961094934",
+  "config": {
+    "A": "ECOD rescoring of the shared records as their own batch, per arm",
+    "B": "moving-block bootstrap, block 100 records, 1000 resamples, seed 11",
+    "C": "relocation destinations of attacks leaving the held-out slice",
+    "D": "imputation counts per stream, numeric columns, label dropped",
+    "E": "paired cut-by-assembly sweep, 7 cuts, both arms",
+    "metric": "sklearn average_precision_score / roc_auc_score, positive class 1",
+    "train": 0.7,
+    "val": 0.15
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_natural_scores.npz",
+      "sha256": "be784bd7bc48cb6ba0f6aa9a6900be64705d9618cd8d62c6567698ec8a020c01"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_synthetic_scores.npz",
+      "sha256": "565858635b7a2836c94b31f0250104b1676d04573fd99e2bb071d9d67939d734"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv",
+      "sha256": "96d41208b789ae8a1f446e5db952ca9fa0c7cd564b86455a3cb813329009767a"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_udp_flood_natural.csv",
+      "sha256": "3bb6753b505e10bcb0e06062ff34aa338c9f352bc5faa69d7feca6abd4b5a297"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_blaster_worm_natural.csv",
+      "sha256": "9dba5f0ec9355376ace930750232ba53ea00ad76de4e07427a511c035be64d17"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\litnet2020_spam_natural.csv",
+      "sha256": "5f837b84445883caf2c100028185814378beea66563c48329418ed02be0563e1"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\findings_referee_analyses.md",
+      "exists": true,
+      "sha256": "dfccc08ba1c72d88d7ea2b9cb5c6ab6b75d50a145f859725e00b3e819df1c771"
+    }
+  ],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-09-06T18:21:58.971324+00:00",
+  "finished_utc": "2026-09-06T18:45:22.310262+00:00",
+  "wall_seconds": 1403.338938,
+  "macros": {
+    "RefSharedRecords": {
+      "value": 78000,
+      "unit": "",
+      "desc": "records held out by both arms"
+    },
+    "RefReproNaturalEcodFullAucpr": {
+      "value": 0.755142,
+      "unit": "",
+      "desc": "ECOD AUC-PR, natural held-out slice, refit here in the contrast's 480000-record batch"
+    },
+    "RefReproSyntheticEcodFullAucpr": {
+      "value": 0.418966,
+      "unit": "",
+      "desc": "ECOD AUC-PR, synthetic held-out slice, refit here in the contrast's 480000-record batch"
+    },
+    "RefEcodShared240NaturalAucpr": {
+      "value": 0.844487,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the shared records, natural arm, scored in the 240000-record held-out batch (reproduces Table 5)"
+    },
+    "RefEcodShared78NaturalAucpr": {
+      "value": 0.847585,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the shared records, natural arm, scored as their own 78000-record batch"
+    },
+    "RefEcodShared78NaturalAucroc": {
+      "value": 0.802003,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on the shared records, natural arm, own 78000-record batch"
+    },
+    "RefEcodShared240NaturalAucroc": {
+      "value": 0.79991,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on the shared records, natural arm, 240000-record batch"
+    },
+    "RefMarginShared78Natural": {
+      "value": 0.058028,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR on the shared records, natural arm, ECOD in its own 78000-record batch"
+    },
+    "RefMarginShared240Natural": {
+      "value": 0.061126,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR on the shared records, natural arm, ECOD in the 240000-record batch"
+    },
+    "RefEcodShared240SyntheticAucpr": {
+      "value": 0.849842,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the shared records, synthetic arm, scored in the 240000-record held-out batch (reproduces Table 5)"
+    },
+    "RefEcodShared78SyntheticAucpr": {
+      "value": 0.844797,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the shared records, synthetic arm, scored as their own 78000-record batch"
+    },
+    "RefEcodShared78SyntheticAucroc": {
+      "value": 0.79767,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on the shared records, synthetic arm, own 78000-record batch"
+    },
+    "RefEcodShared240SyntheticAucroc": {
+      "value": 0.805657,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on the shared records, synthetic arm, 240000-record batch"
+    },
+    "RefMarginShared78Synthetic": {
+      "value": 0.055574,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR on the shared records, synthetic arm, ECOD in its own 78000-record batch"
+    },
+    "RefMarginShared240Synthetic": {
+      "value": 0.050529,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR on the shared records, synthetic arm, ECOD in the 240000-record batch"
+    },
+    "RefEcodShared78CrossArmSpread": {
+      "value": 0.002788,
+      "unit": "",
+      "desc": "ECOD AUC-PR difference between arms on the identical 78000-record batch (history-only difference for ECOD)"
+    },
+    "RefDetectorLeadsBothArmsBatchControlled": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the detector leads ECOD in both arms on the shared records with ECOD batch-controlled"
+    },
+    "RefBootBlockLength": {
+      "value": 100,
+      "unit": "",
+      "desc": "moving-block length in records; exceeds the p90 attack run of 70"
+    },
+    "RefBootResamples": {
+      "value": 1000,
+      "unit": "",
+      "desc": "bootstrap resamples"
+    },
+    "RefBootFullNaturalMarginPoint": {
+      "value": 0.026787,
+      "unit": "",
+      "desc": "ECOD minus detector AUC-PR margin on the natural held-out slice, from reported values"
+    },
+    "RefBootFullNaturalMarginLo": {
+      "value": 0.021099,
+      "unit": "",
+      "desc": "2.5th percentile of that margin, block bootstrap"
+    },
+    "RefBootFullNaturalMarginHi": {
+      "value": 0.032692,
+      "unit": "",
+      "desc": "97.5th percentile of that margin, block bootstrap"
+    },
+    "RefBootFullNaturalMarginCrossesZero": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the bootstrap interval of that margin includes zero"
+    },
+    "RefBootFullSyntheticMarginPoint": {
+      "value": 0.126032,
+      "unit": "",
+      "desc": "detector minus ECOD AUC-PR margin on the synthetic held-out slice, from reported values"
+    },
+    "RefBootFullSyntheticMarginLo": {
+      "value": 0.122046,
+      "unit": "",
+      "desc": "2.5th percentile of that margin, block bootstrap"
+    },
+    "RefBootFullSyntheticMarginHi": {
+      "value": 0.130294,
+      "unit": "",
+      "desc": "97.5th percentile of that margin, block bootstrap"
+    },
+    "RefBootFullSyntheticMarginCrossesZero": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the bootstrap interval of that margin includes zero"
+    },
+    "RefBootShared240NaturalMarginLo": {
+      "value": 0.053856,
+      "unit": "",
+      "desc": "2.5th percentile, detector minus ECOD on the shared records, natural arm, ECOD 240000-batch"
+    },
+    "RefBootShared240NaturalMarginHi": {
+      "value": 0.06772,
+      "unit": "",
+      "desc": "97.5th percentile of the same margin"
+    },
+    "RefBootShared240NaturalMarginCrossesZero": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if that interval includes zero"
+    },
+    "RefBootShared78NaturalMarginLo": {
+      "value": 0.05177,
+      "unit": "",
+      "desc": "2.5th percentile, detector minus ECOD on the shared records, natural arm, ECOD 78000-batch"
+    },
+    "RefBootShared78NaturalMarginHi": {
+      "value": 0.064229,
+      "unit": "",
+      "desc": "97.5th percentile of the same margin"
+    },
+    "RefBootShared78NaturalMarginCrossesZero": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if that interval includes zero"
+    },
+    "RefBootShared240SyntheticMarginLo": {
+      "value": 0.044634,
+      "unit": "",
+      "desc": "2.5th percentile, detector minus ECOD on the shared records, synthetic arm, ECOD 240000-batch"
+    },
+    "RefBootShared240SyntheticMarginHi": {
+      "value": 0.056329,
+      "unit": "",
+      "desc": "97.5th percentile of the same margin"
+    },
+    "RefBootShared240SyntheticMarginCrossesZero": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if that interval includes zero"
+    },
+    "RefBootShared78SyntheticMarginLo": {
+      "value": 0.04862,
+      "unit": "",
+      "desc": "2.5th percentile, detector minus ECOD on the shared records, synthetic arm, ECOD 78000-batch"
+    },
+    "RefBootShared78SyntheticMarginHi": {
+      "value": 0.061923,
+      "unit": "",
+      "desc": "97.5th percentile of the same margin"
+    },
+    "RefBootShared78SyntheticMarginCrossesZero": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if that interval includes zero"
+    },
+    "RefBootBranchCombinedAucprLo": {
+      "value": 0.714449,
+      "unit": "",
+      "desc": "2.5th percentile of Combined Aucpr on the natural held-out slice"
+    },
+    "RefBootBranchCombinedAucprHi": {
+      "value": 0.744732,
+      "unit": "",
+      "desc": "97.5th percentile of Combined Aucpr on the natural held-out slice"
+    },
+    "RefBootBranchCombinedAucrocLo": {
+      "value": 0.510641,
+      "unit": "",
+      "desc": "2.5th percentile of Combined Aucroc on the natural held-out slice"
+    },
+    "RefBootBranchCombinedAucrocHi": {
+      "value": 0.542664,
+      "unit": "",
+      "desc": "97.5th percentile of Combined Aucroc on the natural held-out slice"
+    },
+    "RefBootBranchTailOnlyAucprLo": {
+      "value": 0.822025,
+      "unit": "",
+      "desc": "2.5th percentile of TailOnly Aucpr on the natural held-out slice"
+    },
+    "RefBootBranchTailOnlyAucprHi": {
+      "value": 0.842969,
+      "unit": "",
+      "desc": "97.5th percentile of TailOnly Aucpr on the natural held-out slice"
+    },
+    "RefBootBranchTailOnlyAucrocLo": {
+      "value": 0.82412,
+      "unit": "",
+      "desc": "2.5th percentile of TailOnly Aucroc on the natural held-out slice"
+    },
+    "RefBootBranchTailOnlyAucrocHi": {
+      "value": 0.834607,
+      "unit": "",
+      "desc": "97.5th percentile of TailOnly Aucroc on the natural held-out slice"
+    },
+    "RefBootBranchAuxOnlyAucprLo": {
+      "value": 0.58338,
+      "unit": "",
+      "desc": "2.5th percentile of AuxOnly Aucpr on the natural held-out slice"
+    },
+    "RefBootBranchAuxOnlyAucprHi": {
+      "value": 0.619628,
+      "unit": "",
+      "desc": "97.5th percentile of AuxOnly Aucpr on the natural held-out slice"
+    },
+    "RefBootBranchAuxOnlyAucrocLo": {
+      "value": 0.272288,
+      "unit": "",
+      "desc": "2.5th percentile of AuxOnly Aucroc on the natural held-out slice"
+    },
+    "RefBootBranchAuxOnlyAucrocHi": {
+      "value": 0.291531,
+      "unit": "",
+      "desc": "97.5th percentile of AuxOnly Aucroc on the natural held-out slice"
+    },
+    "RefBootAuxAucrocMinusHalfLo": {
+      "value": -0.227712,
+      "unit": "",
+      "desc": "2.5th percentile of auxiliary-only AUC-ROC minus 0.5"
+    },
+    "RefBootAuxAucrocMinusHalfHi": {
+      "value": -0.208469,
+      "unit": "",
+      "desc": "97.5th percentile of auxiliary-only AUC-ROC minus 0.5"
+    },
+    "RefBootAuxBelowChanceEntireInterval": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the whole auxiliary-only AUC-ROC interval lies below 0.5"
+    },
+    "RefRelocatedAttacks": {
+      "value": 103189,
+      "unit": "",
+      "desc": "attacks in the natural held-out slice that the round-robin arm does not hold out"
+    },
+    "RefRelocatedToTraining": {
+      "value": 77670,
+      "unit": "",
+      "desc": "of those, landing in the round-robin training split"
+    },
+    "RefRelocatedToValidation": {
+      "value": 25519,
+      "unit": "",
+      "desc": "of those, landing in the round-robin validation split"
+    },
+    "RefImputeCicidsRows": {
+      "value": 1600000,
+      "unit": "",
+      "desc": "Cicids: rows (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsFeatures": {
+      "value": 84,
+      "unit": "",
+      "desc": "Cicids: features (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsInfRows": {
+      "value": 4,
+      "unit": "",
+      "desc": "Cicids: inf rows (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsNanRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "Cicids: nan rows (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsAffectedRows": {
+      "value": 4,
+      "unit": "",
+      "desc": "Cicids: affected rows (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsInfFeatures": {
+      "value": 2,
+      "unit": "",
+      "desc": "Cicids: inf features (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsNanFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "Cicids: nan features (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsInfCells": {
+      "value": 8,
+      "unit": "",
+      "desc": "Cicids: inf cells (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsNanCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "Cicids: nan cells (numeric columns after dropping the label)"
+    },
+    "RefImputeCicidsAffectedFeatures": {
+      "value": 2,
+      "unit": "",
+      "desc": "Cicids: affected features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodRows": {
+      "value": 500000,
+      "unit": "",
+      "desc": "LitnetUdpFlood: rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodFeatures": {
+      "value": 36,
+      "unit": "",
+      "desc": "LitnetUdpFlood: features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodInfRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetUdpFlood: inf rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodNanRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetUdpFlood: nan rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodAffectedRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetUdpFlood: affected rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodInfFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetUdpFlood: inf features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodNanFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetUdpFlood: nan features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodInfCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetUdpFlood: inf cells (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodNanCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetUdpFlood: nan cells (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetUdpFloodAffectedFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetUdpFlood: affected features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormRows": {
+      "value": 500000,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormFeatures": {
+      "value": 36,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormInfRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: inf rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormNanRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: nan rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormAffectedRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: affected rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormInfFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: inf features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormNanFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: nan features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormInfCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: inf cells (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormNanCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: nan cells (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetBlasterWormAffectedFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetBlasterWorm: affected features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamRows": {
+      "value": 500000,
+      "unit": "",
+      "desc": "LitnetSpam: rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamFeatures": {
+      "value": 36,
+      "unit": "",
+      "desc": "LitnetSpam: features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamInfRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetSpam: inf rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamNanRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetSpam: nan rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamAffectedRows": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetSpam: affected rows (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamInfFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetSpam: inf features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamNanFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetSpam: nan features (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamInfCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetSpam: inf cells (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamNanCells": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetSpam: nan cells (numeric columns after dropping the label)"
+    },
+    "RefImputeLitnetSpamAffectedFeatures": {
+      "value": 0,
+      "unit": "",
+      "desc": "LitnetSpam: affected features (numeric columns after dropping the label)"
+    },
+    "RefPairedCut60NaturalDetectorAucpr": {
+      "value": 0.483383,
+      "unit": "",
+      "desc": "detector AUC-PR at the 60% cut, natural arm"
+    },
+    "RefPairedCut60NaturalEcodAucpr": {
+      "value": 0.451502,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 60% cut, natural arm, refit on that arm's prefix"
+    },
+    "RefPairedCut60NaturalPrevalence": {
+      "value": 0.350142,
+      "unit": "",
+      "desc": "held-out prevalence at the 60% cut, natural arm"
+    },
+    "RefPairedCut60SyntheticDetectorAucpr": {
+      "value": 0.395789,
+      "unit": "",
+      "desc": "detector AUC-PR at the 60% cut, synthetic arm"
+    },
+    "RefPairedCut60SyntheticEcodAucpr": {
+      "value": 0.386564,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 60% cut, synthetic arm, refit on that arm's prefix"
+    },
+    "RefPairedCut60SyntheticPrevalence": {
+      "value": 0.254153,
+      "unit": "",
+      "desc": "held-out prevalence at the 60% cut, synthetic arm"
+    },
+    "RefPairedCut60OrderingsAgree": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if ECOD-versus-detector ordering is the same in both arms at the 60% cut"
+    },
+    "RefPairedCut65NaturalDetectorAucpr": {
+      "value": 0.528435,
+      "unit": "",
+      "desc": "detector AUC-PR at the 65% cut, natural arm"
+    },
+    "RefPairedCut65NaturalEcodAucpr": {
+      "value": 0.498989,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 65% cut, natural arm, refit on that arm's prefix"
+    },
+    "RefPairedCut65NaturalPrevalence": {
+      "value": 0.40002,
+      "unit": "",
+      "desc": "held-out prevalence at the 65% cut, natural arm"
+    },
+    "RefPairedCut65SyntheticDetectorAucpr": {
+      "value": 0.402082,
+      "unit": "",
+      "desc": "detector AUC-PR at the 65% cut, synthetic arm"
+    },
+    "RefPairedCut65SyntheticEcodAucpr": {
+      "value": 0.385961,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 65% cut, synthetic arm, refit on that arm's prefix"
+    },
+    "RefPairedCut65SyntheticPrevalence": {
+      "value": 0.240532,
+      "unit": "",
+      "desc": "held-out prevalence at the 65% cut, synthetic arm"
+    },
+    "RefPairedCut65OrderingsAgree": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if ECOD-versus-detector ordering is the same in both arms at the 65% cut"
+    },
+    "RefPairedCut70NaturalDetectorAucpr": {
+      "value": 0.578913,
+      "unit": "",
+      "desc": "detector AUC-PR at the 70% cut, natural arm"
+    },
+    "RefPairedCut70NaturalEcodAucpr": {
+      "value": 0.56123,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 70% cut, natural arm, refit on that arm's prefix"
+    },
+    "RefPairedCut70NaturalPrevalence": {
+      "value": 0.461644,
+      "unit": "",
+      "desc": "held-out prevalence at the 70% cut, natural arm"
+    },
+    "RefPairedCut70SyntheticDetectorAucpr": {
+      "value": 0.436118,
+      "unit": "",
+      "desc": "detector AUC-PR at the 70% cut, synthetic arm"
+    },
+    "RefPairedCut70SyntheticEcodAucpr": {
+      "value": 0.389094,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 70% cut, synthetic arm, refit on that arm's prefix"
+    },
+    "RefPairedCut70SyntheticPrevalence": {
+      "value": 0.234708,
+      "unit": "",
+      "desc": "held-out prevalence at the 70% cut, synthetic arm"
+    },
+    "RefPairedCut70OrderingsAgree": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if ECOD-versus-detector ordering is the same in both arms at the 70% cut"
+    },
+    "RefPairedCut75NaturalDetectorAucpr": {
+      "value": 0.508857,
+      "unit": "",
+      "desc": "detector AUC-PR at the 75% cut, natural arm"
+    },
+    "RefPairedCut75NaturalEcodAucpr": {
+      "value": 0.556352,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 75% cut, natural arm, refit on that arm's prefix"
+    },
+    "RefPairedCut75NaturalPrevalence": {
+      "value": 0.429028,
+      "unit": "",
+      "desc": "held-out prevalence at the 75% cut, natural arm"
+    },
+    "RefPairedCut75SyntheticDetectorAucpr": {
+      "value": 0.477333,
+      "unit": "",
+      "desc": "detector AUC-PR at the 75% cut, synthetic arm"
+    },
+    "RefPairedCut75SyntheticEcodAucpr": {
+      "value": 0.389087,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 75% cut, synthetic arm, refit on that arm's prefix"
+    },
+    "RefPairedCut75SyntheticPrevalence": {
+      "value": 0.229687,
+      "unit": "",
+      "desc": "held-out prevalence at the 75% cut, synthetic arm"
+    },
+    "RefPairedCut75OrderingsAgree": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if ECOD-versus-detector ordering is the same in both arms at the 75% cut"
+    },
+    "RefPairedCut80NaturalDetectorAucpr": {
+      "value": 0.585598,
+      "unit": "",
+      "desc": "detector AUC-PR at the 80% cut, natural arm"
+    },
+    "RefPairedCut80NaturalEcodAucpr": {
+      "value": 0.639969,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 80% cut, natural arm, refit on that arm's prefix"
+    },
+    "RefPairedCut80NaturalPrevalence": {
+      "value": 0.513066,
+      "unit": "",
+      "desc": "held-out prevalence at the 80% cut, natural arm"
+    },
+    "RefPairedCut80SyntheticDetectorAucpr": {
+      "value": 0.53693,
+      "unit": "",
+      "desc": "detector AUC-PR at the 80% cut, synthetic arm"
+    },
+    "RefPairedCut80SyntheticEcodAucpr": {
+      "value": 0.400022,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 80% cut, synthetic arm, refit on that arm's prefix"
+    },
+    "RefPairedCut80SyntheticPrevalence": {
+      "value": 0.241975,
+      "unit": "",
+      "desc": "held-out prevalence at the 80% cut, synthetic arm"
+    },
+    "RefPairedCut80OrderingsAgree": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if ECOD-versus-detector ordering is the same in both arms at the 80% cut"
+    },
+    "RefPairedCut85NaturalDetectorAucpr": {
+      "value": 0.728355,
+      "unit": "",
+      "desc": "detector AUC-PR at the 85% cut, natural arm"
+    },
+    "RefPairedCut85NaturalEcodAucpr": {
+      "value": 0.758205,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 85% cut, natural arm, refit on that arm's prefix"
+    },
+    "RefPairedCut85NaturalPrevalence": {
+      "value": 0.68235,
+      "unit": "",
+      "desc": "held-out prevalence at the 85% cut, natural arm"
+    },
+    "RefPairedCut85SyntheticDetectorAucpr": {
+      "value": 0.544998,
+      "unit": "",
+      "desc": "detector AUC-PR at the 85% cut, synthetic arm"
+    },
+    "RefPairedCut85SyntheticEcodAucpr": {
+      "value": 0.417522,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 85% cut, synthetic arm, refit on that arm's prefix"
+    },
+    "RefPairedCut85SyntheticPrevalence": {
+      "value": 0.252396,
+      "unit": "",
+      "desc": "held-out prevalence at the 85% cut, synthetic arm"
+    },
+    "RefPairedCut85OrderingsAgree": {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if ECOD-versus-detector ordering is the same in both arms at the 85% cut"
+    },
+    "RefPairedCut90NaturalDetectorAucpr": {
+      "value": 0.799279,
+      "unit": "",
+      "desc": "detector AUC-PR at the 90% cut, natural arm"
+    },
+    "RefPairedCut90NaturalEcodAucpr": {
+      "value": 0.791671,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 90% cut, natural arm, refit on that arm's prefix"
+    },
+    "RefPairedCut90NaturalPrevalence": {
+      "value": 0.71625,
+      "unit": "",
+      "desc": "held-out prevalence at the 90% cut, natural arm"
+    },
+    "RefPairedCut90SyntheticDetectorAucpr": {
+      "value": 0.574244,
+      "unit": "",
+      "desc": "detector AUC-PR at the 90% cut, synthetic arm"
+    },
+    "RefPairedCut90SyntheticEcodAucpr": {
+      "value": 0.474453,
+      "unit": "",
+      "desc": "ECOD AUC-PR at the 90% cut, synthetic arm, refit on that arm's prefix"
+    },
+    "RefPairedCut90SyntheticPrevalence": {
+      "value": 0.285544,
+      "unit": "",
+      "desc": "held-out prevalence at the 90% cut, synthetic arm"
+    },
+    "RefPairedCut90OrderingsAgree": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if ECOD-versus-detector ordering is the same in both arms at the 90% cut"
+    },
+    "RefPairedCuts": {
+      "value": 7,
+      "unit": "",
+      "desc": "chronological cut points evaluated in both arms"
+    },
+    "RefPairedCutsOrderingsAgree": {
+      "value": 4,
+      "unit": "",
+      "desc": "cut points at which both arms show the same ECOD-versus-detector ordering"
+    },
+    "RefPairedCutsOrderingsDiffer": {
+      "value": 3,
+      "unit": "",
+      "desc": "cut points at which the two arms show opposite orderings"
+    },
+    "RefWallSeconds": {
+      "value": 1427,
+      "unit": "s",
+      "desc": "wall time of this run"
+    }
+  },
+  "notes": "hostile-referee triage: BLOCKING 2, MAJOR 2, 3, 7, 10, from archived dumps and stream files; no detector rerun",
+  "extra": {}
+}
