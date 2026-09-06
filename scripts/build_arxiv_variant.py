@@ -57,6 +57,19 @@ def main() -> int:
          "for double-anonymous review) shares",
          "A companion manuscript from the same research programme "
          "(arXiv:2510.09619) shares"),
+        # the anonymous master withholds which measurements are shared because
+        # naming them identifies the earlier versions; the named arXiv posting
+        # has no such constraint and states them in full.
+        ("is part of the account supplied to the editors, because naming them\n"
+         "here would identify the earlier versions.",
+         "is as follows. The pooled LITNET composite and the assembled CICIDS arm\n"
+         "are the same measurements as in v1 and v2, reported there under a regime\n"
+         "interpretation that this paper replaces with an assembly interpretation;\n"
+         "the timestamp-ordered CICIDS arm, the per-capture LITNET streams, the\n"
+         "shared-record analysis and the method-identity audit have no counterpart\n"
+         "in any earlier version; and results on a third dataset that appeared in\n"
+         "the earlier versions are withdrawn and are not relied upon anywhere in\n"
+         "this paper."),
         ("identifiers are supplied to the editors confidentially.",
          "the earlier public versions are arXiv:2605.24696 v1 and v2."),
         ("During double-anonymous review, the artifact is available through the\n"

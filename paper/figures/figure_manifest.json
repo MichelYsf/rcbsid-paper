@@ -11,11 +11,11 @@
   "figures": {
     "paper/figures/fig_assembly.pdf": "aa4641ba53e36fc61491486064db0bef8a1f064527cbbe957d3a681b6a594fc3",
     "paper/figures/fig_branch.pdf": "72689f80e80263c38ad7bd590be4e3b0f4caa3be69dfdc86dac3b085fbc501c9",
-    "paper/figures/fig_decomposition.pdf": "1214c9a7753850117261b5c8cacff1fa0e4bed8aadfc22168bd7c14f6ab6ad92",
-    "paper/figures/fig_split.pdf": "ae360857b1f96efbb08ededf6107133d43f7140ddbcc2514728bba1b624bdc52"
+    "paper/figures/fig_decomposition.pdf": "321a65025d6fa7086512e36c43ec4ed934383c8b5bb9f6860ef1da4ad8090835",
+    "paper/figures/fig_split.pdf": "6ff6695336f48d2992b195b9210c64b9d566e03ecd32193850b8dacf0c78df7d"
   },
   "generator": "scripts/make_figures.py",
-  "generator_sha256": "a982dacc6686a48cb9db68ab14b93f529c2cb6a9706f50e68aa60d144a51f802",
+  "generator_sha256": "4deb96220c9e339aa5dcfe5c1296b26466af793ec5cf830a3b80d7663d2ca069",
   "inputs": {
     "results/manifests/cicids_heldout_composition_20260819T120420_ebb7c281.json": "740f38ddfb5899ea36b11fb7237ea29e90dff72ad366ccc1f045790032615bba",
     "results/manifests/cicids_subsample_audit_20260819T085704_3ed9b901.json": "e01198cbf94aafb2a2f226d38fccd15b6778cc9718044a1359e8ef7a3ace6795",

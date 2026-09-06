@@ -1158,6 +1158,22 @@ invisible to every check that reads numbers, and the literal, decimal,
 control-character and overfull checks all passed over it. The published
 Zenodo 2.0.0 record predates the edit and is unaffected.
 
+### CI-38: interval bounds of a metric rendered at five decimals, and the width check passed
+The referee-round bootstrap (2026-09-06, `run_referee_analyses.py`) emits the
+2.5th and 97.5th percentiles of AUC-PR margins as `RefBoot...MarginLo` and
+`RefBoot...MarginHi`, with descriptions that say only "percentile of that
+margin". `provenance.is_metric` classifies by description vocabulary and by
+name suffix, and neither matched, so two bounds reached `numbers.tex` at the
+five decimals they happened to be emitted with (0.06772 and 0.04862) beside
+six-decimal metrics. The display-width check passed over them: their names end
+in no listed suffix, so both landed in the catch-all family, uniformly wide and
+wrong, which is CI-32's lesson in a third form. Found by reading the
+regenerated `numbers.tex` before the manuscript was compiled; no built PDF or
+package carried it. Fixed by stripping a trailing `Lo`, `Hi` or `Point` before
+the suffix test, so an interval bound or point estimate of a metric is that
+metric, with a regression test in `tests/test_is_metric.py`. Flags such as
+`...CrossesZero` are not stripped and stay integers.
+
 **The pattern across CI-22, CI-24, CI-26 and CI-27 is one pattern:** a check or
 a claim that reads as universal while covering less than its wording implies.
 The provenance gate said "every number in the manuscript" and read one

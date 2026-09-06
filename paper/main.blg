@@ -61,47 +61,49 @@ Warning--empty publisher in sharafaldin2018cicids
 Warning--empty address in sharafaldin2018cicids
 Warning--empty address in sommer2010outside
 Warning--empty address in tan2011hst
+Warning--empty publisher in tatbul2018precision
+Warning--empty address in tatbul2018precision
 Warning--no number and no volume in vandeburg2020evaluation
 Warning--page numbers missing in both pages and numpages fields in vandeburg2020evaluation
-You've used 49 entries,
+You've used 51 entries,
             6273 wiz_defined-function locations,
-            1843 strings with 30204 characters,
-and the built_in function-call counts, 59550 in all, are:
-= -- 7794
-> -- 1843
+            1855 strings with 30606 characters,
+and the built_in function-call counts, 62165 in all, are:
+= -- 8146
+> -- 1921
 < -- 0
-+ -- 642
-- -- 642
-* -- 4214
-:= -- 5527
-add.period$ -- 254
-call.type$ -- 49
-change.case$ -- 370
-chr.to.int$ -- 48
-cite$ -- 98
-duplicate$ -- 5318
-empty$ -- 3710
-format.name$ -- 813
-if$ -- 14728
++ -- 668
+- -- 666
+* -- 4400
+:= -- 5760
+add.period$ -- 265
+call.type$ -- 51
+change.case$ -- 386
+chr.to.int$ -- 50
+cite$ -- 102
+duplicate$ -- 5552
+empty$ -- 3873
+format.name$ -- 845
+if$ -- 15387
 int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 207
-newline$ -- 466
-num.names$ -- 343
-pop$ -- 2079
+missing$ -- 216
+newline$ -- 484
+num.names$ -- 357
+pop$ -- 2168
 preamble$ -- 1
-purify$ -- 760
+purify$ -- 792
 quote$ -- 0
-skip$ -- 1959
+skip$ -- 2045
 stack$ -- 0
-substring$ -- 4594
-swap$ -- 561
+substring$ -- 4812
+swap$ -- 588
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1140
-warning$ -- 49
-while$ -- 325
+type$ -- 1186
+warning$ -- 51
+while$ -- 337
 width$ -- 0
-write$ -- 1012
-(There were 49 warnings)
+write$ -- 1052
+(There were 51 warnings)

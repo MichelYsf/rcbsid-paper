@@ -180,3 +180,10 @@ appear here in title case. DOIs and all other fields are as registered.
 says under review, which the entry does not repeat), `biswas2026protocol`
 (Preprints.org v1; no v2 and no journal relation), `moczkodan2026transformers`
 (arXiv; no non-arXiv location).
+
+## Additions (2026-09-06), each verified before entry
+
+| entry | verified record | hook in the manuscript |
+|---|---|---|
+| `gama2013prequential` | Machine Learning 90(3), pp. 317--346, 2013, DOI 10.1007/s10994-012-5320-9 (Crossref; the record's online date is 2012, the volume year is 2013 and the entry carries the volume year) | Table 2, the update-timing row, where the prequential protocol is named |
+| `tatbul2018precision` | Advances in NeurIPS 31 (NeurIPS 2018), pp. 1924--1934 (DBLP conf/nips/TatbulLZAG18; proceedings.neurips.cc hash 8f468c873a32bb0619eaeb2050ba45d1); arXiv:1803.03639 kept as note; NeurIPS 2018 papers carry no Crossref DOI, so none is entered | Table 2, the metric row, with the sentence that flow-wise AP is the convention of the compared work and event-based evaluation is future work |

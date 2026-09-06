@@ -47,7 +47,7 @@ TABLE = ROOT / "results/table_prevalence_sweep.tex"
 LEVELS = [(5.0, "LFive", "5%"), (10.0, "LTen", "10%"),
           (22.06, "LUnresampled", "unresampled"), (40.0, "LForty", "40%"),
           (64.0, "LSixtyFour", "64%")]
-METHODS = [("bocpd_slo", "Proposed", "proposed detector"),
+METHODS = [("bocpd_slo", "Proposed", "evaluated detector"),
            ("hst", "Hst", "HST"),
            ("loda", "Loda", "LODA"),
            ("ecod_batch_ref", "Ecod", "ECOD (batch)"),
@@ -79,16 +79,25 @@ def _dry_run(*_a, **_kw):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--relabel-table", metavar="RUN_ID",
+                    help="rewrite ONLY the LaTeX table from the pinned run's "
+                         "macros, with the generator's current column labels; "
+                         "no manifest is written and no number is re-derived. "
+                         "Used 2026-09-06 to rename column labels.")
     a = ap.parse_args()
 
     global OUT, TABLE
     runner = provenance_run
-    if a.dry_run:
+    if a.dry_run or a.relabel_table:
         runner = _dry_run
         scratch = ROOT / "results/_dryrun"
         scratch.mkdir(parents=True, exist_ok=True)
         OUT = scratch / "findings_prevalence.md"
-        TABLE = scratch / "table_prevalence_sweep.tex"
+        if a.relabel_table:
+            # the table names the run whose macros it references
+            _DryRun.run_id = a.relabel_table
+        else:
+            TABLE = scratch / "table_prevalence_sweep.tex"
 
     df = pd.read_csv(CSV)
 
@@ -275,7 +284,7 @@ def main() -> int:
                "% Macro references only - a bare literal here is invisible to the gate.",
                "\\begin{tabular}{lr" + "r" * len(METHODS) + "}",
                "\\toprule",
-               "Level & Floor & " + " & ".join(lbl for _, _, lbl in METHODS) + " \\\\",
+               "Level & Chance level & " + " & ".join(lbl for _, _, lbl in METHODS) + " \\\\",
                "\\midrule"]
         for lvl, lkey, llabel in LEVELS:
             if df[df["level_target_pct"] == lvl].empty:

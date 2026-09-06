@@ -177,7 +177,7 @@ def fig_assembly(used: dict, protocol: dict) -> Path:
 
 def fig_decomposition(used: dict) -> Path:
     """Detector and ECOD AUC-PR per arm, full held-out slice beside the shared
-    records, each group with its chance floor (held-out prevalence)."""
+    records, each group with its chance level (held-out prevalence)."""
     nat, syn = load("natural"), load("synthetic")
     dl, rv = load("deliverables"), load("review")
     full = [
@@ -211,7 +211,7 @@ def fig_decomposition(used: dict) -> Path:
         for xi, g in zip(xs, groups):
             ax.hlines(g[3], xi - w, xi + w, colors=C["black"], linestyles=":",
                       linewidth=1.0,
-                      label="chance floor" if xi == 0 else None)
+                      label="chance level" if xi == 0 else None)
         ax.set_xticks(xs, [g[0] for g in groups])
         ax.set_title(title)
     axes[0].set_ylabel("AUC-PR")
@@ -224,7 +224,7 @@ def fig_decomposition(used: dict) -> Path:
 
 def fig_split(used: dict, protocol: dict) -> Path:
     """Both deterministic scorers' AUC-PR across the seven chronological cuts,
-    with the held-out prevalence (the AUC-PR chance floor) on the same axis."""
+    with the held-out prevalence (the AUC-PR chance level) on the same axis."""
     rv = load("review")
     comp = load("composition")
     cuts = sorted(int(k[len("RevSplitCut"):-len("Records")])
@@ -246,9 +246,9 @@ def fig_split(used: dict, protocol: dict) -> Path:
                    linewidth=0, label="ECOD leads" if j == 0 else None)
     ax.axvline(fixed_cut, color=C["grey"], linewidth=0.8, linestyle="--",
                label="this paper's split")
-    # the chance floor is black dotted in every figure that draws one
+    # the chance level is black dotted in every figure that draws one
     ax.plot(x, prev, color=C["black"], linestyle=":", marker="^",
-            label="prevalence (chance floor)")
+            label="prevalence (chance level)")
     ax.plot(x, det, color=C["blue"], marker="o", label="detector")
     ax.plot(x, eco, color=C["vermillion"], marker="s", label="ECOD")
     ax.set_xlabel("chronological cut\n(fraction of the stream before the held-out slice)")

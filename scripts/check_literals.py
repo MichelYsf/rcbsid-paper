@@ -152,6 +152,10 @@ ALLOW = {
     "10010147.10010257": "ACM CCS concept identifier, not a measurement",
     "4320": "SRE burn-rate window length in minutes (60/360/4320), a cited "
             "practice parameter, not a value we measured",
+    "100000": "the redraw seed increment of the sweep's resampling procedure "
+              "(seed + 100000 * attempt), a protocol constant read from "
+              "scripts/prevalence_lib.py and printed in Table 3, not a "
+              "value we measured",
 }
 
 

@@ -31,15 +31,15 @@ quantifications are, to my knowledge, firsts. The deployed detector's maximum
 composition ranks worse than its own tail term alone, so the auxiliary branch
 is inverted rather than merely uninformative. The ECOD reference
 implementation's scores move with the batch they are scored in, so published
-ECOD numbers are not comparable across studies that score different batch
-sizes. The utility is practical: hash-verified stream reconstruction, run
+ECOD numbers are not comparable across studies that score a different batch,
+in size or composition. The utility is practical: hash-verified stream reconstruction, run
 manifests, and checks a practitioner can rerun.
 
 **Internal validity.** Flat comparisons are made only between deterministic
 scorers. Every stochastic result carries its seed distribution or is withheld.
 The central reversal was then tested against its own strongest alternative
 explanation. Restricting both arms to the records they both held out removes
-the reversal, which locates the effect in sample membership rather than
+the reversal, which attributes the effect to sample membership rather than
 processing order. That result refuted my own earlier headline, and the paper
 is rewritten around the smaller supported claim. Every derived number on the
 page equals the arithmetic a reader performs on the numbers printed beside it,

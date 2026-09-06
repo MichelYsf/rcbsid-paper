@@ -55,7 +55,7 @@ FINDINGS = ROOT / "findings_contrast.md"
 TABLE = ROOT / "results/table_construction_contrast.tex"
 
 METHOD_LABEL = {
-    "proposed_detector": "proposed detector",
+    "proposed_detector": "evaluated detector",
     "hst": "HST",
     "ecod": "ECOD",
 }
@@ -198,17 +198,25 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true",
                     help="exercise the generator without writing a manifest or "
                          "touching the macro index; outputs go to /scratch paths")
+    ap.add_argument("--relabel-table", metavar="RUN_ID",
+                    help="rewrite ONLY the LaTeX table from the pinned run's "
+                         "macros, with the generator's current column labels; "
+                         "no manifest is written and no number is re-derived. "
+                         "Used 2026-09-06 to rename a column label.")
     a = ap.parse_args()
 
     global MERGED, FINDINGS, TABLE
     runner = provenance_run
-    if a.dry_run:
+    if a.dry_run or a.relabel_table:
         runner = _dry_run
         scratch = ROOT / "results/_dryrun"
         scratch.mkdir(parents=True, exist_ok=True)
         MERGED = scratch / "construction_contrast.csv"
         FINDINGS = scratch / "findings_contrast.md"
-        TABLE = scratch / "table_construction_contrast.tex"
+        if a.relabel_table:
+            _DryRun.run_id = a.relabel_table
+        else:
+            TABLE = scratch / "table_construction_contrast.tex"
 
     df, files, exclusions = load_parts()
     MERGED.parent.mkdir(parents=True, exist_ok=True)
@@ -736,7 +744,7 @@ def main() -> int:
             "% Run: " + run.run_id,
             "\\begin{tabular}{llrrr}",
             "\\toprule",
-            "Benchmark & Construction & Held-out prev. & Attacks & AUC-PR (proposed) \\\\",
+            "Benchmark & Construction & Held-out prev. & Attacks & AUC-PR (evaluated detector) \\\\",
             "\\midrule",
         ]
         # Rows carry MACRO REFERENCES, never literals. A bare literal in a

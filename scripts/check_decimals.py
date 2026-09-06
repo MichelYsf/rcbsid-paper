@@ -127,6 +127,26 @@ RELATIONS += [
      ["RevSharedAttacks", "RevSharedRecords"]),
 ]
 
+# Referee round (2026-09-06): the Section 5.3 margins the bootstrap intervals
+# attach to, and the batch-controlled shared-record margins of Table 5.
+RELATIONS += [
+    ("SFourCicidsNaturalEcodMinusDetectorAucpr", "sub",
+     ["SFourCicidsNaturalEcodAucpr", "SFourCicidsNaturalProposedDetectorAucpr"]),
+    ("SFourCicidsSyntheticDetectorMinusEcodAucpr", "sub",
+     ["SFourCicidsSyntheticProposedDetectorAucpr", "SFourCicidsSyntheticEcodAucpr"]),
+    # names as numbers.tex spells them: digits transliterated (240 -> TwoFourZero)
+    ("RefMarginSharedTwoFourZeroNatural", "sub",
+     ["RevSharedDetectorNaturalAucpr", "RefEcodSharedTwoFourZeroNaturalAucpr"]),
+    ("RefMarginSharedTwoFourZeroSynthetic", "sub",
+     ["RevSharedDetectorSyntheticAucpr", "RefEcodSharedTwoFourZeroSyntheticAucpr"]),
+    ("RefMarginSharedSevenEightNatural", "sub",
+     ["RevSharedDetectorNaturalAucpr", "RefEcodSharedSevenEightNaturalAucpr"]),
+    ("RefMarginSharedSevenEightSynthetic", "sub",
+     ["RevSharedDetectorSyntheticAucpr", "RefEcodSharedSevenEightSyntheticAucpr"]),
+    ("RefEcodSharedSevenEightCrossArmSpread", "absub",
+     ["RefEcodSharedSevenEightNaturalAucpr", "RefEcodSharedSevenEightSyntheticAucpr"]),
+]
+
 
 def compute(op: str, vs: list[float]) -> float:
     if op == "sub":

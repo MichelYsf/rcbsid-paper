@@ -14,21 +14,21 @@ The Zenodo deposit is live (doi:10.5281/zenodo.22213264). Order per
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (92,643 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (98,760 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
 |---|---|
 | `main.tex` | named-author variant (not the anonymous DTRAP build) |
 | `numbers.tex` | the generated macro layer every number resolves through |
-| `references.bib` | 49 entries |
+| `references.bib` | 51 entries |
 | `main.bbl` | **required** — arXiv does not run BibTeX |
 | `table_construction_contrast.tex` | `\input` by main.tex |
 | `table_prevalence_sweep.tex` | `\input` by main.tex |
 | `figures/*.pdf` | the four manuscript figures, rendered from archived manifests |
 
 Verified locally: 3-pass pdflatex+bibtex, **exit 0, 0 undefined references, 0
-overfull boxes, 19 pages**, author named on page 1.
+overfull boxes, 21 pages**, author named on page 1.
 
 ## Step 2 — Title (replaces the v1/v2 title)
 
@@ -54,9 +54,10 @@ their records, at held-out prevalences of 68.235% and 25.2396% -- a
 42.9954-point difference -- and the measured ordering of the two deterministic
 scorers reverses. Restricting both arms to the 78000 records they both held out
 removes that reversal: the same scorer leads in both arms there. The reversal is
-therefore a consequence of which records the assembly hands to the test set, not
-of the order in which the detector saw its history, and we locate it
-accordingly. On LITNET-2020, pooling three temporally disjoint captures reports
+therefore attributable to which records the assembly hands to the test set, not
+to the order in which the detector saw its history. That attribution assumes
+that history contributes no more on the records the arms do not share than on
+those they do. On LITNET-2020, pooling three temporally disjoint captures reports
 a single 6.4982% operating point that is the equal-weight mean of per-capture
 held-out prevalences spanning 0.176% to 15.7747%; we present that identity as an
 audit check rather than a discovery. We also audit the evaluated detector
@@ -68,14 +69,14 @@ evaluation consumes is a function of P(r<=5), not of P(r=0). Scoring that
 detector one branch at a time yields a separate result: its deployed max
 composition ranks worse than its own tail term alone (0.103477 AP, 0.302658
 AUC-ROC), because the auxiliary branch is inverted rather than uninformative
-(AUC-ROC 0.281890) and a maximum lets it govern the rank wherever the tail is
-small -- a defect no metric computed on the assembled score can attribute.
+(AUC-ROC 0.281890) and a maximum lets it set the record's score wherever the
+tail is small -- a defect no metric computed on the assembled score can attribute.
 Finally, we quantify a batch dependence in the ECOD reference implementation,
 whose empirical CDFs are recomputed over the training matrix concatenated with
 the scored batch: holding the evaluated records and the fitted model fixed and
 changing only the accompanying batch moves its AUC-PR by 0.003063, so published
-ECOD numbers are not comparable across studies that score different batch sizes.
-Every measured value traces to an archived, hash-verified run manifest, and the
+ECOD numbers are not comparable across studies that score a different batch, in
+size or composition. Every measured value traces to an archived, hash-verified run manifest, and the
 sentence-level claim ledger ships with the artifact.
 ```
 
@@ -124,7 +125,7 @@ author's Windows machine would change published numbers -- the cross-platform
 difference this project records as corrected incident CI-16. They were
 therefore not re-run, and the other seventeen were deliberately left as they
 are rather than regenerate a subset that would not change this disclosure.
-19 pages.
+21 pages.
 ```
 
 **Resolved 2026-08-31:** the v2.0.0 version DOI is
@@ -137,7 +138,7 @@ as the Zenodo description and the DTRAP editor note — 19 of 25 live run
 manifests ran on an uncommitted tree, two irreducibly. Decided 2026-08-27:
 accepted, not re-run.
 
-**Page count is 19.** Verify against the arXiv build preview before submitting;
+**Page count is 21.** Verify against the arXiv build preview before submitting;
 a stale count in this permanent field is the class of error this version exists
 to correct.
 
@@ -151,7 +152,7 @@ to correct.
 
 ## Step 6 — Before pressing submit
 
-1. Preview arXiv's own build. Confirm **19 pages** and **your name on page 1**
+1. Preview arXiv's own build. Confirm **21 pages** and **your name on page 1**
    (this is the named variant; the anonymous build is for DTRAP only).
 2. Confirm the Comments field is the NO VENUE CLAIM variant.
 3. Confirm the abstract has no LaTeX macros left in it (the text above is

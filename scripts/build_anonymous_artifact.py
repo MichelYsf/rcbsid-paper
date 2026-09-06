@@ -34,7 +34,7 @@ INCLUDE_FILES = [
     "REBUILD_DONE.md", "findings_contrast.md", "findings_prevalence.md",
     "findings_score_threshold.md", "findings_bocpd_ablation.md",
     "findings_contributions.md", "findings_streams.md",
-    "findings_review_analyses.md",
+    "findings_review_analyses.md", "findings_referee_analyses.md",
     "paper/main.tex", "paper/numbers.tex", "paper/references.bib",
     "paper/figures/figure_manifest.json",
     "results/construction_contrast.csv", "results/prevalence_sweep_cicids.csv",

@@ -14,7 +14,7 @@ michelyoussef@hotmail.com. ScholarOne will ask to link your ORCID. Link
 
 ## 2. Article type
 
-Select: **full research paper**. The paper is 19 pages, inside DTRAP's 10 to
+Select: **full research paper**. The paper is 21 pages, inside DTRAP's 10 to
 25 page range. If the type list does not offer a clearly matching option,
 stop and report the list. Choose nothing.
 
@@ -29,8 +29,8 @@ Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Be
 ## 4. Abstract
 
 Paste the full abstract below. It is plain text, already expanded from the
-manuscript macros, and it was verified on 2026-08-31 to match the manuscript
-abstract exactly after LaTeX normalization. It is 399 words and 2,607
+manuscript macros, and it was verified on 2026-09-06 to match the manuscript
+abstract exactly after LaTeX normalization. It is 418 words and 2,707
 characters.
 
 ```
@@ -45,9 +45,10 @@ their records, at held-out prevalences of 68.235% and 25.2396% -- a
 42.9954-point difference -- and the measured ordering of the two deterministic
 scorers reverses. Restricting both arms to the 78000 records they both held out
 removes that reversal: the same scorer leads in both arms there. The reversal is
-therefore a consequence of which records the assembly hands to the test set, not
-of the order in which the detector saw its history, and we locate it
-accordingly. On LITNET-2020, pooling three temporally disjoint captures reports
+therefore attributable to which records the assembly hands to the test set, not
+to the order in which the detector saw its history. That attribution assumes
+that history contributes no more on the records the arms do not share than on
+those they do. On LITNET-2020, pooling three temporally disjoint captures reports
 a single 6.4982% operating point that is the equal-weight mean of per-capture
 held-out prevalences spanning 0.176% to 15.7747%; we present that identity as an
 audit check rather than a discovery. We also audit the evaluated detector
@@ -59,14 +60,14 @@ evaluation consumes is a function of P(r<=5), not of P(r=0). Scoring that
 detector one branch at a time yields a separate result: its deployed max
 composition ranks worse than its own tail term alone (0.103477 AP, 0.302658
 AUC-ROC), because the auxiliary branch is inverted rather than uninformative
-(AUC-ROC 0.281890) and a maximum lets it govern the rank wherever the tail is
-small -- a defect no metric computed on the assembled score can attribute.
+(AUC-ROC 0.281890) and a maximum lets it set the record's score wherever the
+tail is small -- a defect no metric computed on the assembled score can attribute.
 Finally, we quantify a batch dependence in the ECOD reference implementation,
 whose empirical CDFs are recomputed over the training matrix concatenated with
 the scored batch: holding the evaluated records and the fitted model fixed and
 changing only the accompanying batch moves its AUC-PR by 0.003063, so published
-ECOD numbers are not comparable across studies that score different batch sizes.
-Every measured value traces to an archived, hash-verified run manifest, and the
+ECOD numbers are not comparable across studies that score a different batch, in
+size or composition. Every measured value traces to an archived, hash-verified run manifest, and the
 sentence-level claim ledger ships with the artifact.
 ```
 
@@ -86,8 +87,8 @@ CICIDS2017, holding the record multiset identical and changing only the
 ordering, a fixed positional split produces held-out samples that share only
 32.5% of their records, sit 42.9954 percentage points apart in prevalence, and
 reverse the measured ordering of the two deterministic scorers. Restricting
-both arms to the records they both held out removes the reversal, locating it
-in test-set membership rather than processing order. On LITNET-2020, the
+both arms to the records they both held out removes the reversal, attributing
+it to test-set membership rather than to processing order. On LITNET-2020, the
 pooled operating point is the equal-weight mean of per-capture prevalences
 spanning 0.176% to 15.7747%. We also audit the evaluated detector against its
 description and quantify a batch dependence in the ECOD reference
@@ -142,7 +143,7 @@ Excluded and confirmed clean: Seth Barrett and every FIRCE and FADES author
 
 ## 9. Cover letter
 
-Paste the whole of `packages/dtrap/COVER_LETTER.txt` (836 words). It is plain
+Paste the whole of `packages/dtrap/COVER_LETTER.txt` (840 words). It is plain
 text with no markdown residue.
 
 Contingency: if the portal offers no separate confidential-comments box, use
@@ -182,9 +183,9 @@ Three files, with designations:
 
 | # | full path | bytes | designation |
 |---|---|---|---|
-| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 641,135 | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 542,171 | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 92,480 | supplementary for review, not for publication |
+| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 654,852 | main document |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 570,954 | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 98,197 | supplementary for review, not for publication |
 
 Upload the anonymized PDF, never `paper\main.pdf`. The anonymous build is the
 one that says "Anonymous Author(s)" on page 1.
@@ -192,7 +193,7 @@ one that says "Anonymous Author(s)" on page 1.
 ## 13. Proof check and submit
 
 ScholarOne renders a proof PDF of your entries before submission. Open it.
-Confirm the title, the abstract, one anonymous main document of 19 pages, and
+Confirm the title, the abstract, one anonymous main document of 21 pages, and
 both supplementary files. Confirm the manuscript PDF shows no author name.
 Then press submit.
 

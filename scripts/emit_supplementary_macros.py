@@ -206,6 +206,24 @@ def main() -> int:
                                  - reported(s6floor), 6),
                            desc="Stage 6 " + v.lower() + " additive lift above "
                                 "the chance floor")
+        # 7) Referee round (2026-09-06): the Section 5.3 margins that the
+        #    event-block bootstrap intervals attach to, taken from the REPORTED
+        #    contrast cells (binding rule 9) so that the printed margin equals
+        #    the arithmetic on the two printed values beside it. The bootstrap
+        #    run recomputes the same margins from the archived per-record
+        #    scores, which reproduce the timestamp-ordered arm to 1.8e-05, so
+        #    its point value is not the one printed.
+        dm = deliv["macros"]
+        run.emit_macro("SFourCicidsNaturalEcodMinusDetectorAucpr",
+                       round(reported(dm["SFourCicidsNaturalEcodAucpr"]["value"])
+                             - reported(dm["SFourCicidsNaturalProposedDetectorAucpr"]["value"]), 6),
+                       desc="timestamp-order arm: ECOD AUC-PR minus detector "
+                            "AUC-PR, from the reported values")
+        run.emit_macro("SFourCicidsSyntheticDetectorMinusEcodAucpr",
+                       round(reported(dm["SFourCicidsSyntheticProposedDetectorAucpr"]["value"])
+                             - reported(dm["SFourCicidsSyntheticEcodAucpr"]["value"]), 6),
+                       desc="day-round-robin arm: detector AUC-PR minus ECOD "
+                            "AUC-PR, from the reported values")
         # LITNET pooling identity: the validation boundary of the pooled stream
         # and the per-capture held-out size whose triple it equals.
         pooled_rows = 3 * lit_n

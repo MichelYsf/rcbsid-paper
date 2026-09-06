@@ -170,7 +170,17 @@ def is_metric(name: str, desc: str = "", unit: str = "") -> bool:
         return False
     if d and any(k in d for k in METRIC_DESC):
         return True
-    return any(name.endswith(suf) for suf in METRIC_SUFFIXES)
+    # An interval bound or point estimate OF a metric is that metric: the
+    # referee-round bootstrap emits RefBoot...MarginLo / MarginHi / MarginPoint,
+    # whose descriptions say only "percentile of that margin", and without
+    # this they rendered at the five decimals they happened to be emitted
+    # with. Flags such as ...CrossesZero are not stripped and stay integers.
+    base = name
+    for tail in ("Lo", "Hi", "Point"):
+        if base.endswith(tail):
+            base = base[: -len(tail)]
+            break
+    return any(base.endswith(suf) for suf in METRIC_SUFFIXES)
 
 
 def sha256_obj(obj: Any) -> str:

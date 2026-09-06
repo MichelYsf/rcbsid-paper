@@ -42,9 +42,10 @@ record multiset identical and changing only the ordering, a fixed positional
 \SFourCicidsPrevShiftAbsPp-point difference --- and the measured ordering of
 the two deterministic scorers reverses. Restricting both arms to the
 \RevSharedRecords{} records they both held out removes that reversal: the same
-scorer leads in both arms there. The reversal is therefore a consequence of
-which records the assembly hands to the test set, not of the order in which the
-detector saw its history, and we locate it accordingly.
+scorer leads in both arms there. The reversal is therefore attributable to
+which records the assembly hands to the test set, not to the order in which
+the detector saw its history. That attribution assumes that history contributes
+no more on the records the arms do not share than on those they do.
 On LITNET-2020, pooling three temporally disjoint captures reports a single
 \SFourLitnetPooledTestPrev\%\ operating point that is the equal-weight mean of
 per-capture held-out prevalences spanning \SFourLitnetSpamTestPrev\%\ to
@@ -59,14 +60,14 @@ that detector one branch at a time yields a separate result: its deployed
 $\max$ composition ranks \emph{worse than its own tail term alone}
 (\RevBranchTailMinusCombinedAucpr{} $AP$, \RevBranchTailMinusCombinedAucroc{}
 AUC-ROC), because the auxiliary branch is inverted rather than uninformative
-(AUC-ROC \RevBranchAuxOnlyAucroc) and a maximum lets it govern the rank
+(AUC-ROC \RevBranchAuxOnlyAucroc) and a maximum lets it set the record's score
 wherever the tail is small --- a defect no metric computed on the assembled
 score can attribute. Finally, we quantify a batch dependence in the ECOD
 reference implementation, whose empirical CDFs are recomputed over the
 training matrix concatenated with the scored batch: holding the evaluated
 records and the fitted model fixed and changing only the accompanying batch
 moves its AUC-PR by \RevEcodBatchDelta, so published ECOD numbers are not
-comparable across studies that score different batch sizes. Every measured
+comparable across studies that score a different batch, in size or composition. Every measured
 value traces to an archived, hash-verified run manifest, and the
 sentence-level claim ledger ships with the artifact.
 \end{abstract}
@@ -188,8 +189,8 @@ held-out slice, the deployed $\max$ composition ranks \emph{worse than its own
 tail term alone} --- by \RevBranchTailMinusCombinedAucpr{} $AP$ and
 \RevBranchTailMinusCombinedAucroc{} AUC-ROC. The auxiliary branch is not
 uninformative but inverted (AUC-ROC \RevBranchAuxOnlyAucroc), and because the
-score is a maximum it governs the rank wherever the tail is small, dragging the
-deployed detector to near-chance AUC-ROC (\RevBranchCombinedAucroc) while its
+score is a maximum it sets the record's score wherever the tail is small,
+dragging the deployed detector to near-chance AUC-ROC (\RevBranchCombinedAucroc) while its
 tail component reaches \RevBranchTailOnlyAucroc. No metric computed on the
 assembled score can attribute this, and the decomposition that finds it uses
 values the scorer already computes.
@@ -200,7 +201,7 @@ the training matrix concatenated with whatever batch is passed to
 accompanied it. Holding the evaluated records and the fitted model identical
 and varying only the accompanying batch moves ECOD's AUC-PR by
 \RevEcodBatchDelta. Published ECOD numbers are therefore not comparable across
-studies that score different batch sizes.
+studies that score a different batch, in size or composition.
 \item \textbf{A provenance discipline that is itself auditable}
 (Section~\ref{sec:provenance}), including the correction history and overlap
 statement of Section~\ref{sec:disclosure}.
@@ -316,9 +317,9 @@ McDermott et al.~\cite{mcdermott2024closerlook} caution that AUC-PR is not
 automatically the better summary under class imbalance and that the choice
 should follow how the scores will be used. We
 use these results, we do not extend them: every AUC-PR this paper compares
-\emph{across} prevalence regimes is reported with its chance floor $p$ and with
+\emph{across} prevalence regimes is reported with its chance level $p$ and with
 normalized lift $(AP-p)/(1-p)$ for that reason, and comparisons made within one
-slice, where the floor is shared, are reported at that fixed floor. What is ours is narrower and is about this benchmark's
+slice, where the chance level is shared, are reported at that fixed level. What is ours is narrower and is about this benchmark's
 construction, not about the metric: the prevalence regime these evaluations
 operate in is \emph{doubly constructed} --- first by a retention budget whose
 per-day sampling is anti-correlated with attack density, and then by the
@@ -453,8 +454,8 @@ result appears in this paper.
 
 \subsection{Protocol}
 \label{sec:protocol}
-Table~\ref{tab:protocol} states the protocol in full so the paper is
-self-contained; the artifact reproduces it exactly.
+Tables~\ref{tab:protocol} and~\ref{tab:protocol-baselines} state the protocol
+in full so the paper is self-contained; the artifact reproduces it exactly.
 
 \begin{table}
 \caption{Experimental protocol. Every entry is taken from the code the archived
@@ -465,9 +466,16 @@ manifests pin, not from intent.}
 element & setting \\
 \midrule
 features & all numeric columns after dropping the label; non-numeric columns
-dropped, so no categorical encoding is used \\
+dropped, so no categorical encoding is used; $d=\ContrastCicidsDim$ (CICIDS2017),
+\ContrastLitnetUdpFloodDim{} (udp\_flood), \ContrastLitnetBlasterWormDim{}
+(blaster\_worm), \ContrastLitnetSpamDim{} (spam) \\
 scaling & none applied by the harness \\
-missing / infinite & $\pm\infty$ mapped to NaN, then all NaN filled with $0.0$ \\
+missing / infinite & $\pm\infty$ mapped to NaN, then all NaN filled with $0.0$;
+this touches \RefImputeCicidsAffectedRows{} of the \RefImputeCicidsRows{}
+CICIDS2017 rows (\RefImputeCicidsInfCells{} infinite cells in
+\RefImputeCicidsAffectedFeatures{} features, no NaN) and
+\RefImputeLitnetUdpFloodAffectedRows{}, \RefImputeLitnetBlasterWormAffectedRows{}
+and \RefImputeLitnetSpamAffectedRows{} rows of the three LITNET streams \\
 label rule & $y{=}1$ unless the label string is \texttt{benign}, \texttt{normal},
 \texttt{0} or \texttt{false} \\
 eligibility (CICIDS) & rows whose label contains `` - Attempted'' dropped \\
@@ -479,20 +487,24 @@ detector: hazard & \SThreeProbeHazard \\
 detector: run-length cap & \SThreeRunLengthCap \\
 detector: warm-up & 30 records \\
 detector: short-run mass & $P(r\le5)$, weight $0.25$ \\
-update timing & score computed from the pre-update predictive; sufficient
-statistics updated after scoring, on every record including held-out ones \\
-label access & the detector and HST see no labels at any point; baselines
-receive a validation-derived threshold; \textbf{ECOD and LOF are fitted on benign-only
-training rows and therefore have label access} \\
+detector: predictive model & one diagonal Gaussian over all $d$ features,
+initialised on the first record, with mean and $M_2$ advanced by Welford's
+recurrence after every record and variances floored at $10^{-4}$; the tail
+score is the $\chi^2_d$ CDF of the squared standardized residual under the
+pre-update global statistics, zero during warm-up; run-conditional means and
+$M_2$ are kept per run length by the same recurrence \\
 metric & \texttt{sklearn.metrics.average\_precision\_score} (AUC-PR) and
 \texttt{roc\_auc\_score}, scikit-learn 1.8.0, positive class $1$, no sample
 weighting; average precision is the step-wise sum
-$\sum_n (R_n-R_{n-1})P_n$, not trapezoidal interpolation \\
-chance floor & average precision of an uninformative ranking equals the
-positive-class prevalence $p$ \\
+$\sum_n (R_n-R_{n-1})P_n$, not trapezoidal interpolation. Flow-wise average
+precision is the convention of the compared work; event-based precision and
+recall for time series~\cite{tatbul2018precision} are future work \\
+chance level & the expected average precision of an uninformative ranking
+equals the positive-class prevalence $p$; it is an expectation, not a lower
+bound, and a ranking can fall below it \\
 reported precision & every \emph{dimensionless} metric on $[0,1]$ ---
-AUC-PR, AUC-ROC, chance floor, fractional prevalence, normalized and additive
-lift, and the margins, spreads and differences taken between them, including
+AUC-PR, AUC-ROC, chance level, fractional prevalence, normalized and additive
+lift, and the margins, ranges and differences taken between them, including
 per-seed draws --- is reported to six decimal places, and any of those derived
 from other reported quantities is computed from their \emph{reported} values.
 Every such derived number therefore equals the arithmetic on the numbers
@@ -502,8 +514,52 @@ last reported place, below $10^{-5}$ throughout and orders of magnitude below
 any effect claimed here. Deliberately outside that rule, and reported at the
 precision each was emitted with: percentage- and percentage-point-scaled
 values (the same quantities at $100\times$, where six decimals would fabricate
-digits), integer counts, the protocol constants in this table, and values
-quoted from cited work \\
+digits), integer counts, the protocol constants in this table and in
+Table~\ref{tab:protocol-baselines}, the posterior
+probabilities of Section~\ref{sec:detector} and the diagnostic fractions of
+Table~\ref{tab:ablation}, which are not metrics and are reported at the
+precision each was emitted with, and values quoted from cited work \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\caption{Experimental protocol, continued: update timing, label access,
+baseline hyperparameters, seeds and the sweep's resampling procedure. Every
+entry is read from the code the archived manifests pin.}
+\label{tab:protocol-baselines}
+\begin{tabular}{@{}lp{0.72\linewidth}@{}}
+\toprule
+element & setting \\
+\midrule
+update timing & prequential, in the sense of Gama et
+al.~\cite{gama2013prequential}: score computed from the pre-update predictive;
+sufficient statistics updated after scoring, on every record including held-out
+ones \\
+label access & the detector and HST see no labels at any point; baselines
+receive a validation-derived threshold; \textbf{ECOD and LOF are fitted on benign-only
+training rows and therefore have label access} \\
+HST & river \texttt{HalfSpaceTrees} behind a river \texttt{MinMaxScaler}:
+25 trees, height 15, window 250, the cell's seed \\
+LODA & the artifact's own implementation of LODA: 100 unit-norm random
+projections, 32 histogram bins, window 512, running standardization, the
+cell's seed \\
+LOF & \texttt{sklearn.neighbors.LocalOutlierFactor}, 35 neighbours,
+\texttt{novelty=True}, \texttt{contamination='auto'}, fitted on benign-only
+training rows; score $=-$\texttt{score\_samples}, min--max scaled \\
+ECOD & PyOD \texttt{ECOD()} at its defaults, fitted on benign-only training
+rows and scored in one \texttt{decision\_function} call on the batch stated in
+Section~\ref{sec:ecodbatch}; scores min--max scaled \\
+seeds & contrast and LITNET runs: seed 11, with HST's additional draws at seeds
+23 and 47; sweep: resample seeds 11, 23 and 47, each streaming method seeded
+with the resample seed \\
+sweep resampling & stratified within each chronological split segment: below
+the natural rate every benign row is kept and attacks are thinned to the
+segment quota; above it both classes are thinned to the quotas of the largest
+stream whose re-split meets the target in every segment; selection is random
+without replacement, order preserved, no duplicates; a draw is accepted only if
+every segment's achieved prevalence is within 1\,pp of the target, otherwise
+redrawn with seed $+\,100000\cdot$attempt, at most 20 redraws \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -569,7 +625,9 @@ Held-out prevalence differs by \SFourCicidsPrevShiftAbsPp{} points. The two
 held-out slices share only \CicidsHeldoutOverlap{} of \CicidsHeldoutSize{}
 records (\CicidsHeldoutOverlapPct\%); the assembled arm's held-out attacks are
 a strict subset of the timestamp-ordered arm's, with
-\CicidsAttacksMovedOutOfHeldout{} attacks relocated into training. The
+\CicidsAttacksMovedOutOfHeldout{} attacks relocated out of the held-out slice:
+\RefRelocatedToTraining{} of them into training and \RefRelocatedToValidation{}
+into validation, counted from the archived splits. The
 mechanism of the prevalence change is dilution: every held-out attack in the
 assembled arm is a Friday record
 (\CicidsSyntheticHeldoutAttackDays{} of five days contribute any), while
@@ -582,7 +640,7 @@ is not by itself an account of the outcome change in
 Section~\ref{sec:outcome}.
 
 \begin{table}
-\caption{The assembly contrast. Held-out prevalence, attacks, and the proposed
+\caption{The assembly contrast. Held-out prevalence, attacks, and the evaluated
 detector's AUC-PR per arm. Every cell is a macro resolving to an archived
 manifest.}
 \label{tab:contrast}
@@ -591,11 +649,11 @@ manifest.}
 
 \subsection{What assembly does to the measured outcome}
 \label{sec:outcome}
-AUC-PR's chance floor is the positive-class prevalence, which the treatment
+AUC-PR's chance level is the positive-class prevalence, which the treatment
 moves (\SFourCicidsNaturalChanceFloor{} against
 \SFourCicidsSyntheticChanceFloor), and additive lift $AP-p$ has a
-prevalence-dependent ceiling of $1-p$. We therefore report raw $AP$, the floor
-$p$, and the normalized lift $(AP-p)/(1-p)$ together, and report no raw
+prevalence-dependent ceiling of $1-p$. We therefore report raw $AP$, the chance
+level $p$, and the normalized lift $(AP-p)/(1-p)$ together, and report no raw
 cross-arm difference.
 
 \begin{itemize}
@@ -605,7 +663,7 @@ $AP=\SFourCicidsNaturalEcodAucpr$ (normalized lift
 $AP=\SFourCicidsNaturalProposedDetectorAucpr$ (normalized lift
 \SFourCicidsNaturalProposedDetectorNormLift). HST scores
 \SFourCicidsNaturalHstAucpr{} here, \SFourCicidsNaturalHstLiftAbs{} below its
-chance floor, from a single seed, so no placement is asserted for it.
+chance level, from a single seed, so no placement is asserted for it.
 \item \textbf{Day round robin} ($p=\SFourCicidsSyntheticChanceFloor$): detector
 $AP=\SFourCicidsSyntheticProposedDetectorAucpr$ (normalized lift
 \SFourCicidsSyntheticProposedDetectorNormLift), ECOD
@@ -631,9 +689,16 @@ measured on a common sample. Section~\ref{sec:shared} measures what happens
 when that difference is removed, and the reversal does not survive it
 (Figure~\ref{fig:decomposition}).
 (iii)~Determinism removes seed variance but not sampling uncertainty from the
-selected window, correlated attack runs, or the subsample; we report no
-confidence interval and therefore claim no stable ordering, only a measured one
-under this protocol.
+selected window, correlated attack runs, or the subsample. The margins are
+\SFourCicidsNaturalEcodMinusDetectorAucpr{} $AP$ for ECOD in timestamp order
+and \SFourCicidsSyntheticDetectorMinusEcodAucpr{} $AP$ for the detector in day
+round robin, each computed from the reported cells; their event-block bootstrap
+intervals over the held-out slice (Section~\ref{sec:threats} states the
+procedure; the intervals are computed from the archived per-record scores) are
+$[\RefBootFullNaturalMarginLo,\,\RefBootFullNaturalMarginHi]$ and
+$[\RefBootFullSyntheticMarginLo,\,\RefBootFullSyntheticMarginHi]$, neither of
+which crosses zero. Those intervals cover sampling uncertainty over this slice
+only, so we claim no stable ordering, only a measured one under this protocol.
 
 \begin{figure}
 \centering
@@ -641,7 +706,7 @@ under this protocol.
 \caption{Detector and ECOD AUC-PR in the two arms. Left: the full held-out
 slice of each arm, where the measured ordering reverses. Right: the
 \RevSharedRecords{} records both arms held out, where the detector leads in
-both arms. Dotted marks are each group's chance floor, the held-out
+both arms. Dotted marks are each group's chance level, the held-out
 prevalence: \SFourCicidsNaturalChanceFloor{} and
 \SFourCicidsSyntheticChanceFloor{} for the full slices and
 \RevSharedPrevalence{} for the shared records. Values are those of
@@ -670,7 +735,7 @@ artifact of equal budgets. Per-stream values are in Table~\ref{tab:litnet}.
 \caption{LITNET-2020: AUC-PR per stream against the pooled assembled composite.
 The detector and ECOD (label-privileged diagnostic reference) are deterministic;
 HST is a single draw per cell, so no ordering involving HST is asserted. Its
-measured composite spread across three seeds is
+three composite draws across seeds are
 \SFourSeedLitnetPooledCompositeSyntheticHstDrawOne,
 \SFourSeedLitnetPooledCompositeSyntheticHstDrawTwo,
 \SFourSeedLitnetPooledCompositeSyntheticHstDrawThree.}
@@ -707,29 +772,46 @@ exactly those records, and recomputing:
 \begin{table}
 \caption{Both arms restricted to the \RevSharedRecords{} records they both
 held out. Membership and prevalence are identical by construction; only the
-history each detector saw before scoring them differs.}
+history each detector saw before scoring them differs. ECOD is reported under
+two scoring batches: ``slice'' is the arm's full \CicidsHeldoutSize-record
+held-out slice, scored together and restricted afterwards to the shared
+records; ``shared'' is the \RevSharedRecords{} shared records scored as their
+own batch under the same fitted model, which is the batch-controlled
+comparison (Section~\ref{sec:ecodbatch}).}
 \label{tab:shared}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrrr}
 \toprule
-arm & detector $AP$ & ECOD $AP$ & detector AUC-ROC & ECOD AUC-ROC \\
+ & \multicolumn{3}{c}{$AP$} & \multicolumn{3}{c}{AUC-ROC} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+arm & detector & ECOD (slice) & ECOD (shared) & detector & ECOD (slice) & ECOD (shared) \\
 \midrule
-timestamp order & \RevSharedDetectorNaturalAucpr & \RevSharedEcodNaturalAucpr & \RevSharedDetectorNaturalAucroc & \RevSharedEcodNaturalAucroc \\
-day round robin & \RevSharedDetectorSyntheticAucpr & \RevSharedEcodSyntheticAucpr & \RevSharedDetectorSyntheticAucroc & \RevSharedEcodSyntheticAucroc \\
+timestamp order & \RevSharedDetectorNaturalAucpr & \RevSharedEcodNaturalAucpr & \RefEcodSharedSevenEightNaturalAucpr & \RevSharedDetectorNaturalAucroc & \RevSharedEcodNaturalAucroc & \RefEcodSharedSevenEightNaturalAucroc \\
+day round robin & \RevSharedDetectorSyntheticAucpr & \RevSharedEcodSyntheticAucpr & \RefEcodSharedSevenEightSyntheticAucpr & \RevSharedDetectorSyntheticAucroc & \RevSharedEcodSyntheticAucroc & \RefEcodSharedSevenEightSyntheticAucroc \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{The ordering does not reverse on the shared records.} The detector
-leads ECOD in both arms (margins \RevSharedMarginNatural{} and
-\RevSharedMarginSynthetic, both computed from the reported cells above), and
-its own score changes by only
-\RevSharedDetectorSpread{} $AP$ between the two histories. This is the
-round's most consequential result and it constrains the paper's central claim:
-the reversal reported in Section~\ref{sec:outcome} is produced by \emph{which
-records the assembly places in the test set}, not by the order in which the
-detector processed its history. We report the reversal as an evaluation-level
-consequence of assembly and explicitly not as an effect of ordering on detector
-behaviour.
+\textbf{The ordering does not reverse on the shared records, under either
+batch.} The detector leads ECOD in both arms: by \RevSharedMarginNatural{} and
+\RevSharedMarginSynthetic{} $AP$ under the slice batch and by
+\RefMarginSharedSevenEightNatural{} and \RefMarginSharedSevenEightSynthetic{} $AP$ under the
+shared batch, each computed from the reported cells above, with event-block
+bootstrap intervals (Section~\ref{sec:threats})
+$[\RefBootSharedTwoFourZeroNaturalMarginLo,\,\RefBootSharedTwoFourZeroNaturalMarginHi]$,
+$[\RefBootSharedTwoFourZeroSyntheticMarginLo,\,\RefBootSharedTwoFourZeroSyntheticMarginHi]$,
+$[\RefBootSharedSevenEightNaturalMarginLo,\,\RefBootSharedSevenEightNaturalMarginHi]$ and
+$[\RefBootSharedSevenEightSyntheticMarginLo,\,\RefBootSharedSevenEightSyntheticMarginHi]$, none
+of which crosses zero. The detector's own score changes by only
+\RevSharedDetectorSpread{} $AP$ between the two histories, and ECOD's
+batch-controlled score by \RefEcodSharedSevenEightCrossArmSpread{} $AP$ between the two
+fitted models. This is the paper's most consequential result and it constrains
+the paper's central claim: the reversal reported in Section~\ref{sec:outcome}
+is attributable to \emph{which records the assembly places in the test set},
+not to the order in which the detector processed its history. That attribution
+rests on an assumption the archived design does not test: that history
+contributes no more on the records the arms do not share than on those they
+do. We report the reversal as an evaluation-level consequence of assembly and
+explicitly not as an effect of ordering on detector behaviour.
 
 Two cautions on reading Table~\ref{tab:shared}. The shared records are not a
 random subsample --- they are the intersection two particular assemblies
@@ -748,6 +830,14 @@ others. The measured ordering is therefore a property of the split point as well
 as of the assembly; the archived split is not adversarially chosen, but it is
 not neutral either, and no claim here is a stable property of CICIDS2017.
 Per-cut values are in the archived findings and in Figure~\ref{fig:split}.
+Repeating the assembly contrast at the same \RefPairedCuts{} cuts, with both
+arms scored at each cut and ECOD refit at each, the two arms' orderings differ
+at \RefPairedCutsOrderingsDiffer{} cuts --- 75\%, 80\%\ and the 85\%\ cut this
+paper uses, where ECOD leads in timestamp order and the detector leads in day
+round robin --- and agree at the other \RefPairedCutsOrderingsAgree, where the
+detector leads in both arms; the detector leads in the day-round-robin arm at
+every cut. The reversal is therefore a property of this region of cuts, not of
+every cut.
 
 \begin{figure}
 \centering
@@ -755,7 +845,7 @@ Per-cut values are in the archived findings and in Figure~\ref{fig:split}.
 \caption{AUC-PR of the two deterministic scorers at each of the
 \RevSplitCuts{} chronological cuts of the timestamp-ordered CICIDS2017 stream.
 The held-out prevalence at each cut is drawn on the same axis. It is the
-AUC-PR chance floor. Shaded cuts are the \RevSplitEcodWins{} at which ECOD
+AUC-PR chance level. Shaded cuts are the \RevSplitEcodWins{} at which ECOD
 leads. The dashed line marks the cut this paper's fixed split uses. Values are
 recomputed from the archived per-record scores, as those of
 Table~\ref{tab:branch} are, with ECOD refit at each cut, and so differ slightly
@@ -798,8 +888,8 @@ the scored batch, not a fitted function evaluated pointwise.
 
 We measured the size of the effect with everything else pinned. The evaluated
 index set is fixed at the same \RevEcodBatchEvalRecords{} records, the model is
-fitted once on the same benign training rows, and only the number of records
-accompanying them in the call varies. Scored alone, ECOD reaches
+fitted once on the same benign training rows, and only the records
+accompanying them in the call vary, in number and therefore in composition. Scored alone, ECOD reaches
 $AP=\RevEcodBatchTwoFourZeroZeroZeroZeroAucpr$; scored in the
 \CicidsEcodScoringBatch-record validation-plus-test call this paper's contrast
 arms use, the same records give
@@ -809,13 +899,13 @@ a four-point batch ladder the value spans \RevEcodBatchSpread{} $AP$, and it
 does not move monotonically with batch size, so the dependence cannot be
 corrected for by a simple adjustment.
 
-The second of those two figures is the diagnostic one:
-$\RevEcodBatchFourEightZeroZeroZeroZeroAucpr$ is exactly
-\SFourCicidsNaturalEcodAucpr, the value the timestamp-ordered arm of
-Section~\ref{sec:outcome} reports, recovered here from an independent pass. The
-batch composition therefore accounts for the discrepancy completely rather than
-approximately, which is what distinguishes this from an unexplained numerical
-difference. The threshold inherits the dependence too, because it is read off
+The second of those two values is the diagnostic one: scoring the held-out
+records inside the validation-plus-test batch reproduces, from an independent
+pass over the archived design matrix, the value the timestamp-ordered arm of
+Section~\ref{sec:outcome} reports (\SFourCicidsNaturalEcodAucpr), to the last
+reported decimal. The batch composition therefore accounts for the discrepancy
+completely rather than approximately, which is what distinguishes this from an
+unexplained numerical difference. The threshold inherits the dependence too, because it is read off
 the validation portion of the same call.
 
 \textbf{What is and is not new here.} That ECOD mixes the training and scored
@@ -842,10 +932,10 @@ the cross-study consequence, in the ordinary sense that we are aware of no
 prior one. We would rather be corrected on priority than have the measurement
 go unreported, and the claim is about the measurement, not about the mechanism,
 which is not ours. That consequence is that published
-ECOD numbers are not comparable across studies that score different batch
-sizes, even on the same dataset, the same split and the same model, and that a
-reported ECOD number is therefore under-specified unless the scoring batch is
-reported with it. Campos et al.~\cite{campos2016evaluation} showed for
+ECOD numbers are not comparable across studies that score a different batch,
+in size or composition, even on the same dataset, the same split and the same
+model, and that a reported ECOD number is therefore under-specified unless the
+scoring batch is reported with it. Campos et al.~\cite{campos2016evaluation} showed for
 unsupervised outlier detection generally that reported comparisons depend on
 evaluation choices that papers rarely state.
 
@@ -865,15 +955,21 @@ composite (Section~\ref{sec:contrast-litnet}), and between
 \SweepEcodScoringBatchMin{} and \SweepEcodScoringBatchMax{} across the levels
 of the prevalence sweep (Section~\ref{sec:sweep}), which resamples the stream
 and so changes the batch with the level. The shared-record analysis of
-Section~\ref{sec:shared} scores each arm's \CicidsHeldoutSize-record held-out
-slice and then restricts to the \RevSharedRecords{} shared records, so its ECOD
-values carry a \CicidsHeldoutSize-record batch; the split sweep above scores
-the tail of the stream at each cut, so its batch is the test slice itself and
-varies by cut. Cross-arm comparisons in this paper are made within a fixed
-batch size, which is why the batch dependence does not disturb them; the
+Section~\ref{sec:shared} reports ECOD under two batches: each arm's
+\CicidsHeldoutSize-record held-out slice, restricted afterwards to the
+\RevSharedRecords{} shared records, and the shared records scored as their own
+\RevSharedRecords-record batch; the split sweeps above score the tail of the
+stream at each cut, so their batch is the test slice itself and varies by cut.
+Cross-arm comparisons in this paper hold the batch fixed in size but not in
+composition: the two arms' validation-plus-test batches have the same
+\CicidsEcodScoringBatch{} records in count and different records in content,
+so equal size alone does not remove the batch dependence from the contrast of
+Section~\ref{sec:outcome}. Cross-arm ECOD comparisons are batch-controlled
+only where the rescoring of Table~\ref{tab:shared} makes them so, by scoring
+identical records as an identical batch under each arm's fitted model. The
 \CicidsHeldoutSize-versus-\CicidsEcodScoringBatch{} discrepancy is visible
 precisely because the split sweep and the contrast were the one pair of
-analyses that did not share one.
+analyses that did not share a batch size.
 
 \section{The Deployed Score Ranks Worse Than Its Own Tail Term}
 \label{sec:branch}
@@ -908,14 +1004,25 @@ auxiliary term only & \RevBranchAuxOnlyAucpr & \RevBranchAuxOnlyAucroc \\
 The tail term alone \emph{outranks} the deployed composition, by
 \RevBranchTailMinusCombinedAucpr{} $AP$ and
 \RevBranchTailMinusCombinedAucroc{} AUC-ROC. Deleting the auxiliary branch
-would therefore improve the detector on this slice. Figure~\ref{fig:branch}
+would therefore improve the detector on this slice. The event-block bootstrap
+intervals of the three rows of Table~\ref{tab:branch} are
+$[\RefBootBranchCombinedAucprLo,\,\RefBootBranchCombinedAucprHi]$ $AP$ and
+$[\RefBootBranchCombinedAucrocLo,\,\RefBootBranchCombinedAucrocHi]$ AUC-ROC for
+the deployed composition,
+$[\RefBootBranchTailOnlyAucprLo,\,\RefBootBranchTailOnlyAucprHi]$ and
+$[\RefBootBranchTailOnlyAucrocLo,\,\RefBootBranchTailOnlyAucrocHi]$ for the
+tail term alone, and
+$[\RefBootBranchAuxOnlyAucprLo,\,\RefBootBranchAuxOnlyAucprHi]$ and
+$[\RefBootBranchAuxOnlyAucrocLo,\,\RefBootBranchAuxOnlyAucrocHi]$ for the
+auxiliary term alone; the tail-only and deployed intervals do not overlap on
+either metric. Figure~\ref{fig:branch}
 draws the three branches against chance.
 
 \begin{figure}
 \centering
 \includegraphics[width=3.33in]{figures/fig_branch}
 \caption{Branch-wise discrimination on the timestamp-ordered held-out slice,
-the values of Table~\ref{tab:branch}. Left: AUC-PR with the chance floor at
+the values of Table~\ref{tab:branch}. Left: AUC-PR with the chance level at
 the slice prevalence, \SFourCicidsNaturalChanceFloor. Right: AUC-ROC with the
 chance level of an uninformative ranking. The deployed composition is the
 detector of the other figures. The tail term alone ranks above the deployed
@@ -927,14 +1034,17 @@ panels and the auxiliary-only bar is below the chance line in both panels.}
 \label{fig:branch}
 \end{figure}
 
-The mechanism is identified and is not statistical. The auxiliary term ranks
-\emph{below} chance here (AUC-ROC \RevBranchAuxOnlyAucroc{} against $0.5$),
-which means it is not noise but an actively inverted signal: it scores attacks
-lower than benign records more often than not. Because the deployed score is a
-$\max$, the auxiliary value governs the record's rank whenever it exceeds the
+The mechanism is identified on this slice, and its sampling uncertainty over
+the slice is small. The auxiliary term ranks \emph{below} chance here (AUC-ROC
+\RevBranchAuxOnlyAucroc{} against $0.5$, with event-block bootstrap interval
+$[\RefBootBranchAuxOnlyAucrocLo,\,\RefBootBranchAuxOnlyAucrocHi]$, entirely
+below $0.5$), which means it is not noise on this slice but an inverted signal:
+it scores attacks lower than benign records more often than not. Because the deployed score is a
+$\max$, the auxiliary value sets the record's score whenever it exceeds the
 tail value --- which is \RevBranchAuxBindsHeldoutPct\%\ of this held-out
-slice, counted from the same archived components --- so an inverted ranking is
-imposed on top of a working one. That is why the
+slice, counted from the same archived components --- and the record's rank
+then follows from all scores together, so an inverted signal is written into
+the scores of a working one. That is why the
 deployed composition's AUC-ROC (\RevBranchCombinedAucroc) sits near chance
 while its tail component reaches \RevBranchTailOnlyAucroc.
 
@@ -964,14 +1074,14 @@ stratified resampling at five levels, three draws each. It does not isolate
 prevalence either --- only the unresampled level's draws see identical records,
 so record identity, repetition and temporal adjacency vary with the nominal
 level. Table~\ref{tab:sweep} reports $AP$ with the achieved held-out prevalence
-as the floor beside every level.
+as the chance level beside every prevalence level.
 
 \begin{table}
 \caption{AUC-PR by prevalence level on the assembled construction (mean over
-three resampling draws). ``Floor'' is the achieved held-out prevalence. At the
-unresampled level all draws see the same records; at resampled levels the
-spread of every method is the resampling draw. Per-draw values and normalized
-lift are in the archived findings.}
+three resampling draws). ``Chance level'' is the achieved held-out prevalence.
+At the unresampled level all draws see the same records; at resampled levels
+the three draws of every method differ by the resampling draw. Per-draw values
+and normalized lift are in the archived findings.}
 \label{tab:sweep}
 \input{table_prevalence_sweep}
 \end{table}
@@ -1005,7 +1115,7 @@ this paragraph: one stream (udp\_flood), a \SSixPrefixRows-record prefix, one
 seed. On the synthetic probe the repair responds: $P(r{=}0)$ peaks at
 \SSixProbeCorrectedPeak{} after a $6\sigma$ shift against
 \SSixProbeOriginalPeak{} for the evaluated detector. On real data it ranks near
-chance: $AP=\SSixCorrectedAucpr$ against \SSixOriginalAucpr{} (floor
+chance: $AP=\SSixCorrectedAucpr$ against \SSixOriginalAucpr{} (chance level
 \SSixChanceFloor; normalized lift \SSixCorrectedNormLift{} against
 \SSixOriginalNormLift), with AUC-ROC \SSixCorrectedAucroc.
 
@@ -1093,16 +1203,19 @@ anonymous --- that account is supplied to the editors confidentially rather
 than printed here, together with the dated version history and the list of
 claims each correction invalidates.
 
-Three statements can be made in the body without breaking anonymity, and are
-made here because they bear on how the results should be read. First, some
-measurements in this paper also appear in the earlier versions: the pooled
-LITNET composite and the assembled CICIDS arm are the \emph{same
-measurements}, reported there under a regime interpretation that this paper
-withdraws and replaces with an assembly interpretation. Second, the
-timestamp-ordered CICIDS arm, the per-capture LITNET streams, the shared-record
-analysis, and the method-identity audit have no counterpart in any earlier
-version. Third, results on a third dataset that appeared in the earlier
-versions are withdrawn and are not relied upon anywhere in this paper.
+Two statements can be made in the body without breaking anonymity, and are
+made here because they bear on how the results should be read. Some
+measurements in this paper also appear in the earlier versions, reported there
+under an interpretation that this paper withdraws and replaces. Which
+measurements those are, which results are new, and which earlier results are
+withdrawn is as follows. The pooled LITNET composite and the assembled CICIDS arm
+are the same measurements as in v1 and v2, reported there under a regime
+interpretation that this paper replaces with an assembly interpretation;
+the timestamp-ordered CICIDS arm, the per-capture LITNET streams, the
+shared-record analysis and the method-identity audit have no counterpart
+in any earlier version; and results on a third dataset that appeared in
+the earlier versions are withdrawn and are not relied upon anywhere in
+this paper.
 
 One result from those earlier versions is worth restating here as
 \emph{corroboration}, explicitly not as a contribution of this paper. Conformal
@@ -1133,15 +1246,21 @@ claim.
 moves held-out membership, prevalence and order together, so no single factor
 is identified by the contrast alone. Section~\ref{sec:shared} removes the
 membership difference post hoc and finds the ordering reversal does not
-survive, which locates the effect in sample membership; it does not decompose
-the remaining factors, and a factorial design still would. ECOD is a label-privileged diagnostic reference, not a competitor
-under equal information. Determinism removes seed variance only; we report no
-confidence interval, and with attack runs of median/p90/max
+survive, which attributes the effect to sample membership under the assumption
+stated there; it does not decompose the remaining factors, and a factorial
+design still would. ECOD is a label-privileged diagnostic reference, not a competitor
+under equal information. Determinism removes seed variance only. With attack runs of median/p90/max
 \StreamCicidsTwoZeroOneSevenRunMedian/\StreamCicidsTwoZeroOneSevenRunPninety/\StreamCicidsTwoZeroOneSevenRunMax{}
-an IID row bootstrap would be inappropriate, so an event-block or
-rolling-origin procedure is the right instrument and is not yet applied.
+records an IID row bootstrap would be inappropriate, so every interval this
+paper reports comes from a moving-block bootstrap over the archived per-record
+scores of the evaluated slice, in stream order: block length
+\RefBootBlockLength{} records, longer than the p90 run, \RefBootResamples{}
+resamples, and the 2.5th and 97.5th percentiles of the resampled statistic.
+Those intervals quantify sampling uncertainty over the evaluated slice only,
+not over the window selection or the subsample, and a rolling-origin procedure
+is not applied.
 Stochastic baselines appear either as single draws marked as such or as means
-over draws with the draw spread stated, and the per-draw values are archived.
+over draws with the three draws stated, and the per-draw values are archived.
 
 \textbf{External.} Two benchmarks, one split rule, one corpus per benchmark.
 The CICIDS mechanism depends on that dataset's scripted per-day schedule
@@ -1172,8 +1291,8 @@ measured. On CICIDS2017 the same multiset reordered yields held-out slices
 sharing \CicidsHeldoutOverlapPct\%\ of their records at prevalences
 \SFourCicidsPrevShiftAbsPp{} points apart, and reverses the measured ordering
 of the two deterministic scorers --- a reversal that disappears once both arms
-are restricted to the records they share, locating it in the sample the
-assembly selects rather than in the order it imposes. On LITNET-2020, pooling reports an operating
+are restricted to the records they share, attributing it to the sample the
+assembly selects rather than to the order it imposes. On LITNET-2020, pooling reports an operating
 point no capture exhibits. The practical recommendation is not that chronology
 is always right; it is that assembly belongs in the experimental design and in
 the provenance record --- report capture identity, mixture weights, split
@@ -1204,10 +1323,9 @@ including any portion drafted with such assistance.
 A companion manuscript from the same research programme (arXiv:2510.09619) shares parts of the underlying codebase and
 predates the audit reported here. The method-identity findings of
 Section~\ref{sec:detector} apply to that shared lineage, and correcting it is
-in hand. It is a public preprint and is not under review at any venue; its
-status was verified against the submission system of record on 27 August 2026,
-and there is accordingly no other editor to inform and no concurrent
-consideration to declare. Its relationship to the results reported here, and the
+in hand. It is a public preprint and is not under review at any venue, and
+there is accordingly no other editor to inform and no concurrent consideration
+to declare. Its relationship to the results reported here, and the
 relationship to the earlier public versions of this manuscript, are stated in
 Section~\ref{sec:disclosure};
 the earlier public versions are arXiv:2605.24696 v1 and v2.

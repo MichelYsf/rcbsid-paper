@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{49}
+\begin{thebibliography}{51}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -344,6 +344,18 @@
 \href{https://doi.org/10.1111/j.1467-9868.2007.00601.x}{doi:\nolinkurl{10.1111/j.1467-9868.2007.00601.x}}
 
 
+\bibitem[Gama et~al\mbox{.}(2013)]%
+        {gama2013prequential}
+\bibfield{author}{\bibinfo{person}{Jo{\~a}o Gama}, \bibinfo{person}{Raquel
+  Sebasti{\~a}o}, {and} \bibinfo{person}{Pedro~Pereira Rodrigues}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{On Evaluating Stream Learning Algorithms}.
+\newblock \bibinfo{journal}{\emph{Machine Learning}} \bibinfo{volume}{90},
+  \bibinfo{number}{3} (\bibinfo{year}{2013}), \bibinfo{pages}{317--346}.
+\newblock
+\href{https://doi.org/10.1007/s10994-012-5320-9}{doi:\nolinkurl{10.1007/s10994-012-5320-9}}
+
+
 \bibitem[Guha et~al\mbox{.}(2016)]%
         {guha2016rrcf}
 \bibfield{author}{\bibinfo{person}{Sudipto Guha}, \bibinfo{person}{Nina
@@ -649,6 +661,19 @@
   \bibinfo{publisher}{{AAAI} Press}, \bibinfo{pages}{1511--1516}.
 \newblock
 \href{https://doi.org/10.5591/978-1-57735-516-8/IJCAI11-254}{doi:\nolinkurl{10.5591/978-1-57735-516-8/IJCAI11-254}}
+
+
+\bibitem[Tatbul et~al\mbox{.}(2018)]%
+        {tatbul2018precision}
+\bibfield{author}{\bibinfo{person}{Nesime Tatbul}, \bibinfo{person}{Tae~Jun
+  Lee}, \bibinfo{person}{Stan Zdonik}, \bibinfo{person}{Mejbah Alam}, {and}
+  \bibinfo{person}{Justin Gottschlich}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Precision and Recall for Time Series}. In
+  \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems
+  31 ({NeurIPS} 2018)}}. \bibinfo{pages}{1924--1934}.
+\newblock
+\shownote{arXiv:1803.03639}.
+\newblock
 
 
 \bibitem[van~den Burg and Williams(2020)]%
