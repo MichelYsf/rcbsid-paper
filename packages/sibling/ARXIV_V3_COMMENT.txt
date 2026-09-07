@@ -52,9 +52,11 @@ execution, and a build gate fails on any number lacking one. A sentence-level
 claim ledger ships with the artifact. Earlier manuscript versions cite
 doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact
 record, deposited 2026-05-07 and containing the pre-audit codebase; this
-corrected rebuild is published as version 2.0.0 in the same record lineage
-(doi:10.5281/zenodo.22213264) and supersedes it, and Zenodo displays a
-newer-version notice on the superseded record. Title changed accordingly
+corrected rebuild is published in the same record lineage, first as version
+2.0.0 (doi:10.5281/zenodo.22213264) and, with the manifests of the
+pre-submission review rounds added, as version 2.1.0
+(doi:10.5281/zenodo.22638195), which supersedes it, and Zenodo displays a
+newer-version notice on each superseded record. Title changed accordingly
 (previously "CALIBURN: Operationally Calibrated Streaming Intrusion Detection
 with Regime-Dependent Conformal Risk Control"). A companion preprint sharing
 parts of the same codebase (arXiv:2510.09619) predates this audit. The
@@ -72,14 +74,15 @@ instance that has since been decommissioned, and re-running them on the
 author's Windows machine would change published numbers -- the cross-platform
 difference this project records as corrected incident CI-16. They were
 therefore not re-run, and the other seventeen were deliberately left as they
-are rather than regenerate a subset that would not change this disclosure.
-22 pages.
+are rather than regenerate a subset that would not change this disclosure. 22
+pages.
 -----------------------------------------------------------------------------
-PAGE COUNT: 22, the compiled length of packages/arxiv_v3/arxiv_v3_source.tar.gz
-as rebuilt 2026-09-07 (17 before the figure round, 13 before the round-3 additions, 16 before the
-three-auditor sweep's qualifying clauses). Re-check after
-any further edit before pasting; a stale figure in a public Comments field is
-exactly the class of error this version exists to correct.
+PAGE COUNT: 22, the compiled length of
+packages/arxiv_v3/arxiv_v3_source.tar.gz as rebuilt 2026-09-07 (17 before the
+figure round, 13 before the round-3 additions, 16 before the three-auditor
+sweep's qualifying clauses). Re-check after any further edit before pasting; a
+stale figure in a public Comments field is exactly the class of error this
+version exists to correct.
 -----------------------------------------------------------------------------
 
 Note on the companion sentence: it states only what is verifiable from the

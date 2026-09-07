@@ -24,8 +24,9 @@ Detection with Regime-Dependent Conformal Risk Control":
 
 Neither version was accepted anywhere. A corrected v3, matching this
 submission, will be posted to arXiv within 48 hours of this submission. The
-corrected artifact is already live on Zenodo as version 2.0.0
-(doi:10.5281/zenodo.22213264).
+corrected artifact is already deposited on Zenodo at the time of this
+submission as version 2.1.0 (doi:10.5281/zenodo.22638195), which supersedes
+version 2.0.0 (doi:10.5281/zenodo.22213264).
 
 **What was wrong, and what the correction covers.** An adversarial review and
 a line-by-line audit of the archived artifacts established two defects that
@@ -76,7 +77,7 @@ hours of this submission. The corrected-incident log in the artifact records
 each numbered incident with its evidence and closure status. The count is a
 record of the process, not a quality claim, so none is quoted here.
 
-**The artifact DOI.** Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage (doi:10.5281/zenodo.22213264) and supersedes it, and Zenodo displays a newer-version notice on the superseded record. An earlier draft of the correction texts accompanying this submission said that DOI was never minted. That was false. The check behind it searched the repository's own history instead of the registrar. The error is recorded as corrected incident CI-36 in the log that ships with the artifact.
+**The artifact DOI.** Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published in the same record lineage, first as version 2.0.0 (doi:10.5281/zenodo.22213264) and, with the manifests of the pre-submission review rounds added, as version 2.1.0 (doi:10.5281/zenodo.22638195), which supersedes it, and Zenodo displays a newer-version notice on each superseded record. An earlier draft of the correction texts accompanying this submission said that DOI was never minted. That was false. The check behind it searched the repository's own history instead of the registrar. The error is recorded as corrected incident CI-36 in the log that ships with the artifact.
 
 **Companion manuscript.** A companion preprint, **arXiv:2510.09619**
 ("Risk-Calibrated Bayesian Streaming Intrusion Detection with SRE-Aligned
@@ -159,9 +160,9 @@ follow your instruction.
 The full artifact accompanies the submission as anonymized supplementary
 material. It holds the code, every run manifest, the claim ledger, and the
 numbered corrected-incident log. The figure renderer postdates the Zenodo
-2.0.0 deposit, draws only measured values already archived in that deposit
-(its one typed constant is the chance level of AUC-ROC), and will be included
-in the next archived version at camera-ready.
+2.0.0 deposit, draws only measured values already archived in the manifests
+(its one typed constant is the chance level of AUC-ROC), and is included in
+version 2.1.0 together with the manifests of the pre-submission review rounds.
 
 Sincerely,
 [Author, identified to the editorial system]

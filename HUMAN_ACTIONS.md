@@ -3,10 +3,10 @@
 Nothing here needs judgment, and nothing here is blocked on a missing
 identifier. Every file referenced is in this repository.
 
-**Order matters.** Zenodo is done. The submission order is now: **DTRAP
-first**, then the arXiv v3 replacement **within 48 hours** (the editor note
-promises that window), then the companion's v2 replacement, then the optional
-AWS cleanup.
+**Order matters.** The order is: **Zenodo 2.1.0 publish** (its DOI is
+reserved and every document already cites it), then **DTRAP**, then the arXiv
+v3 replacement **within 48 hours of DTRAP** (the editor note promises that
+window), then the companion's v2 replacement, then the optional AWS cleanup.
 
 > **Removed 2026-08-27: the TIFS withdrawal steps.** This file previously
 > opened with two steps — retrieve the TIFS manuscript ID from email, then send
@@ -52,21 +52,26 @@ cross-platform effect this project already recorded as CI-16.
 in the deposit description (`ZENODO_DEPOSIT_SHEET.md` carries the wording), or
 do not deposit. Nothing else blocks the sequence.
 
-## 1. Zenodo deposit — EXECUTED 2026-08-31
+## 1. Zenodo 2.1.0 publish — FIRST outward action
 
-Published as **version 2.0.0** of the existing lineage: version DOI
-**10.5281/zenodo.22213264**, concept DOI 10.5281/zenodo.20074589, superseding
-v1.0.0 (10.5281/zenodo.20074590). Verified against the Zenodo API 2026-08-31;
-all five files at their staged sizes. Record of what was entered:
-`ZENODO_DEPOSIT_SHEET.md`.
+Version 2.0.0 was published 2026-08-31 (version DOI 10.5281/zenodo.22213264,
+concept DOI 10.5281/zenodo.20074589, superseding v1.0.0,
+10.5281/zenodo.20074590). Version 2.1.0 is staged as a New version on that
+record with its DOI **reserved: 10.5281/zenodo.22638195**. Work through
+`ZENODO_DEPOSIT_SHEET.md` top to bottom: upload the two rebuilt zips, paste
+the Step 5 description, set version 2.1.0 and the Step 7 identifiers, then
+publish. Afterwards verify against the Zenodo API that the published DOI is
+10.5281/zenodo.22638195 and that the five files are at the sheet's sizes.
 
-## 2. DOI propagation — EXECUTED 2026-08-31
+## 2. DOI propagation — EXECUTED 2026-09-07, before the publish
 
-`CITATION.cff` carries `doi: 10.5281/zenodo.22213264`, version `2.0.0`,
-date-released 2026-08-31; the canonical lineage sentence in all four venue
-texts carries the DOI; committed and pushed.
+`CITATION.cff` carries `doi: 10.5281/zenodo.22638195`, version `2.1.0`,
+date-released 2026-09-07; the canonical lineage sentence in all five venue
+texts states the 2.0.0 and 2.1.0 lineage; the editor note, cover letter,
+sheets, README and the arXiv variant's availability sentence cite 2.1.0;
+committed and pushed. Nothing here needs a click.
 
-## 3. DTRAP submission (login wall) — FIRST outward action
+## 3. DTRAP submission (login wall) — after the Zenodo publish
 
 1. Sign in at **https://mc.manuscriptcentral.com/dtrap** (verified 2026-08-24);
    link ORCID 0009-0000-0664-8228 if prompted.

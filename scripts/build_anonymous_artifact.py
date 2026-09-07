@@ -67,9 +67,12 @@ def scrub(rel: str, data: bytes) -> bytes:
     # Zenodo record identifiers resolve to a page naming the author, so the
     # double-anonymous artifact redacts them wherever the correction log or
     # README carries them; the scan below then proves none survive.
-    for doi in (b"10.5281/zenodo.22213264", b"10.5281/zenodo.20074590",
-                b"10.5281/zenodo.20074589"):
+    for doi in (b"10.5281/zenodo.22638195", b"10.5281/zenodo.22213264",
+                b"10.5281/zenodo.20074590", b"10.5281/zenodo.20074589"):
         data = data.replace(doi, b"[doi-redacted-for-review]")
+    # any other identifier in the record lineage's prefix, in either DOI form
+    data = re.sub(rb"(?:doi:|https?://doi\.org/)?10\.5281/zenodo\.\d+",
+                  b"[doi-redacted-for-review]", data)
     data = re.sub(rb"https?://(?:www\.)?zenodo\.org/\S*",
                   b"[zenodo-url-redacted-for-review]", data)
     if rel == "README.md":

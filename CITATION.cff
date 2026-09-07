@@ -2,19 +2,22 @@ cff-version: 1.2.0
 title: "Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks: Reproducibility Package"
 message: >-
   If you use this software, please cite it using this metadata. This is
-  version 2.0.0 of the record lineage (concept DOI 10.5281/zenodo.20074589),
-  published 2026-08-31. Version 1.0.0 (doi:10.5281/zenodo.20074590, deposited
-  2026-05-07) archives the pre-audit codebase cited by arXiv:2605.24696 v1/v2
-  and is superseded by this version.
+  version 2.1.0 of the record lineage (concept DOI 10.5281/zenodo.20074589),
+  released 2026-09-07 with the manifests of the pre-submission review rounds
+  added. Version 2.0.0 (doi:10.5281/zenodo.22213264, published 2026-08-31) is
+  the corrected rebuild this version extends; version 1.0.0
+  (doi:10.5281/zenodo.20074590, deposited 2026-05-07) archives the pre-audit
+  codebase cited by arXiv:2605.24696 v1/v2. Both are superseded by this
+  version.
 type: software
 authors:
   - family-names: "Youssef"
     given-names: "Michel"
     email: "michelyoussef@hotmail.com"
     orcid: "https://orcid.org/0009-0000-0664-8228"
-version: "2.0.0"
-doi: "10.5281/zenodo.22213264"
-date-released: "2026-08-31"
+version: "2.1.0"
+doi: "10.5281/zenodo.22638195"
+date-released: "2026-09-07"
 license: "Apache-2.0"
 repository-code: "https://github.com/MichelYsf/rcbsid-paper"
 keywords:

@@ -143,7 +143,7 @@ Excluded and confirmed clean: Seth Barrett and every FIRCE and FADES author
 
 ## 9. Cover letter
 
-Paste the whole of `packages/dtrap/COVER_LETTER.txt` (840 words). It is plain
+Paste the whole of `packages/dtrap/COVER_LETTER.txt` (854 words). It is plain
 text with no markdown residue.
 
 Contingency: if the portal offers no separate confidential-comments box, use
@@ -156,7 +156,7 @@ CONFIDENTIAL TO THE EDITORS: PRIOR APPEARANCE AND CORRECTION HISTORY
 
 ## 10. Confidential comments to the editor
 
-Paste the whole of `packages/dtrap/EDITOR_NOTE.txt` (1,647 words). It carries
+Paste the whole of `packages/dtrap/EDITOR_NOTE.txt` (1,677 words). It carries
 the prior-appearance disclosure, the overlap account, the correction history,
 the companion-manuscript status, and the provenance limitation.
 
@@ -170,7 +170,7 @@ Answers, one per row:
 | Under consideration elsewhere? | No. This manuscript is under consideration at DTRAP and nowhere else, and so is nothing else of the author's. |
 | Conflicts of interest | None to declare. |
 | Funding | None to declare. |
-| Code availability | Yes, Apache-2.0. An anonymous copy is uploaded as supplementary material. The public repository and the Zenodo DOI follow at acceptance. |
+| Code availability | Yes, Apache-2.0. An anonymous copy is uploaded as supplementary material. The author-named release is already deposited as Zenodo version 2.1.0; the public repository and that DOI are supplied in the manuscript at acceptance. |
 | Data availability | The benchmarks are public third-party datasets (CICIDS2017 in the Engelen-corrected release, and LITNET-2020). They are not redistributed. The artifact ships EXPECTED_SHA256.txt, line-ending-normalized hashes that let a reader verify their own reconstruction of each stream. |
 | Generative AI disclosure | Required and already in the manuscript, in Acknowledgements: Generative AI Usage. Use is disclosed. No AI tool is an author. No reported number was produced by one. The author takes full responsibility. |
 | ORCID | 0009-0000-0664-8228. Link when prompted. |
@@ -184,8 +184,8 @@ Three files, with designations:
 | # | full path | bytes | designation |
 |---|---|---|---|
 | 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 666,241 | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 603,437 | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 101,308 | supplementary for review, not for publication |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 603,478 | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 101,309 | supplementary for review, not for publication |
 
 Upload the anonymized PDF, never `paper\main.pdf`. The anonymous build is the
 one that says "Anonymous Author(s)" on page 1.

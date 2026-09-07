@@ -82,8 +82,10 @@ provided as an anonymized zip through the submission system's
 supplementary-material channel. It holds the code, the run manifests, the
 claim ledger, and the stream-reconstruction scripts with hash verification,
 and it contains no author-identifying strings (verified mechanically). An
-author-named release of the same artifact is already archived with a
-persistent identifier, which will be supplied at camera-ready.
+author-named release of the same artifact is already deposited at the time of
+this submission as version 2.1.0 of its Zenodo record
+(doi:10.5281/zenodo.22638195); the identifier will be supplied in the
+manuscript at camera-ready.
 
 **Companion manuscript.** A related manuscript sharing parts of the audited
 codebase (arXiv:2510.09619) is a public preprint. It is not under review at

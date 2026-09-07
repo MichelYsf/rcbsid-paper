@@ -1,9 +1,11 @@
 # ARXIV_V3_SHEET — replacement of arXiv:2605.24696, nothing submitted
 
 Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
-The Zenodo deposit is live (doi:10.5281/zenodo.22213264). Order per
-`HUMAN_ACTIONS.md`: **DTRAP submission first, then this replacement within
-48 hours of it** — the editor note promises that window.
+The Zenodo lineage: version 2.0.0 is live (doi:10.5281/zenodo.22213264) and
+version 2.1.0 is staged with its DOI reserved (doi:10.5281/zenodo.22638195).
+Order per `HUMAN_ACTIONS.md`: **Zenodo 2.1.0 publish, then the DTRAP
+submission, then this replacement within 48 hours of it** (the editor note
+promises that window), then the companion's v2 replacement.
 
 > **Immutable on submission:** an arXiv version is permanent. v3 will sit
 > publicly beside v1 and v2 forever; you cannot delete a version, only add v4.
@@ -14,7 +16,7 @@ The Zenodo deposit is live (doi:10.5281/zenodo.22213264). Order per
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (101,896 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (101,918 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
@@ -104,9 +106,11 @@ execution, and a build gate fails on any number lacking one. A sentence-level
 claim ledger ships with the artifact. Earlier manuscript versions cite
 doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact
 record, deposited 2026-05-07 and containing the pre-audit codebase; this
-corrected rebuild is published as version 2.0.0 in the same record lineage
-(doi:10.5281/zenodo.22213264) and supersedes it, and Zenodo displays a
-newer-version notice on the superseded record. Title changed accordingly
+corrected rebuild is published in the same record lineage, first as version
+2.0.0 (doi:10.5281/zenodo.22213264) and, with the manifests of the
+pre-submission review rounds added, as version 2.1.0
+(doi:10.5281/zenodo.22638195), which supersedes it, and Zenodo displays a
+newer-version notice on each superseded record. Title changed accordingly
 (previously "CALIBURN: Operationally Calibrated Streaming Intrusion Detection
 with Regime-Dependent Conformal Risk Control"). A companion preprint sharing
 parts of the same codebase (arXiv:2510.09619) predates this audit. The
@@ -128,10 +132,11 @@ are rather than regenerate a subset that would not change this disclosure.
 22 pages.
 ```
 
-**Resolved 2026-08-31:** the v2.0.0 version DOI is
-**10.5281/zenodo.22213264** and the Comments text above already carries it —
-no sentence needs appending. (Not 10.5281/zenodo.20074590, which is v1.0.0,
-and not the concept DOI 10.5281/zenodo.20074589.)
+**Resolved 2026-08-31, extended 2026-09-07:** the Comments text above carries
+the whole lineage: v1.0.0 (10.5281/zenodo.20074590), v2.0.0
+(10.5281/zenodo.22213264) and v2.1.0 (10.5281/zenodo.22638195, reserved and
+published before this replacement per `HUMAN_ACTIONS.md`). No sentence needs
+appending; the concept DOI 10.5281/zenodo.20074589 is not cited.
 
 **The Comments text now carries the provenance disclosure** in the same words
 as the Zenodo description and the DTRAP editor note — 19 of 25 live run

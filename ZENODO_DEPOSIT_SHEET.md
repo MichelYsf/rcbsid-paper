@@ -10,14 +10,17 @@
 > Nothing about that version changes.
 
 > **This sheet stages version 2.1.0 as a New version on record 22213264.**
-> It has not been uploaded. Its version DOI is minted when you publish and is
-> not known yet; every place that must carry it is listed in Step 9.
+> It has not been published. Its version DOI is **reserved:
+> 10.5281/zenodo.22638195**; every document that must carry it already does
+> (Step 9), so publishing is the first outward action in `HUMAN_ACTIONS.md`.
 
-Assembled 2026-09-07 against commit **`b9f32addaf60a927e4c9d57b1c7280da2867501d`**, the
-packaging commit whose tree holds the five files below byte-for-byte; this
-sheet is committed one commit ahead of it, which is harmless (the files are
-identical in both). If you rebuild anything after that, run `git rev-parse
-HEAD` on a clean tree instead.
+Assembled 2026-09-07 against commit **`b9f32addaf60a927e4c9d57b1c7280da2867501d`**,
+the packaging commit of the analysis code, manifests and manuscript source the
+deposit derives from (Step 7). The code zip was rebuilt once after it, in
+commit `PACKAGING_COMMIT_PLACEHOLDER`, because `CITATION.cff` and `README.md`
+inside it now carry the 2.1.0 DOI; the other four files are byte-identical in
+both commits. If you rebuild anything after that, run `git rev-parse HEAD` on
+a clean tree and update Step 2 before uploading.
 
 > **Immutability, before you start.** On Zenodo, **the files are frozen at
 > publication**; you cannot add, replace or remove one afterwards, only publish
@@ -91,7 +94,7 @@ retired.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` (144 files) | 438,888 B | `34185b586ec157a87a7d3205db99e96da130c447ce035922d5d52da2cf11b1a6` |
+| 1 | `rcbsid_rebuild_code.zip` (144 files) | 439,133 B | `13441fc7bc598b78203b33aadc30ce4746be68da8aff63368c50811c97d3e227` |
 | 2 | `manifests_bundle.zip` (93 entries, 939,967 B unzipped) | 168,084 B | `3ddab2d15db932f230e1d01f9d181c0b89c99d665d898d56a4013151893787c5` |
 | 3 | `EXPECTED_SHA256.txt` (unchanged from 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` (unchanged from 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
@@ -120,9 +123,11 @@ Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Be
 
 ## Step 5 — Description (paste verbatim)
 
-The 2.0.0 description with one added paragraph (the second). The
-provenance-limitation paragraph and the DOI-lineage sentence are canons and
-are unchanged.
+The 2.0.0 description with one added paragraph (the second) and the canonical
+DOI-lineage sentence updated to state the lineage (2.0.0, then 2.1.0 with the
+review-round manifests added). The provenance-limitation paragraph is a canon
+and is unchanged; the lineage sentence is byte-identical across the five canon
+venues after the update.
 
 ```
 Reproducibility package for "Stream Assembly Is an Uncontrolled Treatment in
@@ -177,7 +182,7 @@ subset that would not change this disclosure.
 Earlier versions of the associated manuscript (arXiv:2605.24696 v1 and v2)
 reported results produced under a composite benchmark construction and described
 a scoring rule the released code did not implement. This package is the rebuild
-from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage (doi:10.5281/zenodo.22213264) and supersedes it, and Zenodo displays a newer-version notice on the superseded record.
+from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published in the same record lineage, first as version 2.0.0 (doi:10.5281/zenodo.22213264) and, with the manifests of the pre-submission review rounds added, as version 2.1.0 (doi:10.5281/zenodo.22638195), which supersedes it, and Zenodo displays a newer-version notice on each superseded record.
 ```
 
 ## Step 6 — License (inherited, unchanged)
@@ -205,19 +210,18 @@ Zenodo records the version relation to 2.0.0 itself; do not add it by hand.
 
 ## Step 9 — Publish, then
 
-1. Record the new version DOI in the header of this sheet.
-2. `CITATION.cff`: the `doi:` field carries 10.5281/zenodo.22213264 (version
-   2.0.0); change it to the 2.1.0 version DOI. Commit and push.
-3. The named arXiv variant's artifact-availability sentence
-   (`scripts/build_arxiv_variant.py`) names version 2.0.0 and its DOI. Update
-   it to 2.1.0 before the arXiv v3 replacement is posted, rebuild the variant,
-   and re-stage `packages/arxiv_v3/arxiv_v3_source.tar.gz`.
-4. **Decision for you, not made here:** the canon DOI-lineage sentence shared
-   by the DTRAP editor note, the arXiv v3 comment and this sheet names
-   version 2.0.0 as "this corrected rebuild". Once 2.1.0 exists it is still
-   true of 2.0.0 and silent about 2.1.0; changing it changes all five canon
-   venues together, under binding rule 11's canon exemption.
-5. Optional: annotate the 2.0.0 record's description with one sentence
+1. Confirm against the Zenodo API that the published version DOI is exactly
+   the reserved **10.5281/zenodo.22638195** and that the five files are at
+   the Step 2 sizes. If Zenodo minted a different DOI, stop: every document
+   below already cites the reserved one and would have to be re-propagated.
+2. Already done 2026-09-07, before the publish (HUMAN_ACTIONS step 2):
+   `CITATION.cff` carries doi 10.5281/zenodo.22638195, version 2.1.0,
+   date-released 2026-09-07; the canonical lineage sentence in all five
+   venues states the 2.0.0-then-2.1.0 lineage; the editor note, cover
+   letter, README, every sheet and the named arXiv variant's
+   artifact-availability sentence cite 2.1.0; the companion's v2 correction
+   note cites 2.1.0.
+3. Optional: annotate the 2.0.0 record's description with one sentence
    naming 2.1.0 as the version that carries the referee-round material.
    Metadata on 2.0.0 stays editable; its files stay frozen.
 

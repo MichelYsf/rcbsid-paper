@@ -38,7 +38,7 @@ fresh and compiled clean.
    > descriptions below are not what the shared codebase implements, and that
    > the evaluation streams are assembled constructions. See the correction
    > note on the title page and the corrected companion work,
-   > arXiv:2605.24696 (v3 forthcoming), artifact doi:10.5281/zenodo.22213264.]
+   > arXiv:2605.24696 (v3 forthcoming), artifact doi:10.5281/zenodo.22638195.]
 
 3. **Comments field.** Set to exactly:
 
@@ -46,7 +46,7 @@ fresh and compiled clean.
    > shared codebase found the score, threshold, and latency descriptions
    > unsupported by the implementation, and the evaluation streams to be
    > assembled constructions. No quantitative result tables are affected.
-   > See arXiv:2605.24696 (corrected v3) and doi:10.5281/zenodo.22213264.
+   > See arXiv:2605.24696 (corrected v3) and doi:10.5281/zenodo.22638195.
 
 4. **License.** Keep the license chosen for v1. arXiv applies the license per
    version. Changing it on a correction invites questions the note already

@@ -29,5 +29,6 @@ anonymize the title page and remove identifying acknowledgments.
 ## After acceptance
 
 Camera-ready replaces the anonymous availability sentence with the public
-GitHub repository (branch `rebuild/honest-v1`) and the Zenodo DOI minted in
-HUMAN_ACTIONS step 2; CITATION.cff travels with the public artifact only.
+GitHub repository (branch `rebuild/honest-v1`) and the Zenodo version 2.1.0
+DOI (10.5281/zenodo.22638195, HUMAN_ACTIONS step 1); CITATION.cff travels
+with the public artifact only.

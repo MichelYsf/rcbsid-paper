@@ -9,8 +9,9 @@ history; a repo search is not a registrar query. **The operative checklist is
 `../../ZENODO_DEPOSIT_SHEET.md`; use it.** This file is retained as a
 historical staging note only. **Executed 2026-08-31: published as version
 2.0.0, doi:10.5281/zenodo.22213264.** **Version 2.1.0 was staged on
-2026-09-07 as a New version on that record; `../../ZENODO_DEPOSIT_SHEET.md`
-carries its files, sizes, checksums and description.**
+2026-09-07 as a New version on that record with its DOI reserved,
+10.5281/zenodo.22638195; `../../ZENODO_DEPOSIT_SHEET.md` carries its files,
+sizes, checksums and description.**
 
 - **Upload type:** Software
 - **Title:** Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks: Reproducibility Package
