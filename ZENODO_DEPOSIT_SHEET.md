@@ -17,7 +17,7 @@
 Assembled 2026-09-07 against commit **`b9f32addaf60a927e4c9d57b1c7280da2867501d`**,
 the packaging commit of the analysis code, manifests and manuscript source the
 deposit derives from (Step 7). The code zip was rebuilt once after it, in
-commit `PACKAGING_COMMIT_PLACEHOLDER`, because `CITATION.cff` and `README.md`
+commit `7c2b8fca5d19a11c3734faef7465d85049b7b804`, because `CITATION.cff` and `README.md`
 inside it now carry the 2.1.0 DOI; the other four files are byte-identical in
 both commits. If you rebuild anything after that, run `git rev-parse HEAD` on
 a clean tree and update Step 2 before uploading.
