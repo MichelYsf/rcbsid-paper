@@ -1,11 +1,18 @@
 #!/usr/bin/env python
-"""Stage 6: the corrected change-point statistic, under a 30-minute local cap.
+"""Stage 6: the alternative reset formulation, under a 30-minute local cap.
 
-Stage 3 established that the evaluated detector's run-length posterior is
-algebraically pinned to the hazard rate: the reset and growth branches share the
-same run-conditional predictive, which cancels in the normalisation. Stage 6
-implements the correction audit finding A2 prescribes - a prior-predictive term
-on the reset branch - and measures whether it changes anything.
+The arm the code, the macros and the manifests name "corrected" is this
+alternative formulation; the name is historical and is kept because macro and
+run names are frozen.
+
+Stage 3 established that the evaluated detector's reset posterior is
+algebraically pinned to the hazard rate below the run-length cap: the reset and
+growth branches share the same run-conditional predictive, which cancels in the
+normalisation. That is a property of the Adams-MacKay recursion as published,
+in which the reset hypothesis at t is not informed by x_t, not a coding error.
+Stage 6 implements the alternative formulation audit finding A2 describes - a
+prior-predictive term on the reset branch, modelling the change point before
+x_t rather than after it - and measures whether it changes anything.
 
 DOCUMENTED REDUCTION (operator constraint, 2026-08-20: 30 minutes of local
 compute, down from 90, and no cloud):
@@ -100,9 +107,9 @@ def probe(corrected: bool, hazard: float = HAZARD, n: int = 300,
 
 
 def saturation_diagnostic(X, rows: int = 15_000):
-    """Why does the corrected variant behave as it does?
+    """Why does the alternative formulation (the "corrected" arm) behave as it does?
 
-    "The correction degrades detection" and "the correction saturates the score"
+    "The variant degrades detection" and "the variant saturates the score"
     are different findings, and only the second is what the data shows. This
     measures the score distribution directly: how often the change-point branch
     sets the score, how much posterior mass sits on short runs, and how many

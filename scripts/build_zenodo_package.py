@@ -41,6 +41,8 @@ CODE_FILES = [
     "findings_contributions.md", "findings_streams.md",
     "findings_review_analyses.md", "findings_referee_analyses.md",
     "findings_bootstrap_robustness.md", "findings_ecod_composition.md",
+    # ledger-cited and referee-round records (v2.1.0)
+    "RESPONSE_SHELF.md", "REFEREE_TRIAGE.md", "BIB_AUDIT.md",
 ]
 SKIP_SUFFIX = {".pdf", ".aux", ".log", ".out", ".bbl", ".blg", ".synctex.gz",
                ".pyc", ".sha256"}

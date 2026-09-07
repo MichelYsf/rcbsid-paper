@@ -105,11 +105,15 @@ Key experiment entry points, each writing manifests:
 ## Figures and the archived deposit
 
 The figure renderer (`scripts/make_figures.py`) postdates the Zenodo 2.0.0
-deposit. That record is frozen and is not touched. The renderer draws only
-measured values already archived in that deposit's manifests and adds no
-measured number. Its one typed constant is the chance level of AUC-ROC, the
-value an uninformative ranking scores, recorded in the figure manifest under
-`constants`. It will be included in the next archived version at camera-ready.
+deposit, which is frozen and is not touched, and is included from version
+2.1.0 of the record together with the referee-round analyses (the bounded
+referee analyses, the block-length bootstrap robustness rerun and the ECOD
+batch-composition experiment, each with its manifest and findings document).
+The renderer draws only measured values already archived in the manifests and
+adds no measured number. Its one typed constant is the chance level of
+AUC-ROC, the value an uninformative ranking scores, recorded in the figure
+manifest under `constants`. The deposit's code zip carries no rendered figure
+PDF; re-render them from the manifests as shown above before the figure check.
 
 ## Honest limitations, up front
 

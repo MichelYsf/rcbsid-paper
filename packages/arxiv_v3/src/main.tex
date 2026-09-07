@@ -283,8 +283,9 @@ benchmarks are themselves flawed in ways that create an illusion of progress.
 \textbf{Change-point detection.} The evaluated detector descends from Bayesian
 online change-point detection~\cite{adams2007bocpd} with a truncated run-length
 posterior~\cite{fearnhead2007online,knoblauch2018bocpd}.
-Section~\ref{sec:detector} shows the implementation's reset posterior is
-data-independent below its cap; van den Burg and
+Section~\ref{sec:detector} shows that the reset posterior of the published
+recursion, which the implementation reproduces, is data-independent below the
+cap; van den Burg and
 Williams~\cite{vandeburg2020evaluation} document how often change-point
 evaluations mismeasure their subject.
 

@@ -15,7 +15,8 @@ and are deliberately not automated.
       and baselines, per-stream, every cell manifested. This is the paper's
       central evidence under the settled framing.
   S5  verified contributions regenerated from real runs.
-  S6  corrected change-point statistic, bounded ablation (90 minute cap).
+  S6  alternative reset formulation (the arm named "corrected"), bounded
+      ablation (90 minute cap).
 """
 from __future__ import annotations
 

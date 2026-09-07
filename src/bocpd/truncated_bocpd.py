@@ -13,15 +13,19 @@ class TruncatedBOCPDConfig:
     incident_prior: float = 0.01
     warmup: int = 30
     short_run_mass: int = 5
-    # Stage 6. False reproduces the evaluated detector exactly, including its
-    # defect; True uses the corrected change-point statistic.
+    # Stage 6. False reproduces the evaluated detector exactly, which is the
+    # Adams-MacKay recursion as published; True uses the alternative reset
+    # formulation (the arm the macros and manifests name "corrected").
     #
-    # The defect (audit A2, re-measured in Stage 3): the reset branch uses the
-    # same run-conditional predictive `nll` as the growth branch, so it cancels
-    # in the normalisation and P(r=0) equals the hazard for ANY data. The fix
-    # A2 prescribes is a PRIOR-predictive term on the reset branch - the
-    # likelihood of x under a freshly started run rather than under the
-    # existing ones - so that the two branches respond to the data differently.
+    # The identity (audit A2, re-measured in Stage 3): the reset branch uses
+    # the same run-conditional predictive `nll` as the growth branch, so it
+    # cancels in the normalisation and P(r=0) equals the hazard for ANY data
+    # below the run-length cap. That is a property of the published recursion,
+    # in which the reset hypothesis at t is not informed by x_t, not a coding
+    # error. The alternative formulation A2 describes places a PRIOR-predictive
+    # term on the reset branch - the likelihood of x under a freshly started
+    # run rather than under the existing ones - so that the change point is
+    # modelled before x_t and the two branches respond to the data differently.
     prior_predictive_reset: bool = False
 
 
@@ -89,9 +93,9 @@ class TruncatedGaussianBOCPD:
     def _prior_predictive_nll(self, x: np.ndarray) -> float:
         """Negative log-likelihood of x under a FRESHLY started run.
 
-        This must be a VAGUE predictive, and the first attempt at Stage 6 got
-        that wrong. Plugging in the global slowly-adapting Gaussian does not
-        correct anything: immediately after a change the global model is just as
+        This must be a VAGUE predictive, and the first attempt at Stage 6 used
+        one that is not. Plugging in the global slowly-adapting Gaussian changes
+        nothing: immediately after a change the global model is just as
         stale as the run-conditional ones, both branches take the same penalty,
         and P(r=0) stays at the hazard (measured: 0.001001 against a hazard of
         0.001000). A reset branch is only informative if a surprising point is
@@ -160,9 +164,10 @@ class TruncatedGaussianBOCPD:
         nll = self._predictive_nll(x)
         growth = self.log_run_probs + np.log1p(-self.config.hazard) - nll
         if self.config.prior_predictive_reset:
-            # Corrected: the reset branch is scored under a freshly started run,
-            # so the predictive term no longer cancels against the growth branch
-            # and P(r=0) becomes a function of the data.
+            # Alternative reset formulation: the reset branch is scored under a
+            # freshly started run, so the predictive term no longer cancels
+            # against the growth branch and P(r=0) becomes a function of the
+            # data.
             cp = float(self._logsumexp(self.log_run_probs + np.log(self.config.hazard))
                        - self._prior_predictive_nll(x))
         else:

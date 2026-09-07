@@ -55,9 +55,9 @@ reproducibility; provenance
 
 | # | file | size | role |
 |---|---|---|---|
-| 1 | `packages/dtrap/manuscript_anonymous.pdf` | 666,208 B | **main document** |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 602,916 B | supplementary, **not for publication** |
-| 3 | `packages/dtrap/source_anonymous.tar.gz` | 101,301 B | supplementary, **not for publication** |
+| 1 | `packages/dtrap/manuscript_anonymous.pdf` | 666,241 B | **main document** |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 603,437 B | supplementary, **not for publication** |
+| 3 | `packages/dtrap/source_anonymous.tar.gz` | 101,308 B | supplementary, **not for publication** |
 
 The artifact contains 229 files and passes its own documented reproduction
 instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).

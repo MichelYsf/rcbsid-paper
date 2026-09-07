@@ -1,124 +1,115 @@
-# ZENODO_DEPOSIT_SHEET — EXECUTED 2026-08-31
+# ZENODO_DEPOSIT_SHEET — version 2.1.0 STAGED 2026-09-07, nothing uploaded
 
-> **The deposit is LIVE.** Published 2026-08-31 as **version 2.0.0** of the
-> record lineage: version DOI **10.5281/zenodo.22213264**, concept DOI
-> 10.5281/zenodo.20074589, superseding v1.0.0 (10.5281/zenodo.20074590).
-> Verified against the Zenodo API on 2026-08-31: title, creator with ORCID
-> 0009-0000-0664-8228, and all five files at their staged byte sizes
-> (rcbsid_rebuild_code.zip 363,694 B; manifests_bundle.zip 143,621 B;
-> EXPECTED_SHA256.txt 932 B; construction_contrast.csv 4,755 B;
-> prevalence_sweep_cicids.csv 48,587 B). The published version string is
-> **"2.0.0"** — the operator entered the plain string, not this sheet's
-> "2.0.0-honest-rebuild"; every project reference is reconciled to "2.0.0".
-> This sheet is retained below as the record of what was entered.
+> **Version 2.0.0 is LIVE and frozen.** Published 2026-08-31: version DOI
+> **10.5281/zenodo.22213264**, concept DOI 10.5281/zenodo.20074589,
+> superseding v1.0.0 (10.5281/zenodo.20074590). Verified against the Zenodo
+> API on 2026-08-31: title, creator with ORCID 0009-0000-0664-8228, and its
+> five files at their staged sizes (rcbsid_rebuild_code.zip 363,694 B;
+> manifests_bundle.zip 143,621 B; EXPECTED_SHA256.txt 932 B;
+> construction_contrast.csv 4,755 B; prevalence_sweep_cicids.csv 48,587 B).
+> Nothing about that version changes.
 
-Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
-Nothing here has been uploaded. Work top to bottom; every value is final unless
-marked **[decide]**.
+> **This sheet stages version 2.1.0 as a New version on record 22213264.**
+> It has not been uploaded. Its version DOI is minted when you publish and is
+> not known yet; every place that must carry it is listed in Step 9.
+
+Assembled 2026-09-07 against commit **`DEPOSIT_COMMIT_PLACEHOLDER`**, the
+packaging commit whose tree holds the five files below byte-for-byte; this
+sheet is committed one commit ahead of it, which is harmless (the files are
+identical in both). If you rebuild anything after that, run `git rev-parse
+HEAD` on a clean tree instead.
 
 > **Immutability, before you start.** On Zenodo, **the files are frozen at
-> publication** — you cannot add, replace or remove one afterwards, only publish
-> a *new version* with its own DOI. **Metadata (title, description, authors,
-> keywords, related identifiers) remains editable after publication.** The DOI
-> itself is permanent and cannot be withdrawn; a record can be hidden by
-> Zenodo support only in exceptional cases. Confirm both behaviours in the UI
-> before you press Publish — the field behaviours were written offline, while
-> the record facts below (v1.0.0, both DOIs, file, dates) are account-verified
-> as of 2026-08-31.
-
-> **Which commit to name.** Use **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
-> That commit contains the five deposit files byte-for-byte as they are on
-> disk now — the sheets were updated afterwards, and updating a sheet cannot
-> change what it names without moving the target again, so the tip may be one
-> commit ahead. That is harmless: the artifacts are identical in both, and the
-> named commit is the one whose tree the deposit was built from. If you have
-> rebuilt anything since, run `git rev-parse HEAD` on a clean tree instead.
+> publication**; you cannot add, replace or remove one afterwards, only publish
+> a further version with its own DOI. **Metadata (title, description, authors,
+> keywords, related identifiers, version string) remains editable after
+> publication.** The DOI is permanent. Confirm both behaviours in the UI
+> before you press Publish.
 
 ---
 
-## Step 0 — the decision you must make first
+## Step 0 — the decision, restated for 2.1.0
 
-`python scripts/check_provenance.py --publish-ready` **exits 1**, on one point:
+`python scripts/check_provenance.py --publish-ready` **exits 1**, on the same
+point as before and by the same accepted decision:
 
-- tree clean ✓, HEAD pushed ✓, every manifest's base commit resolves in the
-  pushed history ✓
-- **19 of 25 live run manifests ran while the working tree carried
-  uncommitted edits.** Their base commit resolves and is an ancestor of the
-  published branch; the exact source state at run time does not.
-- **Two of those cannot be regenerated at all**: the CICIDS construction-contrast
-  arms (`s4_construction_contrast_20260819T064027_20f44694`,
-  `s4_construction_contrast_20260819T090813_46e9bd32`) ran 8,702 s and 8,644 s
-  on an **EC2 Linux** instance that has been decommissioned. Re-running on this
-  Windows machine would change published numbers — the cross-platform effect
-  recorded as CI-16.
+- tree clean, HEAD pushed, every manifest's base commit resolves in the pushed
+  history;
+- **25 of the 31 live run manifests ran while the working tree carried
+  uncommitted edits**: the 19 of 25 that version 2.0.0 disclosed, plus all six
+  that 2.1.0 adds (`referee_bounded_analyses_20260906T182158_de69afab`,
+  `bootstrap_block_robustness_20260906T200612_b7c847e1`,
+  `ecod_batch_composition_20260907T061817_7d2ec490`, and the three
+  `supplementary_macros_2026090…` derivation runs). Each records its base
+  commit (ad01b8b, e76ee0b or d2742e1) with a dirty marker; each base commit
+  is an ancestor of the pushed branch; none changed during its run.
+- The two irreducible arms are unchanged (CI-16).
 
-**DECIDED 2026-08-27: accept the nineteen. The seventeen are not re-run.** The
-disclosure paragraph in Step 5 states this, and the identical wording is in the
-DTRAP confidential editor note and the arXiv v3 correction note. Nothing else
-blocks the sequence.
+**DECIDED 2026-08-27, reaffirmed 2026-09-07: accept the dirty-tree manifests;
+nothing is re-run.** The provenance-limitation paragraph in Step 5 is a canon
+held byte-identical across the DTRAP editor note, the arXiv v3 comment and this
+sheet; it describes the twenty-five live manifests of version 2.0.0 and stays
+as it is. The paragraph 2.1.0 adds states the six new manifests plainly.
 
 ---
 
-## Step 1 — New version, not New upload
+## Step 1 — New version of record 22213264
 
-**This is a new version of an existing record, not a first deposit.** Record
-**doi:10.5281/zenodo.20074590** — version 1.0.0, "SLO-Aware Streaming Intrusion
-Detection: Reproducibility Package", deposited 2026-05-07 — is published and
-public. It holds the pre-audit codebase (one file,
-`MichelYsf/rcbsid-paper-v1.0.0.zip`, 2,028,268 B, md5
-f67dfa9c0203490a4de1648f6d6ce8c6) and is what arXiv:2605.24696 v1/v2 cite. The
-concept DOI **10.5281/zenodo.20074589** groups every version of the record. (An
-earlier revision of this sheet called the rebuild "the first deposit"; that was
-false — CI-36.)
-
-1. Open doi:10.5281/zenodo.20074590 signed in as the record's owner.
+1. Open **doi:10.5281/zenodo.22213264** (version 2.0.0) signed in as the
+   record's owner.
 2. Click **New version**.
-3. **Do NOT import the old file.** If the form carries
-   `MichelYsf/rcbsid-paper-v1.0.0.zip` over from v1.0.0, remove it — the new
-   version contains exactly the five files of Step 2 and nothing else.
+3. Zenodo carries the five 2.0.0 files into the draft. **Remove
+   `rcbsid_rebuild_code.zip` and `manifests_bundle.zip` and upload the 2.1.0
+   ones from `packages/zenodo/`.** `EXPECTED_SHA256.txt`,
+   `construction_contrast.csv` and `prevalence_sweep_cicids.csv` are
+   byte-identical to 2.0.0's (same SHA-256, Step 2); keeping the carried-over
+   copies or re-uploading them gives the same record.
 
-A new version pre-fills its metadata from v1.0.0. **Inherited fields that MUST
+A new version pre-fills its metadata from 2.0.0. **Inherited fields that MUST
 be changed:**
 
-| inherited from v1.0.0 | change to |
+| inherited from 2.0.0 | change to |
 |---|---|
-| title "SLO-Aware Streaming Intrusion Detection: Reproducibility Package" | the Step 3 title |
-| description ("Initial release for CALIBURN paper submission to KeAi Cyber Security and Applications") | the Step 5 text |
-| version `1.0.0` | `2.0.0` (published string; the sheet had said `2.0.0-honest-rebuild`) |
-| keywords | the six in Step 8 |
-| related identifier *is-supplement-to* `…/rcbsid-paper/tree/v1.0.0` | **replace** with the two rows in Step 7 |
+| description | the Step 5 text (2.0.0's text plus one paragraph) |
+| version `2.0.0` | `2.1.0` |
+| related identifier *is derived from* `…/rcbsid-paper/tree/083df8acb6e48c2f403218ae765260584c3a2fdb` | the Step 7 commit link |
 
-**Inherited and kept:** resource type Software; creator Youssef, Michel —
-confirm ORCID 0009-0000-0664-8228 is attached; licence Apache-2.0; access
-Open.
+**Inherited and kept:** title (Step 3), resource type Software, creator
+Youssef, Michel with ORCID 0009-0000-0664-8228, licence Apache-2.0, access
+Open, keywords (Step 8), related identifier *is supplement to*
+`arXiv:2605.24696`.
 
-## Step 2 — Files (upload in this order)
+## Step 2 — Files (all five in `packages/zenodo/`, rebuilt 2026-09-07)
 
-**`manifests_bundle.zip` is already built**, at
-`packages/zenodo/manifests_bundle.zip`. Do **not** re-zip it by hand: its
-entries are relative to the bundle root with no wrapping directory, because
-`README.md` tells a downloader to extract it *into* `results/manifests/`. A
-right-click "compress" on Windows wraps the folder and silently breaks that
-step. If you need to rebuild it, run `python scripts/build_zenodo_package.py`,
-which writes it. All five files upload as they are.
+`manifests_bundle.zip` is built by `python scripts/build_zenodo_package.py`
+with entries relative to the bundle root and no wrapping directory, because
+`README.md` tells a downloader to extract it *into* `results/manifests/`. Do
+not re-zip it by hand. The bundle holds every live manifest (31, plus the
+macro index) and every retired one (60, with the retirement README),
+including all six manifests the referee rounds created and the one they
+retired.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` | 363,694 B | `41dd667d57acd5dac9295a1510f6e66bf36c54b0eac5082c42d928f7c7c641fe` |
-| 2 | `manifests_bundle.zip` (86 entries, 718,048 B unzipped) | 143,621 B | `cb021540cc85f061f64091a04a0c775360049402773409042ff973f023c9ce0a` |
-| 3 | `EXPECTED_SHA256.txt` | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
-| 4 | `construction_contrast.csv` | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
-| 5 | `prevalence_sweep_cicids.csv` | 48,587 B | `ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759` |
+| 1 | `rcbsid_rebuild_code.zip` (144 files) | 438,888 B | `34185b586ec157a87a7d3205db99e96da130c447ce035922d5d52da2cf11b1a6` |
+| 2 | `manifests_bundle.zip` (93 entries, 939,967 B unzipped) | 168,084 B | `3ddab2d15db932f230e1d01f9d181c0b89c99d665d898d56a4013151893787c5` |
+| 3 | `EXPECTED_SHA256.txt` (unchanged from 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
+| 4 | `construction_contrast.csv` (unchanged from 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
+| 5 | `prevalence_sweep_cicids.csv` (unchanged from 2.0.0) | 48,587 B | `ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759` |
 
-All five are in `packages/zenodo/`. **Files are immutable after publication.**
+Verified before staging: the code zip extracted with the bundle placed in
+`results/manifests/` passes every gate check that applies outside a compiled
+tree once the figures are re-rendered (`python scripts/make_figures.py`, as
+the README says; the code zip carries no rendered figure PDF). **Files are
+immutable after publication.**
 
-## Step 3 — Title
+## Step 3 — Title (inherited, unchanged)
 
 ```
 Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks: Reproducibility Package
 ```
 
-## Step 4 — Authors
+## Step 4 — Authors (inherited, unchanged)
 
 | field | value |
 |---|---|
@@ -127,14 +118,32 @@ Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Be
 | ORCID | **0009-0000-0664-8228** |
 | Affiliation | Independent Researcher |
 
-Confirm the ORCID resolves before entering it (HUMAN_ACTIONS step 0). The
-`-8224` variant is a 404 and appears nowhere in these packages.
-
 ## Step 5 — Description (paste verbatim)
+
+The 2.0.0 description with one added paragraph (the second). The
+provenance-limitation paragraph and the DOI-lineage sentence are canons and
+are unchanged.
 
 ```
 Reproducibility package for "Stream Assembly Is an Uncontrolled Treatment in
 Streaming Intrusion-Detection Benchmarks".
+
+Version 2.1.0 adds, over version 2.0.0, the material of the two referee-triage
+rounds of 6 and 7 September 2026: the bounded referee analyses
+(batch-controlled ECOD rescoring of the 78,000 shared held-out records,
+moving-block bootstrap intervals for every reported margin and branch value,
+the training and validation destinations of the 103,189 relocated attacks,
+the imputation counts, and the paired cut-by-assembly sweep), the block-length
+robustness rerun at 250 and 2,600 records, the ECOD batch-composition
+experiment at fixed batch size and fixed model, the scripts and findings
+documents of those runs, six live manifests and one retired manifest with its
+reason, the supplementary macros derived from them, the deterministic figure
+renderer with its figure manifest and a ninth gate check for figures, the
+revised manuscript source (22 pages), the claim ledger, the bibliography audit,
+and the referee triage and response-shelf records. No manifest of version
+2.0.0 is changed. The six live manifests added here executed, like nineteen of
+the twenty-five they join, on a working tree with uncommitted edits; each
+records its base commit with a dirty marker.
 
 Contents: the analysis code and tests, the LaTeX source of the manuscript, the
 generated macro layer that every reported number resolves through, the full set
@@ -171,7 +180,7 @@ a scoring rule the released code did not implement. This package is the rebuild
 from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published as version 2.0.0 in the same record lineage (doi:10.5281/zenodo.22213264) and supersedes it, and Zenodo displays a newer-version notice on the superseded record.
 ```
 
-## Step 6 — License
+## Step 6 — License (inherited, unchanged)
 
 | field | value |
 |---|---|
@@ -182,34 +191,35 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/083df8acb6e48c2f403218ae765260584c3a2fdb` | **the commit, not the branch** — a branch name moves, and the deposit must name a state that cannot change |
-| is supplement to | `arXiv:2605.24696` | the manuscript this package supports; v3 replacement is a later step |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/DEPOSIT_COMMIT_PLACEHOLDER` | **the commit, not the branch**; replaces the inherited 083df8a… link, which belongs to 2.0.0 |
+| is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
-These two rows **replace** the inherited *is-supplement-to*
-`…/rcbsid-paper/tree/v1.0.0` row, which belongs to v1.0.0 (that git tag exists
-on the remote, so the old record's link keeps resolving).
+Zenodo records the version relation to 2.0.0 itself; do not add it by hand.
 
 ## Step 8 — Version and keywords
 
 | field | value |
 |---|---|
-| Version | `2.0.0` (as published) |
-| Keywords | intrusion detection; streaming evaluation; benchmark stream construction; evaluation methodology; reproducibility; provenance |
+| Version | `2.1.0` |
+| Keywords | inherited, unchanged: intrusion detection; streaming evaluation; benchmark stream construction; evaluation methodology; reproducibility; provenance |
 
 ## Step 9 — Publish, then
 
-1. **DONE** — the new version's DOI is **10.5281/zenodo.22213264**
-   (not 10.5281/zenodo.20074590, which is v1.0.0, and not the concept DOI
-   10.5281/zenodo.20074589, which groups all versions).
-2. `CITATION.cff`: replace the explanatory `message:` block with a `doi:` field
-   carrying that new version DOI.
-3. Commit and push. Then, and only then, HUMAN_ACTIONS step 3 (arXiv).
-4. **Optional, after publish — annotate the superseded record.** Metadata on
-   v1.0.0 stays editable: open doi:10.5281/zenodo.20074590, choose Edit, and
-   append one factual sentence to its description: "Version 1.0.0 is the
-   pre-audit artifact evaluated in arXiv:2605.24696 v1/v2; it is superseded by
-   version 2.0.0, the corrected rebuild." Its files stay frozen and public,
-   and Zenodo shows the newer-version notice regardless.
+1. Record the new version DOI in the header of this sheet.
+2. `CITATION.cff`: the `doi:` field carries 10.5281/zenodo.22213264 (version
+   2.0.0); change it to the 2.1.0 version DOI. Commit and push.
+3. The named arXiv variant's artifact-availability sentence
+   (`scripts/build_arxiv_variant.py`) names version 2.0.0 and its DOI. Update
+   it to 2.1.0 before the arXiv v3 replacement is posted, rebuild the variant,
+   and re-stage `packages/arxiv_v3/arxiv_v3_source.tar.gz`.
+4. **Decision for you, not made here:** the canon DOI-lineage sentence shared
+   by the DTRAP editor note, the arXiv v3 comment and this sheet names
+   version 2.0.0 as "this corrected rebuild". Once 2.1.0 exists it is still
+   true of 2.0.0 and silent about 2.1.0; changing it changes all five canon
+   venues together, under binding rule 11's canon exemption.
+5. Optional: annotate the 2.0.0 record's description with one sentence
+   naming 2.1.0 as the version that carries the referee-round material.
+   Metadata on 2.0.0 stays editable; its files stay frozen.
 
 ---
 
@@ -217,11 +227,11 @@ on the remote, so the old record's link keeps resolving).
 
 | field | after publication |
 |---|---|
-| Files | **frozen** — new version only |
+| Files | **frozen**; new version only |
 | DOI | **permanent** |
 | Title, description, authors, keywords, related identifiers, license | editable |
 | Version string | editable |
-| Access right (open → closed) | restricted; treat as frozen |
+| Access right (open to closed) | restricted; treat as frozen |
 
 The two irreversible commitments are **the files** and **the DOI**. Everything
 in Step 5 can be corrected later; the manifests cannot.
