@@ -14,7 +14,7 @@
 > 10.5281/zenodo.22638195**; every document that must carry it already does
 > (Step 9), so publishing is the first outward action in `HUMAN_ACTIONS.md`.
 
-Assembled 2026-09-07 against commit **`60e6b08272609649f52682b49b950301712aee39`**, the
+Assembled 2026-09-07 against commit **`389540f84bec5bea05ed57ebce3355825126481b`**, the
 packaging commit whose tree holds the five files of Step 2 byte-for-byte as
 staged (their SHA-256 values are recorded there). This sheet is committed one
 commit ahead of it, which changes no file it names. If you rebuild anything
@@ -197,7 +197,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/60e6b08272609649f52682b49b950301712aee39` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 083df8a… link, which belongs to 2.0.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/389540f84bec5bea05ed57ebce3355825126481b` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 083df8a… link, which belongs to 2.0.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
 Zenodo records the version relation to 2.0.0 itself; do not add it by hand.
