@@ -1,0 +1,8 @@
+# The five Zenodo deposit files are stored byte-for-byte: no line-ending
+# conversion, so the commit the deposit sheet names holds exactly the bytes
+# that are uploaded (the CSVs carry the line endings they were emitted with).
+packages/zenodo/rcbsid_rebuild_code.zip -text
+packages/zenodo/manifests_bundle.zip -text
+packages/zenodo/EXPECTED_SHA256.txt -text
+packages/zenodo/construction_contrast.csv -text
+packages/zenodo/prevalence_sweep_cicids.csv -text
