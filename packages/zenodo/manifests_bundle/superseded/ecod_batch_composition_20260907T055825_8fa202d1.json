@@ -1,0 +1,111 @@
+{
+  "run_id": "ecod_batch_composition_20260907T055825_8fa202d1",
+  "name": "ecod_batch_composition",
+  "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+  "git_commit_at_write": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+  "repo_changed_during_run": false,
+  "config_sha256": "0987181d2ba064794e59c723dafade973da13a089f890a21273ace1d78af1055",
+  "config": {
+    "model": "ECOD fitted on the timestamp arm's benign-only training rows, PyOD defaults",
+    "batches": "timestamp-order held-out slice and day-round-robin held-out slice, 240000 records each, sharing the 78000 evaluated records",
+    "evaluated": "the 78000 shared records, natural-position order",
+    "metric": "sklearn average_precision_score / roc_auc_score, positive class 1",
+    "train": 0.7,
+    "val": 0.15,
+    "referee_run": "referee_bounded_analyses_20260906T182158_de69afab"
+  },
+  "seed": 11,
+  "inputs": [
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_natural_scores.npz",
+      "sha256": "be784bd7bc48cb6ba0f6aa9a6900be64705d9618cd8d62c6567698ec8a020c01"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\score_dumps\\cicids_synthetic_scores.npz",
+      "sha256": "565858635b7a2836c94b31f0250104b1676d04573fd99e2bb071d9d67939d734"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\data\\raw\\natural\\cicids2017_natural.csv",
+      "sha256": "96d41208b789ae8a1f446e5db952ca9fa0c7cd564b86455a3cb813329009767a"
+    },
+    {
+      "path": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\results\\manifests\\referee_bounded_analyses_20260906T182158_de69afab.json",
+      "sha256": "7a8442dfc271e0b6af82f8b075e82db399585d57455ccd8df7322c026cb6db0b"
+    }
+  ],
+  "outputs": [],
+  "environment": {
+    "requirements_sha256": "11012ea0ceba3a70fb48f7045a571322dbb1a5237703f285b20be99dda3492e8",
+    "pip_freeze_sha256": "e2dae635a38c179bb48d9837697436bfc30344516944effa12e1abeb6eb42220",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "executable": "C:\\Users\\CYBERWIZARD\\projects\\rcbsid-paper\\.venv\\Scripts\\python.exe"
+  },
+  "started_utc": "2026-09-07T05:58:25.993439+00:00",
+  "finished_utc": "2026-09-07T05:58:26.111883+00:00",
+  "wall_seconds": 0.118444,
+  "macros": {
+    "RefEcodCompBatchRecords": {
+      "value": 240000,
+      "unit": "",
+      "desc": "records in each of the two scoring batches"
+    },
+    "RefEcodCompSharedRecords": {
+      "value": 78000,
+      "unit": "",
+      "desc": "evaluated records common to both batches"
+    },
+    "RefEcodCompDifferingRecords": {
+      "value": 162000,
+      "unit": "",
+      "desc": "records in which the two batches differ"
+    },
+    "RefEcodCompNaturalBatchAucpr": {
+      "value": 0.844487,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the shared records, timestamp-arm model, timestamp-slice batch (reproduces the Table 6 slice value)"
+    },
+    "RefEcodCompSyntheticBatchAucpr": {
+      "value": 0.852039,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the shared records, timestamp-arm model, round-robin-slice batch"
+    },
+    "RefEcodCompNaturalBatchAucroc": {
+      "value": 0.79991,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on the shared records, timestamp-arm model, timestamp-slice batch"
+    },
+    "RefEcodCompSyntheticBatchAucroc": {
+      "value": 0.809006,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on the shared records, timestamp-arm model, round-robin-slice batch"
+    },
+    "RefEcodCompDeltaAucpr": {
+      "value": 0.007552,
+      "unit": "",
+      "desc": "AUC-PR difference between the two batches, same model, same size, from reported values"
+    },
+    "RefEcodCompDeltaAucroc": {
+      "value": 0.009096,
+      "unit": "",
+      "desc": "AUC-ROC difference between the two batches, same model, same size, from reported values"
+    },
+    "RefEcodCompositionMovesAucpr": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if batch content alone, at fixed size and model, changes the reported AUC-PR"
+    },
+    "RefEcodCompReproducesSlice": {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the timestamp-slice value reproduces the archived Table 6 slice-batch value"
+    },
+    "RefEcodCompWallSeconds": {
+      "value": 131,
+      "unit": "s",
+      "desc": "wall time of this run"
+    }
+  },
+  "notes": "second referee report, MAJOR 2: batch content varied with size and model fixed; no detector rerun",
+  "extra": {}
+}

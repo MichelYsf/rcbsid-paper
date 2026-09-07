@@ -149,10 +149,27 @@ RELATIONS += [
     # when scored in its own 240000-record batch (Section 6.3)
     ("SFourCicidsNaturalEcodOwnBatchMinusDetectorAucpr", "sub",
      ["RevEcodBatchTwoFourZeroZeroZeroZeroAucpr", "SFourCicidsNaturalProposedDetectorAucpr"]),
+    # second referee round: the exact finite-sample chance level of step-wise
+    # AP on the timestamp-order held-out slice, from its printed counts
+    ("ChanceExactNaturalSliceAucpr", "chance_exact",
+     ["CicidsHeldoutSize", "SFourCicidsNaturalTestAttacks"]),
+    # ECOD batch content at fixed size and model (Section 6.3)
+    ("RefEcodCompDeltaAucpr", "absub",
+     ["RefEcodCompNaturalBatchAucpr", "RefEcodCompSyntheticBatchAucpr"]),
+    ("RefEcodCompDeltaAucroc", "absub",
+     ["RefEcodCompNaturalBatchAucroc", "RefEcodCompSyntheticBatchAucroc"]),
 ]
 
 
 def compute(op: str, vs: list[float]) -> float:
+    if op == "chance_exact":
+        # exact expectation of step-wise average precision under a uniformly
+        # random permutation of n items with m positives:
+        #   E[AP] = (m-1)/(n-1) + (H_n / n) * (n-m)/(n-1),  H_n the harmonic number
+        import math
+        n, m = int(round(vs[0])), int(round(vs[1]))
+        h = math.fsum(1.0 / r for r in range(1, n + 1))
+        return (m - 1) / (n - 1) + (h / n) * (n - m) / (n - 1)
     if op == "sub":
         return vs[0] - vs[1]
     if op == "absub":

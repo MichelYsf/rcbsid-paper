@@ -40,7 +40,7 @@ CODE_FILES = [
     "findings_score_threshold.md", "findings_bocpd_ablation.md",
     "findings_contributions.md", "findings_streams.md",
     "findings_review_analyses.md", "findings_referee_analyses.md",
-    "findings_bootstrap_robustness.md",
+    "findings_bootstrap_robustness.md", "findings_ecod_composition.md",
 ]
 SKIP_SUFFIX = {".pdf", ".aux", ".log", ".out", ".bbl", ".blg", ".synctex.gz",
                ".pyc", ".sha256"}

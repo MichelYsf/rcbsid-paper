@@ -22,7 +22,7 @@ anonymize the title page and remove identifying acknowledgments.
   reference the named GitHub remote and machine paths), scrubs the machine
   username from archived manifest paths, and **fails the build if any token
   from the identity list survives anywhere in the zip**. The shipped zip
-  passed that check (223 files at the 2026-09-06 build). No external links in the manuscript point
+  passed that check (229 files at the 2026-09-07 build). No external links in the manuscript point
   to author-named resources: the Data Availability section says the artifact
   is provided through the submission system during review.
 

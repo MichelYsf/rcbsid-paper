@@ -188,3 +188,11 @@ says under review, which the entry does not repeat), `biswas2026protocol`
 | `gama2013prequential` | Machine Learning 90(3), pp. 317--346, 2013, DOI 10.1007/s10994-012-5320-9 (Crossref; the record's online date is 2012, the volume year is 2013 and the entry carries the volume year) | Table 2, the update-timing row, where the prequential protocol is named |
 | `tatbul2018precision` | Advances in NeurIPS 31 (NeurIPS 2018), pp. 1924--1934 (DBLP conf/nips/TatbulLZAG18; proceedings.neurips.cc hash 8f468c873a32bb0619eaeb2050ba45d1); arXiv:1803.03639 kept as note; NeurIPS 2018 papers carry no Crossref DOI, so none is entered | Table 2, the metric row, with the sentence that flow-wise AP is the convention of the compared work and event-based evaluation is future work |
 | `kunsch1989jackknife` | The Annals of Statistics 17(3), 1989, DOI 10.1214/aos/1176347265 (Crossref: title, journal, volume, issue, year, author as "Kunsch"); pages 1217--1241 from the publisher page (projecteuclid.org, citation_firstpage/lastpage), which Crossref does not carry; Crossref and the Euclid meta tags give the ASCII form "Kunsch", and the umlaut follows the author's printed byline, corroborated by OpenAlex and zbMATH 0684.62035 | Threats to Validity, the moving-block bootstrap description (added 2026-09-06, final read) |
+
+## Second referee round (2026-09-07)
+
+| entry | action | verified record | hook |
+|---|---|---|---|
+| `manzhos2026ap` | added | Modern Stochastics: Theory and Applications 13(3), pp. 357--374, 2026, DOI 10.15559/26-VMSTA298 (Crossref: title, journal, pages, authors with ORCIDs, CC BY; the deposit carries no volume or issue, which come from the publisher page's citation meta tags and the published PDF header); arXiv:2511.02571 kept as note. Theorem 1 (eq. 4, p. 362) gives the expectation of AP at cutoff k under a uniformly random ranking; the full-list expectation the manuscript prints is its k = n case, which the paper does not print itself, and the manuscript says so | Table 2, chance-level row |
+| `angelopoulos2024crc` | removed | uncited after the conformal paragraph of Section 11 was deleted (second report, MAJOR 6) | none |
+| `bates2021rcps` | removed | uncited for the same reason | none |

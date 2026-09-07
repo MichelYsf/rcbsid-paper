@@ -167,3 +167,6 @@ The selftest now deletes its fixture and reindexes before returning, so the
 store is exactly as it was. These are retired rather than deleted, per this
 project's rule that history is never deleted. Retired 2026-08-27 (CI-34).
 
+
+## ecod_batch_composition_20260907T055825_8fa202d1.json
+Superseded within the second referee round (2026-09-07): the first composition run declared no output, so its manifest did not record the findings file it wrote, and its config described the model as fitted once where the script repeats an identical deterministic fit per batch. Rerun with the output declared and the wording corrected. Every emitted value is unchanged.

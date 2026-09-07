@@ -8,7 +8,16 @@ absolute. The referee report this round answers is
 `findings_referee_analyses.md` (manifest
 `referee_bounded_analyses_20260906T182158_de69afab`).
 
-## 1. Crossed history-by-sample design (referee BLOCKING 1) — shelved 2026-09-06
+## 1. Crossed history-by-sample design (first report BLOCKING 1; second report BLOCKING 1 and MAJOR 1) — shelved 2026-09-06, reaffirmed 2026-09-07
+
+The second report adds that ECOD's benign-only training rows also differ
+between the arms, so the shared-record comparison holds fixed the evaluated
+sample and, in the shared-batch columns, ECOD's batch, but not the fitted
+model. Table 6's caption and Section 6.1 now say exactly that, cite the two
+movements the design does measure (the detector by 0.005242 AP between the
+two prefixes, ECOD by 0.002788 AP between the two fitted models on the
+identical shared batch), and the conclusion carries the assumption in a
+clause. The reason the crossed design stays shelved is unchanged.
 
 **Asked.** Score each arm's detector state on the other arm's held-out
 records, so that history and sample membership are crossed and the headline
@@ -70,6 +79,50 @@ outside this round's bound (archived data only).
 
 **What the paper says instead.** Table 2, missing/infinite row, carries the
 counts as macros.
+
+## 4. Table 9 diagnostics on the held-out slice (second report, MAJOR 3) — shelved 2026-09-07
+
+**Asked.** Recompute the Section 9 diagnostics (posterior mass on short runs,
+scores at the cap, distinct values, score standard deviation) on the 30,000
+held-out records whose AP and AUC-ROC the section reports, rather than on the
+first 15,000 records of the stream.
+
+**Why it is not run.** The ablation run archived no per-record scores: its
+manifests (`s6_bocpd_corrected_ablation_20260824T092655_a47acf51` and the
+27 August re-derivation) declare a single output, the findings document, and
+`results/s6_ablation_arms.json` holds per-arm metrics only. Recomputing the
+diagnostics on the held-out slice would rerun both detector variants, which
+this round's bound (archived data only) excludes.
+
+**What the paper says instead.** Section 9 states that the prefix diagnostics
+are consistent with, not proof of, the held-out ranking, names the two
+populations and says the held-out scores were not archived.
+
+## 5. Intervals for the LITNET rows (second report, MAJOR 5) — shelved 2026-09-07
+
+**Asked.** Event-block bootstrap intervals for the four LITNET rows of Table 5.
+
+**Why it is not run.** The archived per-record score dumps cover the two
+CICIDS arms only (`results/score_dumps/`); no LITNET per-record scores were
+archived, so a bootstrap over them would require rerunning every LITNET
+method, outside the round's bound.
+
+**What the paper says instead.** Section 12 names which results carry
+intervals and which do not, and why.
+
+## 6. A size-only ECOD manipulation at fixed batch composition (second report, MAJOR 2) — not possible by construction
+
+**Asked (implicitly).** The complement of the composition-only experiment:
+change the batch size while holding its content fixed.
+
+**Why it is not run.** A batch's content is the set of records in it; a
+larger batch contains records a smaller one does not, so size cannot vary
+with content fixed. What can be held fixed is size while content varies,
+which analysis E of this round did (`findings_ecod_composition.md`): at
+identical size and model, content alone moves the shared records' AUC-PR by
+0.007552. The paper states that both the size and the content of the batch
+enter through the recomputed empirical CDFs, and keeps "in size or
+composition".
 
 ## Not shelved: the paired cut-by-assembly sweep (referee MAJOR 3)
 

@@ -14,7 +14,7 @@ michelyoussef@hotmail.com. ScholarOne will ask to link your ORCID. Link
 
 ## 2. Article type
 
-Select: **full research paper**. The paper is 21 pages, inside DTRAP's 10 to
+Select: **full research paper**. The paper is 22 pages, inside DTRAP's 10 to
 25 page range. If the type list does not offer a clearly matching option,
 stop and report the list. Choose nothing.
 
@@ -29,8 +29,8 @@ Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Be
 ## 4. Abstract
 
 Paste the full abstract below. It is plain text, already expanded from the
-manuscript macros, and it was verified on 2026-09-06 to match the manuscript
-abstract exactly after LaTeX normalization. It is 418 words and 2,707
+manuscript macros, and it was verified on 2026-09-07 to match the manuscript
+abstract exactly after LaTeX normalization. It is 419 words and 2,711
 characters.
 
 ```
@@ -53,8 +53,8 @@ a single 6.4982% operating point that is the equal-weight mean of per-capture
 held-out prevalences spanning 0.176% to 15.7747%; we present that identity as an
 audit check rather than a discovery. We also audit the evaluated detector
 against its description: its reset and growth branches share a predictive term
-that cancels, so the run-length posterior equals the hazard rate exactly below
-the run-length cap, while the evaluations spend nearly all their length at or
+that cancels, so the reset posterior P(r_t=0) equals the hazard rate exactly
+below the run-length cap, while the evaluations spend nearly all their length at or
 beyond that cap, where the posterior instead wanders; and the score the
 evaluation consumes is a function of P(r<=5), not of P(r=0). Scoring that
 detector one branch at a time yields a separate result: its deployed max
@@ -183,9 +183,9 @@ Three files, with designations:
 
 | # | full path | bytes | designation |
 |---|---|---|---|
-| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 658,735 | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 586,632 | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 99,989 | supplementary for review, not for publication |
+| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 666,208 | main document |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 602,916 | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 101,301 | supplementary for review, not for publication |
 
 Upload the anonymized PDF, never `paper\main.pdf`. The anonymous build is the
 one that says "Anonymous Author(s)" on page 1.
@@ -193,7 +193,7 @@ one that says "Anonymous Author(s)" on page 1.
 ## 13. Proof check and submit
 
 ScholarOne renders a proof PDF of your entries before submission. Open it.
-Confirm the title, the abstract, one anonymous main document of 21 pages, and
+Confirm the title, the abstract, one anonymous main document of 22 pages, and
 both supplementary files. Confirm the manuscript PDF shows no author name.
 Then press submit.
 

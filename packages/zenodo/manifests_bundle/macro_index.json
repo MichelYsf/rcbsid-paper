@@ -1044,6 +1044,138 @@
       "finished_utc": "2026-08-19T08:57:16.083152+00:00"
     }
   ],
+  "RefEcodCompBatchRecords": [
+    {
+      "value": 240000,
+      "unit": "",
+      "desc": "records in each of the two scoring batches",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompSharedRecords": [
+    {
+      "value": 78000,
+      "unit": "",
+      "desc": "evaluated records common to both batches",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompDifferingRecords": [
+    {
+      "value": 162000,
+      "unit": "",
+      "desc": "records in which the two batches differ",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompNaturalBatchAucpr": [
+    {
+      "value": 0.844487,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the shared records, timestamp-arm model, timestamp-slice batch (reproduces the Table 6 slice value)",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompSyntheticBatchAucpr": [
+    {
+      "value": 0.852039,
+      "unit": "",
+      "desc": "ECOD AUC-PR on the shared records, timestamp-arm model, round-robin-slice batch",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompNaturalBatchAucroc": [
+    {
+      "value": 0.79991,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on the shared records, timestamp-arm model, timestamp-slice batch",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompSyntheticBatchAucroc": [
+    {
+      "value": 0.809006,
+      "unit": "",
+      "desc": "ECOD AUC-ROC on the shared records, timestamp-arm model, round-robin-slice batch",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompDeltaAucpr": [
+    {
+      "value": 0.007552,
+      "unit": "",
+      "desc": "AUC-PR difference between the two batches, same model, same size, from reported values",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompDeltaAucroc": [
+    {
+      "value": 0.009096,
+      "unit": "",
+      "desc": "AUC-ROC difference between the two batches, same model, same size, from reported values",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompositionMovesAucpr": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if batch content alone, at fixed size and model, changes the reported AUC-PR",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompReproducesSlice": [
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if the timestamp-slice value reproduces the archived Table 6 slice-batch value",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
+  "RefEcodCompWallSeconds": [
+    {
+      "value": 150,
+      "unit": "s",
+      "desc": "wall time of this run",
+      "run_id": "ecod_batch_composition_20260907T061817_7d2ec490",
+      "manifest": "ecod_batch_composition_20260907T061817_7d2ec490.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T06:18:17.190500+00:00"
+    }
+  ],
   "RefSharedRecords": [
     {
       "value": 78000,
@@ -9019,6 +9151,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 162000,
+      "unit": "",
+      "desc": "synthetic held-out rows from days contributing zero attacks (Mon-Thu)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "CicidsFridayHeldoutDensityPct": [
@@ -9084,6 +9225,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 77.66,
+      "unit": "%",
+      "desc": "attack density of the synthetic arm's Friday held-out sub-slice",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsNaturalHstLiftAbs": [
@@ -9149,6 +9299,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.093448,
+      "unit": "",
+      "desc": "magnitude of HST's below-chance lift, natural arm",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsPrevShiftAbsPp": [
@@ -9214,6 +9373,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 42.9954,
+      "unit": "pp",
+      "desc": "magnitude of the held-out prevalence shift",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SSixDiagWindowRows": [
@@ -9279,6 +9447,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 15000,
+      "unit": "",
+      "desc": "records covered by the Stage-6 score-distribution diagnostic",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsNaturalProposedDetectorNormLift": [
@@ -9344,6 +9521,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.144773,
+      "unit": "",
+      "desc": "CICIDS Natural ProposedDetector normalized lift (AP-p)/(1-p)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsNaturalEcodNormLift": [
@@ -9409,6 +9595,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.229158,
+      "unit": "",
+      "desc": "CICIDS Natural Ecod normalized lift (AP-p)/(1-p)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsNaturalHstNormLift": [
@@ -9474,6 +9669,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": -0.294185,
+      "unit": "",
+      "desc": "CICIDS Natural Hst normalized lift (AP-p)/(1-p)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsSyntheticProposedDetectorNormLift": [
@@ -9539,6 +9743,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.391386,
+      "unit": "",
+      "desc": "CICIDS Synthetic ProposedDetector normalized lift (AP-p)/(1-p)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsSyntheticEcodNormLift": [
@@ -9604,6 +9817,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.222805,
+      "unit": "",
+      "desc": "CICIDS Synthetic Ecod normalized lift (AP-p)/(1-p)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsSyntheticHstNormLift": [
@@ -9669,6 +9891,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.349419,
+      "unit": "",
+      "desc": "CICIDS Synthetic Hst normalized lift (AP-p)/(1-p)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SSixOriginalNormLift": [
@@ -9734,6 +9965,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.281581,
+      "unit": "",
+      "desc": "Stage 6 original normalized lift (AP-p)/(1-p)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SSixCorrectedNormLift": [
@@ -9799,6 +10039,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.010229,
+      "unit": "",
+      "desc": "Stage 6 corrected normalized lift (AP-p)/(1-p)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "CicidsEcodScoringBatch": [
@@ -9855,6 +10104,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 480000,
+      "unit": "",
+      "desc": "records in the single decision_function call that produced every CICIDS arm's ECOD scores (validation+test, scored together)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "LitnetCaptureEcodScoringBatch": [
@@ -9902,6 +10160,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 150000,
+      "unit": "",
+      "desc": "records per decision_function call for each per-capture LITNET ECOD score",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "LitnetPooledEcodScoringBatch": [
@@ -9949,6 +10216,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 450000,
+      "unit": "",
+      "desc": "records in the decision_function call that produced the pooled LITNET ECOD score",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SweepEcodScoringBatchMin": [
@@ -9996,6 +10272,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 160917,
+      "unit": "",
+      "desc": "smallest ECOD scoring batch across the prevalence sweep levels",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SweepEcodScoringBatchMax": [
@@ -10043,6 +10328,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 480000,
+      "unit": "",
+      "desc": "largest ECOD scoring batch across the prevalence sweep levels",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SSixOriginalLift": [
@@ -10090,6 +10384,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.236153,
+      "unit": "",
+      "desc": "Stage 6 original additive lift above the chance floor",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SSixCorrectedLift": [
@@ -10137,6 +10440,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.008579,
+      "unit": "",
+      "desc": "Stage 6 corrected additive lift above the chance floor",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "LitnetPooledValBoundary": [
@@ -10184,6 +10496,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 1275000,
+      "unit": "",
+      "desc": "row index where the pooled LITNET stream's held-out slice begins",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "LitnetCaptureHeldoutRows": [
@@ -10231,6 +10552,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 75000,
+      "unit": "",
+      "desc": "held-out rows per LITNET capture; three of these tile the pooled held-out slice exactly",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "LitnetCaptureValBoundary": [
@@ -10269,6 +10599,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 425000,
+      "unit": "",
+      "desc": "row index where each LITNET capture's held-out slice begins; three of these sum to the pooled boundary",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "RevEcodBatchLadder1": [
@@ -10307,6 +10646,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 300000,
+      "unit": "",
+      "desc": "intermediate scoring batch 1 of the ECOD batch-size ladder",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "RevEcodBatchLadder2": [
@@ -10345,6 +10693,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 360000,
+      "unit": "",
+      "desc": "intermediate scoring batch 2 of the ECOD batch-size ladder",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SweepUnresampledLofMinusDetector": [
@@ -10383,6 +10740,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.318196,
+      "unit": "",
+      "desc": "LOF minus proposed-detector AUC-PR at the unresampled sweep level (both deterministic there)",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsNaturalEcodMinusDetectorAucpr": [
@@ -10403,6 +10769,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.026805,
+      "unit": "",
+      "desc": "timestamp-order arm: ECOD AUC-PR minus detector AUC-PR, from the reported values",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsSyntheticDetectorMinusEcodAucpr": [
@@ -10423,6 +10798,15 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.126032,
+      "unit": "",
+      "desc": "day-round-robin arm: detector AUC-PR minus ECOD AUC-PR, from the reported values",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ],
   "SFourCicidsNaturalEcodOwnBatchMinusDetectorAucpr": [
@@ -10434,6 +10818,26 @@
       "manifest": "supplementary_macros_20260906T195945_633a8c6f.json",
       "git_commit": "e76ee0b3698b20430690e3525559af1375668ac4-dirty",
       "finished_utc": "2026-09-06T19:59:45.158947+00:00"
+    },
+    {
+      "value": 0.029868,
+      "unit": "",
+      "desc": "timestamp-order arm: ECOD AUC-PR in its own 240000-record batch minus detector AUC-PR, from the reported values",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
+    }
+  ],
+  "ChanceExactNaturalSliceAucpr": [
+    {
+      "value": 0.682366,
+      "unit": "",
+      "desc": "exact expected step-wise AUC-PR of a uniformly random ranking of the timestamp-order held-out slice",
+      "run_id": "supplementary_macros_20260907T055615_32f14bfe",
+      "manifest": "supplementary_macros_20260907T055615_32f14bfe.json",
+      "git_commit": "d2742e159df56a84938b8880139dc51ede78384d-dirty",
+      "finished_utc": "2026-09-07T05:56:15.417992+00:00"
     }
   ]
 }

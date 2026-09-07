@@ -229,6 +229,19 @@ def main() -> int:
         #    240000-record batch (the A4 ladder's first rung), from the
         #    reported values, so Section 6.3 can state that ECOD leads that
         #    arm under both batches with a number the reader can subtract.
+        # 9) Second referee round (2026-09-07): the exact finite-sample
+        #    expectation of step-wise AP under a uniformly random permutation,
+        #    E[AP] = (m-1)/(n-1) + (H_n/n)(n-m)/(n-1), for the timestamp-order
+        #    held-out slice (n records, m attacks), so Table 2 can state how far
+        #    the prevalence p sits from the exact chance level.
+        import math as _math
+        n_slice = int(comp["macros"]["CicidsHeldoutSize"]["value"])
+        m_slice = int(dm["SFourCicidsNaturalTestAttacks"]["value"])
+        h_n = _math.fsum(1.0 / r for r in range(1, n_slice + 1))
+        run.emit_macro("ChanceExactNaturalSliceAucpr",
+                       round((m_slice - 1) / (n_slice - 1) + (h_n / n_slice) * (n_slice - m_slice) / (n_slice - 1), 6),
+                       desc="exact expected step-wise AUC-PR of a uniformly random "
+                            "ranking of the timestamp-order held-out slice")
         rev_path, rev = load("review_bounded_analyses_20260827T131839_")
         run.declared_inputs.append(str(rev_path))
         run.emit_macro("SFourCicidsNaturalEcodOwnBatchMinusDetectorAucpr",

@@ -165,3 +165,61 @@ Both additions verified against a registrar before entry (`BIB_AUDIT.md`,
 (DOI 10.1007/s10994-012-5320-9); Tatbul et al. 2018 via DBLP
 (conf/nips/TatbulLZAG18, pp. 1924–1934) and the NeurIPS proceedings page.
 NeurIPS 2018 papers carry no Crossref DOI, so none is entered.
+
+---
+
+# Second report (2026-09-07): `report-source.md`
+
+The second report re-examines the eleven earlier objections and adds a cold
+review (3 BLOCKING, 6 MAJOR, 6 MINOR) with a reject recommendation. Every
+finding was verified against the built PDF (tip d2742e1), the code and the
+manifests before anything changed. Table numbers below are the report's, which
+are the d2742e1 build's; the per-cut table added this round shifts later
+numbers by one in the current build. Analysis run this round: E
+(`findings_ecod_composition.md`, manifest
+`ecod_batch_composition_20260907T061817_7d2ec490`, 131 s). Analyses not run,
+with reasons: `RESPONSE_SHELF.md` entries 4 to 6.
+
+## Cold review, BLOCKING
+
+| # | finding (gist) | verdict | evidence | action |
+|---|---|---|---|---|
+| B1 | Table 6's "only the history each detector saw before scoring them differs" is false for ECOD, which is fitted on each arm's benign-only training rows; the shared-record comparison does not hold the fitted model fixed. | confirmed | `scripts/run_construction_contrast.py` line 183 fits ECOD on the benign rows of each arm's own training split; the splits differ (77,670 relocated attacks and the benign rows around them). The shared-batch analysis scored the identical batch under two fitted models (`run_referee_analyses.py`, stage A). | B: caption and Section 6.1 now say membership and prevalence are held fixed while everything upstream of scoring still varies (the detector's prefix, ECOD's training rows and, in the slice columns, its batch) and cite the two measured movements, 0.005242 AP (detector, between prefixes) and 0.002788 AP (ECOD, between fitted models on the identical shared batch); Section 12 says the same. The crossed design stays shelved (`RESPONSE_SHELF.md` 1). |
+| B2 | The constant reset marginal P(r_t=0)=h follows from the Adams and MacKay recursion (same predictive on both branches, Algorithm 1), so it is not evidence of an implementation defect; and the consumed score uses P(r<=5), so the identity does not make the score data-independent. | confirmed | Read-only check of arXiv:0710.3742: Eq. 3 and Algorithm 1 steps 3 to 5 weight the changepoint branch by the previous run's predictive; the identity and the one-step lag follow from steps 4 to 8 (the paper does not state them). `src/bocpd/truncated_bocpd.py` lines 161 to 168 reproduce that recursion below the cap. The paper already said the consumed score is a function of P(r<=5). | A: Section 3.2 states the identity as a property of the published recursion (cited with its equation and algorithm), not a coding error, and states the audit finding as the description-versus-implementation mismatch; abstract and contribution 3 say "the reset posterior P(r_t=0)"; Section 9 is retitled "An Alternative Reset Formulation", every "repair" is gone, the prior-predictive reset is described as modelling the change point before x_t, all measured results kept; Table 9 heading and the Section 12 Construct clause follow. |
+| B3 | The manifest id, the run name in Section 3, the public-version statement and the companion disclosure are searchable fingerprints. | confirmed for the identifiers; the two statements are kept by instruction | Grep of the d2742e1 body: `bootstrap_block_robustness_20260906T200612_b7c847e1` (Section 12) and `s3_score_threshold_verification` (Section 3 opening). | C: both replaced by "archived in the artifact". After the edit the body has zero hits for `_2026`, `T2026` and 8-hex-digit suffixes other than the two ACM CCS concept ids in the CCSXML block, which every acmart submission carries. The earlier-versions and companion statements stay as they were, by the brief. |
+
+## Cold review, MAJOR
+
+| # | finding (gist) | verdict | evidence | action |
+|---|---|---|---|---|
+| M1 | The conclusion attributes the reversal unconditionally while the body conditions it on an untested assumption. | confirmed | Conclusion sentence "attributing it to the sample the assembly selects rather than to the order it imposes" carried no clause. | D: the sentence now carries the Section 6 assumption in a clause. |
+| M2 | "In size or composition" exceeds the design: the ladder varied size and content together; Figure 2 does not say which Table 6 batch it plots. | confirmed as to the ladder; the composition-only experiment was feasible and run | Ladder pads add validation records (`run_review_analyses.py`); Figure 2 caption named no batch. | E: the 78,000 shared records scored under the timestamp arm's fitted model inside two batches of identical size (240,000) and different content (the timestamp slice and the round-robin slice, differing in 162,000 records): AUC-PR 0.844487 against 0.852039, a difference of 0.007552 (AUC-ROC 0.799910 against 0.809006, 0.009096); the timestamp-slice value reproduces the Table 6 slice value exactly. Composition alone moves it, so "in size or composition" is kept and Section 6.3 states that both size and content enter through the recomputed ECDFs. Figure 2's caption says the right panel plots the slice-batch values. A size-only manipulation at fixed content is impossible by construction (`RESPONSE_SHELF.md` 6). |
+| M3 | "Table 9 shows why" explains the held-out ranking with diagnostics from a disjoint 15,000-record prefix. | confirmed | Table 9 caption states the two populations; the ablation manifests declare only the findings file as output and `results/s6_ablation_arms.json` holds per-arm metrics, so no held-out per-record scores exist. | F: the sentence now says the prefix diagnostics are consistent with, not proof of, the held-out ranking, names the two populations and says the held-out scores were not archived. Recomputation shelved (`RESPONSE_SHELF.md` 4). |
+| M4 | Biswas is mischaracterised: the coverage-versus-drift separation is within CSE-CIC-IDS2018 by a stratified-temporal control; cross-dataset transfer is a separate experiment; no intersected held-out set. | confirmed | Read-only read of the preprint (abstract, Sections 1, 1.2, 5.3, 6.1 to 6.3, 7; the Crossref record for 10.20944/preprints202606.0903.v1 matches the bib entry). | G: the sentence now describes a within-corpus comparison of random, stratified-temporal and class-blind chronological splits that separates unseen-attack coverage from drift, with transfer to CIC-DDoS2019 reported separately and each protocol scored on its own partition; nothing quoted. |
+| M5 | Interval coverage is selective and the paper's evidentiary language does not say so. | confirmed | Intervals existed for the CICIDS contrast, shared records and branches only. | H: one Section 12 sentence names which results carry intervals and which do not (LITNET per-stream values, per-cut values, prevalence-level means, the one-stream Section 9 result) and why; LITNET intervals are not possible from archived data (`RESPONSE_SHELF.md` 5). |
+| M6 | The conformal paragraph misreads the cited algorithm (an empty feasible set selects lambda_max; it does not make CRC infeasible) and gives no reproducible feasibility analysis. | confirmed | Paragraph in Section 11; no calibration details were reported. | I: paragraph deleted; `angelopoulos2024crc` and `bates2021rcps` became uncited and were removed, recorded in `BIB_AUDIT.md`. |
+
+## Cold review, MINOR
+
+| # | finding (gist) | verdict | evidence | action |
+|---|---|---|---|---|
+| m1 | The chance level is not exactly the finite-sample expectation of step-wise AP under a random permutation; Manzhos, Ianevych and Melnyk give the exact formula; Table 9 still says "floor". | confirmed | The closed form E[AP] = (m-1)/(n-1) + (H_n/n)(n-m)/(n-1) reproduces the report's four values to nine decimals (0.682365837, 0.252433107, 0.776633616, 0.161609716); the cited paper verifies (Modern Stochastics: Theory and Applications 13(3):357-374, 2026, DOI 10.15559/26-VMSTA298); its Theorem 1 gives AP at cutoff k and the full-list case is its k = n specialisation. | J: Table 2's chance-level row states that the exact expectation differs from p in the fifth decimal, prints one worked value (0.682366 against 0.682350 on the timestamp-order slice, a supplementary macro checked by a decimals relation with its own operator), cites the record, and says it changes no conclusion; Table 9's "floor" is "chance level". |
+| m2 | "No coherent global timestamp order exists" overstates disjoint capture intervals. | confirmed | Section 4.2 wording. | J: "no continuous global chronology, three disjoint intervals separated by gaps of weeks", with the reason that a global order would concatenate the gaps. |
+| m3 | Gurjar and Camp implement gradient-boosted classification of a 95th-percentile exceedance, not extreme-value methods. | confirmed | Read-only read of arXiv:2601.14299 (Sections 4.1 to 4.4, 6.2, 7): XGBoost per severity stratum on intensity, momentum and volatility; 30-minute horizon; EVT is related work only. | J: sentence rewritten to the implemented predictor; nothing quoted. |
+| m4 | The two-arm split sweep is not auditable from the paper. | confirmed | Only three cut points were named; Figure 3 shows one arm. | J: a table of chance level and AUC-PR of both scorers in both arms at all seven cuts, with an agreement column, from the archived paired-sweep macros. |
+| m5 | "Sampling uncertainty is small" is not robust to the block-2600 result. | confirmed | Section 12 reports the AP overlap at 2,600. | J: the sentence is restricted to the block lengths at which the branches' AP intervals separate (100 and 250). |
+| m6 | C_FP, C_FN and the validation threshold rule are not in the protocol tables. | confirmed | `posterior_threshold(1.0, 10.0, 0.05)` in `run_construction_contrast.py`; `_threshold_from_validation` in `src/experiments/run_streaming_eval.py` maximises F1 on the validation precision-recall curve with the Bayes threshold as fallback. | J: a "decision threshold" row in Table 3 states the formula with C_FP = 1, C_FN = 10, rho = 0.05 and the printed value 0.655172, the baselines' F1 rule and its fallback, and that no threshold-dependent column is reported; "PyOD 2.0.5" added to the ECOD row. |
+
+## Dispositions of the eleven earlier objections
+
+1 partial (conclusion): fixed by D. 2 partial (ECOD training rows differ): B and E. 3 partial (size versus composition): E. 4 resolved with a version gap: PyOD 2.0.5 added to Table 3. 5 partial (Table 9 "floor", finite-sample chance level): J. 6, 9 and 11 resolved: no action. 7 partial (interval coverage): H. 8 mostly resolved (second arm not auditable): the per-cut table. 10 not cleanly resolved (identifiers): C.
+
+## Analysis E in full
+
+| batch (timestamp-arm model, 240,000 records each, sharing the 78,000 evaluated records) | AUC-PR | AUC-ROC |
+|---|---|---|
+| timestamp-order held-out slice (reproduces the Table 6 slice value) | 0.844487 | 0.799910 |
+| day-round-robin held-out slice | 0.852039 | 0.809006 |
+| difference, from reported values | 0.007552 | 0.009096 |
+
+F and H were not run: no per-record scores are archived for the ablation's held-out slice or for any LITNET method (see the shelf).

@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{52}
+\begin{thebibliography}{51}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -45,24 +45,6 @@
   (\bibinfo{year}{2007}).
 \newblock
 \href{https://doi.org/10.48550/arXiv.0710.3742}{doi:\nolinkurl{10.48550/arXiv.0710.3742}}
-
-
-\bibitem[Angelopoulos et~al\mbox{.}(2024)]%
-        {angelopoulos2024crc}
-\bibfield{author}{\bibinfo{person}{Anastasios~N. Angelopoulos},
-  \bibinfo{person}{Stephen Bates}, \bibinfo{person}{Adam Fisch},
-  \bibinfo{person}{Lihua Lei}, {and} \bibinfo{person}{Tal Schuster}.}
-  \bibinfo{year}{2024}\natexlab{}.
-\newblock \showarticletitle{Conformal Risk Control}. In
-  \bibinfo{booktitle}{\emph{The Twelfth International Conference on Learning
-  Representations ({ICLR})}}.
-\newblock
-\shownote{arXiv:2208.02814}.
-\newblock
-\urldef\tempurl%
-\url{https://openreview.net/forum?id=33XGfHLtZg}
-\showURL{%
-\tempurl}
 
 
 \bibitem[Apruzzese et~al\mbox{.}(2023)]%
@@ -158,19 +140,6 @@
 \shownote{arXiv:2605.01962}.
 \newblock
 \href{https://doi.org/10.1109/SMARTNETS69662.2026.11604738}{doi:\nolinkurl{10.1109/SMARTNETS69662.2026.11604738}}
-
-
-\bibitem[Bates et~al\mbox{.}(2021)]%
-        {bates2021rcps}
-\bibfield{author}{\bibinfo{person}{Stephen Bates}, \bibinfo{person}{Anastasios
-  Angelopoulos}, \bibinfo{person}{Lihua Lei}, \bibinfo{person}{Jitendra Malik},
-  {and} \bibinfo{person}{Michael~I. Jordan}.} \bibinfo{year}{2021}\natexlab{}.
-\newblock \showarticletitle{Distribution-Free, Risk-Controlling Prediction
-  Sets}.
-\newblock \bibinfo{journal}{\emph{Journal of the {ACM}}} \bibinfo{volume}{68},
-  \bibinfo{number}{6} (\bibinfo{year}{2021}), \bibinfo{pages}{43:1--43:34}.
-\newblock
-\href{https://doi.org/10.1145/3478535}{doi:\nolinkurl{10.1145/3478535}}
 
 
 \bibitem[Beyer et~al\mbox{.}(2016)]%
@@ -503,6 +472,22 @@
   \bibinfo{publisher}{{IEEE}}, \bibinfo{pages}{254--262}.
 \newblock
 \href{https://doi.org/10.1109/CNS56114.2022.9947235}{doi:\nolinkurl{10.1109/CNS56114.2022.9947235}}
+
+
+\bibitem[Manzhos et~al\mbox{.}(2026)]%
+        {manzhos2026ap}
+\bibfield{author}{\bibinfo{person}{Tetiana Manzhos}, \bibinfo{person}{Tetiana
+  Ianevych}, {and} \bibinfo{person}{Olga Melnyk}.}
+  \bibinfo{year}{2026}\natexlab{}.
+\newblock \showarticletitle{Average Precision at Cutoff {$k$} under Random
+  Rankings: Expectation and Variance}.
+\newblock \bibinfo{journal}{\emph{Modern Stochastics: Theory and Applications}}
+  \bibinfo{volume}{13}, \bibinfo{number}{3} (\bibinfo{year}{2026}),
+  \bibinfo{pages}{357--374}.
+\newblock
+\shownote{arXiv:2511.02571}.
+\newblock
+\href{https://doi.org/10.15559/26-VMSTA298}{doi:\nolinkurl{10.15559/26-VMSTA298}}
 
 
 \bibitem[Manzoor et~al\mbox{.}(2018)]%
