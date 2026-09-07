@@ -13,7 +13,7 @@
 > It has not been uploaded. Its version DOI is minted when you publish and is
 > not known yet; every place that must carry it is listed in Step 9.
 
-Assembled 2026-09-07 against commit **`DEPOSIT_COMMIT_PLACEHOLDER`**, the
+Assembled 2026-09-07 against commit **`b9f32addaf60a927e4c9d57b1c7280da2867501d`**, the
 packaging commit whose tree holds the five files below byte-for-byte; this
 sheet is committed one commit ahead of it, which is harmless (the files are
 identical in both). If you rebuild anything after that, run `git rev-parse
@@ -191,7 +191,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/DEPOSIT_COMMIT_PLACEHOLDER` | **the commit, not the branch**; replaces the inherited 083df8a… link, which belongs to 2.0.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/b9f32addaf60a927e4c9d57b1c7280da2867501d` | **the commit, not the branch**; replaces the inherited 083df8a… link, which belongs to 2.0.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
 Zenodo records the version relation to 2.0.0 itself; do not add it by hand.
