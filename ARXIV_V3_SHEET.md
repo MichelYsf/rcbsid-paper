@@ -16,7 +16,7 @@ promises that window), then the companion's v2 replacement.
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (101,918 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (101,910 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
