@@ -24,6 +24,14 @@ OUT = ROOT / "packages/dtrap/artifact_anonymous.zip"
 IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                b"hotmail", b"0664-8228", b"0664-8224", b"CYBERWIZARD",
                b"camich289",
+               # The repository directory name and the branch name survive
+               # inside archived absolute paths and in prose even after the
+               # machine username is replaced. "rcbsid-paper" is the name of
+               # the public GitHub repository, so a search for it names the
+               # author; the branch name pins the same repository. Neither
+               # appears in the manuscript, so a referee has no innocent
+               # reason to have seen either.
+               b"rcbsid-paper", b"rebuild/honest-v1",
                # Zenodo record ids: each resolves to a page naming the author
                b"22673735", b"22638195", b"22213264", b"20074590",
                b"20074589", b"zenodo.org"]
@@ -65,6 +73,11 @@ def scrub(rel: str, data: bytes) -> bytes:
     # machine username inside archived absolute paths
     data = data.replace(b"CYBERWIZARD", b"ANON")
     data = data.replace(b"camich289", b"ANON")
+    # ... and the two path-shaped identifiers the username replacement leaves
+    # behind: 93 of 231 entries carried "projects/rcbsid-paper" after the
+    # username was scrubbed, which is the public repository's name.
+    data = data.replace(b"rcbsid-paper", b"[repo-redacted-for-review]")
+    data = data.replace(b"rebuild/honest-v1", b"[branch-redacted-for-review]")
     # Zenodo record identifiers resolve to a page naming the author, so the
     # double-anonymous artifact redacts them wherever the correction log or
     # README carries them; the scan below then proves none survive.

@@ -21,14 +21,23 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+# The Zenodo code zip's sources used to be listed here by hand, and the list
+# had drifted: fourteen of the twenty-two root files the builder ships were
+# invisible to this check, README.md and CITATION.cff among them. Those two are
+# exactly what a DOI propagation edits, so a propagation that touched nothing
+# else would have left the zip stale and this check would still have printed
+# PASSED -- the CI-31 failure again, on the one artifact that cannot be
+# withdrawn after upload. Import the list from the builder instead, so the two
+# cannot disagree.
+from build_zenodo_package import CODE_DIRS, CODE_FILES  # noqa: E402
+
+_ZENODO_CODE_SOURCES = list(CODE_DIRS) + list(CODE_FILES)
 
 # (package artifact, [source roots it is built from])
 PACKAGES = [
-    (ROOT / "packages/zenodo/rcbsid_rebuild_code.zip",
-     ["src", "scripts", "tests", "paper/main.tex", "paper/numbers.tex",
-      "SCOPE_DECISIONS.md", "CLAIM_LEDGER.md", "findings_contrast.md",
-      "findings_review_analyses.md", "findings_referee_analyses.md",
-      "findings_bootstrap_robustness.md", "findings_ecod_composition.md", "findings_prevalence.md"]),
+    (ROOT / "packages/zenodo/rcbsid_rebuild_code.zip", _ZENODO_CODE_SOURCES),
     (ROOT / "packages/dtrap/artifact_anonymous.zip",
      ["src", "scripts", "tests", "paper/main.tex", "paper/numbers.tex",
       "SCOPE_DECISIONS.md", "CLAIM_LEDGER.md", "results/manifests",

@@ -30,6 +30,7 @@ What it enforces, and why each matters for an IMMUTABLE deposit:
 """
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -77,16 +78,25 @@ def main() -> int:
     else:
         print("  HEAD published  %s == remote" % head[:12])
 
-    dirty = []
+    # Count run manifests, and count them by the field that carries the
+    # marker. Matching "-dirty" anywhere in the file text counted three things
+    # that are not dirty run manifests: macro_index.json, which is a derived
+    # index and not a run at all, and two clean-tree manifests that merely
+    # mention a dirty commit elsewhere in their payload. That printed "30 of
+    # 34" where the deposit sheet discloses 27 of 33, which is the number an
+    # operator has to defend in the record's description.
+    dirty, total = [], 0
     if MANIFESTS.exists():
         for m in sorted(MANIFESTS.glob("*.json")):
+            if m.name == "macro_index.json":
+                continue
+            total += 1
             try:
-                t = m.read_text(encoding="utf-8", errors="replace")
+                d = json.loads(m.read_text(encoding="utf-8", errors="replace"))
             except Exception:
                 continue
-            if '"git_commit"' in t and "-dirty" in t:
+            if str(d.get("git_commit", "")).endswith("-dirty"):
                 dirty.append(m.name)
-    total = len(list(MANIFESTS.glob("*.json"))) if MANIFESTS.exists() else 0
     if dirty:
         print("  DIRTY PROVENANCE %d of %d live manifest(s) ran on an "
               "uncommitted tree (base commit resolves; exact source does not)"

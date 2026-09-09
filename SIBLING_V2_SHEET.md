@@ -27,7 +27,7 @@ fresh and compiled clean.
 
 1. **Upload the staged tarball.** Sign in at https://arxiv.org, open paper
    2510.09619, choose **Replace**, and upload
-   `packages/sibling/arxiv_2510_09619_v2_source.tar.gz` (117,078 bytes). It
+   `packages/sibling/arxiv_2510_09619_v2_source.tar.gz` (117,035 bytes). It
    contains `main.tex`, `refs.bib`, `main.bbl` (arXiv does not run BibTeX),
    `00README.json`, and the seven figure PDFs, in the same layout as v1.
 2. **Abstract metadata field.** Add the correction sentence to the abstract
