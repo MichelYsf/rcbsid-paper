@@ -26,13 +26,15 @@
 > outward action (Step 9). The provenance-limitation canon is deliberately
 > untouched; see the note under Step 0.
 
-Assembled 2026-09-09 against commit **`6087a45b787936d83acb92b0495902844fa6b7cf`**, the
+Assembled 2026-09-09 against commit **`cd26bf73db7670c7ff07cf415c3e01dbc11dabba`**, the
 packaging commit whose tree holds the five files of Step 2 byte-for-byte as
-staged (their SHA-256 values are recorded there). The DOI propagation of
-2026-09-09 changed `README.md`, `CITATION.cff` and two scripts, all of which
-ship inside the code zip, so that zip was rebuilt and the packaging commit
-moved on from 224d130. This sheet is committed one
-commit ahead of it, which changes no file it names. If you rebuild anything
+staged (their SHA-256 values are recorded there). The packaging commit moved twice on
+2026-09-09 and 224d130 is no longer it: the DOI propagation changed
+`README.md`, `CITATION.cff` and two scripts, and the audit fixes that followed
+changed three more scripts and added `scripts/check_tarball_anonymity.py`. All
+of those ship inside the code zip, which is why it is now 145 entries rather
+than 144. This sheet is committed one commit ahead of the packaging commit,
+and changes no file it names. If you rebuild anything
 after that, run `git rev-parse HEAD` on a clean tree and update Step 2 and
 Step 7 before uploading.
 
@@ -125,7 +127,7 @@ including the two that this round's document regenerations created.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` (144 entries, 1,257,737 B unzipped) | 445,490 B | `c8f1633983f1c705a6a1dbf65b89241367e9506cfde11241af196fc2779b0584` |
+| 1 | `rcbsid_rebuild_code.zip` (145 entries, 1,264,599 B unzipped) | 448,411 B | `9a3756a7f42fe74eccb18422fb7956243ef30ddfdf0bbb7ce5c89d254314fec5` |
 | 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `a3f601de3b847b6a5173b145c31111f8908f50080f3fd1432586a84524957786` |
 | 3 | `EXPECTED_SHA256.txt` (unchanged from 2.1.0 and 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` (unchanged from 2.1.0 and 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
@@ -234,7 +236,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/6087a45b787936d83acb92b0495902844fa6b7cf` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/cd26bf73db7670c7ff07cf415c3e01dbc11dabba` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
 Zenodo records the version relation to 2.1.0 itself; do not add it by hand.

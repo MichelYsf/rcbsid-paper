@@ -5,7 +5,10 @@
 > paste order, the verified reviewer block, the plain-text renders, and the
 > corrected waiver row. This sheet stays as the fuller reference record.
 
-Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
+Assembled 2026-08-27, last rebuilt 2026-09-09 against commit
+**`cd26bf73db7670c7ff07cf415c3e01dbc11dabba`**, whose tree holds the three
+files of Step 6 at the sizes given there. The 2026-08-27 anchor that stood
+here, 083df8a, holds a 17-page manuscript and a differently sized artifact.
 Portal: **https://mc.manuscriptcentral.com/dtrap** (ScholarOne, verified
 2026-08-24). **This is the first outward action after the Zenodo 2.2.0
 publish** (doi:10.5281/zenodo.22673735, superseding 2.1.0,
@@ -56,11 +59,20 @@ reproducibility; provenance
 | # | file | size | role |
 |---|---|---|---|
 | 1 | `packages/dtrap/manuscript_anonymous.pdf` | 672,265 B | **main document** |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 608,618 B | supplementary, **not for publication** |
-| 3 | `packages/dtrap/source_anonymous.tar.gz` | 102,151 B | supplementary, **not for publication** |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 612,277 B | supplementary, **not for publication** |
+| 3 | `packages/dtrap/source_anonymous.tar.gz` | 102,093 B | supplementary, **not for publication** |
 
-The artifact contains 231 files and passes its own documented reproduction
+The artifact contains 232 files and passes its own documented reproduction
 instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).
+
+> **Run the tarball check before you upload.** `tar tvf` prints POSIX owner
+> metadata on every member line, and a plain `tar -czf` had been writing the
+> author's machine username into all three shipped tarballs, where a referee
+> reads it without extracting anything. The tarballs are now written with
+> `tar --owner=0 --group=0 --numeric-owner`, and
+> `python scripts/check_tarball_anonymity.py` proves it. It is not one of the
+> nine gate checks and does not change that count; run it by hand.
+
 
 ## Step 7 — Cover letter
 
@@ -73,7 +85,7 @@ now match the manuscript.
 ## Step 8 — Confidential Comments to the Editor
 
 Paste **`packages/dtrap/EDITOR_NOTE.txt` in full** (the plain-text render of
-`PRIOR_APPEARANCE_EDITOR_NOTE.md`, 168 lines in the markdown source).
+`PRIOR_APPEARANCE_EDITOR_NOTE.md`, 169 lines in the markdown source).
 It contains, and the manuscript deliberately does not:
 
 - the prior appearance: arXiv:2605.24696 v1 (23 May 2026) and v2 (25 June 2026),

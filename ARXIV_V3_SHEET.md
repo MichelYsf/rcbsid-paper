@@ -1,6 +1,10 @@
 # ARXIV_V3_SHEET — replacement of arXiv:2605.24696, nothing submitted
 
-Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
+Assembled 2026-08-27, last rebuilt 2026-09-09 against commit
+**`cd26bf73db7670c7ff07cf415c3e01dbc11dabba`**, whose tree holds the tarball and the
+23-page manuscript this sheet describes. The 2026-08-27 anchor that stood
+here, 083df8a, holds a 43,880 B tarball and a 17-page manuscript, and would
+have failed an operator who checked the upload against it.
 The Zenodo lineage: versions 2.0.0 (doi:10.5281/zenodo.22213264) and 2.1.0
 (doi:10.5281/zenodo.22638195) are live and frozen, and version 2.2.0 is staged
 on record 22638195 with its DOI **reserved: 10.5281/zenodo.22673735**. The
@@ -20,7 +24,7 @@ promises that window), then the companion's v2 replacement.
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (102,774 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (102,712 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
@@ -93,7 +97,8 @@ Source of truth: the **NO VENUE CLAIM VARIANT** at the top of
 that file are **retired and false** — both asserted a journal status for the
 companion preprint that does not exist. Do not paste either.
 
-``` v3: substantial correction and rebuild. v1 and v2 reported results
+```
+v3: substantial correction and rebuild. v1 and v2 reported results
 produced on assembled evaluation streams (pooled captures, day-interleaved
 records) and interpreted the resulting operating points as dataset properties.
 They also described a scoring rule the released code did not implement,
@@ -135,7 +140,8 @@ author's Windows machine would change published numbers -- the cross-platform
 difference this project records as corrected incident CI-16. They were
 therefore not re-run, and the other seventeen were deliberately left as they
 are rather than regenerate a subset that would not change this disclosure. 23
-pages. ```
+pages.
+```
 
 **Resolved 2026-08-31, extended 2026-09-07 and 2026-09-09:** the Comments text
 above carries the whole lineage: v1.0.0 (10.5281/zenodo.20074590), v2.0.0
