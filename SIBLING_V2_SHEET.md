@@ -27,7 +27,7 @@ fresh and compiled clean.
 
 1. **Upload the staged tarball.** Sign in at https://arxiv.org, open paper
    2510.09619, choose **Replace**, and upload
-   `packages/sibling/arxiv_2510_09619_v2_source.tar.gz` (117,077 bytes). It
+   `packages/sibling/arxiv_2510_09619_v2_source.tar.gz` (117,078 bytes). It
    contains `main.tex`, `refs.bib`, `main.bbl` (arXiv does not run BibTeX),
    `00README.json`, and the seven figure PDFs, in the same layout as v1.
 2. **Abstract metadata field.** Add the correction sentence to the abstract
@@ -38,7 +38,7 @@ fresh and compiled clean.
    > descriptions below are not what the shared codebase implements, and that
    > the evaluation streams are assembled constructions. See the correction
    > note on the title page and the corrected companion work,
-   > arXiv:2605.24696 (v3 forthcoming), artifact doi:10.5281/zenodo.22638195.]
+   > arXiv:2605.24696 (v3 forthcoming), artifact doi:10.5281/zenodo.22673735.]
 
 3. **Comments field.** Set to exactly:
 
@@ -46,7 +46,7 @@ fresh and compiled clean.
    > shared codebase found the score, threshold, and latency descriptions
    > unsupported by the implementation, and the evaluation streams to be
    > assembled constructions. No quantitative result tables are affected.
-   > See arXiv:2605.24696 (corrected v3) and doi:10.5281/zenodo.22638195.
+   > See arXiv:2605.24696 (corrected v3) and doi:10.5281/zenodo.22673735.
 
 4. **License.** Keep the license chosen for v1. arXiv applies the license per
    version. Changing it on a correction invites questions the note already

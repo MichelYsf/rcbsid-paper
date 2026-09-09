@@ -135,7 +135,9 @@ in this rebuild** and therefore carry no numbers anywhere.
 See `CITATION.cff`. Version 1.0.0 of the Zenodo record
 (doi:10.5281/zenodo.20074590, deposited 2026-05-07) archives the pre-audit
 codebase at tag `v1.0.0`; the corrected rebuild is published in the same
-record lineage, first as version 2.0.0 (doi:10.5281/zenodo.22213264) and,
-with the manifests of the pre-submission review rounds added, as version
-2.1.0 (doi:10.5281/zenodo.22638195), which is the one to cite (CI-36 in
-`SCOPE_DECISIONS.md` records the correction of an earlier DOI claim).
+record lineage, first as version 2.0.0 (doi:10.5281/zenodo.22213264), then
+as version 2.1.0 (doi:10.5281/zenodo.22638195) with the manifests of the
+pre-submission review rounds added, and as version 2.2.0
+(doi:10.5281/zenodo.22673735) with the revisions of the final review round.
+Version 2.2.0 is the one to cite (CI-36 in `SCOPE_DECISIONS.md` records the
+correction of an earlier DOI claim).

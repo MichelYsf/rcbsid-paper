@@ -7,9 +7,9 @@
 
 Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
 Portal: **https://mc.manuscriptcentral.com/dtrap** (ScholarOne, verified
-2026-08-24). **This is the first outward action after the Zenodo 2.1.0
-publish** (doi:10.5281/zenodo.22638195, superseding 2.0.0,
-doi:10.5281/zenodo.22213264), and the arXiv v3 replacement follows within
+2026-08-24). **This is the first outward action after the Zenodo 2.2.0
+publish** (doi:10.5281/zenodo.22673735, superseding 2.1.0,
+doi:10.5281/zenodo.22638195), and the arXiv v3 replacement follows within
 48 hours of this submission (the editor note promises that window).
 
 > **Double-anonymous.** The main document must stay anonymous. The identifying
@@ -56,10 +56,10 @@ reproducibility; provenance
 | # | file | size | role |
 |---|---|---|---|
 | 1 | `packages/dtrap/manuscript_anonymous.pdf` | 672,265 B | **main document** |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 608,590 B | supplementary, **not for publication** |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 608,618 B | supplementary, **not for publication** |
 | 3 | `packages/dtrap/source_anonymous.tar.gz` | 102,151 B | supplementary, **not for publication** |
 
-The artifact contains 229 files and passes its own documented reproduction
+The artifact contains 231 files and passes its own documented reproduction
 instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).
 
 ## Step 7 — Cover letter

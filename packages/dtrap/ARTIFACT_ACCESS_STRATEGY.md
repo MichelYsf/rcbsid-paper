@@ -22,13 +22,13 @@ anonymize the title page and remove identifying acknowledgments.
   reference the named GitHub remote and machine paths), scrubs the machine
   username from archived manifest paths, and **fails the build if any token
   from the identity list survives anywhere in the zip**. The shipped zip
-  passed that check (229 files at the 2026-09-07 build). No external links in the manuscript point
+  passed that check (231 files at the 2026-09-09 build). No external links in the manuscript point
   to author-named resources: the Data Availability section says the artifact
   is provided through the submission system during review.
 
 ## After acceptance
 
 Camera-ready replaces the anonymous availability sentence with the public
-GitHub repository (branch `rebuild/honest-v1`) and the Zenodo version 2.1.0
-DOI (10.5281/zenodo.22638195, HUMAN_ACTIONS step 1); CITATION.cff travels
+GitHub repository (branch `rebuild/honest-v1`) and the Zenodo version 2.2.0
+DOI (10.5281/zenodo.22673735, HUMAN_ACTIONS step 1); CITATION.cff travels
 with the public artifact only.

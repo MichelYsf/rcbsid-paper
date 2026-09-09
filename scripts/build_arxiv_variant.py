@@ -76,9 +76,10 @@ def main() -> int:
          "submission system's anonymous artifact channel.",
          "The repository is public at\n"
          "\\url{https://github.com/MichelYsf/rcbsid-paper} (branch "
-         "\\texttt{rebuild/honest-v1}); the artifact is archived as version 2.1.0 of the "
-         "Zenodo record lineage, doi:10.5281/zenodo.22638195, which supersedes "
-         "version 2.0.0 (doi:10.5281/zenodo.22213264) and version 1.0.0 "
+         "\\texttt{rebuild/honest-v1}); the artifact is archived as version 2.2.0 of the "
+         "Zenodo record lineage, doi:10.5281/zenodo.22673735, which supersedes "
+         "version 2.1.0 (doi:10.5281/zenodo.22638195), version 2.0.0 "
+         "(doi:10.5281/zenodo.22213264) and version 1.0.0 "
          "(doi:10.5281/zenodo.20074590)."),
     ]
     for old, new in edits:

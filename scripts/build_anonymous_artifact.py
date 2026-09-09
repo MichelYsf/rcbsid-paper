@@ -25,7 +25,8 @@ IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                b"hotmail", b"0664-8228", b"0664-8224", b"CYBERWIZARD",
                b"camich289",
                # Zenodo record ids: each resolves to a page naming the author
-               b"22213264", b"20074590", b"20074589", b"zenodo.org"]
+               b"22673735", b"22638195", b"22213264", b"20074590",
+               b"20074589", b"zenodo.org"]
 
 INCLUDE_DIRS = ["src", "scripts", "tests"]
 INCLUDE_FILES = [
@@ -67,8 +68,9 @@ def scrub(rel: str, data: bytes) -> bytes:
     # Zenodo record identifiers resolve to a page naming the author, so the
     # double-anonymous artifact redacts them wherever the correction log or
     # README carries them; the scan below then proves none survive.
-    for doi in (b"10.5281/zenodo.22638195", b"10.5281/zenodo.22213264",
-                b"10.5281/zenodo.20074590", b"10.5281/zenodo.20074589"):
+    for doi in (b"10.5281/zenodo.22673735", b"10.5281/zenodo.22638195",
+                b"10.5281/zenodo.22213264", b"10.5281/zenodo.20074590",
+                b"10.5281/zenodo.20074589"):
         data = data.replace(doi, b"[doi-redacted-for-review]")
     # any other identifier in the record lineage's prefix, in either DOI form
     data = re.sub(rb"(?:doi:|https?://doi\.org/)?10\.5281/zenodo\.\d+",
