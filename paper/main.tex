@@ -107,8 +107,10 @@ benchmarks measure~\cite{catillo2023hype,arp2022dosdonts,ring2019datasets}.
 This paper contributes a quantified case study and mechanism audit of one step
 in that pipeline: the step that assembles capture files into an evaluation
 stream. CICIDS2017 spans five capture days of very different attack
-density~\cite{sharafaldin2018cicids,engelen2021cicids}, and LITNET-2020's
-captures are temporally disjoint~\cite{damasevicius2020litnet}, so evaluations
+density~\cite{sharafaldin2018cicids,engelen2021cicids}, while LITNET-2020
+annotates twelve attack types collected over about ten
+months~\cite{damasevicius2020litnet} and the three captures we evaluate are
+temporally disjoint, so evaluations
 interleave, pool, or replay records to obtain a single stream with workable
 splits. We measure what that step does on these two benchmarks.
 
@@ -332,7 +334,7 @@ assembly step, which redistributes the surviving attacks across the split.
 Neither construction step is visible in a reported operating point.
 
 \textbf{Cost-sensitive thresholds.} The threshold actually implemented is the
-prior-inclusive Bayes rule of Elkan~\cite{elkan2001cost}
+prior-inclusive cutoff formula of Elkan~\cite{elkan2001cost}
 (Section~\ref{sec:detector}); SRE-style error budgets~\cite{beyer2016sre}
 motivated the original framing.
 
@@ -397,13 +399,18 @@ the auxiliary branch is uninformative over the regime that produced almost all
 reported scores, and we do not claim it.
 
 \subsection{The threshold}
-The implemented decision threshold is the prior-inclusive Bayes
-rule~\cite{elkan2001cost},
+The implemented decision cutoff is the prior-inclusive formula of
+Elkan~\cite{elkan2001cost},
 $\tau = C_{FP}(1-\rho)/[C_{FP}(1-\rho) + C_{FN}\rho]$, giving
 \SThreeThresholdLitnet{} at incident prior $\rho{=}0.05$ and
 \SThreeThresholdCicids{} at $\rho{=}0.22$ --- not the cost-only
 $C_{FP}/(C_{FP}{+}C_{FN}) = \SThreeThresholdCostOnly$ described in earlier
-versions. AUC-PR and AUC-ROC are threshold-free and unaffected; we report no
+versions. That formula is a Bayes rule for a calibrated class posterior. The
+quantity it is applied to here is the $\max$ composition defined at the head of
+this section, which is not one, so the cutoff carries no Bayes-optimality
+warrant on this score. We record that as an observation about what the
+implementation does and not as a defect claim, and it changes no reported
+number: AUC-PR and AUC-ROC are threshold-free and unaffected; we report no
 threshold-dependent column, which is also why none of the non-comparable
 precision/recall/F1 columns appears in this paper.
 
@@ -453,17 +460,20 @@ LITNET spam & \StreamLitnetSpamRows & \StreamLitnetSpamPrevalencePct\% & \Stream
 \end{tabular}
 \end{table}
 
-\subsection{LITNET-2020: three disjoint captures}
-LITNET-2020 has no continuous global chronology: its captures are three
-disjoint intervals separated by gaps of weeks --- udp\_flood roughly four
-minutes, blaster\_worm under two, spam about four weeks --- so a global
-timestamp order would concatenate three intervals across those gaps rather
-than describe one observed stream. We evaluate three per-attack-type
+\subsection{LITNET-2020: three disjoint attack-type captures}
+The three captures this paper evaluates have no common chronology: they do not
+overlap in time, they are separated by gaps of weeks and months, and their
+spans are \StreamLitnetUdpFloodSpanMinutes, \StreamLitnetBlasterWormSpanMinutes{}
+and \StreamLitnetSpamSpanMinutes{} minutes (Table~\ref{tab:streams}), so a
+global timestamp order over them would concatenate three intervals across
+those gaps rather than describe one observed stream. We make no chronology
+claim about LITNET-2020 as a whole, which was collected over about ten months
+and annotates twelve attack types~\cite{damasevicius2020litnet}. We evaluate three per-attack-type
 streams of \StreamLitnetUdpFloodRows{} records each, never a manufactured
 composite; the pooled composite appears only as the explicitly labelled
 assembled arm of Section~\ref{sec:contrast-litnet}. Multi-window burn-rate
-alerting over 60/360/4320-minute windows is undefined on captures spanning
-minutes; we report that as a finding about the benchmark, and no burn-rate
+alerting over 60/360/4320-minute windows is undefined on the two captures that
+span minutes; we report that as a finding about the benchmark, and no burn-rate
 result appears in this paper.
 
 \subsection{Protocol}
@@ -558,8 +568,8 @@ ones \\
 label access & the detector and HST see no labels at any point; baselines
 receive a validation-derived threshold; \textbf{ECOD and LOF are fitted on benign-only
 training rows and therefore have label access} \\
-decision threshold & the evaluated detector alerts at the prior-inclusive Bayes
-threshold $\tau = C_{FP}(1-\rho)/[C_{FP}(1-\rho)+C_{FN}\rho]$ with $C_{FP}=1$,
+decision threshold & the evaluated detector alerts at Elkan's prior-inclusive
+cutoff $\tau = C_{FP}(1-\rho)/[C_{FP}(1-\rho)+C_{FN}\rho]$ with $C_{FP}=1$,
 $C_{FN}=10$ and $\rho=0.05$ in the contrast runs (\SThreeThresholdLitnet);
 each baseline alerts at the threshold that maximises F1 on the validation
 slice's precision--recall curve, falling back to the same $\tau$ when
@@ -660,8 +670,9 @@ assembled arm is a Friday record
 Monday--Thursday contribute \CicidsHeldoutAttackFreeRows{} attack-free held-out
 rows. The assembled arm's Friday sub-slice is denser
 (\CicidsFridayHeldoutDensityPct\%) than the timestamp-ordered arm's entire
-slice: prevalence falls because attack-free days are mixed in, not because
-attacks are redistributed. This dilution accounts for the prevalence change; it
+slice: prevalence falls because attack-free rows from the four other days enter
+the held-out slice and displace Friday attack rows, which is the same movement
+the relocation counts above report. This dilution accounts for the prevalence change; it
 is not by itself an account of the outcome change in
 Section~\ref{sec:outcome}.
 
@@ -827,7 +838,8 @@ day round robin & \RevSharedDetectorSyntheticAucpr & \RevSharedEcodSyntheticAucp
 batch.} The detector leads ECOD in both arms: by \RevSharedMarginNatural{} and
 \RevSharedMarginSynthetic{} $AP$ under the slice batch and by
 \RefMarginSharedSevenEightNatural{} and \RefMarginSharedSevenEightSynthetic{} $AP$ under the
-shared batch, each computed from the reported cells above, with event-block
+shared batch, each computed from the reported cells of
+Table~\ref{tab:shared}, with event-block
 bootstrap intervals (Section~\ref{sec:threats})
 $[\RefBootSharedTwoFourZeroNaturalMarginLo,\,\RefBootSharedTwoFourZeroNaturalMarginHi]$,
 $[\RefBootSharedTwoFourZeroSyntheticMarginLo,\,\RefBootSharedTwoFourZeroSyntheticMarginHi]$,
@@ -842,7 +854,12 @@ is attributable to \emph{which records the assembly places in the test set},
 not to the order in which the detector processed its history. That attribution
 rests on an assumption the archived design does not test: that history
 contributes no more on the records the arms do not share than on those they
-do. We report the reversal as an evaluation-level consequence of assembly and
+do. Stated exactly, the restriction shows that the ordering does not reverse on
+a sample both arms held out and that the detector's score on that sample moves
+by \RevSharedDetectorSpread{} $AP$ between the two histories; it does not bound
+history's effect on comparisons between shared and unshared records, which the
+full-slice $AP$ of Section~\ref{sec:outcome} also contains. We report the
+reversal as an evaluation-level consequence of assembly and
 explicitly not as an effect of ordering on detector behaviour.
 
 Two cautions on reading Table~\ref{tab:shared}. The shared records are not a
@@ -952,10 +969,18 @@ $AP=\RevEcodBatchTwoFourZeroZeroZeroZeroAucpr$; scored in the
 \CicidsEcodScoringBatch-record validation-plus-test call this paper's contrast
 arms use, the same records give
 $AP=\RevEcodBatchFourEightZeroZeroZeroZeroAucpr$ --- a difference of
-\RevEcodBatchDelta{} $AP$ on identical records with an identical model. Across
-a four-point batch ladder the value spans \RevEcodBatchSpread{} $AP$, and it
-does not move monotonically with batch size, so the dependence cannot be
-corrected for by a simple adjustment.
+\RevEcodBatchDelta{} $AP$ on identical records with an identical model. The
+full ladder has four rungs, each scoring those same
+\RevEcodBatchEvalRecords{} records preceded by successively more of the
+validation records immediately before the split:
+$AP=\RevEcodBatchTwoFourZeroZeroZeroZeroAucpr$ at
+\RevEcodBatchEvalRecords{} records,
+\RevEcodBatchThreeZeroZeroZeroZeroZeroAucpr{} at \RevEcodBatchLadderOne,
+\RevEcodBatchThreeSixZeroZeroZeroZeroAucpr{} at \RevEcodBatchLadderTwo, and
+\RevEcodBatchFourEightZeroZeroZeroZeroAucpr{} at \CicidsEcodScoringBatch. The
+value therefore rises over the first three rungs and falls at the fourth,
+spanning \RevEcodBatchSpread{} $AP$: the dependence is not monotone in batch
+size and cannot be corrected for by a simple adjustment.
 
 The second of those two values is the diagnostic one: scoring the held-out
 records inside the validation-plus-test batch reproduces, from an independent
@@ -971,10 +996,14 @@ sets is known: it was reported as a defect against the reference implementation
 in 2022~\cite{pyod401} and remains open, and ADBench~\cite{han2022adbench}
 evaluates PyOD detectors in a fixed harness that holds the scored batch
 constant, which sidesteps rather than measures the issue. The ECOD
-paper~\cite{li2023ecod} specifies an ECDF computed over the data at hand and
-gives no rule for scoring an out-of-sample record without recomputation, so the
-implementation is not contradicting its specification --- the specification is
-silent. It is not the only unresolved question about this reference: a separate
+paper~\cite{li2023ecod} is not silent on new records: its Section~IV-D states
+that ECOD requires no re-training to fit them, given a relatively large sample
+and no assumed data shift. What it does not state is a rule for scoring an
+out-of-sample record while leaving the fitted per-dimension ECDFs unchanged
+rather than recomputing them over the concatenation, and its scores are defined
+for the rows of the input matrix, so the implementation is not contradicting
+the specification: the specification is silent at exactly the point where the
+batch enters. It is not the only unresolved question about this reference: a separate
 open report~\cite{pyod561} argues that the aggregation the code applies is not
 the one either the ECOD or the COPOD paper describes. We take no position on
 that second report; we note only that a detector used as a fixed point of
@@ -1150,8 +1179,8 @@ regimes. Retained here, it is a controlled experiment \emph{on the assembled
 (interleaved) CICIDS2017 stream} and nothing more: prevalence is varied by
 stratified resampling at five levels, three draws each. It does not isolate
 prevalence either --- only the unresampled level's draws see identical records,
-so record identity, repetition and temporal adjacency vary with the nominal
-level. Table~\ref{tab:sweep} reports $AP$ with the achieved held-out prevalence
+so which records are retained, how many of them there are, and how far apart in
+the stream the retained ones sit all vary with the nominal level. Table~\ref{tab:sweep} reports $AP$ with the achieved held-out prevalence
 as the chance level beside every prevalence level.
 
 \begin{table}
@@ -1170,14 +1199,16 @@ flat comparison is admissible here --- identical records, no seed variance to
 withhold: the batch label-privileged reference LOF
 attains $AP=\STwoLUnresampledLofMean$ against the detector's
 $AP=\STwoLUnresampledProposedMean$ on that identical slice.
-Second, the detector's normalized lift runs
-\STwoLFiveProposedNormLift{} at 5\%, \STwoLTenProposedNormLift{} at 10\%,
-\STwoLUnresampledProposedNormLift{} unresampled,
-\STwoLFortyProposedNormLift{} at 40\%, and
-\STwoLSixtyFourProposedNormLift{} at 64\% --- below zero at the highest level,
-meaning below what an uninformative ranking achieves. We note that the additive
-and normalized forms peak at different levels, which is precisely why both are
-reported. Nothing in this section transfers to the timestamp-ordered stream or
+Second, the detector's additive lift $AP-p$ runs \STwoLFiveProposedLift{} at
+5\%, \STwoLTenProposedLift{} at 10\%, \STwoLUnresampledProposedLift{}
+unresampled, \STwoLFortyProposedLift{} at 40\%, and
+\STwoLSixtyFourProposedLift{} at 64\%, and its normalized form
+$(AP-p)/(1-p)$ runs \STwoLFiveProposedNormLift, \STwoLTenProposedNormLift,
+\STwoLUnresampledProposedNormLift, \STwoLFortyProposedNormLift{} and
+\STwoLSixtyFourProposedNormLift{} over the same five levels --- both below zero
+at the highest level, meaning below what an uninformative ranking achieves. The
+additive form peaks at the 10\%\ level and the normalized form at the
+unresampled one, which is why both are reported. Nothing in this section transfers to the timestamp-ordered stream or
 to deployment.
 
 \section{An Alternative Reset Formulation}
@@ -1188,8 +1219,13 @@ below the cap by the published recursion. An alternative formulation places a
 prior-predictive term on the reset branch, so that the change point is
 modelled as occurring before $x_t$ rather than after it and the reset
 hypothesis is informed by $x_t$. We implemented \textbf{one untuned instance}
-of that formulation --- a Normal--Inverse-Gamma prior predictive (Student-$t$, $\nu{=}2$, squared scale
-twice the global variance, standard vague hyperparameters, nothing tuned) ---
+of that formulation --- a Normal--Inverse-Gamma prior predictive, evaluated per
+feature and summed: a Student-$t$ centred at the running global mean, with
+$\nu{=}2$ degrees of freedom and squared scale $2\sigma^2$, where $\sigma^2$ is
+the running global variance floored at $10^{-4}$. Its hyperparameters are
+$\kappa_0{=}1$, $\alpha_0{=}1$ and $\beta_0{=}\sigma^2$, which give
+$\nu{=}2\alpha_0$ and squared scale $(\beta_0/\alpha_0)(1+1/\kappa_0)$; nothing
+is tuned ---
 and measured both variants under a 30-minute compute cap whose reductions bind
 this paragraph: one stream (udp\_flood), a \SSixPrefixRows-record prefix, one
 seed. On the synthetic probe the variant responds: $P(r{=}0)$ peaks at
@@ -1212,9 +1248,16 @@ scores sit exactly at the $0.25$ cap, and \SSixDiagCorrectedDistinctScores{}
 distinct values are emitted against \SSixDiagOriginalDistinctScores. The score
 is \emph{not} constant --- it takes many values and has standard deviation
 \SSixDiagCorrectedScoreSd{} --- but it ranks near chance on this sample, which
-is what an AUC-ROC close to $0.5$ indicates. Both variants are thus degenerate
-in opposite directions: the evaluated one never resets below the cap, this
-variant almost always resets. We draw no conclusion about what a \emph{tuned}
+is what an AUC-ROC close to $0.5$ indicates. The two variants are degenerate in
+different quantities, and we state each in the quantity measured. Below the cap
+the evaluated variant's reset posterior is pinned at the hazard rate and
+carries no information from the current record
+(Section~\ref{sec:detector}); under this alternative it is the short-run mass
+that saturates, at $P(r{\le}5)=\SSixDiagCorrectedMeanShortRunMass$, and the
+score sits at the $0.25$ cap on \SSixDiagCorrectedFracAtCap{} of records. The
+archived run recorded $P(r{=}0)$ for this alternative only on the synthetic
+probe, so we assert nothing here about how often it resets on the stream. We
+draw no conclusion about what a \emph{tuned}
 prior-predictive scale would achieve; that requires a training/validation
 tuning protocol and more than one stream, and selecting it on test labels is
 forbidden by our protocol.
@@ -1377,8 +1420,10 @@ sharing \CicidsHeldoutOverlapPct\%\ of their records at prevalences
 of the two deterministic scorers --- a reversal that disappears once both arms
 are restricted to the records they share, attributing it, under the assumption
 that history contributes no more on the unshared records than on the shared
-ones, to the sample the assembly selects rather than to the order it imposes. On LITNET-2020, pooling reports an operating
-point no capture exhibits. The practical recommendation is not that chronology
+ones, to the sample the assembly selects rather than to the order it imposes.
+That restriction does not bound history's effect on comparisons between shared
+and unshared records, which the full-slice value also contains. On LITNET-2020,
+pooling reports an operating point no capture exhibits. The practical recommendation is not that chronology
 is always right; it is that assembly belongs in the experimental design and in
 the provenance record --- report capture identity, mixture weights, split
 membership, held-out overlap, and sensitivity to the plausible alternatives ---

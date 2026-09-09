@@ -223,3 +223,69 @@ with reasons: `RESPONSE_SHELF.md` entries 4 to 6.
 | difference, from reported values | 0.007552 | 0.009096 |
 
 F and H were not run: no per-record scores are archived for the ablation's held-out slice or for any LITNET method (see the shelf).
+
+---
+
+# Third round (2026-09-09): eleven final-read findings
+
+Verified against the code, the manifests and the built PDF (tip cd6cea9) before
+anything changed. No analysis was run: every number printed this round already
+existed in an archived manifest. Section and table numbers below are the
+current build's, which is 23 pages.
+
+## Findings and verdicts
+
+| # | finding (gist) | verdict | evidence | action |
+|---|---|---|---|---|
+| 1 | Section 9's "both variants are degenerate in opposite directions: the evaluated one never resets below the cap, this variant almost always resets" contradicts Section 3.2 in both halves. | confirmed, both halves | Section 3.2 states that below the cap the reset posterior equals the hazard rate exactly, so the evaluated variant resets with probability exactly the hazard, not never. For the alternative, the ablation manifest `s6_bocpd_corrected_ablation_20260824T092655_a47acf51` records P(r=0) only as `SSixProbeCorrectedPeak` = 1.0, the peak after a 6-sigma shift on the synthetic probe; it holds no real-data P(r=0) macro, so "almost always resets" on the stream rested on nothing archived. | Replaced with the measured quantities: below the cap the evaluated variant's reset posterior is pinned at the hazard rate and carries no information from the current record; under the alternative the short-run mass saturates at `SSixDiagCorrectedMeanShortRunMass` = 1 and the score sits at the 0.25 cap on `SSixDiagCorrectedFracAtCap` = 0.9274 of records. The replacement states that P(r=0) for the alternative was recorded only on the synthetic probe and asserts nothing about how often it resets on the stream. The sweep of Sections 3, 9 and 12 found no other sentence of that kind. |
+| 2 | Sections 6.1 and the conclusion state the attribution without stating what the restriction does not bound. | confirmed | The paragraph carried the assumption sentence but nothing about the scope of the demonstration itself. | Added one sentence in each place: the restriction shows that the ordering does not reverse on a sample both arms held out and that the detector's score on it moves by 0.005242 AP between histories, and it does not bound history's effect on comparisons between shared and unshared records, which the full-slice AP also contains. **"Attributable to" was kept.** Reason: the phrase is followed immediately by the assumption sentence and now by the limitation sentence, so the claim is conditioned in the same breath and the reader is told exactly which comparison is unbounded. Weakening it further would understate a result that does hold on the shared sample, which is the opposite error. |
+| 3 | The four-point batch ladder is asserted but not printed, so the 0.006966 span and the non-monotonicity cannot be audited from the page. | confirmed | Only the first and last rungs appeared in the prose. | All four rungs printed with their definitions, from the archived macros: 240000 records (the evaluated slice alone) 0.758205, 300000 0.760029, 360000 0.762108, and 480000 (validation plus test) 0.755142. The construction matches `scripts/run_review_analyses.py`, whose pads are 0, 60000, 120000 and the full validation length. The span is now the reader's own subtraction, and the shape (up, up, down) is visible. |
+| 4 | "Standard vague hyperparameters" does not specify the alternative's prior. | confirmed | The prose gave nu and the scale but not the location, the floor or the hyperparameters. | The specification now prints, from `_prior_predictive_nll`: a Student-t centred at the running global mean, nu = 2 degrees of freedom, squared scale twice the running global variance floored at 1e-4, with kappa0 = 1, alpha0 = 1 and beta0 the global variance, giving nu = 2*alpha0 and squared scale (beta0/alpha0)(1 + 1/kappa0). "Standard vague hyperparameters" is gone. |
+| 5 | Section 5.2's "not because attacks are redistributed" contradicts the relocation counts three lines above. | confirmed | The same paragraph reports 77,670 attacks relocated into training and 25,519 into validation, which is a redistribution of attacks. | Reworded so both describe one event: prevalence falls because attack-free rows from the four other days enter the held-out slice and displace Friday attack rows, which is the same movement the relocation counts report. |
+| 6 | "Each computed from the reported cells above" does not name its table. | confirmed | The nearest preceding table cells are Table 6's, but the reference was positional. | Names Table 6 by label. |
+| 7 | Section 8 claims the additive and normalized forms peak at different levels while printing only the normalized ones. | confirmed, and the claim is true | Additive lift runs 0.317640, 0.348209, 0.292602, 0.094222, -0.020445 and peaks at the 10 percent level; normalized runs 0.334190, 0.386471, 0.391386, 0.157035, -0.056790 and peaks at the unresampled level. | Both families printed through the macro layer, so the claim is now checkable on the page. |
+| 8 | "The specification is silent" is too categorical: the ECOD paper's Section IV-D speaks to new data points. | confirmed | Read against arXiv:2201.00382. Section IV-D is the preprint's Section 4.4, whose closing paragraph states that ECOD requires no re-training to fit new data points, with two stated conditions: a relatively large sample and no assumed data shift. The paper nonetheless defines its scores for the rows of the input matrix (Algorithm 1 takes X and returns one score per row) and states no rule for scoring a new record with the fitted per-dimension ECDFs held fixed. | Reconciled and narrowed: the paper is not silent on new records, its Section IV-D is cited with both conditions, and what is identified as absent is the rule for scoring an out-of-sample record without recomputing the ECDFs over the concatenation. The sentence now says the specification is silent at exactly the point where the batch enters, rather than silent outright. |
+| 9 | Calling the implemented cutoff a Bayes rule for this score is unwarranted. | confirmed | `update_score` returns max(chi-square tail CDF, 0.25 * P(r<=5)) clipped to [0,1], which is not a class posterior, so Elkan's formula has no optimality warrant on it. | Section 3.3 now says the earlier implementation applied Elkan's prior-inclusive formula to a score that is not a class posterior, so the cutoff carries no Bayes-optimality warrant for it, records this as an audit observation and not a defect claim, and states that the ranking metrics are unaffected. The two other places that called it a Bayes rule, the Related Work sentence and the Table 3 decision-threshold row, were made consistent. |
+| 10 | The chronology claim is attributed to LITNET-2020 as a whole. | confirmed as to scope; the claim itself is true and archived | Verified against the dataset paper (DOI 10.3390/electronics9050800): collection ran 6 March 2019 to 31 January 2020, about ten months, and twelve attack types are annotated, so attributing a finding drawn from three attack-type captures to the dataset as a whole overreaches. The disjointness itself holds and is archived: `findings_streams.md`, the Stage 1 output, records the capture dates (udp_flood 2019-03-06, spam 2019-12-09 to 2020-01-06, blaster_worm 2020-01-25), and each released stream carries a per-record timestamp column whose SHA-256 the Stage 1 manifest pins; the three windows do not overlap and the gaps are weeks and months. What the dataset paper does not support is the attribution: it describes two capture periods and never describes per-attack-type captures. | Section 4.2 is scoped to the three captures this paper evaluates and states the claim as this paper's own: they do not overlap in time, they are separated by gaps of weeks and months, and their spans are the 3.97, 1.62 and 39122.23 minutes Table 1 records, so a global timestamp order over them would concatenate three intervals rather than describe one observed stream. It then says no chronology claim is made about LITNET-2020 as a whole, which was collected over about ten months and annotates twelve attack types. The introduction cited the dataset paper for the disjointness; it now cites it only for the span and the attack-type count and attributes the disjointness to this paper. The abstract is unchanged. |
+| 11 | "Repetition" varies across draws, which contradicts Table 3's "no duplicates". | confirmed | `scripts/prevalence_lib.py` draws without replacement and returns sorted unique indices, so no record repeats within a draw. | Reworded to what does vary: which records are retained, how many there are, and how far apart in the stream the retained ones sit. |
+
+## Two further defects found while verifying finding 10, and fixed
+
+- The introduction asserted that LITNET-2020's captures are temporally disjoint and cited the dataset paper for it. The paper does not support that, so the sentence now states what the paper does support, twelve attack types over about ten months, and attributes the span observation to this paper's own measurement.
+- The abstract twice called the captures "temporally disjoint". Since no start times are archived and the source does not say it, both were changed to "separate", which changes no claim the paper makes. The two operator abstract copies were updated in step and re-verified against the built abstract.
+
+## A correction made inside this round
+
+The first revision of finding 10 went too far. It removed the disjointness
+claim as well as the misattribution, on the premise that no start or end
+timestamp is archived in this project, and replaced it with a sentence saying
+that a timestamp order over the three captures would interleave them. Both
+halves were wrong. `findings_streams.md` archives the capture dates, and the
+released streams carry a timestamp column the Stage 1 manifest pins by hash,
+so the disjointness was always checkable here; and because the three windows
+do not overlap, a timestamp sort concatenates them and interleaves nothing.
+The pre-commit verification pass caught it by scanning the timestamp column of
+the three pinned stream files directly. Section 4.2 now states the claim the
+archive supports, scoped to the three captures, and this record keeps the
+error rather than hiding it.
+
+## Residues reported and deliberately not fixed
+
+Three shipping documents still carry the "both variants are degenerate in
+opposite directions, the evaluated one never resets, this one always resets"
+framing that finding 1 removed from the manuscript.
+
+- `findings_bocpd_ablation.md` and `findings_contributions.md` are archived run
+  outputs whose SHA-256 values are recorded as manifest outputs (the 27 August
+  ablation run and the Stage 5 contributions run respectively). Editing either
+  would break a recorded output hash and require re-running, which this round's
+  bound excludes.
+- `SCOPE_DECISIONS.md` carries it in the Stage 6 narrative. It is the project's
+  historical record of binding rules and corrected incidents, and this project's
+  standing rule is that history is recorded rather than rewritten, so it is left
+  for the operator to decide whether to add a correction entry.
+
+`README.md` carried the same framing plus an unqualified "equals the hazard
+rate for any data"; it is hand-maintained, is the first thing a reader of the
+artifact sees, and was corrected in this round to state the cap qualifier and
+the current framing.

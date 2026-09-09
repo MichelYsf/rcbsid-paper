@@ -16,7 +16,7 @@ promises that window), then the companion's v2 replacement.
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (101,910 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (102,768 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
@@ -30,7 +30,7 @@ the six source files plus the `figures/` directory and compiles standalone:
 | `figures/*.pdf` | the four manuscript figures, rendered from archived manifests |
 
 Verified locally: 3-pass pdflatex+bibtex, **exit 0, 0 undefined references, 0
-overfull boxes, 22 pages**, author named on page 1.
+overfull boxes, 23 pages**, author named on page 1.
 
 ## Step 2 — Title (replaces the v1/v2 title)
 
@@ -129,7 +129,7 @@ author's Windows machine would change published numbers -- the cross-platform
 difference this project records as corrected incident CI-16. They were
 therefore not re-run, and the other seventeen were deliberately left as they
 are rather than regenerate a subset that would not change this disclosure.
-22 pages.
+23 pages.
 ```
 
 **Resolved 2026-08-31, extended 2026-09-07:** the Comments text above carries
@@ -143,7 +143,7 @@ as the Zenodo description and the DTRAP editor note — 19 of 25 live run
 manifests ran on an uncommitted tree, two irreducibly. Decided 2026-08-27:
 accepted, not re-run.
 
-**Page count is 22.** Verify against the arXiv build preview before submitting;
+**Page count is 23.** Verify against the arXiv build preview before submitting;
 a stale count in this permanent field is the class of error this version exists
 to correct.
 
@@ -157,7 +157,7 @@ to correct.
 
 ## Step 6 — Before pressing submit
 
-1. Preview arXiv's own build. Confirm **22 pages** and **your name on page 1**
+1. Preview arXiv's own build. Confirm **23 pages** and **your name on page 1**
    (this is the named variant; the anonymous build is for DTRAP only).
 2. Confirm the Comments field is the NO VENUE CLAIM variant.
 3. Confirm the abstract has no LaTeX macros left in it (the text above is

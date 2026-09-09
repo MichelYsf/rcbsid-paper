@@ -20,7 +20,7 @@ audit found unimplemented or withdrawn.
 `../sibling/ARXIV_V3_COMMENT.txt`. The two variants below it are
 retired and false — both asserted a journal status for the companion preprint
 that does not exist (see `../../SIBLING_DECISION.md`, CI-25) — so do not paste
-either. The variant already carries the page count, **22 pages**; confirm it
+either. The variant already carries the page count, **23 pages**; confirm it
 still matches the compiled PDF before pasting.
 
 **Categories:** cs.CR (primary); cross-list cs.LG unchanged from v2.
@@ -31,4 +31,4 @@ main.tex, numbers.tex, references.bib, main.bbl,
 table_construction_contrast.tex, table_prevalence_sweep.tex, and the
 figures/ directory with the four manuscript figures.
 Verified locally: 3-pass compile, exit 0, zero undefined references,
-22 pages, author-named (arXiv postings are not anonymous).
+23 pages, author-named (arXiv postings are not anonymous).

@@ -23,11 +23,13 @@ mistaken for current.
 2. **The pooling identity on LITNET-2020**. The composite's single 6.498%
    prevalence is the equal-budget mixture of three disjoint captures spanning
    0.176%–15.775%; it is a property of assembly, not of any capture.
-3. **Method identity** (`findings_score_threshold.md`). The evaluated
-   detector's run-length posterior equals the hazard rate for any data; the
-   system is prequential global-Gaussian tail scoring. The textbook repair
-   saturates the score and detects nothing (`findings_bocpd_ablation.md`) —
-   both variants are degenerate, in opposite directions.
+3. **Method identity** (`findings_score_threshold.md`). Below the run-length
+   cap the evaluated detector's reset posterior equals the hazard rate for any
+   data, a property of the published BOCPD recursion; the system is prequential
+   global-Gaussian tail scoring. One untuned alternative reset formulation
+   saturates the score and ranks near chance on the stream tested
+   (`findings_bocpd_ablation.md`): the two variants are degenerate in different
+   quantities.
 4. **Findings that cut against the detector, stated as findings**: batch LOF
    beats it 0.8632 vs 0.5450 on the identical natural-order slice, and its
    lift over the chance floor goes negative at 64% prevalence
