@@ -6,7 +6,7 @@
 > corrected waiver row. This sheet stays as the fuller reference record.
 
 Assembled 2026-08-27, last rebuilt 2026-09-09 against commit
-**`cd26bf73db7670c7ff07cf415c3e01dbc11dabba`**, whose tree holds the three
+**`10aa1bd19f4672d3e821f3b1624929002be76a12`**, whose tree holds the three
 files of Step 6 at the sizes given there. The 2026-08-27 anchor that stood
 here, 083df8a, holds a 17-page manuscript and a differently sized artifact.
 Portal: **https://mc.manuscriptcentral.com/dtrap** (ScholarOne, verified
@@ -60,7 +60,7 @@ reproducibility; provenance
 |---|---|---|---|
 | 1 | `packages/dtrap/manuscript_anonymous.pdf` | 672,265 B | **main document** |
 | 2 | `packages/dtrap/artifact_anonymous.zip` | 612,277 B | supplementary, **not for publication** |
-| 3 | `packages/dtrap/source_anonymous.tar.gz` | 102,093 B | supplementary, **not for publication** |
+| 3 | `packages/dtrap/source_anonymous.tar.gz` | 102,088 B | supplementary, **not for publication** |
 
 The artifact contains 232 files and passes its own documented reproduction
 instructions inside a fresh extraction (verified; see `PUBLISH_PREP_REPORT.md`).

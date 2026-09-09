@@ -26,7 +26,7 @@
 > outward action (Step 9). The provenance-limitation canon is deliberately
 > untouched; see the note under Step 0.
 
-Assembled 2026-09-09 against commit **`cd26bf73db7670c7ff07cf415c3e01dbc11dabba`**, the
+Assembled 2026-09-09 against commit **`10aa1bd19f4672d3e821f3b1624929002be76a12`**, the
 packaging commit whose tree holds the five files of Step 2 byte-for-byte as
 staged (their SHA-256 values are recorded there). The packaging commit moved twice on
 2026-09-09 and 224d130 is no longer it: the DOI propagation changed
@@ -37,6 +37,17 @@ than 144. This sheet is committed one commit ahead of the packaging commit,
 and changes no file it names. If you rebuild anything
 after that, run `git rev-parse HEAD` on a clean tree and update Step 2 and
 Step 7 before uploading.
+
+> **Why the checksums move even when nothing does.** Zip and gzip store a
+> timestamp per entry, and pdflatex stamps a creation date, so rebuilding
+> produces different bytes from identical inputs. After the rebuild of
+> 2026-09-09 that closed the provenance-canon counts, all five deposit files
+> were compared against the previous build entry by entry: every entry of the
+> code zip and of the manifests bundle was byte-identical, and the three data
+> files did not move at all. Only the archives' embedded timestamps changed,
+> which is why row 1 and row 2 of Step 2 carry new SHA-256 values for
+> unchanged content. Read Step 2 off the tree at the commit named above; do
+> not carry a checksum over from an earlier revision of this sheet.
 
 > **Immutability, before you start.** On Zenodo, **the files are frozen at
 > publication**; you cannot add, replace or remove one afterwards, only publish
@@ -68,18 +79,28 @@ point as before and by the same accepted decision:
 **DECIDED 2026-08-27, reaffirmed 2026-09-09: accept the dirty-tree manifests;
 no earlier run is repeated in order to clean its tree.** The
 provenance-limitation paragraph in Step 5 is a canon held byte-identical
-across the DTRAP editor note, the arXiv v3 comment and this sheet; it
-describes the twenty-five live manifests of version 2.0.0 and stays as it is,
-by standing instruction, through this round as well.
+across the DTRAP editor note, the arXiv v3 comment and this sheet. **It now
+describes this deposit and no longer version 2.0.0's**: twenty-seven of the
+thirty-three live run manifests, two of them irreducible, the other
+twenty-five left as they are. Those three counts were read from
+`packages/zenodo/manifests_bundle.zip` itself, by parsing each live
+manifest's `git_commit` field, not from any document that quotes them.
 
-> **Known staleness in that canon, recorded rather than fixed.** The canon
-> opens "Nineteen of the twenty-five live run manifests in this record". For
-> the record this sheet stages, the true figures are twenty-seven of
-> thirty-three. The paragraph 2.2.0 adds gives those true figures in the same
-> description, so the description read whole is accurate, but the canon
-> sentence read alone is not. Correcting it would change a paragraph held
-> byte-identical across three venues, two of which are already staged for
-> outward use, so it is an operator decision and is left open.
+> **That staleness is now closed.** From version 2.0.0 until 2026-09-09 the
+> canon opened "Nineteen of the twenty-five live run manifests in this record"
+> and closed on "the other seventeen", figures that were true of 2.0.0 and
+> were carried forward unchanged through 2.1.0 and into this staging. They were
+> corrected on 2026-09-09 to twenty-seven of thirty-three, two irreducible and
+> the other twenty-five, verified by parsing every live manifest in
+> `packages/zenodo/manifests_bundle.zip`. The two named CICIDS run ids, the
+> decommissioned EC2 Linux instance, CI-16, the ancestry argument and the
+> reason the rest were not re-run are carried verbatim; only the three counts
+> moved. The canon is 1,009 characters and byte-identical across the five
+> venues. **A published record still carries the old figures**: version 2.0.0's
+> description was true when written, and version 2.1.0's was not, since that
+> deposit held thirty-one live manifests of which twenty-five ran dirty.
+> Metadata on a published Zenodo version stays editable, so 2.1.0's
+> description can be corrected in place; its files cannot.
 
 ---
 
@@ -127,8 +148,8 @@ including the two that this round's document regenerations created.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` (145 entries, 1,264,599 B unzipped) | 448,411 B | `9a3756a7f42fe74eccb18422fb7956243ef30ddfdf0bbb7ce5c89d254314fec5` |
-| 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `a3f601de3b847b6a5173b145c31111f8908f50080f3fd1432586a84524957786` |
+| 1 | `rcbsid_rebuild_code.zip` (145 entries, 1,264,599 B unzipped) | 448,411 B | `c7e6c4aae6106e06368e92f56742c9ec44475e500093db8da5c9f8da1cf6b55e` |
+| 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `2b1ff2fa78c9086105efc02ed84824231a0a2a322f2c7466df648734ee095cfa` |
 | 3 | `EXPECTED_SHA256.txt` (unchanged from 2.1.0 and 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` (unchanged from 2.1.0 and 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
 | 5 | `prevalence_sweep_cicids.csv` (unchanged from 2.1.0 and 2.0.0) | 48,587 B | `ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759` |
@@ -204,20 +225,20 @@ shell-escape damage in the LaTeX sources; text typeset past the page measure;
 and a figure whose inputs or generator changed or whose plotted values disagree
 with the macro index.
 
-Provenance limitation, stated precisely. Nineteen of the twenty-five live run
-manifests in this record executed on a working tree that carried uncommitted
-edits, so the exact source state for those runs is not recoverable. Every base
-commit they name resolves and is an ancestor of the published branch, so the
-generating code is reachable at commit granularity; what is missing is the
-uncommitted delta at run time. Two of the nineteen are irreducible: the CICIDS
-construction-contrast arms, run ids
+Provenance limitation, stated precisely. Twenty-seven of the thirty-three live
+run manifests in this record executed on a working tree that carried
+uncommitted edits, so the exact source state for those runs is not
+recoverable. Every base commit they name resolves and is an ancestor of the
+published branch, so the generating code is reachable at commit granularity;
+what is missing is the uncommitted delta at run time. Two of the twenty-seven
+are irreducible: the CICIDS construction-contrast arms, run ids
 s4_construction_contrast_20260819T064027_20f44694 and
-s4_construction_contrast_20260819T090813_46e9bd32, ran on an EC2 Linux instance
-that has since been decommissioned, and re-running them on the author's Windows
-machine would change published numbers -- the cross-platform difference this
-project records as corrected incident CI-16. They were therefore not re-run, and
-the other seventeen were deliberately left as they are rather than regenerate a
-subset that would not change this disclosure.
+s4_construction_contrast_20260819T090813_46e9bd32, ran on an EC2 Linux
+instance that has since been decommissioned, and re-running them on the
+author's Windows machine would change published numbers -- the cross-platform
+difference this project records as corrected incident CI-16. They were
+therefore not re-run, and the other twenty-five were deliberately left as they
+are rather than regenerate a subset that would not change this disclosure.
 
 Earlier versions of the associated manuscript (arXiv:2605.24696 v1 and v2)
 reported results produced under a composite benchmark construction and described
@@ -236,7 +257,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/cd26bf73db7670c7ff07cf415c3e01dbc11dabba` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/10aa1bd19f4672d3e821f3b1624929002be76a12` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
 Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
