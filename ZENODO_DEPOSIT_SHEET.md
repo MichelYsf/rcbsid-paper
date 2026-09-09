@@ -1,20 +1,31 @@
-# ZENODO_DEPOSIT_SHEET — version 2.1.0 STAGED 2026-09-07, nothing uploaded
+# ZENODO_DEPOSIT_SHEET — version 2.2.0 STAGED 2026-09-09, nothing uploaded
 
-> **Version 2.0.0 is LIVE and frozen.** Published 2026-08-31: version DOI
-> **10.5281/zenodo.22213264**, concept DOI 10.5281/zenodo.20074589,
-> superseding v1.0.0 (10.5281/zenodo.20074590). Verified against the Zenodo
-> API on 2026-08-31: title, creator with ORCID 0009-0000-0664-8228, and its
-> five files at their staged sizes (rcbsid_rebuild_code.zip 363,694 B;
-> manifests_bundle.zip 143,621 B; EXPECTED_SHA256.txt 932 B;
-> construction_contrast.csv 4,755 B; prevalence_sweep_cicids.csv 48,587 B).
-> Nothing about that version changes.
+> **Versions 2.0.0 and 2.1.0 are LIVE and frozen.** 2.0.0 was published
+> 2026-08-31 (version DOI **10.5281/zenodo.22213264**); 2.1.0 was published
+> from this sheet's previous staging under the DOI it had reserved,
+> **10.5281/zenodo.22638195**. Both sit under concept DOI
+> 10.5281/zenodo.20074589, above v1.0.0 (10.5281/zenodo.20074590). Files on a
+> published version are frozen. Nothing about either version changes here, and
+> neither is touched by anything below.
 
-> **This sheet stages version 2.1.0 as a New version on record 22213264.**
-> It has not been published. Its version DOI is **reserved:
-> 10.5281/zenodo.22638195**; every document that must carry it already does
-> (Step 9), so publishing is the first outward action in `HUMAN_ACTIONS.md`.
+> **2.1.0's five files, as this sheet staged them**, for the check in Step 1:
+> rcbsid_rebuild_code.zip 439,133 B; manifests_bundle.zip 168,084 B;
+> EXPECTED_SHA256.txt 932 B; construction_contrast.csv 4,755 B;
+> prevalence_sweep_cicids.csv 48,587 B. They were **not** re-verified against
+> the Zenodo API in this round, which contacted nothing; Step 1 has you read
+> them off the record you are versioning.
 
-Assembled 2026-09-07 against commit **`389540f84bec5bea05ed57ebce3355825126481b`**, the
+> **This sheet stages version 2.2.0 as a New version on record 22638195, and
+> no version DOI has been reserved for it yet.** Every document in this
+> repository that carries a Zenodo DOI still cites 2.1.0
+> (10.5281/zenodo.22638195), which is correct and resolvable today. The
+> canonical lineage sentence and the provenance-limitation paragraph are
+> canons and are deliberately unchanged in this round. Both are updated in a
+> propagation round once 2.2.0's DOI is reserved, and **that round must run
+> before you publish 2.2.0** (Step 9), or the deposit ships documents naming
+> a superseded version as current.
+
+Assembled 2026-09-09 against commit **`224d13023259fe98a33c49a73a2918ca99ac82ba`**, the
 packaging commit whose tree holds the five files of Step 2 byte-for-byte as
 staged (their SHA-256 values are recorded there). This sheet is committed one
 commit ahead of it, which changes no file it names. If you rebuild anything
@@ -30,74 +41,81 @@ Step 7 before uploading.
 
 ---
 
-## Step 0 — the decision, restated for 2.1.0
+## Step 0 — the decision, restated for 2.2.0
 
 `python scripts/check_provenance.py --publish-ready` **exits 1**, on the same
 point as before and by the same accepted decision:
 
 - tree clean, HEAD pushed, every manifest's base commit resolves in the pushed
   history;
-- **25 of the 31 live run manifests ran while the working tree carried
-  uncommitted edits**: the 19 of 25 that version 2.0.0 disclosed, plus all six
-  that 2.1.0 adds (`referee_bounded_analyses_20260906T182158_de69afab`,
-  `bootstrap_block_robustness_20260906T200612_b7c847e1`,
-  `ecod_batch_composition_20260907T061817_7d2ec490`, and the three
-  `supplementary_macros_2026090…` derivation runs). Each records its base
-  commit (ad01b8b, e76ee0b or d2742e1) with a dirty marker; each base commit
-  is an ancestor of the pushed branch; none changed during its run.
+- **27 of the 33 live run manifests ran while the working tree carried
+  uncommitted edits**: the 25 of 31 that version 2.1.0 disclosed, plus the two
+  that 2.2.0 adds (`s6_bocpd_corrected_ablation_20260909T060039_7766d5ff` and
+  `s5_verified_contributions_20260909T060341_6108db2a`). Both record base
+  commit 328ecf2 with a dirty marker, 328ecf2 is an ancestor of the pushed
+  branch, and neither tree changed during its run. Both are document
+  regenerations that recompute no detector arm and changed no macro value:
+  the three Stage 6 manifests agree on all 27 shared macros and the two Stage
+  5 manifests on all 16.
 - The two irreducible arms are unchanged (CI-16).
 
-**DECIDED 2026-08-27, reaffirmed 2026-09-07: accept the dirty-tree manifests;
-nothing is re-run.** The provenance-limitation paragraph in Step 5 is a canon
-held byte-identical across the DTRAP editor note, the arXiv v3 comment and this
-sheet; it describes the twenty-five live manifests of version 2.0.0 and stays
-as it is. The paragraph 2.1.0 adds states the six new manifests plainly.
+**DECIDED 2026-08-27, reaffirmed 2026-09-09: accept the dirty-tree manifests;
+no earlier run is repeated in order to clean its tree.** The
+provenance-limitation paragraph in Step 5 is a canon held byte-identical
+across the DTRAP editor note, the arXiv v3 comment and this sheet; it
+describes the twenty-five live manifests of version 2.0.0 and stays as it is
+in this round. The paragraph 2.2.0 adds states the two new manifests plainly
+and says what they did not change.
 
 ---
 
-## Step 1 — New version of record 22213264
+## Step 1 — New version of record 22638195
 
-1. Open **doi:10.5281/zenodo.22213264** (version 2.0.0) signed in as the
+1. Open **doi:10.5281/zenodo.22638195** (version 2.1.0) signed in as the
    record's owner.
-2. Click **New version**.
-3. Zenodo carries the five 2.0.0 files into the draft. **Remove
-   `rcbsid_rebuild_code.zip` and `manifests_bundle.zip` and upload the 2.1.0
+2. **Before changing anything**, read the five carried-over file sizes off the
+   record and check them against 2.1.0's staged sizes in the note at the top
+   of this sheet. If any differs, stop: the record does not hold what this
+   sheet believes it holds, and Step 2's "unchanged from 2.1.0" rows are then
+   unsafe.
+3. Click **New version**.
+4. Zenodo carries the five 2.1.0 files into the draft. **Remove
+   `rcbsid_rebuild_code.zip` and `manifests_bundle.zip` and upload the 2.2.0
    ones from `packages/zenodo/`.** `EXPECTED_SHA256.txt`,
    `construction_contrast.csv` and `prevalence_sweep_cicids.csv` are
-   byte-identical to 2.0.0's (same SHA-256, Step 2); keeping the carried-over
-   copies or re-uploading them gives the same record.
+   byte-identical to 2.1.0's, and to 2.0.0's (same SHA-256, Step 2); keeping
+   the carried-over copies or re-uploading them gives the same record.
 
-A new version pre-fills its metadata from 2.0.0. **Inherited fields that MUST
+A new version pre-fills its metadata from 2.1.0. **Inherited fields that MUST
 be changed:**
 
-| inherited from 2.0.0 | change to |
+| inherited from 2.1.0 | change to |
 |---|---|
-| description | the Step 5 text (2.0.0's text plus one paragraph) |
-| version `2.0.0` | `2.1.0` |
-| related identifier *is derived from* `…/rcbsid-paper/tree/083df8acb6e48c2f403218ae765260584c3a2fdb` | the Step 7 commit link |
+| description | the Step 5 text (2.1.0's text with its second paragraph replaced) |
+| version `2.1.0` | `2.2.0` |
+| related identifier *is derived from* `…/rcbsid-paper/tree/389540f84bec5bea05ed57ebce3355825126481b` | the Step 7 commit link |
 
 **Inherited and kept:** title (Step 3), resource type Software, creator
 Youssef, Michel with ORCID 0009-0000-0664-8228, licence Apache-2.0, access
 Open, keywords (Step 8), related identifier *is supplement to*
 `arXiv:2605.24696`.
 
-## Step 2 — Files (all five in `packages/zenodo/`, rebuilt 2026-09-07)
+## Step 2 — Files (all five in `packages/zenodo/`, rebuilt 2026-09-09)
 
 `manifests_bundle.zip` is built by `python scripts/build_zenodo_package.py`
 with entries relative to the bundle root and no wrapping directory, because
 `README.md` tells a downloader to extract it *into* `results/manifests/`. Do
-not re-zip it by hand. The bundle holds every live manifest (31, plus the
+not re-zip it by hand. The bundle holds every live manifest (33, plus the
 macro index) and every retired one (60, with the retirement README),
-including all six manifests the referee rounds created and the one they
-retired.
+including the two that this round's document regenerations created.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` (144 files) | 439,133 B | `13441fc7bc598b78203b33aadc30ce4746be68da8aff63368c50811c97d3e227` |
-| 2 | `manifests_bundle.zip` (93 entries, 939,967 B unzipped) | 168,084 B | `3ddab2d15db932f230e1d01f9d181c0b89c99d665d898d56a4013151893787c5` |
-| 3 | `EXPECTED_SHA256.txt` (unchanged from 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
-| 4 | `construction_contrast.csv` (unchanged from 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
-| 5 | `prevalence_sweep_cicids.csv` (unchanged from 2.0.0) | 48,587 B | `ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759` |
+| 1 | `rcbsid_rebuild_code.zip` (144 entries, 1,257,370 B unzipped) | 445,388 B | `f6eb13d9643320b1bc278994fac93a072874241fa6b2faed615c473c65317da9` |
+| 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `a3f601de3b847b6a5173b145c31111f8908f50080f3fd1432586a84524957786` |
+| 3 | `EXPECTED_SHA256.txt` (unchanged from 2.1.0 and 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
+| 4 | `construction_contrast.csv` (unchanged from 2.1.0 and 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
+| 5 | `prevalence_sweep_cicids.csv` (unchanged from 2.1.0 and 2.0.0) | 48,587 B | `ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759` |
 
 Verified before staging: the code zip extracted with the bundle placed in
 `results/manifests/` passes every gate check that applies outside a compiled
@@ -122,32 +140,38 @@ Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Be
 
 ## Step 5 — Description (paste verbatim)
 
-The 2.0.0 description with one added paragraph (the second) and the canonical
-DOI-lineage sentence updated to state the lineage (2.0.0, then 2.1.0 with the
-review-round manifests added). The provenance-limitation paragraph is a canon
-and is unchanged; the lineage sentence is byte-identical across the five canon
-venues after the update.
+The 2.1.0 description with its second paragraph replaced by one stating what
+2.2.0 adds over 2.1.0. The provenance-limitation paragraph and the canonical
+DOI-lineage sentence are canons and are **unchanged in this round**: the
+lineage sentence still ends at 2.1.0 and stays byte-identical across the five
+canon venues. It gains 2.2.0 in the propagation round that follows the DOI
+reservation, so **re-read this description after that round and before you
+paste it** — pasting it as it stands would describe 2.2.0 with a lineage that
+stops one version short.
 
 ```
 Reproducibility package for "Stream Assembly Is an Uncontrolled Treatment in
 Streaming Intrusion-Detection Benchmarks".
 
-Version 2.1.0 adds, over version 2.0.0, the material of the two referee-triage
-rounds of 6 and 7 September 2026: the bounded referee analyses
-(batch-controlled ECOD rescoring of the 78,000 shared held-out records,
-moving-block bootstrap intervals for every reported margin and branch value,
-the training and validation destinations of the 103,189 relocated attacks,
-the imputation counts, and the paired cut-by-assembly sweep), the block-length
-robustness rerun at 250 and 2,600 records, the ECOD batch-composition
-experiment at fixed batch size and fixed model, the scripts and findings
-documents of those runs, six live manifests and one retired manifest with its
-reason, the supplementary macros derived from them, the deterministic figure
-renderer with its figure manifest and a ninth gate check for figures, the
-revised manuscript source (22 pages), the claim ledger, the bibliography audit,
-and the referee triage and response-shelf records. No manifest of version
-2.0.0 is changed. The six live manifests added here executed, like nineteen of
-the twenty-five they join, on a working tree with uncommitted edits; each
-records its base commit with a dirty marker.
+Version 2.2.0 adds, over version 2.1.0, the revisions of the final referee
+round of 9 September 2026 and the manuscript source they produced, which is 23
+pages. Eleven findings were verified against the code, the archived manifests
+and the built PDF before anything was changed. The substantive results are
+these: the discussion of the alternative reset formulation is restated in the
+quantities that were actually measured, rather than as two failures in
+opposite directions; the LITNET-2020 chronology claim is scoped to the three
+captures this paper evaluates and attributed to this paper; the ECOD
+reconciliation names the section of the source it reconciles against; the
+run-length cap qualifier is carried into every statement of the method
+identity; and the reported limitations are extended where the referee was
+right. It also adds the two document regenerations of 9 September, which
+brought the Stage 5 and Stage 6 findings documents onto that wording by
+editing their generators and re-running them, and archived the result as two
+further live manifests; neither run recomputed a detector arm and neither
+changed a macro value. No manifest of version 2.0.0 or 2.1.0 is changed. The
+two live manifests added here executed, like twenty-five of the thirty-one
+they join, on a working tree with uncommitted edits; each records its base
+commit with a dirty marker.
 
 Contents: the analysis code and tests, the LaTeX source of the manuscript, the
 generated macro layer that every reported number resolves through, the full set
@@ -197,34 +221,36 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/389540f84bec5bea05ed57ebce3355825126481b` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 083df8a… link, which belongs to 2.0.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/224d13023259fe98a33c49a73a2918ca99ac82ba` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
-Zenodo records the version relation to 2.0.0 itself; do not add it by hand.
+Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
 
 ## Step 8 — Version and keywords
 
 | field | value |
 |---|---|
-| Version | `2.1.0` |
+| Version | `2.2.0` |
 | Keywords | inherited, unchanged: intrusion detection; streaming evaluation; benchmark stream construction; evaluation methodology; reproducibility; provenance |
 
 ## Step 9 — Publish, then
 
+0. **Before you publish.** Reserve the 2.2.0 version DOI in the draft, then
+   run the propagation round with it. Every document in this repository that
+   carries a Zenodo DOI still cites 2.1.0: `CITATION.cff`, `README.md`, the
+   canonical lineage sentence in all five canon venues, the DTRAP editor
+   note, the cover letter, every sheet, the named arXiv variant's
+   artifact-availability sentence, and the companion's v2 correction note.
+   None of that is wrong today, because 2.1.0 is published and resolvable;
+   all of it becomes wrong the moment 2.2.0 exists and supersedes it.
+   Publishing first is the one ordering this sheet cannot repair afterwards
+   for the manuscript source already shipped inside DTRAP and arXiv copies.
 1. Confirm against the Zenodo API that the published version DOI is exactly
-   the reserved **10.5281/zenodo.22638195** and that the five files are at
-   the Step 2 sizes. If Zenodo minted a different DOI, stop: every document
-   below already cites the reserved one and would have to be re-propagated.
-2. Already done 2026-09-07, before the publish (HUMAN_ACTIONS step 2):
-   `CITATION.cff` carries doi 10.5281/zenodo.22638195, version 2.1.0,
-   date-released 2026-09-07; the canonical lineage sentence in all five
-   venues states the 2.0.0-then-2.1.0 lineage; the editor note, cover
-   letter, README, every sheet and the named arXiv variant's
-   artifact-availability sentence cite 2.1.0; the companion's v2 correction
-   note cites 2.1.0.
-3. Optional: annotate the 2.0.0 record's description with one sentence
-   naming 2.1.0 as the version that carries the referee-round material.
-   Metadata on 2.0.0 stays editable; its files stay frozen.
+   the one you reserved and that the five files are at the Step 2 sizes. If
+   Zenodo minted a different DOI, stop and re-propagate before going further.
+2. Optional: annotate the 2.1.0 record's description with one sentence
+   naming 2.2.0 as the version that carries the final referee round's
+   manuscript. Metadata on 2.1.0 stays editable; its files stay frozen.
 
 ---
 
