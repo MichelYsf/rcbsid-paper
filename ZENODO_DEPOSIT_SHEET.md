@@ -1,4 +1,4 @@
-# ZENODO_DEPOSIT_SHEET — version 2.2.0 STAGED 2026-09-09, nothing uploaded
+# ZENODO_DEPOSIT_SHEET — version 2.2.0 STAGED 2026-09-09, DOI reserved, nothing uploaded
 
 > **Versions 2.0.0 and 2.1.0 are LIVE and frozen.** 2.0.0 was published
 > 2026-08-31 (version DOI **10.5281/zenodo.22213264**); 2.1.0 was published
@@ -15,19 +15,23 @@
 > the Zenodo API in this round, which contacted nothing; Step 1 has you read
 > them off the record you are versioning.
 
-> **This sheet stages version 2.2.0 as a New version on record 22638195, and
-> no version DOI has been reserved for it yet.** Every document in this
-> repository that carries a Zenodo DOI still cites 2.1.0
-> (10.5281/zenodo.22638195), which is correct and resolvable today. The
-> canonical lineage sentence and the provenance-limitation paragraph are
-> canons and are deliberately unchanged in this round. Both are updated in a
-> propagation round once 2.2.0's DOI is reserved, and **that round must run
-> before you publish 2.2.0** (Step 9), or the deposit ships documents naming
-> a superseded version as current.
+> **This sheet stages version 2.2.0 as a New version on record 22638195. Its
+> version DOI is reserved, not published: 10.5281/zenodo.22673735.** The
+> propagation round ran on 2026-09-09, before the publish: `CITATION.cff`, the
+> README, the artifact access strategy, the DTRAP editor note and
+> prior-appearance note, the cover letter, every sheet, the named arXiv
+> variant's availability sentence, the companion's v2 correction note and the
+> canonical lineage sentence in all five canon venues now cite 2.2.0. **None
+> of those citations resolves until you publish**, so publishing is the next
+> outward action (Step 9). The provenance-limitation canon is deliberately
+> untouched; see the note under Step 0.
 
-Assembled 2026-09-09 against commit **`224d13023259fe98a33c49a73a2918ca99ac82ba`**, the
+Assembled 2026-09-09 against commit **`6087a45b787936d83acb92b0495902844fa6b7cf`**, the
 packaging commit whose tree holds the five files of Step 2 byte-for-byte as
-staged (their SHA-256 values are recorded there). This sheet is committed one
+staged (their SHA-256 values are recorded there). The DOI propagation of
+2026-09-09 changed `README.md`, `CITATION.cff` and two scripts, all of which
+ship inside the code zip, so that zip was rebuilt and the packaging commit
+moved on from 224d130. This sheet is committed one
 commit ahead of it, which changes no file it names. If you rebuild anything
 after that, run `git rev-parse HEAD` on a clean tree and update Step 2 and
 Step 7 before uploading.
@@ -63,9 +67,17 @@ point as before and by the same accepted decision:
 no earlier run is repeated in order to clean its tree.** The
 provenance-limitation paragraph in Step 5 is a canon held byte-identical
 across the DTRAP editor note, the arXiv v3 comment and this sheet; it
-describes the twenty-five live manifests of version 2.0.0 and stays as it is
-in this round. The paragraph 2.2.0 adds states the two new manifests plainly
-and says what they did not change.
+describes the twenty-five live manifests of version 2.0.0 and stays as it is,
+by standing instruction, through this round as well.
+
+> **Known staleness in that canon, recorded rather than fixed.** The canon
+> opens "Nineteen of the twenty-five live run manifests in this record". For
+> the record this sheet stages, the true figures are twenty-seven of
+> thirty-three. The paragraph 2.2.0 adds gives those true figures in the same
+> description, so the description read whole is accurate, but the canon
+> sentence read alone is not. Correcting it would change a paragraph held
+> byte-identical across three venues, two of which are already staged for
+> outward use, so it is an operator decision and is left open.
 
 ---
 
@@ -100,7 +112,9 @@ Youssef, Michel with ORCID 0009-0000-0664-8228, licence Apache-2.0, access
 Open, keywords (Step 8), related identifier *is supplement to*
 `arXiv:2605.24696`.
 
-## Step 2 — Files (all five in `packages/zenodo/`, rebuilt 2026-09-09)
+## Step 2 — Files (all five in `packages/zenodo/`, rebuilt 2026-09-09; the
+DOI propagation of that date changed only the code zip, and the other four
+are byte-identical to what the pre-deposit round staged)
 
 `manifests_bundle.zip` is built by `python scripts/build_zenodo_package.py`
 with entries relative to the bundle root and no wrapping directory, because
@@ -111,7 +125,7 @@ including the two that this round's document regenerations created.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` (144 entries, 1,257,370 B unzipped) | 445,388 B | `f6eb13d9643320b1bc278994fac93a072874241fa6b2faed615c473c65317da9` |
+| 1 | `rcbsid_rebuild_code.zip` (144 entries, 1,257,737 B unzipped) | 445,490 B | `c8f1633983f1c705a6a1dbf65b89241367e9506cfde11241af196fc2779b0584` |
 | 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `a3f601de3b847b6a5173b145c31111f8908f50080f3fd1432586a84524957786` |
 | 3 | `EXPECTED_SHA256.txt` (unchanged from 2.1.0 and 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` (unchanged from 2.1.0 and 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
@@ -141,13 +155,12 @@ Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Be
 ## Step 5 — Description (paste verbatim)
 
 The 2.1.0 description with its second paragraph replaced by one stating what
-2.2.0 adds over 2.1.0. The provenance-limitation paragraph and the canonical
-DOI-lineage sentence are canons and are **unchanged in this round**: the
-lineage sentence still ends at 2.1.0 and stays byte-identical across the five
-canon venues. It gains 2.2.0 in the propagation round that follows the DOI
-reservation, so **re-read this description after that round and before you
-paste it** — pasting it as it stands would describe 2.2.0 with a lineage that
-stops one version short.
+2.2.0 adds over 2.1.0, and with the canonical DOI-lineage sentence extended to
+name 2.2.0. That lineage canon is now two sentences, 689 characters, and is
+byte-identical across the five canon venues after whitespace normalisation.
+The provenance-limitation paragraph is the other canon and is **unchanged**;
+the note under Step 0 records what it does and does not describe. **Paste the
+text below verbatim.**
 
 ```
 Reproducibility package for "Stream Assembly Is an Uncontrolled Treatment in
@@ -207,7 +220,7 @@ subset that would not change this disclosure.
 Earlier versions of the associated manuscript (arXiv:2605.24696 v1 and v2)
 reported results produced under a composite benchmark construction and described
 a scoring rule the released code did not implement. This package is the rebuild
-from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published in the same record lineage, first as version 2.0.0 (doi:10.5281/zenodo.22213264) and, with the manifests of the pre-submission review rounds added, as version 2.1.0 (doi:10.5281/zenodo.22638195), which supersedes it, and Zenodo displays a newer-version notice on each superseded record.
+from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, which resolves to version 1.0.0 of the artifact record, deposited 2026-05-07 and containing the pre-audit codebase; this corrected rebuild is published in the same record lineage, first as version 2.0.0 (doi:10.5281/zenodo.22213264) and then, with the manifests of the pre-submission review rounds added, as version 2.1.0 (doi:10.5281/zenodo.22638195), each superseding the one before it. The version accompanying this manuscript is 2.2.0 (doi:10.5281/zenodo.22673735), which adds the revisions of the final pre-submission review round and supersedes 2.1.0, and Zenodo displays a newer-version notice on each superseded record.
 ```
 
 ## Step 6 — License (inherited, unchanged)
@@ -221,7 +234,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/224d13023259fe98a33c49a73a2918ca99ac82ba` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/6087a45b787936d83acb92b0495902844fa6b7cf` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
 Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
@@ -235,19 +248,20 @@ Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
 
 ## Step 9 — Publish, then
 
-0. **Before you publish.** Reserve the 2.2.0 version DOI in the draft, then
-   run the propagation round with it. Every document in this repository that
-   carries a Zenodo DOI still cites 2.1.0: `CITATION.cff`, `README.md`, the
-   canonical lineage sentence in all five canon venues, the DTRAP editor
-   note, the cover letter, every sheet, the named arXiv variant's
-   artifact-availability sentence, and the companion's v2 correction note.
-   None of that is wrong today, because 2.1.0 is published and resolvable;
-   all of it becomes wrong the moment 2.2.0 exists and supersedes it.
-   Publishing first is the one ordering this sheet cannot repair afterwards
-   for the manuscript source already shipped inside DTRAP and arXiv copies.
+0. **Done 2026-09-09, before the publish.** The DOI was reserved and
+   propagated: `CITATION.cff` carries doi 10.5281/zenodo.22673735, version
+   2.2.0, date-released 2026-09-09; the canonical lineage sentence in all five
+   canon venues names 2.2.0; the README, the artifact access strategy, the
+   DTRAP editor note and prior-appearance note, the cover letter in both
+   renders, every sheet, the named arXiv variant's availability sentence and
+   the companion's v2 correction note cite 2.2.0. Nothing in the repository
+   now cites 2.1.0 as the accompanying artifact, and every one of those
+   citations is unresolvable until you publish.
 1. Confirm against the Zenodo API that the published version DOI is exactly
-   the one you reserved and that the five files are at the Step 2 sizes. If
-   Zenodo minted a different DOI, stop and re-propagate before going further.
+   10.5281/zenodo.22673735 and that the five files are at the Step 2
+   sizes. **If Zenodo mints a different DOI, stop**: the whole repository
+   already cites the reserved one, and it would all have to be re-propagated
+   before anything goes to DTRAP or arXiv.
 2. Optional: annotate the 2.1.0 record's description with one sentence
    naming 2.2.0 as the version that carries the final referee round's
    manuscript. Metadata on 2.1.0 stays editable; its files stay frozen.
