@@ -7477,6 +7477,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'ChangePoint' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimSloThresholdSupported": [
@@ -7488,6 +7497,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'SloThreshold' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimBurnRateSupported": [
@@ -7499,6 +7517,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'BurnRate' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimThreeDatasetsSupported": [
@@ -7510,6 +7537,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'ThreeDatasets' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimChronologicalSupported": [
@@ -7521,6 +7557,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Chronological' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimStreamingBaselinesSupported": [
@@ -7532,6 +7577,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'StreamingBaselines' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimBatchReferencesSupported": [
@@ -7543,6 +7597,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'BatchReferences' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimStatisticalTestsSupported": [
@@ -7554,6 +7617,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'StatisticalTests' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimLatencySupported": [
@@ -7565,6 +7637,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Latency' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimConstructionSupported": [
@@ -7576,6 +7657,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "1 if claim 'Construction' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimArtifactsSupported": [
@@ -7587,6 +7677,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if claim 'Artifacts' is fully supported by a manifested run",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimsSupported": [
@@ -7598,6 +7697,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 1,
+      "unit": "",
+      "desc": "claims with verdict SUPPORTED",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimsPartial": [
@@ -7609,6 +7717,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "claims with verdict PARTIAL",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimsUnsupported": [
@@ -7620,6 +7737,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 4,
+      "unit": "",
+      "desc": "claims with verdict UNSUPPORTED",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimsWithdrawn": [
@@ -7631,6 +7757,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 3,
+      "unit": "",
+      "desc": "claims with verdict WITHDRAWN",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SFiveClaimsTotal": [
@@ -7642,6 +7777,15 @@
       "manifest": "s5_verified_contributions_20260820T101339_b4b27691.json",
       "git_commit": "363d2619f4dd82a2439cfaab7afcc12aa993df6b-dirty",
       "finished_utc": "2026-08-20T10:13:39.507301+00:00"
+    },
+    {
+      "value": 11,
+      "unit": "",
+      "desc": "contribution claims assessed",
+      "run_id": "s5_verified_contributions_20260909T060341_6108db2a",
+      "manifest": "s5_verified_contributions_20260909T060341_6108db2a.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:41.550820+00:00"
     }
   ],
   "SSixProbeHazard": [
@@ -7662,6 +7806,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.001,
+      "unit": "",
+      "desc": "hazard used in the probe",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixProbeOriginalPeak": [
@@ -7682,6 +7835,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.001,
+      "unit": "",
+      "desc": "peak P(r=0) after a 6-sigma shift, evaluated detector",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixProbeCorrectedPeak": [
@@ -7702,6 +7864,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "peak P(r=0) after a 6-sigma shift, corrected statistic",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixProbeCorrectedRatio": [
@@ -7722,6 +7893,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 1000.0,
+      "unit": "",
+      "desc": "corrected peak P(r=0) as a multiple of the hazard",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixProbeOriginalRatio": [
@@ -7742,6 +7922,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "original peak P(r=0) as a multiple of the hazard",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixPrefixRows": [
@@ -7762,6 +7951,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 200000,
+      "unit": "",
+      "desc": "prefix records evaluated",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixTestRows": [
@@ -7782,6 +7980,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 30000,
+      "unit": "",
+      "desc": "held-out records",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixTestAttacks": [
@@ -7802,6 +8009,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 4840,
+      "unit": "",
+      "desc": "held-out attacks",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixChanceFloor": [
@@ -7822,6 +8038,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.161333,
+      "unit": "",
+      "desc": "AUC-PR chance floor on this prefix (test prevalence)",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixOriginalAucpr": [
@@ -7842,6 +8067,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.397486,
+      "unit": "",
+      "desc": "original variant AUC-PR (from cached run)",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixOriginalAucroc": [
@@ -7862,6 +8096,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.848216,
+      "unit": "",
+      "desc": "original variant AUC-ROC (from cached run)",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixOriginalElapsedS": [
@@ -7882,6 +8125,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 743.2,
+      "unit": "",
+      "desc": "original variant wall seconds (from cached run)",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixCorrectedAucpr": [
@@ -7902,6 +8154,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.169912,
+      "unit": "",
+      "desc": "corrected variant AUC-PR (from cached run)",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixCorrectedAucroc": [
@@ -7922,6 +8183,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.50962,
+      "unit": "",
+      "desc": "corrected variant AUC-ROC (from cached run)",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixCorrectedElapsedS": [
@@ -7942,6 +8212,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 586.3,
+      "unit": "",
+      "desc": "corrected variant wall seconds (from cached run)",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixArmsRecomputed": [
@@ -7962,6 +8241,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the arm metrics were recomputed this run",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixExcluded": [
@@ -7982,6 +8270,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0,
+      "unit": "",
+      "desc": "1 if the ablation was excluded",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixTotalWallS": [
@@ -8013,6 +8310,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 1800,
+      "unit": "",
+      "desc": "the operator's wall cap",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixAucprDelta": [
@@ -8033,6 +8339,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": -0.227574,
+      "unit": "",
+      "desc": "corrected minus original AUC-PR on this prefix",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixDiagOriginalScoreSd": [
@@ -8053,6 +8368,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.218999,
+      "unit": "",
+      "desc": "original score standard deviation",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixDiagOriginalDistinctScores": [
@@ -8073,6 +8397,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 3899,
+      "unit": "",
+      "desc": "original distinct score values emitted",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixDiagOriginalFracAtCap": [
@@ -8093,6 +8426,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.004733,
+      "unit": "",
+      "desc": "original fraction of scores exactly at the 0.25 cap",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixDiagOriginalMeanShortRunMass": [
@@ -8113,6 +8455,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.006472,
+      "unit": "",
+      "desc": "original mean posterior mass on runs <= 5",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixDiagCorrectedScoreSd": [
@@ -8133,6 +8484,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.159341,
+      "unit": "",
+      "desc": "corrected score standard deviation",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixDiagCorrectedDistinctScores": [
@@ -8153,6 +8513,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 747,
+      "unit": "",
+      "desc": "corrected distinct score values emitted",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixDiagCorrectedFracAtCap": [
@@ -8173,6 +8542,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 0.9274,
+      "unit": "",
+      "desc": "corrected fraction of scores exactly at the 0.25 cap",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "SSixDiagCorrectedMeanShortRunMass": [
@@ -8193,6 +8571,15 @@
       "manifest": "s6_bocpd_corrected_ablation_20260827T113456_f9869627.json",
       "git_commit": "64ad3e8dfe8b87ed99098bb221bbb37d4c7d3b77-dirty",
       "finished_utc": "2026-08-27T11:36:35.578384+00:00"
+    },
+    {
+      "value": 1.0,
+      "unit": "",
+      "desc": "corrected mean posterior mass on runs <= 5",
+      "run_id": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff",
+      "manifest": "s6_bocpd_corrected_ablation_20260909T060039_7766d5ff.json",
+      "git_commit": "328ecf2a85570b34bb9d408994b72c2c409a0e19-dirty",
+      "finished_utc": "2026-09-09T06:03:14.749971+00:00"
     }
   ],
   "Stage1BocpdsloAucprDiff": [

@@ -289,3 +289,52 @@ framing that finding 1 removed from the manuscript.
 rate for any data"; it is hand-maintained, is the first thing a reader of the
 artifact sees, and was corrected in this round to state the cap qualifier and
 the current framing.
+
+# Fourth round (2026-09-09): the two generator residues, regenerated
+
+The previous round left `findings_bocpd_ablation.md` and
+`findings_contributions.md` carrying the retired framing, on the reasoning that
+editing either would break a recorded manifest output hash and that re-running
+was outside that round's bound. That reasoning was half right. Editing the
+*documents* would indeed break their recorded hashes; editing their
+*generators* and re-running them does not, because a run writes a fresh
+manifest that records the new hash. CI-27 states the rule directly: editing a
+generator is not a fix, running it is.
+
+Both generators could regenerate from archived data with no new detector run:
+
+- `scripts/verify_contributions.py` reads run manifests and the macro index
+  only, so it recomputes nothing.
+- `scripts/run_bocpd_ablation.py` reuses the arm metrics from
+  `results/s6_ablation_arms.json` whenever the cached prefix length matches,
+  emits the arm macros from that cache with `SSixArmsRecomputed` = 0, and by
+  design claims no stage wall time on that path (CI-24), so the run measures no
+  arm. Its saturation diagnostic over the first 15,000 records is deterministic
+  and was recomputed, as it is on every run.
+
+The retired framing was replaced in both generators with the wording the
+manuscript now uses: the two variants are degenerate in different quantities,
+each stated in the quantity that was measured; below the run-length cap the
+evaluated detector's reset posterior is pinned at the hazard rate, a property
+of the published recursion rather than a coding error; under the alternative it
+is the short-run mass that saturates; and `P(r=0)` for the alternative was
+measured only on the synthetic probe, so nothing is asserted about how often it
+resets on the stream. The Stage 6 sentence that called the alternative's score
+"constant on most records" was corrected in the same edit, because the
+manuscript states the opposite and the archived standard deviation supports the
+manuscript.
+
+Both generators were then run. New manifests
+`s6_bocpd_corrected_ablation_20260909T060039_7766d5ff` and
+`s5_verified_contributions_20260909T060341_6108db2a` record the new document
+hashes. Neither run changed a macro value: the three Stage 6 manifests agree on
+all 27 shared macros, the two Stage 5 manifests agree on all 16, and
+`paper/numbers.tex` regenerated to the same 799 macros with no value changed,
+only the provenance attribution comments moving to the new run ids.
+
+`SCOPE_DECISIONS.md` still carries the retired framing in its Stage 6 narrative
+and is deliberately untouched; it is the historical log, and this project
+records history rather than rewriting it. One further residue was found and
+fixed in this round: `CLAIM_LEDGER.md` entry I13 abbreviated the introduction
+sentence with the retired framing, which the manuscript no longer says. The
+gist now matches the manuscript.

@@ -2,10 +2,15 @@
 
 Assembled 2026-08-27 against commit **`083df8acb6e48c2f403218ae765260584c3a2fdb`**.
 The Zenodo lineage: version 2.0.0 is live (doi:10.5281/zenodo.22213264) and
-version 2.1.0 is staged with its DOI reserved (doi:10.5281/zenodo.22638195).
-Order per `HUMAN_ACTIONS.md`: **Zenodo 2.1.0 publish, then the DTRAP
-submission, then this replacement within 48 hours of it** (the editor note
-promises that window), then the companion's v2 replacement.
+version 2.1.0 is live and frozen (doi:10.5281/zenodo.22638195), which is the
+version the Comments text below cites. A version 2.2.0 is staged on record
+22638195 and **has no DOI reserved yet**; if it is published before this
+replacement is submitted, re-read the Comments text against
+`ZENODO_DEPOSIT_SHEET.md` first, because an arXiv version is permanent and the
+lineage sentence would then stop one version short.
+Order per `HUMAN_ACTIONS.md`: **Zenodo 2.2.0 propagation and publish, then the
+DTRAP submission, then this replacement within 48 hours of it** (the editor
+note promises that window), then the companion's v2 replacement.
 
 > **Immutable on submission:** an arXiv version is permanent. v3 will sit
 > publicly beside v1 and v2 forever; you cannot delete a version, only add v4.
@@ -16,7 +21,7 @@ promises that window), then the companion's v2 replacement.
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (102,768 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (102,769 B). It contains
 the six source files plus the `figures/` directory and compiles standalone:
 
 | file | why |
@@ -134,9 +139,10 @@ are rather than regenerate a subset that would not change this disclosure.
 
 **Resolved 2026-08-31, extended 2026-09-07:** the Comments text above carries
 the whole lineage: v1.0.0 (10.5281/zenodo.20074590), v2.0.0
-(10.5281/zenodo.22213264) and v2.1.0 (10.5281/zenodo.22638195, reserved and
-published before this replacement per `HUMAN_ACTIONS.md`). No sentence needs
-appending; the concept DOI 10.5281/zenodo.20074589 is not cited.
+(10.5281/zenodo.22213264) and v2.1.0 (10.5281/zenodo.22638195, published and
+live). No sentence needs appending; the concept DOI 10.5281/zenodo.20074589 is
+not cited. If Zenodo 2.2.0 is published first, this text is re-read before
+submission, per the note at the top of this sheet.
 
 **The Comments text now carries the provenance disclosure** in the same words
 as the Zenodo description and the DTRAP editor note — 19 of 25 live run

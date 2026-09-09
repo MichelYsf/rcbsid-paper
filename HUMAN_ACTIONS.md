@@ -3,10 +3,12 @@
 Nothing here needs judgment, and nothing here is blocked on a missing
 identifier. Every file referenced is in this repository.
 
-**Order matters.** The order is: **Zenodo 2.1.0 publish** (its DOI is
-reserved and every document already cites it), then **DTRAP**, then the arXiv
-v3 replacement **within 48 hours of DTRAP** (the editor note promises that
+**Order matters.** The order is: **reserve the Zenodo 2.2.0 DOI and propagate
+it**, then **publish Zenodo 2.2.0**, then **DTRAP**, then the arXiv v3
+replacement **within 48 hours of DTRAP** (the editor note promises that
 window), then the companion's v2 replacement, then the optional AWS cleanup.
+The propagation must precede the publish, which is the reverse of the order
+2.1.0 used and the reason step 1 below is not simply a repeat of it.
 
 > **Removed 2026-08-27: the TIFS withdrawal steps.** This file previously
 > opened with two steps — retrieve the TIFS manuscript ID from email, then send
@@ -52,24 +54,35 @@ cross-platform effect this project already recorded as CI-16.
 in the deposit description (`ZENODO_DEPOSIT_SHEET.md` carries the wording), or
 do not deposit. Nothing else blocks the sequence.
 
-## 1. Zenodo 2.1.0 publish — FIRST outward action
+## 1. Zenodo 2.2.0 — FIRST outward action, in two parts
 
 Version 2.0.0 was published 2026-08-31 (version DOI 10.5281/zenodo.22213264,
 concept DOI 10.5281/zenodo.20074589, superseding v1.0.0,
-10.5281/zenodo.20074590). Version 2.1.0 is staged as a New version on that
-record with its DOI **reserved: 10.5281/zenodo.22638195**. Work through
-`ZENODO_DEPOSIT_SHEET.md` top to bottom: upload the two rebuilt zips, paste
-the Step 5 description, set version 2.1.0 and the Step 7 identifiers, then
-publish. Afterwards verify against the Zenodo API that the published DOI is
-10.5281/zenodo.22638195 and that the five files are at the sheet's sizes.
+10.5281/zenodo.20074590). **Version 2.1.0 was published from that record under
+the DOI it had reserved, 10.5281/zenodo.22638195**, and is frozen. Version
+2.2.0 is now staged as a New version on record 22638195, carrying the final
+referee round's 23-page manuscript source and the two regenerated findings
+documents. **No DOI is reserved for it yet.**
 
-## 2. DOI propagation — EXECUTED 2026-09-07, before the publish
+1. Open `ZENODO_DEPOSIT_SHEET.md` and work Steps 1 and 2, up to and including
+   uploading the two rebuilt zips. Then **reserve the version DOI** in the
+   draft and stop.
+2. Bring the reserved DOI back here and run the DOI propagation round (step 2
+   below) before touching Publish. Then return, paste the re-read Step 5
+   description, set version 2.2.0 and the Step 7 identifiers, and publish.
+3. Afterwards verify against the Zenodo API that the published DOI is the one
+   you reserved and that the five files are at the sheet's sizes.
 
-`CITATION.cff` carries `doi: 10.5281/zenodo.22638195`, version `2.1.0`,
-date-released 2026-09-07; the canonical lineage sentence in all five venue
-texts states the 2.0.0 and 2.1.0 lineage; the editor note, cover letter,
-sheets, README and the arXiv variant's availability sentence cite 2.1.0;
-committed and pushed. Nothing here needs a click.
+## 2. DOI propagation for 2.2.0 — NOT YET DONE, and it blocks the publish
+
+Every document in this repository that carries a Zenodo DOI cites 2.1.0
+(10.5281/zenodo.22638195): `CITATION.cff`, `README.md`, the canonical lineage
+sentence in all five venue texts, the DTRAP editor note, the cover letter,
+every sheet, the named arXiv variant's availability sentence, and the
+companion's v2 correction note. That is correct and resolvable today. Once
+2.2.0 is published it is a stale citation in files already shipped to DTRAP
+and arXiv, which is why the propagation runs **before** the publish this time.
+The 2.1.0 propagation, executed 2026-09-07, is the template.
 
 ## 3. DTRAP submission (login wall) — after the Zenodo publish
 

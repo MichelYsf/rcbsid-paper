@@ -420,17 +420,23 @@ def main() -> int:
                      ("%.1f%%" % (100 * diag["corrected"]["frac_at_cap"])) + " of its "
                      "scores are exactly 0.25. It emits " +
                      str(diag["corrected"]["distinct"]) + " distinct values where the "
-                     "original emits " + str(diag["original"]["distinct"]) + ". A score "
-                     "that is constant on most records cannot rank, which is what an "
+                     "original emits " + str(diag["original"]["distinct"]) + ". The "
+                     "score is not constant, but a score that sits at its cap on most "
+                     "records carries little ranking information, which is what an "
                      "AUC-ROC of " + ("%.4f" % arms["corrected"]["auc_roc"]) + " means.")
             L.append("")
             L.append("**So the honest conclusion is not \"repairing the change-point "
-                     "statistic degrades detection\".** It is that both variants are "
-                     "degenerate, in opposite directions. The evaluated detector never "
-                     "resets — `P(r=0)` is algebraically pinned to the hazard. This "
-                     "correction always resets — a nu=2 Student-t prior predictive "
-                     "assigns a fresh run higher likelihood than any fitted run for "
-                     "nearly every point. Neither is change-point detection.")
+                     "statistic degrades detection\".** It is that the two variants are "
+                     "degenerate in different quantities, and each is stated here in the "
+                     "quantity that was measured. Below the run-length cap the evaluated "
+                     "detector's reset posterior is pinned at the hazard rate, a property "
+                     "of the published recursion rather than a coding error, and it "
+                     "carries no information from the current record. Under this "
+                     "alternative it is the short-run mass that saturates, so the "
+                     "composed score sits at its cap on most records, as the table above "
+                     "reports. `P(r=0)` under the alternative was measured only on the "
+                     "synthetic probe, so nothing is claimed here about how often it "
+                     "resets on this stream. Neither variant is change-point detection.")
             L.append("")
             L.append("A statistic that resets when the data warrants it needs a "
                      "prior-predictive scale between the two, and locating it is a "

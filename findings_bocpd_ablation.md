@@ -1,6 +1,6 @@
 # findings_bocpd_ablation — the corrected change-point statistic (Stage 6)
 
-Generating run: `s6_bocpd_corrected_ablation_20260827T113456_f9869627`. Every number is a provenance macro.
+Generating run: `s6_bocpd_corrected_ablation_20260909T060039_7766d5ff`. Every number is a provenance macro.
 
 ## Scope reduction, stated up front
 
@@ -11,7 +11,7 @@ The operator capped Stage 6 at **30 minutes of local compute** (down from 90) wi
 - **blaster_worm and spam excluded** for an independent reason: their attacks sit at the end of the stream, so any prefix holds no test attacks.
 - **One seed**, permitted by binding rule 7 because both variants are deterministic (Stage 2 measured this detector at sd 0.0000 across three draws).
 
-Total local compute: **98.6 s** against a cap of 1800 s.
+Total local compute: **155.1 s** against a cap of 1800 s.
 
 ## Does the corrected statistic respond to a change point?
 
@@ -46,9 +46,9 @@ On a 200000-record prefix, 30000 held-out records carrying 4840 attacks (chance 
 | distinct score values | 3899 | 747 |
 | score standard deviation | 0.2190 | 0.1593 |
 
-The corrected variant's run-length posterior is collapsed onto short runs at **every step** (mean `P(r<=5)` = 1.0000), so `0.25 * P(r<=5)` saturates and 92.7% of its scores are exactly 0.25. It emits 747 distinct values where the original emits 3899. A score that is constant on most records cannot rank, which is what an AUC-ROC of 0.5096 means.
+The corrected variant's run-length posterior is collapsed onto short runs at **every step** (mean `P(r<=5)` = 1.0000), so `0.25 * P(r<=5)` saturates and 92.7% of its scores are exactly 0.25. It emits 747 distinct values where the original emits 3899. The score is not constant, but a score that sits at its cap on most records carries little ranking information, which is what an AUC-ROC of 0.5096 means.
 
-**So the honest conclusion is not "repairing the change-point statistic degrades detection".** It is that both variants are degenerate, in opposite directions. The evaluated detector never resets — `P(r=0)` is algebraically pinned to the hazard. This correction always resets — a nu=2 Student-t prior predictive assigns a fresh run higher likelihood than any fitted run for nearly every point. Neither is change-point detection.
+**So the honest conclusion is not "repairing the change-point statistic degrades detection".** It is that the two variants are degenerate in different quantities, and each is stated here in the quantity that was measured. Below the run-length cap the evaluated detector's reset posterior is pinned at the hazard rate, a property of the published recursion rather than a coding error, and it carries no information from the current record. Under this alternative it is the short-run mass that saturates, so the composed score sits at its cap on most records, as the table above reports. `P(r=0)` under the alternative was measured only on the synthetic probe, so nothing is claimed here about how often it resets on this stream. Neither variant is change-point detection.
 
 A statistic that resets when the data warrants it needs a prior-predictive scale between the two, and locating it is a hyperparameter search. That is excluded here by the 30-minute cap, and it is constrained by the rule against selecting on test labels. **Stage 6 therefore establishes the failure mode and not a working correction**, and the manuscript may claim no more.
 
