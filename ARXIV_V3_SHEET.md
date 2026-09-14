@@ -1,7 +1,7 @@
 # ARXIV_V3_SHEET — replacement of arXiv:2605.24696, nothing submitted
 
 Assembled 2026-08-27, last rebuilt 2026-09-14 against commit
-**`adf9e62bcb69b0694ba1c33224c18f86e65e404b`**, whose tree holds the tarball and the
+**`1dc670930b517ce097f369c96f69e91dc91dc35e`**, whose tree holds the tarball and the
 24-page manuscript this sheet describes. **On 2026-09-14 the manuscript was
 reset in the official TMLR template** (tmlr.sty and tmlr.bst, unmodified; the
 named arXiv variant uses the template's `[preprint]` option), so the tarball
@@ -30,7 +30,7 @@ after and do not wait on the review.
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (113,636 B). It contains
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (113,688 B). It contains
 the six source files, the three TMLR template files and the `figures/`
 directory, and compiles standalone (verified by extracting it to an empty
 directory and running pdflatex twice):
@@ -63,41 +63,7 @@ Control*.
 ## Step 3 — Abstract (paste verbatim)
 
 ```
-Public network captures are rarely usable as evaluation streams as they stand,
-so streaming intrusion-detection studies assemble them: interleaving capture
-days, pooling temporally disjoint captures, or replaying records round robin. We
-show on two benchmarks that this assembly step is not neutral plumbing but an
-uncontrolled experimental treatment. On CICIDS2017, holding the full record
-multiset identical and changing only the ordering, a fixed positional 70/15/15
-split then produces held-out samples that share only 32.5% of
-their records, at held-out prevalences of 68.235% and 25.2396% -- a
-42.9954-point difference -- and the measured ordering of the two deterministic
-scorers reverses. Restricting both arms to the 78000 records they both held out
-removes that reversal: the same scorer leads in both arms there. The reversal is
-therefore attributable to which records the assembly hands to the test set, not
-to the order in which the detector saw its history. That attribution assumes
-that history contributes no more on the records the arms do not share than on
-those they do. On LITNET-2020, pooling three temporally disjoint captures reports
-a single 6.4982% operating point that is the equal-weight mean of per-capture
-held-out prevalences spanning 0.176% to 15.7747%; we present that identity as an
-audit check rather than a discovery. We also audit the evaluated detector
-against its description: its reset and growth branches share a predictive term
-that cancels, so the reset posterior P(r_t=0) equals the hazard rate exactly
-below the run-length cap, while the evaluations spend nearly all their length at or
-beyond that cap, where the posterior instead wanders; and the score the
-evaluation consumes is a function of P(r<=5), not of P(r=0). Scoring that
-detector one branch at a time yields a separate result: its deployed max
-composition ranks worse than its own tail term alone (0.103477 AP, 0.302658
-AUC-ROC), because the auxiliary branch is inverted rather than uninformative
-(AUC-ROC 0.281890) and a maximum lets it set the record's score wherever the
-tail is small -- a defect no metric computed on the assembled score can attribute.
-Finally, we quantify a batch dependence in the ECOD reference implementation,
-whose empirical CDFs are recomputed over the training matrix concatenated with
-the scored batch: holding the evaluated records and the fitted model fixed and
-changing only the accompanying batch moves its AUC-PR by 0.003063, so published
-ECOD numbers are not comparable across studies that score a different batch, in
-size or composition. Every measured value traces to an archived, hash-verified run manifest, and the
-sentence-level claim ledger ships with the artifact.
+Public network captures are rarely usable as evaluation streams as they stand, so streaming intrusion-detection studies assemble them: interleaving capture days, pooling temporally disjoint captures, or replaying records round robin. We show on two benchmarks that this assembly step is not neutral plumbing but an uncontrolled experimental treatment, a benchmark-construction choice that changes what the evaluation measures. On CICIDS2017, holding the full record multiset identical and changing only the ordering, a fixed positional 70/15/15 split then produces held-out samples that share only 32.5% of their records, at held-out prevalences of 68.235% and 25.2396% — a 42.9954-point difference — and the measured ordering of the two deterministic scorers reverses. Restricting both arms to the 78000 records they both held out removes that reversal: the same scorer leads in both arms there. The reversal is therefore attributable to which records the assembly hands to the test set, not to the order in which the detector saw its history. That attribution assumes that history contributes no more on the records the arms do not share than on those they do. On LITNET-2020, pooling three temporally disjoint captures reports a single 6.4982% operating point that is the equal-weight mean of per-capture held-out prevalences spanning 0.176% to 15.7747%; we present that identity as an audit check rather than a discovery. We also audit the evaluated detector against its description: its reset and growth branches share a predictive term that cancels, so the reset posterior P(rt=0) equals the hazard rate exactly below the run-length cap, while the evaluations spend nearly all their length at or beyond that cap, where the posterior instead wanders; and the score the evaluation consumes is a function of P(r ≤5), not of P(r=0). Scoring that detector one branch at a time yields a separate result: its deployed max composition ranks worse than its own tail term alone (0.103477 AP, 0.302658 AUC-ROC), because the auxiliary branch is inverted rather than uninformative (AUC-ROC 0.281890) and a maximum lets it set the record’s score wherever the tail is small — a defect no metric computed on the assembled score can attribute. Finally, we quantify a batch dependence in the ECOD reference implementation, whose empirical CDFs are recomputed over the training matrix concatenated with the scored batch: holding the evaluated records and the fitted model fixed and changing only the accompanying batch moves its AUC-PR by 0.003063, so published ECOD numbers are not comparable across studies that score a different batch, in size or composition. Every measured value traces to an archived, hash-verified run manifest, and the sentence-level claim ledger ships with the artifact.
 ```
 
 ## Step 4 — Comments field (paste verbatim; permanent and public)
@@ -167,7 +133,7 @@ reaffirmed 2026-09-09: accepted, not re-run. The counts were corrected on
 2026-09-09 from the 19 of 25 the canon had carried since version 2.0.0; they
 are read from the staged manifests bundle, not from any document.
 
-**Page count is 23.** Verify against the arXiv build preview before submitting;
+**Page count is 24.** Verify against the arXiv build preview before submitting;
 a stale count in this permanent field is the class of error this version exists
 to correct.
 

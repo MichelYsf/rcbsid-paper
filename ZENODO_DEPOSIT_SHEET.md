@@ -26,7 +26,7 @@
 > outward action (Step 9). The provenance-limitation canon is deliberately
 > untouched; see the note under Step 0.
 
-Assembled 2026-09-14 against commit **`adf9e62bcb69b0694ba1c33224c18f86e65e404b`**, the
+Assembled 2026-09-14 against commit **`1dc670930b517ce097f369c96f69e91dc91dc35e`**, the
 packaging commit whose tree holds the five files of Step 2 byte-for-byte as
 staged (their SHA-256 values are recorded there). The packaging commit moved twice on
 2026-09-09 and 224d130 is no longer it: the DOI propagation changed
@@ -48,8 +48,11 @@ Step 7 before uploading.
 > and one clause to the abstract, citations in natbib author-year form, and
 > the figures re-rendered at the template's text width. No macro, table value
 > or claim changed; `paper/numbers.tex` is byte-identical to the previous
-> build. Two builder scripts changed and one was added
-> (`scripts/build_anonymous_source.py`), so the zip has 149 entries.
+> build. Three builder scripts changed (`build_anonymous_artifact.py`,
+> `build_arxiv_variant.py`, `make_figures.py`), one was added
+> (`scripts/build_anonymous_source.py`), and `CLAIM_LEDGER.md`,
+> `paper/references.bib` and the figure manifest changed with the manuscript,
+> so the zip has 149 entries.
 
 > **Why the checksums move even when nothing does.** Zip and gzip store a
 > timestamp per entry, and pdflatex stamps a creation date, so rebuilding
@@ -57,7 +60,9 @@ Step 7 before uploading.
 > 2026-09-09 that closed the provenance-canon counts, all five deposit files
 > were compared against the previous build entry by entry: every entry of the
 > code zip and of the manifests bundle was byte-identical, and the three data
-> files did not move at all. Only the archives' embedded timestamps changed,
+> files did not move at all. (That comparison describes the 2026-09-09
+> rebuild; the 2026-09-14 TMLR reset did change the code zip's content, as
+> the note above says.) Only the archives' embedded timestamps changed,
 > which is why row 1 and row 2 of Step 2 carry new SHA-256 values for
 > unchanged content. Read Step 2 off the tree at the commit named above; do
 > not carry a checksum over from an earlier revision of this sheet.
@@ -148,9 +153,9 @@ Youssef, Michel with ORCID 0009-0000-0664-8228, licence Apache-2.0, access
 Open, keywords (Step 8), related identifier *is supplement to*
 `arXiv:2605.24696`.
 
-## Step 2 — Files (all five in `packages/zenodo/`, rebuilt 2026-09-09; the
-DOI propagation of that date changed only the code zip, and the other four
-are byte-identical to what the pre-deposit round staged)
+## Step 2 — Files (all five in `packages/zenodo/`, rebuilt 2026-09-14; the TMLR
+reset changed the code zip's content and the manifests bundle's bytes, and the
+three data files are byte-identical to what the pre-deposit round staged)
 
 `manifests_bundle.zip` is built by `python scripts/build_zenodo_package.py`
 with entries relative to the bundle root and no wrapping directory, because
@@ -161,8 +166,8 @@ including the two that this round's document regenerations created.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` (149 entries, 1,323,684 B unzipped) | 463,583 B | `afcaa678793aaca68ccf9494e4ed6a41f579ccd48389de39fc74e6fcc8c393bf` |
-| 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `6757b874e0d559c354af6aab15cb69855a7038c99d96cdab56f700fb14002ac8` |
+| 1 | `rcbsid_rebuild_code.zip` (149 entries, 1,327,907 B unzipped) | 464,720 B | `30d169290d48d232dc4a92abbba846e5145659ff0f2d90049b07c844ec5896a5` |
+| 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `7ec14fd4564e7bbb2895960b46ff957a93259727b0cfadfa0ca7ebdb67208b6c` |
 | 3 | `EXPECTED_SHA256.txt` (unchanged from 2.1.0 and 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` (unchanged from 2.1.0 and 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
 | 5 | `prevalence_sweep_cicids.csv` (unchanged from 2.1.0 and 2.0.0) | 48,587 B | `ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759` |
@@ -271,7 +276,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/adf9e62bcb69b0694ba1c33224c18f86e65e404b` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/1dc670930b517ce097f369c96f69e91dc91dc35e` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
 Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
@@ -287,7 +292,7 @@ Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
 
 0. **Done 2026-09-09, before the publish.** The DOI was reserved and
    propagated: `CITATION.cff` carries doi 10.5281/zenodo.22673735, version
-   2.2.0, date-released 2026-09-09; the canonical lineage sentence in all five
+   2.2.0, date-released 2026-09-14; the canonical lineage sentence in all five
    canon venues names 2.2.0; the README, the artifact access strategy, the
    DTRAP editor note and prior-appearance note, the cover letter in both
    renders, every sheet, the named arXiv variant's availability sentence and
