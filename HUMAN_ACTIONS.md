@@ -4,9 +4,11 @@ Nothing here needs judgment, and nothing here is blocked on a missing
 identifier. Every file referenced is in this repository.
 
 **Order matters.** The order is: **publish Zenodo 2.2.0** (its DOI is reserved
-and every document already cites it), then **DTRAP**, then the arXiv v3
-replacement **within 48 hours of DTRAP** (the editor note promises that
-window), then the companion's v2 replacement, then the optional AWS cleanup.
+and every document already cites it), then the **TMLR submission on
+OpenReview**, then the arXiv v3 replacement, then the companion's v2
+replacement, then the optional AWS cleanup. **The venue changed on
+2026-09-14 from ACM DTRAP to TMLR**; the manuscript was reset in the TMLR
+template and the DTRAP documents are retired as historical.
 The propagation that had to sit between the reservation and the publish is
 done, so the publish is again the first outward action.
 
@@ -63,8 +65,9 @@ concept DOI 10.5281/zenodo.20074589, superseding v1.0.0,
 10.5281/zenodo.20074590). **Version 2.1.0 was published from that record under
 the DOI it had reserved, 10.5281/zenodo.22638195**, and is frozen. Version
 2.2.0 is staged as a New version on record 22638195 with its DOI **reserved:
-10.5281/zenodo.22673735**, carrying the final referee round's 23-page
-manuscript source and the two regenerated findings documents.
+10.5281/zenodo.22673735**, carrying the final referee round's manuscript source, reset on 2026-09-14
+in the TMLR template (24 pages, 20 of them main body), and the two
+regenerated findings documents.
 
 Work through `ZENODO_DEPOSIT_SHEET.md` top to bottom: check the carried-over
 2.1.0 file sizes against the note at the top of that sheet, upload the two
@@ -88,30 +91,29 @@ here needs a click. **None of those citations resolves until the record is
 published**, which is why the publish above is the next action and not a later
 one.
 
-## 3. DTRAP submission (login wall) — after the Zenodo publish
+## 3. TMLR submission (login wall) — after the Zenodo publish
 
-1. Sign in at **https://mc.manuscriptcentral.com/dtrap** (verified 2026-08-24);
-   link ORCID 0009-0000-0664-8228 if prompted.
-2. Work through `SUBMISSION_CONSOLE.md` top to bottom. It carries every
-   field in paste order: article type, title, verified abstract, keywords,
-   CCS concepts, author block, the verified reviewer block, the plain-text
-   cover letter and editor note, the questionnaire, and the upload table.
-3. Suggested reviewers: your call — candidates with reasons are in
-   `SUGGESTED_REVIEWERS.md` (not auto-submitted).
-4. **Attach the ACM waiver confirmation.** The PDF is at
-   `C:\Users\CYBERWIZARD\Downloads\ACM_Waiver.pdf` (verified present
-   2026-08-31). Attach it in the fee section.
-5. If the editorial thread with Delman about your ORCID is still open, reply
-   with `packages/dtrap/DELMAN_CLARIFICATION_REPLY.md`.
-6. Submit. Note the submission date: step 4 is promised within 48 hours of it.
+1. Sign in at **https://openreview.net** with a complete profile (affiliation,
+   conflicts, publication history; TMLR requires it) and open the TMLR
+   submission form.
+2. Work through `TMLR_SUBMISSION_SHEET.md` top to bottom. It carries every
+   OpenReview field in the form's order, the PDF and the single supplementary
+   zip to upload, the private note to the action editor, and the
+   action-editor recommendation step that follows submission.
+3. There are no suggested reviewers, no cover letter and no fee: TMLR assigns
+   reviewers through its action editors and charges nothing. The DTRAP cover
+   letter, editor note and reviewer block are retired as historical.
+4. Submit, then complete the action-editor recommendation task OpenReview
+   opens for the submission.
 
-## 4. arXiv v3 replacement — within 48 hours of step 3
+## 4. arXiv v3 replacement — after step 3
 
 Follow `ARXIV_V3_SHEET.md`: paper 2605.24696 → Replace → upload
 `packages/arxiv_v3/arxiv_v3_source.tar.gz`; new title; Comments = the NO VENUE
-CLAIM variant (it already carries doi:10.5281/zenodo.22213264 and the
-provenance disclosure); confirm 23 pages in arXiv's preview and your name on
-page 1.
+CLAIM variant (it carries the Zenodo lineage through 2.2.0 and the provenance
+disclosure); confirm 24 pages in arXiv's preview and your name on page 1. TMLR
+permits preprints at any time and the private note to the action editor says
+this corrected v3 follows the submission, so post it soon after.
 
 ## 5. Companion v2 replacement (arXiv:2510.09619)
 
@@ -143,8 +145,10 @@ good hygiene and it means this step stays yours, in the console:
 
 ---
 
-**Fallback ladder if DTRAP declines:** **TMLR first, DMLR second.** TNSM is
-removed from the ladder — it is not free to publish at this paper's 23 pages.
+**Fallback ladder if TMLR declines:** **DMLR.** DTRAP was the original target
+and is no longer in the ladder: the venue changed to TMLR on 2026-09-14 and
+the DTRAP package is retired. TNSM is removed from the ladder — it is not free
+to publish at this paper's 24 pages.
 
 Everything else — compiles, gates, ledger, tests, packages, anonymity scans —
 is done and verified. See `PUBLISH_PREP_REPORT.md` and `TRIAGE_REPORT.md`.

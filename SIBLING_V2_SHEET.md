@@ -6,7 +6,7 @@ Intrusion Detection with SRE-Aligned Decisions") gets a corrected
 `SIBLING_DECISION.md`. The v2 is the v1 paper plus the prepared correction
 note. Nothing else in the paper changes.
 
-**When.** After the DTRAP submission and after the main paper's arXiv v3
+**When.** After the TMLR submission and after the main paper's arXiv v3
 replacement (`HUMAN_ACTIONS.md` steps 3 and 4). Nothing in the main paper's
 path waits on this.
 

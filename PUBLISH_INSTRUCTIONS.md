@@ -1,7 +1,7 @@
 # PUBLISH_INSTRUCTIONS — what each package is, and the invariants before it leaves
 
 Zenodo versions 2.0.0 and 2.1.0 are published; nothing has gone to arXiv, to
-DTRAP, or to any other submission system. The click-by-click execution lives
+TMLR, or to any other submission system. The click-by-click execution lives
 in `HUMAN_ACTIONS.md`, **which is the operative document and takes precedence
 over this one wherever they differ**. This file records what each package is
 and the invariants that must hold before any of them leaves this machine.
@@ -47,8 +47,9 @@ where `tar tvf` prints it without extracting anything.
 
 - **arxiv_v3/** — the v3 replacement for arXiv:2605.24696: source tarball
   (`arxiv_v3_source.tar.gz`, compiles standalone: main.tex + numbers.tex +
-  references.bib + the two generated tables copied in), the Comments-field
-  text in both sibling-decision variants, and the title-change note.
+  references.bib + main.bbl + the unmodified TMLR template files + the two
+  generated tables copied in), the Comments-field text in both
+  sibling-decision variants, and the title-change note.
 - **zenodo/** — the deposit bundle, always staged as a **new version** in the
   lineage that begins at Zenodo record 10.5281/zenodo.20074590 (v1.0.0 of
   2026-05-07, the pre-audit artifact; the "first deposit" description that
@@ -60,9 +61,12 @@ where `tar tvf` prints it without extracting anything.
   doi:10.5281/zenodo.22673735, which `CITATION.cff` carries.** The five files,
   their sizes and checksums are in `ZENODO_DEPOSIT_SHEET.md` Step 2, which is
   the only place they are maintained.
-- **dtrap/** — the double-anonymous submission: anonymized PDF and source
-  zip, cover letter, artifact-access strategy, and the ORCID clarification
-  reply. Portal verified fresh 2026-08-24: https://mc.manuscriptcentral.com/dtrap.
+- **dtrap/** — the anonymous deliverables, directory name historical: the
+  anonymous manuscript PDF, the anonymous source tarball and the anonymous
+  artifact zip, now built for the **TMLR** submission on OpenReview
+  (`TMLR_SUBMISSION_SHEET.md`). The cover letter, editor note, reviewer block
+  and access strategy in this directory were written for ACM DTRAP and are
+  **retired as historical** as of 2026-09-14; each carries a notice.
 - **sibling/** — the arXiv v3 correction-note wording. Use the **no venue
   claim** variant. The withdrawal letter and both earlier note variants in this
   directory are **retired and void**: verification in the IEEE Author Portal on
@@ -74,10 +78,10 @@ where `tar tvf` prints it without extracting anything.
 There is no withdrawal step and no venue to notify first; that ordering
 constraint was void and is removed. **The Zenodo publish now comes first and
 is required**, which is a change from the earlier "preferred but not
-required" advice this section used to give. The reason is that the texts the
-operator pastes into DTRAP now assert the deposit already exists and give its
-DOI: the cover letter, the editor note, the prior-appearance note and the
-portal questionnaire all name version 2.2.0 and doi:10.5281/zenodo.22673735.
+required" advice this section used to give. The reason is that the private
+note to the TMLR action editor asserts the deposit already exists and names
+version 2.2.0 and doi:10.5281/zenodo.22673735, and the named arXiv variant
+carries the same lineage in its availability statement.
 That DOI is reserved, so it does not resolve until the record is published.
 Submitting first would hand the editors a false statement and a dead link.
 The order in `HUMAN_ACTIONS.md` governs.

@@ -20,15 +20,17 @@ audit found unimplemented or withdrawn.
 `../sibling/ARXIV_V3_COMMENT.txt`. The two variants below it are
 retired and false — both asserted a journal status for the companion preprint
 that does not exist (see `../../SIBLING_DECISION.md`, CI-25) — so do not paste
-either. The variant already carries the page count, **23 pages**; confirm it
+either. The variant already carries the page count, **24 pages**; confirm it
 still matches the compiled PDF before pasting.
 
 **Categories:** cs.CR (primary); cross-list cs.LG unchanged from v2.
 
 **Package contents** (`arxiv_v3_source.tar.gz`, compiles on arXiv's pipeline —
 pdflatex, `.bbl` included because arXiv does not run BibTeX):
-main.tex, numbers.tex, references.bib, main.bbl,
+main.tex, numbers.tex, references.bib, main.bbl, the unmodified TMLR
+template files tmlr.sty, tmlr.bst and fancyhdr.sty,
 table_construction_contrast.tex, table_prevalence_sweep.tex, and the
 figures/ directory with the four manuscript figures.
 Verified locally: 3-pass compile, exit 0, zero undefined references,
-23 pages, author-named (arXiv postings are not anonymous).
+24 pages (20 main body), author-named via the template's [preprint] option
+(arXiv postings are not anonymous).

@@ -1,3 +1,11 @@
+> **RETIRED 2026-09-14 — historical.** This document was written for the ACM
+> DTRAP submission, which is no longer the target venue. The manuscript was
+> reset in the TMLR template on 2026-09-14 and is submitted through OpenReview;
+> the operative document is `TMLR_SUBMISSION_SHEET.md`. Nothing below is to be
+> pasted or sent anywhere. It is kept as the record of what was prepared, and
+> because two of these files carry the canonical lineage and provenance
+> paragraphs, which stay byte-identical across their five venues.
+
 # Cover letter for the DTRAP submission
 
 To the Co-Editors-in-Chief, ACM Digital Threats: Research and Practice,

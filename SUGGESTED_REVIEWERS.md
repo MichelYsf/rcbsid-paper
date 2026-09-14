@@ -1,3 +1,10 @@
+> **RETIRED 2026-09-14 — historical.** Written for the ACM DTRAP submission,
+> which is no longer the target venue. TMLR assigns reviewers through its
+> action editors and takes no reviewer suggestions from authors; the
+> operative document is `TMLR_SUBMISSION_SHEET.md`, whose Step 5 covers the
+> action-editor recommendation instead. Nothing below is to be entered
+> anywhere. Kept as the record of the verification work it contains.
+
 # SUGGESTED_REVIEWERS: verified candidates for the DTRAP submission
 
 This file is operator judgment. Nothing here is auto-submitted. You choose whom

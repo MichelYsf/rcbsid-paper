@@ -1,3 +1,5 @@
+RETIRED 2026-09-14 - historical. Written for the ACM DTRAP submission, which is no longer the target venue; the manuscript was reset in the TMLR template on 2026-09-14 and is submitted through OpenReview. The operative document is TMLR_SUBMISSION_SHEET.md. Do not paste or send this text anywhere. Kept as the record of what was prepared, and because it carries the canonical lineage and provenance paragraphs, which stay byte-identical across their five venues.
+
 Dear Editors,
 
 This submission has prior public appearance, and it is a correction of that prior work. I would rather you have the full picture from me at submission than discover it later.

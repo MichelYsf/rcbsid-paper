@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Build the DTRAP anonymized artifact zip, and PROVE it is anonymous.
+"""Build the anonymized artifact zip for double-blind review, and PROVE it is anonymous.
 
 Double-anonymous review requires the supplementary artifact to carry no
 author-identifying strings. Assembling it by hand and eyeballing is how a
@@ -46,6 +46,8 @@ INCLUDE_FILES = [
     "findings_review_analyses.md", "findings_referee_analyses.md",
     "findings_bootstrap_robustness.md", "findings_ecod_composition.md",
     "paper/main.tex", "paper/numbers.tex", "paper/references.bib",
+    # the unmodified TMLR template, so the source compiles from the artifact
+    "paper/tmlr.sty", "paper/tmlr.bst", "paper/fancyhdr.sty",
     "paper/figures/figure_manifest.json",
     "results/construction_contrast.csv", "results/prevalence_sweep_cicids.csv",
     "results/table_construction_contrast.tex",

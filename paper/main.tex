@@ -4,35 +4,42 @@
 % one, and CLAIM_LEDGER.md maps every abstract and introduction sentence to its
 % generating run.
 %
-% DTRAP (verified 2026-08-24 at dl.acm.org/journal/dtrap/author-guidelines):
-% ACM large-format template, portal mc.manuscriptcentral.com/dtrap, 10-25 pages
-% with a 30-page soft cap, double-anonymous. acmart's one-column review layout
-% is ACM's recommended journal-submission combination; TAPS applies the trim.
-\documentclass[manuscript,anonymous,review]{acmart}
+% TMLR (jmlr.org/tmlr author guide and github.com/JmlrOrg/tmlr-style-file,
+% read 2026-09-14): the official style file tmlr.sty and bibliography style
+% tmlr.bst are used unmodified, in anonymous mode (no [accepted] or [preprint]
+% option), single column at the template's 6.5in text width. The named
+% [preprint] variant for arXiv is derived by scripts/build_arxiv_variant.py.
+% TMLR desk-rejects modified templates: do not edit tmlr.sty or tmlr.bst.
+\documentclass[10pt]{article}
+\usepackage{tmlr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
 
 \input{numbers}
-
-\setcopyright{none}
-\settopmatter{printacmref=false}
-\renewcommand\footnotetextcopyrightpermission[1]{}
-
-\begin{document}
 
 \title{Stream Assembly Is an Uncontrolled Treatment in Streaming
 Intrusion-Detection Benchmarks}
 
-\author{Anonymous Author(s)}
-\affiliation{%
-  \institution{Anonymous Institution}
-  \city{}
-  \country{}}
+% Not printed while tmlr is loaded without [accepted] or [preprint]; the
+% template prints "Anonymous authors, Paper under double-blind review".
+\author{\name Anonymous authors \email anonymous@example.org \\
+      \addr Paper under double-blind review}
+
+\begin{document}
+
+\maketitle
 
 \begin{abstract}
 Public network captures are rarely usable as evaluation streams as they stand,
 so streaming intrusion-detection studies assemble them: interleaving capture
 days, pooling temporally disjoint captures, or replaying records round robin.
 We show on two benchmarks that this assembly step is not neutral plumbing but
-an \emph{uncontrolled experimental treatment}. On CICIDS2017, holding the full
+an \emph{uncontrolled experimental treatment}, a benchmark-construction choice
+that changes what the evaluation measures. On CICIDS2017, holding the full
 record multiset identical and changing only the ordering, a fixed positional
 70/15/15 split then produces held-out samples that share only
 \CicidsHeldoutOverlapPct\%\ of their records, at held-out prevalences of
@@ -70,46 +77,18 @@ value traces to an archived, hash-verified run manifest, and the
 sentence-level claim ledger ships with the artifact.
 \end{abstract}
 
-\begin{CCSXML}
-<ccs2012>
-<concept>
-<concept_id>10002978.10003022</concept_id>
-<concept_desc>Security and privacy~Intrusion detection systems</concept_desc>
-<concept_significance>500</concept_significance>
-</concept>
-<concept>
-<concept_id>10010147.10010257</concept_id>
-<concept_desc>Computing methodologies~Machine learning</concept_desc>
-<concept_significance>300</concept_significance>
-</concept>
-</ccs2012>
-\end{CCSXML}
-\ccsdesc[500]{Security and privacy~Intrusion detection systems}
-\ccsdesc[300]{Computing methodologies~Machine learning}
-\ccsdesc[300]{General and reference~Evaluation}
-
-% "conformal risk control" was dropped from this list: the paper reports no
-% conformal result (the superseded versions' corroboration paragraph was
-% removed on 2026-09-07), so keeping the keyword would steer reviewer
-% assignment toward a topic this paper does not advance.
-\keywords{streaming network intrusion detection, benchmark stream
-construction, evaluation methodology, experimental design, anomaly detection
-benchmarks, reproducibility, provenance}
-
-\maketitle
-
 \section{Introduction}
 \label{sec:intro}
 
 Machine-learning evaluations for network intrusion detection rest on a small
 number of public benchmarks, and a substantial literature questions what those
-benchmarks measure~\cite{catillo2023hype,arp2022dosdonts,ring2019datasets}.
+benchmarks measure~\citep{catillo2023hype,arp2022dosdonts,ring2019datasets}.
 This paper contributes a quantified case study and mechanism audit of one step
 in that pipeline: the step that assembles capture files into an evaluation
 stream. CICIDS2017 spans five capture days of very different attack
-density~\cite{sharafaldin2018cicids,engelen2021cicids}, while LITNET-2020
+density~\citep{sharafaldin2018cicids,engelen2021cicids}, while LITNET-2020
 annotates twelve attack types collected over about ten
-months~\cite{damasevicius2020litnet} and the three captures we evaluate are
+months~\citep{damasevicius2020litnet} and the three captures we evaluate are
 temporally disjoint, so evaluations
 interleave, pool, or replay records to obtain a single stream with workable
 splits. We measure what that step does on these two benchmarks.
@@ -134,7 +113,7 @@ against is the one used by the audited earlier evaluation of this same work,
 with interleaving and pooling also discussed in the cited benchmark-criticism
 literature. Second, the conceptual warning that arbitrary temporal ordering and
 sampling can distort security-ML evaluation is established prior
-art~\cite{catillo2023hype,arp2022dosdonts}; our contribution is the exact
+art~\citep{catillo2023hype,arp2022dosdonts}; our contribution is the exact
 same-multiset measurement on a real benchmark, with overlap, relocation,
 prevalence and outcome reported together, plus the audit of the released
 detector.
@@ -153,8 +132,28 @@ in the same execution, an archived manifest recording the git commit,
 configuration hash, input SHA-256, seed, environment hash and output path.
 Section~\ref{sec:disclosure} states which measurements this paper shares with
 those versions and which are new; the per-result-group account and the dated
-correction history are supplied to the editors confidentially, because
+correction history are supplied to the action editor confidentially, because
 printing them here would defeat anonymization.
+
+\subsection*{Where this work sits}
+Read as machine-learning evaluation methodology, this paper makes three points
+and uses the intrusion-detection corpora as the instance. First, benchmark
+construction is an experimental treatment: the choices that turn raw captures
+into an evaluation stream change the held-out sample, its class prevalence and
+its order at once, and so change what a reported number measures. The
+benchmark-criticism literature describes effects of this kind for temporal
+bias~\citep{pendlebury2019tesseract}, for the evaluation of anomaly
+detectors~\citep{campos2016evaluation,han2022adbench,wu2023flawed} and for
+security machine learning generally~\citep{arp2022dosdonts,catillo2023hype};
+this paper measures one such effect on a fixed multiset. Second, a widely used
+library scores transductively: ECOD in PyOD recomputes its empirical
+distributions over the training matrix concatenated with the batch it is asked
+to score, so a fixed record's score depends on the batch it is scored within,
+and we quantify that dependence at fixed model and fixed batch size. Third,
+reporting can be made provenance-enforced: every number here resolves through
+a generated macro to an archived run manifest, and the build fails on any that
+does not, which addresses the reproducibility gaps documented for this
+field~\citep{olszewski2023reproducibility,apruzzese2022crosseval}.
 
 \subsection*{Contributions}
 \begin{enumerate}
@@ -179,7 +178,7 @@ pooled operating point can correspond to no capture in the pool.
 \item \textbf{A scoped method-identity audit} (Section~\ref{sec:detector}).
 Below the run-length cap the reset and growth branches share a predictive term
 that cancels, so the reset posterior $P(r_t{=}0)$ equals the hazard rate for
-any data, a property of the published recursion~\cite{adams2007bocpd} and not
+any data, a property of the published recursion~\citep{adams2007bocpd} and not
 a coding error; at and beyond the cap --- where the evaluated runs spend
 nearly all their length --- truncation breaks that identity and the posterior
 wanders. The score the evaluation consumes is a function of $P(r_t\le5)$, not
@@ -212,23 +211,21 @@ statement of Section~\ref{sec:disclosure}.
 \section{Related Work}
 \label{sec:related}
 
-\textbf{Benchmark criticism.} Catillo et al.~\cite{catillo2023hype} question
+\textbf{Benchmark criticism.} \citet{catillo2023hype} question
 whether results on public intrusion datasets represent concrete advances and
 warn specifically that partitioning timestamped records in arbitrary order can
-alter split representativeness. Arp et al.~\cite{arp2022dosdonts} catalogue
+alter split representativeness. \citet{arp2022dosdonts} catalogue
 sampling bias, mixing incompatible sources and temporal snooping as recurring
-security-ML pitfalls. Sommer and Paxson~\cite{sommer2010outside} set out
+security-ML pitfalls. \citet{sommer2010outside} set out
 earlier why machine learning is harder to apply to intrusion detection than to
 other domains, pointing to the high cost of errors, the semantic gap between
-results and operational meaning, and the difficulty of sound evaluation. Ring
-et al.~\cite{ring2019datasets} survey dataset
-limitations, and Engelen et al.~\cite{engelen2021cicids} correct label and
+results and operational meaning, and the difficulty of sound evaluation. \citet{ring2019datasets} survey dataset
+limitations, and \citet{engelen2021cicids} correct label and
 flow-construction defects in CICIDS2017; we build on their corrected release.
-Liu et al.~\cite{liu2022errorprevalence} quantify how prevalent such labelling
-errors are in CIC-IDS-2017 and CSE-CIC-IDS-2018, and Lanvin et
-al.~\cite{lanvin2022errors} show that correcting the CICIDS2017 errors changes
+\citet{liu2022errorprevalence} quantify how prevalent such labelling
+errors are in CIC-IDS-2017 and CSE-CIC-IDS-2018, and \citet{lanvin2022errors} show that correcting the CICIDS2017 errors changes
 measured detection performance.
-Catillo et al.~\cite{catillo2021critique} earlier showed that a detector
+\citet{catillo2021critique} earlier showed that a detector
 learned on a public IDS dataset degrades against emulated attacks in a
 controlled network, which is the transfer-side counterpart of the question we
 ask on the construction side. We do not claim to discover that temporal
@@ -238,21 +235,21 @@ prevalence and measured outcome reported together on a real benchmark.
 
 \textbf{The evaluation protocol as the variable under study.} A line of work
 treats the protocol itself, rather than the model, as what determines a
-reported result. TESSERACT~\cite{pendlebury2019tesseract} shows that spatial
+reported result. TESSERACT~\citep{pendlebury2019tesseract} shows that spatial
 and temporal bias in how train/test sets are constituted inflates malware
 classification results, and gives a construction discipline for removing it;
-Apruzzese et al.~\cite{apruzzese2022crosseval} formalise cross-evaluation and
+\citet{apruzzese2022crosseval} formalise cross-evaluation and
 show how much a reported NIDS result depends on which corpora are combined;
-Olszewski et al.~\cite{olszewski2023reproducibility} find that a large fraction
+\citet{olszewski2023reproducibility} find that a large fraction
 of tier-1 security ML papers cannot be reproduced from what they report.
-Apruzzese, Laskov and Schneider~\cite{apruzzese2023sok} survey how
+\citet{apruzzese2023sok} survey how
 machine-learning NIDS are assessed and set out pragmatic criteria for
 evaluations that practitioners can act on.
-Concurrent with this work, Moczkodan and Ragab~\cite{moczkodan2026transformers}
+Concurrent with this work, \citet{moczkodan2026transformers}
 reformulate CICIDS2017 as a temporal task and find that a padding convention,
 not the architecture, determines whether Transformers appear to help --- a
 protocol variable of a different kind (input formatting) on the same benchmark.
-Biswas~\cite{biswas2026protocol} likewise argues the evaluation protocol is the
+\citet{biswas2026protocol} likewise argues the evaluation protocol is the
 hidden variable: within the single corpus CSE-CIC-IDS2018 it compares random,
 stratified-temporal and class-blind chronological splits, uses the
 stratified-temporal arm to attribute the chronological collapse to attack
@@ -267,38 +264,34 @@ drift within one corpus and reports transfer between corpora separately, ours
 attributes an assembly effect within one corpus under a stated assumption.
 
 \textbf{Streaming anomaly detection.} The baselines evaluated in this rebuild
-are Half-Space Trees~\cite{tan2011hst} and LODA~\cite{pevny2016loda}
-(streaming), with LOF~\cite{breunig2000lof} and ECOD~\cite{li2023ecod} as batch
-diagnostic references. KitNET~\cite{mirsky2018kitsune},
-xStream~\cite{manzoor2018xstream}, RRCF~\cite{guha2016rrcf}, streaming
-isolation forest~\cite{ding2013iforestasd} and COPOD~\cite{li2020copod} have
+are Half-Space Trees~\citep{tan2011hst} and LODA~\citep{pevny2016loda}
+(streaming), with LOF~\citep{breunig2000lof} and ECOD~\citep{li2023ecod} as batch
+diagnostic references. KitNET~\citep{mirsky2018kitsune},
+xStream~\citep{manzoor2018xstream}, RRCF~\citep{guha2016rrcf}, streaming
+isolation forest~\citep{ding2013iforestasd} and COPOD~\citep{li2020copod} have
 implementations in the artifact but no archived evaluation runs in this
-rebuild, and carry no numbers here. Cao et al.~\cite{cao2024revisiting}
+rebuild, and carry no numbers here. \citet{cao2024revisiting}
 benchmark streaming detectors under controlled anomaly types and drifts and
 report strong sensitivity to assessment design; our results give one such
-sensitivity a measured mechanism on an IDS benchmark. Wu and
-Keogh~\cite{wu2023flawed} argue that the standard time-series anomaly
+sensitivity a measured mechanism on an IDS benchmark. \citet{wu2023flawed} argue that the standard time-series anomaly
 benchmarks are themselves flawed in ways that create an illusion of progress.
 
 \textbf{Change-point detection.} The evaluated detector descends from Bayesian
-online change-point detection~\cite{adams2007bocpd} with a truncated run-length
-posterior~\cite{fearnhead2007online,knoblauch2018bocpd}.
+online change-point detection~\citep{adams2007bocpd} with a truncated run-length
+posterior~\citep{fearnhead2007online,knoblauch2018bocpd}.
 Section~\ref{sec:detector} shows that the reset posterior of the published
 recursion, which the implementation reproduces, is data-independent below the
-cap; van den Burg and
-Williams~\cite{vandeburg2020evaluation} document how often change-point
+cap; \citet{vandeburg2020evaluation} document how often change-point
 evaluations mismeasure their subject.
 
-\textbf{Conformal and calibrated alerting.} Laxhammar and
-Falkman~\cite{laxhammar2014conformal} established conformal anomaly detection
+\textbf{Conformal and calibrated alerting.} \citet{laxhammar2014conformal} established conformal anomaly detection
 for sequential data, with guarantees resting on exchangeability
-assumptions~\cite{vovk2005alrw}. Three 2026 lines run concurrent with this work
-and are distinct from it. FIRCE~\cite{barrett2026firce} and its successor
-FADES~\cite{barrett2026fades} integrate conformal evaluation into streaming IDS
+assumptions~\citep{vovk2005alrw}. Three 2026 lines run concurrent with this work
+and are distinct from it. FIRCE~\citep{barrett2026firce} and its successor
+FADES~\citep{barrett2026fades} integrate conformal evaluation into streaming IDS
 pipelines to drive drift detection and adaptive retraining; both propose
 detection machinery and evaluate it, whereas this paper proposes no detector and
-instead audits what an evaluation pipeline measures. Gurjar and
-Camp~\cite{gurjar2026tailrisk} train a gradient-boosted classifier on smoothed
+instead audits what an evaluation pipeline measures. \citet{gurjar2026tailrisk} train a gradient-boosted classifier on smoothed
 alert intensity, momentum and volatility features to predict whether alert
 intensity will exceed the training period's 95th percentile within the next
 30 minutes, fitted per severity class on 251 million Suricata alerts from one
@@ -310,17 +303,17 @@ establish exchangeability, which is a distributional symmetry. What
 interleaving can do is \emph{mask temporal dependence, or make exchangeability
 appear more plausible to a diagnostic} applied to the assembled stream.
 Conformal methods that relax exchangeability already
-exist~\cite{barber2023beyond}.
+exist~\citep{barber2023beyond}.
 
 \textbf{Metric behaviour under class imbalance.} That precision-recall
 summaries move with the positive-class base rate is long-established and is not
-a finding of this paper. Davis and Goadrich~\cite{davis2006prroc} characterise
+a finding of this paper. \citet{davis2006prroc} characterise
 the ROC/PR correspondence and show that the achievable PR region depends on the
-class ratio; Saito and Rehmsmeier~\cite{saito2015prplot} demonstrate that PR
+class ratio; \citet{saito2015prplot} demonstrate that PR
 summaries are the informative choice precisely because they respond to
-imbalance while ROC summaries do not; and Axelsson~\cite{axelsson2000baserate}
+imbalance while ROC summaries do not; and \citet{axelsson2000baserate}
 established the base-rate consequence for intrusion detection specifically.
-McDermott et al.~\cite{mcdermott2024closerlook} caution that AUC-PR is not
+\citet{mcdermott2024closerlook} caution that AUC-PR is not
 automatically the better summary under class imbalance and that the choice
 should follow how the scores will be used. We
 use these results, we do not extend them: every AUC-PR this paper compares
@@ -334,8 +327,8 @@ assembly step, which redistributes the surviving attacks across the split.
 Neither construction step is visible in a reported operating point.
 
 \textbf{Cost-sensitive thresholds.} The threshold actually implemented is the
-prior-inclusive cutoff formula of Elkan~\cite{elkan2001cost}
-(Section~\ref{sec:detector}); SRE-style error budgets~\cite{beyer2016sre}
+prior-inclusive cutoff formula of \citet{elkan2001cost}
+(Section~\ref{sec:detector}); SRE-style error budgets~\citep{beyer2016sre}
 motivated the original framing.
 
 \section{The System Under Study}
@@ -370,7 +363,7 @@ claim about that here and measure it directly in
 Section~\ref{sec:branch}.
 
 \subsection{The run-length posterior below the cap, and at it}
-In the Adams and MacKay recursion as published~\cite{adams2007bocpd}
+In the Adams and MacKay recursion as published~\citep{adams2007bocpd}
 (their Eq.~3 and Algorithm~1), the changepoint and growth branches at step $t$
 carry the same run-conditional predictive term, which cancels in the posterior normalization: under a
 constant hazard the reset posterior $P(r_t{=}0\mid x_{1:t})$ equals the hazard
@@ -400,7 +393,7 @@ reported scores, and we do not claim it.
 
 \subsection{The threshold}
 The implemented decision cutoff is the prior-inclusive formula of
-Elkan~\cite{elkan2001cost},
+\citet{elkan2001cost},
 $\tau = C_{FP}(1-\rho)/[C_{FP}(1-\rho) + C_{FN}\rho]$, giving
 \SThreeThresholdLitnet{} at incident prior $\rho{=}0.05$ and
 \SThreeThresholdCicids{} at $\rho{=}0.22$ --- not the cost-only
@@ -421,11 +414,25 @@ wall-clock instrumentation (\SThreeLatencyUsesAClock{} clock calls in the
 module). We report it as detection delay in records and report no per-flow
 compute cost, which this pipeline does not measure.
 
+\paragraph{An alternative reset formulation, in brief.}
+Appendix~\ref{app:ablation} reports one untuned instance of a formulation that
+places a prior-predictive term on the reset branch, so that the reset
+hypothesis is informed by $x_t$. Measured under a 30-minute compute cap on one
+LITNET stream, one \SSixPrefixRows-record prefix and one seed, it responds on
+the synthetic probe ($P(r{=}0)$ peaks at \SSixProbeCorrectedPeak{} against
+\SSixProbeOriginalPeak{} for the evaluated detector) but ranks near chance on
+real data ($AP=\SSixCorrectedAucpr$ against \SSixOriginalAucpr, AUC-ROC
+\SSixCorrectedAucroc): its short-run mass saturates and the score sits at the
+$0.25$ cap on \SSixDiagCorrectedFracAtCap{} of the diagnostic records. The two
+variants are degenerate in different quantities, and neither is change-point
+detection; the appendix states each in the quantity measured, and what the
+one-stream, one-seed run does not establish.
+
 \section{Datasets, Assembly, and Protocol}
 \label{sec:streams}
 
 \subsection{CICIDS2017: a timestamp-sorted budgeted subsample}
-We use the Engelen-corrected release~\cite{engelen2021cicids}. The evaluation
+We use the Engelen-corrected release~\citep{engelen2021cicids}. The evaluation
 corpus is a \textbf{timestamp-sorted budgeted subsample}: \CicidsWeekUsedRows{}
 of \CicidsWeekEligibleRows{} eligible records, a retention of
 \CicidsWeekRetentionPct\%, selected by fixed per-day budgets with proportional
@@ -468,7 +475,7 @@ and \StreamLitnetSpamSpanMinutes{} minutes (Table~\ref{tab:streams}), so a
 global timestamp order over them would concatenate three intervals across
 those gaps rather than describe one observed stream. We make no chronology
 claim about LITNET-2020 as a whole, which was collected over about ten months
-and annotates twelve attack types~\cite{damasevicius2020litnet}. We evaluate three per-attack-type
+and annotates twelve attack types~\citep{damasevicius2020litnet}. We evaluate three per-attack-type
 streams of \StreamLitnetUdpFloodRows{} records each, never a manufactured
 composite; the pooled composite appears only as the explicitly labelled
 assembled arm of Section~\ref{sec:contrast-litnet}. Multi-window burn-rate
@@ -522,13 +529,13 @@ metric & \texttt{sklearn.metrics.average\_precision\_score} (AUC-PR) and
 weighting; average precision is the step-wise sum
 $\sum_n (R_n-R_{n-1})P_n$, not trapezoidal interpolation. Flow-wise average
 precision is the convention of the compared work; event-based precision and
-recall for time series~\cite{tatbul2018precision} are future work \\
+recall for time series~\citep{tatbul2018precision} are future work \\
 chance level & the expected average precision of an uninformative ranking is
 taken as the positive-class prevalence $p$; the exact finite-sample expectation
 of step-wise $AP$ under a uniformly random permutation differs from $p$ in the
 fifth decimal (\ChanceExactNaturalSliceAucpr{} against
 \SFourCicidsNaturalChanceFloor{} on the timestamp-order held-out slice; the
-full-list case of Theorem~1 of Manzhos et al.~\cite{manzhos2026ap}) and
+full-list case of Theorem~1 of \citet{manzhos2026ap}) and
 changes no conclusion here; it is an expectation, not a lower bound, and a
 ranking can fall below it \\
 reported precision & every \emph{dimensionless} metric on $[0,1]$ ---
@@ -561,8 +568,7 @@ entry is read from the code the archived manifests pin.}
 \toprule
 element & setting \\
 \midrule
-update timing & prequential, in the sense of Gama et
-al.~\cite{gama2013prequential}: score computed from the pre-update predictive;
+update timing & prequential, in the sense of \citet{gama2013prequential}: score computed from the pre-update predictive;
 sufficient statistics updated after scoring, on every record including held-out
 ones \\
 label access & the detector and HST see no labels at any point; baselines
@@ -642,7 +648,7 @@ membership differs.
 
 \begin{figure}
 \centering
-\includegraphics[width=3.33in]{figures/fig_assembly}
+\includegraphics[width=\textwidth]{figures/fig_assembly}
 \caption{The two assemblies of the same CICIDS2017 records under one fixed
 positional split. In timestamp order the capture days follow one another, so
 the held-out slice is the tail of the last day. In day round robin every day
@@ -650,9 +656,6 @@ still supplying records contributes to every position, so the held-out slice
 draws from the tail of each day. Block widths follow the per-day record
 budgets of Table~\ref{tab:protocol}. The figure is a schematic of the
 protocol and carries no measured value.}
-\Description{Two horizontal bars representing the same record stream, one
-with the days concatenated and one with the days interleaved, with the same
-split lines drawn on both.}
 \label{fig:assembly}
 \end{figure}
 
@@ -681,7 +684,7 @@ Section~\ref{sec:outcome}.
 detector's AUC-PR per arm. Every cell is a macro resolving to an archived
 manifest.}
 \label{tab:contrast}
-\input{../results/table_construction_contrast}
+{\small\input{../results/table_construction_contrast}}
 \end{table}
 
 \subsection{What assembly does to the measured outcome}
@@ -739,7 +742,7 @@ only, so we claim no stable ordering, only a measured one under this protocol.
 
 \begin{figure}
 \centering
-\includegraphics[width=3.33in]{figures/fig_decomposition}
+\includegraphics[width=\textwidth]{figures/fig_decomposition}
 \caption{Detector and ECOD AUC-PR in the two arms. Left: the full held-out
 slice of each arm, where the measured ordering reverses. Right: the
 \RevSharedRecords{} records both arms held out, where the detector leads in
@@ -749,9 +752,6 @@ prevalence: \SFourCicidsNaturalChanceFloor{} and
 \SFourCicidsSyntheticChanceFloor{} for the full slices and
 \RevSharedPrevalence{} for the shared records. Values are those of
 Section~\ref{sec:outcome} and Table~\ref{tab:shared}.}
-\Description{Two panels of grouped bars. In the left panel ECOD is above the
-detector in timestamp order and below it in day round robin. In the right
-panel the detector is above ECOD in both arms.}
 \label{fig:decomposition}
 \end{figure}
 
@@ -822,6 +822,7 @@ records; ``shared'' is the \RevSharedRecords{} shared records scored as their
 own batch under the same fitted model, which is the batch-controlled
 comparison (Section~\ref{sec:ecodbatch}).}
 \label{tab:shared}
+{\small
 \begin{tabular}{lrrrrrr}
 \toprule
  & \multicolumn{3}{c}{$AP$} & \multicolumn{3}{c}{AUC-ROC} \\
@@ -831,7 +832,7 @@ arm & detector & ECOD (slice) & ECOD (shared) & detector & ECOD (slice) & ECOD (
 timestamp order & \RevSharedDetectorNaturalAucpr & \RevSharedEcodNaturalAucpr & \RefEcodSharedSevenEightNaturalAucpr & \RevSharedDetectorNaturalAucroc & \RevSharedEcodNaturalAucroc & \RefEcodSharedSevenEightNaturalAucroc \\
 day round robin & \RevSharedDetectorSyntheticAucpr & \RevSharedEcodSyntheticAucpr & \RefEcodSharedSevenEightSyntheticAucpr & \RevSharedDetectorSyntheticAucroc & \RevSharedEcodSyntheticAucroc & \RefEcodSharedSevenEightSyntheticAucroc \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 \textbf{The ordering does not reverse on the shared records, under either
@@ -915,7 +916,7 @@ cut & chance & detector & ECOD & chance & detector & ECOD & agree \\
 
 \begin{figure}
 \centering
-\includegraphics[width=3.33in]{figures/fig_split}
+\includegraphics[width=\textwidth]{figures/fig_split}
 \caption{AUC-PR of the two deterministic scorers at each of the
 \RevSplitCuts{} chronological cuts of the timestamp-ordered CICIDS2017 stream.
 The held-out prevalence at each cut is drawn on the same axis. It is the
@@ -924,9 +925,6 @@ leads. The dashed line marks the cut this paper's fixed split uses. Values are
 recomputed from the archived per-record scores, as those of
 Table~\ref{tab:branch} are, with ECOD refit at each cut, and so differ slightly
 from Table~\ref{tab:contrast} at the cut this paper uses.}
-\Description{Two lines with markers that broadly rise with the cut position,
-with a dip at one intermediate cut, crossing each other twice, above a dotted
-prevalence line that follows the same shape.}
 \label{fig:split}
 \end{figure}
 
@@ -993,10 +991,10 @@ the validation portion of the same call.
 
 \textbf{What is and is not new here.} That ECOD mixes the training and scored
 sets is known: it was reported as a defect against the reference implementation
-in 2022~\cite{pyod401} and remains open, and ADBench~\cite{han2022adbench}
+in 2022~\citep{pyod401} and remains open, and ADBench~\citep{han2022adbench}
 evaluates PyOD detectors in a fixed harness that holds the scored batch
 constant, which sidesteps rather than measures the issue. The ECOD
-paper~\cite{li2023ecod} is not silent on new records: its Section~IV-D states
+paper~\citep{li2023ecod} is not silent on new records: its Section~IV-D states
 that ECOD requires no re-training to fit them, given a relatively large sample
 and no assumed data shift. What it does not state is a rule for scoring an
 out-of-sample record while leaving the fitted per-dimension ECDFs unchanged
@@ -1004,7 +1002,7 @@ rather than recomputing them over the concatenation, and its scores are defined
 for the rows of the input matrix, so the implementation is not contradicting
 the specification: the specification is silent at exactly the point where the
 batch enters. It is not the only unresolved question about this reference: a separate
-open report~\cite{pyod561} argues that the aggregation the code applies is not
+open report~\citep{pyod561} argues that the aggregation the code applies is not
 the one either the ECOD or the COPOD paper describes. We take no position on
 that second report; we note only that a detector used as a fixed point of
 comparison across a literature has open, unresolved questions about what it
@@ -1022,7 +1020,7 @@ which is not ours. That consequence is that published
 ECOD numbers are not comparable across studies that score a different batch,
 in size or composition, even on the same dataset, the same split and the same
 model, and that a reported ECOD number is therefore under-specified unless the
-scoring batch is reported with it. Campos et al.~\cite{campos2016evaluation} showed for
+scoring batch is reported with it. \citet{campos2016evaluation} showed for
 unsupervised outlier detection generally that reported comparisons depend on
 evaluation choices that papers rarely state.
 
@@ -1125,7 +1123,7 @@ draws the three branches against chance.
 
 \begin{figure}
 \centering
-\includegraphics[width=3.33in]{figures/fig_branch}
+\includegraphics[width=\textwidth]{figures/fig_branch}
 \caption{Branch-wise discrimination on the timestamp-ordered held-out slice,
 the values of Table~\ref{tab:branch}. Left: AUC-PR with the chance level at
 the slice prevalence, \SFourCicidsNaturalChanceFloor. Right: AUC-ROC with the
@@ -1133,9 +1131,6 @@ chance level of an uninformative ranking. The deployed composition is the
 detector of the other figures. The tail term alone ranks above the deployed
 composition on both metrics, and the auxiliary term ranks below chance on
 AUC-ROC.}
-\Description{Two panels of three bars each, deployed, tail only and auxiliary
-only, with a dotted chance line. The tail-only bar is the tallest in both
-panels and the auxiliary-only bar is below the chance line in both panels.}
 \label{fig:branch}
 \end{figure}
 
@@ -1211,8 +1206,221 @@ additive form peaks at the 10\%\ level and the normalized form at the
 unresampled one, which is why both are reported. Nothing in this section transfers to the timestamp-ordered stream or
 to deployment.
 
+\section{Provenance Discipline}
+\label{sec:provenance}
+
+Every measured value in this paper is a \LaTeX{} macro generated from
+archived run manifests recording git commit, configuration hash, input
+SHA-256, seed, environment hash, timestamps and output paths, and a claim
+ledger maps every sentence of the abstract and introduction to its generating
+run. The build fails on a measurement-shaped number with no manifested value,
+on a macro two runs claim with different values, and on drift between the
+derived macro index and the manifests behind it. Protocol constants that
+define the experiment rather than result from it, and values quoted from cited
+work, are typed and identified as such where they appear. What the checks
+cover, and what they do not --- the correctness of code, labels,
+preprocessing or interpretation, which no provenance check reaches --- is
+stated in Appendix~\ref{app:provenance}. Provenance establishes that a
+displayed number came from a recorded execution on recorded inputs, and
+nothing beyond that. The manifests, the macro layer, the claim ledger and the
+checks ship in the artifact.
+
+\section{Relationship to Prior Versions of This Work}
+\label{sec:disclosure}
+
+Earlier versions of this manuscript were publicly posted and are superseded by
+this one. Because a per-result-group account of what is reused, re-derived,
+corrected, withdrawn or new would identify those versions --- and they are not
+anonymous --- that account is supplied to the action editor confidentially
+rather than printed here, together with the dated version history and the list of
+claims each correction invalidates.
+
+One statement can be made in the body without breaking anonymity, and is
+made here because it bears on how the results should be read. Some
+measurements in this paper also appear in the earlier versions, reported there
+under an interpretation that this paper withdraws and replaces. Which
+measurements those are, which results are new, and which earlier results are
+withdrawn is part of the account supplied to the action editor, because naming
+them here would identify the earlier versions.
+
+The corrected-incident log in the artifact records each correction with its
+evidence and closure status. The count of incidents is not itself a quality
+claim.
+
+\section{Limitations and What Would Change Our Conclusions}
+\label{sec:threats}
+
+\textbf{The attribution assumption, and what the restriction does not
+bound.} The assembly treatment is uncontrolled by construction: it moves
+held-out membership, prevalence and order together, so no single factor is
+identified by the contrast alone. Section~\ref{sec:shared} removes the
+membership difference post hoc and finds the ordering reversal does not
+survive, which attributes the effect to sample membership under an assumption
+the archived design does not test: that history contributes no more on the
+records the arms do not share than on those they do. Stated exactly, the
+restriction shows that the ordering does not reverse on a sample both arms
+held out and that the detector's score on that sample moves by
+\RevSharedDetectorSpread{} $AP$ between the two histories; it does not bound
+history's effect on comparisons between shared and unshared records, which the
+full-slice $AP$ of Section~\ref{sec:outcome} also contains, and it does not
+decompose the remaining factors, since the detector's prefix and ECOD's
+training rows still differ between the arms. ECOD is a label-privileged
+diagnostic reference, not a competitor under equal information. Determinism
+removes seed variance only.
+
+\textbf{External validity: two corpora, one split rule.}
+Two benchmarks, one split rule, one corpus per benchmark.
+The CICIDS mechanism depends on that dataset's scripted per-day schedule
+meeting a positional split; it does not establish the direction or magnitude of
+assembly effects elsewhere. The LITNET identity depends on equal budgets and a
+divisible boundary. The corpus is a \CicidsWeekRetentionPct\%\ budgeted
+subsample. The timestamp-ordered held-out slice is one
+\CicidsNaturalHeldoutSpanMinutes-minute window --- what a positional
+chronological split yields on this corpus, stated rather than engineered
+around. Timestamp order is the least transformed reference available for
+CICIDS2017, not a universal gold standard: multi-sensor deployments
+legitimately merge asynchronous sources, and the durable recommendation is to
+preserve capture and time metadata, justify the assembly, and report sensitivity
+to plausible alternatives.
+
+\textbf{Shelved analyses, and what each would change.} Each of the following
+was scoped out of this paper and is stated here with the conclusion it bears
+on.
+\begin{itemize}
+\item \emph{A crossed history-by-sample design.} A factorial or
+prevalence-matched design that varies the detector's history and the evaluated
+sample independently would test the attribution assumption directly. If
+history contributed more on the unshared records than on the shared ones, the
+attribution of the reversal to sample membership would not hold, and the
+reversal would have to be reported as a joint effect of membership and
+history.
+\item \emph{Event-based metrics.} Flow-wise average precision is the
+convention of the compared work, and the claims here are claims about what
+that convention measures under assembly. Event-based precision and recall for
+time series~\citep{tatbul2018precision} would test whether the reversal is
+specific to flow-wise scoring; a different ordering under an event-based
+metric would narrow the reversal to the flow-wise convention without
+contradicting it.
+\item \emph{An imputation ablation.} The $\pm\infty$-to-zero mapping of
+Table~\ref{tab:protocol} touches \RefImputeCicidsAffectedRows{} of the
+\RefImputeCicidsRows{} CICIDS2017 rows and no LITNET row. An ablation that
+reruns both arms without it would test whether those rows move any contrast;
+the counts bound what it could find.
+\item \emph{Intervals for the LITNET and sweep results.} The per-record
+scores behind the LITNET per-stream values, the pooled composite and the
+prevalence sweep were not archived, so those results carry no interval and
+have weaker inferential support than the headline contrast. Intervals would
+state whether the per-capture prevalence spread and the sweep's lift ordering
+are stable under resampling; they would not change the pooling identity,
+which is arithmetic.
+\item \emph{Held-out diagnostics for the alternative reset formulation.}
+The diagnostics of Appendix~\ref{app:ablation} are measured on the first
+\SSixDiagWindowRows{} records of the stream and the detection metrics on the
+final \SSixTestRows{} held-out records, and the held-out per-record scores were
+not archived. Recomputing the diagnostics on the held-out slice would turn
+``consistent with'' into a shown equality or a shown difference of the two
+score distributions.
+\end{itemize}
+
+\textbf{Uncertainty.} With attack runs of median/p90/max
+\StreamCicidsTwoZeroOneSevenRunMedian/\StreamCicidsTwoZeroOneSevenRunPninety/\StreamCicidsTwoZeroOneSevenRunMax{}
+records an IID row bootstrap would be inappropriate, so every interval this
+paper reports comes from a moving-block bootstrap~\citep{kunsch1989jackknife}
+over the archived per-record scores of the evaluated slice, in stream order:
+block length
+\RefBootBlockLength{} records, longer than the p90 run, \RefBootResamples{}
+resamples, and the 2.5th and 97.5th percentiles of the resampled statistic.
+Those intervals quantify sampling uncertainty over the evaluated slice only,
+not over the window selection or the subsample, and a rolling-origin procedure
+is not applied. Rerunning that bootstrap at block lengths
+\RefBootRobustBlockLengthA{} and \RefBootRobustBlockLengthB{} records, the
+second longer than the longest attack run, changes exactly one conclusion:
+every margin interval stays above zero and the auxiliary-only AUC-ROC interval
+stays below $0.5$ at both lengths, but at \RefBootRobustBlockLengthB{} records
+the tail-only and deployed AUC-PR intervals,
+$[\RefBootBTwoSixZeroZeroBranchTailOnlyAucprLo,\,\RefBootBTwoSixZeroZeroBranchTailOnlyAucprHi]$
+and
+$[\RefBootBTwoSixZeroZeroBranchCombinedAucprLo,\,\RefBootBTwoSixZeroZeroBranchCombinedAucprHi]$,
+overlap while the AUC-ROC intervals stay disjoint
+(\RefBootBTwoFiveZeroConclusionChanges{} of nine checks change at the shorter
+length and \RefBootBTwoSixZeroZeroConclusionChanges{} at the longer; the rerun
+is archived in the artifact). Intervals are reported for the two margins of
+Section~\ref{sec:outcome}, the margins of Table~\ref{tab:shared} and the
+branch values of Table~\ref{tab:branch}; the LITNET per-stream values of
+Table~\ref{tab:litnet}, the per-cut values of Table~\ref{tab:pairedcuts}, the
+prevalence-level means of Table~\ref{tab:sweep} and the one-stream result of
+Appendix~\ref{app:ablation} carry none, because the per-record scores behind
+the LITNET, sweep and Appendix~\ref{app:ablation} results were not archived and
+the per-cut values are single recomputations, so those results have weaker
+inferential support than the headline contrast.
+Stochastic baselines appear either as single draws marked as such or as means
+over draws with the three draws stated, and the per-draw values are archived.
+
+\textbf{Construct.} We do not claim the evaluated detector is change-point
+detection, we do not claim the untuned variant characterizes change-point
+detection with an informed reset, and we do not claim that ordering alone causes the
+outcome change.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+On these two benchmarks, the step that assembles capture files into an
+evaluation stream is an uncontrolled experimental treatment: it changes which
+records are evaluated, at what prevalence, in what order, and thereby what is
+measured. On CICIDS2017 the same multiset reordered yields held-out slices
+sharing \CicidsHeldoutOverlapPct\%\ of their records at prevalences
+\SFourCicidsPrevShiftAbsPp{} points apart, and reverses the measured ordering
+of the two deterministic scorers --- a reversal that disappears once both arms
+are restricted to the records they share, attributing it, under the assumption
+that history contributes no more on the unshared records than on the shared
+ones, to the sample the assembly selects rather than to the order it imposes.
+That restriction does not bound history's effect on comparisons between shared
+and unshared records, which the full-slice value also contains. On LITNET-2020,
+pooling reports an operating point no capture exhibits. The practical recommendation is not that chronology
+is always right; it is that assembly belongs in the experimental design and in
+the provenance record --- report capture identity, mixture weights, split
+membership, held-out overlap, and sensitivity to the plausible alternatives ---
+so that a reported operating point can be recognized as a property of the
+assembly when it is one.
+
+\section*{Data and Artifact Availability}
+The code, stream-assembly scripts with SHA-256 verification, all run manifests,
+the macro layer, the claim ledger and the corrected-incident history are
+archived. During double-blind review, the artifact is available as the
+anonymized supplementary material accompanying this submission.
+
+\section*{Generative AI Usage}
+The authors disclose that generative AI tools were used in producing this
+work. Large language models
+were used, under continuous human direction, to write and refactor analysis
+scripts, to draft prose subsequently verified against the archived
+measurements, and to operate an adversarial review harness that audited the
+authors' own claims. No generative AI tool is an author of this work, and none
+produced any reported measurement: every measured value was generated by
+executed code that wrote an archived run manifest in the same execution, and the provenance gate
+and claim ledger exist in part to make that boundary externally auditable. The
+authors take full responsibility for the entire content of this work,
+including any portion drafted with such assistance.
+
+\section*{Companion Manuscript Disclosure}
+A companion manuscript from the same research programme (reference suppressed
+for double-blind review) shares parts of the underlying codebase and
+predates the audit reported here. The method-identity findings of
+Section~\ref{sec:detector} apply to that shared lineage, and correcting it is
+in hand. It is a public preprint and is not under review at any venue, and
+there is accordingly no other editor to inform and no concurrent consideration
+to declare. Its relationship to the results reported here, and the
+relationship to the earlier public versions of this manuscript, are stated in
+Section~\ref{sec:disclosure};
+identifiers are supplied to the action editor confidentially.
+
+\bibliography{references}
+\bibliographystyle{tmlr}
+
+\appendix
+
 \section{An Alternative Reset Formulation}
-\label{sec:ablation}
+\label{app:ablation}
 
 Section~\ref{sec:detector} showed the evaluated reset posterior is pinned
 below the cap by the published recursion. An alternative formulation places a
@@ -1283,17 +1491,8 @@ AUC-ROC on the prefix & \SSixOriginalAucroc & \SSixCorrectedAucroc \\
 \end{tabular}
 \end{table}
 
-\section{Provenance Discipline}
-\label{sec:provenance}
-
-Every measured value in this paper is a \LaTeX{} macro generated from
-archived run manifests recording git commit, configuration hash, input
-SHA-256, seed, environment hash, timestamps and output paths. Protocol
-constants that define the experiment rather than result from it (the
-70/15/15 split, budget sizes, the auxiliary weight, library versions) and
-values quoted from cited third-party work are typed, and are identified as
-such where they appear. A claim ledger maps every sentence of the abstract and
-introduction to its generating run.
+\section{Provenance Discipline: What the Checks Cover}
+\label{app:provenance}
 
 \textbf{What the checks cover, stated as a scope rather than a name.} The
 build fails on: a measurement-shaped number with no manifested value, anywhere
@@ -1321,147 +1520,5 @@ file it had itself generated from those manifests, and a compile check reported
 zero undefined references in a document carrying citations that resolved to
 nothing. Both were true statements about a narrower scope than their names
 implied. A reader should ask of any such check what set it actually reads.
-
-\section{Relationship to Prior Versions of This Work}
-\label{sec:disclosure}
-
-Earlier versions of this manuscript were publicly posted and are superseded by
-this one. Because a per-result-group account of what is reused, re-derived,
-corrected, withdrawn or new would identify those versions --- and they are not
-anonymous --- that account is supplied to the editors confidentially rather
-than printed here, together with the dated version history and the list of
-claims each correction invalidates.
-
-One statement can be made in the body without breaking anonymity, and is
-made here because it bears on how the results should be read. Some
-measurements in this paper also appear in the earlier versions, reported there
-under an interpretation that this paper withdraws and replaces. Which
-measurements those are, which results are new, and which earlier results are
-withdrawn is part of the account supplied to the editors, because naming them
-here would identify the earlier versions.
-
-The corrected-incident log in the artifact records each correction with its
-evidence and closure status. The count of incidents is not itself a quality
-claim.
-
-\section{Threats to Validity}
-\label{sec:threats}
-
-\textbf{Internal.} The assembly treatment is uncontrolled by construction: it
-moves held-out membership, prevalence and order together, so no single factor
-is identified by the contrast alone. Section~\ref{sec:shared} removes the
-membership difference post hoc and finds the ordering reversal does not
-survive, which attributes the effect to sample membership under the assumption
-stated there, while the detector's prefix and ECOD's training rows still
-differ between the arms; it does not decompose the remaining factors, and a
-factorial design still would. ECOD is a label-privileged diagnostic reference, not a competitor
-under equal information. Determinism removes seed variance only. With attack runs of median/p90/max
-\StreamCicidsTwoZeroOneSevenRunMedian/\StreamCicidsTwoZeroOneSevenRunPninety/\StreamCicidsTwoZeroOneSevenRunMax{}
-records an IID row bootstrap would be inappropriate, so every interval this
-paper reports comes from a moving-block bootstrap~\cite{kunsch1989jackknife}
-over the archived per-record scores of the evaluated slice, in stream order:
-block length
-\RefBootBlockLength{} records, longer than the p90 run, \RefBootResamples{}
-resamples, and the 2.5th and 97.5th percentiles of the resampled statistic.
-Those intervals quantify sampling uncertainty over the evaluated slice only,
-not over the window selection or the subsample, and a rolling-origin procedure
-is not applied. Rerunning that bootstrap at block lengths
-\RefBootRobustBlockLengthA{} and \RefBootRobustBlockLengthB{} records, the
-second longer than the longest attack run, changes exactly one conclusion:
-every margin interval stays above zero and the auxiliary-only AUC-ROC interval
-stays below $0.5$ at both lengths, but at \RefBootRobustBlockLengthB{} records
-the tail-only and deployed AUC-PR intervals,
-$[\RefBootBTwoSixZeroZeroBranchTailOnlyAucprLo,\,\RefBootBTwoSixZeroZeroBranchTailOnlyAucprHi]$
-and
-$[\RefBootBTwoSixZeroZeroBranchCombinedAucprLo,\,\RefBootBTwoSixZeroZeroBranchCombinedAucprHi]$,
-overlap while the AUC-ROC intervals stay disjoint
-(\RefBootBTwoFiveZeroConclusionChanges{} of nine checks change at the shorter
-length and \RefBootBTwoSixZeroZeroConclusionChanges{} at the longer; the rerun
-is archived in the artifact). Intervals are reported for the two margins of
-Section~\ref{sec:outcome}, the margins of Table~\ref{tab:shared} and the
-branch values of Table~\ref{tab:branch}; the LITNET per-stream values of
-Table~\ref{tab:litnet}, the per-cut values of Table~\ref{tab:pairedcuts}, the
-prevalence-level means of Table~\ref{tab:sweep} and the one-stream result of
-Section~\ref{sec:ablation} carry none, because the per-record scores behind
-the LITNET, sweep and Section~\ref{sec:ablation} results were not archived and
-the per-cut values are single recomputations, so those results have weaker
-inferential support than the headline contrast.
-Stochastic baselines appear either as single draws marked as such or as means
-over draws with the three draws stated, and the per-draw values are archived.
-
-\textbf{External.} Two benchmarks, one split rule, one corpus per benchmark.
-The CICIDS mechanism depends on that dataset's scripted per-day schedule
-meeting a positional split; it does not establish the direction or magnitude of
-assembly effects elsewhere. The LITNET identity depends on equal budgets and a
-divisible boundary. The corpus is a \CicidsWeekRetentionPct\%\ budgeted
-subsample. The timestamp-ordered held-out slice is one
-\CicidsNaturalHeldoutSpanMinutes-minute window --- what a positional
-chronological split yields on this corpus, stated rather than engineered
-around. Timestamp order is the least transformed reference available for
-CICIDS2017, not a universal gold standard: multi-sensor deployments
-legitimately merge asynchronous sources, and the durable recommendation is to
-preserve capture and time metadata, justify the assembly, and report sensitivity
-to plausible alternatives.
-
-\textbf{Construct.} We do not claim the evaluated detector is change-point
-detection, we do not claim the untuned variant characterizes change-point
-detection with an informed reset, and we do not claim that ordering alone causes the
-outcome change.
-
-\section{Conclusion}
-\label{sec:conclusion}
-
-On these two benchmarks, the step that assembles capture files into an
-evaluation stream is an uncontrolled experimental treatment: it changes which
-records are evaluated, at what prevalence, in what order, and thereby what is
-measured. On CICIDS2017 the same multiset reordered yields held-out slices
-sharing \CicidsHeldoutOverlapPct\%\ of their records at prevalences
-\SFourCicidsPrevShiftAbsPp{} points apart, and reverses the measured ordering
-of the two deterministic scorers --- a reversal that disappears once both arms
-are restricted to the records they share, attributing it, under the assumption
-that history contributes no more on the unshared records than on the shared
-ones, to the sample the assembly selects rather than to the order it imposes.
-That restriction does not bound history's effect on comparisons between shared
-and unshared records, which the full-slice value also contains. On LITNET-2020,
-pooling reports an operating point no capture exhibits. The practical recommendation is not that chronology
-is always right; it is that assembly belongs in the experimental design and in
-the provenance record --- report capture identity, mixture weights, split
-membership, held-out overlap, and sensitivity to the plausible alternatives ---
-so that a reported operating point can be recognized as a property of the
-assembly when it is one.
-
-\section*{Data and Artifact Availability}
-The code, stream-assembly scripts with SHA-256 verification, all run manifests,
-the macro layer, the claim ledger and the corrected-incident history are
-archived. During double-anonymous review, the artifact is available through the
-submission system's anonymous artifact channel.
-
-\section*{Acknowledgements: Generative AI Usage}
-In accordance with the ACM Policy on Authorship, the authors disclose that
-generative AI tools were used in producing this work. Large language models
-were used, under continuous human direction, to write and refactor analysis
-scripts, to draft prose subsequently verified against the archived
-measurements, and to operate an adversarial review harness that audited the
-authors' own claims. No generative AI tool is an author of this work, and none
-produced any reported measurement: every measured value was generated by
-executed code that wrote an archived run manifest in the same execution, and the provenance gate
-and claim ledger exist in part to make that boundary externally auditable. The
-authors take full responsibility for the entire content of this work,
-including any portion drafted with such assistance.
-
-\section*{Companion Manuscript Disclosure}
-A companion manuscript from the same research programme (reference suppressed
-for double-anonymous review) shares parts of the underlying codebase and
-predates the audit reported here. The method-identity findings of
-Section~\ref{sec:detector} apply to that shared lineage, and correcting it is
-in hand. It is a public preprint and is not under review at any venue, and
-there is accordingly no other editor to inform and no concurrent consideration
-to declare. Its relationship to the results reported here, and the
-relationship to the earlier public versions of this manuscript, are stated in
-Section~\ref{sec:disclosure};
-identifiers are supplied to the editors confidentially.
-
-\bibliographystyle{ACM-Reference-Format}
-\bibliography{references}
 
 \end{document}

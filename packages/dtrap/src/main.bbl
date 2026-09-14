@@ -1,713 +1,415 @@
-%%% -*-BibTeX-*-
-%%% Do NOT edit. File created by BibTeX with style
-%%% ACM-Reference-Format-Journals [18-Jan-2012].
-
 \begin{thebibliography}{51}
-
-%%% ====================================================================
-%%% NOTE TO THE USER: you can override these defaults by providing
-%%% customized versions of any of these macros before the \bibliography
-%%% command.  Each of them MUST provide its own final punctuation,
-%%% except for \shownote{} and \showURL{}.  The latter two
-%%% do not use final punctuation, in order to avoid confusing it with
-%%% the Web address.
-%%%
-%%% To suppress output of a particular field, define its macro to expand
-%%% to an empty string, or better, \unskip, like this:
-%%%
-%%% \newcommand{\showURL}[1]{\unskip}   % LaTeX syntax
-%%%
-%%% \def \showURL #1{\unskip}           % plain TeX syntax
-%%%
-%%% ====================================================================
-
-\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
-\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
-\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
-\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
-\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
-\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
-\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
-\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
-% The following commands are used for tagged output and should be
-% invisible to TeX
-\providecommand\bibfield[2]{#2}
-\providecommand\bibinfo[2]{#2}
-\providecommand\natexlab[1]{#1}
-\providecommand\showeprint[2][]{arXiv:#2}
-
-\bibitem[Adams and MacKay(2007)]%
-        {adams2007bocpd}
-\bibfield{author}{\bibinfo{person}{Ryan~Prescott Adams} {and}
-  \bibinfo{person}{David J.~C. MacKay}.} \bibinfo{year}{2007}\natexlab{}.
-\newblock \showarticletitle{{Bayesian} Online Changepoint Detection}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:0710.3742}}
-  (\bibinfo{year}{2007}).
-\newblock
-\href{https://doi.org/10.48550/arXiv.0710.3742}{doi:\nolinkurl{10.48550/arXiv.0710.3742}}
-
-
-\bibitem[Apruzzese et~al\mbox{.}(2023)]%
-        {apruzzese2023sok}
-\bibfield{author}{\bibinfo{person}{Giovanni Apruzzese}, \bibinfo{person}{Pavel
-  Laskov}, {and} \bibinfo{person}{Johannes Schneider}.}
-  \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{{SoK}: Pragmatic Assessment of Machine Learning for
-  Network Intrusion Detection}. In \bibinfo{booktitle}{\emph{2023 {IEEE} 8th
-  European Symposium on Security and Privacy ({EuroS\&P})}}.
-  \bibinfo{publisher}{{IEEE}}, \bibinfo{pages}{592--614}.
-\newblock
-\href{https://doi.org/10.1109/EuroSP57164.2023.00042}{doi:\nolinkurl{10.1109/EuroSP57164.2023.00042}}
-
-
-\bibitem[Apruzzese et~al\mbox{.}(2022)]%
-        {apruzzese2022crosseval}
-\bibfield{author}{\bibinfo{person}{Giovanni Apruzzese}, \bibinfo{person}{Luca
-  Pajola}, {and} \bibinfo{person}{Mauro Conti}.}
-  \bibinfo{year}{2022}\natexlab{}.
-\newblock \showarticletitle{The Cross-Evaluation of Machine Learning-Based
-  Network Intrusion Detection Systems}.
-\newblock \bibinfo{journal}{\emph{{IEEE} Transactions on Network and Service
-  Management}} \bibinfo{volume}{19}, \bibinfo{number}{4}
-  (\bibinfo{year}{2022}), \bibinfo{pages}{5152--5169}.
-\newblock
-\href{https://doi.org/10.1109/TNSM.2022.3157344}{doi:\nolinkurl{10.1109/TNSM.2022.3157344}}
-
-
-\bibitem[Arp et~al\mbox{.}(2022)]%
-        {arp2022dosdonts}
-\bibfield{author}{\bibinfo{person}{Daniel Arp}, \bibinfo{person}{Erwin
-  Quiring}, \bibinfo{person}{Feargus Pendlebury}, \bibinfo{person}{Alexander
-  Warnecke}, \bibinfo{person}{Fabio Pierazzi}, \bibinfo{person}{Christian
-  Wressnegger}, \bibinfo{person}{Lorenzo Cavallaro}, {and}
-  \bibinfo{person}{Konrad Rieck}.} \bibinfo{year}{2022}\natexlab{}.
-\newblock \showarticletitle{Dos and Don'ts of Machine Learning in Computer
-  Security}. In \bibinfo{booktitle}{\emph{31st {USENIX} Security Symposium
-  ({USENIX} Security 22)}}. \bibinfo{publisher}{{USENIX} Association},
-  \bibinfo{pages}{3971--3988}.
-\newblock
-
-
-\bibitem[Axelsson(2000)]%
-        {axelsson2000baserate}
-\bibfield{author}{\bibinfo{person}{Stefan Axelsson}.}
-  \bibinfo{year}{2000}\natexlab{}.
-\newblock \showarticletitle{The Base-Rate Fallacy and the Difficulty of
-  Intrusion Detection}.
-\newblock \bibinfo{journal}{\emph{{ACM} Transactions on Information and System
-  Security}} \bibinfo{volume}{3}, \bibinfo{number}{3} (\bibinfo{year}{2000}),
-  \bibinfo{pages}{186--205}.
-\newblock
-\href{https://doi.org/10.1145/357830.357849}{doi:\nolinkurl{10.1145/357830.357849}}
-
-
-\bibitem[Barber et~al\mbox{.}(2023)]%
-        {barber2023beyond}
-\bibfield{author}{\bibinfo{person}{Rina~Foygel Barber},
-  \bibinfo{person}{Emmanuel~J. Cand{\`e}s}, \bibinfo{person}{Aaditya Ramdas},
-  {and} \bibinfo{person}{Ryan~J. Tibshirani}.} \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{Conformal Prediction Beyond Exchangeability}.
-\newblock \bibinfo{journal}{\emph{The Annals of Statistics}}
-  \bibinfo{volume}{51}, \bibinfo{number}{2} (\bibinfo{year}{2023}),
-  \bibinfo{pages}{816--845}.
-\newblock
-\href{https://doi.org/10.1214/23-AOS2276}{doi:\nolinkurl{10.1214/23-AOS2276}}
-
-
-\bibitem[Barrett et~al\mbox{.}(2026a)]%
-        {barrett2026fades}
-\bibfield{author}{\bibinfo{person}{Seth Barrett}, \bibinfo{person}{Gokila
-  Dorai}, \bibinfo{person}{Lin Li}, {and} \bibinfo{person}{Swarnamugi
-  Rajaganapathy}.} \bibinfo{year}{2026}\natexlab{a}.
-\newblock \showarticletitle{{FADES}: Adaptive Drift Estimation via Conformal
-  Signals for Streaming Intrusion Detection}.
-\newblock \bibinfo{journal}{\emph{Electronics}} \bibinfo{volume}{15},
-  \bibinfo{number}{10} (\bibinfo{year}{2026}), \bibinfo{pages}{2114}.
-\newblock
-\href{https://doi.org/10.3390/electronics15102114}{doi:\nolinkurl{10.3390/electronics15102114}}
-
-
-\bibitem[Barrett et~al\mbox{.}(2026b)]%
-        {barrett2026firce}
-\bibfield{author}{\bibinfo{person}{Seth Barrett}, \bibinfo{person}{Lin Li},
-  \bibinfo{person}{Gokila Dorai}, {and} \bibinfo{person}{Swarnamugi
-  Rajaganapathy}.} \bibinfo{year}{2026}\natexlab{b}.
-\newblock \showarticletitle{{FIRCE}: A Framework for Intrusion Response and
-  Conformal Evaluation}. In \bibinfo{booktitle}{\emph{2026 International
-  Conference on Smart Applications, Communications and Networking
-  ({SmartNets})}}. \bibinfo{pages}{1--9}.
-\newblock
-\shownote{arXiv:2605.01962}.
-\newblock
-\href{https://doi.org/10.1109/SMARTNETS69662.2026.11604738}{doi:\nolinkurl{10.1109/SMARTNETS69662.2026.11604738}}
-
-
-\bibitem[Beyer et~al\mbox{.}(2016)]%
-        {beyer2016sre}
-\bibfield{editor}{\bibinfo{person}{Betsy Beyer}, \bibinfo{person}{Chris Jones},
-  \bibinfo{person}{Jennifer Petoff}, {and} \bibinfo{person}{Niall~Richard
-  Murphy}} (Eds.). \bibinfo{year}{2016}\natexlab{}.
-\newblock \bibinfo{booktitle}{\emph{Site Reliability Engineering: How {Google}
-  Runs Production Systems}}.
-\newblock \bibinfo{publisher}{O'Reilly Media}.
-\newblock
-
-
-\bibitem[Biswas(2026)]%
-        {biswas2026protocol}
-\bibfield{author}{\bibinfo{person}{Md~Anas Biswas}.}
-  \bibinfo{year}{2026}\natexlab{}.
-\newblock \showarticletitle{The Evaluation Protocol Is the Hidden Variable: A
-  Drift-Aware Re-Examination of Flow-Based Intrusion Detection Benchmarks}.
-\newblock \bibinfo{journal}{\emph{Preprints.org}} (\bibinfo{year}{2026}).
-\newblock
-\shownote{Preprint, posted 11 June 2026}.
-\newblock
-\href{https://doi.org/10.20944/preprints202606.0903.v1}{doi:\nolinkurl{10.20944/preprints202606.0903.v1}}
-
-
-\bibitem[Breunig et~al\mbox{.}(2000)]%
-        {breunig2000lof}
-\bibfield{author}{\bibinfo{person}{Markus~M. Breunig},
-  \bibinfo{person}{Hans-Peter Kriegel}, \bibinfo{person}{Raymond~T. Ng}, {and}
-  \bibinfo{person}{J{\"o}rg Sander}.} \bibinfo{year}{2000}\natexlab{}.
-\newblock \showarticletitle{{LOF}: Identifying Density-Based Local Outliers}.
-  In \bibinfo{booktitle}{\emph{Proceedings of the 2000 {ACM} {SIGMOD}
-  International Conference on Management of Data}}. \bibinfo{pages}{93--104}.
-\newblock
-\href{https://doi.org/10.1145/342009.335388}{doi:\nolinkurl{10.1145/342009.335388}}
-
-
-\bibitem[Campos et~al\mbox{.}(2016)]%
-        {campos2016evaluation}
-\bibfield{author}{\bibinfo{person}{Guilherme~O. Campos},
-  \bibinfo{person}{Arthur Zimek}, \bibinfo{person}{J{\"o}rg Sander},
-  \bibinfo{person}{Ricardo J. G.~B. Campello}, \bibinfo{person}{Barbora
-  Micenkov{\'a}}, \bibinfo{person}{Erich Schubert}, \bibinfo{person}{Ira
-  Assent}, {and} \bibinfo{person}{Michael~E. Houle}.}
-  \bibinfo{year}{2016}\natexlab{}.
-\newblock \showarticletitle{On the Evaluation of Unsupervised Outlier
-  Detection: Measures, Datasets, and an Empirical Study}.
-\newblock \bibinfo{journal}{\emph{Data Mining and Knowledge Discovery}}
-  \bibinfo{volume}{30}, \bibinfo{number}{4} (\bibinfo{year}{2016}),
-  \bibinfo{pages}{891--927}.
-\newblock
-\href{https://doi.org/10.1007/s10618-015-0444-8}{doi:\nolinkurl{10.1007/s10618-015-0444-8}}
-
-
-\bibitem[Cao et~al\mbox{.}(2025)]%
-        {cao2024revisiting}
-\bibfield{author}{\bibinfo{person}{Yang Cao}, \bibinfo{person}{Yixiao Ma},
-  \bibinfo{person}{Ye Zhu}, {and} \bibinfo{person}{Kai~Ming Ting}.}
-  \bibinfo{year}{2025}\natexlab{}.
-\newblock \showarticletitle{Revisiting Streaming Anomaly Detection: Benchmark
-  and Evaluation}.
-\newblock \bibinfo{journal}{\emph{Artificial Intelligence Review}}
-  \bibinfo{volume}{58}, \bibinfo{number}{1} (\bibinfo{year}{2025}),
-  \bibinfo{pages}{8}.
-\newblock
-\href{https://doi.org/10.1007/s10462-024-10995-w}{doi:\nolinkurl{10.1007/s10462-024-10995-w}}
-
-
-\bibitem[Catillo et~al\mbox{.}(2021)]%
-        {catillo2021critique}
-\bibfield{author}{\bibinfo{person}{Marta Catillo}, \bibinfo{person}{Andrea
-  Del~Vecchio}, \bibinfo{person}{Antonio Pecchia}, {and}
-  \bibinfo{person}{Umberto Villano}.} \bibinfo{year}{2021}\natexlab{}.
-\newblock \showarticletitle{A Critique on the Use of Machine Learning on Public
-  Datasets for Intrusion Detection}. In \bibinfo{booktitle}{\emph{Quality of
-  Information and Communications Technology ({QUATIC} 2021)}}
-  \emph{(\bibinfo{series}{Communications in Computer and Information Science},
-  Vol.~\bibinfo{volume}{1439})}. \bibinfo{publisher}{Springer},
-  \bibinfo{pages}{253--266}.
-\newblock
-\href{https://doi.org/10.1007/978-3-030-85347-1_19}{doi:\nolinkurl{10.1007/978-3-030-85347-1_19}}
-
-
-\bibitem[Catillo et~al\mbox{.}(2023)]%
-        {catillo2023hype}
-\bibfield{author}{\bibinfo{person}{Marta Catillo}, \bibinfo{person}{Antonio
-  Pecchia}, {and} \bibinfo{person}{Umberto Villano}.}
-  \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{Machine Learning on Public Intrusion Datasets:
-  Academic Hype or Concrete Advances in {NIDS}?}. In
-  \bibinfo{booktitle}{\emph{2023 53rd Annual {IEEE/IFIP} International
-  Conference on Dependable Systems and Networks, Supplemental Volume
-  ({DSN-S})}}. \bibinfo{pages}{132--136}.
-\newblock
-\href{https://doi.org/10.1109/DSN-S58398.2023.00038}{doi:\nolinkurl{10.1109/DSN-S58398.2023.00038}}
-
-
-\bibitem[Damasevicius et~al\mbox{.}(2020)]%
-        {damasevicius2020litnet}
-\bibfield{author}{\bibinfo{person}{Robertas Damasevicius},
-  \bibinfo{person}{Algimantas Venckauskas}, \bibinfo{person}{Sarunas
-  Grigaliunas}, \bibinfo{person}{Jevgenijus Toldinas}, \bibinfo{person}{Nerijus
-  Morkevicius}, \bibinfo{person}{Tautvydas Aleliunas}, {and}
-  \bibinfo{person}{Paulius Smuikys}.} \bibinfo{year}{2020}\natexlab{}.
-\newblock \showarticletitle{{LITNET-2020}: An Annotated Real-World Network Flow
-  Dataset for Network Intrusion Detection}.
-\newblock \bibinfo{journal}{\emph{Electronics}} \bibinfo{volume}{9},
-  \bibinfo{number}{5} (\bibinfo{year}{2020}), \bibinfo{pages}{800}.
-\newblock
-\href{https://doi.org/10.3390/electronics9050800}{doi:\nolinkurl{10.3390/electronics9050800}}
-
-
-\bibitem[Davis and Goadrich(2006)]%
-        {davis2006prroc}
-\bibfield{author}{\bibinfo{person}{Jesse Davis} {and} \bibinfo{person}{Mark
-  Goadrich}.} \bibinfo{year}{2006}\natexlab{}.
-\newblock \showarticletitle{The Relationship Between Precision-Recall and {ROC}
-  Curves}. In \bibinfo{booktitle}{\emph{Proceedings of the 23rd International
-  Conference on Machine Learning ({ICML})}}. \bibinfo{pages}{233--240}.
-\newblock
-\href{https://doi.org/10.1145/1143844.1143874}{doi:\nolinkurl{10.1145/1143844.1143874}}
-
-
-\bibitem[Ding and Fei(2013)]%
-        {ding2013iforestasd}
-\bibfield{author}{\bibinfo{person}{Zhiguo Ding} {and} \bibinfo{person}{Minrui
-  Fei}.} \bibinfo{year}{2013}\natexlab{}.
-\newblock \showarticletitle{An Anomaly Detection Approach Based on Isolation
-  Forest Algorithm for Streaming Data Using Sliding Window}.
-\newblock \bibinfo{journal}{\emph{{IFAC} Proceedings Volumes}}
-  \bibinfo{volume}{46}, \bibinfo{number}{20} (\bibinfo{year}{2013}),
-  \bibinfo{pages}{12--17}.
-\newblock
-\href{https://doi.org/10.3182/20130902-3-CN-3020.00044}{doi:\nolinkurl{10.3182/20130902-3-CN-3020.00044}}
-
-
-\bibitem[Elkan(2001)]%
-        {elkan2001cost}
-\bibfield{author}{\bibinfo{person}{Charles Elkan}.}
-  \bibinfo{year}{2001}\natexlab{}.
-\newblock \showarticletitle{The Foundations of Cost-Sensitive Learning}. In
-  \bibinfo{booktitle}{\emph{Proceedings of the Seventeenth International Joint
-  Conference on Artificial Intelligence ({IJCAI} 2001)}}.
-  \bibinfo{publisher}{Morgan Kaufmann}, \bibinfo{pages}{973--978}.
-\newblock
-
-
-\bibitem[Engelen et~al\mbox{.}(2021)]%
-        {engelen2021cicids}
-\bibfield{author}{\bibinfo{person}{Gints Engelen}, \bibinfo{person}{Vera
-  Rimmer}, {and} \bibinfo{person}{Wouter Joosen}.}
-  \bibinfo{year}{2021}\natexlab{}.
-\newblock \showarticletitle{Troubleshooting an Intrusion Detection Dataset: The
-  {CICIDS2017} Case Study}. In \bibinfo{booktitle}{\emph{2021 {IEEE} Security
-  and Privacy Workshops ({SPW})}}. \bibinfo{pages}{7--12}.
-\newblock
-\href{https://doi.org/10.1109/SPW53761.2021.00009}{doi:\nolinkurl{10.1109/SPW53761.2021.00009}}
-
-
-\bibitem[Fearnhead and Liu(2007)]%
-        {fearnhead2007online}
-\bibfield{author}{\bibinfo{person}{Paul Fearnhead} {and} \bibinfo{person}{Zhen
-  Liu}.} \bibinfo{year}{2007}\natexlab{}.
-\newblock \showarticletitle{On-Line Inference for Multiple Changepoint
-  Problems}.
-\newblock \bibinfo{journal}{\emph{Journal of the Royal Statistical Society:
-  Series B (Statistical Methodology)}} \bibinfo{volume}{69},
-  \bibinfo{number}{4} (\bibinfo{year}{2007}), \bibinfo{pages}{589--605}.
-\newblock
-\href{https://doi.org/10.1111/j.1467-9868.2007.00601.x}{doi:\nolinkurl{10.1111/j.1467-9868.2007.00601.x}}
-
-
-\bibitem[Gama et~al\mbox{.}(2013)]%
-        {gama2013prequential}
-\bibfield{author}{\bibinfo{person}{Jo{\~a}o Gama}, \bibinfo{person}{Raquel
-  Sebasti{\~a}o}, {and} \bibinfo{person}{Pedro~Pereira Rodrigues}.}
-  \bibinfo{year}{2013}\natexlab{}.
-\newblock \showarticletitle{On Evaluating Stream Learning Algorithms}.
-\newblock \bibinfo{journal}{\emph{Machine Learning}} \bibinfo{volume}{90},
-  \bibinfo{number}{3} (\bibinfo{year}{2013}), \bibinfo{pages}{317--346}.
-\newblock
-\href{https://doi.org/10.1007/s10994-012-5320-9}{doi:\nolinkurl{10.1007/s10994-012-5320-9}}
-
-
-\bibitem[Guha et~al\mbox{.}(2016)]%
-        {guha2016rrcf}
-\bibfield{author}{\bibinfo{person}{Sudipto Guha}, \bibinfo{person}{Nina
-  Mishra}, \bibinfo{person}{Gourav Roy}, {and} \bibinfo{person}{Okke
-  Schrijvers}.} \bibinfo{year}{2016}\natexlab{}.
-\newblock \showarticletitle{Robust Random Cut Forest Based Anomaly Detection on
-  Streams}. In \bibinfo{booktitle}{\emph{Proceedings of the 33rd International
-  Conference on Machine Learning ({ICML})}} \emph{(\bibinfo{series}{Proceedings
-  of Machine Learning Research}, Vol.~\bibinfo{volume}{48})}.
-  \bibinfo{publisher}{{PMLR}}, \bibinfo{pages}{2712--2721}.
-\newblock
-
-
-\bibitem[Gurjar and Camp(2026)]%
-        {gurjar2026tailrisk}
-\bibfield{author}{\bibinfo{person}{Ambarish Gurjar} {and}
-  \bibinfo{person}{L.~Jean Camp}.} \bibinfo{year}{2026}\natexlab{}.
-\newblock \showarticletitle{Predicting Tail-Risk Escalation in {IDS} Alert Time
-  Series}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2601.14299}}
-  (\bibinfo{year}{2026}).
-\newblock
-
-
-\bibitem[Han et~al\mbox{.}(2022)]%
-        {han2022adbench}
-\bibfield{author}{\bibinfo{person}{Songqiao Han}, \bibinfo{person}{Xiyang Hu},
-  \bibinfo{person}{Hailiang Huang}, \bibinfo{person}{Minqi Jiang}, {and}
-  \bibinfo{person}{Yue Zhao}.} \bibinfo{year}{2022}\natexlab{}.
-\newblock \showarticletitle{{ADBench}: Anomaly Detection Benchmark}. In
-  \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems
-  35 ({NeurIPS} 2022), Datasets and Benchmarks Track}}.
-  \bibinfo{pages}{32142--32159}.
-\newblock
-\shownote{arXiv:2206.09426}.
-\newblock
-\href{https://doi.org/10.52202/068431-2329}{doi:\nolinkurl{10.52202/068431-2329}}
-
-
-\bibitem[{Hellsice}(2024)]%
-        {pyod561}
-\bibfield{author}{\bibinfo{person}{{Hellsice}}.}
-  \bibinfo{year}{2024}\natexlab{}.
-\newblock \bibinfo{title}{{ECOD} and {COPOD} Decision Functions Switched}.
-\newblock \bibinfo{howpublished}{{PyOD} issue \#561,
-  \url{https://github.com/yzhao062/pyod/issues/561}}.
-\newblock
-\shownote{Opened 30 April 2024; open as of 3 September 2026}.
-\newblock
-
-
-\bibitem[Knoblauch and Damoulas(2018)]%
-        {knoblauch2018bocpd}
-\bibfield{author}{\bibinfo{person}{Jeremias Knoblauch} {and}
-  \bibinfo{person}{Theodoros Damoulas}.} \bibinfo{year}{2018}\natexlab{}.
-\newblock \showarticletitle{Spatio-Temporal {Bayesian} On-Line Changepoint
-  Detection with Model Selection}. In \bibinfo{booktitle}{\emph{Proceedings of
-  the 35th International Conference on Machine Learning ({ICML})}}
-  \emph{(\bibinfo{series}{Proceedings of Machine Learning Research},
-  Vol.~\bibinfo{volume}{80})}. \bibinfo{publisher}{{PMLR}},
-  \bibinfo{pages}{2718--2727}.
-\newblock
-\shownote{arXiv:1805.05383}.
-\newblock
-
-
-\bibitem[K{\"u}nsch(1989)]%
-        {kunsch1989jackknife}
-\bibfield{author}{\bibinfo{person}{Hans~R. K{\"u}nsch}.}
-  \bibinfo{year}{1989}\natexlab{}.
-\newblock \showarticletitle{The Jackknife and the Bootstrap for General
-  Stationary Observations}.
-\newblock \bibinfo{journal}{\emph{The Annals of Statistics}}
-  \bibinfo{volume}{17}, \bibinfo{number}{3} (\bibinfo{year}{1989}),
-  \bibinfo{pages}{1217--1241}.
-\newblock
-\href{https://doi.org/10.1214/aos/1176347265}{doi:\nolinkurl{10.1214/aos/1176347265}}
-
-
-\bibitem[Lanvin et~al\mbox{.}(2023)]%
-        {lanvin2022errors}
-\bibfield{author}{\bibinfo{person}{Maxime Lanvin},
-  \bibinfo{person}{Pierre-Fran{\c{c}}ois Gimenez}, \bibinfo{person}{Yufei Han},
-  \bibinfo{person}{Fr{\'e}d{\'e}ric Majorczyk}, \bibinfo{person}{Ludovic
-  M{\'e}}, {and} \bibinfo{person}{{\'E}ric Totel}.}
-  \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{Errors in the {CICIDS2017} Dataset and the
-  Significant Differences in Detection Performances It Makes}. In
-  \bibinfo{booktitle}{\emph{Risks and Security of Internet and Systems
-  ({CRiSIS} 2022)}} \emph{(\bibinfo{series}{Lecture Notes in Computer Science},
-  Vol.~\bibinfo{volume}{13857})}. \bibinfo{publisher}{Springer},
-  \bibinfo{pages}{18--33}.
-\newblock
-\href{https://doi.org/10.1007/978-3-031-31108-6_2}{doi:\nolinkurl{10.1007/978-3-031-31108-6_2}}
-
-
-\bibitem[Laxhammar and Falkman(2014)]%
-        {laxhammar2014conformal}
-\bibfield{author}{\bibinfo{person}{Rikard Laxhammar} {and}
-  \bibinfo{person}{G{\"o}ran Falkman}.} \bibinfo{year}{2014}\natexlab{}.
-\newblock \showarticletitle{Online Learning and Sequential Anomaly Detection in
-  Trajectories}.
-\newblock \bibinfo{journal}{\emph{{IEEE} Transactions on Pattern Analysis and
-  Machine Intelligence}} \bibinfo{volume}{36}, \bibinfo{number}{6}
-  (\bibinfo{year}{2014}), \bibinfo{pages}{1158--1173}.
-\newblock
-\href{https://doi.org/10.1109/TPAMI.2013.172}{doi:\nolinkurl{10.1109/TPAMI.2013.172}}
-
-
-\bibitem[Li et~al\mbox{.}(2020)]%
-        {li2020copod}
-\bibfield{author}{\bibinfo{person}{Zheng Li}, \bibinfo{person}{Yue Zhao},
-  \bibinfo{person}{Nicola Botta}, \bibinfo{person}{Cezar Ionescu}, {and}
-  \bibinfo{person}{Xiyang Hu}.} \bibinfo{year}{2020}\natexlab{}.
-\newblock \showarticletitle{{COPOD}: Copula-Based Outlier Detection}. In
-  \bibinfo{booktitle}{\emph{2020 {IEEE} International Conference on Data Mining
-  ({ICDM})}}. \bibinfo{pages}{1118--1123}.
-\newblock
-\href{https://doi.org/10.1109/ICDM50108.2020.00135}{doi:\nolinkurl{10.1109/ICDM50108.2020.00135}}
-
-
-\bibitem[Li et~al\mbox{.}(2023)]%
-        {li2023ecod}
-\bibfield{author}{\bibinfo{person}{Zheng Li}, \bibinfo{person}{Yue Zhao},
-  \bibinfo{person}{Xiyang Hu}, \bibinfo{person}{Nicola Botta},
-  \bibinfo{person}{Cezar Ionescu}, {and} \bibinfo{person}{George~H. Chen}.}
-  \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{{ECOD}: Unsupervised Outlier Detection Using
-  Empirical Cumulative Distribution Functions}.
-\newblock \bibinfo{journal}{\emph{{IEEE} Transactions on Knowledge and Data
-  Engineering}} \bibinfo{volume}{35}, \bibinfo{number}{12}
-  (\bibinfo{year}{2023}), \bibinfo{pages}{12181--12193}.
-\newblock
-\href{https://doi.org/10.1109/TKDE.2022.3159580}{doi:\nolinkurl{10.1109/TKDE.2022.3159580}}
-
-
-\bibitem[Liu et~al\mbox{.}(2022)]%
-        {liu2022errorprevalence}
-\bibfield{author}{\bibinfo{person}{Lisa Liu}, \bibinfo{person}{Gints Engelen},
-  \bibinfo{person}{Timothy Lynar}, \bibinfo{person}{Daryl Essam}, {and}
-  \bibinfo{person}{Wouter Joosen}.} \bibinfo{year}{2022}\natexlab{}.
-\newblock \showarticletitle{Error Prevalence in {NIDS} Datasets: A Case Study
-  on {CIC-IDS-2017} and {CSE-CIC-IDS-2018}}. In \bibinfo{booktitle}{\emph{2022
-  {IEEE} Conference on Communications and Network Security ({CNS})}}.
-  \bibinfo{publisher}{{IEEE}}, \bibinfo{pages}{254--262}.
-\newblock
-\href{https://doi.org/10.1109/CNS56114.2022.9947235}{doi:\nolinkurl{10.1109/CNS56114.2022.9947235}}
-
-
-\bibitem[Manzhos et~al\mbox{.}(2026)]%
-        {manzhos2026ap}
-\bibfield{author}{\bibinfo{person}{Tetiana Manzhos}, \bibinfo{person}{Tetiana
-  Ianevych}, {and} \bibinfo{person}{Olga Melnyk}.}
-  \bibinfo{year}{2026}\natexlab{}.
-\newblock \showarticletitle{Average Precision at Cutoff {$k$} under Random
-  Rankings: Expectation and Variance}.
-\newblock \bibinfo{journal}{\emph{Modern Stochastics: Theory and Applications}}
-  \bibinfo{volume}{13}, \bibinfo{number}{3} (\bibinfo{year}{2026}),
-  \bibinfo{pages}{357--374}.
-\newblock
-\shownote{arXiv:2511.02571}.
-\newblock
-\href{https://doi.org/10.15559/26-VMSTA298}{doi:\nolinkurl{10.15559/26-VMSTA298}}
-
-
-\bibitem[Manzoor et~al\mbox{.}(2018)]%
-        {manzoor2018xstream}
-\bibfield{author}{\bibinfo{person}{Emaad Manzoor}, \bibinfo{person}{Hemank
-  Lamba}, {and} \bibinfo{person}{Leman Akoglu}.}
-  \bibinfo{year}{2018}\natexlab{}.
-\newblock \showarticletitle{{xStream}: Outlier Detection in Feature-Evolving
-  Data Streams}. In \bibinfo{booktitle}{\emph{Proceedings of the 24th {ACM}
-  {SIGKDD} International Conference on Knowledge Discovery \& Data Mining
-  ({KDD})}}. \bibinfo{pages}{1963--1972}.
-\newblock
-\href{https://doi.org/10.1145/3219819.3220107}{doi:\nolinkurl{10.1145/3219819.3220107}}
-
-
-\bibitem[{mbongaerts}(2022)]%
-        {pyod401}
-\bibfield{author}{\bibinfo{person}{{mbongaerts}}.}
-  \bibinfo{year}{2022}\natexlab{}.
-\newblock \bibinfo{title}{{ECOD} Mixes Train Set and Test Set}.
-\newblock \bibinfo{howpublished}{{PyOD} issue \#401,
-  \url{https://github.com/yzhao062/pyod/issues/401}}.
-\newblock
-\shownote{Opened 28 April 2022; open as of 3 September 2026}.
-\newblock
-
-
-\bibitem[McDermott et~al\mbox{.}(2024)]%
-        {mcdermott2024closerlook}
-\bibfield{author}{\bibinfo{person}{Matthew~B. McDermott},
-  \bibinfo{person}{Haoran Zhang}, \bibinfo{person}{Lasse~Hyldig Hansen},
-  \bibinfo{person}{Giovanni Angelotti}, {and} \bibinfo{person}{Jack
-  Gallifant}.} \bibinfo{year}{2024}\natexlab{}.
-\newblock \showarticletitle{A Closer Look at {AUROC} and {AUPRC} under Class
-  Imbalance}. In \bibinfo{booktitle}{\emph{Advances in Neural Information
-  Processing Systems 37 ({NeurIPS} 2024)}}. \bibinfo{pages}{44102--44163}.
-\newblock
-\shownote{arXiv:2401.06091}.
-\newblock
-\href{https://doi.org/10.52202/079017-1400}{doi:\nolinkurl{10.52202/079017-1400}}
-
-
-\bibitem[Mirsky et~al\mbox{.}(2018)]%
-        {mirsky2018kitsune}
-\bibfield{author}{\bibinfo{person}{Yisroel Mirsky}, \bibinfo{person}{Tomer
-  Doitshman}, \bibinfo{person}{Yuval Elovici}, {and} \bibinfo{person}{Asaf
-  Shabtai}.} \bibinfo{year}{2018}\natexlab{}.
-\newblock \showarticletitle{{Kitsune}: An Ensemble of Autoencoders for Online
-  Network Intrusion Detection}. In \bibinfo{booktitle}{\emph{Proceedings of the
-  2018 Network and Distributed System Security Symposium ({NDSS})}}.
-  \bibinfo{publisher}{Internet Society}.
-\newblock
-\shownote{arXiv:1802.09089}.
-\newblock
-\href{https://doi.org/10.14722/ndss.2018.23204}{doi:\nolinkurl{10.14722/ndss.2018.23204}}
-
-
-\bibitem[Moczkodan and Ragab(2026)]%
-        {moczkodan2026transformers}
-\bibfield{author}{\bibinfo{person}{Zach Moczkodan} {and} \bibinfo{person}{Hany
-  Ragab}.} \bibinfo{year}{2026}\natexlab{}.
-\newblock \showarticletitle{Do Transformers Actually Help Intrusion Detection?
-  A Temporal Sequence Evaluation on {CIC-IDS2017}}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2606.11098}}
-  (\bibinfo{year}{2026}).
-\newblock
-
-
-\bibitem[Olszewski et~al\mbox{.}(2023)]%
-        {olszewski2023reproducibility}
-\bibfield{author}{\bibinfo{person}{Daniel Olszewski}, \bibinfo{person}{Allison
-  Lu}, \bibinfo{person}{Carson Stillman}, \bibinfo{person}{Kevin Warren},
-  \bibinfo{person}{Cole Kitroser}, \bibinfo{person}{Alejandro Pascual},
-  \bibinfo{person}{Divyajyoti Ukirde}, \bibinfo{person}{Kevin Butler}, {and}
-  \bibinfo{person}{Patrick Traynor}.} \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{``Get in Researchers; We're Measuring
-  Reproducibility'': A Reproducibility Study of Machine Learning Papers in Tier
-  1 Security Conferences}. In \bibinfo{booktitle}{\emph{Proceedings of the 2023
-  {ACM} {SIGSAC} Conference on Computer and Communications Security ({CCS})}}.
-  \bibinfo{pages}{3433--3459}.
-\newblock
-\href{https://doi.org/10.1145/3576915.3623130}{doi:\nolinkurl{10.1145/3576915.3623130}}
-
-
-\bibitem[Pendlebury et~al\mbox{.}(2019)]%
-        {pendlebury2019tesseract}
-\bibfield{author}{\bibinfo{person}{Feargus Pendlebury}, \bibinfo{person}{Fabio
-  Pierazzi}, \bibinfo{person}{Roberto Jordaney}, \bibinfo{person}{Johannes
-  Kinder}, {and} \bibinfo{person}{Lorenzo Cavallaro}.}
-  \bibinfo{year}{2019}\natexlab{}.
-\newblock \showarticletitle{{TESSERACT}: Eliminating Experimental Bias in
-  Malware Classification across Space and Time}. In
-  \bibinfo{booktitle}{\emph{28th {USENIX} Security Symposium ({USENIX} Security
-  19)}}. \bibinfo{publisher}{{USENIX} Association}, \bibinfo{pages}{729--746}.
-\newblock
-
-
-\bibitem[Pevn{\'y}(2016)]%
-        {pevny2016loda}
-\bibfield{author}{\bibinfo{person}{Tom{\'a}{\v{s}} Pevn{\'y}}.}
-  \bibinfo{year}{2016}\natexlab{}.
-\newblock \showarticletitle{{Loda}: Lightweight On-Line Detector of Anomalies}.
-\newblock \bibinfo{journal}{\emph{Machine Learning}} \bibinfo{volume}{102},
-  \bibinfo{number}{2} (\bibinfo{year}{2016}), \bibinfo{pages}{275--304}.
-\newblock
-\href{https://doi.org/10.1007/s10994-015-5521-0}{doi:\nolinkurl{10.1007/s10994-015-5521-0}}
-
-
-\bibitem[Ring et~al\mbox{.}(2019)]%
-        {ring2019datasets}
-\bibfield{author}{\bibinfo{person}{Markus Ring}, \bibinfo{person}{Sarah
-  Wunderlich}, \bibinfo{person}{Deniz Scheuring}, \bibinfo{person}{Dieter
-  Landes}, {and} \bibinfo{person}{Andreas Hotho}.}
-  \bibinfo{year}{2019}\natexlab{}.
-\newblock \showarticletitle{A Survey of Network-Based Intrusion Detection Data
-  Sets}.
-\newblock \bibinfo{journal}{\emph{Computers \& Security}}  \bibinfo{volume}{86}
-  (\bibinfo{year}{2019}), \bibinfo{pages}{147--167}.
-\newblock
-\href{https://doi.org/10.1016/j.cose.2019.06.005}{doi:\nolinkurl{10.1016/j.cose.2019.06.005}}
-
-
-\bibitem[Saito and Rehmsmeier(2015)]%
-        {saito2015prplot}
-\bibfield{author}{\bibinfo{person}{Takaya Saito} {and} \bibinfo{person}{Marc
-  Rehmsmeier}.} \bibinfo{year}{2015}\natexlab{}.
-\newblock \showarticletitle{The Precision-Recall Plot Is More Informative than
-  the {ROC} Plot When Evaluating Binary Classifiers on Imbalanced Datasets}.
-\newblock \bibinfo{journal}{\emph{{PLOS} {ONE}}} \bibinfo{volume}{10},
-  \bibinfo{number}{3} (\bibinfo{year}{2015}), \bibinfo{pages}{e0118432}.
-\newblock
-\href{https://doi.org/10.1371/journal.pone.0118432}{doi:\nolinkurl{10.1371/journal.pone.0118432}}
-
-
-\bibitem[Sharafaldin et~al\mbox{.}(2018)]%
-        {sharafaldin2018cicids}
-\bibfield{author}{\bibinfo{person}{Iman Sharafaldin},
-  \bibinfo{person}{Arash~Habibi Lashkari}, {and} \bibinfo{person}{Ali~A.
-  Ghorbani}.} \bibinfo{year}{2018}\natexlab{}.
-\newblock \showarticletitle{Toward Generating a New Intrusion Detection Dataset
-  and Intrusion Traffic Characterization}. In
-  \bibinfo{booktitle}{\emph{Proceedings of the 4th International Conference on
-  Information Systems Security and Privacy ({ICISSP})}}.
-  \bibinfo{pages}{108--116}.
-\newblock
-\href{https://doi.org/10.5220/0006639801080116}{doi:\nolinkurl{10.5220/0006639801080116}}
-
-
-\bibitem[Sommer and Paxson(2010)]%
-        {sommer2010outside}
-\bibfield{author}{\bibinfo{person}{Robin Sommer} {and} \bibinfo{person}{Vern
-  Paxson}.} \bibinfo{year}{2010}\natexlab{}.
-\newblock \showarticletitle{Outside the Closed World: On Using Machine Learning
-  for Network Intrusion Detection}. In \bibinfo{booktitle}{\emph{2010 {IEEE}
-  Symposium on Security and Privacy}}. \bibinfo{publisher}{{IEEE}},
-  \bibinfo{pages}{305--316}.
-\newblock
-\href{https://doi.org/10.1109/SP.2010.25}{doi:\nolinkurl{10.1109/SP.2010.25}}
-
-
-\bibitem[Tan et~al\mbox{.}(2011)]%
-        {tan2011hst}
-\bibfield{author}{\bibinfo{person}{Swee~Chuan Tan}, \bibinfo{person}{Kai~Ming
-  Ting}, {and} \bibinfo{person}{Fei~Tony Liu}.}
-  \bibinfo{year}{2011}\natexlab{}.
-\newblock \showarticletitle{Fast Anomaly Detection for Streaming Data}. In
-  \bibinfo{booktitle}{\emph{Proceedings of the Twenty-Second International
-  Joint Conference on Artificial Intelligence ({IJCAI} 2011)}}.
-  \bibinfo{publisher}{{AAAI} Press}, \bibinfo{pages}{1511--1516}.
-\newblock
-\href{https://doi.org/10.5591/978-1-57735-516-8/IJCAI11-254}{doi:\nolinkurl{10.5591/978-1-57735-516-8/IJCAI11-254}}
-
-
-\bibitem[Tatbul et~al\mbox{.}(2018)]%
-        {tatbul2018precision}
-\bibfield{author}{\bibinfo{person}{Nesime Tatbul}, \bibinfo{person}{Tae~Jun
-  Lee}, \bibinfo{person}{Stan Zdonik}, \bibinfo{person}{Mejbah Alam}, {and}
-  \bibinfo{person}{Justin Gottschlich}.} \bibinfo{year}{2018}\natexlab{}.
-\newblock \showarticletitle{Precision and Recall for Time Series}. In
-  \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems
-  31 ({NeurIPS} 2018)}}. \bibinfo{pages}{1924--1934}.
-\newblock
-\shownote{arXiv:1803.03639}.
-\newblock
-
-
-\bibitem[van~den Burg and Williams(2020)]%
-        {vandeburg2020evaluation}
-\bibfield{author}{\bibinfo{person}{Gerrit J.~J. van~den Burg} {and}
-  \bibinfo{person}{Christopher K.~I. Williams}.}
-  \bibinfo{year}{2020}\natexlab{}.
-\newblock \showarticletitle{An Evaluation of Change Point Detection
-  Algorithms}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2003.06222}}
-  (\bibinfo{year}{2020}).
-\newblock
-
-
-\bibitem[Vovk et~al\mbox{.}(2005)]%
-        {vovk2005alrw}
-\bibfield{author}{\bibinfo{person}{Vladimir Vovk}, \bibinfo{person}{Alexander
-  Gammerman}, {and} \bibinfo{person}{Glenn Shafer}.}
-  \bibinfo{year}{2005}\natexlab{}.
-\newblock \bibinfo{booktitle}{\emph{Algorithmic Learning in a Random World}}.
-\newblock \bibinfo{publisher}{Springer}, \bibinfo{address}{New York}.
-\newblock
-\href{https://doi.org/10.1007/b106715}{doi:\nolinkurl{10.1007/b106715}}
-
-
-\bibitem[Wu and Keogh(2023)]%
-        {wu2023flawed}
-\bibfield{author}{\bibinfo{person}{Renjie Wu} {and} \bibinfo{person}{Eamonn~J.
-  Keogh}.} \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{Current Time Series Anomaly Detection Benchmarks
-  Are Flawed and Are Creating the Illusion of Progress}.
-\newblock \bibinfo{journal}{\emph{{IEEE} Transactions on Knowledge and Data
-  Engineering}} \bibinfo{volume}{35}, \bibinfo{number}{3}
-  (\bibinfo{year}{2023}), \bibinfo{pages}{2421--2429}.
-\newblock
-\href{https://doi.org/10.1109/TKDE.2021.3112126}{doi:\nolinkurl{10.1109/TKDE.2021.3112126}}
-
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Adams \& MacKay(2007)Adams and MacKay]{adams2007bocpd}
+Ryan~Prescott Adams and David J.~C. MacKay.
+\newblock {Bayesian} online changepoint detection.
+\newblock \emph{arXiv preprint arXiv:0710.3742}, 2007.
+\newblock \doi{10.48550/arXiv.0710.3742}.
+
+\bibitem[Apruzzese et~al.(2022)Apruzzese, Pajola, and
+  Conti]{apruzzese2022crosseval}
+Giovanni Apruzzese, Luca Pajola, and Mauro Conti.
+\newblock The cross-evaluation of machine learning-based network intrusion
+  detection systems.
+\newblock \emph{{IEEE} Transactions on Network and Service Management},
+  19\penalty0 (4):\penalty0 5152--5169, 2022.
+\newblock \doi{10.1109/TNSM.2022.3157344}.
+
+\bibitem[Apruzzese et~al.(2023)Apruzzese, Laskov, and
+  Schneider]{apruzzese2023sok}
+Giovanni Apruzzese, Pavel Laskov, and Johannes Schneider.
+\newblock {SoK}: Pragmatic assessment of machine learning for network intrusion
+  detection.
+\newblock In \emph{2023 {IEEE} 8th European Symposium on Security and Privacy
+  ({EuroS\&P})}, pp.\  592--614. {IEEE}, 2023.
+\newblock \doi{10.1109/EuroSP57164.2023.00042}.
+
+\bibitem[Arp et~al.(2022)Arp, Quiring, Pendlebury, Warnecke, Pierazzi,
+  Wressnegger, Cavallaro, and Rieck]{arp2022dosdonts}
+Daniel Arp, Erwin Quiring, Feargus Pendlebury, Alexander Warnecke, Fabio
+  Pierazzi, Christian Wressnegger, Lorenzo Cavallaro, and Konrad Rieck.
+\newblock Dos and don'ts of machine learning in computer security.
+\newblock In \emph{31st {USENIX} Security Symposium ({USENIX} Security 22)},
+  pp.\  3971--3988. {USENIX} Association, 2022.
+
+\bibitem[Axelsson(2000)]{axelsson2000baserate}
+Stefan Axelsson.
+\newblock The base-rate fallacy and the difficulty of intrusion detection.
+\newblock \emph{{ACM} Transactions on Information and System Security},
+  3\penalty0 (3):\penalty0 186--205, 2000.
+\newblock \doi{10.1145/357830.357849}.
+
+\bibitem[Barber et~al.(2023)Barber, Cand{\`e}s, Ramdas, and
+  Tibshirani]{barber2023beyond}
+Rina~Foygel Barber, Emmanuel~J. Cand{\`e}s, Aaditya Ramdas, and Ryan~J.
+  Tibshirani.
+\newblock Conformal prediction beyond exchangeability.
+\newblock \emph{The Annals of Statistics}, 51\penalty0 (2):\penalty0 816--845,
+  2023.
+\newblock \doi{10.1214/23-AOS2276}.
+
+\bibitem[Barrett et~al.(2026{\natexlab{a}})Barrett, Dorai, Li, and
+  Rajaganapathy]{barrett2026fades}
+Seth Barrett, Gokila Dorai, Lin Li, and Swarnamugi Rajaganapathy.
+\newblock {FADES}: Adaptive drift estimation via conformal signals for
+  streaming intrusion detection.
+\newblock \emph{Electronics}, 15\penalty0 (10):\penalty0 2114,
+  2026{\natexlab{a}}.
+\newblock \doi{10.3390/electronics15102114}.
+
+\bibitem[Barrett et~al.(2026{\natexlab{b}})Barrett, Li, Dorai, and
+  Rajaganapathy]{barrett2026firce}
+Seth Barrett, Lin Li, Gokila Dorai, and Swarnamugi Rajaganapathy.
+\newblock {FIRCE}: A framework for intrusion response and conformal evaluation.
+\newblock In \emph{2026 International Conference on Smart Applications,
+  Communications and Networking ({SmartNets})}, pp.\  1--9, 2026{\natexlab{b}}.
+\newblock \doi{10.1109/SMARTNETS69662.2026.11604738}.
+\newblock arXiv:2605.01962.
+
+\bibitem[Beyer et~al.(2016)Beyer, Jones, Petoff, and Murphy]{beyer2016sre}
+Betsy Beyer, Chris Jones, Jennifer Petoff, and Niall~Richard Murphy (eds.).
+\newblock \emph{Site Reliability Engineering: How {Google} Runs Production
+  Systems}.
+\newblock O'Reilly Media, 2016.
+
+\bibitem[Biswas(2026)]{biswas2026protocol}
+Md~Anas Biswas.
+\newblock The evaluation protocol is the hidden variable: A drift-aware
+  re-examination of flow-based intrusion detection benchmarks.
+\newblock \emph{Preprints.org}, 2026.
+\newblock \doi{10.20944/preprints202606.0903.v1}.
+\newblock Preprint, posted 11 June 2026.
+
+\bibitem[Breunig et~al.(2000)Breunig, Kriegel, Ng, and Sander]{breunig2000lof}
+Markus~M. Breunig, Hans-Peter Kriegel, Raymond~T. Ng, and J{\"o}rg Sander.
+\newblock {LOF}: Identifying density-based local outliers.
+\newblock In \emph{Proceedings of the 2000 {ACM} {SIGMOD} International
+  Conference on Management of Data}, pp.\  93--104, 2000.
+\newblock \doi{10.1145/342009.335388}.
+
+\bibitem[Campos et~al.(2016)Campos, Zimek, Sander, Campello, Micenkov{\'a},
+  Schubert, Assent, and Houle]{campos2016evaluation}
+Guilherme~O. Campos, Arthur Zimek, J{\"o}rg Sander, Ricardo J. G.~B. Campello,
+  Barbora Micenkov{\'a}, Erich Schubert, Ira Assent, and Michael~E. Houle.
+\newblock On the evaluation of unsupervised outlier detection: Measures,
+  datasets, and an empirical study.
+\newblock \emph{Data Mining and Knowledge Discovery}, 30\penalty0 (4):\penalty0
+  891--927, 2016.
+\newblock \doi{10.1007/s10618-015-0444-8}.
+
+\bibitem[Cao et~al.(2025)Cao, Ma, Zhu, and Ting]{cao2024revisiting}
+Yang Cao, Yixiao Ma, Ye~Zhu, and Kai~Ming Ting.
+\newblock Revisiting streaming anomaly detection: Benchmark and evaluation.
+\newblock \emph{Artificial Intelligence Review}, 58\penalty0 (1):\penalty0 8,
+  2025.
+\newblock \doi{10.1007/s10462-024-10995-w}.
+
+\bibitem[Catillo et~al.(2021)Catillo, Del~Vecchio, Pecchia, and
+  Villano]{catillo2021critique}
+Marta Catillo, Andrea Del~Vecchio, Antonio Pecchia, and Umberto Villano.
+\newblock A critique on the use of machine learning on public datasets for
+  intrusion detection.
+\newblock In \emph{Quality of Information and Communications Technology
+  ({QUATIC} 2021)}, volume 1439 of \emph{Communications in Computer and
+  Information Science}, pp.\  253--266. Springer, 2021.
+\newblock \doi{10.1007/978-3-030-85347-1_19}.
+
+\bibitem[Catillo et~al.(2023)Catillo, Pecchia, and Villano]{catillo2023hype}
+Marta Catillo, Antonio Pecchia, and Umberto Villano.
+\newblock Machine learning on public intrusion datasets: Academic hype or
+  concrete advances in {NIDS}?
+\newblock In \emph{2023 53rd Annual {IEEE/IFIP} International Conference on
+  Dependable Systems and Networks, Supplemental Volume ({DSN-S})}, pp.\
+  132--136, 2023.
+\newblock \doi{10.1109/DSN-S58398.2023.00038}.
+
+\bibitem[Damasevicius et~al.(2020)Damasevicius, Venckauskas, Grigaliunas,
+  Toldinas, Morkevicius, Aleliunas, and Smuikys]{damasevicius2020litnet}
+Robertas Damasevicius, Algimantas Venckauskas, Sarunas Grigaliunas, Jevgenijus
+  Toldinas, Nerijus Morkevicius, Tautvydas Aleliunas, and Paulius Smuikys.
+\newblock {LITNET-2020}: An annotated real-world network flow dataset for
+  network intrusion detection.
+\newblock \emph{Electronics}, 9\penalty0 (5):\penalty0 800, 2020.
+\newblock \doi{10.3390/electronics9050800}.
+
+\bibitem[Davis \& Goadrich(2006)Davis and Goadrich]{davis2006prroc}
+Jesse Davis and Mark Goadrich.
+\newblock The relationship between precision-recall and {ROC} curves.
+\newblock In \emph{Proceedings of the 23rd International Conference on Machine
+  Learning ({ICML})}, pp.\  233--240, 2006.
+\newblock \doi{10.1145/1143844.1143874}.
+
+\bibitem[Ding \& Fei(2013)Ding and Fei]{ding2013iforestasd}
+Zhiguo Ding and Minrui Fei.
+\newblock An anomaly detection approach based on isolation forest algorithm for
+  streaming data using sliding window.
+\newblock \emph{{IFAC} Proceedings Volumes}, 46\penalty0 (20):\penalty0 12--17,
+  2013.
+\newblock \doi{10.3182/20130902-3-CN-3020.00044}.
+
+\bibitem[Elkan(2001)]{elkan2001cost}
+Charles Elkan.
+\newblock The foundations of cost-sensitive learning.
+\newblock In \emph{Proceedings of the Seventeenth International Joint
+  Conference on Artificial Intelligence ({IJCAI} 2001)}, pp.\  973--978. Morgan
+  Kaufmann, 2001.
+
+\bibitem[Engelen et~al.(2021)Engelen, Rimmer, and Joosen]{engelen2021cicids}
+Gints Engelen, Vera Rimmer, and Wouter Joosen.
+\newblock Troubleshooting an intrusion detection dataset: The {CICIDS2017} case
+  study.
+\newblock In \emph{2021 {IEEE} Security and Privacy Workshops ({SPW})}, pp.\
+  7--12, 2021.
+\newblock \doi{10.1109/SPW53761.2021.00009}.
+
+\bibitem[Fearnhead \& Liu(2007)Fearnhead and Liu]{fearnhead2007online}
+Paul Fearnhead and Zhen Liu.
+\newblock On-line inference for multiple changepoint problems.
+\newblock \emph{Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology)}, 69\penalty0 (4):\penalty0 589--605, 2007.
+\newblock \doi{10.1111/j.1467-9868.2007.00601.x}.
+
+\bibitem[Gama et~al.(2013)Gama, Sebasti{\~a}o, and
+  Rodrigues]{gama2013prequential}
+Jo{\~a}o Gama, Raquel Sebasti{\~a}o, and Pedro~Pereira Rodrigues.
+\newblock On evaluating stream learning algorithms.
+\newblock \emph{Machine Learning}, 90\penalty0 (3):\penalty0 317--346, 2013.
+\newblock \doi{10.1007/s10994-012-5320-9}.
+
+\bibitem[Guha et~al.(2016)Guha, Mishra, Roy, and Schrijvers]{guha2016rrcf}
+Sudipto Guha, Nina Mishra, Gourav Roy, and Okke Schrijvers.
+\newblock Robust random cut forest based anomaly detection on streams.
+\newblock In \emph{Proceedings of the 33rd International Conference on Machine
+  Learning ({ICML})}, volume~48 of \emph{Proceedings of Machine Learning
+  Research}, pp.\  2712--2721. {PMLR}, 2016.
+
+\bibitem[Gurjar \& Camp(2026)Gurjar and Camp]{gurjar2026tailrisk}
+Ambarish Gurjar and L.~Jean Camp.
+\newblock Predicting tail-risk escalation in {IDS} alert time series.
+\newblock \emph{arXiv preprint arXiv:2601.14299}, 2026.
+
+\bibitem[Han et~al.(2022)Han, Hu, Huang, Jiang, and Zhao]{han2022adbench}
+Songqiao Han, Xiyang Hu, Hailiang Huang, Minqi Jiang, and Yue Zhao.
+\newblock {ADBench}: Anomaly detection benchmark.
+\newblock In \emph{Advances in Neural Information Processing Systems 35
+  ({NeurIPS} 2022), Datasets and Benchmarks Track}, pp.\  32142--32159, 2022.
+\newblock \doi{10.52202/068431-2329}.
+\newblock arXiv:2206.09426.
+
+\bibitem[{Hellsice}(2024)]{pyod561}
+{Hellsice}.
+\newblock {ECOD} and {COPOD} decision functions switched.
+\newblock {PyOD} issue \#561,
+  \url{https://github.com/yzhao062/pyod/issues/561}, 2024.
+\newblock Opened 30 April 2024; open as of 3 September 2026.
+
+\bibitem[Knoblauch \& Damoulas(2018)Knoblauch and Damoulas]{knoblauch2018bocpd}
+Jeremias Knoblauch and Theodoros Damoulas.
+\newblock Spatio-temporal {Bayesian} on-line changepoint detection with model
+  selection.
+\newblock In \emph{Proceedings of the 35th International Conference on Machine
+  Learning ({ICML})}, volume~80 of \emph{Proceedings of Machine Learning
+  Research}, pp.\  2718--2727. {PMLR}, 2018.
+\newblock arXiv:1805.05383.
+
+\bibitem[K{\"u}nsch(1989)]{kunsch1989jackknife}
+Hans~R. K{\"u}nsch.
+\newblock The jackknife and the bootstrap for general stationary observations.
+\newblock \emph{The Annals of Statistics}, 17\penalty0 (3):\penalty0
+  1217--1241, 1989.
+\newblock \doi{10.1214/aos/1176347265}.
+
+\bibitem[Lanvin et~al.(2023)Lanvin, Gimenez, Han, Majorczyk, M{\'e}, and
+  Totel]{lanvin2022errors}
+Maxime Lanvin, Pierre-Fran{\c{c}}ois Gimenez, Yufei Han, Fr{\'e}d{\'e}ric
+  Majorczyk, Ludovic M{\'e}, and {\'E}ric Totel.
+\newblock Errors in the {CICIDS2017} dataset and the significant differences in
+  detection performances it makes.
+\newblock In \emph{Risks and Security of Internet and Systems ({CRiSIS} 2022)},
+  volume 13857 of \emph{Lecture Notes in Computer Science}, pp.\  18--33.
+  Springer, 2023.
+\newblock \doi{10.1007/978-3-031-31108-6_2}.
+
+\bibitem[Laxhammar \& Falkman(2014)Laxhammar and
+  Falkman]{laxhammar2014conformal}
+Rikard Laxhammar and G{\"o}ran Falkman.
+\newblock Online learning and sequential anomaly detection in trajectories.
+\newblock \emph{{IEEE} Transactions on Pattern Analysis and Machine
+  Intelligence}, 36\penalty0 (6):\penalty0 1158--1173, 2014.
+\newblock \doi{10.1109/TPAMI.2013.172}.
+
+\bibitem[Li et~al.(2020)Li, Zhao, Botta, Ionescu, and Hu]{li2020copod}
+Zheng Li, Yue Zhao, Nicola Botta, Cezar Ionescu, and Xiyang Hu.
+\newblock {COPOD}: Copula-based outlier detection.
+\newblock In \emph{2020 {IEEE} International Conference on Data Mining
+  ({ICDM})}, pp.\  1118--1123, 2020.
+\newblock \doi{10.1109/ICDM50108.2020.00135}.
+
+\bibitem[Li et~al.(2023)Li, Zhao, Hu, Botta, Ionescu, and Chen]{li2023ecod}
+Zheng Li, Yue Zhao, Xiyang Hu, Nicola Botta, Cezar Ionescu, and George~H. Chen.
+\newblock {ECOD}: Unsupervised outlier detection using empirical cumulative
+  distribution functions.
+\newblock \emph{{IEEE} Transactions on Knowledge and Data Engineering},
+  35\penalty0 (12):\penalty0 12181--12193, 2023.
+\newblock \doi{10.1109/TKDE.2022.3159580}.
+
+\bibitem[Liu et~al.(2022)Liu, Engelen, Lynar, Essam, and
+  Joosen]{liu2022errorprevalence}
+Lisa Liu, Gints Engelen, Timothy Lynar, Daryl Essam, and Wouter Joosen.
+\newblock Error prevalence in {NIDS} datasets: A case study on {CIC-IDS-2017}
+  and {CSE-CIC-IDS-2018}.
+\newblock In \emph{2022 {IEEE} Conference on Communications and Network
+  Security ({CNS})}, pp.\  254--262. {IEEE}, 2022.
+\newblock \doi{10.1109/CNS56114.2022.9947235}.
+
+\bibitem[Manzhos et~al.(2026)Manzhos, Ianevych, and Melnyk]{manzhos2026ap}
+Tetiana Manzhos, Tetiana Ianevych, and Olga Melnyk.
+\newblock Average precision at cutoff {$k$} under random rankings: Expectation
+  and variance.
+\newblock \emph{Modern Stochastics: Theory and Applications}, 13\penalty0
+  (3):\penalty0 357--374, 2026.
+\newblock \doi{10.15559/26-VMSTA298}.
+\newblock arXiv:2511.02571.
+
+\bibitem[Manzoor et~al.(2018)Manzoor, Lamba, and Akoglu]{manzoor2018xstream}
+Emaad Manzoor, Hemank Lamba, and Leman Akoglu.
+\newblock {xStream}: Outlier detection in feature-evolving data streams.
+\newblock In \emph{Proceedings of the 24th {ACM} {SIGKDD} International
+  Conference on Knowledge Discovery \& Data Mining ({KDD})}, pp.\  1963--1972,
+  2018.
+\newblock \doi{10.1145/3219819.3220107}.
+
+\bibitem[{mbongaerts}(2022)]{pyod401}
+{mbongaerts}.
+\newblock {ECOD} mixes train set and test set.
+\newblock {PyOD} issue \#401,
+  \url{https://github.com/yzhao062/pyod/issues/401}, 2022.
+\newblock Opened 28 April 2022; open as of 3 September 2026.
+
+\bibitem[McDermott et~al.(2024)McDermott, Zhang, Hansen, Angelotti, and
+  Gallifant]{mcdermott2024closerlook}
+Matthew~B. McDermott, Haoran Zhang, Lasse~Hyldig Hansen, Giovanni Angelotti,
+  and Jack Gallifant.
+\newblock A closer look at {AUROC} and {AUPRC} under class imbalance.
+\newblock In \emph{Advances in Neural Information Processing Systems 37
+  ({NeurIPS} 2024)}, pp.\  44102--44163, 2024.
+\newblock \doi{10.52202/079017-1400}.
+\newblock arXiv:2401.06091.
+
+\bibitem[Mirsky et~al.(2018)Mirsky, Doitshman, Elovici, and
+  Shabtai]{mirsky2018kitsune}
+Yisroel Mirsky, Tomer Doitshman, Yuval Elovici, and Asaf Shabtai.
+\newblock {Kitsune}: An ensemble of autoencoders for online network intrusion
+  detection.
+\newblock In \emph{Proceedings of the 2018 Network and Distributed System
+  Security Symposium ({NDSS})}. Internet Society, 2018.
+\newblock \doi{10.14722/ndss.2018.23204}.
+\newblock arXiv:1802.09089.
+
+\bibitem[Moczkodan \& Ragab(2026)Moczkodan and
+  Ragab]{moczkodan2026transformers}
+Zach Moczkodan and Hany Ragab.
+\newblock Do transformers actually help intrusion detection? {A} temporal
+  sequence evaluation on {CIC-IDS2017}.
+\newblock \emph{arXiv preprint arXiv:2606.11098}, 2026.
+
+\bibitem[Olszewski et~al.(2023)Olszewski, Lu, Stillman, Warren, Kitroser,
+  Pascual, Ukirde, Butler, and Traynor]{olszewski2023reproducibility}
+Daniel Olszewski, Allison Lu, Carson Stillman, Kevin Warren, Cole Kitroser,
+  Alejandro Pascual, Divyajyoti Ukirde, Kevin Butler, and Patrick Traynor.
+\newblock ``get in researchers; we're measuring reproducibility'': A
+  reproducibility study of machine learning papers in tier 1 security
+  conferences.
+\newblock In \emph{Proceedings of the 2023 {ACM} {SIGSAC} Conference on
+  Computer and Communications Security ({CCS})}, pp.\  3433--3459, 2023.
+\newblock \doi{10.1145/3576915.3623130}.
+
+\bibitem[Pendlebury et~al.(2019)Pendlebury, Pierazzi, Jordaney, Kinder, and
+  Cavallaro]{pendlebury2019tesseract}
+Feargus Pendlebury, Fabio Pierazzi, Roberto Jordaney, Johannes Kinder, and
+  Lorenzo Cavallaro.
+\newblock {TESSERACT}: Eliminating experimental bias in malware classification
+  across space and time.
+\newblock In \emph{28th {USENIX} Security Symposium ({USENIX} Security 19)},
+  pp.\  729--746. {USENIX} Association, 2019.
+
+\bibitem[Pevn{\'y}(2016)]{pevny2016loda}
+Tom{\'a}{\v{s}} Pevn{\'y}.
+\newblock {Loda}: Lightweight on-line detector of anomalies.
+\newblock \emph{Machine Learning}, 102\penalty0 (2):\penalty0 275--304, 2016.
+\newblock \doi{10.1007/s10994-015-5521-0}.
+
+\bibitem[Ring et~al.(2019)Ring, Wunderlich, Scheuring, Landes, and
+  Hotho]{ring2019datasets}
+Markus Ring, Sarah Wunderlich, Deniz Scheuring, Dieter Landes, and Andreas
+  Hotho.
+\newblock A survey of network-based intrusion detection data sets.
+\newblock \emph{Computers \& Security}, 86:\penalty0 147--167, 2019.
+\newblock \doi{10.1016/j.cose.2019.06.005}.
+
+\bibitem[Saito \& Rehmsmeier(2015)Saito and Rehmsmeier]{saito2015prplot}
+Takaya Saito and Marc Rehmsmeier.
+\newblock The precision-recall plot is more informative than the {ROC} plot
+  when evaluating binary classifiers on imbalanced datasets.
+\newblock \emph{{PLOS} {ONE}}, 10\penalty0 (3):\penalty0 e0118432, 2015.
+\newblock \doi{10.1371/journal.pone.0118432}.
+
+\bibitem[Sharafaldin et~al.(2018)Sharafaldin, Lashkari, and
+  Ghorbani]{sharafaldin2018cicids}
+Iman Sharafaldin, Arash~Habibi Lashkari, and Ali~A. Ghorbani.
+\newblock Toward generating a new intrusion detection dataset and intrusion
+  traffic characterization.
+\newblock In \emph{Proceedings of the 4th International Conference on
+  Information Systems Security and Privacy ({ICISSP})}, pp.\  108--116, 2018.
+\newblock \doi{10.5220/0006639801080116}.
+
+\bibitem[Sommer \& Paxson(2010)Sommer and Paxson]{sommer2010outside}
+Robin Sommer and Vern Paxson.
+\newblock Outside the closed world: On using machine learning for network
+  intrusion detection.
+\newblock In \emph{2010 {IEEE} Symposium on Security and Privacy}, pp.\
+  305--316. {IEEE}, 2010.
+\newblock \doi{10.1109/SP.2010.25}.
+
+\bibitem[Tan et~al.(2011)Tan, Ting, and Liu]{tan2011hst}
+Swee~Chuan Tan, Kai~Ming Ting, and Fei~Tony Liu.
+\newblock Fast anomaly detection for streaming data.
+\newblock In \emph{Proceedings of the Twenty-Second International Joint
+  Conference on Artificial Intelligence ({IJCAI} 2011)}, pp.\  1511--1516.
+  {AAAI} Press, 2011.
+\newblock \doi{10.5591/978-1-57735-516-8/IJCAI11-254}.
+
+\bibitem[Tatbul et~al.(2018)Tatbul, Lee, Zdonik, Alam, and
+  Gottschlich]{tatbul2018precision}
+Nesime Tatbul, Tae~Jun Lee, Stan Zdonik, Mejbah Alam, and Justin Gottschlich.
+\newblock Precision and recall for time series.
+\newblock In \emph{Advances in Neural Information Processing Systems 31
+  ({NeurIPS} 2018)}, pp.\  1924--1934, 2018.
+\newblock arXiv:1803.03639.
+
+\bibitem[van~den Burg \& Williams(2020)van~den Burg and
+  Williams]{vandeburg2020evaluation}
+Gerrit J.~J. van~den Burg and Christopher K.~I. Williams.
+\newblock An evaluation of change point detection algorithms.
+\newblock \emph{arXiv preprint arXiv:2003.06222}, 2020.
+
+\bibitem[Vovk et~al.(2005)Vovk, Gammerman, and Shafer]{vovk2005alrw}
+Vladimir Vovk, Alexander Gammerman, and Glenn Shafer.
+\newblock \emph{Algorithmic Learning in a Random World}.
+\newblock Springer, New York, 2005.
+\newblock \doi{10.1007/b106715}.
+
+\bibitem[Wu \& Keogh(2023)Wu and Keogh]{wu2023flawed}
+Renjie Wu and Eamonn~J. Keogh.
+\newblock Current time series anomaly detection benchmarks are flawed and are
+  creating the illusion of progress.
+\newblock \emph{{IEEE} Transactions on Knowledge and Data Engineering},
+  35\penalty0 (3):\penalty0 2421--2429, 2023.
+\newblock \doi{10.1109/TKDE.2021.3112126}.
 
 \end{thebibliography}

@@ -1,3 +1,14 @@
+> **RETIRED 2026-09-14 — historical.** This document was written for the ACM
+> DTRAP submission, which is no longer the target venue. The manuscript was
+> reset in the TMLR template on 2026-09-14 and is submitted through OpenReview;
+> the operative document is `TMLR_SUBMISSION_SHEET.md`. Nothing below is to be
+> pasted or sent anywhere. It is kept as the record of what was prepared, and
+> because two of these files carry the canonical lineage and provenance
+> paragraphs, which stay byte-identical across their five venues.
+> The suggested-reviewer block in section 8 below is likewise retired; TMLR
+> assigns reviewers through its action editors and takes no reviewer
+> suggestions from authors.
+
 # SUBMISSION_CONSOLE: DTRAP submission morning, top to bottom
 
 Work through this file in order on submission morning. Every field is in
