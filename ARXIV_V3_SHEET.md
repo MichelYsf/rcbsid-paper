@@ -1,8 +1,12 @@
 # ARXIV_V3_SHEET — replacement of arXiv:2605.24696, nothing submitted
 
-Assembled 2026-08-27, last rebuilt 2026-09-09 against commit
-**`10aa1bd19f4672d3e821f3b1624929002be76a12`**, whose tree holds the tarball and the
-23-page manuscript this sheet describes. The 2026-08-27 anchor that stood
+Assembled 2026-08-27, last rebuilt 2026-09-14 against commit
+**`adf9e62bcb69b0694ba1c33224c18f86e65e404b`**, whose tree holds the tarball and the
+24-page manuscript this sheet describes. **On 2026-09-14 the manuscript was
+reset in the official TMLR template** (tmlr.sty and tmlr.bst, unmodified; the
+named arXiv variant uses the template's `[preprint]` option), so the tarball
+now carries the three template files and the page count moved from 23 to 24,
+of which 20 are main body before the references and two appendices. The 2026-08-27 anchor that stood
 here, 083df8a, holds a 43,880 B tarball and a 17-page manuscript, and would
 have failed an operator who checked the upload against it.
 The Zenodo lineage: versions 2.0.0 (doi:10.5281/zenodo.22213264) and 2.1.0
@@ -11,9 +15,11 @@ on record 22638195 with its DOI **reserved: 10.5281/zenodo.22673735**. The
 Comments text below cites 2.2.0, so **publish that version before submitting
 this replacement**: an arXiv version is permanent, and a reserved DOI does not
 resolve until the record is published.
-Order per `HUMAN_ACTIONS.md`: **Zenodo 2.2.0 publish, then the DTRAP
-submission, then this replacement within 48 hours of it** (the editor note
-promises that window), then the companion's v2 replacement.
+Order per `HUMAN_ACTIONS.md`: **Zenodo 2.2.0 publish, then the TMLR
+submission on OpenReview, then this replacement**, then the companion's v2
+replacement. TMLR permits preprints at any time; the private note to the action
+editor says this corrected v3 will be posted after submission, so post it soon
+after and do not wait on the review.
 
 > **Immutable on submission:** an arXiv version is permanent. v3 will sit
 > publicly beside v1 and v2 forever; you cannot delete a version, only add v4.
@@ -24,12 +30,15 @@ promises that window), then the companion's v2 replacement.
 
 ## Step 1 — Files in the tarball
 
-Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (102,720 B). It contains
-the six source files plus the `figures/` directory and compiles standalone:
+Upload `packages/arxiv_v3/arxiv_v3_source.tar.gz` (113,636 B). It contains
+the six source files, the three TMLR template files and the `figures/`
+directory, and compiles standalone (verified by extracting it to an empty
+directory and running pdflatex twice):
 
 | file | why |
 |---|---|
-| `main.tex` | named-author variant (not the anonymous DTRAP build) |
+| `main.tex` | named-author variant, `\usepackage[preprint]{tmlr}` (not the anonymous submission build) |
+| `tmlr.sty`, `tmlr.bst`, `fancyhdr.sty` | the official TMLR template, unmodified, from github.com/JmlrOrg/tmlr-style-file |
 | `numbers.tex` | the generated macro layer every number resolves through |
 | `references.bib` | 51 entries |
 | `main.bbl` | **required** — arXiv does not run BibTeX |
@@ -37,8 +46,9 @@ the six source files plus the `figures/` directory and compiles standalone:
 | `table_prevalence_sweep.tex` | `\input` by main.tex |
 | `figures/*.pdf` | the four manuscript figures, rendered from archived manifests |
 
-Verified locally: 3-pass pdflatex+bibtex, **exit 0, 0 undefined references, 0
-overfull boxes, 23 pages**, author named on page 1.
+Verified locally: 3-pass pdflatex+bibtex, **exit 0, 0 undefined references, 24
+pages**, one overfull box of 0.75pt in the prevalence-sweep table (inside the
+gate's 2pt tolerance), author named on page 1.
 
 ## Step 2 — Title (replaces the v1/v2 title)
 
@@ -139,7 +149,7 @@ instance that has since been decommissioned, and re-running them on the
 author's Windows machine would change published numbers -- the cross-platform
 difference this project records as corrected incident CI-16. They were
 therefore not re-run, and the other twenty-five were deliberately left as they
-are rather than regenerate a subset that would not change this disclosure. 23
+are rather than regenerate a subset that would not change this disclosure. 24
 pages.
 ```
 
@@ -151,7 +161,7 @@ No sentence needs appending; the concept DOI 10.5281/zenodo.20074589 is not
 cited.
 
 **The Comments text now carries the provenance disclosure** in the same words
-as the Zenodo description and the DTRAP editor note — 27 of 33 live run
+as the Zenodo description and the retired DTRAP editor note — 27 of 33 live run
 manifests ran on an uncommitted tree, two irreducibly. Decided 2026-08-27,
 reaffirmed 2026-09-09: accepted, not re-run. The counts were corrected on
 2026-09-09 from the 19 of 25 the canon had carried since version 2.0.0; they
@@ -171,8 +181,8 @@ to correct.
 
 ## Step 6 — Before pressing submit
 
-1. Preview arXiv's own build. Confirm **23 pages** and **your name on page 1**
-   (this is the named variant; the anonymous build is for DTRAP only).
+1. Preview arXiv's own build. Confirm **24 pages** and **your name on page 1**
+   (this is the named variant; the anonymous build is for the TMLR submission only).
 2. Confirm the Comments field is the NO VENUE CLAIM variant.
 3. Confirm the abstract has no LaTeX macros left in it (the text above is
    already expanded).

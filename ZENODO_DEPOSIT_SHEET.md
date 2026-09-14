@@ -1,4 +1,4 @@
-# ZENODO_DEPOSIT_SHEET — version 2.2.0 STAGED 2026-09-09, DOI reserved, nothing uploaded
+# ZENODO_DEPOSIT_SHEET — version 2.2.0 STAGED 2026-09-14, DOI reserved, nothing uploaded
 
 > **Versions 2.0.0 and 2.1.0 are LIVE and frozen.** 2.0.0 was published
 > 2026-08-31 (version DOI **10.5281/zenodo.22213264**); 2.1.0 was published
@@ -26,17 +26,30 @@
 > outward action (Step 9). The provenance-limitation canon is deliberately
 > untouched; see the note under Step 0.
 
-Assembled 2026-09-09 against commit **`10aa1bd19f4672d3e821f3b1624929002be76a12`**, the
+Assembled 2026-09-14 against commit **`adf9e62bcb69b0694ba1c33224c18f86e65e404b`**, the
 packaging commit whose tree holds the five files of Step 2 byte-for-byte as
 staged (their SHA-256 values are recorded there). The packaging commit moved twice on
 2026-09-09 and 224d130 is no longer it: the DOI propagation changed
 `README.md`, `CITATION.cff` and two scripts, and the audit fixes that followed
 changed three more scripts and added `scripts/check_tarball_anonymity.py`. All
-of those ship inside the code zip, which is why it is now 145 entries rather
+of those ship inside the code zip, which is why it grew past 144 entries; the
+TMLR reset of 2026-09-14 added the template files and a source builder, so it
+is now 149 entries rather
 than 144. This sheet is committed one commit ahead of the packaging commit,
 and changes no file it names. If you rebuild anything
 after that, run `git rev-parse HEAD` on a clean tree and update Step 2 and
 Step 7 before uploading.
+
+> **What moved on 2026-09-14.** The manuscript source inside the code zip is
+> now the TMLR-template build: `paper/main.tex` reset in the unmodified
+> `tmlr.sty`/`tmlr.bst` (both ship in `paper/`), the alternative reset
+> formulation and the provenance mechanics moved to two appendices, the
+> limitations consolidated, one framing paragraph added to the introduction
+> and one clause to the abstract, citations in natbib author-year form, and
+> the figures re-rendered at the template's text width. No macro, table value
+> or claim changed; `paper/numbers.tex` is byte-identical to the previous
+> build. Two builder scripts changed and one was added
+> (`scripts/build_anonymous_source.py`), so the zip has 149 entries.
 
 > **Why the checksums move even when nothing does.** Zip and gzip store a
 > timestamp per entry, and pdflatex stamps a creation date, so rebuilding
@@ -148,8 +161,8 @@ including the two that this round's document regenerations created.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` (145 entries, 1,264,599 B unzipped) | 448,411 B | `c7e6c4aae6106e06368e92f56742c9ec44475e500093db8da5c9f8da1cf6b55e` |
-| 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `2b1ff2fa78c9086105efc02ed84824231a0a2a322f2c7466df648734ee095cfa` |
+| 1 | `rcbsid_rebuild_code.zip` (149 entries, 1,323,684 B unzipped) | 463,583 B | `afcaa678793aaca68ccf9494e4ed6a41f579ccd48389de39fc74e6fcc8c393bf` |
+| 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `6757b874e0d559c354af6aab15cb69855a7038c99d96cdab56f700fb14002ac8` |
 | 3 | `EXPECTED_SHA256.txt` (unchanged from 2.1.0 and 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` (unchanged from 2.1.0 and 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
 | 5 | `prevalence_sweep_cicids.csv` (unchanged from 2.1.0 and 2.0.0) | 48,587 B | `ba096d1dbb34a81c93df97ba0d646f2654dcc3dc26769b1bb2995b485ad22759` |
@@ -190,8 +203,9 @@ Reproducibility package for "Stream Assembly Is an Uncontrolled Treatment in
 Streaming Intrusion-Detection Benchmarks".
 
 Version 2.2.0 adds, over version 2.1.0, the revisions of the final referee
-round of 9 September 2026 and the manuscript source they produced, which is 23
-pages. Eleven findings were verified against the code, the archived manifests
+round of 9 September 2026 and the manuscript source they produced, reset on 14
+September 2026 in the TMLR journal template, at 24 pages of which 20 are main
+body. Eleven findings were verified against the code, the archived manifests
 and the built PDF before anything was changed. The substantive results are
 these: the discussion of the alternative reset formulation is restated in the
 quantities that were actually measured, rather than as two failures in
@@ -257,7 +271,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/10aa1bd19f4672d3e821f3b1624929002be76a12` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/adf9e62bcb69b0694ba1c33224c18f86e65e404b` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
 Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
@@ -284,7 +298,7 @@ Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
    10.5281/zenodo.22673735 and that the five files are at the Step 2
    sizes. **If Zenodo mints a different DOI, stop**: the whole repository
    already cites the reserved one, and it would all have to be re-propagated
-   before anything goes to DTRAP or arXiv.
+   before anything goes to TMLR or arXiv.
 2. Optional: annotate the 2.1.0 record's description with one sentence
    naming 2.2.0 as the version that carries the final referee round's
    manuscript. Metadata on 2.1.0 stays editable; its files stay frozen.
