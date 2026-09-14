@@ -1,6 +1,6 @@
 # TMLR_SUBMISSION_SHEET — submission of the manuscript to Transactions on Machine Learning Research, nothing submitted
 
-Assembled 2026-09-14 against commit **`1dc670930b517ce097f369c96f69e91dc91dc35e`**, whose tree
+Assembled 2026-09-14 against commit **`2bfb89674001f2718b2099de072c4a52ae7c9b89`**, whose tree
 holds the two files of Step 3 at the sizes given there. Venue guidance below
 was read on 2026-09-14 from jmlr.org/tmlr/author-guide.html, the OpenReview
 submission invitation `TMLR/-/Submission` (fields and their order are quoted
@@ -19,8 +19,14 @@ submission; the anonymous PDF itself names no version, DOI or repository.
 > **Anonymity, verified 2026-09-14.** The PDF, the artifact zip and the source
 > tarball carry no author name, ORCID, email, machine username, repository or
 > branch name, Zenodo DOI or URL, GitHub handle, arXiv identifier of either
-> preprint, IEEE record identifier, former title or project codename (the
-> lower-case module name `caliburn_variants` remains, as an import target);
+> preprint, IEEE record identifier, former title or project codename in any
+> case form. The module that carried the codename as its name ships inside
+> the artifact under a neutral name, `scripts/codename_variants.py`, with its
+> test, its three importing scripts, one function name and two constants
+> rewritten to match; no run manifest, figure manifest or macro-index entry
+> ever named it, so nothing else moved. Inside the extracted artifact all
+> six artifact-safe checks pass, every shipped Python file compiles, the
+> renamed test module passes under pytest, and every import resolves.
 > `tar tvf` shows zeroed
 > owner metadata on every member. `scripts/build_anonymous_artifact.py` fails
 > its own build if any identity token survives, `scripts/check_tarball_anonymity.py`
@@ -164,7 +170,7 @@ N/A
 | # | file | size | role |
 |---|---|---|---|
 | 1 | `packages/dtrap/manuscript_anonymous.pdf` | 500,412 B | the submission PDF, 24 pages |
-| 2 | `packages/dtrap/artifact_anonymous.zip` | 627,840 B | the single supplementary file, 236 entries |
+| 2 | `packages/dtrap/artifact_anonymous.zip` | 627,614 B | the single supplementary file, 236 entries |
 
 Read both sizes off the tree at the commit named at the top of this sheet
 before uploading. Run `python scripts/check_tarball_anonymity.py` and rebuild

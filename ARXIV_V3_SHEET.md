@@ -1,7 +1,7 @@
 # ARXIV_V3_SHEET — replacement of arXiv:2605.24696, nothing submitted
 
 Assembled 2026-08-27, last rebuilt 2026-09-14 against commit
-**`1dc670930b517ce097f369c96f69e91dc91dc35e`**, whose tree holds the tarball and the
+**`2bfb89674001f2718b2099de072c4a52ae7c9b89`**, whose tree holds the tarball and the
 24-page manuscript this sheet describes. **On 2026-09-14 the manuscript was
 reset in the official TMLR template** (tmlr.sty and tmlr.bst, unmodified; the
 named arXiv variant uses the template's `[preprint]` option), so the tarball

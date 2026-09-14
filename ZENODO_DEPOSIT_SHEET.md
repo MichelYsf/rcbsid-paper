@@ -26,7 +26,7 @@
 > outward action (Step 9). The provenance-limitation canon is deliberately
 > untouched; see the note under Step 0.
 
-Assembled 2026-09-14 against commit **`1dc670930b517ce097f369c96f69e91dc91dc35e`**, the
+Assembled 2026-09-14 against commit **`2bfb89674001f2718b2099de072c4a52ae7c9b89`**, the
 packaging commit whose tree holds the five files of Step 2 byte-for-byte as
 staged (their SHA-256 values are recorded there). The packaging commit moved twice on
 2026-09-09 and 224d130 is no longer it: the DOI propagation changed
@@ -166,7 +166,7 @@ including the two that this round's document regenerations created.
 
 | # | file | size | sha256 |
 |---|---|---|---|
-| 1 | `rcbsid_rebuild_code.zip` (149 entries, 1,327,907 B unzipped) | 464,720 B | `30d169290d48d232dc4a92abbba846e5145659ff0f2d90049b07c844ec5896a5` |
+| 1 | `rcbsid_rebuild_code.zip` (149 entries, 1,329,422 B unzipped) | 465,129 B | `3a5e9aeb5f680b317b524bca87007e75038df2500950aeffaa80d5f11aec291e` |
 | 2 | `manifests_bundle.zip` (95 entries, 966,981 B unzipped) | 171,747 B | `7ec14fd4564e7bbb2895960b46ff957a93259727b0cfadfa0ca7ebdb67208b6c` |
 | 3 | `EXPECTED_SHA256.txt` (unchanged from 2.1.0 and 2.0.0) | 932 B | `6ebe8ad220ebf5b02e581e9dd0f5ad91a2c36c9a98cb5d129978f6a9bde7edc5` |
 | 4 | `construction_contrast.csv` (unchanged from 2.1.0 and 2.0.0) | 4,755 B | `f3c94a988500b31ffd4b03c722fe6a8bfe8607d0a18360986df7f205cc06486e` |
@@ -276,7 +276,7 @@ from that audit. Earlier manuscript versions cite doi:10.5281/zenodo.20074590, w
 
 | relation | identifier | note |
 |---|---|---|
-| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/1dc670930b517ce097f369c96f69e91dc91dc35e` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
+| **is derived from** | `https://github.com/MichelYsf/rcbsid-paper/tree/2bfb89674001f2718b2099de072c4a52ae7c9b89` | **the commit, not the branch**: the one commit whose tree holds the five Step 2 files byte-for-byte as staged; replaces the inherited 389540f… link, which belongs to 2.1.0 |
 | is supplement to | `arXiv:2605.24696` | inherited, unchanged |
 
 Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
