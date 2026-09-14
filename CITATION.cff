@@ -3,7 +3,7 @@ title: "Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Dete
 message: >-
   If you use this software, please cite it using this metadata. This is
   version 2.2.0 of the record lineage (concept DOI 10.5281/zenodo.20074589),
-  released 2026-09-09 with the revisions of the final pre-submission review
+  released 2026-09-14 with the revisions of the final pre-submission review
   round added. Version 2.1.0 (doi:10.5281/zenodo.22638195) added the manifests
   of the pre-submission review rounds; version 2.0.0
   (doi:10.5281/zenodo.22213264, published 2026-08-31) is the corrected rebuild
@@ -18,7 +18,7 @@ authors:
     orcid: "https://orcid.org/0009-0000-0664-8228"
 version: "2.2.0"
 doi: "10.5281/zenodo.22673735"
-date-released: "2026-09-09"
+date-released: "2026-09-14"
 license: "Apache-2.0"
 repository-code: "https://github.com/MichelYsf/rcbsid-paper"
 keywords:

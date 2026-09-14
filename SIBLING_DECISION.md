@@ -80,7 +80,8 @@ The companion's *technical* problem is unchanged and is not a venue question:
 it shares part of the audited codebase, and the method-identity findings of the
 audit apply to that shared lineage. The FINAL disposition at the top of this
 file resolves it: a v2 replacement carrying the prepared correction note.
-Nothing in this repository's submission path depends on it — the DTRAP
-submission and the arXiv v3 replacement of the main paper proceed first
+Nothing in this repository's submission path depends on it — the TMLR
+submission (the venue since 2026-09-14; DTRAP before that) and the arXiv v3
+replacement of the main paper proceed first
 (`HUMAN_ACTIONS.md` steps 3–4), and the companion replacement is step 5. No
 artifact here may assert that the replacement has been posted until it has.

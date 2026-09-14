@@ -56,6 +56,24 @@ def main() -> int:
         # the anonymous master withholds which measurements are shared because
         # naming them identifies the earlier versions; the named arXiv posting
         # has no such constraint and states them in full.
+        ("Section~\\ref{sec:disclosure} states which measurements this paper shares with\n"
+         "those versions and which are new; the per-result-group account and the dated\n"
+         "correction history are supplied to the action editor confidentially, because\n"
+         "printing them here would defeat anonymization.",
+         "Section~\\ref{sec:disclosure} states which measurements this paper shares with\n"
+         "those versions and which are new, and gives the per-result-group account; the\n"
+         "dated correction history is the corrected-incident log in the artifact."),
+        ("Earlier versions of this manuscript were publicly posted and are superseded by\n"
+         "this one. Because a per-result-group account of what is reused, re-derived,\n"
+         "corrected, withdrawn or new would identify those versions --- and they are not\n"
+         "anonymous --- that account is supplied to the action editor confidentially\n"
+         "rather than printed here, together with the dated version history and the list of\n"
+         "claims each correction invalidates.",
+         "Earlier versions of this manuscript (arXiv:2605.24696 v1, posted 23 May 2026,\n"
+         "and v2, posted 25 June 2026) were publicly posted and are superseded by this\n"
+         "one. The per-result-group account of what is reused, re-derived, corrected,\n"
+         "withdrawn or new follows; the dated version history and the list of claims\n"
+         "each correction invalidates are the corrected-incident log in the artifact."),
         ("is part of the account supplied to the action editor, because naming\n"
          "them here would identify the earlier versions.",
          "is as follows. The pooled LITNET composite and the assembled CICIDS arm\n"

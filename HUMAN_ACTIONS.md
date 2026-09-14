@@ -43,8 +43,11 @@ a Zenodo DOI cannot be withdrawn.
 python scripts/check_provenance.py --publish-ready
 ```
 
-**Status 2026-09-09: the round is committed and pushed, the tree is clean, and
-every base commit any manifest records resolves in the pushed history.** The
+**Status 2026-09-14: the TMLR reformat round is committed and pushed at its
+end, the tree is clean, and every base commit any manifest records resolves
+in the pushed history. Run `--publish-ready` before the deposit; it prints
+whether HEAD is on the remote, and the Step 7 commit link resolves only if
+it is.** The
 check still exits 1, on one point only: 27 of 33 live run manifests ran while
 the tree carried uncommitted edits, so their exact source state is not
 recoverable (the base commit is). Two of those cannot be regenerated at all ---
@@ -81,7 +84,7 @@ re-propagated.
 ## 2. DOI propagation for 2.2.0 — EXECUTED 2026-09-09, before the publish
 
 `CITATION.cff` carries doi 10.5281/zenodo.22673735, version 2.2.0,
-date-released 2026-09-09; the canonical lineage sentence in all five venue
+date-released 2026-09-14; the canonical lineage sentence in all five venue
 texts names 2.2.0 as the version accompanying this manuscript and keeps the
 1.0.0, 2.0.0 and 2.1.0 lineage intact; the editor note, the prior-appearance
 note, the cover letter in both renders, the README, the artifact access

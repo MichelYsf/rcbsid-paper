@@ -1,3 +1,8 @@
+> **RETIRED 2026-09-14 — historical.** This reply was drafted for an ACM
+> editorial thread about ORCID during the DTRAP preparation. No DTRAP
+> submission was made and the venue is now TMLR, so there is no thread to
+> reply to. Do not send. Kept as the record of what was prepared.
+
 # Reply to the editorial clarification request (Delman) — ORCID resolution
 
 **Context for the operator.** The underlying correspondence is not on this

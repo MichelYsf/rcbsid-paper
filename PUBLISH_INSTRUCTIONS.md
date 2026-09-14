@@ -34,9 +34,10 @@ where `tar tvf` prints it without extracting anything.
    eye cannot catch at all. Stated precisely (CI-35): the base commit in such a
    stamp *does* resolve, and every one recorded here is an ancestor of the
    pushed branch, so a reader reaches the code to commit granularity; what is
-   lost is the uncommitted delta at run time. `zenodo_metadata.md` names the
-   GitHub repo as an *is derived from* identifier on a deposit that cannot be
-   withdrawn, so this is the invariant with no undo.
+   lost is the uncommitted delta at run time. `ZENODO_DEPOSIT_SHEET.md` Step 7
+   names one GitHub commit as the *is derived from* identifier on a deposit
+   that cannot be withdrawn, so this is the invariant with no undo; that
+   commit must be pushed before the deposit.
    **As of 2026-09-09, 27 of the 33 live run manifests carry the
    uncommitted-tree marker, two of them irreducibly.** The accepted decision
    and the disclosure wording are in `ZENODO_DEPOSIT_SHEET.md` Step 0 and
@@ -48,8 +49,9 @@ where `tar tvf` prints it without extracting anything.
 - **arxiv_v3/** — the v3 replacement for arXiv:2605.24696: source tarball
   (`arxiv_v3_source.tar.gz`, compiles standalone: main.tex + numbers.tex +
   references.bib + main.bbl + the unmodified TMLR template files + the two
-  generated tables copied in), the Comments-field text in both
-  sibling-decision variants, and the title-change note.
+  generated tables copied in) and the title-change note in `METADATA.md`. The
+  Comments-field text lives in `packages/sibling/ARXIV_V3_COMMENT.txt`; use
+  its NO VENUE CLAIM variant, the two below it are retired and false.
 - **zenodo/** — the deposit bundle, always staged as a **new version** in the
   lineage that begins at Zenodo record 10.5281/zenodo.20074590 (v1.0.0 of
   2026-05-07, the pre-audit artifact; the "first deposit" description that

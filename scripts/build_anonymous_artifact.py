@@ -32,6 +32,13 @@ IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                # appears in the manuscript, so a referee has no innocent
                # reason to have seen either.
                b"rcbsid-paper", b"rebuild/honest-v1",
+               # The two public preprints resolve to listings that name the
+               # author, the IEEE record id names a submission of theirs, and
+               # the former title and the project codename are one web search
+               # from either. TMLR's guide: double blind is maintained by not
+               # linking to another version that includes the authors' names.
+               b"2605.24696", b"2510.09619", b"TDSC-2025-10-1842",
+               b"Operationally Calibrated Streaming", b"CALIBURN",
                # Zenodo record ids: each resolves to a page naming the author
                b"22673735", b"22638195", b"22213264", b"20074590",
                b"20074589", b"zenodo.org"]
@@ -80,6 +87,23 @@ def scrub(rel: str, data: bytes) -> bytes:
     # username was scrubbed, which is the public repository's name.
     data = data.replace(b"rcbsid-paper", b"[repo-redacted-for-review]")
     data = data.replace(b"rebuild/honest-v1", b"[branch-redacted-for-review]")
+    # the named preprints, in every form they are written
+    data = re.sub(rb"arXiv:\s*2605\.24696(?:v\d)?", b"[preprint-id-redacted-for-review]", data)
+    data = re.sub(rb"arXiv:\s*2510\.09619(?:v\d)?", b"[companion-id-redacted-for-review]", data)
+    data = data.replace(b"2605.24696", b"[preprint-id-redacted-for-review]")
+    data = data.replace(b"2510.09619", b"[companion-id-redacted-for-review]")
+    data = data.replace(b"TDSC-2025-10-1842", b"[record-id-redacted-for-review]")
+    data = data.replace(b"Operationally Calibrated Streaming",
+                        b"[former-title-redacted-for-review]")
+    # the underscore form the tarball file names use
+    data = data.replace(b"2605_24696", b"[preprint-id-redacted-for-review]")
+    data = data.replace(b"2510_09619", b"[companion-id-redacted-for-review]")
+    # the project codename: upper case everywhere, and any case in prose.
+    # The lower-case module name caliburn_variants is an import target in
+    # code and stays; it is reported as a known residual.
+    data = data.replace(b"CALIBURN", b"[codename-redacted-for-review]")
+    if rel.endswith((".md", ".txt")):
+        data = re.sub(rb"(?i)caliburn", b"[codename-redacted-for-review]", data)
     # Zenodo record identifiers resolve to a page naming the author, so the
     # double-anonymous artifact redacts them wherever the correction log or
     # README carries them; the scan below then proves none survive.
@@ -95,6 +119,9 @@ def scrub(rel: str, data: bytes) -> bytes:
     if rel == "README.md":
         data = re.sub(rb"https://github\.com/\S+", b"[public-repo-redacted-for-review]", data)
         data = data.replace(b"MichelYsf", b"[redacted]")
+        # CITATION.cff is excluded from this zip; do not point a reviewer at it
+        data = data.replace(b"See `CITATION.cff`.",
+                            b"The citation file is withheld from this anonymized copy.")
     if rel == "paper/main.tex":
         pass  # already the anonymous variant
     return data

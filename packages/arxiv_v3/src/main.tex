@@ -21,8 +21,10 @@
 
 \input{numbers}
 
-\title{Stream Assembly Is an Uncontrolled Treatment in Streaming
-Intrusion-Detection Benchmarks}
+\title{Stream Assembly Is an Uncontrolled Treatment in\\
+Streaming Intrusion-Detection Benchmarks}
+\hypersetup{pdftitle={Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks},
+            pdfauthor={}, pdfsubject={}, pdfkeywords={}}
 
 % Not printed while tmlr is loaded without [accepted] or [preprint]; the
 % template prints "Anonymous authors, Paper under double-blind review".
@@ -132,9 +134,8 @@ sweep, re-derived from the archived pre-audit runs --- by a script that wrote,
 in the same execution, an archived manifest recording the git commit,
 configuration hash, input SHA-256, seed, environment hash and output path.
 Section~\ref{sec:disclosure} states which measurements this paper shares with
-those versions and which are new; the per-result-group account and the dated
-correction history are supplied to the action editor confidentially, because
-printing them here would defeat anonymization.
+those versions and which are new, and gives the per-result-group account; the
+dated correction history is the corrected-incident log in the artifact.
 
 \subsection*{Where this work sits}
 Read as machine-learning evaluation methodology, this paper makes three points
@@ -144,17 +145,20 @@ into an evaluation stream change the held-out sample, its class prevalence and
 its order at once, and so change what a reported number measures. The
 benchmark-criticism literature describes effects of this kind for temporal
 bias~\citep{pendlebury2019tesseract}, for the evaluation of anomaly
-detectors~\citep{campos2016evaluation,han2022adbench,wu2023flawed} and for
-security machine learning generally~\citep{arp2022dosdonts,catillo2023hype};
-this paper measures one such effect on a fixed multiset. Second, a widely used
-library scores transductively: ECOD in PyOD recomputes its empirical
-distributions over the training matrix concatenated with the batch it is asked
-to score, so a fixed record's score depends on the batch it is scored within,
-and we quantify that dependence at fixed model and fixed batch size. Third,
-reporting can be made provenance-enforced: every number here resolves through
-a generated macro to an archived run manifest, and the build fails on any that
-does not, which addresses the reproducibility gaps documented for this
-field~\citep{olszewski2023reproducibility,apruzzese2022crosseval}.
+detectors~\citep{campos2016evaluation,wu2023flawed}, for how much a
+network-intrusion result depends on which corpora are
+combined~\citep{apruzzese2022crosseval}, and for security machine learning
+generally~\citep{arp2022dosdonts,catillo2023hype}; this paper measures one
+such effect on a fixed multiset. Second, a widely used library scores
+transductively: ECOD in PyOD recomputes its empirical distributions over the
+training matrix concatenated with the batch it is asked to score, so a fixed
+record's score depends on the batch it is scored within, and we quantify that
+dependence with the evaluated records and the fitted model held fixed, across
+batch size and, separately, at fixed batch size. Third, reporting can be made
+provenance-enforced: every measured value here resolves through a generated
+macro to an archived run manifest, and the build fails on any that does not,
+which addresses the reproducibility gap documented for this
+field~\citep{olszewski2023reproducibility}.
 
 \subsection*{Contributions}
 \begin{enumerate}
@@ -364,7 +368,7 @@ claim about that here and measure it directly in
 Section~\ref{sec:branch}.
 
 \subsection{The run-length posterior below the cap, and at it}
-In the Adams and MacKay recursion as published~\citep{adams2007bocpd}
+In the recursion of \citet{adams2007bocpd} as published
 (their Eq.~3 and Algorithm~1), the changepoint and growth branches at step $t$
 carry the same run-conditional predictive term, which cancels in the posterior normalization: under a
 constant hazard the reset posterior $P(r_t{=}0\mid x_{1:t})$ equals the hazard
@@ -425,9 +429,9 @@ the synthetic probe ($P(r{=}0)$ peaks at \SSixProbeCorrectedPeak{} against
 real data ($AP=\SSixCorrectedAucpr$ against \SSixOriginalAucpr, AUC-ROC
 \SSixCorrectedAucroc): its short-run mass saturates and the score sits at the
 $0.25$ cap on \SSixDiagCorrectedFracAtCap{} of the diagnostic records. The two
-variants are degenerate in different quantities, and neither is change-point
-detection; the appendix states each in the quantity measured, and what the
-one-stream, one-seed run does not establish.
+variants are degenerate in different quantities, and we claim neither as
+change-point detection; the appendix states each in the quantity measured, and
+what the one-stream, one-seed run does not establish.
 
 \section{Datasets, Assembly, and Protocol}
 \label{sec:streams}
@@ -536,7 +540,7 @@ taken as the positive-class prevalence $p$; the exact finite-sample expectation
 of step-wise $AP$ under a uniformly random permutation differs from $p$ in the
 fifth decimal (\ChanceExactNaturalSliceAucpr{} against
 \SFourCicidsNaturalChanceFloor{} on the timestamp-order held-out slice; the
-full-list case of Theorem~1 of \citet{manzhos2026ap}) and
+full-list case of Theorem~1 of \citealt{manzhos2026ap}) and
 changes no conclusion here; it is an expectation, not a lower bound, and a
 ranking can fall below it \\
 reported precision & every \emph{dimensionless} metric on $[0,1]$ ---
@@ -1217,8 +1221,9 @@ ledger maps every sentence of the abstract and introduction to its generating
 run. The build fails on a measurement-shaped number with no manifested value,
 on a macro two runs claim with different values, and on drift between the
 derived macro index and the manifests behind it. Protocol constants that
-define the experiment rather than result from it, and values quoted from cited
-work, are typed and identified as such where they appear. What the checks
+define the experiment rather than result from it (the 70/15/15 split, budget
+sizes, the auxiliary weight, library versions) and values quoted from cited
+work are typed, and are identified as such where they appear. What the checks
 cover, and what they do not --- the correctness of code, labels,
 preprocessing or interpretation, which no provenance check reaches --- is
 stated in Appendix~\ref{app:provenance}. Provenance establishes that a
@@ -1229,12 +1234,11 @@ checks ship in the artifact.
 \section{Relationship to Prior Versions of This Work}
 \label{sec:disclosure}
 
-Earlier versions of this manuscript were publicly posted and are superseded by
-this one. Because a per-result-group account of what is reused, re-derived,
-corrected, withdrawn or new would identify those versions --- and they are not
-anonymous --- that account is supplied to the action editor confidentially
-rather than printed here, together with the dated version history and the list of
-claims each correction invalidates.
+Earlier versions of this manuscript (arXiv:2605.24696 v1, posted 23 May 2026,
+and v2, posted 25 June 2026) were publicly posted and are superseded by this
+one. The per-result-group account of what is reused, re-derived, corrected,
+withdrawn or new follows; the dated version history and the list of claims
+each correction invalidates are the corrected-incident log in the artifact.
 
 One statement can be made in the body without breaking anonymity, and is
 made here because it bears on how the results should be read. Some
@@ -1317,9 +1321,10 @@ the counts bound what it could find.
 scores behind the LITNET per-stream values, the pooled composite and the
 prevalence sweep were not archived, so those results carry no interval and
 have weaker inferential support than the headline contrast. Intervals would
-state whether the per-capture prevalence spread and the sweep's lift ordering
-are stable under resampling; they would not change the pooling identity,
-which is arithmetic.
+state whether the per-stream orderings of Table~\ref{tab:litnet} and the
+sweep's lift ordering are stable under resampling of the evaluated slice; the
+pooling identity is arithmetic on counts and carries no sampling
+uncertainty.
 \item \emph{Held-out diagnostics for the alternative reset formulation.}
 The diagnostics of Appendix~\ref{app:ablation} are measured on the first
 \SSixDiagWindowRows{} records of the stream and the detection metrics on the
