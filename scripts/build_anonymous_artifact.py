@@ -38,7 +38,12 @@ IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                # from either. TMLR's guide: double blind is maintained by not
                # linking to another version that includes the authors' names.
                b"2605.24696", b"2510.09619", b"TDSC-2025-10-1842",
-               b"Operationally Calibrated Streaming", b"CALIBURN",
+               b"Operationally Calibrated Streaming",
+               # every case form of the project codename, including the former
+               # module name; the artifact carries that module under a neutral
+               # name, with every import, identifier, path and prose mention
+               # rewritten consistently (see codename_map below)
+               b"CALIBURN", b"Caliburn", b"caliburn",
                # Zenodo record ids: each resolves to a page naming the author
                b"22673735", b"22638195", b"22213264", b"20074590",
                b"20074589", b"zenodo.org"]
@@ -74,6 +79,35 @@ EXCLUDE_NAMES = {"CITATION.cff", "build_anonymous_artifact.py",
 EXCLUDE_SUFFIX = {".pyc", ".pdf", ".zip", ".tar.gz"}
 
 
+CODE_SUFFIXES = (".py", ".sh", ".cmd", ".cfg", ".yaml", ".yml", ".json", ".csv", ".tex", ".bib")
+
+
+def codename_map(rel: str, data: bytes) -> bytes:
+    """The project codename is the title of the named preprint, so it must not
+    ship. In code it is an identifier (a module name that is an import target,
+    a function name, a constant, an environment-variable name), so it is mapped
+    case-preservingly to a neutral identifier and the module file is renamed
+    to match (see anonymize_path). In prose, the module path takes the same
+    neutral name so the text still points at a file that exists, and every
+    other mention becomes a placeholder."""
+    if rel.endswith(CODE_SUFFIXES):
+        data = data.replace(b"CALIBURN", b"CODENAME")
+        data = data.replace(b"Caliburn", b"Codename")
+        data = data.replace(b"caliburn", b"codename")
+        return data
+    if rel.endswith((".md", ".txt")):
+        data = data.replace(b"caliburn_variants", b"codename_variants")
+        data = re.sub(rb"(?i)caliburn", b"[codename-redacted-for-review]", data)
+        return data
+    return data
+
+
+def anonymize_path(rel: str) -> str:
+    """Entry names inside the zip: the module and its test are renamed to the
+    neutral identifier the code now imports."""
+    return rel.replace("caliburn", "codename")
+
+
 def scrub(rel: str, data: bytes) -> bytes:
     text_like = rel.endswith((".py", ".md", ".txt", ".tex", ".bib", ".json",
                               ".csv", ".cfg", ".yaml", ".yml", ".sh"))
@@ -98,12 +132,7 @@ def scrub(rel: str, data: bytes) -> bytes:
     # the underscore form the tarball file names use
     data = data.replace(b"2605_24696", b"[preprint-id-redacted-for-review]")
     data = data.replace(b"2510_09619", b"[companion-id-redacted-for-review]")
-    # the project codename: upper case everywhere, and any case in prose.
-    # The lower-case module name caliburn_variants is an import target in
-    # code and stays; it is reported as a known residual.
-    data = data.replace(b"CALIBURN", b"[codename-redacted-for-review]")
-    if rel.endswith((".md", ".txt")):
-        data = re.sub(rb"(?i)caliburn", b"[codename-redacted-for-review]", data)
+    data = codename_map(rel, data)
     # Zenodo record identifiers resolve to a page naming the author, so the
     # double-anonymous artifact redacts them wherever the correction log or
     # README carries them; the scan below then proves none survive.
@@ -173,14 +202,17 @@ def main() -> int:
             if "__pycache__" in rel or "/_dryrun/" in rel:
                 continue
             data = scrub(rel, p.read_bytes())
+            rel_out = anonymize_path(rel)
             for tok in IDENTIFYING:
                 if tok in data:
                     leaks.append(rel + " contains " + tok.decode(errors="replace"))
+                if tok in rel_out.encode("utf-8"):
+                    leaks.append(rel + " is NAMED with " + tok.decode(errors="replace"))
             # Preserve each file's modification time. writestr() with a bare
             # name stamps every entry with the build clock, which made the
             # extracted artifact's manifests look newer than the figures they
             # produced and failed check_figures.py there (rule 12).
-            info = zipfile.ZipInfo("artifact/" + rel,
+            info = zipfile.ZipInfo("artifact/" + rel_out,
                                    date_time=time.localtime(p.stat().st_mtime)[:6])
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o644 << 16
