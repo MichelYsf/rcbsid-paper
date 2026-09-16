@@ -94,20 +94,23 @@ here needs a click. **None of those citations resolves until the record is
 published**, which is why the publish above is the next action and not a later
 one.
 
-## 3. TMLR submission (login wall) — after the Zenodo publish
+## 3. TMLR submission — SUBMITTED 2026-09-16
 
-1. Sign in at **https://openreview.net** with a complete profile (affiliation,
-   conflicts, publication history; TMLR requires it) and open the TMLR
-   submission form.
-2. Work through `TMLR_SUBMISSION_SHEET.md` top to bottom. It carries every
-   OpenReview field in the form's order, the PDF and the single supplementary
-   zip to upload, the private note to the action editor, and the
-   action-editor recommendation step that follows submission.
-3. There are no suggested reviewers, no cover letter and no fee: TMLR assigns
-   reviewers through its action editors and charges nothing. The DTRAP cover
-   letter, editor note and reviewer block are retired as historical.
-4. Submit, then complete the action-editor recommendation task OpenReview
-   opens for the submission.
+**Submitted 16 September 2026.** Forum:
+**https://openreview.net/forum?id=qbYQReMqwP**
+
+The submission was made through `TMLR_SUBMISSION_SHEET.md`, which carries every
+OpenReview field in the form's order, the PDF and the single supplementary zip
+that were uploaded, and the private note to the action editor. There were no
+suggested reviewers, no cover letter and no fee: TMLR assigns reviewers through
+its action editors and charges nothing, and the DTRAP cover letter, editor note
+and reviewer block are retired as historical.
+
+Still to do on this submission, both in `TMLR_SUBMISSION_SHEET.md` Step 9:
+
+1. Complete the action-editor recommendation once OpenReview requests it.
+2. Send the private note of Step 8 to the action editor, with the readers set
+   to the action editor and not to the reviewers, once one is assigned.
 
 ## 4. arXiv v3 replacement — after step 3
 
