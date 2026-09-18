@@ -80,7 +80,7 @@ reset on 2026-09-14 in the TMLR template (24 pages, 20 of them main body);
 that is a historical fact about the deposit. As for the rest, its analysis code (src/ and the analysis scripts), its manifests bundle (93
 run manifests, the macro index and the retirement README) and its macro layer
 are identical to those behind the DTRAP submission; its claim ledger differs
-only by corrected internal cross references; the manuscript source, the
+only by corrected internal cross references and two rows for the reshaped opening; the manuscript source, the
 figure renderer's size constants and the figure manifest, the packaging and
 gate scripts with their tests, and the response shelf differ.
 The camera-ready deposit will carry the final source. `packages/zenodo/` is frozen: do not rebuild it.

@@ -12,6 +12,7 @@ the sentence numbering follows `paper/main.tex` reading order.
 
 | # | sentence (gist) | source |
 |---|---|---|
+| A0 | (Lead) An uncontrolled assembly step changes which records reach the test set and can reverse which detector measures as better, so a detector chosen from a published result may be chosen by the assembly. | manifest:cicids_heldout_composition_20260819T120420_ebb7c281; manifest:s4_contrast_deliverables_20260827T124050_ec876714; logic — the measured change in held-out membership and the measured reversal, read as their consequence for a ranking; no deployment claim (Section 8 transfers nothing to deployment) |
 | A1 | Streaming IDS results are reported on assembled streams (pooled / interleaved). | logic — framing; construction practice documented in file:AUDIT_FINDINGS.md (A5, A13) and file:findings_streams.md |
 | A2 | Stream assembly is an uncontrolled treatment: it jointly changes held-out membership, prevalence and order, and thereby the measured outcome. | manifest:s4_contrast_deliverables_20260827T124050_ec876714; file:findings_contrast.md |
 | A3 | Identical full multiset; under a fixed positional split the two arms hold out different samples at 68.235% and 25.240% prevalence (42.995 pp apart). | manifest:s4_contrast_deliverables_20260827T124050_ec876714; manifest:cicids_heldout_composition_20260819T120420_ebb7c281 |
@@ -30,6 +31,7 @@ the sentence numbering follows `paper/main.tex` reading order.
 
 | # | sentence (gist) | source |
 |---|---|---|
+| I0 | (Lead) The same statement opens the introduction. | manifest:cicids_heldout_composition_20260819T120420_ebb7c281; manifest:s4_contrast_deliverables_20260827T124050_ec876714; logic — the measured change in held-out membership and the measured reversal, read as their consequence for a ranking; no deployment claim (Section 8 transfers nothing to deployment) |
 | I1 | Benchmark criticism context (Catillo, Arp, Ring). | logic — citation framing |
 | I2 | This paper adds the assembly step to that list. | logic — thesis statement, evidenced by I9–I11 |
 | I3 | Captures are rarely usable as-is (CICIDS five days; LITNET disjoint). | manifest:stage1_natural_streams_20260818T114117_285582fc; file:findings_streams.md |

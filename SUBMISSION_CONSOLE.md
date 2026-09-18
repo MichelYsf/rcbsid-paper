@@ -2,7 +2,7 @@
 
 Work through this file in order. Every field is in ScholarOne paste order.
 Nothing here needs judgment except where a step says so. Re-assembled
-2026-09-18 for the DTRAP submission. This is the operative document. The older
+2026-09-18 for the DTRAP submission, updated 2026-09-19. This is the operative document. The older
 DTRAP_SUBMISSION_SHEET.md is superseded by it. Venue facts below were re-read
 on 2026-09-18 from dl.acm.org/journal/dtrap/author-guidelines and from the
 portal's login page.
@@ -12,13 +12,14 @@ portal's login page.
 Address: https://mc.manuscriptcentral.com/dtrap. The DTRAP author guidelines
 name it, and on 2026-09-18 the page opened as "Digital Threats: Research and
 Practice ScholarOne Manuscripts". Sign in with your own account, the one
-registered to michelyoussef@hotmail.com. ScholarOne will ask to link your
-ORCID. Link 0009-0000-0664-8228.
+registered to michel@itigtech.com. That is the submitting address, not the
+Hotmail address. ScholarOne will ask to link your ORCID. Link
+0009-0000-0664-8228.
 
 ## 2. Article type
 
 DTRAP's guidelines call this kind of paper a "Peer-Reviewed Research Paper".
-Select the portal's type that matches it. The paper is 24 pages, inside
+Select the portal's type that matches it. The paper is 25 pages, inside
 the 10 to 25 journal pages DTRAP expects and under its 30-page soft limit. If
 the type list does not offer a clearly matching option, stop and report the
 list. Choose nothing.
@@ -34,11 +35,15 @@ Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Be
 ## 4. Abstract
 
 Paste the full abstract below. It is plain text, expanded from the manuscript
-macros, and it was verified on 2026-09-18 to match the manuscript abstract
-exactly after LaTeX normalization. It is 428 words and 2,786
+macros, and it was verified on 2026-09-19 to match the manuscript abstract
+exactly after LaTeX normalization. It is 479 words and 3,097
 characters, ASCII only.
 
 ```
+An uncontrolled step in building a benchmark, the assembly of capture files into
+one evaluation stream, changes which records reach the test set and can reverse
+which detector measures as better, so a detector chosen from a published
+benchmark result may be chosen by the assembly rather than by the detectors.
 Public network captures are rarely usable as evaluation streams as they stand,
 so streaming intrusion-detection studies assemble them: interleaving capture
 days, pooling temporally disjoint captures, or replaying records round robin. We
@@ -86,21 +91,24 @@ abstract exceeds. It is derived from the full abstract with no new claims, and
 every number in it is in the full abstract.
 
 ```
+An uncontrolled step in building a benchmark, the assembly of capture files into
+one evaluation stream, changes which records reach the test set and can reverse
+which detector measures as better, so a detector chosen from a published
+benchmark result may be chosen by the assembly rather than by the detectors.
 Streaming intrusion-detection studies assemble evaluation streams from public
 capture files by interleaving capture days, pooling disjoint captures, or
-replaying records round robin. We show on two benchmarks that this assembly
-step is an uncontrolled experimental treatment, not neutral plumbing. On
-CICIDS2017, holding the record multiset identical and changing only the
-ordering, a fixed positional split produces held-out samples that share only
-32.5% of their records, sit 42.9954 percentage points apart in prevalence, and
-reverse the measured ordering of the two deterministic scorers. Restricting
-both arms to the records they both held out removes the reversal, attributing
-it to test-set membership rather than to processing order. On LITNET-2020, the
-pooled operating point is the equal-weight mean of per-capture prevalences
-spanning 0.176% to 15.7747%. We also audit the evaluated detector against its
-description and quantify a batch dependence in the ECOD reference
-implementation. Every measured value traces to an archived, hash-verified run
-manifest.
+replaying records round robin. We show on two benchmarks that this assembly step
+is an uncontrolled experimental treatment, not neutral plumbing. On CICIDS2017,
+holding the record multiset identical and changing only the ordering, a fixed
+positional split produces held-out samples that share only 32.5% of their
+records, sit 42.9954 percentage points apart in prevalence, and reverse the
+measured ordering of the two deterministic scorers. Restricting both arms to the
+records they both held out removes the reversal, attributing it to test-set
+membership rather than to processing order. On LITNET-2020, the pooled operating
+point is the equal-weight mean of per-capture prevalences spanning 0.176% to
+15.7747%. We also audit the evaluated detector against its description and
+quantify a batch dependence in the ECOD reference implementation. Every measured
+value traces to an archived, hash-verified run manifest.
 ```
 
 ## 5. Keywords
@@ -123,7 +131,8 @@ Three concepts, with significance, as in the manuscript:
 
 ## 7. Author block
 
-One author. Name: Michel Youssef. Email: michelyoussef@hotmail.com.
+One author. Name: Michel Youssef. Email: michel@itigtech.com (the submitting
+address, not the Hotmail address).
 Affiliation: Independent Researcher. City: Beirut. Country: Lebanon. ORCID:
 0009-0000-0664-8228. ScholarOne will ask you to link the ORCID through its
 own dialog. Complete that link.
@@ -152,7 +161,7 @@ Excluded and confirmed clean: Seth Barrett and every FIRCE and FADES author
 
 ## 9. Cover letter
 
-Paste the whole of `packages/dtrap/COVER_LETTER.txt` (946 words). It is
+Paste the whole of `packages/dtrap/COVER_LETTER.txt` (1,052 words). It is
 plain ASCII text with no markdown residue and no operator note.
 
 Contingency: if the portal offers no separate confidential-comments box, do
@@ -162,7 +171,7 @@ submitting.
 
 ## 10. Confidential comments to the editor
 
-Paste the whole of `packages/dtrap/EDITOR_NOTE.txt` (2,180 words). It carries
+Paste the whole of `packages/dtrap/EDITOR_NOTE.txt` (2,212 words). It carries
 the prior-appearance disclosure, the two prior submissions and the review they
 did not receive, what Zenodo 2.2.0 carries, the overlap account, the correction history, the
 companion-manuscript status with its IEEE portal record, and the provenance
@@ -193,15 +202,16 @@ shows a fee or waiver field, and only in that field. The file is
 Never attach it in the file-upload step of section 12.
 
 Submitting address and the waiver. The submitting address is
-michelyoussef@hotmail.com, the account of section 1. Lebanon's 100%
-geographic waiver was confirmed in writing by ACM's Director of Publications,
-Scott Delman, on 6 August 2026: the email says the waiver will be applied
+michel@itigtech.com, the account of section 1, not the Hotmail address.
+Lebanon's 100% geographic waiver was confirmed in writing by ACM's Director
+of Publications, Scott Delman, on 6 August 2026, in reply to a request sent
+from michelyoussef@hotmail.com: the email says the waiver will be applied
 automatically to this paper during the eRights process, and it sets no
-institutional condition on the waiver. The same email asks for an
-institutional email address for submission and eRights; the request it
-answered stated that you have no institutional affiliation, so there is none
-to use. If eRights asks about the waiver or the address, forward that
-confirmation (the same ACM_Waiver.pdf).
+institutional condition on the waiver. The same email asks that an
+institutional email address be used for submission and eRights. If eRights
+asks about the waiver or the address, forward that confirmation (the same
+ACM_Waiver.pdf); it shows the request and the reply went through the Hotmail
+address.
 
 ## 12. File uploads
 
@@ -210,9 +220,9 @@ Three files, with designations. Sizes are those of the files built
 
 | # | full path | bytes | SHA-256 (first 16) | designation |
 |---|---|---|---|---|
-| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 682,410 | `c21d9de1f4b32d8d` | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 618,195 | `44171c251dba1e67` | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 103,254 | `25daf24b83cb7805` | supplementary for review, not for publication |
+| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 684,279 | `95be417d766edd5f` | main document |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 618,524 | `8a0cc12317886ae2` | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 103,424 | `f19f26a8b6a73efa` | supplementary for review, not for publication |
 
 Upload exactly these three files and nothing else. The waiver PDF is not one of
 them. The anonymous build is the one that says "ANONYMOUS AUTHOR(S)" on page 1.
@@ -224,7 +234,7 @@ shows a referee without extracting anything.
 ## 13. Proof check and submit
 
 ScholarOne renders a proof PDF of your entries before submission. Open it.
-Confirm the title, the abstract, one anonymous main document of 24 pages,
+Confirm the title, the abstract, one anonymous main document of 25 pages,
 and both supplementary files. Confirm the manuscript PDF shows no author name.
 Confirm ACM_Waiver.pdf is not among the uploaded files. Then press submit.
 

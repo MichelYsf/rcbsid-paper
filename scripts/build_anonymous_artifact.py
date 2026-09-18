@@ -34,6 +34,8 @@ IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                b"rcbsid-paper", b"rebuild/honest-v1",
                # the repository stem alone also names the deposit's code zip
                b"rcbsid", b"RCBSID", b"Rcbsid",
+               # the submitting address's domain names the author's company
+               b"itigtech", b"ITIGTECH", b"ItigTech",
                # The two public preprints resolve to listings that name the
                # author, the IEEE record id names a submission of theirs, and
                # the former title and the project codename are one web search

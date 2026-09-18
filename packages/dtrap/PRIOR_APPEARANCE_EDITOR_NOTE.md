@@ -30,7 +30,7 @@ Regime-Dependent Conformal Risk Control":
 |---|---|---|
 | v1 | posted 23 May 2026 | public preprint, superseded by v3 |
 | v2 | posted 25 June 2026 | public preprint, superseded by v3 |
-| v3 | posted 14 September 2026, announced 16 September 2026 | the corrected version, under the present title: this submission's text with the author named, the prior-version identifiers printed, and a per-result-group account in place of the pointer to this note; since then two cross-reference sentences have been corrected, and the layout and the generative-AI statement follow ACM's template and policy |
+| v3 | posted 14 September 2026, announced 16 September 2026 | the corrected version, under the present title: this submission's text with the author named, the prior-version identifiers printed, and a per-result-group account in place of the pointer to this note; since then two cross-reference sentences have been corrected, the abstract and introduction open with the consequence of the finding, the provenance machinery has moved to an appendix, and the layout and the generative-AI statement follow ACM's template and policy |
 
 The corrected artifact is archived on Zenodo as version 2.2.0
 (doi:10.5281/zenodo.22673735), in the same record lineage as version 2.1.0
@@ -58,8 +58,9 @@ Zenodo version 2.2.0, carries the manuscript source in the TMLR LaTeX
 template of that second submission; its analysis code, run manifests and
 macro layer are identical to those behind this submission, whose anonymized
 supplementary copy differs from them only by its anonymization rewrites; its
-claim ledger differs only by corrected internal cross references, and the
-camera-ready deposit will carry the final source.
+claim ledger differs only by corrected internal cross references and by two
+rows that map the reshaped opening sentences, and the camera-ready deposit
+will carry the final source.
 
 **What was wrong, and what the correction covers.** An adversarial review and
 a line-by-line audit of the archived artifacts established two defects that
@@ -147,8 +148,8 @@ to weigh. This manuscript is under consideration at DTRAP and nowhere else,
 and nothing else of mine is under review anywhere.
 
 **On the provenance mechanism, and two failures of it.** The manuscript's
-Provenance Discipline section (Section 9) and its Appendix B state what the
-checks cover as a scope rather than by name. The reason it is written that way
+Appendix B, to which its short Provenance Discipline section (Section 9)
+points, states what the checks cover as a scope rather than by name. The reason it is written that way
 belongs with you rather than with the referees, so I set it out here.
 
 The gate was written to enforce a rule: no number in the manuscript without an

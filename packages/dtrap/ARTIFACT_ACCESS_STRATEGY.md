@@ -39,6 +39,6 @@ the manuscript source in the TMLR template of the earlier submission, and
 its analysis code (src/ and the analysis scripts), its manifests bundle (93
 run manifests, the macro index and the retirement README) and its macro layer
 are identical to those behind the DTRAP submission; its claim ledger differs
-only by corrected internal cross references; the manuscript source, the
+only by corrected internal cross references and two rows for the reshaped opening; the manuscript source, the
 figure renderer's size constants and the figure manifest, the packaging and
 gate scripts with their tests, and the response shelf differ. CITATION.cff travels with the public artifact only.

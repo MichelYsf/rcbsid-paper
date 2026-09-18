@@ -18,12 +18,23 @@ view that, from the framing provided, the work fits, and that certainty is
 possible only after submission.
 
 **Relevance.** The paper is about what operational detection evaluations
-measure. Streaming intrusion-detection results across the field are reported
-on evaluation streams assembled from public capture files. Day interleaving,
-capture pooling, and round-robin replay are typical assembly steps. The paper
+measure. Streaming intrusion-detection results are reported on evaluation
+streams assembled from public capture files; day interleaving, capture
+pooling, and round-robin replay are the assembly steps it examines. The paper
 shows, with mechanically verified experiments, that this assembly step is an
 uncontrolled experimental treatment rather than neutral plumbing. That sits
 squarely in DTRAP's remit of evaluation practice for operational detection.
+In DTRAP, Ceschin et al., "Machine Learning (In) Security: A Stream of
+Problems" (DTRAP 5(1), 2024, doi:10.1145/3617897), examined how concept drift,
+delayed labels, adversarial machine learning and data collection affect
+machine-learning security solutions and the results reported for them.
+Apruzzese et al., "Modeling Realistic Adversarial Attacks against Network
+Intrusion Detection Systems" (DTRAP 3(3), 2022, doi:10.1145/3469659), showed
+that the threat models the literature assumes for adversarial attacks on
+machine-learning network intrusion detection are unrealistic, and modelled
+the capabilities a real attacker has. This submission is in that line: it
+measures what one evaluation step, assembling a benchmark stream, does to the
+result a reader takes from a benchmark.
 
 **Novelty and utility.** The conceptual warning that arbitrary ordering and
 sampling distort security-ML evaluation is established prior art, and the

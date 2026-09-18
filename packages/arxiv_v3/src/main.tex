@@ -30,6 +30,10 @@ Intrusion-Detection Benchmarks}
 \email{michelyoussef@hotmail.com}
 
 \begin{abstract}
+An uncontrolled step in building a benchmark, the assembly of capture files into
+one evaluation stream, changes which records reach the test set and can reverse
+which detector measures as better, so a detector chosen from a published
+benchmark result may be chosen by the assembly rather than by the detectors.
 Public network captures are rarely usable as evaluation streams as they stand,
 so streaming intrusion-detection studies assemble them: interleaving capture
 days, pooling temporally disjoint captures, or replaying records round robin.
@@ -104,6 +108,10 @@ benchmarks, reproducibility, provenance}
 \section{Introduction}
 \label{sec:intro}
 
+An uncontrolled step in building a benchmark --- the assembly of capture files
+into one evaluation stream --- changes which records reach the test set and can
+reverse which detector measures as better, so a detector chosen from a published
+benchmark result may be chosen by the assembly rather than by the detectors.
 Machine-learning evaluations for network intrusion detection rest on a small
 number of public benchmarks, and a substantial literature questions what those
 benchmarks measure~\citep{catillo2023hype,arp2022dosdonts,ring2019datasets}.
@@ -152,8 +160,8 @@ retained as explicitly labelled protocols and contrasted against
 least-transformed alternatives; the detector is described as what the code
 computes; and every number was regenerated --- or, for the retained prevalence
 sweep, re-derived from the archived pre-audit runs --- by a script that wrote,
-in the same execution, an archived manifest recording the git commit,
-configuration hash, input SHA-256, seed, environment hash and output path.
+in the same execution, an archived run manifest
+(Appendix~\ref{app:provenance}).
 Section~\ref{sec:disclosure} states which measurements this paper shares with
 those versions and which are new, and gives the per-result-group account; the
 dated correction history is the corrected-incident log in the artifact.
@@ -230,7 +238,8 @@ and varying only the accompanying batch moves ECOD's AUC-PR by
 \RevEcodBatchDelta. Published ECOD numbers are therefore not comparable across
 studies that score a different batch, in size or composition.
 \item \textbf{A provenance discipline that is itself auditable}
-(Section~\ref{sec:provenance}), including the prior-version statement of
+(Section~\ref{sec:provenance}, with its machinery in
+Appendix~\ref{app:provenance}), including the prior-version statement of
 Section~\ref{sec:disclosure} and the dated corrected-incident log that ships
 with the artifact.
 \end{enumerate}
@@ -1247,22 +1256,14 @@ to deployment.
 \section{Provenance Discipline}
 \label{sec:provenance}
 
-Every measured value in this paper is a \LaTeX{} macro generated from
-archived run manifests recording git commit, configuration hash, input
-SHA-256, seed, environment hash, timestamps and output paths, and a claim
-ledger maps every sentence of the abstract and introduction to its generating
-run. The build fails on a measurement-shaped number with no manifested value,
-on a macro two runs claim with different values, and on drift between the
-derived macro index and the manifests behind it. Protocol constants that
-define the experiment rather than result from it (the 70/15/15 split, budget
-sizes, the auxiliary weight, library versions) and values quoted from cited
-work are typed, and are identified as such where they appear. What the checks
-cover, and what they do not --- the correctness of code, labels,
-preprocessing or interpretation, which no provenance check reaches --- is
-stated in Appendix~\ref{app:provenance}. Provenance establishes that a
-displayed number came from a recorded execution on recorded inputs, and
-nothing beyond that. The manifests, the macro layer, the claim ledger and the
-checks ship in the artifact.
+Every measured value in this paper came from a recorded execution on recorded
+inputs: each resolves to an archived run manifest, and a measured value without
+one fails the build. That is what the discipline guarantees, and nothing beyond
+it; no provenance check reaches the correctness of code, labels, preprocessing
+or interpretation. Appendix~\ref{app:provenance} describes the machinery ---
+the manifests, the macro layer, the build gate and the claim ledger --- and
+states what the checks cover and what they do not; all of it ships in the
+artifact.
 
 \section{Relationship to Prior Versions of This Work}
 \label{sec:disclosure}
@@ -1534,8 +1535,19 @@ AUC-ROC on the prefix & \SSixOriginalAucroc & \SSixCorrectedAucroc \\
 \end{tabular}
 \end{table}
 
-\section{Provenance Discipline: What the Checks Cover}
+\section{Provenance Machinery and What the Checks Cover}
 \label{app:provenance}
+
+\textbf{The machinery.} Every measured value in this paper is a \LaTeX{}
+macro generated from archived run manifests recording git commit,
+configuration hash, input SHA-256, seed, environment hash, timestamps and
+output paths; each manifest is written by the script that produced the value,
+in the same execution. A claim ledger maps every sentence of the abstract and
+introduction to its generating run. Protocol constants that define the
+experiment rather than result from it (the 70/15/15 split, budget sizes, the
+auxiliary weight, library versions) and values quoted from cited work are
+typed, and are identified as such where they appear. The manifests, the macro
+layer, the claim ledger and the checks ship in the artifact.
 
 \textbf{What the checks cover, stated as a scope rather than a name.} The
 build fails on: a measurement-shaped number with no manifested value, anywhere
