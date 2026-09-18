@@ -60,7 +60,7 @@ C = {"orange": "#E69F00", "sky": "#56B4E9", "green": "#009E73",
 # palette yellow, which is too faint for a thin lane on white.
 DAY_COLOURS = [C["sky"], C["green"], C["orange"], C["purple"], C["grey"]]
 
-WIDTH_IN = 6.5           # TMLR text width (tmlr.sty: \textwidth 6.5 true in)
+WIDTH_IN = 3.33          # ACM column width
 META = {"Title": PAPER_TITLE, "Author": None, "Creator": None,
         "Producer": None, "Subject": None, "Keywords": None,
         "CreationDate": None, "ModDate": None}
@@ -122,7 +122,7 @@ def fig_assembly(used: dict, protocol: dict) -> Path:
                      "source": [INPUTS["subsample"].name,
                                 INPUTS["composition"].name]})
 
-    fig, ax = plt.subplots(figsize=(WIDTH_IN, 2.4))
+    fig, ax = plt.subplots(figsize=(WIDTH_IN, 2.0))
     bar_h = 0.5
     top_y = 1.0
     label_y = top_y + bar_h + 0.1
@@ -199,7 +199,7 @@ def fig_decomposition(used: dict) -> Path:
          macro(rv, "RevSharedDetectorSyntheticAucpr", used),
          macro(rv, "RevSharedEcodSyntheticAucpr", used), p_shared),
     ]
-    fig, axes = plt.subplots(1, 2, figsize=(WIDTH_IN, 2.8), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(WIDTH_IN, 2.2), sharey=True)
     w = 0.36
     for ax, groups, title in zip(axes, (full, shared),
                                  ("full held-out slice", "shared records")):
@@ -239,7 +239,7 @@ def fig_split(used: dict, protocol: dict) -> Path:
     fixed_cut = float(comp["config"]["train"]) + float(comp["config"]["val"])
     protocol["fixed_cut"] = fixed_cut
 
-    fig, ax = plt.subplots(figsize=(WIDTH_IN, 3.0))
+    fig, ax = plt.subplots(figsize=(WIDTH_IN, 2.5))
     lead = eco > det
     for j, xi in enumerate(x[lead]):
         ax.axvspan(xi - 0.012, xi + 0.012, color=C["vermillion"], alpha=0.15,
@@ -277,7 +277,7 @@ def fig_branch(used: dict) -> Path:
     # assigns to a method
     cols = [C["blue"], C["sky"], C["purple"]]
 
-    fig, axes = plt.subplots(1, 2, figsize=(WIDTH_IN, 2.8))
+    fig, axes = plt.subplots(1, 2, figsize=(WIDTH_IN, 2.2))
     for ax, vals, chance, lab in zip(axes, (pr, roc), (p_nat, AUC_ROC_CHANCE),
                                      ("AUC-PR", "AUC-ROC")):
         ax.bar(names, vals, color=cols, width=0.6)

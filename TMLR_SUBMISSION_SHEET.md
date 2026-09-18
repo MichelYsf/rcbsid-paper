@@ -1,3 +1,13 @@
+> **HISTORICAL — desk-rejected 18 September 2026.** This sheet carried the TMLR
+> submission of 16 September 2026 (OpenReview forum
+> https://openreview.net/forum?id=qbYQReMqwP). TMLR desk-rejected it without
+> review on 18 September 2026, in a decision signed by the venue. No action
+> editor was assigned and no comment was given. The paper now goes to ACM
+> DTRAP, and the operative document is `SUBMISSION_CONSOLE.md`. Nothing below
+> is to be pasted or sent anywhere. The title's "nothing submitted" describes
+> the sheet as assembled on 2026-09-14. Kept as the record of what was
+> submitted.
+
 # TMLR_SUBMISSION_SHEET — submission of the manuscript to Transactions on Machine Learning Research, nothing submitted
 
 Assembled 2026-09-14 against commit **`2bfb89674001f2718b2099de072c4a52ae7c9b89`**, whose tree

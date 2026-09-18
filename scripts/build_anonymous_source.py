@@ -10,8 +10,9 @@ Both are fixed here, once, and `check_tarball_anonymity.py` checks the first.
 
 Layout matches the arXiv variant: the two generated tables sit beside main.tex,
 so the `\\input` paths are rewritten to the flat layout in the staged copy
-only; `paper/main.tex` is not touched. The unmodified TMLR template files ship
-inside the tarball so it compiles standalone.
+only; `paper/main.tex` is not touched. The acmart class and the
+ACM-Reference-Format bibliography style ship with TeX Live and MiKTeX, so no
+template file is bundled; main.bbl ships so no BibTeX run is needed.
 """
 from __future__ import annotations
 
@@ -29,9 +30,6 @@ FILES = [
     ("paper/numbers.tex", "numbers.tex"),
     ("paper/references.bib", "references.bib"),
     ("paper/main.bbl", "main.bbl"),
-    ("paper/tmlr.sty", "tmlr.sty"),
-    ("paper/tmlr.bst", "tmlr.bst"),
-    ("paper/fancyhdr.sty", "fancyhdr.sty"),
     ("results/table_construction_contrast.tex", "table_construction_contrast.tex"),
     ("results/table_prevalence_sweep.tex", "table_prevalence_sweep.tex"),
 ]

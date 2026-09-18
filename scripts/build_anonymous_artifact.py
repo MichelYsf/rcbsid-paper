@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Build the anonymized artifact zip for double-blind review, and PROVE it is anonymous.
+"""Build the anonymized artifact zip for double-anonymous review, and PROVE it is anonymous.
 
 Double-anonymous review requires the supplementary artifact to carry no
 author-identifying strings. Assembling it by hand and eyeballing is how a
@@ -35,8 +35,8 @@ IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                # The two public preprints resolve to listings that name the
                # author, the IEEE record id names a submission of theirs, and
                # the former title and the project codename are one web search
-               # from either. TMLR's guide: double blind is maintained by not
-               # linking to another version that includes the authors' names.
+               # from either. Double-anonymous review is not maintained if the
+               # artifact links to another version that names the author.
                b"2605.24696", b"2510.09619", b"TDSC-2025-10-1842",
                b"Operationally Calibrated Streaming",
                # every case form of the project codename, including the former
@@ -58,8 +58,6 @@ INCLUDE_FILES = [
     "findings_review_analyses.md", "findings_referee_analyses.md",
     "findings_bootstrap_robustness.md", "findings_ecod_composition.md",
     "paper/main.tex", "paper/numbers.tex", "paper/references.bib",
-    # the unmodified TMLR template, so the source compiles from the artifact
-    "paper/tmlr.sty", "paper/tmlr.bst", "paper/fancyhdr.sty",
     "paper/figures/figure_manifest.json",
     "results/construction_contrast.csv", "results/prevalence_sweep_cicids.csv",
     "results/table_construction_contrast.tex",

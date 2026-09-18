@@ -4,36 +4,28 @@
 % one, and CLAIM_LEDGER.md maps every abstract and introduction sentence to its
 % generating run.
 %
-% TMLR (jmlr.org/tmlr author guide and github.com/JmlrOrg/tmlr-style-file,
-% read 2026-09-14): the official style file tmlr.sty and bibliography style
-% tmlr.bst are used unmodified, in anonymous mode (no [accepted] or [preprint]
-% option), single column at the template's 6.5in text width. The named
-% [preprint] variant for arXiv is derived by scripts/build_arxiv_variant.py.
-% TMLR desk-rejects modified templates: do not edit tmlr.sty or tmlr.bst.
-\documentclass[10pt]{article}
-\usepackage{tmlr}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{booktabs}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{url}
+% DTRAP (verified 2026-08-24 at dl.acm.org/journal/dtrap/author-guidelines):
+% ACM large-format template, portal mc.manuscriptcentral.com/dtrap, 10-25 pages
+% with a 30-page soft cap, double-anonymous. acmart's one-column review layout
+% is ACM's recommended journal-submission combination; TAPS applies the trim.
+\documentclass[manuscript,anonymous,review]{acmart}
 
 \input{numbers}
 
-\title{Stream Assembly Is an Uncontrolled Treatment in\\
-Streaming Intrusion-Detection Benchmarks}
-\hypersetup{pdftitle={Stream Assembly Is an Uncontrolled Treatment in Streaming Intrusion-Detection Benchmarks},
-            pdfauthor={}, pdfsubject={}, pdfkeywords={}}
-
-% Not printed while tmlr is loaded without [accepted] or [preprint]; the
-% template prints "Anonymous authors, Paper under double-blind review".
-\author{\name Anonymous authors \email anonymous@example.org \\
-      \addr Paper under double-blind review}
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
 
 \begin{document}
 
-\maketitle
+\title{Stream Assembly Is an Uncontrolled Treatment in Streaming
+Intrusion-Detection Benchmarks}
+
+\author{Anonymous Author(s)}
+\affiliation{%
+  \institution{Anonymous Institution}
+  \city{}
+  \country{}}
 
 \begin{abstract}
 Public network captures are rarely usable as evaluation streams as they stand,
@@ -78,6 +70,34 @@ comparable across studies that score a different batch, in size or composition. 
 value traces to an archived, hash-verified run manifest, and the
 sentence-level claim ledger ships with the artifact.
 \end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10002978.10003022</concept_id>
+<concept_desc>Security and privacy~Intrusion detection systems</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10010147.10010257</concept_id>
+<concept_desc>Computing methodologies~Machine learning</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Security and privacy~Intrusion detection systems}
+\ccsdesc[300]{Computing methodologies~Machine learning}
+\ccsdesc[300]{General and reference~Evaluation}
+
+% "conformal risk control" was dropped from this list: the paper reports no
+% conformal result (the superseded versions' corroboration paragraph was
+% removed on 2026-09-07), so keeping the keyword would steer reviewer
+% assignment toward a topic this paper does not advance.
+\keywords{streaming network intrusion detection, benchmark stream
+construction, evaluation methodology, experimental design, anomaly detection
+benchmarks, reproducibility, provenance}
+
+\maketitle
 
 \section{Introduction}
 \label{sec:intro}
@@ -134,7 +154,7 @@ in the same execution, an archived manifest recording the git commit,
 configuration hash, input SHA-256, seed, environment hash and output path.
 Section~\ref{sec:disclosure} states which measurements this paper shares with
 those versions and which are new; the per-result-group account and the dated
-correction history are supplied to the action editor confidentially, because
+correction history are supplied to the editors confidentially, because
 printing them here would defeat anonymization.
 
 \subsection*{Where this work sits}
@@ -540,7 +560,7 @@ taken as the positive-class prevalence $p$; the exact finite-sample expectation
 of step-wise $AP$ under a uniformly random permutation differs from $p$ in the
 fifth decimal (\ChanceExactNaturalSliceAucpr{} against
 \SFourCicidsNaturalChanceFloor{} on the timestamp-order held-out slice; the
-full-list case of Theorem~1 of \citealt{manzhos2026ap}) and
+full-list case of Theorem~1 of \citet{manzhos2026ap}) and
 changes no conclusion here; it is an expectation, not a lower bound, and a
 ranking can fall below it \\
 reported precision & every \emph{dimensionless} metric on $[0,1]$ ---
@@ -653,7 +673,7 @@ membership differs.
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{figures/fig_assembly}
+\includegraphics[width=3.33in]{figures/fig_assembly}
 \caption{The two assemblies of the same CICIDS2017 records under one fixed
 positional split. In timestamp order the capture days follow one another, so
 the held-out slice is the tail of the last day. In day round robin every day
@@ -661,6 +681,9 @@ still supplying records contributes to every position, so the held-out slice
 draws from the tail of each day. Block widths follow the per-day record
 budgets of Table~\ref{tab:protocol}. The figure is a schematic of the
 protocol and carries no measured value.}
+\Description{Two horizontal bars representing the same record stream, one
+with the days concatenated and one with the days interleaved, with the same
+split lines drawn on both.}
 \label{fig:assembly}
 \end{figure}
 
@@ -689,7 +712,7 @@ Section~\ref{sec:outcome}.
 detector's AUC-PR per arm. Every cell is a macro resolving to an archived
 manifest.}
 \label{tab:contrast}
-{\small\input{../results/table_construction_contrast}}
+\input{../results/table_construction_contrast}
 \end{table}
 
 \subsection{What assembly does to the measured outcome}
@@ -747,7 +770,7 @@ only, so we claim no stable ordering, only a measured one under this protocol.
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{figures/fig_decomposition}
+\includegraphics[width=3.33in]{figures/fig_decomposition}
 \caption{Detector and ECOD AUC-PR in the two arms. Left: the full held-out
 slice of each arm, where the measured ordering reverses. Right: the
 \RevSharedRecords{} records both arms held out, where the detector leads in
@@ -757,6 +780,9 @@ prevalence: \SFourCicidsNaturalChanceFloor{} and
 \SFourCicidsSyntheticChanceFloor{} for the full slices and
 \RevSharedPrevalence{} for the shared records. Values are those of
 Section~\ref{sec:outcome} and Table~\ref{tab:shared}.}
+\Description{Two panels of grouped bars. In the left panel ECOD is above the
+detector in timestamp order and below it in day round robin. In the right
+panel the detector is above ECOD in both arms.}
 \label{fig:decomposition}
 \end{figure}
 
@@ -827,7 +853,6 @@ records; ``shared'' is the \RevSharedRecords{} shared records scored as their
 own batch under the same fitted model, which is the batch-controlled
 comparison (Section~\ref{sec:ecodbatch}).}
 \label{tab:shared}
-{\small
 \begin{tabular}{lrrrrrr}
 \toprule
  & \multicolumn{3}{c}{$AP$} & \multicolumn{3}{c}{AUC-ROC} \\
@@ -837,7 +862,7 @@ arm & detector & ECOD (slice) & ECOD (shared) & detector & ECOD (slice) & ECOD (
 timestamp order & \RevSharedDetectorNaturalAucpr & \RevSharedEcodNaturalAucpr & \RefEcodSharedSevenEightNaturalAucpr & \RevSharedDetectorNaturalAucroc & \RevSharedEcodNaturalAucroc & \RefEcodSharedSevenEightNaturalAucroc \\
 day round robin & \RevSharedDetectorSyntheticAucpr & \RevSharedEcodSyntheticAucpr & \RefEcodSharedSevenEightSyntheticAucpr & \RevSharedDetectorSyntheticAucroc & \RevSharedEcodSyntheticAucroc & \RefEcodSharedSevenEightSyntheticAucroc \\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 
 \textbf{The ordering does not reverse on the shared records, under either
@@ -921,7 +946,7 @@ cut & chance & detector & ECOD & chance & detector & ECOD & agree \\
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{figures/fig_split}
+\includegraphics[width=3.33in]{figures/fig_split}
 \caption{AUC-PR of the two deterministic scorers at each of the
 \RevSplitCuts{} chronological cuts of the timestamp-ordered CICIDS2017 stream.
 The held-out prevalence at each cut is drawn on the same axis. It is the
@@ -930,6 +955,9 @@ leads. The dashed line marks the cut this paper's fixed split uses. Values are
 recomputed from the archived per-record scores, as those of
 Table~\ref{tab:branch} are, with ECOD refit at each cut, and so differ slightly
 from Table~\ref{tab:contrast} at the cut this paper uses.}
+\Description{Two lines with markers that broadly rise with the cut position,
+with a dip at one intermediate cut, crossing each other twice, above a dotted
+prevalence line that follows the same shape.}
 \label{fig:split}
 \end{figure}
 
@@ -1128,7 +1156,7 @@ draws the three branches against chance.
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{figures/fig_branch}
+\includegraphics[width=3.33in]{figures/fig_branch}
 \caption{Branch-wise discrimination on the timestamp-ordered held-out slice,
 the values of Table~\ref{tab:branch}. Left: AUC-PR with the chance level at
 the slice prevalence, \SFourCicidsNaturalChanceFloor. Right: AUC-ROC with the
@@ -1136,6 +1164,9 @@ chance level of an uninformative ranking. The deployed composition is the
 detector of the other figures. The tail term alone ranks above the deployed
 composition on both metrics, and the auxiliary term ranks below chance on
 AUC-ROC.}
+\Description{Two panels of three bars each, deployed, tail only and auxiliary
+only, with a dotted chance line. The tail-only bar is the tallest in both
+panels and the auxiliary-only bar is below the chance line in both panels.}
 \label{fig:branch}
 \end{figure}
 
@@ -1237,8 +1268,8 @@ checks ship in the artifact.
 Earlier versions of this manuscript were publicly posted and are superseded by
 this one. Because a per-result-group account of what is reused, re-derived,
 corrected, withdrawn or new would identify those versions --- and they are not
-anonymous --- that account is supplied to the action editor confidentially
-rather than printed here, together with the dated version history and the list of
+anonymous --- that account is supplied to the editors confidentially rather
+than printed here, together with the dated version history and the list of
 claims each correction invalidates.
 
 One statement can be made in the body without breaking anonymity, and is
@@ -1246,8 +1277,8 @@ made here because it bears on how the results should be read. Some
 measurements in this paper also appear in the earlier versions, reported there
 under an interpretation that this paper withdraws and replaces. Which
 measurements those are, which results are new, and which earlier results are
-withdrawn is part of the account supplied to the action editor, because naming
-them here would identify the earlier versions.
+withdrawn is part of the account supplied to the editors, because naming them
+here would identify the earlier versions.
 
 The corrected-incident log in the artifact records each correction with its
 evidence and closure status. The count of incidents is not itself a quality
@@ -1393,12 +1424,12 @@ assembly when it is one.
 \section*{Data and Artifact Availability}
 The code, stream-assembly scripts with SHA-256 verification, all run manifests,
 the macro layer, the claim ledger and the corrected-incident history are
-archived. During double-blind review, the artifact is available as the
-anonymized supplementary material accompanying this submission.
+archived. During double-anonymous review, the artifact is available through the
+submission system's anonymous artifact channel.
 
-\section*{Generative AI Usage}
-The authors disclose that generative AI tools were used in producing this
-work. Large language models
+\section*{Acknowledgements: Generative AI Usage}
+In accordance with the ACM Policy on Authorship, the authors disclose that
+generative AI tools were used in producing this work. Large language models
 were used, under continuous human direction, to write and refactor analysis
 scripts, to draft prose subsequently verified against the archived
 measurements, and to operate an adversarial review harness that audited the
@@ -1411,7 +1442,7 @@ including any portion drafted with such assistance.
 
 \section*{Companion Manuscript Disclosure}
 A companion manuscript from the same research programme (reference suppressed
-for double-blind review) shares parts of the underlying codebase and
+for double-anonymous review) shares parts of the underlying codebase and
 predates the audit reported here. The method-identity findings of
 Section~\ref{sec:detector} apply to that shared lineage, and correcting it is
 in hand. It is a public preprint and is not under review at any venue, and
@@ -1419,10 +1450,10 @@ there is accordingly no other editor to inform and no concurrent consideration
 to declare. Its relationship to the results reported here, and the
 relationship to the earlier public versions of this manuscript, are stated in
 Section~\ref{sec:disclosure};
-identifiers are supplied to the action editor confidentially.
+identifiers are supplied to the editors confidentially.
 
+\bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
-\bibliographystyle{tmlr}
 
 \appendix
 
