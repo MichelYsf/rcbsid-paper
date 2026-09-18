@@ -3,14 +3,18 @@
 Nothing here needs judgment, and nothing here is blocked on a missing
 identifier. Every file referenced is in this repository.
 
-**Order matters.** The order is: **publish Zenodo 2.2.0** (its DOI is reserved
-and every document already cites it), then the **TMLR submission on
-OpenReview**, then the arXiv v3 replacement, then the companion's v2
-replacement, then the optional AWS cleanup. **The venue changed on
-2026-09-14 from ACM DTRAP to TMLR**; the manuscript was reset in the TMLR
-template and the DTRAP documents are retired as historical.
-The propagation that had to sit between the reservation and the publish is
-done, so the publish is again the first outward action.
+**Where things stand, 2026-09-18.** The venue is **ACM Digital Threats:
+Research and Practice (DTRAP)**, through ScholarOne. The one outward action
+left is that submission, from `SUBMISSION_CONSOLE.md` (step 3 below).
+Everything before it in the sequence is done and is kept below as the record,
+marked historical:
+
+- Zenodo 2.2.0 is published (doi:10.5281/zenodo.22673735).
+- arXiv v3 of 2605.24696 and the companion's v2 of 2510.09619 were both
+  posted on 14 September 2026 and announced on 16 September 2026.
+- The TMLR submission of 16 September 2026 was desk-rejected on 18 September
+  2026 without review, in a decision signed by the venue, with no action
+  editor assigned and no comment given. That is why the venue is DTRAP again.
 
 > **Removed 2026-08-27: the TIFS withdrawal steps.** This file previously
 > opened with two steps — retrieve the TIFS manuscript ID from email, then send
@@ -34,18 +38,19 @@ in the current packages.
 1. Sign in at https://orcid.org/signin.
 2. Confirm the iD under your name reads 0009-0000-0664-8228.
 
-## 0b. Commit and push this round — BEFORE the deposit
+## 0b. Commit and push before the deposit — HISTORICAL, done before the 2.2.0 publish
 
 The Zenodo record names the GitHub repository as the source it derives from, and
-a Zenodo DOI cannot be withdrawn.
+a Zenodo DOI cannot be withdrawn. This step preceded the publish of 2.2.0 and
+is kept for the next deposit, the camera-ready one.
 
 ```
 python scripts/check_provenance.py --publish-ready
 ```
 
-**Status 2026-09-14: the TMLR reformat round is committed and pushed at its
-end, the tree is clean, and every base commit any manifest records resolves
-in the pushed history. Run `--publish-ready` before the deposit; it prints
+**Status 2026-09-14 (historical): the reformat round for TMLR, the venue at
+the time, was committed and pushed at its end, the tree was clean, and every
+base commit any manifest records resolves in the pushed history. Run `--publish-ready` before the deposit; it prints
 whether HEAD is on the remote, and the Step 7 commit link resolves only if
 it is.** The
 check still exits 1, on one point only: 27 of 33 live run manifests ran while
@@ -61,27 +66,23 @@ disagrees with the deposit description, the manifests bundle settles it.
 in the deposit description (`ZENODO_DEPOSIT_SHEET.md` carries the wording), or
 do not deposit. Nothing else blocks the sequence.
 
-## 1. Zenodo 2.2.0 publish — FIRST outward action
+## 1. Zenodo 2.2.0 publish — DONE, 14 September 2026 (historical)
 
-Version 2.0.0 was published 2026-08-31 (version DOI 10.5281/zenodo.22213264,
-concept DOI 10.5281/zenodo.20074589, superseding v1.0.0,
-10.5281/zenodo.20074590). **Version 2.1.0 was published from that record under
-the DOI it had reserved, 10.5281/zenodo.22638195**, and is frozen. Version
-2.2.0 is staged as a New version on record 22638195 with its DOI **reserved:
-10.5281/zenodo.22673735**, carrying the final referee round's manuscript source, reset on 2026-09-14
-in the TMLR template (24 pages, 20 of them main body), and the two
-regenerated findings documents.
+Version 2.2.0 was published on 14 September 2026 at 21:48 UTC (publication
+date 2026-09-15 on the record) as **doi:10.5281/zenodo.22673735**. Verified
+2026-09-18 against the Zenodo API: the record is published, it is the latest
+of the four versions in the lineage (2.2.0, 2.1.0 doi:10.5281/zenodo.22638195,
+2.0.0 doi:10.5281/zenodo.22213264, 1.0.0 doi:10.5281/zenodo.20074590), and its
+five files match `packages/zenodo/` by MD5. Its manuscript source is the build
+reset on 2026-09-14 in the TMLR template (24 pages, 20 of them main body);
+that is a historical fact about the deposit. As for the rest, its analysis code (src/, tests/ and the analysis scripts), its 95 run
+manifests, its macro layer and its claim ledger are identical to those behind
+the DTRAP submission; the manuscript source, the figure renderer's width
+constants, three packaging scripts and the response shelf's section pointers
+differ.
+The camera-ready deposit will carry the final source. `packages/zenodo/` is frozen: do not rebuild it.
 
-Work through `ZENODO_DEPOSIT_SHEET.md` top to bottom: check the carried-over
-2.1.0 file sizes against the note at the top of that sheet, upload the two
-rebuilt zips, paste the Step 5 description, set version 2.2.0 and the Step 7
-identifiers, then publish. Afterwards verify against the Zenodo API that the
-published DOI is exactly 10.5281/zenodo.22673735 and that the five files
-are at the sheet's sizes. If Zenodo mints a different DOI, stop: every
-document below already cites the reserved one and would have to be
-re-propagated.
-
-## 2. DOI propagation for 2.2.0 — EXECUTED 2026-09-09, before the publish
+## 2. DOI propagation for 2.2.0 — EXECUTED 2026-09-09 (historical)
 
 `CITATION.cff` carries doi 10.5281/zenodo.22673735, version 2.2.0,
 date-released 2026-09-14; the canonical lineage sentence in all five venue
@@ -89,47 +90,50 @@ texts names 2.2.0 as the version accompanying this manuscript and keeps the
 1.0.0, 2.0.0 and 2.1.0 lineage intact; the editor note, the prior-appearance
 note, the cover letter in both renders, the README, the artifact access
 strategy, every sheet, the named arXiv variant's availability sentence and the
-companion's v2 correction note all cite 2.2.0; committed and pushed. Nothing
-here needs a click. **None of those citations resolves until the record is
-published**, which is why the publish above is the next action and not a later
-one.
+companion's v2 correction note all cite 2.2.0. Since the publish of 14
+September 2026 every one of those citations resolves.
 
-## 3. TMLR submission — SUBMITTED 2026-09-16
+## 3. DTRAP submission — NEXT, the only outward action left
 
-**Submitted 16 September 2026.** Forum:
-**https://openreview.net/forum?id=qbYQReMqwP**
+Work through `SUBMISSION_CONSOLE.md` top to bottom at
+https://mc.manuscriptcentral.com/dtrap. It carries every ScholarOne field in
+paste order, the three files to upload with their sizes, the cover letter
+(`packages/dtrap/COVER_LETTER.txt`), the confidential note
+(`packages/dtrap/EDITOR_NOTE.txt`, which discloses both prior submissions),
+the verified reviewers, the questionnaire answers and the waiver rule. After
+submitting, record the manuscript ID in the console.
 
-The submission was made through `TMLR_SUBMISSION_SHEET.md`, which carries every
-OpenReview field in the form's order, the PDF and the single supplementary zip
-that were uploaded, and the private note to the action editor. There were no
-suggested reviewers, no cover letter and no fee: TMLR assigns reviewers through
-its action editors and charges nothing, and the DTRAP cover letter, editor note
-and reviewer block are retired as historical.
+## 3a. TMLR submission — HISTORICAL: submitted 2026-09-16, desk-rejected 2026-09-18
 
-Still to do on this submission, both in `TMLR_SUBMISSION_SHEET.md` Step 9:
+Submitted 16 September 2026 through `TMLR_SUBMISSION_SHEET.md`, forum
+https://openreview.net/forum?id=qbYQReMqwP. Desk-rejected without review on
+18 September 2026, in a decision signed by the venue; no action editor was
+assigned and no comment was given. The follow-ups of that sheet's Step 9, the
+action-editor recommendation and the private note to the action editor, had
+no action editor to go to and are void. `TMLR_SUBMISSION_SHEET.md` is marked
+historical.
 
-1. Complete the action-editor recommendation once OpenReview requests it.
-2. Send the private note of Step 8 to the action editor, with the readers set
-   to the action editor and not to the reviewers, once one is assigned.
+## 4. arXiv v3 replacement — DONE: posted 2026-09-14, announced 2026-09-16 (historical)
 
-## 4. arXiv v3 replacement — after step 3
+Verified 2026-09-18 on arxiv.org/abs/2605.24696v3: posted 14 September 2026 at
+22:18 UTC under the new title, with the 1,898-character abstract of
+`ARXIV_V3_SHEET.md` Step 3, CC BY 4.0, cs.CR with cross-list cs.LG, 24 pages
+by its Comments field. The source staged for it was the named variant in the
+TMLR template at commit 2bfb896 (113,688 B); the listing does not identify the
+uploaded file, and its 108 KB source size does not match that tarball, so
+which exact file was uploaded is unverified. The tarball now in
+`packages/arxiv_v3/` is the acmart rebuild of 2026-09-18 (25 pages) and was not
+posted. The Comments field actually posted is a 411-character text as arXiv
+renders it, not the sheet's NO VENUE CLAIM variant; `ARXIV_V3_SHEET.md`
+records it. Nothing to do.
 
-Follow `ARXIV_V3_SHEET.md`: paper 2605.24696 → Replace → upload
-`packages/arxiv_v3/arxiv_v3_source.tar.gz`; new title; Comments = the NO VENUE
-CLAIM variant (it carries the Zenodo lineage through 2.2.0 and the provenance
-disclosure); confirm 24 pages in arXiv's preview and your name on page 1. TMLR
-permits preprints at any time and the private note to the action editor says
-this corrected v3 follows the submission, so post it soon after.
+## 5. Companion v2 replacement (arXiv:2510.09619) — DONE: posted 2026-09-14, announced 2026-09-16 (historical)
 
-## 5. Companion v2 replacement (arXiv:2510.09619)
-
-Decision is FINAL: corrected **replacement**, not withdrawal. arXiv updates
-are replacements. A withdrawal reads as retraction. Follow
-`SIBLING_V2_SHEET.md`. As of 2026-09-01 the upload package is built and
-verified: the v1 source was fetched from arXiv's public e-print endpoint,
-confirmed against the public v1 PDF, and the correction note is inserted.
-You upload `packages/sibling/arxiv_2510_09619_v2_source.tar.gz` as-is and
-fill three fields from the sheet.
+Verified 2026-09-18 on arxiv.org/abs/2510.09619v2: posted 14 September 2026 at
+22:30 UTC as a corrected replacement, not a withdrawal, with the correction
+note on the title page, the bracketed correction sentence opening the
+abstract, and the Comments field of `SIBLING_V2_SHEET.md` step 3 (the DOI
+rendered as a link, no final period). Nothing to do.
 
 ## 6. AWS closeout — verified 2026-08-31, one console click remains
 
@@ -151,10 +155,10 @@ good hygiene and it means this step stays yours, in the console:
 
 ---
 
-**Fallback ladder if TMLR declines:** **DMLR.** DTRAP was the original target
-and is no longer in the ladder: the venue changed to TMLR on 2026-09-14 and
-the DTRAP package is retired. TNSM is removed from the ladder — it is not free
-to publish at this paper's 24 pages.
+**Fallback ladder, as last recorded: DMLR.** TMLR is off it after the desk
+rejection of 18 September 2026. TNSM stays removed: it is not free to publish
+at this paper's 24 pages.
 
 Everything else — compiles, gates, ledger, tests, packages, anonymity scans —
-is done and verified. See `PUBLISH_PREP_REPORT.md` and `TRIAGE_REPORT.md`.
+is done and verified, with one expected exception: the gate's package-freshness
+check fails on the frozen Zenodo 2.2.0 code zip, which must not be rebuilt. See `PUBLISH_PREP_REPORT.md` and `TRIAGE_REPORT.md`.

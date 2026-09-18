@@ -1,3 +1,12 @@
+> **Historical snapshot of 2026-08-24 (updated 2026-08-27).** Since then,
+> Zenodo 2.2.0 was published (doi:10.5281/zenodo.22673735), and arXiv v3 of
+> 2605.24696 and the companion's v2 were posted on 14 September 2026 and
+> announced on 16 September 2026. The TMLR submission of 16 September 2026
+> was desk-rejected on 18 September 2026 without review. The tarball now in
+> `packages/arxiv_v3/` is an unposted rebuild and must not be uploaded from
+> item 4 below. The one outward action left is the DTRAP submission; follow
+> `HUMAN_ACTIONS.md`, not the list below.
+
 # FINALIZE_DONE — status COMPLETE (2026-08-24)
 
 Everything that can be done without a login is done and verified

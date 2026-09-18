@@ -1,3 +1,12 @@
+> **Historical.** This file describes the v3 package as staged for the posting
+> of 14 September 2026: the named build in the TMLR template at commit 2bfb896
+> (113,688 B). The listing's 108 KB source size does not match that tarball, so
+> which exact file was uploaded is unverified. The tarball now in this
+> directory is the acmart rebuild of 2026-09-18 (25 pages), which was not
+> posted. The Comments field actually posted is recorded in
+> `ARXIV_V3_SHEET.md`. The venue is now ACM DTRAP; TMLR desk-rejected the
+> submission on 18 September 2026 without review.
+
 # arXiv v3 replacement — metadata to paste
 
 **Replaces:** arXiv:2605.24696 v2.

@@ -1,3 +1,23 @@
+> **POSTED — historical record.** v3 was posted on 14 September 2026 at 22:18
+> UTC and announced on 16 September 2026. Verified 2026-09-18 on
+> arxiv.org/abs/2605.24696v3: the title of Step 2, the abstract of Step 3
+> exactly (1,898 characters), CC BY 4.0, cs.CR with cross-list cs.LG. The
+> source staged for it was the named variant in the TMLR template at commit
+> 2bfb896 (113,688 B), as this sheet describes; that staging is a historical
+> fact. The listing does not identify the uploaded file, and its 108 KB source
+> size does not match that tarball, so which exact file was uploaded is
+> unverified. The Comments field actually posted is neither the Step 4 text nor
+> its fallback but this text, 411 characters as arXiv renders it (arXiv shows a
+> DOI as a link, so the typed field may have read doi:10.5281/...):
+>
+> v3: substantial correction and rebuild. v1 and v2 reported results on assembled evaluation streams, described a scoring rule the code did not implement, and included tables with no archived origin. Details in Sec. 10. Title changed (was CALIBURN: Operationally Calibrated Streaming Intrusion Detection with Regime-Dependent Conformal Risk Control). Artifact doi:https://doi.org/10.5281/zenodo.22673735. 24 pages
+>
+> The venue is now ACM DTRAP: the TMLR submission of 16 September 2026 was desk-rejected on 18 September
+> 2026 without review.
+> `packages/arxiv_v3/` now holds the acmart rebuild of 2026-09-18 (25 pages),
+> which was not posted. The title's "nothing submitted" describes the sheet as
+> assembled. Nothing below is to be done again.
+
 # ARXIV_V3_SHEET — replacement of arXiv:2605.24696, nothing submitted
 
 Assembled 2026-08-27, last rebuilt 2026-09-14 against commit
@@ -15,8 +35,8 @@ on record 22638195 with its DOI **reserved: 10.5281/zenodo.22673735**. The
 Comments text below cites 2.2.0, so **publish that version before submitting
 this replacement**: an arXiv version is permanent, and a reserved DOI does not
 resolve until the record is published.
-Order per `HUMAN_ACTIONS.md`: **Zenodo 2.2.0 publish, then the TMLR
-submission on OpenReview, then this replacement**, then the companion's v2
+Historical, as ordered on 2026-09-14 per `HUMAN_ACTIONS.md`: **Zenodo 2.2.0
+publish, then the TMLR submission on OpenReview, then this replacement**, then the companion's v2
 replacement. TMLR permits preprints at any time; the private note to the action
 editor says this corrected v3 will be posted after submission, so post it soon
 after and do not wait on the review.
@@ -147,7 +167,7 @@ No sentence needs appending; the concept DOI 10.5281/zenodo.20074589 is not
 cited.
 
 **The Comments text now carries the provenance disclosure** in the same words
-as the Zenodo description and the retired DTRAP editor note — 27 of 33 live run
+as the Zenodo description and the DTRAP editor note — 27 of 33 live run
 manifests ran on an uncommitted tree, two irreducibly. Decided 2026-08-27,
 reaffirmed 2026-09-09: accepted, not re-run. The counts were corrected on
 2026-09-09 from the 19 of 25 the canon had carried since version 2.0.0; they
@@ -203,7 +223,8 @@ one selected for v3 before submitting.
 ## Step 6 — Before pressing submit
 
 1. Preview arXiv's own build. Confirm **24 pages** and **your name on page 1**
-   (this is the named variant; the anonymous build is for the TMLR submission only).
+   (this is the named variant; the anonymous build was for the TMLR submission at
+   the time and is now for the DTRAP submission only).
 2. Confirm the Comments field is the NO VENUE CLAIM variant.
 3. Confirm the abstract field holds the Step 3 paste text (1,898 characters),
    not the full PDF abstract, and that arXiv's preview shows no LaTeX in it.

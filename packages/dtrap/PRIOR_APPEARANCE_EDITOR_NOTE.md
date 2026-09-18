@@ -8,15 +8,17 @@ guidelines (read 2026-09-18 at dl.acm.org/journal/dtrap/author-guidelines)
 ask that any prior appearance be noted on the title page, and that the author
 inform the Editors-in-Chief of any circumstances bearing on the
 prior-publication policy. This note does the second. Its Anonymity paragraph
-explains how the first is handled.
+explains how the first is handled. The two prior submissions are disclosed
+here and only here; the cover letter carries none of them.
 
 ---
 
 Dear Editors,
 
 This submission has prior public appearance, and it is a correction of that
-prior work. I would rather you have the full picture from me at submission
-than discover it later.
+prior work. It also has two prior submissions, set out below; neither
+received peer review. I would rather you have the full picture from me at
+submission than discover it later.
 
 **Prior versions.** This manuscript is the corrected version of the preprint
 **arXiv:2605.24696**. Its first two versions were posted under the title
@@ -33,6 +35,28 @@ The corrected artifact is archived on Zenodo as version 2.2.0
 (doi:10.5281/zenodo.22673735), in the same record lineage as version 2.1.0
 (doi:10.5281/zenodo.22638195), version 2.0.0 (doi:10.5281/zenodo.22213264)
 and version 1.0.0 (doi:10.5281/zenodo.20074590).
+
+**Prior submissions.** This work has been submitted twice before. Neither
+submission received peer review.
+
+1. An earlier version of this work was submitted to KeAi *Cyber Security and
+   Applications* in May 2026 and rejected within 48 hours without peer
+   review. That version is the one the audit found defective, and this
+   manuscript is the rebuild from it. The arXiv v1 Comments field and the
+   description of Zenodo version 1.0.0 both name that submission. The v1
+   comment, "Under review at Cyber Security and Applications", is out of
+   date; the v2 Comments field does not repeat it.
+2. The current version was submitted to *Transactions on Machine Learning
+   Research* (TMLR) on 16 September 2026 and desk-rejected on 18 September
+   2026 without review. The decision was signed by the venue. No action
+   editor was assigned and no comment was given.
+
+Neither manuscript has received peer review at any venue, and apart from
+this submission nothing is under review anywhere. The archived artifact,
+Zenodo version 2.2.0, carries the manuscript source in the TMLR LaTeX
+template of that second submission; its analysis code, run manifests, macro
+layer and claim ledger are identical to those behind this submission, and
+the camera-ready deposit will carry the final source.
 
 **What was wrong, and what the correction covers.** An adversarial review and
 a line-by-line audit of the archived artifacts established two defects that
@@ -98,11 +122,25 @@ and latency descriptions unsupported by the implementation and the evaluation
 streams to be assembled constructions, and points to arXiv:2605.24696 v3 and
 the Zenodo 2.2.0 record.
 
-**The companion is a public preprint and is not under review at any venue.
-This manuscript is not under review at any other venue.** There is no
-concurrent-submission or dual-consideration question for you to weigh. The
-manuscript's Companion Manuscript Disclosure says the same of the companion,
-without its identifier.
+**The companion is a public preprint and is not under review at any
+journal.** I state this plainly because an earlier draft of this note said
+that "the relevant journal has been or is being informed", and that was
+false. The same implication stood in the manuscript's Companion Manuscript
+Disclosure and is now corrected there too. No submission of the companion to
+IEEE Transactions on Information Forensics and Security (TIFS), the journal
+that sentence presumed, existed. I verified this in the IEEE Author Portal on
+2026-08-27, with the filters set to All Publications and All Submission
+Statuses. The account returned one closed record, `TDSC-2025-10-1842`, an
+IEEE Transactions on Dependable and Secure Computing record rejected on 22
+October 2025, and no other. The error was mine and was caught
+before submission rather than by you. It is recorded as corrected incident
+CI-25, together with the rule it produced. The rule says that a venue
+relationship asserted in any artifact must be verified against the venue's
+own system before the artifact is prepared, and that researching a venue's
+procedures is not verification of a submission's existence. There is
+consequently no concurrent-submission or dual-consideration question for you
+to weigh. This manuscript is under consideration at DTRAP and nowhere else,
+and nothing else of mine is under review anywhere.
 
 **On the provenance mechanism, and two failures of it.** The manuscript's
 Provenance Discipline section (Section 9) and its Appendix B state what the

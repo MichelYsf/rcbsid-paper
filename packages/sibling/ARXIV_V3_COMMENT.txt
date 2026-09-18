@@ -1,3 +1,11 @@
+POSTED 2026-09-14 -- historical. v3 was posted with a shorter Comments text
+than the variant below (411 characters as arXiv renders it; ARXIV_V3_SHEET.md
+records it). This
+file stays because it carries the canonical lineage and provenance
+paragraphs, which stay byte-identical across their five venues. The page
+count note below describes the TMLR-template build that was posted; the
+venue is now ACM DTRAP.
+
 arXiv v3 Comments-field text.
 
 RENAMED 2026-08-27 from ARXIV_V3_COMMENT_COEXIST.txt. That name was given when
@@ -94,7 +102,11 @@ public record -- that the preprint exists, that it shares code, that the audit
 findings reach it, and that correction is in hand. It deliberately does not say
 where it has been submitted, whether it is under review, or whether any editor
 has been informed, because as of 2026-08-27 the answers are: nowhere, no, and
-no.
+no. [Corrected 2026-09-18: "nowhere" was more than the check established. It
+found no TIFS submission and no open submission of any kind; the IEEE
+account's one record, TDSC-2025-10-1842, was rejected on 22 October 2025 and
+is closed. The companion was under review nowhere, and no editor had been
+informed.]
 
 
 =============================================================================
@@ -105,7 +117,9 @@ Ended with: "A companion manuscript sharing parts of the codebase
 (arXiv:2510.09619) has been withdrawn from journal consideration by the author
 pending its own correction."
 
-FALSE. Nothing was withdrawn because nothing was submitted. Retired 2026-08-27.
+FALSE. Nothing was withdrawn: there was no TIFS submission, and the IEEE
+account's one record, TDSC-2025-10-1842, was rejected on 22 October 2025 and
+is closed. Retired 2026-08-27; wording corrected 2026-09-18.
 
 
 =============================================================================

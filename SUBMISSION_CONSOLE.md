@@ -152,22 +152,22 @@ Excluded and confirmed clean: Seth Barrett and every FIRCE and FADES author
 
 ## 9. Cover letter
 
-Paste the whole of `packages/dtrap/COVER_LETTER.txt` (931 words). It is
+Paste the whole of `packages/dtrap/COVER_LETTER.txt` (935 words). It is
 plain ASCII text with no markdown residue and no operator note.
 
-Contingency: if the portal offers no separate confidential-comments box, use
-the single cover-letter field for both texts. Paste the cover letter, then
-this heading on its own line, then the editor note:
-
-```
-CONFIDENTIAL TO THE EDITORS: PRIOR APPEARANCE AND CORRECTION HISTORY
-```
+Contingency: if the portal offers no separate confidential-comments box, do
+not paste the editor note into the cover-letter field; the submission history
+belongs in a confidential-to-editor field only. Stop and report before
+submitting.
 
 ## 10. Confidential comments to the editor
 
-Paste the whole of `packages/dtrap/EDITOR_NOTE.txt` (1,698 words). It carries
-the prior-appearance disclosure, the overlap account, the correction history,
-the companion-manuscript status, and the provenance limitation.
+Paste the whole of `packages/dtrap/EDITOR_NOTE.txt` (2,078 words). It carries
+the prior-appearance disclosure, the two prior submissions and the review they
+did not receive, what Zenodo 2.2.0 carries, the overlap account, the correction history, the
+companion-manuscript status with its IEEE portal record, and the provenance
+limitation. The cover letter carries none of the submission history; it
+belongs in this field only.
 
 ## 11. Portal questionnaire
 
@@ -177,9 +177,10 @@ Answers, one per row:
 |---|---|
 | Previously published? | No. It has prior public appearance as a preprint. The confidential note covers it. |
 | Under consideration elsewhere? | No |
+| Previously submitted elsewhere? (only if the form asks this) | Yes, twice, and neither was peer reviewed: an earlier, pre-audit version to KeAi Cyber Security and Applications in May 2026, rejected within 48 hours without peer review; and this version to Transactions on Machine Learning Research on 16 September 2026, desk-rejected on 18 September 2026 without review. The confidential comments give the details. |
 | Conflicts of interest | None to declare. |
 | Funding | None to declare. |
-| Code availability | Yes, Apache-2.0. An anonymous copy is uploaded as supplementary material. The author-named release is archived as Zenodo version 2.2.0 (doi:10.5281/zenodo.22673735); the public repository and that DOI are supplied in the manuscript at acceptance. |
+| Code availability | Yes, Apache-2.0. An anonymous copy is uploaded as supplementary material. The author-named release is archived as Zenodo version 2.2.0 (doi:10.5281/zenodo.22673735). The public repository and the DOI of the camera-ready deposit are supplied in the manuscript at camera-ready. |
 | Data availability | The benchmarks are public third-party datasets (CICIDS2017 in the Engelen-corrected release, and LITNET-2020). They are not redistributed. The artifact ships EXPECTED_SHA256.txt, line-ending-normalized hashes that let a reader verify their own reconstruction of each stream. |
 | Generative AI disclosure | Required and already in the manuscript, under "Acknowledgements: Generative AI Usage". Use is disclosed. No AI tool is an author. No reported number was produced by one. The author takes full responsibility. |
 | ORCID | 0009-0000-0664-8228. Link when prompted. |
@@ -188,15 +189,19 @@ Answers, one per row:
 Open-access fee waiver. Attach the waiver confirmation ONLY if the portal
 shows a fee or waiver field, and only in that field. The file is
 `C:\Users\CYBERWIZARD\Downloads\ACM_Waiver.pdf` (643,261 bytes, present
-2026-09-18). It is ACM's email of 6 August 2026 confirming that the 100%
-geographic waiver applies to this paper and is applied automatically during
-the eRights process. If the portal shows no fee or waiver field, attach it
-nowhere. Never attach it in the file-upload step of section 12.
+2026-09-18). If the portal shows no fee or waiver field, attach it nowhere.
+Never attach it in the file-upload step of section 12.
 
-Your judgment: the same email asks you to use an institutional email address
-for submission and eRights completion. The request it answers said you have
-no institutional affiliation. This console assumes the account address of
-section 1. Decide before you submit whether to raise that with ACM first.
+Submitting address and the waiver. The submitting address is
+michelyoussef@hotmail.com, the account of section 1. Lebanon's 100%
+geographic waiver was confirmed in writing by ACM's Director of Publications,
+Scott Delman, on 6 August 2026: the email says the waiver will be applied
+automatically to this paper during the eRights process, and it sets no
+institutional condition on the waiver. The same email asks for an
+institutional email address for submission and eRights; the request it
+answered stated that you have no institutional affiliation, so there is none
+to use. If eRights asks about the waiver or the address, forward that
+confirmation (the same ACM_Waiver.pdf).
 
 ## 12. File uploads
 
@@ -205,9 +210,9 @@ Three files, with designations. Sizes are those of the files built
 
 | # | full path | bytes | SHA-256 (first 16) | designation |
 |---|---|---|---|---|
-| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 682,331 | `fe2e9d64943caf70` | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 615,764 | `3875489d8778a0a6` | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 103,164 | `f5cf3ea21e106afb` | supplementary for review, not for publication |
+| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 682,331 | `217aa3e1a872ee3f` | main document |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 615,738 | `30dfee30bda297d1` | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 103,196 | `06c7a0dd3047d562` | supplementary for review, not for publication |
 
 Upload exactly these three files and nothing else. The waiver PDF is not one of
 them. The anonymous build is the one that says "ANONYMOUS AUTHOR(S)" on page 1.

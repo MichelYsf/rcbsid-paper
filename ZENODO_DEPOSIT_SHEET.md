@@ -1,5 +1,25 @@
 # ZENODO_DEPOSIT_SHEET — version 2.2.0 STAGED 2026-09-14, DOI reserved, nothing uploaded
 
+> **PUBLISHED — historical record.** Version 2.2.0 was published on 14
+> September 2026 at 21:48 UTC (publication date 2026-09-15 on the record) as
+> doi:10.5281/zenodo.22673735. Verified 2026-09-18 against the Zenodo API: the
+> record is published, it is the latest of the four versions in the lineage
+> (2.2.0, 2.1.0, 2.0.0, 1.0.0), and its five files match `packages/zenodo/`
+> by MD5. Its manuscript source is the build reset on 2026-09-14 in the TMLR
+> template, and its Step 5 description says so; both are historical facts.
+> The venue is now ACM DTRAP: the TMLR submission of 16 September 2026 was desk-rejected on 18 September
+> 2026 without review, and the
+> DTRAP submission uses the acmart build. As for the rest of the deposit,
+> its analysis code (src/, tests/ and the analysis scripts), its 95 run
+> manifests, its macro layer and its claim ledger are identical to those behind
+> the DTRAP submission; the manuscript source, the figure renderer's width
+> constants, three packaging scripts and the response shelf's section pointers
+> differ.
+> The camera-ready deposit will carry the final source.
+> `packages/zenodo/` is frozen and is not to be rebuilt. The title's "STAGED
+> ... nothing uploaded" describes the sheet as assembled. Nothing below is
+> to be done again.
+
 > **Versions 2.0.0 and 2.1.0 are LIVE and frozen.** 2.0.0 was published
 > 2026-08-31 (version DOI **10.5281/zenodo.22213264**); 2.1.0 was published
 > from this sheet's previous staging under the DOI it had reserved,
@@ -303,7 +323,7 @@ Zenodo records the version relation to 2.1.0 itself; do not add it by hand.
    10.5281/zenodo.22673735 and that the five files are at the Step 2
    sizes. **If Zenodo mints a different DOI, stop**: the whole repository
    already cites the reserved one, and it would all have to be re-propagated
-   before anything goes to TMLR or arXiv.
+   before anything went to TMLR, the venue at the time, or to arXiv.
 2. Optional: annotate the 2.1.0 record's description with one sentence
    naming 2.2.0 as the version that carries the final referee round's
    manuscript. Metadata on 2.1.0 stays editable; its files stay frozen.

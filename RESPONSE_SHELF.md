@@ -25,7 +25,7 @@ attribution (the reversal follows test membership, not history) is identified
 by design rather than assumed.
 
 **Why it is not run.** The detector is prequential and updates its sufficient
-statistics on every record it scores, including held-out ones (Table 2,
+statistics on every record it scores, including held-out ones (Table 3,
 update-timing row). The records one arm holds out that the other does not
 share are, in the other arm, training or validation records: of the 103,189
 attacks that leave the held-out slice under day round robin, 77,670 sit in that
@@ -40,8 +40,8 @@ attribution as *attributable to* test membership and state the assumption it
 rests on: that history contributes no more on the records the arms do not
 share than on those they do. The shared-record result is reported under both
 ECOD batches (analysis A) with event-block bootstrap intervals (analysis B),
-and the Threats section keeps the sentence that a factorial design would
-decompose the remaining factors.
+and Section 11 (Limitations) names a factorial or prevalence-matched design
+as the analysis that would test that assumption directly.
 
 ## 2. Event-based (range-aware) precision and recall (referee MAJOR 4) — future work, 2026-09-06
 
@@ -80,11 +80,11 @@ outside this round's bound (archived data only).
 **What the paper says instead.** Table 2, missing/infinite row, carries the
 counts as macros.
 
-## 4. Table 9 diagnostics on the held-out slice (second report, MAJOR 3) — shelved 2026-09-07
+## 4. Table 10 diagnostics on the held-out slice (second report, MAJOR 3) — shelved 2026-09-07
 
-**Asked.** Recompute the Section 9 diagnostics (posterior mass on short runs,
+**Asked.** Recompute the Appendix A diagnostics (posterior mass on short runs,
 scores at the cap, distinct values, score standard deviation) on the 30,000
-held-out records whose AP and AUC-ROC the section reports, rather than on the
+held-out records whose AP and AUC-ROC the appendix reports, rather than on the
 first 15,000 records of the stream.
 
 **Why it is not run.** The ablation run archived no per-record scores: its
@@ -94,7 +94,7 @@ manifests (`s6_bocpd_corrected_ablation_20260824T092655_a47acf51` and the
 diagnostics on the held-out slice would rerun both detector variants, which
 this round's bound (archived data only) excludes.
 
-**What the paper says instead.** Section 9 states that the prefix diagnostics
+**What the paper says instead.** Appendix A states that the prefix diagnostics
 are consistent with, not proof of, the held-out ranking, names the two
 populations and says the held-out scores were not archived.
 
@@ -107,7 +107,7 @@ CICIDS arms only (`results/score_dumps/`); no LITNET per-record scores were
 archived, so a bootstrap over them would require rerunning every LITNET
 method, outside the round's bound.
 
-**What the paper says instead.** Section 12 names which results carry
+**What the paper says instead.** Section 11 names which results carry
 intervals and which do not, and why.
 
 ## 6. A size-only ECOD manipulation at fixed batch composition (second report, MAJOR 2) — not possible by construction
@@ -135,7 +135,7 @@ at every cut.
 
 ## Standing: rolling-origin resampling
 
-The Threats section states that the reported intervals are moving-block
+Section 11 (Limitations) states that the reported intervals are moving-block
 bootstrap intervals over the evaluated slice and that a rolling-origin
 procedure is not applied. It is not shelved with a reason; it is stated as a
 limit.

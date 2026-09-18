@@ -1,10 +1,12 @@
-> **RETIRED 2026-09-14 — historical.** This document was written for the ACM
-> DTRAP submission, which is no longer the target venue. The manuscript was
-> reset in the TMLR template on 2026-09-14 and is submitted through OpenReview;
-> the operative document is `TMLR_SUBMISSION_SHEET.md`. Nothing below is to be
-> pasted or sent anywhere. It is kept as the record of what was prepared, and
-> because two of these files carry the canonical lineage and provenance
-> paragraphs, which stay byte-identical across their five venues.
+> **SUPERSEDED — reference record only.** The venue is ACM DTRAP again:
+> the TMLR submission of 16 September 2026 was desk-rejected on 18 September
+> 2026 without review. The operative
+> document for the DTRAP submission is `SUBMISSION_CONSOLE.md`, rewritten
+> 2026-09-18; use it, not this sheet. This sheet was assembled 2026-08-27 and
+> last rebuilt 2026-09-09, so its sizes, page count, anchor commit and
+> ordering are out of date: Zenodo 2.2.0 is published and arXiv v3 was posted
+> on 14 September 2026. Two of its statements were false and are corrected in
+> place below.
 
 # DTRAP_SUBMISSION_SHEET — nothing submitted
 
@@ -96,8 +98,11 @@ Paste **`packages/dtrap/EDITOR_NOTE.txt` in full** (the plain-text render of
 `PRIOR_APPEARANCE_EDITOR_NOTE.md`, 169 lines in the markdown source).
 It contains, and the manuscript deliberately does not:
 
-- the prior appearance: arXiv:2605.24696 v1 (23 May 2026) and v2 (25 June 2026),
-  neither submitted to a journal
+- the prior appearance: arXiv:2605.24696 v1 (23 May 2026) and v2 (25 June 2026)
+  [corrected 2026-09-18: this line said "neither submitted to a journal", which
+  was false; the note now discloses both prior submissions, to KeAi Cyber
+  Security and Applications in May 2026 and to TMLR in September 2026, neither
+  peer reviewed]
 - the per-result-group overlap matrix — reused / re-derived / new / withdrawn
 - the dated correction history with the claims each version invalidates
 - the companion preprint arXiv:2510.09619: a public preprint, **not under review
@@ -123,7 +128,7 @@ so and offers to move it if the editors prefer.
 | **Data availability** | The benchmarks are public third-party datasets (CICIDS2017, Engelen-corrected release; LITNET-2020). They are **not** redistributed. The artifact ships `EXPECTED_SHA256.txt`, line-ending-normalized hashes that let a reader verify their own reconstruction of each stream |
 | Generative AI disclosure | **Required and already in the manuscript**, in *Acknowledgements: Generative AI Usage*: use is disclosed, no AI tool is an author, no reported number was produced by one, and the authors take full responsibility |
 | ORCID | 0009-0000-0664-8228 — link if prompted |
-| Open-access fee / waiver | A waiver was confirmed 2026-08-07. The confirmation PDF is at `C:\Users\CYBERWIZARD\Downloads\ACM_Waiver.pdf` (verified present 2026-08-31). Attach it in the fee section |
+| Open-access fee / waiver | [corrected 2026-09-18: the confirmation is ACM's email of 6 August 2026, not 2026-08-07, and it is attached only in a fee or waiver field if the portal has one, never in the file upload; see `SUBMISSION_CONSOLE.md` section 11] |
 | Suggested reviewers | your judgment — four candidates verified against official pages 2026-08-31, with two drops explained, in `SUGGESTED_REVIEWERS.md` (not auto-submitted) |
 
 ## Step 10 — Before submitting

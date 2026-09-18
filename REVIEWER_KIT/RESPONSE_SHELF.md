@@ -61,7 +61,7 @@ doing change-point detection, and the failure is invisible to every
 downstream metric; (d) the both-directions degeneracy of the obvious repair.
 DTRAP's scope includes evaluation practice for operational detection; that
 is the lane this paper occupies. **Evidence:** `findings_score_threshold.md`,
-`findings_bocpd_ablation.md`, Section 3 and 7 of the manuscript.
+`findings_bocpd_ablation.md`, Section 3 and Appendix A of the manuscript.
 
 ## S5. "The natural-order test slice is one 204-minute window; that is not an
 evaluation."
@@ -79,8 +79,9 @@ chronological cuts from 60% to 90% and finds ECOD ahead of the detector at
 three of them, including the cut this paper uses. The narrowness of the
 window stands; the claim that no such check exists does not, and has been
 withdrawn wherever it appeared. **Evidence:**
-`findings_contrast.md`; manifest `cicids_heldout_composition_*`;
-Section 8 (Threats).
+`findings_contrast.md`; `findings_review_analyses.md` A2; manifest
+`cicids_heldout_composition_*`; Section 6.2, Table 7 and Figure 3 (the
+sweep); Section 11 (Limitations: the window).
 
 ## S6. "Why should we trust numbers from a project with this correction
 history?"

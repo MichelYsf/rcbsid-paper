@@ -1,3 +1,13 @@
+> **POSTED -- historical record.** v2 was posted on 14 September 2026 at 22:30
+> UTC and announced on 16 September 2026. Verified 2026-09-18 on
+> arxiv.org/abs/2510.09619v2: the Comments field carries the step 3 text
+> (arXiv renders the DOI as a link; the posted text has no final period), and
+> the abstract opens with the step 2
+> sentence, posted with "(corrected v3)" in place of "(v3 forthcoming)".
+> The main paper's venue is now ACM DTRAP: the TMLR submission of 16
+> September 2026 was desk-rejected on 18 September 2026 without review.
+> Nothing here is to be done again.
+
 # SIBLING_V2_SHEET: v2 replacement of arXiv:2510.09619
 
 **What this is.** The companion preprint ("Risk-Calibrated Bayesian Streaming
@@ -6,9 +16,10 @@ Intrusion Detection with SRE-Aligned Decisions") gets a corrected
 `SIBLING_DECISION.md`. The v2 is the v1 paper plus the prepared correction
 note. Nothing else in the paper changes.
 
-**When.** After the TMLR submission and after the main paper's arXiv v3
-replacement (`HUMAN_ACTIONS.md` steps 3 and 4). Nothing in the main paper's
-path waits on this.
+**When (historical).** Planned for after the TMLR submission and the main
+paper's v3 replacement. It was posted on 14 September 2026, after v3 and
+before the TMLR submission of 16 September. Nothing in the main paper's path
+waited on it.
 
 **State as of 2026-09-01: the upload package is built and verified.** The v1
 source was fetched from arXiv's public e-print endpoint in one request and
@@ -61,5 +72,5 @@ fresh and compiled clean.
    that needs a small edit round first: change the two "(v3 forthcoming)"
    spots in `packages/sibling/v2_source/main.tex`, recompile, and re-tar.
 
-**Do not post any of this yet.** This sheet is preparation. Execution is
-`HUMAN_ACTIONS.md` step 5.
+**Historical.** This sheet was the preparation; the posting is done
+(`HUMAN_ACTIONS.md` step 5).

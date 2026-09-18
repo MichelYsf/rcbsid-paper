@@ -1,18 +1,13 @@
-> **RETIRED 2026-09-14 — historical.** This document was written for the ACM
-> DTRAP submission, which is no longer the target venue. The manuscript was
-> reset in the TMLR template on 2026-09-14 and is submitted through OpenReview;
-> the operative document is `TMLR_SUBMISSION_SHEET.md`. Nothing below is to be
-> pasted or sent anywhere. It is kept as the record of what was prepared, and
-> because two of these files carry the canonical lineage and provenance
-> paragraphs, which stay byte-identical across their five venues.
-
 # Artifact-access strategy — DTRAP double-anonymous compliance
 
-Verified fresh 2026-08-24 against dl.acm.org/journal/dtrap/author-guidelines
-(via web search snapshot; the page itself blocks robots): submissions are
-double-anonymous, prepared on the ACM template, submitted as PDF via
-ScholarOne at `https://mc.manuscriptcentral.com/dtrap`. Manuscripts must
-anonymize the title page and remove identifying acknowledgments.
+Re-read 2026-09-18 at dl.acm.org/journal/dtrap/author-guidelines (first
+verified 2026-08-24 from a search snapshot, when the page blocked robots):
+submissions are double-anonymous, prepared on the ACM large-format template,
+and submitted as PDF via ScholarOne at `https://mc.manuscriptcentral.com/dtrap`.
+Manuscripts must anonymize the title page and remove funding sources and
+personal acknowledgments. The venue is DTRAP again after the TMLR
+submission of 16 September 2026 was desk-rejected on 18 September 2026
+without review.
 
 ## During review
 
@@ -30,13 +25,19 @@ anonymize the title page and remove identifying acknowledgments.
   reference the named GitHub remote and machine paths), scrubs the machine
   username from archived manifest paths, and **fails the build if any token
   from the identity list survives anywhere in the zip**. The shipped zip
-  passed that check (232 files at the 2026-09-09 build). No external links in the manuscript point
+  passed that check (233 files at the 2026-09-18 build). No external links in the manuscript point
   to author-named resources: the Data Availability section says the artifact
   is provided through the submission system during review.
 
 ## After acceptance
 
 Camera-ready replaces the anonymous availability sentence with the public
-GitHub repository (branch `rebuild/honest-v1`) and the Zenodo version 2.2.0
-DOI (10.5281/zenodo.22673735, HUMAN_ACTIONS step 1); CITATION.cff travels
-with the public artifact only.
+GitHub repository (branch `rebuild/honest-v1`) and the DOI of the
+camera-ready Zenodo deposit, which will carry the final manuscript source.
+The version published now is 2.2.0 (10.5281/zenodo.22673735). It carries
+the manuscript source in the TMLR template of the earlier submission, and
+its analysis code (src/, tests/ and the analysis scripts), its 95 run
+manifests, its macro layer and its claim ledger are identical to those behind
+the DTRAP submission; the manuscript source, the figure renderer's width
+constants, three packaging scripts and the response shelf's section pointers
+differ. CITATION.cff travels with the public artifact only.

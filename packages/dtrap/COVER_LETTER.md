@@ -98,8 +98,8 @@ claim ledger, and the stream-reconstruction scripts with hash verification,
 and it contains no author-identifying strings (verified mechanically). An
 author-named release of the artifact is archived as version 2.2.0 of its
 Zenodo record (doi:10.5281/zenodo.22673735), which supersedes versions 2.1.0,
-2.0.0 and 1.0.0 in the same lineage; the identifier will be supplied in the
-manuscript at camera-ready.
+2.0.0 and 1.0.0 in the same lineage; the DOI of the camera-ready deposit will
+be supplied in the manuscript at camera-ready.
 
 **Companion manuscript.** A related manuscript sharing parts of the audited
 codebase (arXiv:2510.09619) is a public preprint and is not under review at

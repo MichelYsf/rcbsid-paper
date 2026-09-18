@@ -44,6 +44,11 @@ IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                # name, with every import, identifier, path and prose mention
                # rewritten consistently (see codename_map below)
                b"CALIBURN", b"Caliburn", b"caliburn",
+               # the v1.0.0 Zenodo record's title and file checksum, quoted in the
+               # incident log, each find the author-named record in one search;
+               # the prior venue it names belongs in the confidential note only
+               b"SLO-Aware Streaming", b"f67dfa9c0203490a4de1648f6d6ce8c6",
+               b"KeAi", b"Cyber Security and Applications",
                # Zenodo record ids: each resolves to a page naming the author
                b"22673735", b"22638195", b"22213264", b"20074590",
                b"20074589", b"zenodo.org"]
@@ -127,6 +132,11 @@ def scrub(rel: str, data: bytes) -> bytes:
     data = data.replace(b"TDSC-2025-10-1842", b"[record-id-redacted-for-review]")
     data = data.replace(b"Operationally Calibrated Streaming",
                         b"[former-title-redacted-for-review]")
+    data = re.sub(rb"SLO-Aware Streaming Intrusion Detection(?:: Reproducibility Package)?",
+                  b"[v1-title-redacted-for-review]", data)
+    data = data.replace(b"f67dfa9c0203490a4de1648f6d6ce8c6", b"[checksum-redacted-for-review]")
+    data = re.sub(rb"(?:to )?KeAi Cyber Security and Applications", b"[venue-redacted-for-review]", data)
+    data = data.replace(b"Cyber Security and Applications", b"[venue-redacted-for-review]")
     # the underscore form the tarball file names use
     data = data.replace(b"2605_24696", b"[preprint-id-redacted-for-review]")
     data = data.replace(b"2510_09619", b"[companion-id-redacted-for-review]")

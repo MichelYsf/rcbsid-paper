@@ -1,7 +1,10 @@
 # PUBLISH_INSTRUCTIONS — what each package is, and the invariants before it leaves
 
-Zenodo versions 2.0.0 and 2.1.0 are published; nothing has gone to arXiv, to
-TMLR, or to any other submission system. The click-by-click execution lives
+Zenodo versions 2.0.0, 2.1.0 and 2.2.0 are published. arXiv v3 of 2605.24696
+and the companion's v2 were posted on 14 September 2026 and announced on 16
+September 2026. The TMLR submission of 16 September 2026 was desk-rejected
+on 18 September 2026 without review (historical). The venue is now ACM
+DTRAP, not yet submitted. The click-by-click execution lives
 in `HUMAN_ACTIONS.md`, **which is the operative document and takes precedence
 over this one wherever they differ**. This file records what each package is
 and the invariants that must hold before any of them leaves this machine.
@@ -9,7 +12,7 @@ and the invariants that must hold before any of them leaves this machine.
 ## Invariants (check all five before publishing anything)
 
 ```bash
-python scripts/check_provenance.py        # gate + claim ledger: must end GREEN twice
+python scripts/check_provenance.py        # gate + claim ledger: GREEN except package freshness on the frozen Zenodo 2.2.0 zip (expected; never rebuild it)
 python scripts/check_manuscript_macros.py # must PASS
 python scripts/check_tarball_anonymity.py # shipped tarballs: must PASS
 python -m pytest -q                       # full suite: must pass
@@ -46,44 +49,51 @@ where `tar tvf` prints it without extracting anything.
 
 ## The packages (`packages/`)
 
-- **arxiv_v3/** — the v3 replacement for arXiv:2605.24696: source tarball
-  (`arxiv_v3_source.tar.gz`, compiles standalone: main.tex + numbers.tex +
-  references.bib + main.bbl + the unmodified TMLR template files + the two
-  generated tables copied in) and the title-change note in `METADATA.md`. The
-  Comments-field text lives in `packages/sibling/ARXIV_V3_COMMENT.txt`; use
-  its NO VENUE CLAIM variant, the two below it are retired and false.
+- **arxiv_v3/** — the v3 replacement for arXiv:2605.24696, posted on 14
+  September 2026 (historical). The source staged for it was the named build in
+  the TMLR template at commit 2bfb896; the listing's 108 KB source size does not
+  match that 113,688 B tarball, so which exact file was uploaded is unverified.
+  The tarball here now (`arxiv_v3_source.tar.gz`)
+  is the acmart rebuild of 2026-09-18, which compiles standalone (main.tex +
+  numbers.tex + references.bib + main.bbl + the two generated tables + the
+  figures) and was not posted. `METADATA.md` carries the title-change note.
+  The Comments field actually posted is a 411-character text recorded in
+  `ARXIV_V3_SHEET.md`, not the NO VENUE CLAIM variant of
+  `packages/sibling/ARXIV_V3_COMMENT.txt`; the two variants below that one are
+  retired and false.
 - **zenodo/** — the deposit bundle, always staged as a **new version** in the
   lineage that begins at Zenodo record 10.5281/zenodo.20074590 (v1.0.0 of
   2026-05-07, the pre-audit artifact; the "first deposit" description that
   stood here was false, CI-36): code + scripts + manifests + logs + stream
   hashes. Version 2.0.0 was published 2026-08-31
   (doi:10.5281/zenodo.22213264) and version 2.1.0 after it
-  (doi:10.5281/zenodo.22638195); both are frozen. **What is staged here now is
-  version 2.2.0, DOI reserved and not yet published:
-  doi:10.5281/zenodo.22673735, which `CITATION.cff` carries.** The five files,
+  (doi:10.5281/zenodo.22638195); both are frozen. **Version 2.2.0 was
+  published on 14 September 2026 as doi:10.5281/zenodo.22673735, which
+  `CITATION.cff` carries; its files are frozen and this directory is not to
+  be rebuilt.** The five files,
   their sizes and checksums are in `ZENODO_DEPOSIT_SHEET.md` Step 2, which is
   the only place they are maintained.
-- **dtrap/** — the anonymous deliverables, directory name historical: the
-  anonymous manuscript PDF, the anonymous source tarball and the anonymous
-  artifact zip, now built for the **TMLR** submission on OpenReview
-  (`TMLR_SUBMISSION_SHEET.md`). The cover letter, editor note, reviewer block
-  and access strategy in this directory were written for ACM DTRAP and are
-  **retired as historical** as of 2026-09-14; each carries a notice.
-- **sibling/** — the arXiv v3 correction-note wording. Use the **no venue
-  claim** variant. The withdrawal letter and both earlier note variants in this
+- **dtrap/** — the anonymous deliverables for the **ACM DTRAP** submission on
+  ScholarOne (`SUBMISSION_CONSOLE.md`): the anonymous manuscript PDF, the
+  anonymous source tarball and the anonymous artifact zip. The same directory
+  served the TMLR submission of 16 September 2026, desk-rejected on 18
+  September 2026 (historical). The cover letter, editor note and access
+  strategy in this directory are current again as of 2026-09-18; the reviewer
+  block is `SUGGESTED_REVIEWERS.md` at the repository root (console section 8).
+- **sibling/** — the arXiv v3 Comments-field wording and the companion's v2
+  source, posted on 14 September 2026 (both historical; the Comments actually
+  posted with v3 are the shorter text `ARXIV_V3_SHEET.md` records). The withdrawal letter and both earlier note variants in this
   directory are **retired and void**: verification in the IEEE Author Portal on
   2026-08-27 established that no TIFS submission exists (see
   `SIBLING_DECISION.md`, CI-25). They are kept as a record, not as options.
 
-## Ordering constraint
+## Ordering constraint — met, historical
 
 There is no withdrawal step and no venue to notify first; that ordering
-constraint was void and is removed. **The Zenodo publish now comes first and
-is required**, which is a change from the earlier "preferred but not
-required" advice this section used to give. The reason is that the private
-note to the TMLR action editor asserts the deposit already exists and names
-version 2.2.0 and doi:10.5281/zenodo.22673735, and the named arXiv variant
-carries the same lineage in its availability statement.
-That DOI is reserved, so it does not resolve until the record is published.
-Submitting first would hand the editors a false statement and a dead link.
-The order in `HUMAN_ACTIONS.md` governs.
+constraint was void and is removed. The requirement that the Zenodo publish
+come first was met: version 2.2.0 was published on 14 September 2026 at
+21:48 UTC, before the arXiv v3 posting that evening and before the TMLR
+submission of 16 September, so every citation of doi:10.5281/zenodo.22673735
+in the DTRAP documents and in the named arXiv variant resolves. The one
+outward action left is the DTRAP submission. The order in `HUMAN_ACTIONS.md`
+governs.

@@ -55,7 +55,7 @@ was wrong:
 | artifact | disposition |
 |---|---|
 | `packages/sibling/WITHDRAWAL_LETTER_TIFS.md` | **RETIRED — do not send.** Header records why. |
-| `packages/sibling/ARXIV_V3_COMMENT.txt` | Both prior variants retired; a third variant that makes no venue claim is now the one to use. |
+| `packages/sibling/ARXIV_V3_COMMENT.txt` | Both prior variants retired; a third variant that makes no venue claim was the one prepared. Historical: v3 was posted on 14 September 2026 with a shorter Comments text, recorded in `ARXIV_V3_SHEET.md`. |
 
 ## How the error happened, and the rule it produces
 
@@ -80,8 +80,9 @@ The companion's *technical* problem is unchanged and is not a venue question:
 it shares part of the audited codebase, and the method-identity findings of the
 audit apply to that shared lineage. The FINAL disposition at the top of this
 file resolves it: a v2 replacement carrying the prepared correction note.
-Nothing in this repository's submission path depends on it — the TMLR
-submission (the venue since 2026-09-14; DTRAP before that) and the arXiv v3
-replacement of the main paper proceed first
-(`HUMAN_ACTIONS.md` steps 3–4), and the companion replacement is step 5. No
-artifact here may assert that the replacement has been posted until it has.
+Nothing in this repository's submission path depended on it. The replacement
+was posted on 14 September 2026 and announced on 16 September 2026, verified
+on arxiv.org/abs/2510.09619v2 on 2026-09-18 (historical, `HUMAN_ACTIONS.md`
+step 5). The main paper's venue is ACM DTRAP; TMLR, the venue from
+2026-09-14, desk-rejected the submission on 18 September 2026 without
+review.
