@@ -21,7 +21,9 @@ marked historical:
 > a withdrawal letter to the editor-in-chief — and made them the *first* thing
 > you did. Both were void: you verified in the IEEE Author Portal that the
 > account holds one record, `TDSC-2025-10-1842`, rejected 22 October 2025, and
-> no TIFS submission at all. The companion preprint is not under review
+> no TIFS submission at all. That record is the companion's: arXiv:2510.09619 was submitted to IEEE Transactions on
+> Dependable and Secure Computing and desk-rejected on 22 October 2025 on scope
+> grounds, without peer review. The companion preprint is not under review
 > anywhere, so there is nothing to withdraw and no editor to write to. The
 > letter is retired in place at `packages/sibling/WITHDRAWAL_LETTER_TIFS.md`
 > with a notice explaining why; do not send or adapt it. See
@@ -75,11 +77,12 @@ of the four versions in the lineage (2.2.0, 2.1.0 doi:10.5281/zenodo.22638195,
 2.0.0 doi:10.5281/zenodo.22213264, 1.0.0 doi:10.5281/zenodo.20074590), and its
 five files match `packages/zenodo/` by MD5. Its manuscript source is the build
 reset on 2026-09-14 in the TMLR template (24 pages, 20 of them main body);
-that is a historical fact about the deposit. As for the rest, its analysis code (src/, tests/ and the analysis scripts), its 95 run
-manifests, its macro layer and its claim ledger are identical to those behind
-the DTRAP submission; the manuscript source, the figure renderer's width
-constants, three packaging scripts and the response shelf's section pointers
-differ.
+that is a historical fact about the deposit. As for the rest, its analysis code (src/ and the analysis scripts), its manifests bundle (93
+run manifests, the macro index and the retirement README) and its macro layer
+are identical to those behind the DTRAP submission; its claim ledger differs
+only by corrected internal cross references; the manuscript source, the
+figure renderer's size constants and the figure manifest, the packaging and
+gate scripts with their tests, and the response shelf differ.
 The camera-ready deposit will carry the final source. `packages/zenodo/` is frozen: do not rebuild it.
 
 ## 2. DOI propagation for 2.2.0 — EXECUTED 2026-09-09 (historical)
@@ -118,10 +121,13 @@ historical.
 Verified 2026-09-18 on arxiv.org/abs/2605.24696v3: posted 14 September 2026 at
 22:18 UTC under the new title, with the 1,898-character abstract of
 `ARXIV_V3_SHEET.md` Step 3, CC BY 4.0, cs.CR with cross-list cs.LG, 24 pages
-by its Comments field. The source staged for it was the named variant in the
-TMLR template at commit 2bfb896 (113,688 B); the listing does not identify the
-uploaded file, and its 108 KB source size does not match that tarball, so
-which exact file was uploaded is unverified. The tarball now in
+by its Comments field. The source posted is the named variant in the TMLR
+template staged at commit 2bfb896, verified 2026-09-18: arXiv's submission receipt lists the archive contents as tmlr.sty, tmlr.bst,
+fancyhdr.sty, main.tex, numbers.tex, references.bib, the two table files and
+the four figures. The tarball staged at commit 2bfb896 (113,688 B) holds those
+files and main.bbl, which the receipt's list as relayed does not name; the
+listing's 108 KB is arXiv's recompressed size.
+That is a historical fact. The tarball now in
 `packages/arxiv_v3/` is the acmart rebuild of 2026-09-18 (25 pages) and was not
 posted. The Comments field actually posted is a 411-character text as arXiv
 renders it, not the sheet's NO VENUE CLAIM variant; `ARXIV_V3_SHEET.md`

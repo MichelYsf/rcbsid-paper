@@ -3,10 +3,12 @@
 > arxiv.org/abs/2605.24696v3: the title of Step 2, the abstract of Step 3
 > exactly (1,898 characters), CC BY 4.0, cs.CR with cross-list cs.LG. The
 > source staged for it was the named variant in the TMLR template at commit
-> 2bfb896 (113,688 B), as this sheet describes; that staging is a historical
-> fact. The listing does not identify the uploaded file, and its 108 KB source
-> size does not match that tarball, so which exact file was uploaded is
-> unverified. The Comments field actually posted is neither the Step 4 text nor
+> 2bfb896 (113,688 B), as this sheet describes, and it is what was posted:
+> arXiv's submission receipt lists the archive contents as tmlr.sty, tmlr.bst,
+> fancyhdr.sty, main.tex, numbers.tex, references.bib, the two table files and
+> the four figures. The tarball staged at commit 2bfb896 (113,688 B) holds those
+> files and main.bbl, which the receipt's list as relayed does not name; the
+> listing's 108 KB is arXiv's recompressed size. The Comments field actually posted is neither the Step 4 text nor
 > its fallback but this text, 411 characters as arXiv renders it (arXiv shows a
 > DOI as a link, so the typed field may have read doi:10.5281/...):
 >

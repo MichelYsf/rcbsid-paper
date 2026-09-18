@@ -25,10 +25,12 @@ claim, which is construction-versus-construction, not method-versus-method.
 **Response.** We agree, and the paper enforces exactly that: binding rule 7
 forbids flat comparative claims for any stochastic method from a single
 seed. Where we bought additional seeds, the HST/ECOD ordering flipped in 2
-of 2 cells — which is why every flat claim in the paper is between the two
-deterministic methods (the evaluated detector and ECOD), where seeds cannot
-move anything, and every HST number appears with its seed distribution
-(composite spread 0.1776–0.3678). Extending every cell to ≥3 seeds costs
+of 2 cells — which is why every flat claim in the paper is between
+deterministic methods, where seeds cannot move anything: the evaluated
+detector against ECOD in the assembly contrast, and against LOF at the
+unresampled level of the prevalence sweep (Section 8). Every HST number
+appears either as a single draw marked as such, with no placement asserted,
+or as a mean over three draws with the per-draw values archived (Section 11). Extending every cell to ≥3 seeds costs
 roughly 1.5 h per HST cell locally; the four uncovered cells total ~6 h and
 we will run them within a revision window on request. No conclusion of the
 paper rests on a stochastic placement. **Evidence:** `SCOPE_DECISIONS.md`
@@ -49,19 +51,24 @@ construction effect without measuring it. **Evidence:**
 
 ## S4. "The detector is known art; where is the contribution?"
 
-**Response.** We agree the detector is known art, and the paper says so in
-its own Section 3: what was evaluated is prequential global-Gaussian tail
-scoring, and we withdrew the change-point framing after measuring the
-posterior pinned to its hazard. The contribution is the characterization:
-(a) the construction contrast on identical records with its mechanism
-(dilution, not redistribution) measured; (b) the pooling identity; (c) the
-method-identity result itself, which generalizes — any BOCPD implementation
-whose reset branch shares the growth branch's predictive is silently not
-doing change-point detection, and the failure is invisible to every
-downstream metric; (d) the both-directions degeneracy of the obvious repair.
-DTRAP's scope includes evaluation practice for operational detection; that
-is the lane this paper occupies. **Evidence:** `findings_score_threshold.md`,
-`findings_bocpd_ablation.md`, Section 3 and Appendix A of the manuscript.
+**Response.** The paper claims no new detector. Section 3 characterizes the
+evaluated detector as the code implements it: the score is the maximum of a
+chi-square tail term under a global, slowly adapting diagonal Gaussian and
+0.25·P(r≤5); below the run-length cap the reset posterior equals the hazard
+exactly, a property of the published recursion rather than a coding error,
+and at and beyond the cap it wanders. The contribution is (a) the assembly
+contrast on identical records, with its membership and dilution mechanism
+measured; (b) the pooling identity, offered as an audit check; (c) the
+method-identity audit, scoped to this implementation: the described score is
+not the evaluated score; (d) the composition defect of Section 7, where the
+deployed score ranks worse than its own tail term; and (e) the ECOD batch
+dependence of Section 6.3. Appendix A reports one untuned alternative reset
+formulation, degenerate in a different quantity, and draws no conclusion
+about tuned variants. DTRAP's scope includes evaluation practice for
+operational detection; that is the lane this paper occupies. **Evidence:**
+`findings_score_threshold.md`, `findings_review_analyses.md`,
+`findings_ecod_composition.md`, `findings_bocpd_ablation.md`; Sections 3,
+6.3 and 7 and Appendix A of the manuscript.
 
 ## S5. "The natural-order test slice is one 204-minute window; that is not an
 evaluation."
@@ -70,10 +77,11 @@ evaluation."
 fixed chronological split, and the paper states it prominently rather than
 engineering around it — because engineering around it (reordering,
 resampling, interleaving) is precisely the construction step under study.
-The narrowness of the natural test window is itself a finding about the
-benchmark: CICIDS2017 cannot support a chronological evaluation with a
-representative test period, and constructions that appear to fix this
-manufacture the operating point instead. We agreed a split-rule sensitivity
+The narrowness of the natural test window is what a positional chronological
+split yields on this budgeted subsample, stated rather than engineered around
+(Section 11); the paper presents no ordering as a stable property of
+CICIDS2017 (Section 6.2), and constructions that appear to fix the window
+change the operating point instead. We agreed a split-rule sensitivity
 analysis was the right next step, and it has since been run: A2 sweeps seven
 chronological cuts from 60% to 90% and finds ECOD ahead of the detector at
 three of them, including the cut this paper uses. The narrowness of the
@@ -117,16 +125,21 @@ guessed.
 
 ### S7. "Determinism does not establish a stable winner" (review T8)
 
-**Verified TRUE.** No confidence interval, repeated split, or event-block
-bootstrap is reported anywhere. **Response.** We agree and have removed every
-"winner" formulation: the manuscript now reports a *measured ordering under the
-stated protocol* and says so. The right instrument is an event-block or
-rolling-origin procedure, not an IID row bootstrap — attack runs on CICIDS2017
-have median/p90/max length 2/70/2522, so rows are not exchangeable. Estimated
-cost: a moving-block bootstrap over the archived per-record score vectors is
-cheap (minutes) once block length is justified; justifying block length against
-the run-length distribution is the actual work, roughly a revision-window day.
-The score vectors now exist in the artifact, so this needs no re-scoring.
+**Verified TRUE on 26 August 2026; closed since.** At the time no confidence
+interval, repeated split or event-block bootstrap was reported. **Response.**
+We agreed and removed every "winner" formulation: the manuscript reports a
+*measured ordering under the stated protocol* and says so. The instrument has
+since been applied. Attack runs on CICIDS2017 have median/p90/max length
+2/70/2522, so rows are not exchangeable, and Section 11 reports moving-block
+bootstrap intervals over the archived per-record scores of the evaluated
+slice, in stream order, with a block length longer than the p90 run: for the
+two margins of Section 5.3, the margins of Table 6 and the branch values of
+Table 8, with a rerun at two further block lengths. Section 6.2 sweeps seven
+chronological cuts and, in Table 7, repeats the assembly contrast at each of
+them. The LITNET, sweep and Appendix A results carry no interval, because
+their per-record scores were not archived, and Section 11 says so. A
+rolling-origin procedure is not applied, and Section 11 states that as a
+limit.
 
 ### S8. Factorial decomposition of the assembly treatment (review T6)
 
@@ -160,13 +173,13 @@ recurrence analytically is a mathematical contribution in its own right and is
 out of scope for a revision window; an empirical characterization over the
 archived component dumps is affordable (hours).
 
-### S11. Broader validation of the change-point repair (review T15)
+### S11. Broader validation of the alternative reset formulation (review T15)
 
 **Verified TRUE.** One prior, one stream, one prefix, no tuning. **Response.**
 The manuscript now says "one untuned instance" everywhere and draws no
-conclusion about tuned variants. A meaningful corrected-BOCPD result needs a
-training/validation tuning protocol for the prior scale and at least two
-streams; cost is dominated by the tuning grid, roughly 8-20 hours depending on
+conclusion about tuned variants. A meaningful result for a tuned variant needs
+a training/validation tuning protocol for the prior scale and more than one
+stream, as Appendix A states; cost is dominated by the tuning grid, roughly 8-20 hours depending on
 grid size, and it must not select on test labels.
 
 ### S12. Systematic literature survey of assembly practice (review T2)
@@ -207,24 +220,27 @@ judgment items were shelved rather than acted on.
 ### S15. "Why is the correction history not in the paper?"
 
 **Judgment, and the answer is anonymity.** **Response.** It was in the paper,
-and moving it out was a deliberate fix. Under ACM double-anonymous review,
-prior appearance is disclosed to editors, not referees; a per-result-group
-overlap matrix against named public preprints, plus a dated version history,
-identifies the authors. Both tables are in the confidential editor note in
+and moving it out was a deliberate fix. Under ACM double-anonymous review the
+identifiers of prior appearance go to the editors, not the referees; a
+per-result-group overlap matrix against named public preprints, plus a dated
+version history, identifies the author. Both tables are in the confidential editor note in
 full, expanded with the claims each version invalidates. The anonymized body
-still states that prior versions exist, that some measurements are shared with
-corrected interpretation, that several results are new, and that one dataset's
-results are withdrawn — everything a referee needs to weigh the work, without
-the identifiers. If the editors prefer the tables in the body, we will move
-them back on request; the note says so explicitly.
+(Section 10) states that prior versions exist and were publicly posted, and
+that some measurements also appear in them under an interpretation this
+paper withdraws; which measurements, which results are new and which are
+withdrawn are supplied to the editors. The dated correction history is the
+corrected-incident log that ships with the artifact. The note offers to follow the editors'
+instruction on how this history is handled, including moving it into the body.
 
 ### S16. "A1 only removes the membership difference after the fact."
 
 **Verified TRUE, and stated in the paper.** **Response.** A1 is a post-hoc
 restriction to the shared records, not a prospective control: it holds the
-evaluated sample fixed but leaves each detector's prequential history intact,
-and the shared records are the intersection two particular assemblies produce,
-not a random subsample. That is why the paper reports A1 as locating the effect
-in sample membership rather than as decomposing the treatment, and why the
+evaluated sample fixed but leaves each detector's prequential history, and
+ECOD's training rows, different between the arms, and the shared records are
+the intersection two particular assemblies produce, not a random subsample.
+That is why the paper reports A1 as attributing the reversal to sample
+membership under a stated assumption the archived design does not test, not
+as decomposing the treatment, and why the
 factorial or prevalence-matched design (S8, ≈13 h) remains the named next
 experiment rather than a claim we make.

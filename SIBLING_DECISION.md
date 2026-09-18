@@ -33,8 +33,9 @@ returns **exactly one record**:
 
 That is a *Transactions on Dependable and Secure Computing* record, and it is
 closed. **There is no IEEE TIFS submission, and no open submission of any
-kind.** This document does not assert that the TDSC record corresponds to the
-companion manuscript; that was not checked and nothing here depends on it.
+kind.** *Update 2026-09-18, from the author:* that record is the companion's: arXiv:2510.09619 was submitted to IEEE Transactions on
+Dependable and Secure Computing and desk-rejected on 22 October 2025 on scope
+grounds, without peer review.
 
 **Verified state of the companion manuscript:** `arXiv:2510.09619`
 ("Risk-Calibrated Bayesian Streaming Intrusion Detection with SRE-Aligned

@@ -9,7 +9,8 @@ ask that any prior appearance be noted on the title page, and that the author
 inform the Editors-in-Chief of any circumstances bearing on the
 prior-publication policy. This note does the second. Its Anonymity paragraph
 explains how the first is handled. The two prior submissions are disclosed
-here and only here; the cover letter carries none of them.
+in this note, and in the portal form only if the form asks; the cover letter
+carries none of them.
 
 ---
 
@@ -29,7 +30,7 @@ Regime-Dependent Conformal Risk Control":
 |---|---|---|
 | v1 | posted 23 May 2026 | public preprint, superseded by v3 |
 | v2 | posted 25 June 2026 | public preprint, superseded by v3 |
-| v3 | posted 14 September 2026, announced 16 September 2026 | the corrected version, under the present title: this submission's text with the author named, the prior-version identifiers printed, and a per-result-group account in place of the pointer to this note |
+| v3 | posted 14 September 2026, announced 16 September 2026 | the corrected version, under the present title: this submission's text with the author named, the prior-version identifiers printed, and a per-result-group account in place of the pointer to this note; since then two cross-reference sentences have been corrected, and the layout and the generative-AI statement follow ACM's template and policy |
 
 The corrected artifact is archived on Zenodo as version 2.2.0
 (doi:10.5281/zenodo.22673735), in the same record lineage as version 2.1.0
@@ -54,9 +55,11 @@ submission received peer review.
 Neither manuscript has received peer review at any venue, and apart from
 this submission nothing is under review anywhere. The archived artifact,
 Zenodo version 2.2.0, carries the manuscript source in the TMLR LaTeX
-template of that second submission; its analysis code, run manifests, macro
-layer and claim ledger are identical to those behind this submission, and
-the camera-ready deposit will carry the final source.
+template of that second submission; its analysis code, run manifests and
+macro layer are identical to those behind this submission, whose anonymized
+supplementary copy differs from them only by its anonymization rewrites; its
+claim ledger differs only by corrected internal cross references, and the
+camera-ready deposit will carry the final source.
 
 **What was wrong, and what the correction covers.** An adversarial review and
 a line-by-line audit of the archived artifacts established two defects that
@@ -130,9 +133,10 @@ Disclosure and is now corrected there too. No submission of the companion to
 IEEE Transactions on Information Forensics and Security (TIFS), the journal
 that sentence presumed, existed. I verified this in the IEEE Author Portal on
 2026-08-27, with the filters set to All Publications and All Submission
-Statuses. The account returned one closed record, `TDSC-2025-10-1842`, an
-IEEE Transactions on Dependable and Secure Computing record rejected on 22
-October 2025, and no other. The error was mine and was caught
+Statuses. The account returned one closed record, `TDSC-2025-10-1842`, and no
+other. That record is the companion's: arXiv:2510.09619 was submitted to IEEE
+Transactions on Dependable and Secure Computing and desk-rejected on 22 October
+2025 on scope grounds, without peer review. The error was mine and was caught
 before submission rather than by you. It is recorded as corrected incident
 CI-25, together with the rule it produced. The rule says that a venue
 relationship asserted in any artifact must be verified against the venue's
@@ -148,16 +152,20 @@ checks cover as a scope rather than by name. The reason it is written that way
 belongs with you rather than with the referees, so I set it out here.
 
 The gate was written to enforce a rule: no number in the manuscript without an
-archived generating run. For several months it reported that the rule held. It
-was reading one file, the generated macro file, which is produced from the
-manifests and therefore cannot contain an unmanifested number. It never opened
-the manuscript. Three numbers typed directly into manuscript-bound tables
-passed a green gate and were found by human auditors instead (corrected
-incidents CI-11, CI-19, and four AUC-ROC values in the shared-record table).
+archived generating run. For its first ten days, from 18 to 28 August 2026, it
+reported that the rule held. It was reading one file, the generated macro
+file, which is produced from the manifests and therefore cannot contain an
+unmanifested number. It never opened the manuscript. Values typed directly
+into manuscript-bound tables passed a green gate on three occasions and were
+found by independent audit passes instead (corrected incidents CI-11 and
+CI-19, and four AUC-ROC values in the shared-record table).
 The scan now covers the manuscript, everything it includes, and every file the
-claim ledger cites. Widening it surfaced 88 further findings on its first run,
-including unmanifested values in the findings file behind the analyses added
-at that time, all now emitted as macros or deleted.
+claim ledger cites. Its first run over the repository returned 88 findings:
+the four known values, 28 unmanifested values in the findings file behind the
+analyses added at that time, six derived values in generated findings files,
+a class of false positives from a sign-handling bug that was then fixed, and
+entries in files that exist to record numbers. Every real finding is now
+emitted as a macro or deleted.
 
 A second check failed the same way. A three-pass compile reported zero
 undefined references while two citations resolved to nothing. The bibliography

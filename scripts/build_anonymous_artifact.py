@@ -32,6 +32,8 @@ IDENTIFYING = [b"Youssef", b"youssef", b"MichelYsf", b"Michel", b"michel",
                # appears in the manuscript, so a referee has no innocent
                # reason to have seen either.
                b"rcbsid-paper", b"rebuild/honest-v1",
+               # the repository stem alone also names the deposit's code zip
+               b"rcbsid", b"RCBSID", b"Rcbsid",
                # The two public preprints resolve to listings that name the
                # author, the IEEE record id names a submission of theirs, and
                # the former title and the project codename are one web search
@@ -124,6 +126,9 @@ def scrub(rel: str, data: bytes) -> bytes:
     # username was scrubbed, which is the public repository's name.
     data = data.replace(b"rcbsid-paper", b"[repo-redacted-for-review]")
     data = data.replace(b"rebuild/honest-v1", b"[branch-redacted-for-review]")
+    # the stem in identifiers and file names (the deposit's code zip, a legacy
+    # directory name) becomes a neutral one, consistently across every file
+    data = data.replace(b"rcbsid", b"project").replace(b"RCBSID", b"PROJECT").replace(b"Rcbsid", b"Project")
     # the named preprints, in every form they are written
     data = re.sub(rb"arXiv:\s*2605\.24696(?:v\d)?", b"[preprint-id-redacted-for-review]", data)
     data = re.sub(rb"arXiv:\s*2510\.09619(?:v\d)?", b"[companion-id-redacted-for-review]", data)

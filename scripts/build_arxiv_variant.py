@@ -62,10 +62,12 @@ def main() -> int:
         # the anonymous master withholds which measurements are shared because
         # naming them identifies the earlier versions; the named arXiv posting
         # has no such constraint and states them in full.
-        ("Section~\\ref{sec:disclosure} states which measurements this paper shares with\n"
-         "those versions and which are new; the per-result-group account and the dated\n"
-         "correction history are supplied to the editors confidentially, because\n"
-         "printing them here would defeat anonymization.",
+        ("Section~\\ref{sec:disclosure} states that some measurements in this paper also\n"
+         "appear in those versions, under an interpretation this paper withdraws; which\n"
+         "measurements those are, which results are new and which are withdrawn are\n"
+         "supplied to the editors confidentially, because naming them here would defeat\n"
+         "anonymization. The dated correction history is the corrected-incident log that\n"
+         "ships with the artifact.",
          "Section~\\ref{sec:disclosure} states which measurements this paper shares with\n"
          "those versions and which are new, and gives the per-result-group account; the\n"
          "dated correction history is the corrected-incident log in the artifact."),
@@ -90,8 +92,10 @@ def main() -> int:
          "in any earlier version; and results on a third dataset that appeared in\n"
          "the earlier versions are withdrawn and are not relied upon anywhere in\n"
          "this paper."),
-        ("identifiers are supplied to the editors confidentially.",
-         "the earlier public versions are arXiv:2605.24696 v1 and v2."),
+        ("the identifiers of the\n"
+         "companion and of those versions are supplied to the editors confidentially.",
+         "those versions\n"
+         "are arXiv:2605.24696 v1 and v2."),
         ("During double-anonymous review, the artifact is available through the\n"
          "submission system's anonymous artifact channel.",
          "The repository is public at\n"

@@ -102,11 +102,12 @@ public record -- that the preprint exists, that it shares code, that the audit
 findings reach it, and that correction is in hand. It deliberately does not say
 where it has been submitted, whether it is under review, or whether any editor
 has been informed, because as of 2026-08-27 the answers are: nowhere, no, and
-no. [Corrected 2026-09-18: "nowhere" was more than the check established. It
-found no TIFS submission and no open submission of any kind; the IEEE
-account's one record, TDSC-2025-10-1842, was rejected on 22 October 2025 and
-is closed. The companion was under review nowhere, and no editor had been
-informed.]
+no. [Corrected 2026-09-18: "nowhere" was wrong. The check found no TIFS
+submission and no open submission of any kind; the IEEE
+account's one record, TDSC-2025-10-1842, is the companion's submission to IEEE
+Transactions on Dependable and Secure Computing, desk-rejected on 22 October
+2025 on scope grounds without peer review. The companion was under review
+nowhere, and no editor had been informed.]
 
 
 =============================================================================
@@ -118,8 +119,8 @@ Ended with: "A companion manuscript sharing parts of the codebase
 pending its own correction."
 
 FALSE. Nothing was withdrawn: there was no TIFS submission, and the IEEE
-account's one record, TDSC-2025-10-1842, was rejected on 22 October 2025 and
-is closed. Retired 2026-08-27; wording corrected 2026-09-18.
+account's one record, TDSC-2025-10-1842, is the companion's TDSC submission,
+desk-rejected on 22 October 2025 on scope grounds without peer review. Retired 2026-08-27; wording corrected 2026-09-18.
 
 
 =============================================================================

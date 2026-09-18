@@ -42,7 +42,8 @@ in size or composition. The utility is practical: hash-verified stream
 reconstruction, run manifests, and checks a practitioner can rerun.
 
 **Internal validity.** Flat comparisons are made only between deterministic
-scorers. Every stochastic result carries its seed distribution or is withheld.
+scorers. Stochastic baselines appear either as single draws marked as such or
+as means over three draws, never in a flat comparison.
 The central reversal was then tested against its own strongest alternative
 explanation. Restricting both arms to the records they both held out removes
 the reversal, which attributes the effect to sample membership rather than

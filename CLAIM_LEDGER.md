@@ -31,7 +31,7 @@ the sentence numbering follows `paper/main.tex` reading order.
 | # | sentence (gist) | source |
 |---|---|---|
 | I1 | Benchmark criticism context (Catillo, Arp, Ring). | logic — citation framing |
-| I2 | This paper adds the assembly step to that list. | logic — thesis statement, evidenced by I5–I8 |
+| I2 | This paper adds the assembly step to that list. | logic — thesis statement, evidenced by I9–I11 |
 | I3 | Captures are rarely usable as-is (CICIDS five days; LITNET disjoint). | manifest:stage1_natural_streams_20260818T114117_285582fc; file:findings_streams.md |
 | I4 | Assembly is treated as neutral plumbing; it is not - it moves prevalence, replaces two-thirds of the evaluated sample, and changes the measured ordering. | manifest:s4_contrast_deliverables_20260827T124050_ec876714; manifest:cicids_heldout_composition_20260819T120420_ebb7c281 |
 | I5 | (Origin) Earlier versions reported composite-construction results and described a scoring rule the code did not implement. | file:AUDIT_FINDINGS.md (A1–A4); file:SCOPE_DECISIONS.md (CI-1, CI-2) |
@@ -43,15 +43,15 @@ the sentence numbering follows `paper/main.tex` reading order.
 | I11 | (C2) Pooled 6.498% held-out prevalence equals the equal-weight mean of 0.176%/3.544%/15.775% held-out prevalences. | manifest:s4_contrast_deliverables_20260827T124050_ec876714; file:findings_contrast.md |
 | I12 | (C3) Posterior pinned to hazard; auxiliary contributes mean 0.0025 where it binds. | manifest:s3_score_threshold_verification_20260820T084659_1e2b01b8 |
 | I13 | (C3) One untuned alternative reset formulation saturates: 92.7% of scores at the cap, 747 distinct values, near-chance ranking; the two variants degenerate in different quantities. | manifest:s6_bocpd_corrected_ablation_20260824T092655_a47acf51 |
-| I14 | (C4) Provenance discipline: macro layer, gate fails on orphans/ambiguity/index drift. | logic — process; file:scripts/check_provenance.py; file:tests/test_provenance.py |
+| I14 | (C6) Provenance discipline: macro layer, gate fails on orphans/ambiguity/index drift. | logic — process; file:scripts/check_provenance.py; file:tests/test_provenance.py |
 | I15 | LOF 0.8632 vs detector 0.5450 on the identical held-out slice of the interleaved (unresampled) stream. | manifest:s2_prevalence_relabelled_20260827T140708_90bc36cd; file:findings_prevalence.md |
 | I16 | Detector lift peaks at +0.348 (10%) and falls from there to −0.020 (64%), below chance. | manifest:s2_prevalence_relabelled_20260827T140708_90bc36cd; file:findings_prevalence.md |
 | I17 | (C4) The composition defect: tail-only outranks the deployed score by 0.103477 AP / 0.302658 AUC-ROC; auxiliary AUC-ROC 0.281890. | manifest:review_bounded_analyses_20260827T131839_87899899; file:findings_review_analyses.md |
 | I18 | (C5) ECOD batch dependence: identical records and model, batch 240000 vs 480000, AP 0.758205 vs 0.755142; the 480000 value reproduces the archived arm exactly. | manifest:review_bounded_analyses_20260827T131839_87899899; manifest:supplementary_macros_20260827T113344_220658e5; file:findings_review_analyses.md |
 | I19 | (Where this work sits) Lead-in and first point: read as ML evaluation methodology the paper makes three points with the IDS corpora as the instance; benchmark construction is an experimental treatment that changes the held-out sample, its prevalence and its order at once, and so what a reported number measures; the benchmark-criticism literature describes effects of this kind. | logic — framing; the measured instance is I9–I10; literature characterisation as in Section 2 |
-| I20 | (Where this work sits) ECOD in PyOD scores transductively: empirical distributions recomputed over training matrix plus scored batch, so a record's score depends on the batch; quantified with records and model held fixed, across batch size (I17) and, separately, at fixed batch size (I18). | manifest:review_bounded_analyses_20260827T131839_87899899; manifest:ecod_batch_composition_20260907T061817_7d2ec490; file:findings_ecod_composition.md |
+| I20 | (Where this work sits) ECOD in PyOD scores transductively: empirical distributions recomputed over training matrix plus scored batch, so a record's score depends on the batch; quantified with records and model held fixed, across batch size (I18) and, separately, at fixed batch size (A10). | manifest:review_bounded_analyses_20260827T131839_87899899; manifest:ecod_batch_composition_20260907T061817_7d2ec490; file:findings_ecod_composition.md |
 | I21 | (Where this work sits) Reporting is provenance-enforced: every measured value resolves through a generated macro to an archived manifest and the build fails on any that does not. | logic — process; file:scripts/check_provenance.py; file:tests/test_provenance.py |
-| I19 | Every ECOD number in the paper states its scoring batch; the batches are derived from archived row counts and the fixed split rule. | manifest:supplementary_macros_20260827T113344_220658e5; file:SCOPE_DECISIONS.md |
+| I22 | Every ECOD number in the paper states its scoring batch; the batches are derived from archived row counts and the fixed split rule. | manifest:supplementary_macros_20260827T113344_220658e5; file:SCOPE_DECISIONS.md |
 
 ## Standing constraints the ledger enforces on prose
 

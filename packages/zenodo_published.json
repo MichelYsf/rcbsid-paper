@@ -1,0 +1,28 @@
+{
+  "what": "files of a PUBLISHED, frozen deposit; the freshness check verifies each local copy against the checksum the published record reports, instead of by modification time",
+  "deposit": "Zenodo version 2.2.0, doi:10.5281/zenodo.22673735",
+  "published": "2026-09-14T21:48Z",
+  "source": "Zenodo REST API record files[].checksum and files[].size, fetched 2026-09-18",
+  "files": {
+    "packages/zenodo/EXPECTED_SHA256.txt": {
+      "size": 932,
+      "md5": "7eb3dbc76412ad2e81b99338a05b7a7b"
+    },
+    "packages/zenodo/construction_contrast.csv": {
+      "size": 4755,
+      "md5": "27d9565b487c8e98a8d2f13465e9049f"
+    },
+    "packages/zenodo/manifests_bundle.zip": {
+      "size": 171747,
+      "md5": "340e602e27acedbd47e2a95fa3d9f4e9"
+    },
+    "packages/zenodo/prevalence_sweep_cicids.csv": {
+      "size": 48587,
+      "md5": "cf50d05bf1548edaaa37213660de6d5e"
+    },
+    "packages/zenodo/rcbsid_rebuild_code.zip": {
+      "size": 465129,
+      "md5": "7797ef8d0f513ff782a04ac6579f8e52"
+    }
+  }
+}

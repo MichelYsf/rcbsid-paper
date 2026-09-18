@@ -1,7 +1,10 @@
-> **Historical.** This file describes the v3 package as staged for the posting
-> of 14 September 2026: the named build in the TMLR template at commit 2bfb896
-> (113,688 B). The listing's 108 KB source size does not match that tarball, so
-> which exact file was uploaded is unverified. The tarball now in this
+> **Historical.** This file describes the v3 package posted on 14 September
+> 2026: the named build in the TMLR template staged at commit 2bfb896.
+> arXiv's submission receipt lists the archive contents as tmlr.sty, tmlr.bst,
+> fancyhdr.sty, main.tex, numbers.tex, references.bib, the two table files and
+> the four figures. The tarball staged at commit 2bfb896 (113,688 B) holds those
+> files and main.bbl, which the receipt's list as relayed does not name; the
+> listing's 108 KB is arXiv's recompressed size. The tarball now in this
 > directory is the acmart rebuild of 2026-09-18 (25 pages), which was not
 > posted. The Comments field actually posted is recorded in
 > `ARXIV_V3_SHEET.md`. The venue is now ACM DTRAP; TMLR desk-rejected the

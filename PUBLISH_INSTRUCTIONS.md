@@ -50,9 +50,12 @@ where `tar tvf` prints it without extracting anything.
 ## The packages (`packages/`)
 
 - **arxiv_v3/** — the v3 replacement for arXiv:2605.24696, posted on 14
-  September 2026 (historical). The source staged for it was the named build in
-  the TMLR template at commit 2bfb896; the listing's 108 KB source size does not
-  match that 113,688 B tarball, so which exact file was uploaded is unverified.
+  September 2026 (historical). The source posted is the named build in the TMLR
+  template staged at commit 2bfb896: arXiv's submission receipt lists the archive contents as tmlr.sty, tmlr.bst,
+  fancyhdr.sty, main.tex, numbers.tex, references.bib, the two table files and
+  the four figures. The tarball staged at commit 2bfb896 (113,688 B) holds those
+  files and main.bbl, which the receipt's list as relayed does not name; the
+  listing's 108 KB is arXiv's recompressed size.
   The tarball here now (`arxiv_v3_source.tar.gz`)
   is the acmart rebuild of 2026-09-18, which compiles standalone (main.tex +
   numbers.tex + references.bib + main.bbl + the two generated tables + the
@@ -72,7 +75,8 @@ where `tar tvf` prints it without extracting anything.
   `CITATION.cff` carries; its files are frozen and this directory is not to
   be rebuilt.** The five files,
   their sizes and checksums are in `ZENODO_DEPOSIT_SHEET.md` Step 2, which is
-  the only place they are maintained.
+  where they are maintained; `packages/zenodo_published.json` pins the
+  published sizes and checksums the freshness check verifies.
 - **dtrap/** — the anonymous deliverables for the **ACM DTRAP** submission on
   ScholarOne (`SUBMISSION_CONSOLE.md`): the anonymous manuscript PDF, the
   anonymous source tarball and the anonymous artifact zip. The same directory

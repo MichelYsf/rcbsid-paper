@@ -25,7 +25,7 @@ without review.
   reference the named GitHub remote and machine paths), scrubs the machine
   username from archived manifest paths, and **fails the build if any token
   from the identity list survives anywhere in the zip**. The shipped zip
-  passed that check (233 files at the 2026-09-18 build). No external links in the manuscript point
+  passed that check (234 files at the 2026-09-18 build). No external links in the manuscript point
   to author-named resources: the Data Availability section says the artifact
   is provided through the submission system during review.
 
@@ -36,8 +36,9 @@ GitHub repository (branch `rebuild/honest-v1`) and the DOI of the
 camera-ready Zenodo deposit, which will carry the final manuscript source.
 The version published now is 2.2.0 (10.5281/zenodo.22673735). It carries
 the manuscript source in the TMLR template of the earlier submission, and
-its analysis code (src/, tests/ and the analysis scripts), its 95 run
-manifests, its macro layer and its claim ledger are identical to those behind
-the DTRAP submission; the manuscript source, the figure renderer's width
-constants, three packaging scripts and the response shelf's section pointers
-differ. CITATION.cff travels with the public artifact only.
+its analysis code (src/ and the analysis scripts), its manifests bundle (93
+run manifests, the macro index and the retirement README) and its macro layer
+are identical to those behind the DTRAP submission; its claim ledger differs
+only by corrected internal cross references; the manuscript source, the
+figure renderer's size constants and the figure manifest, the packaging and
+gate scripts with their tests, and the response shelf differ. CITATION.cff travels with the public artifact only.

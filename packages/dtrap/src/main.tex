@@ -152,10 +152,12 @@ computes; and every number was regenerated --- or, for the retained prevalence
 sweep, re-derived from the archived pre-audit runs --- by a script that wrote,
 in the same execution, an archived manifest recording the git commit,
 configuration hash, input SHA-256, seed, environment hash and output path.
-Section~\ref{sec:disclosure} states which measurements this paper shares with
-those versions and which are new; the per-result-group account and the dated
-correction history are supplied to the editors confidentially, because
-printing them here would defeat anonymization.
+Section~\ref{sec:disclosure} states that some measurements in this paper also
+appear in those versions, under an interpretation this paper withdraws; which
+measurements those are, which results are new and which are withdrawn are
+supplied to the editors confidentially, because naming them here would defeat
+anonymization. The dated correction history is the corrected-incident log that
+ships with the artifact.
 
 \subsection*{Where this work sits}
 Read as machine-learning evaluation methodology, this paper makes three points
@@ -229,8 +231,9 @@ and varying only the accompanying batch moves ECOD's AUC-PR by
 \RevEcodBatchDelta. Published ECOD numbers are therefore not comparable across
 studies that score a different batch, in size or composition.
 \item \textbf{A provenance discipline that is itself auditable}
-(Section~\ref{sec:provenance}), including the correction history and overlap
-statement of Section~\ref{sec:disclosure}.
+(Section~\ref{sec:provenance}), including the prior-version statement of
+Section~\ref{sec:disclosure} and the dated corrected-incident log that ships
+with the artifact.
 \end{enumerate}
 
 \section{Related Work}
@@ -1447,10 +1450,9 @@ predates the audit reported here. The method-identity findings of
 Section~\ref{sec:detector} apply to that shared lineage, and correcting it is
 in hand. It is a public preprint and is not under review at any venue, and
 there is accordingly no other editor to inform and no concurrent consideration
-to declare. Its relationship to the results reported here, and the
-relationship to the earlier public versions of this manuscript, are stated in
-Section~\ref{sec:disclosure};
-identifiers are supplied to the editors confidentially.
+to declare. The relationship of this manuscript to its own earlier public
+versions is stated in Section~\ref{sec:disclosure}; the identifiers of the
+companion and of those versions are supplied to the editors confidentially.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

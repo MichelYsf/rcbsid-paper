@@ -10,11 +10,12 @@
 > The venue is now ACM DTRAP: the TMLR submission of 16 September 2026 was desk-rejected on 18 September
 > 2026 without review, and the
 > DTRAP submission uses the acmart build. As for the rest of the deposit,
-> its analysis code (src/, tests/ and the analysis scripts), its 95 run
-> manifests, its macro layer and its claim ledger are identical to those behind
-> the DTRAP submission; the manuscript source, the figure renderer's width
-> constants, three packaging scripts and the response shelf's section pointers
-> differ.
+> its analysis code (src/ and the analysis scripts), its manifests bundle (93
+> run manifests, the macro index and the retirement README) and its macro layer
+> are identical to those behind the DTRAP submission; its claim ledger differs
+> only by corrected internal cross references; the manuscript source, the
+> figure renderer's size constants and the figure manifest, the packaging and
+> gate scripts with their tests, and the response shelf differ.
 > The camera-ready deposit will carry the final source.
 > `packages/zenodo/` is frozen and is not to be rebuilt. The title's "STAGED
 > ... nothing uploaded" describes the sheet as assembled. Nothing below is

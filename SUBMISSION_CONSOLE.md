@@ -152,7 +152,7 @@ Excluded and confirmed clean: Seth Barrett and every FIRCE and FADES author
 
 ## 9. Cover letter
 
-Paste the whole of `packages/dtrap/COVER_LETTER.txt` (935 words). It is
+Paste the whole of `packages/dtrap/COVER_LETTER.txt` (946 words). It is
 plain ASCII text with no markdown residue and no operator note.
 
 Contingency: if the portal offers no separate confidential-comments box, do
@@ -162,7 +162,7 @@ submitting.
 
 ## 10. Confidential comments to the editor
 
-Paste the whole of `packages/dtrap/EDITOR_NOTE.txt` (2,078 words). It carries
+Paste the whole of `packages/dtrap/EDITOR_NOTE.txt` (2,180 words). It carries
 the prior-appearance disclosure, the two prior submissions and the review they
 did not receive, what Zenodo 2.2.0 carries, the overlap account, the correction history, the
 companion-manuscript status with its IEEE portal record, and the provenance
@@ -210,9 +210,9 @@ Three files, with designations. Sizes are those of the files built
 
 | # | full path | bytes | SHA-256 (first 16) | designation |
 |---|---|---|---|---|
-| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 682,331 | `217aa3e1a872ee3f` | main document |
-| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 615,738 | `30dfee30bda297d1` | supplementary for review, not for publication |
-| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 103,196 | `06c7a0dd3047d562` | supplementary for review, not for publication |
+| 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 682,410 | `c21d9de1f4b32d8d` | main document |
+| 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 618,195 | `44171c251dba1e67` | supplementary for review, not for publication |
+| 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 103,254 | `25daf24b83cb7805` | supplementary for review, not for publication |
 
 Upload exactly these three files and nothing else. The waiver PDF is not one of
 them. The anonymous build is the one that says "ANONYMOUS AUTHOR(S)" on page 1.

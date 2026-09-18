@@ -13,11 +13,22 @@ The rule is simple enough to enforce mechanically: a package artifact must be
 at least as new as every source file it is built from. This does not verify
 CONTENT -- a package can be newer and still wrong -- but the failure it catches
 is the one that actually happened, twice, and it costs nothing to run.
+
+A PUBLISHED deposit is the exception. Its files are frozen on the record and
+must not be rebuilt, so every later source edit makes it look "stale" by the
+rule above, and the check would demand a rebuild that would itself be the
+error. A published file is therefore checked by content instead: it passes
+while its local copy still has the size and checksum the published record
+reports, and fails the moment it does not. The published checksums are pinned
+in `packages/zenodo_published.json`, written only after each local copy was
+verified against the record. A file that is not pinned (a new version being
+staged) falls back to the mtime rule.
 """
 from __future__ import annotations
 
+import hashlib
+import json
 import sys
-import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +45,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from build_zenodo_package import CODE_DIRS, CODE_FILES  # noqa: E402
 
 _ZENODO_CODE_SOURCES = list(CODE_DIRS) + list(CODE_FILES)
+
+# Checksums of published, frozen deposit files, keyed by repository path.
+PUBLISHED_PINS = ROOT / "packages/zenodo_published.json"
 
 # (package artifact, [source roots it is built from])
 PACKAGES = [
@@ -73,10 +87,10 @@ SKIP_SUFFIX = {".pyc", ".aux", ".log", ".out", ".bbl", ".blg", ".pdf",
 SLACK_S = 2.0     # filesystem timestamp granularity, not a grace period
 
 
-def newest(paths: list[str]) -> tuple[float, Path | None]:
+def newest(paths: list[str], root: Path = ROOT) -> tuple[float, Path | None]:
     best, who = 0.0, None
     for rel in paths:
-        p = ROOT / rel
+        p = root / rel
         if not p.exists():
             continue
         it = [p] if p.is_file() else [q for q in p.rglob("*") if q.is_file()]
@@ -89,33 +103,78 @@ def newest(paths: list[str]) -> tuple[float, Path | None]:
     return best, who
 
 
-def main() -> int:
+def load_pins(pins_path: Path, root: Path = ROOT) -> dict[Path, dict]:
+    """Published files and the size and MD5 the published record reports."""
+    if not pins_path.exists():
+        return {}
+    data = json.loads(pins_path.read_text(encoding="utf-8"))
+    return {(root / rel).resolve(): spec for rel, spec in data.get("files", {}).items()}
+
+
+def published_mismatch(path: Path, spec: dict) -> str | None:
+    """None while the local copy still has the published bytes; else why not."""
+    if not path.exists():
+        return "absent"
+    data = path.read_bytes()
+    if len(data) != int(spec["size"]):
+        return "size %d, published %d" % (len(data), int(spec["size"]))
+    if hashlib.md5(data).hexdigest() != spec["md5"]:
+        return "checksum differs from the published record"
+    return None
+
+
+def main(root: Path = ROOT, packages: list | None = None,
+         pins_path: Path | None = None) -> int:
+    packages = PACKAGES if packages is None else packages
+    pins = load_pins(PUBLISHED_PINS if pins_path is None else pins_path, root)
+    rel = lambda p: p.resolve().relative_to(root.resolve()).as_posix()
+
     stale, checked, absent = [], 0, []
-    for pkg, sources in PACKAGES:
+    for pkg, sources in packages:
+        if pkg.resolve() in pins:
+            continue                      # published and frozen: checked by content below
         if not pkg.exists():
             absent.append(pkg)
             continue
         checked += 1
-        src_m, who = newest(sources)
+        src_m, who = newest(sources, root)
         if src_m - pkg.stat().st_mtime > SLACK_S:
             stale.append((pkg, who, src_m - pkg.stat().st_mtime))
-    print("package freshness: %d staged artifact(s) checked" % checked)
+
+    frozen_ok, frozen_bad = [], []
+    for path, spec in sorted(pins.items()):
+        why = published_mismatch(path, spec)
+        (frozen_bad if why else frozen_ok).append((path, why))
+
+    print("package freshness: %d staged artifact(s) checked by age, "
+          "%d published file(s) checked by content" % (checked, len(pins)))
     for p in absent:
-        print("  ABSENT    %s" % p.relative_to(ROOT).as_posix())
+        print("  ABSENT    %s" % rel(p))
     for pkg, who, delta in stale:
-        print("  STALE     %s" % pkg.relative_to(ROOT).as_posix())
-        print("            %.0fs older than %s"
-              % (delta, who.relative_to(ROOT).as_posix() if who else "?"))
+        print("  STALE     %s" % rel(pkg))
+        print("            %.0fs older than %s" % (delta, rel(who) if who else "?"))
+    for path, _ in frozen_ok:
+        print("  FROZEN    %s  matches its published bytes" % rel(path))
+    for path, why in frozen_bad:
+        print("  CHANGED   %s  %s" % (rel(path), why))
     if not checked:
         print("FAILED - no staged package found; the check must never pass "
               "vacuously.")
         return 1
+    if frozen_bad:
+        print("")
+        print("FAILED - a published deposit file no longer matches the record. "
+              "Its files are frozen: restore the published bytes rather than "
+              "rebuild it. To stage a new version on purpose, first remove the "
+              "file's entry from the pin file, so it is checked by age again.")
     if stale:
         print("")
         print("FAILED - a staged package predates its sources. Rebuild it "
               "before any upload; an uploaded Zenodo deposit is immutable.")
+    if stale or frozen_bad:
         return 1
-    print("PASSED - every staged package is at least as new as its sources.")
+    print("PASSED - every staged package is at least as new as its sources, "
+          "and every published file still matches its published bytes.")
     return 0
 
 
