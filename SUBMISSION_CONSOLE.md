@@ -12,9 +12,8 @@ portal's login page.
 Address: https://mc.manuscriptcentral.com/dtrap. The DTRAP author guidelines
 name it, and on 2026-09-18 the page opened as "Digital Threats: Research and
 Practice ScholarOne Manuscripts". Sign in with your own account, the one
-registered to michel@itigtech.com. That is the submitting address, not the
-Hotmail address. ScholarOne will ask to link your ORCID. Link
-0009-0000-0664-8228.
+registered to michelyoussef@hotmail.com. ScholarOne will ask to link your
+ORCID. Link 0009-0000-0664-8228.
 
 ## 2. Article type
 
@@ -131,8 +130,7 @@ Three concepts, with significance, as in the manuscript:
 
 ## 7. Author block
 
-One author. Name: Michel Youssef. Email: michel@itigtech.com (the submitting
-address, not the Hotmail address).
+One author. Name: Michel Youssef. Email: michelyoussef@hotmail.com.
 Affiliation: Independent Researcher. City: Beirut. Country: Lebanon. ORCID:
 0009-0000-0664-8228. ScholarOne will ask you to link the ORCID through its
 own dialog. Complete that link.
@@ -202,16 +200,15 @@ shows a fee or waiver field, and only in that field. The file is
 Never attach it in the file-upload step of section 12.
 
 Submitting address and the waiver. The submitting address is
-michel@itigtech.com, the account of section 1, not the Hotmail address.
-Lebanon's 100% geographic waiver was confirmed in writing by ACM's Director
-of Publications, Scott Delman, on 6 August 2026, in reply to a request sent
-from michelyoussef@hotmail.com: the email says the waiver will be applied
+michelyoussef@hotmail.com, the account of section 1. Lebanon's 100%
+geographic waiver was confirmed in writing by ACM's Director of Publications,
+Scott Delman, on 6 August 2026: the email says the waiver will be applied
 automatically to this paper during the eRights process, and it sets no
-institutional condition on the waiver. The same email asks that an
-institutional email address be used for submission and eRights. If eRights
-asks about the waiver or the address, forward that confirmation (the same
-ACM_Waiver.pdf); it shows the request and the reply went through the Hotmail
-address.
+institutional condition on the waiver. The same email asks for an
+institutional email address for submission and eRights; the request it
+answered stated that you have no institutional affiliation, so there is none
+to use. If eRights asks about the waiver or the address, forward that
+confirmation (the same ACM_Waiver.pdf).
 
 ## 12. File uploads
 
