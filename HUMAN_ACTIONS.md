@@ -3,11 +3,10 @@
 Nothing here needs judgment, and nothing here is blocked on a missing
 identifier. Every file referenced is in this repository.
 
-**Where things stand, 2026-09-18.** The venue is **ACM Digital Threats:
-Research and Practice (DTRAP)**, through ScholarOne. The one outward action
-left is that submission, from `SUBMISSION_CONSOLE.md` (step 3 below).
-Everything before it in the sequence is done and is kept below as the record,
-marked historical:
+**Where things stand, 2026-09-21.** The paper was submitted to **ACM Digital
+Threats: Research and Practice (DTRAP)** through ScholarOne on 21 September
+2026 as **DTRAP-2026-0211** (step 3 below). Everything before it in the
+sequence is done and is kept below as the record, marked historical:
 
 - Zenodo 2.2.0 is published (doi:10.5281/zenodo.22673735).
 - arXiv v3 of 2605.24696 and the companion's v2 of 2510.09619 were both
@@ -96,15 +95,20 @@ strategy, every sheet, the named arXiv variant's availability sentence and the
 companion's v2 correction note all cite 2.2.0. Since the publish of 14
 September 2026 every one of those citations resolves.
 
-## 3. DTRAP submission — NEXT, the only outward action left
+## 3. DTRAP submission — SUBMITTED 2026-09-21 as DTRAP-2026-0211
 
-Work through `SUBMISSION_CONSOLE.md` top to bottom at
+**Submitted 21 September 2026, manuscript ID DTRAP-2026-0211.** The form has no confidential-comments field, so the confidential editor note
+(`packages/dtrap/EDITOR_NOTE.txt`) was sent by email to dtrap-editors@acm.org
+the same day, and the cover letter was posted with an added prior-appearance
+paragraph pointing to that email.
+
+The submission was made by working through `SUBMISSION_CONSOLE.md` top to bottom at
 https://mc.manuscriptcentral.com/dtrap. It carries every ScholarOne field in
 paste order, the three files to upload with their sizes, the cover letter
 (`packages/dtrap/COVER_LETTER.txt`), the confidential note
 (`packages/dtrap/EDITOR_NOTE.txt`, which discloses both prior submissions),
-the verified reviewers, the questionnaire answers and the waiver rule. After
-submitting, record the manuscript ID in the console.
+the verified reviewers, the questionnaire answers and the waiver rule. The
+manuscript ID is recorded in the console, section 14.
 
 ## 3a. TMLR submission — HISTORICAL: submitted 2026-09-16, desk-rejected 2026-09-18
 

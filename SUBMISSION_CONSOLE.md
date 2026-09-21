@@ -1,5 +1,7 @@
 # SUBMISSION_CONSOLE: DTRAP submission on ScholarOne, top to bottom
 
+> **SUBMITTED 21 September 2026 as DTRAP-2026-0211.** See section 14.
+
 Work through this file in order. Every field is in ScholarOne paste order.
 Nothing here needs judgment except where a step says so. Re-assembled
 2026-09-18 for the DTRAP submission, updated 2026-09-19. This is the operative document. The older
@@ -238,6 +240,10 @@ Confirm ACM_Waiver.pdf is not among the uploaded files. Then press submit.
 ## 14. After submit
 
 Save the confirmation email as a PDF into `C:\Users\CYBERWIZARD\Downloads`.
-Record the manuscript ID here in this file, next to this line. Nothing else is
+Manuscript ID: **DTRAP-2026-0211**, submitted 21 September 2026. The form has no confidential-comments field, so the confidential editor note
+(`packages/dtrap/EDITOR_NOTE.txt`) was sent by email to dtrap-editors@acm.org
+the same day, and the cover letter was posted with an added prior-appearance
+paragraph pointing to that email.
+Nothing else is
 due on submission: the corrected arXiv v3 and the companion's v2 were both
 posted on 14 September 2026 and announced on 16 September 2026.
