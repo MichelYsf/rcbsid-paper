@@ -164,7 +164,7 @@ Excluded and confirmed clean: Seth Barrett and every FIRCE and FADES author
 
 ## 9. Cover letter
 
-Paste the whole of `packages/dtrap/COVER_LETTER.txt` (1,052 words). It is
+Paste the whole of `packages/dtrap/COVER_LETTER.txt` (1,142 words). It is
 plain ASCII text with no markdown residue and no operator note.
 
 Contingency: if the portal offers no separate confidential-comments box, do
@@ -224,7 +224,7 @@ Four files, with designations. Sizes are those of the committed files:
 | 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 684,279 | `95be417d766edd5f` | main document |
 | 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 618,524 | `8a0cc12317886ae2` | supplementary for review, not for publication |
 | 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 103,424 | `f19f26a8b6a73efa` | supplementary for review, not for publication |
-| 4 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\title_page.pdf` | 63,789 | `7296493fbeb47f82` | title page, for editors only: not review material, not for publication |
+| 4 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\title_page.pdf` | 64,130 | `519bd63341a474e1` | title page, for editors only: not review material, not for publication |
 
 Upload exactly these four files and nothing else. The waiver PDF is not one of
 them. The anonymous build is the one that says "ANONYMOUS AUTHOR(S)" on page 1.

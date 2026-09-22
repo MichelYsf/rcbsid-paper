@@ -22,6 +22,8 @@ Artifact access under double-anonymous review. The full artifact is provided as 
 
 Companion manuscript. A related manuscript sharing parts of the audited codebase (arXiv:2510.09619) is a public preprint and is not under review at any venue. Its v2, posted 14 September 2026 and announced 16 September 2026, adds a correction note that points to the corrected v3 of this work and to the Zenodo 2.2.0 record. The manuscript's Companion Manuscript Disclosure section describes the companion without its identifier. This manuscript is not under review at any other venue.
 
+Prior appearance and correction history. Earlier versions of this manuscript were posted publicly as a preprint and are superseded by a corrected version that matches this submission. No version of this work has received peer review at any venue, and the manuscript is not under consideration elsewhere. Because the submission form has no confidential-comments field and the anonymized manuscript cannot carry identifying detail, a full account of the prior appearance, the correction history and the archived artifact lineage is being sent to the Editors-in-Chief by email under this manuscript's number.
+
 Thank you for your consideration.
 
 [Submitting author: identified to the editorial system only, per double-anonymous policy. ORCID: 0009-0000-0664-8228.]
