@@ -3,10 +3,13 @@
 Nothing here needs judgment, and nothing here is blocked on a missing
 identifier. Every file referenced is in this repository.
 
-**Where things stand, 2026-09-21.** The paper was submitted to **ACM Digital
+**Where things stand, 2026-09-22.** The paper was submitted to **ACM Digital
 Threats: Research and Practice (DTRAP)** through ScholarOne on 21 September
-2026 as **DTRAP-2026-0211** (step 3 below). Everything before it in the
-sequence is done and is kept below as the record, marked historical:
+2026 as **DTRAP-2026-0211**. On 22 September 2026 the editorial office
+unsubmitted it because a separate title page was missing; the title page is
+built and the one outward action left is to resubmit DTRAP-2026-0211 with it
+(step 3 below). Everything before it in the sequence is done and is kept
+below as the record, marked historical:
 
 - Zenodo 2.2.0 is published (doi:10.5281/zenodo.22673735).
 - arXiv v3 of 2605.24696 and the companion's v2 of 2510.09619 were both
@@ -95,12 +98,23 @@ strategy, every sheet, the named arXiv variant's availability sentence and the
 companion's v2 correction note all cite 2.2.0. Since the publish of 14
 September 2026 every one of those citations resolves.
 
-## 3. DTRAP submission — SUBMITTED 2026-09-21 as DTRAP-2026-0211
+## 3. DTRAP submission — SUBMITTED 2026-09-21 as DTRAP-2026-0211, UNSUBMITTED 2026-09-22 for a missing title page; RESUBMIT
 
 **Submitted 21 September 2026, manuscript ID DTRAP-2026-0211.** The form has no confidential-comments field, so the confidential editor note
 (`packages/dtrap/EDITOR_NOTE.txt`) was sent by email to dtrap-editors@acm.org
 the same day, and the cover letter was posted with an added prior-appearance
 paragraph pointing to that email.
+
+On 22 September 2026 the editorial office unsubmitted the manuscript because
+a separate title page was missing. The title page is
+`packages/dtrap/title_page.pdf`, one page, built from the LaTeX source
+`packages/dtrap/title_page.tex` beside it. It names the author on purpose,
+so it is uploaded as its own file designated for editors only and never as
+review material; `scripts/check_tarball_anonymity.py` verifies that none of
+the three anonymized packages contains it. The manuscript PDF, the artifact
+and the source tarball are unchanged. Resubmit through the console: its
+section 12 carries the title page as the fourth upload, and section 14
+records the unsubmission.
 
 The submission was made by working through `SUBMISSION_CONSOLE.md` top to bottom at
 https://mc.manuscriptcentral.com/dtrap. It carries every ScholarOne field in

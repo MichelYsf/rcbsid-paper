@@ -1,6 +1,9 @@
 # SUBMISSION_CONSOLE: DTRAP submission on ScholarOne, top to bottom
 
-> **SUBMITTED 21 September 2026 as DTRAP-2026-0211.** See section 14.
+> **SUBMITTED 21 September 2026 as DTRAP-2026-0211. UNSUBMITTED by the editorial
+> office on 22 September 2026: a separate title page was missing.** Resubmit
+> under the same number with the title page of section 12, row 4, designated
+> for editors only. See section 14.
 
 Work through this file in order. Every field is in ScholarOne paste order.
 Nothing here needs judgment except where a step says so. Re-assembled
@@ -214,33 +217,39 @@ confirmation (the same ACM_Waiver.pdf).
 
 ## 12. File uploads
 
-Three files, with designations. Sizes are those of the files built
-2026-09-18 and committed with this console:
+Four files, with designations. Sizes are those of the committed files:
 
 | # | full path | bytes | SHA-256 (first 16) | designation |
 |---|---|---|---|---|
 | 1 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\manuscript_anonymous.pdf` | 684,279 | `95be417d766edd5f` | main document |
 | 2 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\artifact_anonymous.zip` | 618,524 | `8a0cc12317886ae2` | supplementary for review, not for publication |
 | 3 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\source_anonymous.tar.gz` | 103,424 | `f19f26a8b6a73efa` | supplementary for review, not for publication |
+| 4 | `C:\Users\CYBERWIZARD\projects\rcbsid-paper\packages\dtrap\title_page.pdf` | 63,789 | `7296493fbeb47f82` | title page, for editors only: not review material, not for publication |
 
-Upload exactly these three files and nothing else. The waiver PDF is not one of
+Upload exactly these four files and nothing else. The waiver PDF is not one of
 them. The anonymous build is the one that says "ANONYMOUS AUTHOR(S)" on page 1.
+The title page names the author: designate it for editors only, never as
+supplementary material for review. It is built from
+`packages\dtrap\title_page.tex` beside it and carries the title, the
+manuscript ID, the author block and the prior-appearance statement.
 
 Before uploading, run `python scripts/check_tarball_anonymity.py`. It must
 print PASSED. It reads the tarballs' POSIX owner metadata, which `tar tvf`
-shows a referee without extracting anything.
+shows a referee without extracting anything, and it verifies that the title
+page is inside none of the three anonymized packages.
 
 ## 13. Proof check and submit
 
 ScholarOne renders a proof PDF of your entries before submission. Open it.
 Confirm the title, the abstract, one anonymous main document of 25 pages,
-and both supplementary files. Confirm the manuscript PDF shows no author name.
+both supplementary files, and the title page designated for editors only.
+Confirm the manuscript PDF shows no author name.
 Confirm ACM_Waiver.pdf is not among the uploaded files. Then press submit.
 
 ## 14. After submit
 
 Save the confirmation email as a PDF into `C:\Users\CYBERWIZARD\Downloads`.
-Manuscript ID: **DTRAP-2026-0211**, submitted 21 September 2026. The form has no confidential-comments field, so the confidential editor note
+Manuscript ID: **DTRAP-2026-0211**, submitted 21 September 2026. On 22 September 2026 the editorial office unsubmitted the manuscript because a separate title page was missing. The title page is `packages/dtrap/title_page.pdf`, one page, built from the LaTeX source `packages/dtrap/title_page.tex` beside it. It names the author on purpose, so it is uploaded as its own file designated for editors only and never as review material; `scripts/check_tarball_anonymity.py` verifies that none of the three anonymized packages contains it. The manuscript PDF, the artifact and the source tarball are unchanged. The form has no confidential-comments field, so the confidential editor note
 (`packages/dtrap/EDITOR_NOTE.txt`) was sent by email to dtrap-editors@acm.org
 the same day, and the cover letter was posted with an added prior-appearance
 paragraph pointing to that email.
